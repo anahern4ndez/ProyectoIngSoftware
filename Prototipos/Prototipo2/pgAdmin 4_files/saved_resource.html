@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<!-- saved from url=(0116)http://127.0.0.1:65037/datagrid/panel/3442859/true/Lab08%20on%20postgres%40PostgreSQL%2011?query_url=&server_type=pg -->
+<html class="no-js"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>pgAdmin 4 - Datagrid</title><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="shortcut icon" href="http://127.0.0.1:65037/favicon.ico?ver=40200"><link type="text/css" rel="stylesheet" href="./backgrid.css"><link type="text/css" rel="stylesheet" href="./browser.css"><link type="text/css" rel="stylesheet" href="./style.css"><link type="text/css" rel="stylesheet" href="./pgadmin.css"><link type="text/css" rel="stylesheet" href="./alertify.noanimation.css" id="alertify-no-animation" disabled="disabled"><script type="text/javascript" src="./require.min.js.descarga"></script><script type="text/javascript">
+            require.config({
+                baseUrl: '',
+                urlArgs: 'ver=40200',
+                waitSeconds: 0,
+                shim: {},
+                paths: {
+                    sources: "/static/js",
+                    slickgrid: "/static/js/generated/slickgrid",
+                    codemirror: "/static/js/generated/codemirror",
+                    datagrid: "/static/js/generated/datagrid",
+                    sqleditor: "/static/js/generated/sqleditor",
+                    'pgadmin.browser.utils': "/browser/" + "js/utils",
+                    'pgadmin.browser.endpoints': "/browser/" + "js/endpoints",
+                    'pgadmin.browser.messages': "/browser/" + "js/messages",
+                    'pgadmin.server.supported_servers': "/browser/" + "server/supported_servers",
+                    'pgadmin.user_management.current_user': "/user_management/" + "current_user",
+                    'translations': "/tools/" + "translations"
+                }
+            });
+
+    </script><script type="text/javascript" src="./vendor.js.descarga"></script><script type="text/javascript" src="./pgadmin_commons.js.descarga"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="sources/generated/sqleditor" src="./sqleditor.js.descarga"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="translations" src="./translations.js.descarga"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="pgadmin.browser.endpoints" src="./endpoints.js.descarga"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="pgadmin.browser.utils" src="./utils.js.descarga"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="pgadmin.user_management.current_user" src="./current_user.js.descarga"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="pgadmin.browser.messages" src="./messages.js.descarga"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="pgadmin.server.supported_servers" src="./supported_servers.js.descarga"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="sources/gettext" src="./gettext.js.descarga"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="sources/pgadmin" src="./pgadmin.js.descarga"></script><link id="wcTheme" rel="stylesheet" type="text/css" href="./webcabin.overrides(1).css"><style type="text/css" rel="stylesheet">.slickgrid_767750 .slick-header-column { left: 1000px; } .slickgrid_767750 .slick-top-panel { height:25px; } .slickgrid_767750 .slick-preheader-panel { height:25px; } .slickgrid_767750 .slick-headerrow-columns { height:25px; } .slickgrid_767750 .slick-footerrow-columns { height:25px; } .slickgrid_767750 .slick-cell { height:25px; } .slickgrid_767750 .slick-row { height:25px; } .slickgrid_767750 .l0 { } .slickgrid_767750 .r0 { } .slickgrid_767750 .l1 { } .slickgrid_767750 .r1 { } .slickgrid_767750 .l2 { } .slickgrid_767750 .r2 { } .slickgrid_767750 .l3 { } .slickgrid_767750 .r3 { } .slickgrid_767750 .l4 { } .slickgrid_767750 .r4 { } .slickgrid_767750 .l5 { } .slickgrid_767750 .r5 { }</style></head> <body tabindex="0" class="wcDesktop"> <!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]--> <style>
+    body {padding: 0px;}
+    </style> <div id="main-editor_panel"> <div class="sql-editor"> <div id="btn-toolbar" class="editor-toolbar" role="toolbar" aria-label=""> <div class="btn-group mr-1" role="group" aria-label=""> <button id="btn-load-file" type="button" class="btn btn-sm btn-secondary btn-load-file" title="Open File (accesskey + O)" accesskey="O" tabindex="0"> <i class="fa fa-folder-open-o sql-icon-lg" aria-hidden="true"></i> </button> <button id="btn-save" type="button" class="btn btn-sm btn-secondary" title="Save File (accesskey + S)" accesskey="S"> <i class="fa fa-floppy-o sql-icon-lg" aria-hidden="true" tabindex="0"></i> </button> <button id="btn-file-menu-dropdown" type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" tabindex="0"> </button> <ul class="dropdown-menu"> <li> <a class="dropdown-item" id="btn-file-menu-save" href="http://127.0.0.1:65037/datagrid/panel/3442859/true/Lab08%20on%20postgres%40PostgreSQL%2011?query_url=&amp;server_type=pg#" tabindex="0" style="display: block;"> <span>Save</span> </a> </li> <li> <a class="dropdown-item" id="btn-file-menu-save-as" href="http://127.0.0.1:65037/datagrid/panel/3442859/true/Lab08%20on%20postgres%40PostgreSQL%2011?query_url=&amp;server_type=pg#" tabindex="0"> <span>Save As</span> </a> </li> </ul> </div> <div class="btn-group mr-1" role="group" aria-label=""> <button id="btn-find" type="button" class="btn btn-sm btn-secondary" title="Find (Ctrl/Cmd+F)"> <i class="fa fa-search sql-icon-lg" aria-hidden="true" tabindex="0"></i> </button> <button id="btn-find-menu-dropdown" type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Find (accesskey + N)" accesskey="N" tabindex="0"> </button> <ul class="dropdown-menu"> <li> <a class="dropdown-item" id="btn-find-menu-find" href="http://127.0.0.1:65037/datagrid/panel/3442859/true/Lab08%20on%20postgres%40PostgreSQL%2011?query_url=&amp;server_type=pg#" tabindex="0"> <span> Find (Ctrl+F)</span> </a> </li> <li> <a class="dropdown-item" id="btn-find-menu-find-next" href="http://127.0.0.1:65037/datagrid/panel/3442859/true/Lab08%20on%20postgres%40PostgreSQL%2011?query_url=&amp;server_type=pg#" tabindex="0"> <span> Find Next (Ctrl+G)</span> </a> </li> <li> <a class="dropdown-item" id="btn-find-menu-find-previous" href="http://127.0.0.1:65037/datagrid/panel/3442859/true/Lab08%20on%20postgres%40PostgreSQL%2011?query_url=&amp;server_type=pg#" tabindex="0"> <span> Find Previous (Ctrl+Shift+G)</span> </a> </li> <li> <a class="dropdown-item" id="btn-find-menu-find-persistent" href="http://127.0.0.1:65037/datagrid/panel/3442859/true/Lab08%20on%20postgres%40PostgreSQL%2011?query_url=&amp;server_type=pg#" tabindex="0"> <span>Persistent Find</span> </a> </li> <li class="dropdown-divider"></li> <li> <a class="dropdown-item" id="btn-find-menu-replace" href="http://127.0.0.1:65037/datagrid/panel/3442859/true/Lab08%20on%20postgres%40PostgreSQL%2011?query_url=&amp;server_type=pg#" tabindex="0"> <span> Replace (Ctrl+Shift+F)</span> </a> </li> <li> <a class="dropdown-item" id="btn-find-menu-replace-all" href="http://127.0.0.1:65037/datagrid/panel/3442859/true/Lab08%20on%20postgres%40PostgreSQL%2011?query_url=&amp;server_type=pg#" tabindex="0"> <span>Replace All</span> </a> </li> <li class="dropdown-divider"></li> <li> <a class="dropdown-item" id="btn-find-menu-jump" href="http://127.0.0.1:65037/datagrid/panel/3442859/true/Lab08%20on%20postgres%40PostgreSQL%2011?query_url=&amp;server_type=pg#" tabindex="0"> <span>Jump (Alt+G)</span> </a> </li> </ul> </div> <div class="btn-group mr-1" role="group" aria-label=""> <button id="btn-copy-row" type="button" class="btn btn-sm btn-secondary" title="Copy (accesskey + C)" accesskey="C" tabindex="0" disabled=""> <i class="fa fa-files-o sql-icon-lg" aria-hidden="true"></i> </button> <button id="btn-paste-row" type="button" class="btn btn-sm btn-secondary" title="Paste (accesskey + P)" accesskey="P" tabindex="0" disabled=""> <i class="fa fa-clipboard sql-icon-lg" aria-hidden="true"></i> </button> </div> <div class="btn-group mr-1" role="group" aria-label=""> <button id="btn-delete-row" type="button" class="btn btn-sm btn-secondary" title="Delete (accesskey + D)" accesskey="D" tabindex="0" disabled=""> <i class="fa fa-trash sql-icon-lg" aria-hidden="true"></i> </button> </div> <div class="btn-group mr-1" role="group" aria-label=""> <button id="btn-edit-dropdown" type="button" class="btn btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Edit" tabindex="0"> <i class="fa fa-pencil-square-o sql-icon-lg" aria-hidden="true"></i> </button> <ul class="dropdown-menu"> <li> <a class="dropdown-item" id="btn-indent-code" href="http://127.0.0.1:65037/datagrid/panel/3442859/true/Lab08%20on%20postgres%40PostgreSQL%2011?query_url=&amp;server_type=pg#" tabindex="0"> <span> Indent Selection (Tab) </span> </a> </li> <li> <a class="dropdown-item" id="btn-unindent-code" href="http://127.0.0.1:65037/datagrid/panel/3442859/true/Lab08%20on%20postgres%40PostgreSQL%2011?query_url=&amp;server_type=pg#" tabindex="0"> <span> Unindent Selection (Shift+Tab) </span> </a> </li> <li> <a class="dropdown-item" id="btn-comment-line" href="http://127.0.0.1:65037/datagrid/panel/3442859/true/Lab08%20on%20postgres%40PostgreSQL%2011?query_url=&amp;server_type=pg#" tabindex="0"> <span> Inline Comment Selection (Ctrl+/)</span> </a> </li> <li> <a class="dropdown-item" id="btn-uncomment-line" href="http://127.0.0.1:65037/datagrid/panel/3442859/true/Lab08%20on%20postgres%40PostgreSQL%2011?query_url=&amp;server_type=pg#" tabindex="0"> <span> Inline Uncomment Selection (Ctrl+.)</span> </a> </li> <li> <a class="dropdown-item" id="btn-toggle-comment-block" href="http://127.0.0.1:65037/datagrid/panel/3442859/true/Lab08%20on%20postgres%40PostgreSQL%2011?query_url=&amp;server_type=pg#" tabindex="0"> <span> Block Comment/Uncomment Selection (Shift+Ctrl+/)</span> </a> </li> </ul> </div> <div class="btn-group mr-1" role="group" aria-label=""> <button id="btn-filter" type="button" class="btn btn-sm btn-secondary" title="Filter (accesskey + F)" accesskey="F" tabindex="0" disabled=""> <i class="fa fa-filter sql-icon-lg" aria-hidden="true"></i> </button> <button id="btn-filter-dropdown" type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Filter options (accesskey + I)" accesskey="I" disabled="" tabindex="0"> </button> <ul class="dropdown-menu dropdown-menu-right"> <li> <a id="btn-filter-menu" class="dropdown-item" href="http://127.0.0.1:65037/datagrid/panel/3442859/true/Lab08%20on%20postgres%40PostgreSQL%2011?query_url=&amp;server_type=pg#" tabindex="0">Sort/Filter</a> </li> <li> <a id="btn-include-filter" class="dropdown-item" href="http://127.0.0.1:65037/datagrid/panel/3442859/true/Lab08%20on%20postgres%40PostgreSQL%2011?query_url=&amp;server_type=pg#" tabindex="0">Filter by Selection</a> </li> <li> <a id="btn-exclude-filter" class="dropdown-item" href="http://127.0.0.1:65037/datagrid/panel/3442859/true/Lab08%20on%20postgres%40PostgreSQL%2011?query_url=&amp;server_type=pg#" tabindex="0">Exclude by Selection</a> </li> <li> <a id="btn-remove-filter" class="dropdown-item" href="http://127.0.0.1:65037/datagrid/panel/3442859/true/Lab08%20on%20postgres%40PostgreSQL%2011?query_url=&amp;server_type=pg#" tabindex="0">Remove Sort/Filter</a> </li> </ul> </div> <div class="btn-group mr-1" role="group" aria-label=""> <select id="btn-rows-limit" class="limit" disabled="" title="Rows limit (accesskey + R)" accesskey="R" tabindex="0"> <option value="-1">No limit</option> <option value="1000">1000 rows</option> <option value="500">500 rows</option> <option value="100">100 rows</option> </select> </div> <div class="btn-group mr-1" role="group" aria-label=""> <button id="btn-cancel-query" type="button" class="btn btn-sm btn-secondary" title="Cancel query (accesskey + Q)" accesskey="Q" tabindex="0" disabled=""> <i class="fa fa-stop sql-icon-lg" aria-hidden="true"></i> </button> <button id="btn-flash" data-test-selector="execute-refresh-button" type="button" class="btn btn-sm btn-secondary" style="width: 40px;" title="Execute/Refresh (Ctrl+ENTER)" tabindex="0"> <i class="fa fa-bolt sql-icon-lg" aria-hidden="true"></i> </button> <button id="btn-query-dropdown" type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" accesskey="X" title="Execute options (accesskey + X)" tabindex="0"> </button> <ul class="dropdown-menu" role="menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(68px, 29px, 0px);"> <li> <a class="dropdown-item" id="btn-auto-commit" href="http://127.0.0.1:65037/datagrid/panel/3442859/true/Lab08%20on%20postgres%40PostgreSQL%2011?query_url=&amp;server_type=pg#" tabindex="0"> <i class="auto-commit fa fa-check" aria-hidden="true"></i> <span> Auto commit? </span> </a> </li> <li> <a class="dropdown-item" id="btn-auto-rollback" href="http://127.0.0.1:65037/datagrid/panel/3442859/true/Lab08%20on%20postgres%40PostgreSQL%2011?query_url=&amp;server_type=pg#" tabindex="0"> <i class="auto-rollback fa fa-check visibility-hidden" aria-hidden="true"></i> <span> Auto rollback? </span> </a> </li> </ul> </div> <div class="btn-group mr-1" role="group" aria-label=""> <button id="btn-explain" type="button" class="btn btn-sm btn-secondary" title="Explain (F7)" accesskey="" tabindex="0"> <i class="fa fa-hand-pointer-o sql-icon-lg" aria-hidden="true"></i> </button> <button id="btn-explain-analyze" type="button" class="btn btn-sm btn-secondary" title="Explain Analyze (Shift+F7)" accesskey=""> <i class="fa fa-list-alt sql-icon-lg" aria-hidden="true"></i> </button> <button id="btn-explain-options-dropdown" type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" tabindex="0"> </button> <ul class="dropdown-menu"> <li> <a class="dropdown-item" id="btn-explain-verbose" href="http://127.0.0.1:65037/datagrid/panel/3442859/true/Lab08%20on%20postgres%40PostgreSQL%2011?query_url=&amp;server_type=pg#" tabindex="0"> <i class="explain-verbose fa fa-check visibility-hidden" aria-hidden="true"></i> <span> Verbose </span> </a> </li> <li> <a class="dropdown-item" id="btn-explain-costs" href="http://127.0.0.1:65037/datagrid/panel/3442859/true/Lab08%20on%20postgres%40PostgreSQL%2011?query_url=&amp;server_type=pg#" tabindex="0"> <i class="explain-costs fa fa-check visibility-hidden" aria-hidden="true"></i> <span> Costs </span> </a> </li> <li> <a class="dropdown-item" id="btn-explain-buffers" href="http://127.0.0.1:65037/datagrid/panel/3442859/true/Lab08%20on%20postgres%40PostgreSQL%2011?query_url=&amp;server_type=pg#" tabindex="0"> <i class="explain-buffers fa fa-check visibility-hidden" aria-hidden="true"></i> <span> Buffers </span> </a> </li> <li> <a class="dropdown-item" id="btn-explain-timing" href="http://127.0.0.1:65037/datagrid/panel/3442859/true/Lab08%20on%20postgres%40PostgreSQL%2011?query_url=&amp;server_type=pg#" tabindex="0"> <i class="explain-timing fa fa-check visibility-hidden" aria-hidden="true"></i> <span> Timing </span> </a> </li> </ul> </div> <div class="btn-group mr-1" role="group" aria-label=""> <button id="btn-clear-dropdown" type="button" class="btn btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Clear (accesskey + L)" accesskey="L" tabindex="0"> <i class="fa fa-eraser sql-icon-lg" aria-hidden="true"></i> </button> <ul class="dropdown-menu"> <li> <a class="dropdown-item" id="btn-clear" href="http://127.0.0.1:65037/datagrid/panel/3442859/true/Lab08%20on%20postgres%40PostgreSQL%2011?query_url=&amp;server_type=pg#" tabindex="0"> <span> Clear Query Window </span> </a> </li> <li> <a class="dropdown-item" id="btn-clear-history" href="http://127.0.0.1:65037/datagrid/panel/3442859/true/Lab08%20on%20postgres%40PostgreSQL%2011?query_url=&amp;server_type=pg#" tabindex="0"> <span> Clear History </span> </a> </li> </ul> </div> <div class="btn-group" role="group" aria-label=""> <button id="btn-download" type="button" class="btn btn-sm btn-secondary" title="Download as CSV (F8)" tabindex="0"> <i class="fa fa-download sql-icon-lg" aria-hidden="true"></i> </button> </div> </div> <div class="connection_status_wrapper d-flex"> <div id="btn-conn-status" class="connection_status d-flex justify-content-center align-items-center" data-container="body" data-toggle="popover" data-placement="bottom" data-content="The session is idle and there is no current transaction." data-panel-visible="visible" accesskey="T" tabindex="0" data-original-title="" title=""> <i class="fa-custom fa-query-tool-connected" aria-hidden="true" title="Connection status (click for details) (accesskey + T)"> </i> </div> <div class="editor-title" style="background-color: ; color: ;">Lab08 on postgres@PostgreSQL 11</div> </div> <div id="editor-panel" tabindex="0"> <div id="fetching_data" class="pg-sp-container sql-editor-busy-fetching d-none"> <div class="pg-sp-content"> <div class="row"> <div class="col-12 pg-sp-icon sql-editor-busy-icon"></div> </div> <div class="row"><div class="col-12 pg-sp-text sql-editor-busy-text">Loading data from the database server and rendering...</div></div> </div> </div> <div class="wcDocker"><div class="wcDockerTransition"></div><div class="wcLayoutPane" style="height: 383px; top: 0px; left: 0px; right: 0px;"><div class="wcFrame wcWide wcTall"><div class="wcFrameTitleBar wcTabTop" style="width: 1252px;"><div class="wcTabScroller" style="left: 0px;"><div class="wcPanelTab wcPanelTabActive" id="0"><div><a href="http://127.0.0.1:65037/datagrid/panel/3442859/true/Lab08%20on%20postgres%40PostgreSQL%2011?query_url=&amp;server_type=pg#" tabindex="0" class="panel-link-heading">Query Editor</a></div></div><div class="wcPanelTab" id="1"><div><a href="http://127.0.0.1:65037/datagrid/panel/3442859/true/Lab08%20on%20postgres%40PostgreSQL%2011?query_url=&amp;server_type=pg#" tabindex="0" class="panel-link-heading">Query History</a></div></div></div><div class="wcFrameButtonBar" style="min-width: 0px; width: 0px; right: 0px;"></div></div><div class="wcFrameButtonBar" style="min-width: 0px; width: 0px;"><div class="wcFrameButton" title="Close the currently active panel tab" style="display: none;"><div class="fa fa-close"></div></div><div class="wcFrameButton" title="Collapse the active panel" style="display: none;"><div class="fa fa-download"></div>C</div></div><div class="wcFrameCenter wcPanelBackground wcScrollableX wcScrollableY" style="left: 0px; right: 0px; bottom: 0px;"><div class="wcPanelTabContent" id="0"><table class="wcLayout wcWide wcTall"><tbody><tr><td><div class="pg-panel-content"><div id="output-panel" tabindex:="" "0"=""><textarea id="sql_query_tool" tabindex:="" "-1"="" style="display: none;"></textarea><div class="CodeMirror cm-s-default CodeMirror-simplescroll" style="font-size: 1em;"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 109px; left: 373px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;" tabindex="0"></textarea></div><div class="CodeMirror-simplescroll-horizontal" cm-not-content="true" style="display: none; right: 8px; left: 42px;"><div style="width: 448.401px; left: 0px;"></div></div><div class="CodeMirror-simplescroll-vertical" cm-not-content="true" style="display: block; bottom: 0px;"><div style="height: 195.301px; top: 0px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true" style="height: 8px; width: 8px;"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1" draggable="false"><div class="CodeMirror-sizer" style="margin-left: 42px; margin-bottom: -21px; border-right-width: 9px; min-height: 638px; min-width: 829.859px; padding-right: 8px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><div class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>30</div></div></div><div class="CodeMirror-measure"><pre class="CodeMirror-line" role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">INSERT</span> <span class="cm-keyword">INTO</span> <span class="cm-keyword">public</span>."PC"<span class="cm-bracket">(</span>modelo<span class="cm-punctuation">,</span>velocidad<span class="cm-punctuation">,</span>ram<span class="cm-punctuation">,</span>disco<span class="cm-punctuation">,</span>precio<span class="cm-bracket">)</span> <span class="cm-keyword">VALUES</span> <span class="cm-bracket">(</span><span class="cm-string">'1001'</span><span class="cm-punctuation">,</span> <span class="cm-number">2.66</span><span class="cm-punctuation">,</span> <span class="cm-number">1024</span><span class="cm-punctuation">,</span> <span class="cm-number">250</span><span class="cm-punctuation">,</span> <span class="cm-number">2114</span><span class="cm-bracket">)</span><span class="cm-punctuation">;</span></span></pre></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors" style=""><div class="CodeMirror-cursor" style="left: 331px; top: 105px; height: 21px;">&nbsp;</div></div><div class="CodeMirror-code" role="presentation" style=""><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -42px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">-- Query 1:</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -42px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">2</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">BEGIN</span> <span class="cm-keyword">TRANSACTION</span> <span class="cm-keyword">READ</span> <span class="cm-keyword">ONLY</span> <span class="cm-keyword">ISOLATION</span> <span class="cm-keyword">LEVEL</span> <span class="cm-keyword">READ</span> <span class="cm-keyword">COMMITTED</span><span class="cm-punctuation">;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -42px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">3</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">SELECT</span> pro<span class="cm-variable-2">.modelo</span><span class="cm-punctuation">,</span> pc<span class="cm-variable-2">.precio</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -42px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">4</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">FROM</span> <span class="cm-keyword">public</span>."PC" pc</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -42px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">5</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">INNER</span> <span class="cm-keyword">JOIN</span> <span class="cm-keyword">public</span>."Producto" pro <span class="cm-keyword">ON</span> pro<span class="cm-variable-2">.modelo</span> <span class="cm-operator">=</span> pc<span class="cm-variable-2">.modelo</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -42px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">6</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">WHERE</span> ram <span class="cm-operator">=</span> <span class="cm-string">'1024'</span> <span class="cm-keyword">AND</span> velocidad <span class="cm-operator">=</span> <span class="cm-string">'2.66'</span><span class="cm-punctuation">;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -42px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">7</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">COMMIT</span><span class="cm-punctuation">;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -42px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">8</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -42px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">9</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">-- Query 2:</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -42px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">10</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">BEGIN</span> <span class="cm-keyword">TRANSACTION</span> <span class="cm-keyword">READ</span> <span class="cm-keyword">WRITE</span> <span class="cm-keyword">ISOLATION</span> <span class="cm-keyword">LEVEL</span> <span class="cm-keyword">READ</span> <span class="cm-keyword">COMMITTED</span><span class="cm-punctuation">;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -42px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">11</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">DELETE</span> <span class="cm-keyword">FROM</span> <span class="cm-keyword">public</span>."Producto"</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -42px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">12</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">WHERE</span> modelo <span class="cm-operator">=</span> <span class="cm-string">'1001'</span><span class="cm-punctuation">;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -42px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">13</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -42px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">14</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">DELETE</span> <span class="cm-keyword">FROM</span> <span class="cm-keyword">public</span>."PC"</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -42px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">15</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">WHERE</span> modelo <span class="cm-operator">=</span> <span class="cm-string">'1001'</span><span class="cm-punctuation">;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -42px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">16</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">COMMIT</span><span class="cm-punctuation">;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -42px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">17</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -42px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">18</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">-- Query 3:</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -42px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">19</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">BEGIN</span> <span class="cm-keyword">TRANSACTION</span> <span class="cm-keyword">READ</span> <span class="cm-keyword">WRITE</span> <span class="cm-keyword">ISOLATION</span> <span class="cm-keyword">LEVEL</span> <span class="cm-keyword">READ</span> <span class="cm-keyword">COMMITTED</span><span class="cm-punctuation">;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -42px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">20</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">UPDATE</span> <span class="cm-keyword">public</span>."PC" <span class="cm-keyword">SET</span> precio <span class="cm-operator">=</span> precio <span class="cm-operator">-</span> <span class="cm-number">100</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -42px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">21</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">WHERE</span> modelo <span class="cm-operator">=</span> <span class="cm-string">'1003'</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -42px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">22</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">COMMIT</span><span class="cm-punctuation">;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -42px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">23</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -42px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">24</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -42px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">25</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">-- Query 4:</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -42px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">26</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">BEGIN</span> <span class="cm-keyword">TRANSACTION</span> <span class="cm-keyword">READ</span> <span class="cm-keyword">WRITE</span> <span class="cm-keyword">ISOLATION</span> <span class="cm-keyword">LEVEL</span> <span class="cm-keyword">READ</span> <span class="cm-keyword">UNCOMMITTED</span><span class="cm-punctuation">;</span></span></pre></div></div></div></div></div></div><div style="position: absolute; height: 9px; width: 1px; border-bottom: 0px solid transparent; top: 638px;"></div><div class="CodeMirror-gutters" style="height: 647px; left: 0px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 29px;"></div><div class="CodeMirror-gutter CodeMirror-foldgutter"></div></div></div></div></div></div></td></tr></tbody></table></div><div class="wcPanelTabContent wcPanelTabContentHidden" id="1"><table class="wcLayout wcWide wcTall"><tbody><tr><td><div class="pg-panel-content"><div id="history_grid" class="sql-editor-history-container" tabindex:="" "0"=""><div class="SplitPane  vertical " style="display: flex; flex: 1 1 0%; height: 100%; position: absolute; outline: none; overflow: hidden; user-select: text; flex-direction: row; left: 0px; right: 0px;"><div class="Pane vertical Pane1  " style="overflow-y: auto; flex: 0 0 auto; position: relative; outline: none; width: 50%;"><div id="query_list" class="query-history"><ul><li><div class="date-label">Today - Mar 21 2019</div></li><li class="list-item" tabindex="0"><div class="entry selected"><div class="query">SELECT * FROM public."PC"</div><div class="other-info"><div class="timestamp">03:07:27</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">SELECT pro.modelo, pc.precio
+FROM public."PC" pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = 1024 AND velocidad = 2.16;</div><div class="other-info"><div class="timestamp">03:07:22</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">SELECT * FROM public."PC"</div><div class="other-info"><div class="timestamp">03:07:04</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">SELECT pro.modelo, pc.precio
+FROM public."PC" pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = '1024' AND velocidad = '2.66';</div><div class="other-info"><div class="timestamp">03:06:54</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">SELECT * FROM public."PC"</div><div class="other-info"><div class="timestamp">03:06:34</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">SELECT pro.modelo, pc.precio
+FROM public."PC" pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = 1024 AND velocidad = 2.66;</div><div class="other-info"><div class="timestamp">03:06:31</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">SELECT pro.modelo, pc.precio
+FROM public."PC" pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = 2.66 AND velocidad = 2;</div><div class="other-info"><div class="timestamp">03:06:20</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">SELECT * FROM public."PC"</div><div class="other-info"><div class="timestamp">03:03:21</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">COMMIT;</div><div class="other-info"><div class="timestamp">02:54:38</div></div></div></li><li class="list-item" tabindex="0"><div class="entry error"><div class="query">SELECT * FROM public."PC"</div><div class="other-info"><div class="timestamp">02:54:36</div></div></div></li><li class="list-item" tabindex="0"><div class="entry error"><div class="query">SELECT * FROM public."PC"</div><div class="other-info"><div class="timestamp">02:54:33</div></div></div></li><li class="list-item" tabindex="0"><div class="entry error"><div class="query">BEGIN TRANSACTION READ WRITE ISOLATION LEVEL READ UNCOMMITTED;
+INSERT INTO public."PC"(modelo,velocidad,ram,disco,precio) VALUES ('1001', 2.66, 1024, 250, 2114);</div><div class="other-info"><div class="timestamp">02:54:26</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">BEGIN TRANSACTION READ WRITE ISOLATION LEVEL READ UNCOMMITTED;
+INSERT INTO public."PC"(modelo,velocidad,ram,disco,precio) VALUES ('1001', 2.66, 1024, 250, 2114);
+COMMIT;</div><div class="other-info"><div class="timestamp">02:54:21</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">SELECT * FROM public."PC"</div><div class="other-info"><div class="timestamp">02:53:32</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">-- Query 2:
+BEGIN TRANSACTION READ WRITE ISOLATION LEVEL READ COMMITTED;
+DELETE FROM public."Producto"
+WHERE modelo = '1001';
+
+DELETE FROM public."PC"
+WHERE modelo = '1001';
+COMMIT;</div><div class="other-info"><div class="timestamp">02:53:28</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">SELECT * FROM public."PC"</div><div class="other-info"><div class="timestamp">02:53:04</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">BEGIN TRANSACTION READ WRITE ISOLATION LEVEL READ UNCOMMITTED;
+INSERT INTO public."PC"(modelo,velocidad,ram,disco,precio) VALUES ('1001', 2.66, 1024, 250, 2114);
+COMMIT;</div><div class="other-info"><div class="timestamp">02:52:52</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">BEGIN TRANSACTION READ WRITE ISOLATION LEVEL READ UNCOMMITTED;
+INSERT INTO public."PC"(modelo,velocidad,ram,disco,precio) VALUES ('1001', 2.66, 1024, 250, 2114);
+COMMIT;</div><div class="other-info"><div class="timestamp">02:52:49</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">COMMIT;</div><div class="other-info"><div class="timestamp">02:52:47</div></div></div></li><li class="list-item" tabindex="0"><div class="entry error"><div class="query">BEGIN TRANSACTION READ WRITE ISOLATION LEVEL READ UNCOMMITTED;
+INSERT INTO public."PC"(modelo,velocidad,ram,disco,precio) VALUES ('1001', 2.66, 1024, 250, 2114);
+COMMIT;</div><div class="other-info"><div class="timestamp">02:52:38</div></div></div></li><li class="list-item" tabindex="0"><div class="entry error"><div class="query">BEGIN TRANSACTION READ WRITE ISOLATION LEVEL READ UNCOMMITTED;
+INSERT INTO PC(modelo,velocidad,ram,disco,precio) VALUES ('1001', 2.66, 1024, 250, 2114);
+COMMIT;</div><div class="other-info"><div class="timestamp">02:52:27</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">SELECT * FROM public."PC"</div><div class="other-info"><div class="timestamp">02:45:10</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">SELECT * FROM public."PC"</div><div class="other-info"><div class="timestamp">02:44:07</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">
+SELECT * FROM public."PC"</div><div class="other-info"><div class="timestamp">02:40:25</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">COMMIT;</div><div class="other-info"><div class="timestamp">02:40:21</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">BEGIN TRANSACTION READ WRITE ISOLATION LEVEL READ COMMITTED;
+DELETE FROM public."Producto"
+WHERE modelo = '1001';
+
+DELETE FROM public."PC"
+WHERE modelo = '1001';</div><div class="other-info"><div class="timestamp">02:40:17</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">COMMIT;</div><div class="other-info"><div class="timestamp">02:40:09</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">BEGIN TRANSACTION READ WRITE ISOLATION LEVEL READ COMMITTED;
+DELETE FROM public."Producto"
+WHERE modelo = '1001';
+
+DELETE FROM public."PC"
+WHERE modelo = '1001';
+COMMIT;</div><div class="other-info"><div class="timestamp">02:39:58</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">SELECT * FROM public."PC"</div><div class="other-info"><div class="timestamp">02:39:08</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">SELECT * FROM public."PC"</div><div class="other-info"><div class="timestamp">01:38:00</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">BEGIN TRANSACTION READ WRITE ISOLATION LEVEL READ COMMITTED;
+UPDATE public."PC" SET precio = precio - 500
+	WHERE modelo = '1003'
+	AND precio - 500 &gt;= 0;</div><div class="other-info"><div class="timestamp">01:37:57</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">SELECT * FROM public."PC"</div><div class="other-info"><div class="timestamp">01:37:36</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">ROLLBACK;</div><div class="other-info"><div class="timestamp">01:37:33</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">SELECT * FROM public."PC"</div><div class="other-info"><div class="timestamp">01:37:30</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">BEGIN TRANSACTION READ WRITE ISOLATION LEVEL READ COMMITTED;
+UPDATE public."PC" SET precio = precio - 500
+	WHERE modelo = '1003'
+	AND precio - 100 &gt;= 0;</div><div class="other-info"><div class="timestamp">01:37:28</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">SELECT * FROM public."PC"</div><div class="other-info"><div class="timestamp">01:37:04</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">ROLLBACK;</div><div class="other-info"><div class="timestamp">01:37:01</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">SELECT * FROM public."PC"</div><div class="other-info"><div class="timestamp">01:36:52</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">BEGIN TRANSACTION READ WRITE ISOLATION LEVEL READ COMMITTED;
+UPDATE public."PC" SET precio = precio - 100
+	WHERE modelo = '1003'
+	AND precio - 100 &gt;= 0;</div><div class="other-info"><div class="timestamp">01:36:47</div></div></div></li><li class="list-item" tabindex="0"><div class="entry error"><div class="query">BEGIN TRANSACTION READ WRITE ISOLATION LEVEL READ COMMITTED;
+UPDATE public."PC" SET precio = precio - 100
+	WHERE modelo = '1003';
+	AND precio - 100 &gt;= 0</div><div class="other-info"><div class="timestamp">01:36:42</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">SELECT * FROM public."PC"</div><div class="other-info"><div class="timestamp">01:31:09</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">BEGIN TRANSACTION READ WRITE ISOLATION LEVEL READ COMMITTED;
+UPDATE public."PC" SET precio = precio + 500
+	WHERE modelo = '1003';
+COMMIT;</div><div class="other-info"><div class="timestamp">01:31:07</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">SELECT * FROM public."PC"
+</div><div class="other-info"><div class="timestamp">01:30:54</div></div></div></li><li class="list-item" tabindex="0"><div class="entry error"><div class="query">SELECT * FROM public."PC</div><div class="other-info"><div class="timestamp">01:30:51</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">BEGIN TRANSACTION READ WRITE ISOLATION LEVEL READ COMMITTED;
+UPDATE public."PC" SET precio = precio + 500
+	WHERE modelo = '1003'
+	AND precio &gt; 0;
+COMMIT;</div><div class="other-info"><div class="timestamp">01:30:48</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">SELECT * FROM public."PC"</div><div class="other-info"><div class="timestamp">01:30:39</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">
+SELECT * FROM public."PC"</div><div class="other-info"><div class="timestamp">01:30:24</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">BEGIN TRANSACTION READ WRITE ISOLATION LEVEL READ COMMITTED;
+UPDATE public."PC" SET precio = precio + 500
+	WHERE modelo = '1003'
+	AND precio &gt; 0;
+COMMIT;</div><div class="other-info"><div class="timestamp">01:30:22</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">SELECT * FROM public."PC"</div><div class="other-info"><div class="timestamp">01:30:07</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">-- Query 3:
+BEGIN TRANSACTION READ WRITE ISOLATION LEVEL READ COMMITTED;
+UPDATE public."PC" SET precio = precio - 500
+	WHERE modelo = '1003'
+	AND precio &gt; 0;
+COMMIT;</div><div class="other-info"><div class="timestamp">01:30:00</div></div></div></li><li class="list-item" tabindex="0"><div class="entry error"><div class="query">BEGIN TRANSACTION READ WRITE ISOLATION LEVEL READ COMMITTED;
+UPDATE public."PC" SET precio = precio - 500
+	WHERE modelo = '1003';
+	AND precio &gt; 0
+COMMIT;</div><div class="other-info"><div class="timestamp">01:29:53</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">SELECT * FROM public."PC"</div><div class="other-info"><div class="timestamp">01:27:48</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">BEGIN TRANSACTION READ WRITE ISOLATION LEVEL READ COMMITTED;
+UPDATE public."PC" SET precio = precio - 100
+	WHERE modelo = '1005';
+COMMIT;</div><div class="other-info"><div class="timestamp">01:27:45</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">SELECT * FROM public."PC"</div><div class="other-info"><div class="timestamp">01:27:25</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">BEGIN TRANSACTION READ WRITE ISOLATION LEVEL READ COMMITTED;
+UPDATE public."PC" SET precio = precio - 100
+	WHERE modelo = '1002';
+COMMIT;</div><div class="other-info"><div class="timestamp">01:27:22</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">SELECT * FROM public."PC"</div><div class="other-info"><div class="timestamp">01:27:15</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">BEGIN TRANSACTION READ WRITE ISOLATION LEVEL READ COMMITTED;
+DELETE FROM public."Producto"
+WHERE modelo = '1001';
+
+DELETE FROM public."PC"
+WHERE modelo = '1001';
+COMMIT;</div><div class="other-info"><div class="timestamp">01:23:48</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">COMMIT;</div><div class="other-info"><div class="timestamp">01:23:44</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">BEGIN TRANSACTION READ ONLY ISOLATION LEVEL READ COMMITTED;
+SELECT pro.modelo, pc.precio
+FROM public."PC" pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = 2048 AND velocidad = 2;</div><div class="other-info"><div class="timestamp">01:23:42</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">BEGIN TRANSACTION READ ONLY ISOLATION LEVEL READ COMMITTED;
+SELECT pro.modelo, pc.precio
+FROM public."PC" pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = 2048 AND velocidad = 2;
+COMMIT;</div><div class="other-info"><div class="timestamp">01:23:38</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">commit;</div><div class="other-info"><div class="timestamp">01:23:31</div></div></div></li><li class="list-item" tabindex="0"><div class="entry error"><div class="query">BEGIN TRANSACTION READ ONLY ISOLATION LEVEL READ COMMITTED;
+SELECT pro.modelo, pc.precio
+FROM public."PC" pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = 2048 AND velocidad = 2;</div><div class="other-info"><div class="timestamp">01:23:19</div></div></div></li><li class="list-item" tabindex="0"><div class="entry error"><div class="query">BEGIN TRANSACTION READ ONLY ISOLATION LEVEL READ COMMITTED;
+SELECT pro.modelo, pc.precio
+FROM public."PC" pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = 2048 AND velocidad = 2;</div><div class="other-info"><div class="timestamp">01:23:19</div></div></div></li><li class="list-item" tabindex="0"><div class="entry error"><div class="query">BEGIN TRANSACTION READ ONLY ISOLATION LEVEL READ COMMITTED;
+SELECT pro.modelo, pc.precio
+FROM public."PC" pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = 2048 AND velocidad = 2;</div><div class="other-info"><div class="timestamp">01:23:18</div></div></div></li><li class="list-item" tabindex="0"><div class="entry error"><div class="query">BEGIN TRANSACTION READ WRITE ISOLATION LEVEL READ COMMITTED;
+DELETE FROM public."Producto"
+WHERE modelo = '1001';
+
+DELETE FROM public."PC"
+WHERE modelo = '1001';
+COMMIT;</div><div class="other-info"><div class="timestamp">01:23:16</div></div></div></li><li class="list-item" tabindex="0"><div class="entry error"><div class="query">BEGIN TRANSACTION READ ONLY ISOLATION LEVEL READ COMMITTED;
+SELECT pro.modelo, pc.precio
+FROM public."PC" pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = 2048 AND velocidad = 2;
+COMMIT;</div><div class="other-info"><div class="timestamp">01:23:12</div></div></div></li><li class="list-item" tabindex="0"><div class="entry error"><div class="query">BEGIN TRANSACTION READ ONLY ISOLATION LEVEL READ COMMITTED;
+SELECT pro.modelo, pc.precio
+FROM public."PC" pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = 2048 AND velocidad = 2;</div><div class="other-info"><div class="timestamp">01:23:05</div></div></div></li><li class="list-item" tabindex="0"><div class="entry error"><div class="query">BEGIN TRANSACTION READ WRITE ISOLATION LEVEL READ COMMITTED;
+DELETE FROM public."Producto"
+WHERE modelo = '1001';
+
+DELETE FROM public."PC"
+WHERE modelo = '1001';
+COMMIT;</div><div class="other-info"><div class="timestamp">01:23:02</div></div></div></li><li class="list-item" tabindex="0"><div class="entry error"><div class="query">BEGIN TRANSACTION READ WRITE ISOLATION LEVEL READ COMMITTED;
+DELETE FROM public."Producto"
+WHERE modelo = '1001';
+
+DELETE FROM public."PC"
+WHERE modelo = '1001';
+COMMIT;</div><div class="other-info"><div class="timestamp">01:22:54</div></div></div></li><li class="list-item" tabindex="0"><div class="entry error"><div class="query">BEGIN TRANSACTION READ WRITE ISOLATION LEVEL READ COMMITTED;
+DELETE FROM public."Producto"
+WHERE modelo = '1001';
+
+DELETE FROM public."PC"
+WHERE modelo = '1001';
+COMMIT;</div><div class="other-info"><div class="timestamp">01:22:52</div></div></div></li><li class="list-item" tabindex="0"><div class="entry error"><div class="query">BEGIN TRANSACTION READ WRITE ISOLATION LEVEL READ COMMITTED;
+DELETE FROM public."Producto"
+WHERE modelo = '1001';
+
+DELETE FROM public."PC"
+WHERE modelo = '1001';
+COMMIT;</div><div class="other-info"><div class="timestamp">01:22:42</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">BEGIN TRANSACTION READ ONLY ISOLATION LEVEL READ COMMITTED;
+SELECT pro.modelo, pc.precio
+FROM public."PC" pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = 2048 AND velocidad = 2;</div><div class="other-info"><div class="timestamp">01:18:29</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">BEGIN TRANSACTION READ ONLY;
+SELECT pro.modelo, pc.precio
+FROM public."PC" pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = 2048 AND velocidad = 2;</div><div class="other-info"><div class="timestamp">01:18:25</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">BEGIN TRANSACTION READ ONLY;
+SELECT pro.modelo, pc.precio
+FROM public."PC" pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = 2048 AND velocidad = 2;
+COMMIT;</div><div class="other-info"><div class="timestamp">01:18:18</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">SELECT pro.modelo, pc.precio
+FROM public."PC" pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = 2048 AND velocidad = 2;</div><div class="other-info"><div class="timestamp">01:18:15</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">BEGIN TRANSACTION READ ONLY;
+SELECT pro.modelo, pc.precio
+FROM public."PC" pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = 2048 AND velocidad = 2;
+COMMIT;</div><div class="other-info"><div class="timestamp">01:18:10</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">BEGIN TRANSACTION READ ONLY ISOLATION LEVEL READ COMMITTED;
+SELECT pro.modelo, pc.precio
+FROM public."PC" pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = 2048 AND velocidad = 2;
+COMMIT;</div><div class="other-info"><div class="timestamp">01:17:54</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">BEGIN TRANSACTION;
+DELETE FROM public."Producto"
+WHERE modelo = '1001';
+
+DELETE FROM public."PC"
+WHERE modelo = '1001';
+COMMIT;</div><div class="other-info"><div class="timestamp">01:17:48</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">BEGIN TRANSACTION READ ONLY ISOLATION LEVEL READ COMMITTED;
+SELECT pro.modelo, pc.precio
+FROM public."PC" pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = 2048 AND velocidad = 2;
+COMMIT;</div><div class="other-info"><div class="timestamp">01:17:42</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">BEGIN TRANSACTION READ ONLY ISOLATION LEVEL READ COMMITTED;
+SELECT pro.modelo, pc.precio
+FROM public."PC" pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = 2048 AND velocidad = 2;
+COMMIT;</div><div class="other-info"><div class="timestamp">01:17:38</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">BEGIN TRANSACTION READ ONLY ISOLATION LEVEL READ COMMITTED;
+SELECT pro.modelo, pc.precio
+FROM public."PC" pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = 2048 AND velocidad = 2;
+COMMIT;</div><div class="other-info"><div class="timestamp">01:17:31</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">BEGIN TRANSACTION READ ONLY ISOLATION LEVEL READ COMMITTED;
+SELECT pro.modelo, pc.precio
+FROM public."PC" pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = 2048 AND velocidad = 2;</div><div class="other-info"><div class="timestamp">01:17:18</div></div></div></li><li class="list-item" tabindex="0"><div class="entry error"><div class="query">ISOLATION LEVEL READ COMMITTED;
+SELECT pro.modelo, pc.precio
+FROM public."PC" pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = 2048 AND velocidad = 2;</div><div class="other-info"><div class="timestamp">01:17:14</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">BEGIN TRANSACTION READ ONLY ISOLATION LEVEL READ COMMITTED;
+SELECT pro.modelo, pc.precio
+FROM public."PC" pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = 2048 AND velocidad = 2;
+COMMIT;</div><div class="other-info"><div class="timestamp">01:17:05</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">SELECT * from public."Producto"</div><div class="other-info"><div class="timestamp">01:10:01</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">BEGIN TRANSACTION;
+DELETE FROM public."Producto"
+WHERE modelo = '1001';
+
+DELETE FROM public."PC"
+WHERE modelo = '1001';
+COMMIT;</div><div class="other-info"><div class="timestamp">01:09:57</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">SELECT * from public."Producto"</div><div class="other-info"><div class="timestamp">01:09:54</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">BEGIN TRANSACTION;
+DELETE FROM public."Producto"
+WHERE modelo = '1001';
+
+DELETE FROM public."PC"
+WHERE modelo = '1001';
+COMMIT;</div><div class="other-info"><div class="timestamp">01:09:50</div></div></div></li><li class="list-item" tabindex="0"><div class="entry error"><div class="query">BEGIN TRANSACTION;
+DELETE FROM public."Producto"
+WHERE modelo = '1001'
+
+DELETE FROM public."PC"
+WHERE modelo = '1001'
+COMMIT;</div><div class="other-info"><div class="timestamp">01:09:42</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">SELECT * from public."Producto"</div><div class="other-info"><div class="timestamp">01:08:54</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">BEGIN TRANSACTION READ ONLY;
+SELECT pro.modelo, pc.precio
+FROM public."PC" pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = 2048 AND velocidad = 2;
+COMMIT;</div><div class="other-info"><div class="timestamp">01:07:33</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">BEGIN READ ONLY;
+SELECT pro.modelo, pc.precio
+FROM public."PC" pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = 2048 AND velocidad = 2;
+COMMIT;</div><div class="other-info"><div class="timestamp">01:07:15</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">BEGIN;
+SELECT pro.modelo, pc.precio
+FROM public."PC" pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = 2048 AND velocidad = 2;
+COMMIT;</div><div class="other-info"><div class="timestamp">01:07:08</div></div></div></li><li class="list-item" tabindex="0"><div class="entry error"><div class="query">BEGIN;
+SELECT pro.modelo, pc.precio
+FROM public."PC" pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = 2048 AND velocidad = 2
+COMMIT;</div><div class="other-info"><div class="timestamp">01:06:58</div></div></div></li><li class="list-item" tabindex="0"><div class="entry error"><div class="query">BEGIN
+SELECT pro.modelo, pc.precio
+FROM public."PC" pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = 2048 AND velocidad = 2
+COMMIT;</div><div class="other-info"><div class="timestamp">01:06:44</div></div></div></li><li class="list-item" tabindex="0"><div class="entry error"><div class="query">BEGIN TRANSACTION READ ONLY
+SELECT pro.modelo, pc.precio
+FROM public."PC" pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = 2048 AND velocidad = 2
+COMMIT;</div><div class="other-info"><div class="timestamp">01:06:12</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">SELECT pro.modelo, pc.precio
+FROM public."PC" pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = 2048 AND velocidad = 2</div><div class="other-info"><div class="timestamp">01:03:38</div></div></div></li><li class="list-item" tabindex="0"><div class="entry error"><div class="query">SELECT pro.modelo, pc.precio
+FROM public."PC" pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = 2048 AND velocidad = 2
+
+SELECT * from public."PC"</div><div class="other-info"><div class="timestamp">01:03:32</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">SELECT * from public."PC"</div><div class="other-info"><div class="timestamp">01:03:05</div></div></div></li><li class="list-item" tabindex="0"><div class="entry error"><div class="query">SELECT pro.modelo, pc.precio
+FROM public."PC" pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = 512 AND velocidad = 2
+
+SELECT * from public."PC"</div><div class="other-info"><div class="timestamp">01:02:58</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">SELECT pro.modelo, pc.precio
+FROM public."PC" pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = 512 AND velocidad = 2</div><div class="other-info"><div class="timestamp">01:02:54</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">SELECT * from public."Producto"</div><div class="other-info"><div class="timestamp">01:02:37</div></div></div></li><li><div class="date-label">Yesterday - Mar 20 2019</div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">SELECT pro.modelo, pc.precio
+FROM public."PC" pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = 512 AND velocidad = 2</div><div class="other-info"><div class="timestamp">21:07:20</div></div></div></li><li class="list-item" tabindex="0"><div class="entry error"><div class="query">SELECT pro.modelo, pro.precio
+FROM public."PC" pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = 512 AND velocidad = 2</div><div class="other-info"><div class="timestamp">21:07:08</div></div></div></li><li class="list-item" tabindex="0"><div class="entry error"><div class="query">SELECT pro.modelo, pro.precio from public."PC"
+FROM PC pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = 512 AND velocidad = 2</div><div class="other-info"><div class="timestamp">21:06:56</div></div></div></li><li class="list-item" tabindex="0"><div class="entry error"><div class="query">SELECT pro.modelo, pro.precio from public."PC"
+FROM public."PC" pc
+INNER JOIN public."Producto" pro ON pro.modelo = pc.modelo
+WHERE ram = 512 AND velocidad = 2</div><div class="other-info"><div class="timestamp">21:06:48</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">SELECT * from public."PC"</div><div class="other-info"><div class="timestamp">21:04:37</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('1001', 2.66, 1024, 250, 2114);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('1002', 2.10, 512, 250, 995);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('1003', 1.42, 512, 80, 478);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('1004', 2.80, 1024, 250, 649);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('1005', 3.20, 1024, 250, 630);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('1006', 3.20, 1024, 200, 1049);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('1007', 2.20, 1024, 200, 510);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('1008', 2.20, 2048, 250, 770);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('1009', 2.00, 1024, 250, 650);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('1010', 2.80, 2048, 160, 959);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('1011', 1.86, 1024, 160, 649);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('1012', 2.80, 512, 80, 649);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('1013', 3.06, 512, 80, 529);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('2001', 2.00, 2048, 250, 3673);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('2002', 1.73, 1024, 80, 949);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('2003', 1.80, 512, 60, 549);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('2004', 2.00, 512, 60, 1150);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('2005', 2.16, 1024, 120, 2500);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('2006', 2.00, 2048, 80, 1700);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('2007', 1.83, 1024, 120, 1429);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('2008', 1.60, 1024, 100, 900);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('2009', 1.60, 512, 80, 680);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('2010', 2.00, 2048, 160, 2300);</div><div class="other-info"><div class="timestamp">21:04:22</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">DELETE FROM public."PC"</div><div class="other-info"><div class="timestamp">21:04:05</div></div></div></li><li class="list-item" tabindex="0"><div class="entry error"><div class="query">DELETE * FROM public."PC"</div><div class="other-info"><div class="timestamp">21:03:50</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">SELECT * FROM public."PC"</div><div class="other-info"><div class="timestamp">21:03:26</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">SELECT * FROM public."PC"</div><div class="other-info"><div class="timestamp">21:02:37</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">select * from public."Producto"</div><div class="other-info"><div class="timestamp">21:01:05</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">select * from public."PC"</div><div class="other-info"><div class="timestamp">21:00:55</div></div></div></li><li class="list-item" tabindex="0"><div class="entry error"><div class="query">select * from PC</div><div class="other-info"><div class="timestamp">21:00:46</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">INSERT INTO public."Producto"(fabricante, modelo, tipo) VALUES ('A', '1001', 'pc');
+INSERT INTO public."Producto"(fabricante, modelo, tipo) VALUES ('A', '1002', 'pc');
+INSERT INTO public."Producto"(fabricante, modelo, tipo) VALUES ('A', '1003', 'pc');
+INSERT INTO public."Producto"(fabricante, modelo, tipo) VALUES ('A', '2004', 'laptop');
+INSERT INTO public."Producto"(fabricante, modelo, tipo) VALUES ('A', '2005', 'laptop');
+INSERT INTO public."Producto"(fabricante, modelo, tipo) VALUES ('A', '2006', 'laptop');
+INSERT INTO public."Producto"(fabricante, modelo, tipo) VALUES ('B', '1004', 'pc');
+INSERT INTO public."Producto"(fabricante, modelo, tipo) VALUES ('B', '1005', 'pc');
+INSERT INTO public."Producto"(fabricante, modelo, tipo) VALUES ('B', '1006', 'pc');
+INSERT INTO public."Producto"(fabricante, modelo, tipo) VALUES ('B', '2007', 'laptop');
+INSERT INTO public."Producto"(fabricante, modelo, tipo) VALUES ('C', '1007', 'pc');
+INSERT INTO public."Producto"(fabricante, modelo, tipo) VALUES ('D', '1008', 'pc');
+INSERT INTO public."Producto"(fabricante, modelo, tipo) VALUES ('D', '1009', 'pc');
+INSERT INTO public."Producto"(fabricante, modelo, tipo) VALUES ('D', '1010', 'pc');
+INSERT INTO public."Producto"(fabricante, modelo, tipo) VALUES ('E', '1011', 'pc');
+INSERT INTO public."Producto"(fabricante, modelo, tipo) VALUES ('E', '1012', 'pc');
+INSERT INTO public."Producto"(fabricante, modelo, tipo) VALUES ('E', '1013', 'pc');
+INSERT INTO public."Producto"(fabricante, modelo, tipo) VALUES ('E', '2001', 'laptop');
+INSERT INTO public."Producto"(fabricante, modelo, tipo) VALUES ('E', '2002', 'laptop');
+INSERT INTO public."Producto"(fabricante, modelo, tipo) VALUES ('E', '2003', 'laptop');
+INSERT INTO public."Producto"(fabricante, modelo, tipo) VALUES ('F', '2008', 'laptop');
+INSERT INTO public."Producto"(fabricante, modelo, tipo) VALUES ('F', '2009', 'laptop');
+INSERT INTO public."Producto"(fabricante, modelo, tipo) VALUES ('G', '2010', 'laptop');
+INSERT INTO public."Producto"(fabricante, modelo, tipo) VALUES ('D', '3004', 'printer');
+INSERT INTO public."Producto"(fabricante, modelo, tipo) VALUES ('D', '3005', 'printer');
+INSERT INTO public."Producto"(fabricante, modelo, tipo) VALUES ('E', '3001', 'printer');
+INSERT INTO public."Producto"(fabricante, modelo, tipo) VALUES ('E', '3002', 'printer');
+INSERT INTO public."Producto"(fabricante, modelo, tipo) VALUES ('E', '3003', 'printer');
+INSERT INTO public."Producto"(fabricante, modelo, tipo) VALUES ('H', '3006', 'printer');
+INSERT INTO public."Producto"(fabricante, modelo, tipo) VALUES ('H', '3007', 'printer');
+
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('1001', 2.66, 1024, 250, 2114);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('1002', 2.10, 512, 250, 995);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('1003', 1.42, 512, 80, 478);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('1004', 2.80, 1024, 250, 649);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('1005', 3.20, 1024, 250, 630);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('1006', 3.20, 1024, 200, 1049);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('1007', 2.20, 1024, 200, 510);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('1008', 2.20, 2048, 250, 770);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('1009', 2.00, 1024, 250, 650);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('1010', 2.80, 2048, 160, 959);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('1011', 1.86, 1024, 160, 649);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('1012', 2.80, 512, 80, 649);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('1013', 3.06, 512, 80, 529);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('2001', 2.00, 2048, 250, 3673);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('2002', 1.73, 1024, 80, 949);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('2003', 1.80, 512, 60, 549);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('2004', 2.00, 512, 60, 1150);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('2005', 2.16, 1024, 120, 2500);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('2006', 2.00, 2048, 80, 1700);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('2007', 1.83, 1024, 120, 1429);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('2008', 1.60, 1024, 100, 900);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('2009', 1.60, 512, 80, 680);
+INSERT INTO public."PC"(modelo, velocidad, ram, disco, precio) VALUES ('2010', 2.00, 2048, 160, 2300);</div><div class="other-info"><div class="timestamp">21:00:16</div></div></div></li><li class="list-item" tabindex="0"><div class="entry "><div class="query">INSERT INTO public."Producto"(fabricante, modelo, tipo) VALUES ('A', '1001', 'pc');</div><div class="other-info"><div class="timestamp">20:59:34</div></div></div></li><li class="list-item" tabindex="0"><div class="entry error"><div class="query">INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('A', '1001', 'pc');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('A', '1002', 'pc');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('A', '1003', 'pc');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('A', '2004', 'laptop');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('A', '2005', 'laptop');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('A', '2006', 'laptop');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('B', '1004', 'pc');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('B', '1005', 'pc');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('B', '1006', 'pc');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('B', '2007', 'laptop');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('C', '1007', 'pc');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('D', '1008', 'pc');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('D', '1009', 'pc');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('D', '1010', 'pc');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('E', '1011', 'pc');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('E', '1012', 'pc');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('E', '1013', 'pc');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('E', '2001', 'laptop');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('E', '2002', 'laptop');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('E', '2003', 'laptop');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('F', '2008', 'laptop');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('F', '2009', 'laptop');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('G', '2010', 'laptop');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('D', '3004', 'printer');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('D', '3005', 'printer');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('E', '3001', 'printer');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('E', '3002', 'printer');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('E', '3003', 'printer');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('H', '3006', 'printer');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('H', '3007', 'printer');
+
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('1001', 2.66, 1024, 250, 2114);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('1002', 2.10, 512, 250, 995);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('1003', 1.42, 512, 80, 478);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('1004', 2.80, 1024, 250, 649);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('1005', 3.20, 1024, 250, 630);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('1006', 3.20, 1024, 200, 1049);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('1007', 2.20, 1024, 200, 510);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('1008', 2.20, 2048, 250, 770);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('1009', 2.00, 1024, 250, 650);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('1010', 2.80, 2048, 160, 959);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('1011', 1.86, 1024, 160, 649);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('1012', 2.80, 512, 80, 649);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('1013', 3.06, 512, 80, 529);
+
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('2001', 2.00, 2048, 250, 3673);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('2002', 1.73, 1024, 80, 949);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('2003', 1.80, 512, 60, 549);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('2004', 2.00, 512, 60, 1150);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('2005', 2.16, 1024, 120, 2500);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('2006', 2.00, 2048, 80, 1700);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('2007', 1.83, 1024, 120, 1429);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('2008', 1.60, 1024, 100, 900);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('2009', 1.60, 512, 80, 680);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('2010', 2.00, 2048, 160, 2300);</div><div class="other-info"><div class="timestamp">20:59:16</div></div></div></li><li class="list-item" tabindex="0"><div class="entry error"><div class="query">INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('A', '1001', 'pc');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('A', '1002', 'pc');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('A', '1003', 'pc');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('A', '2004', 'laptop');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('A', '2005', 'laptop');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('A', '2006', 'laptop');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('B', '1004', 'pc');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('B', '1005', 'pc');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('B', '1006', 'pc');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('B', '2007', 'laptop');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('C', '1007', 'pc');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('D', '1008', 'pc');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('D', '1009', 'pc');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('D', '1010', 'pc');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('E', '1011', 'pc');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('E', '1012', 'pc');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('E', '1013', 'pc');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('E', '2001', 'laptop');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('E', '2002', 'laptop');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('E', '2003', 'laptop');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('F', '2008', 'laptop');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('F', '2009', 'laptop');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('G', '2010', 'laptop');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('D', '3004', 'printer');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('D', '3005', 'printer');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('E', '3001', 'printer');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('E', '3002', 'printer');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('E', '3003', 'printer');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('H', '3006', 'printer');
+INSERT INTO Producto(fabricante, modelo, tipo) VALUES ('H', '3007', 'printer');
+
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('1001', 2.66, 1024, 250, 2114);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('1002', 2.10, 512, 250, 995);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('1003', 1.42, 512, 80, 478);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('1004', 2.80, 1024, 250, 649);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('1005', 3.20, 1024, 250, 630);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('1006', 3.20, 1024, 200, 1049);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('1007', 2.20, 1024, 200, 510);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('1008', 2.20, 2048, 250, 770);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('1009', 2.00, 1024, 250, 650);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('1010', 2.80, 2048, 160, 959);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('1011', 1.86, 1024, 160, 649);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('1012', 2.80, 512, 80, 649);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('1013', 3.06, 512, 80, 529);
+
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('2001', 2.00, 2048, 250, 3673);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('2002', 1.73, 1024, 80, 949);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('2003', 1.80, 512, 60, 549);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('2004', 2.00, 512, 60, 1150);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('2005', 2.16, 1024, 120, 2500);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('2006', 2.00, 2048, 80, 1700);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('2007', 1.83, 1024, 120, 1429);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('2008', 1.60, 1024, 100, 900);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('2009', 1.60, 512, 80, 680);
+INSERT INTO PC(modelo, velocidad, ram, disco, precio) VALUES ('2010', 2.00, 2048, 160, 2300);</div><div class="other-info"><div class="timestamp">20:58:16</div></div></div></li></ul></div></div><span class="Resizer vertical "></span><div class="Pane vertical Pane2  " style="display: flex; flex: 1 1 0%; position: relative; outline: none;"><div id="query_detail" class="query-detail"><div class="metadata-block"><div class="metadata"><div class="item"><span class="value">3-21-19 03:07:27</span><span class="description">Date</span></div><div class="item"><span class="value">22</span><span class="description">Rows Affected</span></div><div class="item"><span class="value">58 msec</span><span class="description">Duration</span></div></div></div><div class="query-statement-block"><div id="history-detail-query"><button class="copy-all" tabindex="0" accesskey="y">Copy All</button><div><div class="CodeMirror cm-s-default" style="font-size: 1em;"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 0px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;" tabindex="-1"></textarea></div><div class="CodeMirror-vscrollbar" cm-not-content="true" style="display: block; bottom: 0px;"><div style="min-width: 1px; height: 31px;"></div></div><div class="CodeMirror-hscrollbar" cm-not-content="true" style="display: block; right: 0px; left: 0px;"><div style="height: 100%; min-height: 1px; width: 33px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; min-width: 3px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"></div><div class="CodeMirror-measure"><pre class="CodeMirror-line" role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">SELECT</span> <span class="cm-operator">*</span> <span class="cm-keyword">FROM</span> <span class="cm-keyword">public</span>."PC"</span></pre></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"></div><div class="CodeMirror-code" role="presentation"></div></div></div></div></div><div style="position: absolute; height: 30px; width: 1px; border-bottom: 0px solid transparent;"></div><div class="CodeMirror-gutters" style="display: none;"></div></div></div></div></div></div><div><hr class="block-divider"></div><div class="message-block"><div class="message"><div class="message-header">Messages</div><div class="content"><pre class="content-value">Successfully run. Total query runtime: 58 msec.
+22 rows affected.</pre></div></div></div></div></div></div></div></div></td></tr></tbody></table></div></div></div></div><div class="wcLayoutPane" style="bottom: 0px; height: 377px; left: 0px; right: 0px;"><div class="wcFrame wcWide wcTall"><div class="wcFrameTitleBar wcTabTop" style="width: 1252px;"><div class="wcTabScroller" style="left: 0px;"><div class="wcPanelTab wcPanelTabActive" id="0"><div><a href="http://127.0.0.1:65037/datagrid/panel/3442859/true/Lab08%20on%20postgres%40PostgreSQL%2011?query_url=&amp;server_type=pg#" tabindex="0" class="panel-link-heading">Data Output</a></div></div><div class="wcPanelTab" id="1"><div><a href="http://127.0.0.1:65037/datagrid/panel/3442859/true/Lab08%20on%20postgres%40PostgreSQL%2011?query_url=&amp;server_type=pg#" tabindex="0" class="panel-link-heading">Explain</a></div></div><div class="wcPanelTab" id="2"><div><a href="http://127.0.0.1:65037/datagrid/panel/3442859/true/Lab08%20on%20postgres%40PostgreSQL%2011?query_url=&amp;server_type=pg#" tabindex="0" class="panel-link-heading">Messages</a></div></div><div class="wcPanelTab" id="3"><div><a href="http://127.0.0.1:65037/datagrid/panel/3442859/true/Lab08%20on%20postgres%40PostgreSQL%2011?query_url=&amp;server_type=pg#" tabindex="0" class="panel-link-heading">Notifications</a></div></div></div><div class="wcFrameButtonBar" style="min-width: 0px; width: 0px; right: 0px;"></div></div><div class="wcFrameButtonBar" style="min-width: 0px; width: 0px;"><div class="wcFrameButton" title="Close the currently active panel tab" style="display: none;"><div class="fa fa-close"></div></div><div class="wcFrameButton" title="Collapse the active panel" style="display: none;"><div class="fa fa-download"></div>C</div></div><div class="wcFrameCenter wcPanelBackground wcScrollableX wcScrollableY" style="left: 0px; right: 0px; bottom: 0px;"><div class="wcPanelTabContent" id="0"><table class="wcLayout wcWide wcTall"><tbody><tr><td><div class="pg-panel-content"><div id="datagrid" class="sql-editor-grid-container text-12 ui-widget slickgrid_767750" tabindex:="" "0"="" style="height: 342px; overflow: hidden; outline: 0px; position: relative;"><div tabindex="0" hidefocus="" style="position:fixed;width:0;height:0;top:0;left:0;outline:0;"></div><div class="slick-header ui-state-default"><div class="slick-header-columns" style="left: -1000px; width: 2252px;" unselectable="on"><div class="ui-state-default slick-header-column" id="slickgrid_767750row-header-column" title="" style="width: 32px;"><span class="slick-column-name"><span data-id="select-all" title="Select/Deselect All"><br><img class="select-all-icon" src="./select-all-icon.png"></span></span><div class="slick-resizable-handle"></div></div><div class="ui-state-default slick-header-column" id="slickgrid_767750modelo" title="" style="width: 73px;"><span class="slick-column-name"><span data-cell-type="column-header-row" data-test="output-column-header" data-column-id="modelo">  <span class="column-description">    <span class="column-name">modelo</span>    <span class="column-type">character varying (5)</span>  </span></span></span><div class="slick-resizable-handle"></div></div><div class="ui-state-default slick-header-column" id="slickgrid_767750velocidad" title="" style="width: 76px;"><span class="slick-column-name"><span data-cell-type="column-header-row" data-test="output-column-header" data-column-id="velocidad">  <span class="column-description">    <span class="column-name">velocidad</span>    <span class="column-type">real</span>  </span></span></span><div class="slick-resizable-handle"></div></div><div class="ui-state-default slick-header-column" id="slickgrid_767750ram" title="" style="width: 39px;"><span class="slick-column-name"><span data-cell-type="column-header-row" data-test="output-column-header" data-column-id="ram">  <span class="column-description">    <span class="column-name">ram</span>    <span class="column-type">real</span>  </span></span></span><div class="slick-resizable-handle"></div></div><div class="ui-state-default slick-header-column" id="slickgrid_767750disco" title="" style="width: 50px;"><span class="slick-column-name"><span data-cell-type="column-header-row" data-test="output-column-header" data-column-id="disco">  <span class="column-description">    <span class="column-name">disco</span>    <span class="column-type">real</span>  </span></span></span><div class="slick-resizable-handle"></div></div><div class="ui-state-default slick-header-column" id="slickgrid_767750precio" title="" style="width: 55px;"><span class="slick-column-name"><span data-cell-type="column-header-row" data-test="output-column-header" data-column-id="precio">  <span class="column-description">    <span class="column-name">precio</span>    <span class="column-type">real</span>  </span></span></span><div class="slick-resizable-handle"></div></div></div></div><div class="slick-headerrow ui-state-default" style="display: none;"><div class="slick-headerrow-columns" style="width: 367px;"></div><div style="display: block; height: 1px; position: absolute; top: 0px; left: 0px; width: 388px;"></div></div><div class="slick-top-panel-scroller ui-state-default" style="display: none;"><div class="slick-top-panel" style="width:10000px"></div></div><div class="slick-viewport" style="width: 100%; overflow: auto; outline: 0px; position: relative; height: 302px;"><div class="grid-canvas" style="height: 550px; width: 367px;"><div class="ui-widget-content slick-row odd" style="top:125px"><div class="slick-cell l0 r0"><span data-row="5" data-cell-type="row-header-selector">6</span></div><div class="slick-cell l1 r1">1011</div><div class="slick-cell l2 r2"><span style="float:right">1.86</span></div><div class="slick-cell l3 r3"><span style="float:right">1024</span></div><div class="slick-cell l4 r4" title=""><span style="float:right">160</span></div><div class="slick-cell l5 r5"><span style="float:right">649</span></div></div><div class="ui-widget-content slick-row even" style="top:150px"><div class="slick-cell l0 r0"><span data-row="6" data-cell-type="row-header-selector">7</span></div><div class="slick-cell l1 r1">1012</div><div class="slick-cell l2 r2"><span style="float:right">2.8</span></div><div class="slick-cell l3 r3"><span style="float:right">512</span></div><div class="slick-cell l4 r4"><span style="float:right">80</span></div><div class="slick-cell l5 r5"><span style="float:right">649</span></div></div><div class="ui-widget-content slick-row odd" style="top:175px"><div class="slick-cell l0 r0"><span data-row="7" data-cell-type="row-header-selector">8</span></div><div class="slick-cell l1 r1">1013</div><div class="slick-cell l2 r2"><span style="float:right">3.06</span></div><div class="slick-cell l3 r3"><span style="float:right">512</span></div><div class="slick-cell l4 r4" title=""><span style="float:right">80</span></div><div class="slick-cell l5 r5"><span style="float:right">529</span></div></div><div class="ui-widget-content slick-row even" style="top:200px"><div class="slick-cell l0 r0"><span data-row="8" data-cell-type="row-header-selector">9</span></div><div class="slick-cell l1 r1">2001</div><div class="slick-cell l2 r2"><span style="float:right">2</span></div><div class="slick-cell l3 r3"><span style="float:right">2048</span></div><div class="slick-cell l4 r4"><span style="float:right">250</span></div><div class="slick-cell l5 r5"><span style="float:right">3673</span></div></div><div class="ui-widget-content slick-row odd" style="top:225px"><div class="slick-cell l0 r0"><span data-row="9" data-cell-type="row-header-selector">10</span></div><div class="slick-cell l1 r1">2002</div><div class="slick-cell l2 r2"><span style="float:right">1.73</span></div><div class="slick-cell l3 r3"><span style="float:right">1024</span></div><div class="slick-cell l4 r4" title=""><span style="float:right">80</span></div><div class="slick-cell l5 r5"><span style="float:right">949</span></div></div><div class="ui-widget-content slick-row even" style="top:250px"><div class="slick-cell l0 r0"><span data-row="10" data-cell-type="row-header-selector">11</span></div><div class="slick-cell l1 r1">2003</div><div class="slick-cell l2 r2"><span style="float:right">1.8</span></div><div class="slick-cell l3 r3"><span style="float:right">512</span></div><div class="slick-cell l4 r4" title=""><span style="float:right">60</span></div><div class="slick-cell l5 r5"><span style="float:right">549</span></div></div><div class="ui-widget-content slick-row odd" style="top:275px"><div class="slick-cell l0 r0"><span data-row="11" data-cell-type="row-header-selector">12</span></div><div class="slick-cell l1 r1">2004</div><div class="slick-cell l2 r2"><span style="float:right">2</span></div><div class="slick-cell l3 r3"><span style="float:right">512</span></div><div class="slick-cell l4 r4" title=""><span style="float:right">60</span></div><div class="slick-cell l5 r5"><span style="float:right">1150</span></div></div><div class="ui-widget-content slick-row even" style="top:300px"><div class="slick-cell l0 r0"><span data-row="12" data-cell-type="row-header-selector">13</span></div><div class="slick-cell l1 r1">2005</div><div class="slick-cell l2 r2"><span style="float:right">2.16</span></div><div class="slick-cell l3 r3"><span style="float:right">1024</span></div><div class="slick-cell l4 r4"><span style="float:right">120</span></div><div class="slick-cell l5 r5"><span style="float:right">2500</span></div></div><div class="ui-widget-content slick-row odd" style="top:325px"><div class="slick-cell l0 r0"><span data-row="13" data-cell-type="row-header-selector">14</span></div><div class="slick-cell l1 r1">2006</div><div class="slick-cell l2 r2"><span style="float:right">2</span></div><div class="slick-cell l3 r3"><span style="float:right">2048</span></div><div class="slick-cell l4 r4"><span style="float:right">80</span></div><div class="slick-cell l5 r5"><span style="float:right">1700</span></div></div><div class="ui-widget-content slick-row even" style="top:350px"><div class="slick-cell l0 r0"><span data-row="14" data-cell-type="row-header-selector">15</span></div><div class="slick-cell l1 r1">2007</div><div class="slick-cell l2 r2"><span style="float:right">1.83</span></div><div class="slick-cell l3 r3"><span style="float:right">1024</span></div><div class="slick-cell l4 r4"><span style="float:right">120</span></div><div class="slick-cell l5 r5"><span style="float:right">1429</span></div></div><div class="ui-widget-content slick-row odd" style="top:375px"><div class="slick-cell l0 r0"><span data-row="15" data-cell-type="row-header-selector">16</span></div><div class="slick-cell l1 r1">2008</div><div class="slick-cell l2 r2"><span style="float:right">1.6</span></div><div class="slick-cell l3 r3"><span style="float:right">1024</span></div><div class="slick-cell l4 r4"><span style="float:right">100</span></div><div class="slick-cell l5 r5"><span style="float:right">900</span></div></div><div class="ui-widget-content slick-row even" style="top:400px"><div class="slick-cell l0 r0"><span data-row="16" data-cell-type="row-header-selector">17</span></div><div class="slick-cell l1 r1">2009</div><div class="slick-cell l2 r2"><span style="float:right">1.6</span></div><div class="slick-cell l3 r3"><span style="float:right">512</span></div><div class="slick-cell l4 r4" title=""><span style="float:right">80</span></div><div class="slick-cell l5 r5"><span style="float:right">680</span></div></div><div class="ui-widget-content slick-row odd" style="top:425px"><div class="slick-cell l0 r0"><span data-row="17" data-cell-type="row-header-selector">18</span></div><div class="slick-cell l1 r1">2010</div><div class="slick-cell l2 r2"><span style="float:right">2</span></div><div class="slick-cell l3 r3"><span style="float:right">2048</span></div><div class="slick-cell l4 r4"><span style="float:right">160</span></div><div class="slick-cell l5 r5"><span style="float:right">2300</span></div></div><div class="ui-widget-content slick-row even" style="top:450px"><div class="slick-cell l0 r0"><span data-row="18" data-cell-type="row-header-selector">19</span></div><div class="slick-cell l1 r1">1002</div><div class="slick-cell l2 r2"><span style="float:right">2.1</span></div><div class="slick-cell l3 r3"><span style="float:right">512</span></div><div class="slick-cell l4 r4"><span style="float:right">250</span></div><div class="slick-cell l5 r5"><span style="float:right">895</span></div></div><div class="ui-widget-content slick-row odd" style="top:475px"><div class="slick-cell l0 r0"><span data-row="19" data-cell-type="row-header-selector">20</span></div><div class="slick-cell l1 r1">1005</div><div class="slick-cell l2 r2"><span style="float:right">3.2</span></div><div class="slick-cell l3 r3"><span style="float:right">1024</span></div><div class="slick-cell l4 r4"><span style="float:right">250</span></div><div class="slick-cell l5 r5"><span style="float:right">530</span></div></div><div class="ui-widget-content slick-row even" style="top:500px"><div class="slick-cell l0 r0"><span data-row="20" data-cell-type="row-header-selector">21</span></div><div class="slick-cell l1 r1">1007</div><div class="slick-cell l2 r2"><span style="float:right">2.2</span></div><div class="slick-cell l3 r3"><span style="float:right">1024</span></div><div class="slick-cell l4 r4"><span style="float:right">200</span></div><div class="slick-cell l5 r5"><span style="float:right">410</span></div></div><div class="ui-widget-content slick-row odd" style="top:525px"><div class="slick-cell l0 r0"><span data-row="21" data-cell-type="row-header-selector">22</span></div><div class="slick-cell l1 r1">1001</div><div class="slick-cell l2 r2"><span style="float:right">2.66</span></div><div class="slick-cell l3 r3"><span style="float:right">1024</span></div><div class="slick-cell l4 r4"><span style="float:right">250</span></div><div class="slick-cell l5 r5"><span style="float:right">2114</span></div></div></div></div><div tabindex="0" hidefocus="" style="position:fixed;width:0;height:0;top:0;left:0;outline:0;"></div></div></div></td></tr></tbody></table></div><div class="wcPanelTabContent wcPanelTabContentHidden" id="1"><table class="wcLayout wcWide wcTall"><tbody><tr><td><div class="pg-panel-content"><div class="sql-editor-explain" tabindex:="" "0"=""></div></div></td></tr></tbody></table></div><div class="wcPanelTabContent wcPanelTabContentHidden" id="2"><table class="wcLayout wcWide wcTall"><tbody><tr><td><div class="pg-panel-content"><div class="sql-editor-message" tabindex:="" "0"="">Successfully run. Total query runtime: 58 msec.
+22 rows affected.</div></div></td></tr></tbody></table></div><div class="wcPanelTabContent wcPanelTabContentHidden" id="3"><table class="wcLayout wcWide wcTall"><tbody><tr><td><div class="pg-panel-content"><div id="notification_grid" class="sql-editor-notifications" tabindex:="" "0"=""><table class="backgrid presentation table table-bordered table-hover table-noouter-border table-bottom-border"><thead><tr><th class="sortable renderable recorded_time"><button>Recorded time<span class="sort-caret" aria-hidden="true"></span></button></th><th class="sortable renderable channel"><button>Event<span class="sort-caret" aria-hidden="true"></span></button></th><th class="sortable renderable pid"><button>Process ID<span class="sort-caret" aria-hidden="true"></span></button></th><th class="sortable renderable payload"><button>Payload<span class="sort-caret" aria-hidden="true"></span></button></th></tr></thead><tbody><tr class="empty"><td colspan="4"><span>No data found</span></td></tr></tbody></table></div></div></td></tr></tbody></table></div></div></div></div><div class="wcSplitterBar wcWide wcSplitterBarH" style="top: 380px; left: 0px;"><div class="wcSplitterBarLine"></div></div></div></div> <iframe id="download-csv" style="display:none" src="./saved_resource(1).html"></iframe> </div> </div> <script>
+            	require(['sources/generated/sqleditor'], function(ctx) {
+    var $ = pgAdmin.SqlEditor.jquery,
+        S = pgAdmin.SqlEditor.S,
+        editorPanel = $('.sql-editor'),
+        loadingDiv = $('#fetching_data'),
+        msgDiv = loadingDiv.find('.sql-editor-busy-text');
+
+    // Register unload event on window close.
+    window.onbeforeunload = function(ev) {
+      $.ajax({
+        url: "/datagrid/" + "close/" + 3442859,
+        method: 'GET'
+      });
+    };
+
+    // Get the controller object from pgAdmin.SqlEditor
+    var sqlEditorController = pgAdmin.SqlEditor.create(editorPanel);
+
+    // Listen on events to show/hide loading-icon and change messages.
+    sqlEditorController.on('pgadmin-sqleditor:loading-icon:message', function(msg) {
+      msgDiv.text(msg);
+      }).on('pgadmin-sqleditor:loading-icon:show', function(msg) {
+        loadingDiv.removeClass('d-none');
+        msgDiv.text(msg);
+        }).on('pgadmin-sqleditor:loading-icon:hide', function() {
+            loadingDiv.addClass('d-none');
+          });
+            var script_type_url = '';
+        // Start the query tool.
+    sqlEditorController.start(
+        3442859,
+        true,
+        "Lab08 on postgres@PostgreSQL 11",
+        script_type_url,
+        "pg",
+        {"sgid": 1, "sid": 1, "did": 16475}
+    );
+});
+
+</script>  <script type="text/javascript">function d_log (s) {
+                var ev = document.createEvent('events');
+                ev.initEvent('heartbeat_log', true, false);
+                document.body.setAttribute('heartbeat_attrib', s);
+                document.dispatchEvent(ev);
+            };</script><div class="alertify ajs-hidden  ajs-movable ajs-pinnable ajs-zoom"><div class="ajs-dimmer"></div><div class="ajs-modal" tabindex="0"><div class="ajs-dialog" tabindex="0"><button class="ajs-reset"></button><div class="ajs-commands"><button class="ajs-pin"></button><button class="ajs-maximize"></button><button class="ajs-close"></button></div><div class="ajs-header">AlertifyJS</div><div class="ajs-body"><div class="ajs-content"></div></div><div class="ajs-footer"><div class="ajs-auxiliary ajs-buttons"></div><div class="ajs-primary ajs-buttons"><button class="ajs-button btn btn-secondary fa fa-lg fa-times pg-alertify-button">Cancel</button><button class="ajs-button btn btn-primary fa fa-lg fa-check pg-alertify-button">OK</button></div></div><div class="ajs-handle"></div><button class="ajs-reset"></button></div></div></div><div class="alertify ajs-hidden  ajs-movable ajs-pinnable ajs-zoom"><div class="ajs-dimmer"></div><div class="ajs-modal" tabindex="0"><div class="ajs-dialog" tabindex="0"><button class="ajs-reset"></button><div class="ajs-commands"><button class="ajs-pin"></button><button class="ajs-maximize"></button><button class="ajs-close"></button></div><div class="ajs-header">AlertifyJS</div><div class="ajs-body"><div class="ajs-content"><p></p><input class="form-control" type="text"></div></div><div class="ajs-footer"><div class="ajs-auxiliary ajs-buttons"></div><div class="ajs-primary ajs-buttons"><button class="ajs-button btn btn-secondary fa fa-lg fa-times pg-alertify-button">Cancel</button><button class="ajs-button btn btn-primary fa fa-lg fa-check pg-alertify-button">OK</button></div></div><div class="ajs-handle"></div><button class="ajs-reset"></button></div></div></div><div class="alertify-notifier ajs-bottom ajs-right"></div><div class="alertify  ajs-movable ajs-pinnable ajs-zoom ajs-out ajs-hidden"><div class="ajs-dimmer"></div><div class="ajs-modal" tabindex="0"><div class="ajs-dialog" tabindex="0"><button class="ajs-reset"></button><div class="ajs-commands"><button class="ajs-pin"></button><button class="ajs-maximize"></button><button class="ajs-close"></button></div><div class="ajs-header">Save changes?</div><div class="ajs-body"><div class="ajs-content">The text has changed. Do you want to save changes?</div></div><div class="ajs-footer"><div class="ajs-auxiliary ajs-buttons"></div><div class="ajs-primary ajs-buttons"><button class="ajs-button btn btn-secondary fa fa-lg fa-times pg-alertify-button">Cancel</button><button class="ajs-button btn btn-secondary fa fa-lg fa-trash-o pg-alertify-button">Don't save</button><button class="ajs-button btn btn-primary fa fa-lg fa-save pg-alertify-button">Save</button></div></div><div class="ajs-handle"></div><button class="ajs-reset"></button></div></div></div></body></html>

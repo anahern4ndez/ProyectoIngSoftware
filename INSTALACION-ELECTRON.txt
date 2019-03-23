@@ -1,0 +1,17 @@
+Para instalar electron y correr el proyecto:
+
+1. Instalar la versión recomendada de Node.js del siguiente enlace: https://nodejs.org/es/
+
+2. Hacer pull (o clone si aún no lo tienen) al repo en github: https://github.com/her17138/ProyectoIngSoftware
+
+3. En el directorio de su repo, entrar a la carpeta 'Fundanier'.
+
+4. Abrir 'Git Bash' al hacer click derecho y ejecutar el comando: npm install -g electron
+
+5. Una vez terminada la ejecución del comando anterior, ejecutar: npm install
+- Esto instala todas las dependencias de electron.
+
+6. Para verificar que todo salió bien, correr el comando: npm start
+- Esto les va la aplicación ya con el proyecto compilado.
+
+7. A programar :)
