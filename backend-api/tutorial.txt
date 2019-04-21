@@ -1,0 +1,20 @@
+0) instalar php 7, apache y composer
+1) git pull origin master (en su carpeta del repo del proyecto)
+2) cd backend-api
+3) composer install
+4) php artisan key:generate
+5) crear base de datos local en postgres
+6) crear archivo .env, lo mas facil es copy pastear el que se llama .env.example y cambiarle de nombre.
+   En este archivo se configuran varias cosas de la aplicacion, y no se incluye en el repo porque tiene cosas sensibles.
+   En el .env, configurar DB_DATABASE al nombre de su base de datos local
+                          DB_USER a su nombre de usuario
+                          DB_PASSWORD a su contrasena
+7) php artisan:migrate
+8) php artisan serve
+9) ir a su navegador y ingresar a http://localhost:8000/getUsers
+10) deberian de ver vacio porque no hay usuarios en la tabla de User.
+    Pueden probar ingresar un usuario desde Datagrip o linea de comando o como quieran,
+    y recargar la pagina, deberian de ver un JSON con el usuario creado.
+
+
+Ver el archivo routes/web.php, ahi se definen las rutas a las que el API responde.
