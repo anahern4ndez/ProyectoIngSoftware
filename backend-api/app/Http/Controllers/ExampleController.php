@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\User;
+use Illuminate\Http\Request;
 
 class ExampleController extends Controller
 {
@@ -12,7 +13,7 @@ class ExampleController extends Controller
      */
     public function __construct()
     {
-        //
+        
     }
 
     public function index() {
@@ -27,6 +28,7 @@ class ExampleController extends Controller
 
     public function getUsers() {
         $users = User::all();
+        echo "Probando...";
 
         return response()->json([
             'success' => true,

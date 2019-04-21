@@ -35,6 +35,10 @@ Vue.use(Vuetify, {
 
 const routes = [
   {
+    path: '/login',
+    component: Vue.component('login', require('./components/Login.vue').default)
+  },
+  {
     path: '/page-one',
     component: Vue.component('page-one', require('./components/PageOne.vue').default)
   },
@@ -45,10 +49,6 @@ const routes = [
   {
     path: '/page-three',
     component: Vue.component('page-three', require('./components/PageThree.vue').default)
-  },
-  {
-    path: '/login',
-    component: Vue.component('login', require('./components/Login.vue').default)
   }
 ];
 

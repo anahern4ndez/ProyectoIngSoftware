@@ -11,9 +11,13 @@
 |
 */
 
+
+
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+
 
 // aca se definen las rutas del api
 // se debe especificar de primero el verbo HTTP como un metodo,
