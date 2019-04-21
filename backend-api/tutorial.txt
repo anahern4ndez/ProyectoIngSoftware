@@ -11,7 +11,7 @@
                           DB_PASSWORD a su contrasena
 7) php artisan:migrate
 8) php artisan serve
-9) ir a su navegador y ingresar a http://localhost:8000/getUsers
+9) ir a su navegador y ingresar a http://localhost:8000/users
 10) deberian de ver vacio porque no hay usuarios en la tabla de User.
     Pueden probar ingresar un usuario desde Datagrip o linea de comando o como quieran,
     y recargar la pagina, deberian de ver un JSON con el usuario creado.
