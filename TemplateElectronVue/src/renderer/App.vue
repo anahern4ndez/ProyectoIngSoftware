@@ -58,7 +58,7 @@
         <v-btn icon class="grey--text text--darken-3">
           <v-icon>fa-bell</v-icon>
         </v-btn>
-        <v-btn icon class="grey--text text--darken-3">
+        <v-btn icon class="grey--text text--darken-3" to="/login">
           <v-icon>fa-sign-out-alt</v-icon>
         </v-btn>
       </v-toolbar-items>

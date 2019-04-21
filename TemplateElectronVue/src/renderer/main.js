@@ -45,6 +45,10 @@ const routes = [
   {
     path: '/page-three',
     component: Vue.component('page-three', require('./components/PageThree.vue').default)
+  },
+  {
+    path: '/login',
+    component: Vue.component('login', require('./components/Login.vue').default)
   }
 ];
 
