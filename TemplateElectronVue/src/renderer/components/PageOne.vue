@@ -6,7 +6,11 @@
 
 <script>
 export default {
-    
+    mounted () {
+        this.$http.get('http://localhost:8000/users').then((response) => {
+            console.log(response.data);
+        });
+    }
 }
 </script>
 
