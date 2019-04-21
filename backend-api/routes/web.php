@@ -27,3 +27,4 @@ $router->get('/', function () use ($router) {
 // responde a esa ruta: NombreControlador@nombreMetodo
 $router->get('/test', 'ExampleController@index');
 $router->get('/users', 'ExampleController@getUsers');
+$router->post('/message', 'ExampleController@postExample');
