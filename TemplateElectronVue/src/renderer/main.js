@@ -3,6 +3,7 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VueRouter from 'vue-router';
 import Vuetify from 'vuetify';
+import BootstrapVue from 'bootstrap-vue'
 
 import App from './App';
 import 'vuetify/dist/vuetify.min.css';
@@ -14,6 +15,7 @@ Vue.http = Vue.prototype.$http = axios;
 Vue.config.productionTip = false;
 
 // Vue plugins registration
+Vue.use(BootstrapVue);
 Vue.use(VueAxios, axios);
 Vue.use(VueRouter);
 Vue.use(Vuetify, {
