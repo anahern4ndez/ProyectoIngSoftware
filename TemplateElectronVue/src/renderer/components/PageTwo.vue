@@ -2,6 +2,12 @@
     <div class="grey--text text--darken-2">
         <h1 class="text-center">Page Two Component</h1>
         <div id="Tabla">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Usuario">
+            <div class="input-group-append">
+              <button class="btn btn-warning" type="button">Buscar</button>
+            </div>
+          </div>
           <table class="table table-responsive">
               <thead>
                   <tr>
@@ -29,39 +35,36 @@
                   </tbody>
           </table>
         </div>
-        
         <form class="col-4">
           <div class="form-group">
-            <label for="nameInput">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <label for="nameInput">Nombre</label>
+            <input id="nameInput" type="text" class="form-control" placeholder="Nombre">
           </div>
           <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input id="exampleInputEmail1" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            <label for="dpiInput">DPI</label>
+            <input id="dpiInput" type="text" class="form-control" placeholder="DPI">
           </div>
           <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            <label for="exampleInputEmail1">Correo</label>
+            <input id="emailInput" type="email" class="form-control" placeholder="Correo Electronico">
           </div>
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Contrasena</label>
+            <input id="passwordInput" type="password" class="form-control" placeholder="Contrasena">
           </div>
           <div>
-          <b-form-select v-model="selected" class="mb-3">
-            <option :value="null">Seleccione el tipo de usuario</option>
-            <option value="Doctor">Doctor</option>
-            <option value="Administrador">Administrador</option>
-            <option value="Secretaria">Secretaria</option>
-            <option value="Visitante">Visitante</option>
-            <option value="Asistente">Asistente</option>
-          </b-form-select>
+            <label for="levelInput">Tipo de usuario</label>
+            <b-form-select id="levelInput" v-model="selected" class="mb-3">
+              <option value="Doctor">Doctor</option>
+              <option value="Administrador">Administrador</option>
+              <option value="Secretaria">Secretaria</option>
+              <option value="Visitante">Visitante</option>
+              <option value="Asistente">Asistente</option>
+            </b-form-select>
           </div>
-          <div id="btns" class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-secondary">Left</button>
-            <button type="button" class="btn btn-secondary">Middle</button>
-            <button type="button" class="btn btn-secondary">Right</button>
+          <div>
+            <button type="button" class="btn btn-warning">Modificar</button>
+            <button type="button" class="btn btn-warning">Eliminar</button>
           </div>
         </form>
     </div>
