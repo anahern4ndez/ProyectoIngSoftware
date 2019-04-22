@@ -1,9 +1,9 @@
 <template>
     <div class="grey--text text--darken-2">
-        <h1 class="text-center">Page Two Component</h1>
+        <h1 class="text-center">Gestión de Usuarios</h1>
         <div id="Tabla">
           <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Usuario">
+            <input type="text" class="form-control" placeholder="DPI de usuario a editar permisos">
             <div class="input-group-append">
               <button class="btn btn-warning" type="button">Buscar</button>
             </div>
@@ -49,8 +49,8 @@
             <input id="emailInput" type="email" class="form-control" placeholder="Correo Electronico">
           </div>
           <div class="form-group">
-            <label for="exampleInputPassword1">Contrasena</label>
-            <input id="passwordInput" type="password" class="form-control" placeholder="Contrasena">
+            <label for="exampleInputPassword1">Contraseña</label>
+            <input id="passwordInput" type="password" class="form-control" placeholder="Contraseña">
           </div>
           <div>
             <label for="levelInput">Tipo de usuario</label>
@@ -63,6 +63,7 @@
             </b-form-select>
           </div>
           <div>
+            <button type="button" class="btn btn-warning">Crear</button>
             <button type="button" class="btn btn-warning">Modificar</button>
             <button type="button" class="btn btn-warning">Eliminar</button>
           </div>
