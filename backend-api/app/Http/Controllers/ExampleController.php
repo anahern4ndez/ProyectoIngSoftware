@@ -70,4 +70,17 @@ class ExampleController extends Controller
             'message' => 'creado'
         ], 200);
     }
+    public function update($id)
+    {
+        $user=User::find($id);
+        $user->name = 'diego';
+        $user->email = 'diego@gmail.com';
+        $user->password = '12345';
+        $user->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'creado'
+        ], 200);
+    }
 }
