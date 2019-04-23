@@ -56,4 +56,18 @@ class ExampleController extends Controller
             'message' => 'eliminado'
         ], 200);
     }
+    public function store()
+    {
+        $user = new User;
+        $user->id = 5;
+        $user->name = 'juan';
+        $user->email = 'juan@gmail.com';
+        $user->password = '12345';
+        $user->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'creado'
+        ], 200);
+    }
 }
