@@ -28,3 +28,8 @@ $router->get('/', function () use ($router) {
 $router->get('/test', 'ExampleController@index');
 $router->get('/users', 'ExampleController@getUsers');
 $router->post('/message', 'ExampleController@postExample');
+
+//CRUD: TABLA ESTADOS DB
+$router->get('/EstadoResult', 'EstadoController@find');
+$router->post('/EstadoCreate', 'EstadoController@insert');
+$router->get('/EstadoEdit', 'EstadoController@update');
