@@ -28,3 +28,4 @@ $router->get('/', function () use ($router) {
 $router->get('/test', 'ExampleController@index');
 $router->get('/users', 'ExampleController@getUsers');
 $router->post('/message', 'ExampleController@postExample');
+$router->delete('/users/{id}','ExampleController@destroy');
