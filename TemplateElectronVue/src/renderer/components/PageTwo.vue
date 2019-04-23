@@ -144,7 +144,8 @@ export default {
       headers: [
           { text: 'ID',align: 'center', value: 'ID' },
           { text: 'Nombre',align: 'center', value: 'Nombre' },
-          { text: 'Correo',align: 'center', value: 'Correo' }
+          { text: 'Correo',align: 'center', value: 'Correo' },
+          { text: 'DPI',align: 'center', value: 'DPI' }
         ],
         
       }
