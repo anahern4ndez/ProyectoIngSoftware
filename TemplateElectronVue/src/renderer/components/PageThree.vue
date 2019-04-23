@@ -18,7 +18,7 @@
             <label for="four"><h5 class="mx-3">Visitante</h5></label>
             <br>
             <input type="radio" id="five" value="Asistente" v-model="picked">
-            <label for="five"><h5 class="mx-3">Asietnte</h5></label>
+            <label for="five"><h5 class="mx-3">Asistente</h5></label>
             <br>
             <br>
             <span>Usted Selecciono: {{ picked }}</span>
