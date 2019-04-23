@@ -19,7 +19,7 @@
                         name="email"
                         placeholder="Usuario"
                         autofocus=""
-                        id="inputUsuario" 
+                        id="email" 
                         oninvalid="setCustomValidity('Ingrese su usuario')"
                         oninput="setCustomValidity('')" 
                         required 
@@ -33,7 +33,7 @@
                         name="password"
                         type="password" 
                         placeholder="Contraseña" 
-                        id="inputPassword"  
+                        id="password"  
                         oninvalid="setCustomValidity('Ingrese su constraseña')"
                         oninput="setCustomValidity('')" 
                         required>
@@ -71,10 +71,11 @@ export default {
             console.log("User: " + this.email);
             console.log("Pass: " + this.password);
 
-            this.$http.get('http://localhost:8000/evaluateLogin').then((response) => {
-                console.log("Hola amigos");
-                //this.$router.push('/page-three');
+            this.$http.post('http://localhost:8000/login').then((response) => {
+                console.log("Hola amigos")
+                this.$router.push('/page-three')
             }, () => {
+                console.log("Error amigo")
                 this.infoError = true
                 this.loader = false
                 this.password = ''

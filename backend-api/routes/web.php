@@ -30,3 +30,8 @@ $router->post('/message', 'ExampleController@postExample');
 $router->post('/doLogin', 'HomeController@printInfo');
 
 $router->get('/evaluateLogin', 'loginController@doLogin');
+$router->get('/verifyLogin', 'loginController@login');
+
+$router->post('/login', 'loginController@login');
+
+//$router->group(['middleware' => 'auth'], function() use ($router)){}
