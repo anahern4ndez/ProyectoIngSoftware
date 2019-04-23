@@ -106,7 +106,19 @@
         </b-row>
       </b-container>
     </div>
+    <v-data-table
+    :headers="headers"
+    :items="user"
+    class="elevation-1"
+  >
+    <template v-slot:items="props">
+      <td class="text-xs-center">{{ props.item.id }}</td>
+      <td class="text-xs-center">{{ props.item.name }}</td>
+      <td class="text-xs-center">{{ props.item.email }}</td>
+    </template>
+  </v-data-table>
   </div>
+  
 </template>
 
 <script>
@@ -120,10 +132,23 @@ export default {
 </script>
 <script>
 export default {
+  mounted () {
+        this.$http.get('http://localhost:8000/users').then((response) => {
+            this.user=(response.data.users);
+        });
+    },
   data() {
     return {
-      selected: null
-    };
+      selected: null,
+      user:[],
+      headers: [
+          { text: 'ID',align: 'center', value: 'ID' },
+          { text: 'Nombre',align: 'center', value: 'Nombre' },
+          { text: 'Correo',align: 'center', value: 'Correo' }
+        ],
+        
+      }
+    ;
   }
 };
 </script>
