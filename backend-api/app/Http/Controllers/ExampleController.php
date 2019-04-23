@@ -47,22 +47,23 @@ class ExampleController extends Controller
             'message' => 'El usuario envio: '.$request->message
         ], 200);
     }
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $users=User::find($id);
-        $users->delete();
+        $id = $request->id;
+        $user=User::find($id);
+        $user->delete();
         return response()->json([
             'success' => true,
             'message' => 'eliminado'
         ], 200);
     }
-    public function store()
+    public function store(Request $request)
     {
         $user = new User;
-        $user->id = 5;
-        $user->name = 'juan';
-        $user->email = 'juan@gmail.com';
-        $user->password = '12345';
+        $user->id = $request->id;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = $request->password;
         $user->save();
 
         return response()->json([
@@ -70,12 +71,16 @@ class ExampleController extends Controller
             'message' => 'creado'
         ], 200);
     }
-    public function update($id)
+    public function update(Request $request)
     {
+        $id = $request->id;
         $user=User::find($id);
-        $user->name = 'diego';
-        $user->email = 'diego@gmail.com';
-        $user->password = '12345';
+        #$user->name = 'diego';
+        #$user->email = 'diego@gmail.com';
+        #$user->password = '12345';
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = $request->password;
         $user->save();
 
         return response()->json([
