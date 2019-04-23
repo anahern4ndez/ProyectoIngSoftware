@@ -31,5 +31,6 @@ $router->post('/message', 'ExampleController@postExample');
 
 //CRUD: TABLA ESTADOS DB
 $router->get('/EstadoResult', 'EstadoController@find');
+$router->get('/EstadoAll', 'EstadoController@getEstado');
 $router->post('/EstadoCreate', 'EstadoController@insert');
 $router->get('/EstadoEdit', 'EstadoController@update');
