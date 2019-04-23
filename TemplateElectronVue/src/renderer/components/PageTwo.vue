@@ -4,8 +4,8 @@
     <div>
       <b-container class="bv-example-row1">
         <b-row align-h="around" align-v="center">
-          <b-col order="2" cols="5">
-            <div class="input-group">
+          <b-col order="2" cols="6">
+            <!--<div class="input-group">
               <input
                 type="text"
                 class="form-control"
@@ -46,7 +46,14 @@
                   </tbody>
                 </table>
               </div>
-            </div>
+            </div>-->
+            <v-data-table :headers="headers" :items="user" class="elevation-1">
+              <template v-slot:items="props">
+                <td class="text-xs-center">{{ props.item.id }}</td>
+                <td class="text-xs-center">{{ props.item.name }}</td>
+                <td class="text-xs-center">{{ props.item.email }}</td>
+              </template>
+            </v-data-table>
           </b-col>
           <b-col order="1" cols="5">
             <form>
@@ -106,19 +113,7 @@
         </b-row>
       </b-container>
     </div>
-    <v-data-table
-    :headers="headers"
-    :items="user"
-    class="elevation-1"
-  >
-    <template v-slot:items="props">
-      <td class="text-xs-center">{{ props.item.id }}</td>
-      <td class="text-xs-center">{{ props.item.name }}</td>
-      <td class="text-xs-center">{{ props.item.email }}</td>
-    </template>
-  </v-data-table>
   </div>
-  
 </template>
 
 <script>
@@ -132,24 +127,22 @@ export default {
 </script>
 <script>
 export default {
-  mounted () {
-        this.$http.get('http://localhost:8000/users').then((response) => {
-            this.user=(response.data.users);
-        });
-    },
+  mounted() {
+    this.$http.get("http://localhost:8000/users").then(response => {
+      this.user = response.data.users;
+    });
+  },
   data() {
     return {
       selected: null,
-      user:[],
+      user: [],
       headers: [
-          { text: 'ID',align: 'center', value: 'ID' },
-          { text: 'Nombre',align: 'center', value: 'Nombre' },
-          { text: 'Correo',align: 'center', value: 'Correo' },
-          { text: 'DPI',align: 'center', value: 'DPI' }
-        ],
-        
-      }
-    ;
+        { text: "ID", align: "center", value: "ID" },
+        { text: "Nombre", align: "center", value: "Nombre" },
+        { text: "Correo", align: "center", value: "Correo" },
+        { text: "DPI", align: "center", value: "DPI" }
+      ]
+    };
   }
 };
 </script>
