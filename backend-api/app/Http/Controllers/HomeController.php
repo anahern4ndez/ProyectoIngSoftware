@@ -17,11 +17,6 @@ class HomeController extends Controller
     }
 
     public function printInfo(){
-        echo "Llamando a funcion...";
         
-        return response()->json([
-            'success' => true,
-            'message' => 'Holiwi',
-        ], 200);
     }
 }

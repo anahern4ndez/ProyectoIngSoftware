@@ -26,4 +26,7 @@ $router->get('/', function () use ($router) {
 $router->get('/test', 'ExampleController@index');
 $router->get('/users', 'ExampleController@getUsers');
 $router->post('/message', 'ExampleController@postExample');
+
 $router->post('/doLogin', 'HomeController@printInfo');
+
+$router->get('/evaluateLogin', 'loginController@doLogin');

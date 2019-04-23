@@ -50,6 +50,7 @@
 
 <script>
 
+
 export default {
     name: 'login',
 
@@ -67,15 +68,19 @@ export default {
             this.loader = true
             this.infoError = false
 
-            this.$http.post('http://localhost:8000/doLogin').then((response) => {
-                console.log(response.data)
-                this.loader = false
+            console.log("User: " + this.email);
+            console.log("Pass: " + this.password);
+
+            this.$http.get('http://localhost:8000/evaluateLogin').then((response) => {
+                console.log("Hola amigos");
+                //this.$router.push('/page-three');
             }, () => {
                 this.infoError = true
                 this.loader = false
                 this.password = ''
-            })
+            });
         }
     }
 }
+
 </script>
