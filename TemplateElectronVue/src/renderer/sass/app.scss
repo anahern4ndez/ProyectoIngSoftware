@@ -13,6 +13,12 @@
     font-family: Montserrat;
 }
 
+#alert{
+  height: 40px;
+  font-size: 6;
+  border-radius: 12px;
+}
+
 img {
   display: block;
   margin-left: -20%;
@@ -31,8 +37,13 @@ img {
   -ms-flex-align: center;
   align-items: center;
   padding-top: 40px;
-  padding-bottom: 40px;
+  padding-bottom: 20px;
   background-color: #eeeeee;
+}
+
+.centerBtn {
+  margin: auto;
+  width: 27.5%;
 }
 
 .form-signin {

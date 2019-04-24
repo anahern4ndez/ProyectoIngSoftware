@@ -34,4 +34,4 @@ $router->get('/verifyLogin', 'loginController@login');
 
 $router->post('/login', 'loginController@login');
 
-//$router->group(['middleware' => 'auth'], function() use ($router)){}
+$router->post('/logout', 'loginController@logout');
