@@ -110,7 +110,7 @@
             <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="modificar">Modificar</button>
           </b-col>
           <b-col>
-            <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="eliminar" >Eliminar</button>
+            <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="eliminar">Eliminar</button>
           </b-col>
         </b-row>
       </b-container>
@@ -147,12 +147,27 @@ export default {
   methods:{
     eliminar(){
       this.$http.delete(`http://localhost:8000/users/destroy?id=${this.id}`).then(response=>{});
+      this.name = '';
+      this.id = '';
+      this.email = '';
+      this.password = '';
+      this.selected = null;
       },
     crear(){
       this.$http.post(`http://localhost:8000/users/create?id=${this.id}&name=${this.name}&email=${this.email}&password=${this.password}`).then(response=>{});
+      this.name = '';
+      this.id = '';
+      this.email = '';
+      this.password = '';
+      this.selected = null;
     },
     modificar(){
       this.$http.put(`http://localhost:8000/users/update?id=${this.id}&name=${this.name}&email=${this.email}&password=${this.password}`).then(response=>{});
+      this.name = '';
+      this.id = '';
+      this.email = '';
+      this.password = '';
+      this.selected = null;
     }
   }
 };
