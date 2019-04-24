@@ -34,3 +34,8 @@ $router->get('/EstadoResult', 'EstadoController@find');
 $router->get('/EstadoAll', 'EstadoController@getEstado');
 $router->post('/EstadoCreate', 'EstadoController@insert');
 $router->get('/EstadoEdit', 'EstadoController@update');
+
+
+$router->delete('/users/destroy','ExampleController@destroy');
+$router->post('/users/create', 'ExampleController@store');
+$router->put('/users/update', 'ExampleController@update');

@@ -27,11 +27,12 @@ class ExampleController extends Controller
 
     public function getUsers() {
         $users = User::all();
-        echo "Probando...";
+        #echo "Probando...";
 
         return response()->json([
             'success' => true,
-            'users' => $users
+            'users' => $users,
+            'message'=>'Funciono',
         ], 200);
     }
 
@@ -43,6 +44,47 @@ class ExampleController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'El usuario envio: '.$request->message
+        ], 200);
+    }
+    public function destroy(Request $request)
+    {
+        $id = $request->id;
+        $user=User::find($id);
+        $user->delete();
+        return response()->json([
+            'success' => true,
+            'message' => 'eliminado'
+        ], 200);
+    }
+    public function store(Request $request)
+    {
+        $user = new User;
+        $user->id = $request->id;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'creado'
+        ], 200);
+    }
+    public function update(Request $request)
+    {
+        $id = $request->id;
+        $user=User::find($id);
+        #$user->name = 'diego';
+        #$user->email = 'diego@gmail.com';
+        #$user->password = '12345';
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'creado'
         ], 200);
     }
 }

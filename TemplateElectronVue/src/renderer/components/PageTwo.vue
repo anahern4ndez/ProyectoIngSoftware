@@ -4,8 +4,8 @@
     <div>
       <b-container class="bv-example-row1">
         <b-row align-h="around" align-v="center">
-          <b-col order="2" cols="5">
-            <div class="input-group">
+          <b-col order="2" cols="6">
+            <!--<div class="input-group">
               <input
                 type="text"
                 class="form-control"
@@ -46,23 +46,31 @@
                   </tbody>
                 </table>
               </div>
-            </div>
+            </div>-->
+            <v-data-table :headers="headers" :items="user" class="elevation-1">
+              <template v-slot:items="props">
+                <td class="text-xs-center">{{ props.item.id }}</td>
+                <td class="text-xs-center">{{ props.item.name }}</td>
+                <td class="text-xs-center">{{ props.item.email }}</td>
+              </template>
+            </v-data-table>
           </b-col>
           <b-col order="1" cols="5">
             <form>
               <div class="form-group">
                 <label for="nameInput">Nombre</label>
-                <input id="nameInput" type="text" class="form-control" placeholder="Nombre">
+                <input id="nameInput" type="text" v-model="name" class="form-control" placeholder="Nombre">
               </div>
               <div class="form-group">
                 <label for="dpiInput">DPI</label>
-                <input id="dpiInput" type="text" class="form-control" placeholder="DPI">
+                <input id="dpiInput" type="text" v-model="id" class="form-control" placeholder="DPI">
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail1">Correo</label>
                 <input
                   id="emailInput"
                   type="email"
+                  v-model="email"
                   class="form-control"
                   placeholder="Correo Electronico"
                 >
@@ -72,6 +80,7 @@
                 <input
                   id="passwordInput"
                   type="password"
+                  v-model="password"
                   class="form-control"
                   placeholder="Contraseña"
                 >
@@ -95,13 +104,13 @@
       <b-container class="bv-example-row2">
         <b-row class="justify-content-md-center">
           <b-col>
-            <button type="button" class="btn btn-lg btn-warning btn-block">Crear</button>
+            <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="crear">Crear</button>
           </b-col>
           <b-col>
-            <button type="button" class="btn btn-lg btn-warning btn-block">Modificar</button>
+            <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="modificar">Modificar</button>
           </b-col>
           <b-col>
-            <button type="button" class="btn btn-lg btn-warning btn-block">Eliminar</button>
+            <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="eliminar" >Eliminar</button>
           </b-col>
         </b-row>
       </b-container>
@@ -109,21 +118,42 @@
   </div>
 </template>
 
+
 <script>
 export default {
+  mounted() {
+    this.$http.get("http://localhost:8000/users").then(response => {
+      this.user = response.data.users;
+    });
+  },
   data() {
     return {
-      picked: ""
+      picked: "",
+      nombre:'',
+      id:'',
+      name:'',
+      email:'',
+      password:'',
+      selected: null,
+      user: [],
+      headers: [
+        { text: "ID", align: "center", value: "ID" },
+        { text: "Nombre", align: "center", value: "Nombre" },
+        { text: "Correo", align: "center", value: "Correo" },
+        { text: "DPI", align: "center", value: "DPI" }
+      ]
     };
-  }
-};
-</script>
-<script>
-export default {
-  data() {
-    return {
-      selected: null
-    };
+  },
+  methods:{
+    eliminar(){
+      this.$http.delete(`http://localhost:8000/users/destroy?id=${this.id}`).then(response=>{});
+      },
+    crear(){
+      this.$http.post(`http://localhost:8000/users/create?id=${this.id}&name=${this.name}&email=${this.email}&password=${this.password}`).then(response=>{});
+    },
+    modificar(){
+      this.$http.put(`http://localhost:8000/users/update?id=${this.id}&name=${this.name}&email=${this.email}&password=${this.password}`).then(response=>{});
+    }
   }
 };
 </script>
