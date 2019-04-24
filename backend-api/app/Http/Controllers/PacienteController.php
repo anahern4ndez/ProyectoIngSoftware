@@ -30,6 +30,14 @@ class PacienteController extends Controller
             'Pacientes' => $val
         ], 200);
     }
+
+    function findAll(){
+        $val = Paciente::all();
+        return response()->json([
+            'success' => true,
+            'Pacientes' => $val
+        ], 200);
+    }
     /**
      * hace update a todos los properties del elemento
      * @param int id
