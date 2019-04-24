@@ -30,10 +30,16 @@ $router->get('/users', 'ExampleController@getUsers');
 $router->post('/message', 'ExampleController@postExample');
 
 //CRUD: TABLA ESTADOS DB
-$router->get('/EstadoResult', 'EstadoController@find');
-$router->get('/EstadoAll', 'EstadoController@getEstado');
-$router->post('/EstadoCreate', 'EstadoController@insert');
-$router->get('/EstadoEdit', 'EstadoController@update');
+$router->get('/EstadoController/find', 'EstadoController@find');
+$router->get('/EstadoController/getEstado', 'EstadoController@getEstado');
+$router->post('/EstadoController/insert', 'EstadoController@insert');
+$router->get('/EstadoController/update', 'EstadoController@update');
+
+//CRUD: TABLA PACIENTES
+$router->get('/PacienteController/find', 'PacienteController@find');
+$router->get('/PacienteController/findAll', 'PacienteController@findAll');
+$router->post('/PacienteController/insert', 'PacienteController@insert');
+$router->get('/PacienteController/update', 'PacienteController@update');
 
 
 $router->delete('/users/destroy','ExampleController@destroy');
