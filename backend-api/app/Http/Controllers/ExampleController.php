@@ -58,11 +58,11 @@ class ExampleController extends Controller
     }
     public function store(Request $request)
     {
-        $user = new User;
+        $user = new Paciente;
         $user->id = $request->id;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = $request->password;
+        $user->Nombre = $request->name;
+        $user->Apellido = $request->email;
+        #$user->password = $request->password;
         $user->save();
 
         return response()->json([

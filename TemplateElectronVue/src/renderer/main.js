@@ -49,6 +49,10 @@ const routes = [
   {
     path: '/page-three',
     component: Vue.component('page-three', require('./components/PageThree.vue').default)
+  },
+  {
+    path: '/page-four',
+    component: Vue.component('page-four', require('./components/editarPacientes.vue').default)
   }
 ];
 
