@@ -30,4 +30,4 @@ $router->get('/users', 'ExampleController@getUsers');
 $router->post('/message', 'ExampleController@postExample');
 $router->delete('/users/destroy','ExampleController@destroy');
 $router->post('/users/create', 'ExampleController@store');
-$router->put('/users/create/{id}', 'ExampleController@update');
+$router->put('/users/update', 'ExampleController@update');

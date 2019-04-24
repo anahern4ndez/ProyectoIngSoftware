@@ -59,17 +59,18 @@
             <form>
               <div class="form-group">
                 <label for="nameInput">Nombre</label>
-                <input id="nameInput" type="text" class="form-control" placeholder="Nombre">
+                <input id="nameInput" type="text" v-model="name" class="form-control" placeholder="Nombre">
               </div>
               <div class="form-group">
                 <label for="dpiInput">DPI</label>
-                <input id="dpiInput" type="text" class="form-control" placeholder="DPI">
+                <input id="dpiInput" type="text" v-model="id" class="form-control" placeholder="DPI">
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail1">Correo</label>
                 <input
                   id="emailInput"
                   type="email"
+                  v-model="email"
                   class="form-control"
                   placeholder="Correo Electronico"
                 >
@@ -79,6 +80,7 @@
                 <input
                   id="passwordInput"
                   type="password"
+                  v-model="password"
                   class="form-control"
                   placeholder="Contraseña"
                 >
@@ -102,13 +104,13 @@
       <b-container class="bv-example-row2">
         <b-row class="justify-content-md-center">
           <b-col>
-            <button type="button" class="btn btn-lg btn-warning btn-block">Crear</button>
+            <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="crear">Crear</button>
           </b-col>
           <b-col>
-            <button type="button" class="btn btn-lg btn-warning btn-block">Modificar</button>
+            <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="modificar">Modificar</button>
           </b-col>
           <b-col>
-            <button type="button" class="btn btn-lg btn-warning btn-block">Eliminar</button>
+            <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="eliminar" >Eliminar</button>
           </b-col>
         </b-row>
       </b-container>
@@ -116,15 +118,7 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      picked: ""
-    };
-  }
-};
-</script>
+
 <script>
 export default {
   mounted() {
@@ -134,6 +128,12 @@ export default {
   },
   data() {
     return {
+      picked: "",
+      nombre:'',
+      id:'',
+      name:'',
+      email:'',
+      password:'',
       selected: null,
       user: [],
       headers: [
@@ -143,6 +143,17 @@ export default {
         { text: "DPI", align: "center", value: "DPI" }
       ]
     };
+  },
+  methods:{
+    eliminar(){
+      this.$http.delete(`http://localhost:8000/users/destroy?id=${this.id}`).then(response=>{});
+      },
+    crear(){
+      this.$http.post(`http://localhost:8000/users/create?id=${this.id}&name=${this.name}&email=${this.email}&password=${this.password}`).then(response=>{});
+    },
+    modificar(){
+      this.$http.put(`http://localhost:8000/users/update?id=${this.id}&name=${this.name}&email=${this.email}&password=${this.password}`).then(response=>{});
+    }
   }
 };
 </script>
