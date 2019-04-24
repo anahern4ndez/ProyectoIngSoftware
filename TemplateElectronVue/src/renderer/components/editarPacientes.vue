@@ -4,7 +4,7 @@
     <div>
       <b-container class="bv-example-row1">
         <b-row align-h="around" align-v="center">
-            <input v-model="search" class="form-control" placeholder="Buscar por nombre, apellido a número CUI">
+            <input v-model="search" class="form-control" placeholder="Buscar por nombre, apellido o número CUI">
             <br>
             <br>
             <br>
@@ -13,7 +13,7 @@
                 :items="pacientes"
                 class="elevation-1"
             >
-                <template v-slot:items="props">
+                <template v-repeat="pacientes | filterBy search">
                 <td>{{ props.item.id }}</td>
                 <td class="text-xs-center">{{ props.item.nombre }}</td>
                 <td class="text-xs-center">{{ props.item.apellido }}</td>
@@ -97,10 +97,7 @@ export default {
   },
     data () {
       return {
-        currentPage: 1,
-        elementsPerPage: 3,
-        ascending: false,
-        sortColumn: '',
+        search: '',
         headers: [
           {
             text: 'CUI (ID)',
@@ -133,6 +130,56 @@ export default {
             apellido: 262,
             pais_nacimiento: 16.0,
             fecha_nacimiento: 23,
+          },
+
+          {
+            id: 4,
+            nombre: 'Cupcake',
+            apellido: 305,
+            pais_nacimiento: 3.7,
+            fecha_nacimiento: 67
+          },
+          {
+            id: 5,
+            nombre: 'Gingerbread',
+            apellido: 356,
+            pais_nacimiento: 16.0,
+            fecha_nacimiento: 49
+          },
+          {
+            id: 6,
+            nombre: 'Jelly bean',
+            apellido: 375,
+            pais_nacimiento: 0.0,
+            fecha_nacimiento: 94
+          },
+          {
+            id: 7,
+            nombre: 'Lollipop',
+            apellido: 392,
+            pais_nacimiento: 0.2,
+            fecha_nacimiento: 98
+          },
+          {
+            id: 8,
+            nombre: 'Honeycomb',
+            apellido: 408,
+            pais_nacimiento: 3.2,
+            fecha_nacimiento: 87
+          },
+          {
+            id: 9,
+            nombre: 'Donut',
+            apellido: 452,
+            pais_nacimiento: 25.0,
+            fecha_nacimiento: 51
+          },
+          {
+            id: 10,
+            nombre: 'KitKat',
+            apellido: 518,
+            pais_nacimiento: 26.0,
+            fecha_nacimiento: 65
           }
         ]
       }
