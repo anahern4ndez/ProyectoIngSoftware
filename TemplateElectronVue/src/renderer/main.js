@@ -65,6 +65,6 @@ new Vue({
   router,
   render: h => h(App),
   mounted () {
-    this.$router.push('/home')
+    this.$router.push('/login')
   }
 }).$mount('#app');
