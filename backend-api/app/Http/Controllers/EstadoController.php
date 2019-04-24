@@ -13,10 +13,17 @@ class EstadoController extends Controller
      * @return \Illuminate\Http\Response
      */
     function insert(Request $request){
-        Estado::create(Request::all());
-        return 'true';
-    }
+        $estado = new Estado;
+        $estado->id = $request->id;
+        $estado->significado = $request->significado;
+        $estado->save();
 
+        $val = Estado::all();
+        return response()->json([
+            'success' => true,
+            'Estados' => $val
+        ], 200);
+    }
     /**
      * busca segun id (pasado por URL)
      * @param int id
