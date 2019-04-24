@@ -26,6 +26,7 @@ $router->get('/', function () use ($router) {
 $router->get('/test', 'ExampleController@index');
 $router->get('/users', 'ExampleController@getUsers');
 $router->post('/message', 'ExampleController@postExample');
+<<<<<<< HEAD
 
 $router->post('/doLogin', 'HomeController@printInfo');
 
@@ -35,3 +36,6 @@ $router->get('/verifyLogin', 'loginController@login');
 $router->post('/login', 'loginController@login');
 
 $router->post('/logout', 'loginController@logout');
+=======
+$router->delete('/users/{id}','ExampleController@destroy');
+>>>>>>> 09da24e75437972d7dcc645adee9c1cab9b1c979

@@ -1,42 +1,160 @@
 <template>
-    <div class="grey--text text--darken-2">
-        <h1 class="text-center">Page Two Component</h1>
-        <table class="table table-responsive">
-            <thead>
-                <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>John</td>
-                    <td>Doe</td>
-                    <td>[email protected]</td>
-                </tr>
-                <tr>
-                    <td>Smith</td>
-                    <td>Thomas</td>
-                    <td>[email protected]</td>
-                </tr>
-                <tr>
-                    <td>Merry</td>
-                    <td>Jim</td>
-                    <td>[email protected]</td>
-                </tr>
-                </tbody>
-        </table>
+  <div class="grey--text text--darken-2">
+    <h1 class="text-center">Gestión de Usuarios</h1>
+    <div>
+      <b-container class="bv-example-row1">
+        <b-row align-h="around" align-v="center">
+          <b-col order="2" cols="5">
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="DPI de usuario a editar permisos"
+              >
+              <div class="input-group-append">
+                <button class="btn btn-warning" type="button">Buscar</button>
+              </div>
+            </div>
+            <br>
+            <br>
+            <div class="row justify-content-center">
+              <div class="col-auto">
+                <table class="table table-responsive text-center">
+                  <thead>
+                    <tr>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>Email</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>John</td>
+                      <td>Doe</td>
+                      <td>[email protected]</td>
+                    </tr>
+                    <tr>
+                      <td>Smith</td>
+                      <td>Thomas</td>
+                      <td>[email protected]</td>
+                    </tr>
+                    <tr>
+                      <td>Merry</td>
+                      <td>Jim</td>
+                      <td>[email protected]</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </b-col>
+          <b-col order="1" cols="5">
+            <form>
+              <div class="form-group">
+                <label for="nameInput">Nombre</label>
+                <input id="nameInput" type="text" class="form-control" placeholder="Nombre">
+              </div>
+              <div class="form-group">
+                <label for="dpiInput">DPI</label>
+                <input id="dpiInput" type="text" class="form-control" placeholder="DPI">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Correo</label>
+                <input
+                  id="emailInput"
+                  type="email"
+                  class="form-control"
+                  placeholder="Correo Electronico"
+                >
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Contraseña</label>
+                <input
+                  id="passwordInput"
+                  type="password"
+                  class="form-control"
+                  placeholder="Contraseña"
+                >
+              </div>
+              <div>
+                <label for="levelInput">Tipo de usuario</label>
+                <b-form-select id="levelInput" v-model="selected" class="mb-3">
+                  <option value="Doctor">Doctor</option>
+                  <option value="Administrador">Administrador</option>
+                  <option value="Secretaria">Secretaria</option>
+                  <option value="Visitante">Visitante</option>
+                  <option value="Asistente">Asistente</option>
+                </b-form-select>
+              </div>
+            </form>
+          </b-col>
+        </b-row>
+      </b-container>
     </div>
-    
+    <div>
+      <b-container class="bv-example-row2">
+        <b-row class="justify-content-md-center">
+          <b-col>
+            <button type="button" class="btn btn-lg btn-warning btn-block">Crear</button>
+          </b-col>
+          <b-col>
+            <button type="button" class="btn btn-lg btn-warning btn-block">Modificar</button>
+          </b-col>
+          <b-col>
+            <button type="button" class="btn btn-lg btn-warning btn-block">Eliminar</button>
+          </b-col>
+        </b-row>
+      </b-container>
+    </div>
+    <v-data-table
+    :headers="headers"
+    :items="user"
+    class="elevation-1"
+  >
+    <template v-slot:items="props">
+      <td class="text-xs-center">{{ props.item.id }}</td>
+      <td class="text-xs-center">{{ props.item.name }}</td>
+      <td class="text-xs-center">{{ props.item.email }}</td>
+    </template>
+  </v-data-table>
+  </div>
+  
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        picked: ''
-      }
-    }
+export default {
+  data() {
+    return {
+      picked: ""
+    };
   }
+};
 </script>
+<script>
+export default {
+  mounted () {
+        this.$http.get('http://localhost:8000/users').then((response) => {
+            this.user=(response.data.users);
+        });
+    },
+  data() {
+    return {
+      selected: null,
+      user:[],
+      headers: [
+          { text: 'ID',align: 'center', value: 'ID' },
+          { text: 'Nombre',align: 'center', value: 'Nombre' },
+          { text: 'Correo',align: 'center', value: 'Correo' }
+        ],
+        
+      }
+    ;
+  }
+};
+</script>
+<style>
+div#Tabla {
+  float: right;
+  align-items: center;
+}
+</style>

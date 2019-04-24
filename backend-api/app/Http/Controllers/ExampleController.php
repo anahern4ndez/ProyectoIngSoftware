@@ -28,11 +28,12 @@ class ExampleController extends Controller
 
     public function getUsers() {
         $users = User::all();
-        echo "Probando...";
+        #echo "Probando...";
 
         return response()->json([
             'success' => true,
-            'users' => $users
+            'users' => $users,
+            'message'=>'Funciono',
         ], 200);
     }
 
@@ -44,6 +45,15 @@ class ExampleController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'El usuario envio: '.$request->message
+        ], 200);
+    }
+    public function destroy($id)
+    {
+        $users=User::find($id);
+        $users->delete();
+        return response()->json([
+            'success' => true,
+            'message' => 'eliminado'
         ], 200);
     }
 }
