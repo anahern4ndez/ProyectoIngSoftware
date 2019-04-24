@@ -91,8 +91,21 @@
 <script>
 export default {
   mounted() {
-    this.$http.get("http://localhost:8000/users").then(response => {
-      this.user = response.data.users;
+    this.$http.get("http://localhost:8000/PacienteController/findAll").then(response => {
+      //esto deberia ser un arrray de pacientes que contengan todos sus atributos...
+      this.pacientes = response.data.Pacientes;
+      //asi se deberia recorrer la shit esta:
+      /**
+      * <v-for='paciente in Pacientes'>
+          <p>{{paciente.nombre}}</p>
+          <p>{{paciente.apellido}}</p>
+          .
+          .
+          .
+
+      * 
+       */
+
     });
   },
     data () {
@@ -109,79 +122,7 @@ export default {
           { text: 'Procedencia', align: 'center', value: 'pais_nacimiento' },
           { text: 'Fecha de nacimiento', align: 'center', value: 'fecha_nacimiento' },
         ],
-        pacientes: [
-          {
-            id: 1,
-            nombre: 'Frozen Yogurt',
-            apellido: 159,
-            pais_nacimiento: 9.0,
-            fecha_nacimiento: 24,
-          },
-          {
-            id: 2,
-            nombre: 'Ice cream sandwich',
-            apellido: 237,
-            pais_nacimiento: 6.0,
-            fecha_nacimiento: 37,
-          },
-          {
-            id: 3,
-            nombre: 'Eclair',
-            apellido: 262,
-            pais_nacimiento: 16.0,
-            fecha_nacimiento: 23,
-          },
-
-          {
-            id: 4,
-            nombre: 'Cupcake',
-            apellido: 305,
-            pais_nacimiento: 3.7,
-            fecha_nacimiento: 67
-          },
-          {
-            id: 5,
-            nombre: 'Gingerbread',
-            apellido: 356,
-            pais_nacimiento: 16.0,
-            fecha_nacimiento: 49
-          },
-          {
-            id: 6,
-            nombre: 'Jelly bean',
-            apellido: 375,
-            pais_nacimiento: 0.0,
-            fecha_nacimiento: 94
-          },
-          {
-            id: 7,
-            nombre: 'Lollipop',
-            apellido: 392,
-            pais_nacimiento: 0.2,
-            fecha_nacimiento: 98
-          },
-          {
-            id: 8,
-            nombre: 'Honeycomb',
-            apellido: 408,
-            pais_nacimiento: 3.2,
-            fecha_nacimiento: 87
-          },
-          {
-            id: 9,
-            nombre: 'Donut',
-            apellido: 452,
-            pais_nacimiento: 25.0,
-            fecha_nacimiento: 51
-          },
-          {
-            id: 10,
-            nombre: 'KitKat',
-            apellido: 518,
-            pais_nacimiento: 26.0,
-            fecha_nacimiento: 65
-          }
-        ]
+        pacientes: []
       }
   },
   methods: {
