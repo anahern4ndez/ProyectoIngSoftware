@@ -31,15 +31,15 @@
             <v-icon class="grey--text text--darken-3">fa-home</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title class="grey--text text--darken-3">Gestionar Paciente</v-list-tile-title>
+            <v-list-tile-title class="grey--text text--darken-3">Gestionar Usuario</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile to="/page-three" exact>
+        <v-list-tile to="/page-four" exact>
           <v-list-tile-action>
             <v-icon class="grey--text text--darken-3">fa-home</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title class="grey--text text--darken-3">Gestionar Usuario</v-list-tile-title>
+            <v-list-tile-title class="grey--text text--darken-3">Gestionar Paciente</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
