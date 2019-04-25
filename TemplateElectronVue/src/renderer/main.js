@@ -52,7 +52,7 @@ const routes = [
   },
   {
     path: '/page-four',
-    component: Vue.component('page-four', require('./components/editarPacientes.vue').default)
+    component: Vue.component('page-four', require('./components/gestionPacientes.vue').default)
   }
 ];
 

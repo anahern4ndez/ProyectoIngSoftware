@@ -80,7 +80,7 @@
       <b-container class="bv-example-row2">
         <b-row class="justify-content-md-center">
             <b-col order="4" cols="6">
-                <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="crear">Ingresar nuevo paciente</button>
+                <!--button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="ingresarNuevo">Ingresar nuevo paciente</button> -->
                 <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="crear"> Dar consulta </button>
                 <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="eliminar"> Eliminar paciente</button>
                 <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="eliminar"> Editar datos</button>
