@@ -15,7 +15,10 @@ class CreateSexosTable extends Migration
     {
         Schema::create('sexo', function (Blueprint $table) {
             $table->integer('ID');
+            $table->primary('ID');
             $table->string('significado',20);
+
+           
         });
     }
 
@@ -26,6 +29,6 @@ class CreateSexosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sexos');
+        Schema::dropIfExists('sexo');
     }
 }

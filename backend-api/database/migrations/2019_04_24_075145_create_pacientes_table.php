@@ -14,8 +14,6 @@ class CreatePacientesTable extends Migration
     public function up()
     {
         Schema::create('pacientes', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
             $table->string('Nombre', 55);
             $table->string('Apellido', 40);
             $table->date("Fecha_de_nacimiento");
@@ -27,13 +25,20 @@ class CreatePacientesTable extends Migration
             $table->string('Sindrome_Clinico_Presentacion', 15);
             $table->string('Dx_Definitivo', 200);
             $table->string('Dx_Asociados', 200);
-            $table->integer('CUI')->unique();
+            $table->integer('CUI');
+            $table->primary('CUI');
             $table->string('Imagen', 260);
             $table->integer('Tipo_de_Sangre');
             $table->integer('Estudia');
             $table->integer('Transfusiones');
             $table->integer('EstadoActual');
             $table->integer('Sexo');
+
+            
+            $table->foreign('Sexo')
+            ->references('ID')
+            ->on('sexo');
+         
         });
     }
 
