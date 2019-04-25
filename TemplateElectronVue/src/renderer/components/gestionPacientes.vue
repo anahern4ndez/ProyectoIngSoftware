@@ -175,7 +175,6 @@ export default {
         dialog: false,
         lista: [],
         headers: [
-          {text: '', align: 'center', value: '',},
           {text: 'CUI (ID)', align: 'center',value: 'id'},
           { text: 'Nombre', align: 'center', value: 'Nombre' },
           { text: 'Apellido', align: 'center', value: 'Apellido' }, 
@@ -256,6 +255,7 @@ export default {
           this.editedItem = item
           //selected2 contiene el CUI de lo selececionado
           this.selected2 = this.editedItem.CUI;
+          console.log(this.selected2)
           
         }
 
