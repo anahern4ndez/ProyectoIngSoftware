@@ -21,10 +21,10 @@
                     >
                         <template slot="items" slot-scope="props">
                         <td class="text-xs-center">{{ props.item.id }}</td>
-                        <td class="text-xs-center">{{ props.item.nombre }}</td>
-                        <td class="text-xs-center">{{ props.item.apellido }}</td>
-                        <td class="text-xs-center">{{ props.item.pais_nacimiento }}</td>
-                        <td class="text-xs-center">{{ props.item.fecha_nacimiento }}</td>
+                        <td class="text-xs-center">{{ props.item.Nombre }}</td>
+                        <td class="text-xs-center">{{ props.item.Apellido }}</td>
+                        <td class="text-xs-center">{{ props.item.Nombre_de_padre }}</td>
+                        <td class="text-xs-center">{{ props.item.Fecha_de_nacimiento }}</td>
                         </template>
                         <!-- cuando la busqueda no tenga resultados -->
                         <template v-slot:no-results>
@@ -102,6 +102,7 @@ export default {
     this.$http.get("http://localhost:8000/PacienteController/findAll").then(response => {
       //esto deberia ser un arrray de pacientes que contengan todos sus atributos...
       this.pacientes = response.data.Pacientes;
+      console.log(this.pacientes);
       //asi se deberia recorrer la shit esta:
       /**
       * <v-for='paciente in Pacientes'>
