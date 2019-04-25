@@ -37,7 +37,7 @@ $router->get('/EstadoController/update', 'EstadoController@update');
 $router->get('/PacienteController/find', 'PacienteController@find');
 $router->get('/PacienteController/findAll', 'PacienteController@findAll');
 $router->post('/PacienteController/insert', 'PacienteController@insert');
-$router->get('/PacienteController/update', 'PacienteController@update');
+$router->get('/PacienteController/update/{id}', 'PacienteController@update');
 
 
 $router->delete('/users/destroy','ExampleController@destroy');
