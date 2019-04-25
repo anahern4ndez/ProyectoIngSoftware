@@ -74,10 +74,6 @@ class ExampleController extends Controller
     }
     public function update(Request $request)
     {
-        $this->validate($request, [
-            'email' => 'email'
-        ]);
-
         $id = $request->id;
         $user=User::find($id);
         #$user->name = 'diego';
