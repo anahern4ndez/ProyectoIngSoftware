@@ -81,13 +81,13 @@
         <b-row class="justify-content-md-center">
             <b-col order="4" cols="6">
                 <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="ingresarNuevo">Ingresar nuevo paciente</button>
-                <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="crear"> Dar consulta </button>
+                <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="darConsulta"> Dar consulta </button>
                 <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="eliminar"> Eliminar paciente</button>
-                <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="eliminar"> Editar datos</button>
-                <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="eliminar"> Archivos </button>
-                <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="eliminar"> Reporte</button>
-                <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="eliminar"> Estadísticas </button>
-                <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="eliminar"> Casos legales</button>
+                <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="editarDatos"> Editar datos</button>
+                <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="archivos"> Archivos </button>
+                <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="reportes"> Reporte</button>
+                <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="estadisticas"> Estadísticas </button>
+                <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="casoslegales"> Casos legales</button>
             </b-col>
         </b-row>
       </b-container>
@@ -101,30 +101,24 @@ export default {
   mounted() {
     this.$http.get("http://localhost:8000/PacienteController/findAll").then(response => {
       //esto deberia ser un arrray de pacientes que contengan todos sus atributos...
+      
       this.pacientes = response.data.Pacientes;
-      console.log(this.pacientes);
+      //var paciente;
       //asi se deberia recorrer la shit esta:
-      /**
-      * <v-for='paciente in Pacientes'>
-          <p>{{paciente.nombre}}</p>
-          <p>{{paciente.apellido}}</p>
-          .
-          .
-          .
-
-      * 
-       */
-
+      /**for (var paciente in this.lista){
+          this.pacientes.push({ 'nombre': paciente.Nombre,
+              apellido: paciente.Apellido,
+              pais_nacimiento: paciente.Procedencia,
+              fecha_nacimiento: paciente.Fecha_de_nacimiento})
+        }
+        console.log(this.pacientes)*/
     });
   },
     data () {
       return {
         search:'',
-        id:'',
-        name:'',
-        email:'',
-        password:'',
         selected: null,
+        lista: [],
         headers: [
           {
             text: 'CUI (ID)',
@@ -141,15 +135,33 @@ export default {
   },
     methods: {
         //para filtrar los datos de la tabla
-        eliminar(){
-        this.$http.delete(`http://localhost:8000/users/destroy?id=${this.id}`).then(response=>{});
-        },
         ingresarNuevo(){
-        this.$http.post(`http://localhost:8000/users/create?id=${this.id}&name=${this.name}&email=${this.email}&password=${this.password}`).then(response=>{});
+          this.$router.push('/IngresarPaciente');
         },
-        modificar(){
-        this.$http.put(`http://localhost:8000/users/update?id=${this.id}&name=${this.name}&email=${this.email}&password=${this.password}`).then(response=>{});
+        // falta vista para dar una consulta
+        darConsulta(){
+          this.$router.push('/IngresarPaciente');
+        },
+        eliminar(){
+          this.$router.push('/IngresarPaciente');
+        },
+        editarDatos(){
+          this.$router.push('/EditarPaciente');
+        },
+        casoslegales(){
+          this.$router.push('/EditarPaciente');
+        },
+        archivos(){
+          this.$router.push('/IngresarPaciente');
+        },
+        reportes(){
+          this.$router.push('/EditarPaciente');
+        },
+        estadisticas(){
+          this.$router.push('/EditarPaciente');
         }
+        
+        
     }
 };
 </script>

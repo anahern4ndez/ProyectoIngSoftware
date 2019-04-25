@@ -58,7 +58,7 @@ class ExampleController extends Controller
     }
     public function store(Request $request)
     {
-        $user = new Paciente;
+        $user = new User;
         $user->id = $request->id;
         $user->Nombre = $request->name;
         $user->Apellido = $request->email;
