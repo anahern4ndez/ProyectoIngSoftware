@@ -1,4 +1,4 @@
-<template>
+<template lang="">
     <div class="grey--text text--darken-2">
         <h1 class="text-center">Ingreso de Usuario</h1>
         <br>

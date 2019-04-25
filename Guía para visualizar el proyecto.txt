@@ -1,0 +1,17 @@
+Guia para poder visualizar el proyecto
+
+Requisitos:
+1. Tener algún programa que permita la conexión a un escritorio remoto
+2. En el caso de Windows 10, se puede usar el programa ‘Conexión a escritorio remoto’.
+
+Para usar la aplicación:
+1. La ip pública de la máquina virtual es la siguiente: 13.72.104.238
+2. Al entrar, especificar el usuario ‘adminLocal’ y la contraseña es ‘Fundanier2019’ (no poner las comillas simples).
+3. En el escritorio de la máquina virtual, ejecutar el archivo ‘fundanier.bat’ para poder utilizar el sistema creado hasta la fecha actual.
+
+Para entrar al sistema:
+- Debido a que lo primero que se observa es el login, se tienen que ingresar credenciales. Para ello se puede usara la cuenta:
+	User: admin@gmail.com
+	Password: admin12345
+
+Cuando se desee calificar el sistema favor de avisar a David soto para que habilitemos las instancias, ya que poseemos créditos limitados para usarla.

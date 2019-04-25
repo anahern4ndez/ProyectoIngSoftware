@@ -306,11 +306,6 @@ export default {
       if(this.name != '' && this.id != '' && this.password != '' && this.email != '' && this.selected != null){
         this.$http.put(`http://localhost:8000/users/update?id=${this.id}&name=${this.name}&email=${this.email}&password=${this.password}`).then(response=>{
           this.refreshUsers()
-          this.error = false;
-        }).catch(error => {
-          this.error = true;
-          console.log(error.response.data.status);
-          console.log("Error");
         });
         this.name = '';
         this.id = '';
