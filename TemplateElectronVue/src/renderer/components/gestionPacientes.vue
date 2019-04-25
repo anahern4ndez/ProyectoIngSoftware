@@ -15,6 +15,7 @@
                         outline
                     ></v-text-field>
 
+                <!--    cuadro de dialogo para cambiar el estado del paciente -->
                     <v-dialog v-model="dialog" max-width="500px">
                       <v-card>
                         <v-card-title>

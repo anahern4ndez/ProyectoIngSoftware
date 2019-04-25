@@ -66,6 +66,7 @@
                           label="Teléfonos"
                           outline
                       ></v-text-field>
+                  <br>
                   <v-text-field
                           v-model="Edad"
                           label="Edad"
