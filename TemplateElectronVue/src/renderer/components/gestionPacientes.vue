@@ -1,4 +1,3 @@
-
 <link {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}, {rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'} >
 
 <template>
@@ -20,13 +19,25 @@
                         :headers="headers"
                         :items="pacientes"
                         :search="search"
+                        item-key="id"
+                        v-model="selected"
+                        select-all
                     >
-                        <template slot="items" slot-scope="props">
+                        <template v-slot:items="props">
+                          <td>
+                            <v-checkbox
+                              v-model="props.selected"
+                              primary
+                              :disabled="!props.selected && selected.length != 0"
+                              :indeterminate="!props.selected && selected.length != 0"
+                            ></v-checkbox>
+                          </td>
                         <td class="text-xs-center">{{ props.item.CUI }}</td>
                         <td class="text-xs-center">{{ props.item.Nombre }}</td>
                         <td class="text-xs-center">{{ props.item.Apellido }}</td>
                         <td class="text-xs-center">{{ props.item.Procedencia }}</td>
                         <td class="text-xs-center">{{ props.item.Fecha_de_nacimiento }}</td>
+
                         </template>
                         <!-- cuando la busqueda no tenga resultados -->
                         <template v-slot:no-results>
@@ -43,7 +54,7 @@
                             <br>
                             <br>
                         <h2>Nombres </h2>
-                        <h3 class="subheading font-weight-light"> {{selectedPatient}}</h3>
+                        <h3 class="subheading font-weight-light"> {{selected.Apellido}}</h3>
                         </div>
                         <div class="form-group" >
                             <h2>Apellidos </h2>
@@ -121,8 +132,7 @@ export default {
     data () {
       return {
         search:'',
-        selected: null,
-        lista: [],
+        selected: [],
         headers: [
           {
             text: 'CUI (ID)',
@@ -166,13 +176,15 @@ export default {
         estadisticas(){
           this.$router.push('/EditarPaciente');
         },
-            showAlert(a){
-              console.log("aver");
-              console.log(a);
+        
+    },
+    computed: {
+      msg() {
+        const selectedRow = this.selectedPatient[0];
+        return selectedRow ? `${selectedRow.Nombre} ${selectedRow.Apellido}` : "no data selected";
+      }
     }
         
-        
-    }
 };
 </script>
 <style>
