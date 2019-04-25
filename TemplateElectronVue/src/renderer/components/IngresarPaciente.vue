@@ -4,20 +4,76 @@
   <div class="grey--text text--darken-2">
     <h1 class="text-center">Ingresar a un paciente</h1>
 
-    <b-container class="bv-example-row1">
+    <b-container class="bv-example-row1" >
       <b-row align-h="around" align-v="center">
         <b-col order="2" cols="10">
           <v-card>
             <v-card-title primary-title>
-              <div>
-                <h3  class="text-xs-center">Datos Personales</h3>
-                <div> {{ card_text }} </div>
-              </div>
+              <v-flex xs12>
+                <v-layout align-center justify-end column fill-height />
+                  <h3 class="text-xs-center">Datos Personales</h3>
+                  <br>
+                  <v-text-field
+                          v-model="Nombre"
+                          label="Nombres"
+                          outline
+                      ></v-text-field>
+                  <br>
+                  <v-text-field
+                          v-model="Apellido"
+                          label="Apellidos"
+                          outline
+                      ></v-text-field>
+                  <br>
+                  <v-text-field
+                          v-model="Fecha_de_nacimiento"
+                          label="Fecha de nacimiento"
+                          outline
+                      ></v-text-field>
+                  <br>
+                  <v-text-field
+                          v-model="Procedencia"
+                          label="Procedencia"
+                          outline
+                      ></v-text-field>
+                  <br>
+                  <v-text-field
+                          v-model="Nombre_de_padre"
+                          label="Nombre del padre"
+                          outline
+                      ></v-text-field>
+                  <br>
+                  <v-text-field
+                          v-model="Nombre_de_madre"
+                          label="Nombre de la madre"
+                          outline
+                      ></v-text-field>
+                  <br>
+                  <v-text-field
+                          v-model="Telefono"
+                          label="Teléfonos"
+                          outline
+                      ></v-text-field>
+                  <v-text-field
+                          v-model="Edad"
+                          label="Edad"
+                          outline
+                      ></v-text-field>
+              </v-flex>
             </v-card-title>
           </v-card>
         </b-col>
       </b-row>
     </b-container>
+    <div>
+      <b-container class="bv-example-row2">
+        <b-row class="justify-content-md-center">
+            <b-col order="4" cols="6">
+                <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="ingresarNuevo">Ingresar nuevo paciente</button>
+            </b-col>
+        </b-row>
+      </b-container>
+    </div>
   </div>
 </template>
 
@@ -42,23 +98,52 @@ export default {
         Nombre_de_padre:'',
         Nombre_de_madre:'',
         Telefono:'',
-        Edad: '',
-        Sindrome_Clinico_Presentacion: '',
-        Dx_Definitivo:'',
-        Dx_Asociados:'',
-        CUI: '',
+        Edad: '1',
+        Sindrome_Clinico_Presentacion: '12',
+        Dx_Definitivo:'?',
+        Dx_Asociados:'?',
+        CUI: '1',
         Imagen:'None (por ahora)',
-        Tipo_de_Sangre: '',
-        Estudia: '',
-        Transfusiones:'',
-        EstadoActual:'',
-        Sexo:'',
+        Tipo_de_Sangre: '0',
+        Estudia: '0',
+        Transfusiones:'0',
+        EstadoActual:'0',
+        Sexo:'0',
         selected: null,
         pacientes: []
       }
   },
     methods: {
-        //para filtrar los datos de la tabla
+        ingresarNuevo(){
+          const info = {
+            Nombre: this.Nombre,
+            Apellido: this.Apellido,
+            Fecha_de_nacimiento: this.Fecha_de_nacimiento,
+            Procedencia: this.Procedencia,
+            Nombre_de_padre: this.Nombre_de_padre,
+            Nombre_de_madre: this.Nombre_de_madre,
+            Telefono: this.Telefono,
+            Edad: this.Edad,
+            Sindrome_Clinico_Presentacion: this.Sindrome_Clinico_Presentacion,
+            Dx_Definitivo: this.Dx_Definitivo,
+            CUI: this.CUI,
+            Imagen: this.Imagen,
+            Tipo_de_Sangre: this.Tipo_de_Sangre,
+            Estudia: this.Estudia,
+            Transfusiones: this.Transfusiones,
+            EstadoActual: this.EstadoActual,
+            Sexo: this.Sexo
+        };
+          this.$http.post('http://localhost:8000/PacienteController/insert', info).then(response => {
+              this.error = false;
+          }).
+          catch(error => {
+              this.error = true;
+              console.log(error.response.data.status);
+              console.log("Error");
+          });
+
+        }
     }
 };
 </script>
