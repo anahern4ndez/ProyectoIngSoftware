@@ -79,7 +79,6 @@ class PacienteController extends Controller
     function update(Request $request){
         $id = $request->id;
         $toUpdate = Paciente::find($id);
-        //pedira todos los datos, por ahora..
         $toUpdate->EstadoActual = $request->val;
         $toUpdate->save();
 
