@@ -52,7 +52,19 @@ const routes = [
   },
   {
     path: '/page-four',
-    component: Vue.component('page-four', require('./components/gestionPacientes.vue').default)
+    component: Vue.component('page-four', require('./components/GestionPacientes.vue').default)
+  },
+  {
+    path: '/ingresarPaciente',
+    component: Vue.component('ingresarPaciente', require('./components/IngresarPaciente.vue').default)
+  },
+  {
+    path: '/EditarPaciente',
+    component: Vue.component('EditarPaciente', require('./components/EditarPaciente.vue').default)
+  },
+  {
+    path: '/EditarEstadoPaciente',
+    component: Vue.component('EditarEstadoPaciente', require('./components/EditarEstadoPaciente.vue').default)
   }
 ];
 

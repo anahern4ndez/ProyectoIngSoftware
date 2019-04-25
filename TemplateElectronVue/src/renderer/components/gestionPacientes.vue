@@ -80,7 +80,7 @@
       <b-container class="bv-example-row2">
         <b-row class="justify-content-md-center">
             <b-col order="4" cols="6">
-                <!--button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="ingresarNuevo">Ingresar nuevo paciente</button> -->
+                <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="ingresarNuevo">Ingresar nuevo paciente</button>
                 <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="crear"> Dar consulta </button>
                 <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="eliminar"> Eliminar paciente</button>
                 <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="eliminar"> Editar datos</button>
@@ -132,7 +132,7 @@ export default {
             value: 'id'
           },
           { text: 'Nombre', align: 'center', value: 'nombre' },
-          { text: 'Apellido', align: 'center', value: 'apellido' },
+          { text: 'Apellido', align: 'center', value: 'apellido' }, 
           { text: 'Procedencia', align: 'center', value: 'pais_nacimiento' },
           { text: 'Fecha de nacimiento', align: 'center', value: 'fecha_nacimiento' },
         ],
@@ -144,7 +144,7 @@ export default {
         eliminar(){
         this.$http.delete(`http://localhost:8000/users/destroy?id=${this.id}`).then(response=>{});
         },
-        crear(){
+        ingresarNuevo(){
         this.$http.post(`http://localhost:8000/users/create?id=${this.id}&name=${this.name}&email=${this.email}&password=${this.password}`).then(response=>{});
         },
         modificar(){
