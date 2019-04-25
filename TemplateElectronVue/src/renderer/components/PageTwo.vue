@@ -145,8 +145,15 @@ export default {
     };
   },
   methods:{
+    refreshUsers(){
+      this.$http.get("http://localhost:8000/users").then(response => {
+      this.user = response.data.users;
+    });
+    },
     eliminar(){
-      this.$http.delete(`http://localhost:8000/users/destroy?id=${this.id}`).then(response=>{});
+      this.$http.delete(`http://localhost:8000/users/destroy?id=${this.id}`).then(response=>{
+        this.refreshUsers()
+      });
       this.name = '';
       this.id = '';
       this.email = '';
@@ -154,7 +161,9 @@ export default {
       this.selected = null;
       },
     crear(){
-      this.$http.post(`http://localhost:8000/users/create?id=${this.id}&name=${this.name}&email=${this.email}&password=${this.password}`).then(response=>{});
+      this.$http.post(`http://localhost:8000/users/create?id=${this.id}&name=${this.name}&email=${this.email}&password=${this.password}`).then(response=>{
+        this.refreshUsers()
+      });
       this.name = '';
       this.id = '';
       this.email = '';
@@ -162,7 +171,9 @@ export default {
       this.selected = null;
     },
     modificar(){
-      this.$http.put(`http://localhost:8000/users/update?id=${this.id}&name=${this.name}&email=${this.email}&password=${this.password}`).then(response=>{});
+      this.$http.put(`http://localhost:8000/users/update?id=${this.id}&name=${this.name}&email=${this.email}&password=${this.password}`).then(response=>{
+        this.refreshUsers()
+      });
       this.name = '';
       this.id = '';
       this.email = '';
