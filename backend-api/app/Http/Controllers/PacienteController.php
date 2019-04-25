@@ -49,10 +49,11 @@ class PacienteController extends Controller
      * @param \Illuminate\Http\Request 
      * @return null value
      */
-    function update(Request $request, $id){
+    function update(Request $request){
+        $id = $request->id;
         $toUpdate = Paciente::find($id);
         //pedira todos los datos, por ahora..
-        $toUpdate-> update(Request::all());
+        $toUpdate->EstadoActual = $request->val;
         $toUpdate->save();
 
     }
