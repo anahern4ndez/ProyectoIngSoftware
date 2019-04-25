@@ -1,4 +1,4 @@
-<template>
+<template lang="">
   <div class="grey--text text--darken-2">
     <h1 class="text-center">Gestión de Usuarios</h1>
     <div>
@@ -57,15 +57,6 @@
           </b-col>
           <b-col order="1" cols="5">
             <form>
-              <div v-if="errorName">
-                <v-alert :value="true" type="error" id="alert">
-                  Ingrese un nombre, por favor
-                </v-alert>
-              </div>
-              <div class="form-group">
-                <label for="nameInput">Nombre</label>
-                <input id="nameInput" type="text" v-model="name" class="form-control" placeholder="Nombre">
-              </div>
               <div v-if="errorDPI">
                 <v-alert :value="true" type="error" id="alert">
                   Ingrese un DPI, por favor
@@ -75,6 +66,24 @@
                 <label for="dpiInput">DPI</label>
                 <input id="dpiInput" type="text" v-model="id" class="form-control" placeholder="DPI">
               </div>
+              <div v-if="errorName">
+                <v-alert :value="true" type="error" id="alert">
+                  Ingrese un nombre, por favor
+                </v-alert>
+              </div>
+              <div class="form-group">
+                <label for="nameInput">Nombre</label>
+                <input id="nameInput" type="text" v-model="name" class="form-control" placeholder="Nombre">
+              </div>
+              <!--<div v-if="errorDPI">
+                <v-alert :value="true" type="error" id="alert">
+                  Ingrese un DPI, por favor
+                </v-alert>
+              </div>
+              <div class="form-group">
+                <label for="dpiInput">DPI</label>
+                <input id="dpiInput" type="text" v-model="id" class="form-control" placeholder="DPI">
+              </div>-->
               <div v-if="errorEmail">
                 <v-alert :value="true" type="error" id="alert">
                   Ingrese un correo, por favor

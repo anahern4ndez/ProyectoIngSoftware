@@ -1,4 +1,4 @@
-<template>
+<template lang="">
     <div>
         <div class="body">
             <form class="form-signin form form--login">
