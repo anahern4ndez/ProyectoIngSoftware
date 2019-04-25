@@ -33,10 +33,15 @@ class PacienteController extends Controller
 
     function findAll(){
         $val = Paciente::all();
+        foreach ($val as $v) {
+            $v->Sindrome_Clinico_Presentacion;
+            $v->Sexo;
+        }
         return response()->json([
             'success' => true,
             'Pacientes' => $val
         ], 200);
+        
     }
     /**
      * hace update a todos los properties del elemento

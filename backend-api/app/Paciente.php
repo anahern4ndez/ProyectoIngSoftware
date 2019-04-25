@@ -37,13 +37,17 @@ class Paciente extends Model
         return $this->hasOne('App\tipo_sangre','ID');
     }
     public function Procedencia(){
-        return $this->hasOne('App\Procedencia','ID');
+        return $this->hasOne('App\Procedencia','ID', 'CUI');
     }
     public function EstadoActual(){
-        return $this->hasOne('App\Estado','ID');
+        return $this->hasOne('App\Estado','ID', 'CUI');
     }
     public function tipo_respuesta(){
-        return $this->hasOne('App\tipo_respuesta','ID');
+        return $this->hasMany('App\tipo_respuesta','ID', 'CUI');
+    }
+
+    public function Sexo(){
+        return $this->hasOne('App\sexo','ID', 'CUI');
     }
 
 
