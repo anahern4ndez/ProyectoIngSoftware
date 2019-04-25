@@ -53,6 +53,7 @@ class PacienteController extends Controller
         $toUpdate = Paciente::find($id);
         //pedira todos los datos, por ahora..
         $toUpdate-> update(Request::all());
+        $toUpdate->save();
 
     }
     /**

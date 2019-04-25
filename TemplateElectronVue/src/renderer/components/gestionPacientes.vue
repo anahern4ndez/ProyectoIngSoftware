@@ -22,7 +22,7 @@
                         :search="search"
                     >
                         <template slot="items" slot-scope="props">
-                        <td class="text-xs-center">{{ props.item.id }}</td>
+                        <td class="text-xs-center">{{ props.item.CUI }}</td>
                         <td class="text-xs-center">{{ props.item.Nombre }}</td>
                         <td class="text-xs-center">{{ props.item.Apellido }}</td>
                         <td class="text-xs-center">{{ props.item.Procedencia }}</td>
