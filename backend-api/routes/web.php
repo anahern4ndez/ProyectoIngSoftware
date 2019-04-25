@@ -11,8 +11,6 @@
 |
 */
 
-
-
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
@@ -45,3 +43,11 @@ $router->get('/PacienteController/update', 'PacienteController@update');
 $router->delete('/users/destroy','ExampleController@destroy');
 $router->post('/users/create', 'ExampleController@store');
 $router->put('/users/update', 'ExampleController@update');
+$router->post('/doLogin', 'HomeController@printInfo');
+
+$router->get('/evaluateLogin', 'loginController@doLogin');
+$router->get('/verifyLogin', 'loginController@login');
+
+$router->post('/login', 'loginController@login');
+
+$router->post('/logout', 'loginController@logout');

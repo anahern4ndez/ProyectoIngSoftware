@@ -58,7 +58,7 @@
         <v-btn icon class="grey--text text--darken-3">
           <v-icon>fa-bell</v-icon>
         </v-btn>
-        <v-btn icon class="grey--text text--darken-3" to="/login">
+        <v-btn icon class="grey--text text--darken-3" to="/login" v-on:click="logout">
           <v-icon>fa-sign-out-alt</v-icon>
         </v-btn>
       </v-toolbar-items>
@@ -86,7 +86,15 @@ export default {
         {title: 'Title 1', icon: 'fa-home'}
       ]
     }
-  }
+  },
+
+    methods: {
+        logout(){
+            this.$http.post('http://localhost:8000/logout').then((response) => {
+                this.$router.push('/login');
+            });
+        }
+    }
 }
 </script>
 
