@@ -1,4 +1,4 @@
-<template>
+<template lang="">
   <div class="grey--text text--darken-2">
     <h1 class="text-center">Gestión de Usuarios</h1>
     <div>
@@ -57,13 +57,37 @@
           </b-col>
           <b-col order="1" cols="5">
             <form>
-              <div class="form-group">
-                <label for="nameInput">Nombre</label>
-                <input id="nameInput" type="text" v-model="name" class="form-control" placeholder="Nombre">
+              <div v-if="errorDPI">
+                <v-alert :value="true" type="error" id="alert">
+                  Ingrese un DPI, por favor
+                </v-alert>
               </div>
               <div class="form-group">
                 <label for="dpiInput">DPI</label>
                 <input id="dpiInput" type="text" v-model="id" class="form-control" placeholder="DPI">
+              </div>
+              <div v-if="errorName">
+                <v-alert :value="true" type="error" id="alert">
+                  Ingrese un nombre, por favor
+                </v-alert>
+              </div>
+              <div class="form-group">
+                <label for="nameInput">Nombre</label>
+                <input id="nameInput" type="text" v-model="name" class="form-control" placeholder="Nombre">
+              </div>
+              <!--<div v-if="errorDPI">
+                <v-alert :value="true" type="error" id="alert">
+                  Ingrese un DPI, por favor
+                </v-alert>
+              </div>
+              <div class="form-group">
+                <label for="dpiInput">DPI</label>
+                <input id="dpiInput" type="text" v-model="id" class="form-control" placeholder="DPI">
+              </div>-->
+              <div v-if="errorEmail">
+                <v-alert :value="true" type="error" id="alert">
+                  Ingrese un correo, por favor
+                </v-alert>
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail1">Correo</label>
@@ -75,6 +99,11 @@
                   placeholder="Correo Electronico"
                 >
               </div>
+              <div v-if="errorPassword">
+                <v-alert :value="true" type="error" id="alert">
+                  Ingrese una contraseña, por favor
+                </v-alert>
+              </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Contraseña</label>
                 <input
@@ -84,6 +113,11 @@
                   class="form-control"
                   placeholder="Contraseña"
                 >
+              </div>
+              <div v-if="errorTipoUsuario">
+                <v-alert :value="true" type="error" id="alert">
+                  Seleccione un tipo de usuario, por favor
+                </v-alert>
               </div>
               <div>
                 <label for="levelInput">Tipo de usuario</label>
@@ -135,6 +169,11 @@ export default {
       email:'',
       password:'',
       selected: null,
+      errorName: false,
+      errorDPI: false,
+      errorEmail: false,
+      errorPassword: false,
+      errorTipoUsuario: false,
       user: [],
       headers: [
         { text: "ID", align: "center", value: "ID" },
@@ -151,6 +190,18 @@ export default {
     });
     },
     eliminar(){
+      this.errorName = false;
+      this.errorDPI = false;
+      this.errorEmail = false;
+      this.errorPassword = false;
+      this.errorTipoUsuario = false;
+
+      if(this.id === ''){
+        this.errorDPI = true;
+      }else{
+        this.errorDPI = false;
+      }
+      if(this.id != ''){
       this.$http.delete(`http://localhost:8000/users/destroy?id=${this.id}`).then(response=>{
         this.refreshUsers()
       });
@@ -159,26 +210,103 @@ export default {
       this.email = '';
       this.password = '';
       this.selected = null;
-      },
+      }
+    },
     crear(){
-      this.$http.post(`http://localhost:8000/users/create?id=${this.id}&name=${this.name}&email=${this.email}&password=${this.password}`).then(response=>{
-        this.refreshUsers()
-      });
-      this.name = '';
-      this.id = '';
-      this.email = '';
-      this.password = '';
-      this.selected = null;
+      this.errorName = false;
+      this.errorDPI = false;
+      this.errorEmail = false;
+      this.errorPassword = false;
+      this.errorTipoUsuario = false;
+
+      if(this.name === ''){
+        this.errorName = true;
+      }else{
+        this.errorName = false;
+      }
+
+      if(this.id === ''){
+        this.errorDPI = true;
+      }else{
+        this.errorDPI = false;
+      }
+
+      if(this.email === ''){
+        this.errorEmail = true;
+      }else{
+        this.errorEmail = false;
+      }
+
+      if(this.password === ''){
+        this.errorPassword = true;
+      }else{
+        this.errorPassword = false;
+      }
+
+      if(this.selected == null){
+        this.errorTipoUsuario = true;
+      }else{
+        this.errorTipoUsuario = false;
+      }
+
+      if(this.name != '' && this.id != '' && this.password != '' && this.email != '' && this.selected != null){
+        this.$http.post(`http://localhost:8000/users/create?id=${this.id}&name=${this.name}&email=${this.email}&password=${this.password}`).then(response=>{
+          this.refreshUsers()
+        });
+        this.name = '';
+        this.id = '';
+        this.email = '';
+        this.password = '';
+        this.selected = null;
+      }
     },
     modificar(){
-      this.$http.put(`http://localhost:8000/users/update?id=${this.id}&name=${this.name}&email=${this.email}&password=${this.password}`).then(response=>{
-        this.refreshUsers()
-      });
-      this.name = '';
-      this.id = '';
-      this.email = '';
-      this.password = '';
-      this.selected = null;
+      this.errorName = false;
+      this.errorDPI = false;
+      this.errorEmail = false;
+      this.errorPassword = false;
+      this.errorTipoUsuario = false;
+
+      if(this.name === ''){
+        this.errorName = true;
+      }else{
+        this.errorName = false;
+      }
+
+      if(this.id === ''){
+        this.errorDPI = true;
+      }else{
+        this.errorDPI = false;
+      }
+
+      if(this.email === ''){
+        this.errorEmail = true;
+      }else{
+        this.errorEmail = false;
+      }
+
+      if(this.password === ''){
+        this.errorPassword = true;
+      }else{
+        this.errorPassword = false;
+      }
+
+      if(this.selected == null){
+        this.errorTipoUsuario = true;
+      }else{
+        this.errorTipoUsuario = false;
+      }
+
+      if(this.name != '' && this.id != '' && this.password != '' && this.email != '' && this.selected != null){
+        this.$http.put(`http://localhost:8000/users/update?id=${this.id}&name=${this.name}&email=${this.email}&password=${this.password}`).then(response=>{
+          this.refreshUsers()
+        });
+        this.name = '';
+        this.id = '';
+        this.email = '';
+        this.password = '';
+        this.selected = null;
+      }
     }
   }
 };
