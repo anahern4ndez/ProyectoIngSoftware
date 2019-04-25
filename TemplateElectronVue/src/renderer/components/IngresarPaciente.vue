@@ -155,6 +155,16 @@ export default {
         };
           this.$http.post('http://localhost:8000/PacienteController/insert', info).then(response => {
               this.error = false;
+              this.id='';
+              this.CUI=''; 
+              this.Nombre='';
+              this.Apellido='';
+              this.Fecha_de_nacimiento='';
+              this.Procedencia='';
+              this.Nombre_de_padre='';
+              this.Nombre_de_madre='';
+              this.Telefono='';
+              this.Edad= '';
           }).
           catch(error => {
               this.error = true;
