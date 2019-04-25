@@ -36,7 +36,7 @@ $router->get('/EstadoController/update', 'EstadoController@update');
 //CRUD: TABLA PACIENTES
 $router->get('/PacienteController/find', 'PacienteController@find');
 $router->get('/PacienteController/findAll', 'PacienteController@findAll');
-$router->post('/PacienteController/insert', 'PacienteController@insert');
+$router->post('/PacienteController/insert', 'PacienteController@store');
 $router->get('/PacienteController/update', 'PacienteController@update');
 
 

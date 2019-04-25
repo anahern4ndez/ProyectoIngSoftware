@@ -13,9 +13,36 @@ class PacienteController extends Controller
      * @param \Illuminate\Http\Request
      * @return \Illuminate\Http\Response
      */
-    function insert(Request $request){
-        Paciente::create(Request::all());
-        return 'true';
+    function store(Request $request){
+        /*Paciente::create(Request::all());
+        return 'true';*/
+        $pat = new Paciente;
+        $pat->id = $request->id;
+        $pat->Nombre = $request->Nombre;
+        $pat->Apellido = $request->Apellido;
+        $pat->Fecha_de_nacimiento = $request->Fecha_de_nacimiento;
+        $pat->Procedencia = $request->Procedencia;
+        $pat->Nombre_de_padre = $request->Nombre_de_padre;
+        $pat->Nombre_de_madre = $request->Nombre_de_madre;
+        $pat->Telefono = $request->Telefono;
+        $pat->Edad = $request->Edad;
+        $pat->Telefono = $request->Telefono;
+        $pat->Sindrome_Clinico_Presentacion = $request->Sindrome_Clinico_Presentacion;
+        $pat->Dx_Definitivo = $request->Dx_Definitivo;
+        $pat->Dx_Asociados = $request->Dx_Asociados;
+        $pat->CUI = $request->CUI;
+        $pat->Imagen = $request->Imagen;
+        $pat->Tipo_de_Sangre = $request->Tipo_de_Sangre;
+        $pat->Estudia = $request->Estudia;
+        $pat->Transfusiones = $request->Transfusiones;
+        $pat->EstadoActual = $request->EstadoActual;
+        $pat->Sexo = $request->Sexo;
+        $pat->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'creado'
+        ], 200);
     }
 
     /**

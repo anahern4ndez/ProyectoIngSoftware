@@ -14,6 +14,18 @@
                   <h3 class="text-xs-center">Datos Personales</h3>
                   <br>
                   <v-text-field
+                          v-model="CUI"
+                          label="Número de CUI"
+                          outline
+                      ></v-text-field>
+                  <br>
+                  <v-text-field
+                          v-model="Sexo"
+                          label="Género"
+                          outline
+                      ></v-text-field>
+                  <br>
+                  <v-text-field
                           v-model="Nombre"
                           label="Nombres"
                           outline
@@ -91,6 +103,8 @@ export default {
       return {
         search:'',        
         //datos del paciente a ingresar
+        id:'',
+        CUI:'', 
         Nombre:'', 
         Apellido:'', 
         Fecha_de_nacimiento:'',
@@ -98,11 +112,12 @@ export default {
         Nombre_de_padre:'',
         Nombre_de_madre:'',
         Telefono:'',
-        Edad: '1',
+        Edad: '',
+        //los siguientes se pondran como predeterminados por cuestion de tiempo, pero se volveran dinámicos después
         Sindrome_Clinico_Presentacion: '12',
-        Dx_Definitivo:'?',
-        Dx_Asociados:'?',
-        CUI: '1',
+        Dx_Definitivo:'Na',
+        Dx_Asociados:'Na',
+        CUI: '',
         Imagen:'None (por ahora)',
         Tipo_de_Sangre: '0',
         Estudia: '0',
@@ -116,6 +131,8 @@ export default {
     methods: {
         ingresarNuevo(){
           const info = {
+            id:this.CUI,
+            CUI: this.CUI,
             Nombre: this.Nombre,
             Apellido: this.Apellido,
             Fecha_de_nacimiento: this.Fecha_de_nacimiento,
@@ -126,6 +143,7 @@ export default {
             Edad: this.Edad,
             Sindrome_Clinico_Presentacion: this.Sindrome_Clinico_Presentacion,
             Dx_Definitivo: this.Dx_Definitivo,
+            Dx_Asociados: this.Dx_Asociados,
             CUI: this.CUI,
             Imagen: this.Imagen,
             Tipo_de_Sangre: this.Tipo_de_Sangre,

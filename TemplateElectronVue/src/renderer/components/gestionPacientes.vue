@@ -6,7 +6,7 @@
     <div>
       <b-container class="bv-example-row1">
         <b-row align-h="around" align-v="center">
-          <b-col order="2" cols="10">
+          <b-col order="2" cols="20">
                 <div>
                   <v-card>
                     <v-text-field
@@ -169,7 +169,7 @@ export default {
     data () {
       return {
         search:'',
-        selected: null,
+        selected: [],
         selected2: null,
         dialog: false,
         lista: [],
