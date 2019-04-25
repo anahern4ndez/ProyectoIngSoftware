@@ -8,12 +8,14 @@
       <b-container class="bv-example-row1">
         <b-row align-h="around" align-v="center">
           <b-col order="2" cols="10">
-                <div class="Tabla">
+                <div>
+                  <v-card>
                     <v-text-field
                         v-model="search"
                         label="Búsqueda por nombre, apellido o número de CUI"
                         outline
                     ></v-text-field>
+                    
                     <v-data-table
                         :headers="headers"
                         :items="pacientes"
@@ -23,7 +25,7 @@
                         <td class="text-xs-center">{{ props.item.id }}</td>
                         <td class="text-xs-center">{{ props.item.Nombre }}</td>
                         <td class="text-xs-center">{{ props.item.Apellido }}</td>
-                        <td class="text-xs-center">{{ props.item.Nombre_de_padre }}</td>
+                        <td class="text-xs-center">{{ props.item.Procedencia }}</td>
                         <td class="text-xs-center">{{ props.item.Fecha_de_nacimiento }}</td>
                         </template>
                         <!-- cuando la busqueda no tenga resultados -->
@@ -33,6 +35,7 @@
                             </v-alert>
                         </template>
                     </v-data-table>
+                  </v-card>
                 </div>
                     <form>
                         <div class="form-group">
@@ -40,7 +43,7 @@
                             <br>
                             <br>
                         <h2>Nombres </h2>
-                        <h3 class="subheading font-weight-light"> Aqui van los nombres del paciente</h3>
+                        <h3 class="subheading font-weight-light"> {{selectedPatient}}</h3>
                         </div>
                         <div class="form-group" >
                             <h2>Apellidos </h2>
@@ -103,6 +106,7 @@ export default {
       //esto deberia ser un arrray de pacientes que contengan todos sus atributos...
       
       this.pacientes = response.data.Pacientes;
+      this.selectedPatients = this.pacientes[0]
       //var paciente;
       //asi se deberia recorrer la shit esta:
       /**for (var paciente in this.lista){
@@ -110,8 +114,8 @@ export default {
               apellido: paciente.Apellido,
               pais_nacimiento: paciente.Procedencia,
               fecha_nacimiento: paciente.Fecha_de_nacimiento})
-        }
-        console.log(this.pacientes)*/
+        }*/
+        console.log(this.pacientes)
     });
   },
     data () {
@@ -125,12 +129,13 @@ export default {
             align: 'center',
             value: 'id'
           },
-          { text: 'Nombre', align: 'center', value: 'nombre' },
-          { text: 'Apellido', align: 'center', value: 'apellido' }, 
-          { text: 'Procedencia', align: 'center', value: 'pais_nacimiento' },
-          { text: 'Fecha de nacimiento', align: 'center', value: 'fecha_nacimiento' },
+          { text: 'Nombre', align: 'center', value: 'Nombre' },
+          { text: 'Apellido', align: 'center', value: 'Apellido' }, 
+          { text: 'Procedencia', align: 'center', value: 'Procedencia' },
+          { text: 'Fecha de nacimiento', align: 'center', value: 'Fecha_de_nacimiento' },
         ],
-        pacientes: []
+        pacientes: [],
+        selectedPatient: []
       }
   },
     methods: {
@@ -138,6 +143,7 @@ export default {
         ingresarNuevo(){
           this.$router.push('/IngresarPaciente');
         },
+        /* metodos de redirección de botones */
         // falta vista para dar una consulta
         darConsulta(){
           this.$router.push('/IngresarPaciente');
@@ -159,7 +165,11 @@ export default {
         },
         estadisticas(){
           this.$router.push('/EditarPaciente');
-        }
+        },
+            showAlert(a){
+              console.log("aver");
+              console.log(a);
+    }
         
         
     }
