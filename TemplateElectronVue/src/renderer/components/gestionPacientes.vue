@@ -14,6 +14,40 @@
                         label="Búsqueda por nombre, apellido o número de CUI"
                         outline
                     ></v-text-field>
+
+                    <v-dialog v-model="dialog" max-width="500px">
+                      <v-card>
+                        <v-card-title>
+                          <span class="headline">Edit</span>
+                        </v-card-title>
+                        <v-card-text>
+                          <v-flex xs12 sm6 md4>
+                            <div>
+                              <label for="changeStatus">Cambio estado de paciente</label>
+                             
+                              <select class='form-control' name='changeStatus' id='changeStatus' v-model='selected2'>
+                                <option value='1'>1</option>
+                                <option value='2'>2</option>
+                              </select>
+                              
+                              
+                            </div>
+                          </v-flex>
+                        </v-card-text>
+                        
+                        <v-card-actions>
+                          <v-spacer></v-spacer>
+                          <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>
+                          <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
+                        </v-card-actions>
+                        </v-card>
+                    </v-dialog>
+                    
+                    
+                    
+                    
+                    
+                    
                     
                     <v-data-table
                         :headers="headers"
@@ -23,21 +57,29 @@
                         v-model="selected"
                         select-all
                     >
-                        <template v-slot:items="props">
-                          <td>
-                            <v-checkbox
-                              v-model="props.selected"
-                              primary
-                              :disabled="!props.selected && selected.length != 0"
-                              :indeterminate="!props.selected && selected.length != 0"
-                            ></v-checkbox>
-                          </td>
+                        <template slot="items" slot-scope="props">
+                        <td class="text-xs-center"><input type='checkbox' id='checkbox' v-model='selected' @click="pasoParam(props.item)"></td>
                         <td class="text-xs-center">{{ props.item.CUI }}</td>
                         <td class="text-xs-center">{{ props.item.Nombre }}</td>
                         <td class="text-xs-center">{{ props.item.Apellido }}</td>
                         <td class="text-xs-center">{{ props.item.Procedencia }}</td>
                         <td class="text-xs-center">{{ props.item.Fecha_de_nacimiento }}</td>
-
+                        <td class="text-xs-center">{{ props.item.EstadoActual }}</td>
+                        <td class="justify-center layout px-0">
+                          <v-icon
+                            small
+                            class="mr-2"
+                            @click="editarDatos(props.item)"
+                          >
+                            edit
+                          </v-icon>
+                          <v-icon
+                            small
+                            @click="deleteItem(props.item)"
+                          >
+                            delete
+                          </v-icon>
+                        </td>
                         </template>
                         <!-- cuando la busqueda no tenga resultados -->
                         <template v-slot:no-results>
@@ -48,43 +90,46 @@
                     </v-data-table>
                   </v-card>
                 </div>
-                    <form>
+                    <template>
+                      <form>
                         <div class="form-group">
                             <br>
                             <br>
                             <br>
                         <h2>Nombres </h2>
-                        <h3 class="subheading font-weight-light"> {{selected.Apellido}}</h3>
+                        <h3 class="subheading font-weight-light"> {{selectedPatients.Nombre}}</h3>
                         </div>
                         <div class="form-group" >
                             <h2>Apellidos </h2>
-                            <h3 class="subheading font-weight-light"> Aqui van los apellidos del paciente</h3>
+                            <h3 class="subheading font-weight-light"> {{selectedPatients.Apellido}}</h3>
                         </div>
                         <div class="form-group">
                             <h2> CUI </h2>
-                            <h3 class="subheading font-weight-light"> Aqui va el número de CUI del paciente</h3>
+                            <h3 class="subheading font-weight-light"> {{selectedPatients.CUI}}</h3>
                         </div>
                         <div class="form-group">
                             <h2> Estado </h2>
-                            <h3 class="subheading font-weight-light"> Aqui va el estado actual del paciente</h3>
+                            <h3 class="subheading font-weight-light"> {{selectedPatients.EstadoActual}}</h3>
                         </div>
                         <div>
                             <h2> Edad </h2>
-                            <h3 class="subheading font-weight-light"> Aqui va la edad del paciente</h3>
+                            <h3 class="subheading font-weight-light"> {{selectedPatients.Edad}}</h3>
                         </div>
                         <div>
                             <h2> Número telefónico </h2>
-                            <h3 class="subheading font-weight-light"> Aqui va el número de teléfono (emergencia) del paciente</h3>
+                            <h3 class="subheading font-weight-light"> {{selectedPatients.Telefono}}</h3>
                         </div>
                         <div>
                             <h2> Nombre del padre </h2>
-                            <h3 class="subheading font-weight-light"> Aqui va el nombre del paciente</h3>
+                            <h3 class="subheading font-weight-light"> {{selectedPatients.Nombre_de_padre}}</h3>
                         </div>
                         <div>
                             <h2> Nombre de la madre </h2>
-                            <h3 class="subheading font-weight-light"> Aqui va el nombre de la madre paciente</h3>
+                            <h3 class="subheading font-weight-light"> {{selectedPatients.Nombre_de_madre}}</h3>
                         </div>
                     </form>
+                    </template>
+                    
                 
                 </b-col>
             </b-row>
@@ -117,35 +162,37 @@ export default {
       //esto deberia ser un arrray de pacientes que contengan todos sus atributos...
       
       this.pacientes = response.data.Pacientes;
-      this.selectedPatients = this.pacientes[0]
-      //var paciente;
-      //asi se deberia recorrer la shit esta:
-      /**for (var paciente in this.lista){
-          this.pacientes.push({ 'nombre': paciente.Nombre,
-              apellido: paciente.Apellido,
-              pais_nacimiento: paciente.Procedencia,
-              fecha_nacimiento: paciente.Fecha_de_nacimiento})
-        }*/
-        console.log(this.pacientes)
+      this.selectedPatients = response.data.Pacientes[0]
+      console.log(this.pacientes)
     });
   },
     data () {
       return {
         search:'',
-        selected: [],
+        selected: null,
+        selected2: null,
+        dialog: false,
+        lista: [],
         headers: [
-          {
-            text: 'CUI (ID)',
-            align: 'center',
-            value: 'id'
-          },
+          {text: '', align: 'center', value: '',},
+          {text: 'CUI (ID)', align: 'center',value: 'id'},
           { text: 'Nombre', align: 'center', value: 'Nombre' },
           { text: 'Apellido', align: 'center', value: 'Apellido' }, 
           { text: 'Procedencia', align: 'center', value: 'Procedencia' },
           { text: 'Fecha de nacimiento', align: 'center', value: 'Fecha_de_nacimiento' },
+          { text: 'Estado', align: 'center', value: 'EstadoActual' },
         ],
+        editedIndex: -1,
         pacientes: [],
-        selectedPatient: []
+        selectedPatients:'',
+        selectedIndex: 0,
+        editedItem:{
+          Nombre: '',
+          Apellido: '',
+          Procedencia: '',
+          Fecha_de_nacimiento: '',
+          EstadoActual:''
+        }
       }
   },
     methods: {
@@ -161,8 +208,10 @@ export default {
         eliminar(){
           this.$router.push('/IngresarPaciente');
         },
-        editarDatos(){
-          this.$router.push('/EditarPaciente');
+        editarDatos(received){
+          this.dialog=true;
+          this.editedIndex = this.pacientes.indexOf(item)
+          this.$http.put(`http://localhost:8000/PacienteController/update?val=${this.val}`);
         },
         casoslegales(){
           this.$router.push('/EditarPaciente');
@@ -176,6 +225,40 @@ export default {
         estadisticas(){
           this.$router.push('/EditarPaciente');
         },
+        showAlert(a){
+          console.log("aver");
+          console.log(a);
+        },
+        
+        close () {
+          this.dialog = false
+          setTimeout(() => {
+            this.editedItem = Object.assign({}, this.defaultItem)
+            this.editedIndex = -1
+          }, 300)
+        },
+        editItem (item) {
+          this.editedIndex = this.pacientes.indexOf(item)
+          this.editedItem = Object.assign({}, item)
+          this.dialog = true
+        },
+        save () {
+          if (this.editedIndex > -1) {
+            Object.assign(this.pacientes[this.editedIndex], this.editedItem)
+          } else {
+            this.pacientes.push(this.editedItem)
+          }
+          this.close()
+        }, 
+        pasoParam(item){
+          //capturamos al item que se le dio click...
+          this.editedItem = item
+          //selected2 contiene el CUI de lo selececionado
+          this.selected2 = this.editedItem.CUI;
+          
+        }
+
+        
         
     },
     computed: {
