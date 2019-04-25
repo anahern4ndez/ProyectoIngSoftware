@@ -71,7 +71,7 @@
     </v-content>
     <v-footer color="#3A4750">
         <v-spacer></v-spacer>
-        <div class="pa-3 accent--text">Fundadier</div>
+        <div class="pa-3 accent--text">Fundanier</div>
     </v-footer>
   </v-app>
 </template>
