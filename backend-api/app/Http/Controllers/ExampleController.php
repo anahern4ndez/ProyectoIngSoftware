@@ -60,6 +60,11 @@ class ExampleController extends Controller
     }
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'email' => 'email',
+            'password' => 'min:6|max:255'
+        ]);
+        
         $user = new User;
         $user->id = $request->id;
         $user->name = $request->name;
@@ -74,6 +79,11 @@ class ExampleController extends Controller
     }
     public function update(Request $request)
     {
+        $this->validate($request, [
+            'email' => 'email',
+            'password' => 'min:6|max:255'
+        ]);
+
         $id = $request->id;
         $user=User::find($id);
         #$user->name = 'diego';

@@ -89,9 +89,9 @@
                   Ingrese un correo, por favor
                 </v-alert>
               </div>
-              <div v-if="error">
+              <div v-if="errorFormato">
                 <v-alert :value="true" type="error" id="alert">
-                  El formato de correo no es válido, por favor
+                  El formato de correo no es válido
                 </v-alert>
               </div>
               <div class="form-group">
@@ -103,6 +103,11 @@
                   class="form-control"
                   placeholder="Correo Electronico"
                 >
+              </div>
+              <div v-if="errorLargo">
+                <v-alert :value="true" type="error" id="alert">
+                  La contraseña debe tener como mínimo 6 caracteres y un máximo de 255 caracteres
+                </v-alert>
               </div>
               <div v-if="errorPassword">
                 <v-alert :value="true" type="error" id="alert">
@@ -174,7 +179,8 @@ export default {
       email:'',
       password:'',
       selected: null,
-      error: false,
+      errorFormato: false,
+      errorLargo: false,
       errorName: false,
       errorDPI: false,
       errorEmail: false,
@@ -209,13 +215,13 @@ export default {
       }
       if(this.id != ''){
       this.$http.delete(`http://localhost:8000/users/destroy?id=${this.id}`).then(response=>{
-        this.refreshUsers()
+        this.refreshUsers();
+        this.name = '';
+        this.id = '';
+        this.email = '';
+        this.password = '';
+        this.selected = null;
       });
-      this.name = '';
-      this.id = '';
-      this.email = '';
-      this.password = '';
-      this.selected = null;
       }
     },
     crear(){
@@ -224,6 +230,8 @@ export default {
       this.errorEmail = false;
       this.errorPassword = false;
       this.errorTipoUsuario = false;
+      this.errorFormato = false;
+      this.errorLargo = false;
 
       if(this.name === ''){
         this.errorName = true;
@@ -257,13 +265,25 @@ export default {
 
       if(this.name != '' && this.id != '' && this.password != '' && this.email != '' && this.selected != null){
         this.$http.post(`http://localhost:8000/users/create?id=${this.id}&name=${this.name}&email=${this.email}&password=${this.password}`).then(response=>{
-          this.refreshUsers()
+          this.refreshUsers();
+          this.name = '';
+          this.id = '';
+          this.email = '';
+          this.password = '';
+          this.selected = null;
+        }).catch(error => {
+          if (error.response.data.email === undefined){
+            this.errorFormato = false;
+          }else{
+            this.errorFormato = true;
+          }
+
+          if (error.response.data.password === undefined){
+            this.errorLargo = false;
+          }else{
+            this.errorLargo = true;
+          }
         });
-        this.name = '';
-        this.id = '';
-        this.email = '';
-        this.password = '';
-        this.selected = null;
       }
     },
     modificar(){
@@ -272,6 +292,8 @@ export default {
       this.errorEmail = false;
       this.errorPassword = false;
       this.errorTipoUsuario = false;
+      this.errorFormato = false;
+      this.errorLargo = false;
 
       if(this.name === ''){
         this.errorName = true;
@@ -305,13 +327,25 @@ export default {
 
       if(this.name != '' && this.id != '' && this.password != '' && this.email != '' && this.selected != null){
         this.$http.put(`http://localhost:8000/users/update?id=${this.id}&name=${this.name}&email=${this.email}&password=${this.password}`).then(response=>{
-          this.refreshUsers()
+          this.refreshUsers();
+          this.name = '';
+          this.id = '';
+          this.email = '';
+          this.password = '';
+          this.selected = null;
+        }).catch(error => {
+          if (error.response.data.email === undefined){
+            this.errorFormato = false;
+          }else{
+            this.errorFormato = true;
+          }
+
+          if (error.response.data.password === undefined){
+            this.errorLargo = false;
+          }else{
+            this.errorLargo = true;
+          }
         });
-        this.name = '';
-        this.id = '';
-        this.email = '';
-        this.password = '';
-        this.selected = null;
       }
     }
   }
