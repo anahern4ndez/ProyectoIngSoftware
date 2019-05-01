@@ -43,50 +43,48 @@
                         </v-card-actions>
                         </v-card>
                     </v-dialog>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
+                     
                     <v-data-table
+                        
                         :headers="headers"
                         :items="pacientes"
                         :search="search"
                         item-key="id"
                         v-model="selected"
-                        select-all
+                       
                     >
+                      
                         <template slot="items" slot-scope="props">
-                        <td class="text-xs-center"><input type='checkbox' id='checkbox' v-model='selected' @click="pasoParam(props.item)"></td>
-                        <td class="text-xs-center">{{ props.item.CUI }}</td>
-                        <td class="text-xs-center">{{ props.item.Nombre }}</td>
-                        <td class="text-xs-center">{{ props.item.Apellido }}</td>
-                        <td class="text-xs-center">{{ props.item.Procedencia }}</td>
-                        <td class="text-xs-center">{{ props.item.Fecha_de_nacimiento }}</td>
-                        <td class="text-xs-center">{{ props.item.EstadoActual }}</td>
-                        <td class="justify-center layout px-0">
-                          <v-icon
-                            small
-                            class="mr-2"
-                            @click="editarDatos(props.item)"
-                          >
-                            edit
-                          </v-icon>
-                          <v-icon
-                            small
-                            @click="deleteItem(props.item)"
-                          >
-                            delete
-                          </v-icon>
-                        </td>
-                        </template>
+                          <tr @click="changeSelected(props.item)">
+                              <td class="text-xs-center">{{ props.item.CUI }}</td>
+                              <td class="text-xs-center">{{ props.item.Nombre }}</td>
+                              <td class="text-xs-center">{{ props.item.Apellido }}</td>
+                              <td class="text-xs-center">{{ props.item.Procedencia }}</td>
+                              <td class="text-xs-center">{{ props.item.Fecha_de_nacimiento }}</td>
+                              <td class="text-xs-center">{{ props.item.EstadoActual }}</td>
+                              <td class="justify-center layout px-0">
+                                <v-icon
+                                small
+                                class="mr-2"
+                                @click="editarDatos(props.item)"
+                                >
+                                  edit
+                                </v-icon>
+                                <v-icon
+                                  small
+                                  @click="deleteItem(props.item)"
+                                >
+                                  delete
+                                </v-icon>
+                              </td>
+                            </tr>
+                          </template>
                         <!-- cuando la busqueda no tenga resultados -->
                         <template v-slot:no-results>
                             <v-alert :value="true" color="error">
                             No se ha encontrado un paciente que tenga "{{ search }}" en su información.
                             </v-alert>
+                         
                         </template>
                     </v-data-table>
                   </v-card>
@@ -173,6 +171,7 @@ export default {
         selected: [],
         selected2: null,
         dialog: false,
+        radioGroup:1,
         lista: [],
         headers: [
           {text: 'CUI (ID)', align: 'center',value: 'id'},
@@ -199,6 +198,9 @@ export default {
         //para filtrar los datos de la tabla
         ingresarNuevo(){
           this.$router.push('/IngresarPaciente');
+        },
+        changeSelected(received){
+          this.selectedPatients = received
         },
         /* metodos de redirección de botones */
         // falta vista para dar una consulta
