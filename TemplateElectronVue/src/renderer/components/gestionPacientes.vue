@@ -6,7 +6,7 @@
     <div>
       <b-container class="bv-example-row1">
         <b-row align-h="around" align-v="center">
-          <b-col order="2" cols="20">
+          <b-col order="2" cols="30">
                 <div>
                   <v-card>
                     <v-text-field
@@ -142,7 +142,6 @@
             <b-col order="4" cols="6">
                 <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="ingresarNuevo">Ingresar nuevo paciente</button>
                 <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="darConsulta"> Dar consulta </button>
-                <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="eliminar"> Eliminar paciente</button>
                 <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="editarDatos"> Editar datos</button>
                 <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="archivos"> Archivos </button>
                 <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="reportes"> Reporte</button>
@@ -258,6 +257,9 @@ export default {
           this.selected2 = this.editedItem.CUI;
           console.log(this.selected2)
           
+        },
+        deleteItem(item){
+            
         }
 
         

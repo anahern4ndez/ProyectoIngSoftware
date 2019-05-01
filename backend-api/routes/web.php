@@ -38,6 +38,8 @@ $router->get('/PacienteController/find', 'PacienteController@find');
 $router->get('/PacienteController/findAll', 'PacienteController@findAll');
 $router->post('/PacienteController/insert', 'PacienteController@store');
 $router->get('/PacienteController/update', 'PacienteController@update');
+$router->delete('/PacienteController/update', 'PacienteController@destroy');
+
 
 
 $router->delete('/users/destroy','ExampleController@destroy');

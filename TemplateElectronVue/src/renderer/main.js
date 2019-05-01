@@ -11,6 +11,7 @@ import '@fortawesome/fontawesome-free/css/all.css';
 import './sass/app.scss';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'));
 Vue.http = Vue.prototype.$http = axios;

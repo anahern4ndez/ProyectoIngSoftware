@@ -90,7 +90,13 @@ class PacienteController extends Controller
      * @return null value.
      */
     function destroy(Request $request, $id){
-        $val = Paciente::find($id)->delete();
+        $id = $request->id;
+        $user=Paciente::find($id);
+        $user->delete();
+        return response()->json([
+            'success' => true,
+            'message' => 'eliminado'
+        ], 200);
     }
 }
 

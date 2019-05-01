@@ -3,81 +3,82 @@
 <template>
   <div class="grey--text text--darken-2">
     <h1 class="text-center">Ingresar a un paciente</h1>
-
-    <b-container class="bv-example-row1" >
-      <b-row align-h="around" align-v="center">
-        <b-col order="2" cols="10">
-          <v-card>
-            <v-card-title primary-title>
-              <v-flex xs12>
-                <v-layout align-center justify-end column fill-height />
-                  <h3 class="text-xs-center">Datos Personales</h3>
-                  <br>
-                  <v-text-field
-                          v-model="CUI"
-                          label="Número de CUI"
-                          outline
-                      ></v-text-field>
-                  <br>
-                  <v-text-field
-                          v-model="Sexo"
-                          label="Género"
-                          outline
-                      ></v-text-field>
-                  <br>
-                  <v-text-field
-                          v-model="Nombre"
-                          label="Nombres"
-                          outline
-                      ></v-text-field>
-                  <br>
-                  <v-text-field
-                          v-model="Apellido"
-                          label="Apellidos"
-                          outline
-                      ></v-text-field>
-                  <br>
-                  <v-text-field
-                          v-model="Fecha_de_nacimiento"
-                          label="Fecha de nacimiento"
-                          outline
-                      ></v-text-field>
-                  <br>
-                  <v-text-field
-                          v-model="Procedencia"
-                          label="Procedencia"
-                          outline
-                      ></v-text-field>
-                  <br>
-                  <v-text-field
-                          v-model="Nombre_de_padre"
-                          label="Nombre del padre"
-                          outline
-                      ></v-text-field>
-                  <br>
-                  <v-text-field
-                          v-model="Nombre_de_madre"
-                          label="Nombre de la madre"
-                          outline
-                      ></v-text-field>
-                  <br>
-                  <v-text-field
-                          v-model="Telefono"
-                          label="Teléfonos"
-                          outline
-                      ></v-text-field>
-                  <br>
-                  <v-text-field
-                          v-model="Edad"
-                          label="Edad"
-                          outline
-                      ></v-text-field>
-              </v-flex>
-            </v-card-title>
-          </v-card>
-        </b-col>
-      </b-row>
-    </b-container>
+    <div id="datosPersonales">
+      <b-container class="bv-example-row1" >
+        <b-row align-h="around" align-v="center">
+          <b-col order="2" cols="10">
+            <v-card>
+              <v-card-title primary-title>
+                <v-flex xs12>
+                  <v-layout align-center justify-end column fill-height />
+                    <h3 class="text-xs-center">Datos Personales</h3>
+                    <br>
+                    <v-text-field
+                            v-model="CUI"
+                            label="Número de CUI"
+                            outline
+                        ></v-text-field>
+                    <br>
+                    <v-text-field
+                            v-model="Sexo"
+                            label="Género"
+                            outline
+                        ></v-text-field>
+                    <br>
+                    <v-text-field
+                            v-model="Nombre"
+                            label="Nombres"
+                            outline
+                        ></v-text-field>
+                    <br>
+                    <v-text-field
+                            v-model="Apellido"
+                            label="Apellidos"
+                            outline
+                        ></v-text-field>
+                    <br>
+                    <v-text-field
+                            v-model="Fecha_de_nacimiento"
+                            label="Fecha de nacimiento"
+                            outline
+                        ></v-text-field>
+                    <br>
+                    <v-text-field
+                            v-model="Procedencia"
+                            label="Procedencia"
+                            outline
+                        ></v-text-field>
+                    <br>
+                    <v-text-field
+                            v-model="Nombre_de_padre"
+                            label="Nombre del padre"
+                            outline
+                        ></v-text-field>
+                    <br>
+                    <v-text-field
+                            v-model="Nombre_de_madre"
+                            label="Nombre de la madre"
+                            outline
+                        ></v-text-field>
+                    <br>
+                    <v-text-field
+                            v-model="Telefono"
+                            label="Teléfonos"
+                            outline
+                        ></v-text-field>
+                    <br>
+                    <v-text-field
+                            v-model="Edad"
+                            label="Edad"
+                            outline
+                        ></v-text-field>
+                </v-flex>
+              </v-card-title>
+            </v-card>
+          </b-col>
+        </b-row>
+      </b-container>
+    </div>
     <div>
       <b-container class="bv-example-row2">
         <b-row class="justify-content-md-center">
@@ -180,5 +181,12 @@ export default {
 div#Tabla {
   float: right;
   align-items: center;
+}
+div#datosPersonales {
+  width: 500px;
+  height: 800px;
+  margin: auto;
+  float: left;
+
 }
 </style>
