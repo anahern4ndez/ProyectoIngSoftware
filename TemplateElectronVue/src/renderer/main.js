@@ -65,6 +65,10 @@ const routes = [
   {
     path: '/EditarEstadoPaciente',
     component: Vue.component('EditarEstadoPaciente', require('./components/EditarEstadoPaciente.vue').default)
+  },
+  {
+    path: '/Citas',
+    component: Vue.component('creacion-citas', require('./components/CreacionCitas.vue').default)
   }
 ];
 
