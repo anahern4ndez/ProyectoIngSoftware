@@ -54,7 +54,6 @@
                 </div>
             </form>
         </div>
-
         <br>
 
         <div class="centerBtn">
