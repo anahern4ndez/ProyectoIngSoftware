@@ -15,6 +15,7 @@ class CreateProcedenciasTable extends Migration
     {
         Schema::create('procedencias', function (Blueprint $table) {
             $table->integer('ID');
+            $table->primary('ID');
             $table->string('Significado', 20);
         });
     }

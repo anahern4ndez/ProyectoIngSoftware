@@ -26,7 +26,7 @@
                             <div>
                               <label for="changeStatus">Cambio estado de paciente</label>
                              
-                              <select class='form-control' name='changeStatus' id='changeStatus' v-model='selected2'>
+                              <select class='form-control' name='changeStatus' id='changeStatus' v-model='estadoNuevo'>
                                 <option value='1'>1</option>
                                 <option value='2'>2</option>
                               </select>
@@ -65,13 +65,14 @@
                               <td class="justify-center layout px-0">
                                 <v-icon
                                 small
-                                class="mr-2"
+                                class="ma-3"
                                 @click="editarDatos(props.item)"
                                 >
                                   edit
                                 </v-icon>
                                 <v-icon
                                   small
+                                  class="ma-3"
                                   @click="deleteItem(props.item)"
                                 >
                                   delete
@@ -169,6 +170,7 @@ export default {
         search:'',
         selected: [],
         selected2: null,
+        estadoNuevo: null,
         dialog: false,
         radioGroup:1,
         lista: [],
@@ -211,9 +213,7 @@ export default {
         },
         editarDatos(received){
           this.dialog=true;
-          this.editedIndex = this.pacientes.indexOf(received)
-          console.log(editedIndex)
-          this.$http.get(`http://localhost:8000/PacienteController/update/?val=${this.val}/id=${this.editedIndex}`);
+          this.editedIndex = this.pacientes.indexOf(received);
         },
         casoslegales(){
           this.$router.push('/EditarPaciente');
@@ -247,9 +247,13 @@ export default {
         save () {
           if (this.editedIndex > -1) {
             Object.assign(this.pacientes[this.editedIndex], this.editedItem)
-          } else {
-            this.pacientes.push(this.editedItem)
           }
+          var data = {
+            id: this.pacientes[this.editedIndex].CUI,
+            estado: this.estadoNuevo,
+          }
+          //console.log(data.estado)
+          this.$http.put(`http://localhost:8000/PacienteController/update/`,data);
           this.close()
         }, 
         pasoParam(item){

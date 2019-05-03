@@ -15,6 +15,7 @@ class CreateCodigoVacunasTable extends Migration
     {
         Schema::create('codigo_vacunas', function (Blueprint $table) {
             $table->integer('ID');
+            $table->primary('ID');
             $table->string('significado',20);
         });
     }

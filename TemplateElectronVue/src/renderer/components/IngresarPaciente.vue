@@ -116,16 +116,16 @@ export default {
         Telefono:'',
         Edad: '',
         //los siguientes se pondran como predeterminados por cuestion de tiempo, pero se volveran dinámicos después
-        Sindrome_Clinico_Presentacion: '12',
+        Sindrome_Clinico_Presentacion: 1,
         Dx_Definitivo:'Na',
         Dx_Asociados:'Na',
-        CUI: '',
+        CUI: 3,
         Imagen:'None (por ahora)',
-        Tipo_de_Sangre: '0',
-        Estudia: '0',
-        Transfusiones:'0',
-        EstadoActual:'0',
-        Sexo:'0',
+        Tipo_de_Sangre: 1,
+        Estudia: 1,
+        Transfusiones:1,
+        EstadoActual:1,
+        Sexo:1,
         selected: null,
         pacientes: []
       }

@@ -6,9 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Procedencia extends Model
 {
-    protected $params=['id', 'significado'];
-    
+    public $primaryKey = 'ID';
+    protected $fillable=['ID', 'significado'];
+    protected $timestamps=false;
     public function procede(){
-        return $this->belongsTo('App\Paciente');
+        return $this->belongsTo('App\Paciente', 'ID', 'Procedencia');
     }
 }
