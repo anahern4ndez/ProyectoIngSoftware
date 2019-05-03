@@ -18,7 +18,7 @@
         </v-list-tile>
       </v-list>
       <v-list class="accent--text">
-        <v-list-tile to="/page-one" exact>
+        <v-list-tile to="/menu-principal" exact>
           <v-list-tile-action>
             <v-icon class="grey--text text--darken-3">fa-home</v-icon>
           </v-list-tile-action>

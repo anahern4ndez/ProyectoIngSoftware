@@ -131,7 +131,7 @@ export default {
                 this.$http.post('http://localhost:8000/login', data).then(response => {
                     console.log(response);
                     this.error = false;
-                    this.$router.push('/page-three');
+                    this.$router.push('/menu-principal');
                     this.success = true;
                 }).
                 catch(error => {
