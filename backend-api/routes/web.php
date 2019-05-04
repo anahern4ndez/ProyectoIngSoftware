@@ -25,6 +25,7 @@ $router->get('/', function () use ($router) {
 // responde a esa ruta: NombreControlador@nombreMetodo
 $router->get('/test', 'ExampleController@index');
 $router->get('/users', 'ExampleController@getUsers');
+$router->get('/users/look', 'ExampleController@getOneUser');
 $router->post('/message', 'ExampleController@postExample');
 
 //CRUD: TABLA ESTADOS DB

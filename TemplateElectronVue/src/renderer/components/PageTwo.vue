@@ -5,16 +5,25 @@
       <b-container class="bv-example-row1">
         <b-row align-h="around" align-v="center">
           <b-col order="2" cols="6">
-            <!--<div class="input-group">
+            <div v-if="errorBusqueda">
+              <v-alert :value="true" type="error" id="alert">
+                El usuario que busca no se encuentra en la base de datos
+              </v-alert>
+            </div>
+            <div class="input-group">
               <input
+                id="busquedaInput"
                 type="text"
                 class="form-control"
+                v-model="idb"
                 placeholder="DPI de usuario a editar permisos"
               >
               <div class="input-group-append">
-                <button class="btn btn-warning" type="button">Buscar</button>
+                <button class="btn btn-warning" type="button" v-on:click="getOneUser">Buscar</button>
               </div>
             </div>
+            <br>
+            <!--
             <br>
             <br>
             <div class="row justify-content-center">
@@ -178,6 +187,7 @@ export default {
       name:'',
       email:'',
       password:'',
+      idb: '',
       selected: null,
       errorFormato: false,
       errorLargo: false,
@@ -186,6 +196,7 @@ export default {
       errorEmail: false,
       errorPassword: false,
       errorTipoUsuario: false,
+      errorBusqueda: false,
       user: [],
       headers: [
         { text: "ID", align: "center", value: "ID" },
@@ -200,6 +211,27 @@ export default {
       this.$http.get("http://localhost:8000/users").then(response => {
       this.user = response.data.users;
     });
+    },
+    getOneUser(){
+      this.$http.get(`http://localhost:8000/users/look?idb=${this.idb}`).then(response => {
+      if(response.data.usersi === null){
+        this.errorBusqueda = true;
+      }else{
+        this.name = response.data.usersi.name;
+        this.id = response.data.usersi.id;
+        this.email = response.data.usersi.email;
+        this.selected = 'Doctor'
+        this.idb = '';
+        this.errorBusqueda = false;
+        this.errorName = false;
+        this.errorDPI = false;
+        this.errorEmail = false;
+        this.errorPassword = false;
+        this.errorTipoUsuario = false;
+        this.errorFormato = false;
+        this.errorLargo = false;
+      }
+      });
     },
     eliminar(){
       this.errorName = false;
