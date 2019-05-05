@@ -102,4 +102,15 @@ class ExampleController extends Controller
             'message' => 'creado'
         ], 200);
     }
+    public function getOneUser(Request $request)
+    {
+        $id = $request->idb;
+        $usersi = User::find($id);
+
+        return response()->json([
+            'success' => true,
+            'usersi' => $usersi,
+            'message'=>'Funciono',
+        ], 200);
+    }
 }
