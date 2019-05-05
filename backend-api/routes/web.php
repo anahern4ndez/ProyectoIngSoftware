@@ -38,7 +38,7 @@ $router->get('/PacienteController/find', 'PacienteController@find');
 $router->get('/PacienteController/findAll', 'PacienteController@findAll');
 $router->post('/PacienteController/insert', 'PacienteController@store');
 $router->put('/PacienteController/update', 'PacienteController@update');
-$router->delete('/PacienteController/destroy', 'PacienteController@destroy');
+$router->delete('/PacienteController/delete', 'PacienteController@delete');
 
 
 
@@ -54,5 +54,5 @@ $router->post('/login', 'loginController@login');
 
 $router->post('/logout', 'loginController@logout');
 
-$router->delete('/users/{id}','ExampleController@destroy');
+//$router->delete('/users/{id}','ExampleController@destroy');
 

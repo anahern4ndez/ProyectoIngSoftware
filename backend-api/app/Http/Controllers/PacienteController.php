@@ -17,6 +17,7 @@ class PacienteController extends Controller
         /*Paciente::create(Request::all());
         return 'true';*/
         $pat = new Paciente;
+        $pat->id = $request->id;
         $pat->Nombre = $request->Nombre;
         $pat->Apellido = $request->Apellido;
         $pat->Fecha_de_nacimiento = $request->Fecha_de_nacimiento;
@@ -96,11 +97,11 @@ class PacienteController extends Controller
      * @param \Illuminate\Http\Request
      * @return null value.
      */
-    function destroy(Request $request){
-        $id = $request->id;
-        echo 'probando23';
-        $paciente=Paciente::find($id);
-        $paciente->delete();
+    public function delete(Request $request)
+    {
+        $CUI = $request->cui;
+        $user=Paciente::find($CUI);
+        $user->delete();
         return response()->json([
             'success' => true,
             'message' => 'eliminado'

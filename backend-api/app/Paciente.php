@@ -8,8 +8,8 @@ class Paciente extends Model
 {
     //
     protected $primaryKey = 'CUI';
-    public $timestamps = false;
     protected $fillable = [ 
+        'id',
         'Nombre', 
         'Apellido', 
         'Fecha_de_nacimiento',

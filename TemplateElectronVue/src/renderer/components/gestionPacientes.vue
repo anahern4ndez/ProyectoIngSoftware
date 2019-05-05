@@ -185,6 +185,7 @@ export default {
         pacientes: [],
         selectedPatients:'',
         selectedIndex: 0,
+        deletedCUI: '',
         editedItem:{
           Nombre: '',
           Apellido: '',
@@ -264,15 +265,17 @@ export default {
           
         },
         deleteItem(item){
-          const index = this.pacientes.indexOf(item)
-          console.log(index)
-          console.log(this.pacientes[index])
-          const id = this.pacientes[index].CUI
-          console.log(id)
-          this.$http.delete('http://localhost:8000/PacienteController/destroy', id).then(response => {
-          
+          this.deletedCUI = item.CUI
+          const cui = this.deletedCUI
+          this.$http.delete(`http://localhost:8000/PacienteController/delete?cui=${this.deletedCUI}`).then(response=>{
+            this.reloadTable()
           });
             
+        },
+        reloadTable(){
+          this.$http.get("http://localhost:8000/PacienteController/findAll").then(response => {      
+            this.pacientes = response.data.Pacientes;
+          });
         }
 
         
