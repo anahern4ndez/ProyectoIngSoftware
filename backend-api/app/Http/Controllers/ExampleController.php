@@ -70,6 +70,7 @@ class ExampleController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = $request->password;
+        $user->puesto = $request->puesto;
         $user->save();
 
         return response()->json([
@@ -92,6 +93,8 @@ class ExampleController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = $request->password;
+        $user->password = $request->password;
+        $user->puesto = $request->puesto;
         $user->save();
 
         return response()->json([
