@@ -89,10 +89,11 @@ class PacienteController extends Controller
      * @param \Illuminate\Http\Request
      * @return null value.
      */
-    function destroy(Request $request, $id){
+    function destroy(Request $request){
         $id = $request->id;
-        $user=Paciente::find($id);
-        $user->delete();
+        echo 'probando23';
+        $paciente=Paciente::find($id);
+        $paciente->delete();
         return response()->json([
             'success' => true,
             'message' => 'eliminado'

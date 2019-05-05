@@ -161,7 +161,6 @@ export default {
       
       this.pacientes = response.data.Pacientes;
       this.selectedPatients = response.data.Pacientes[0]
-      console.log(this.pacientes)
     });
   },
     data () {
@@ -212,7 +211,6 @@ export default {
         editarDatos(received){
           this.dialog=true;
           this.editedIndex = this.pacientes.indexOf(received)
-          console.log(editedIndex)
           this.$http.get(`http://localhost:8000/PacienteController/update/?val=${this.val}/id=${this.editedIndex}`);
         },
         casoslegales(){
@@ -257,10 +255,17 @@ export default {
           this.editedItem = item
           //selected2 contiene el CUI de lo selececionado
           this.selected2 = this.editedItem.CUI;
-          console.log(this.selected2)
           
         },
         deleteItem(item){
+          const index = this.pacientes.indexOf(item)
+          console.log(index)
+          console.log(this.pacientes[index])
+          const id = this.pacientes[index].CUI
+          console.log(id)
+          this.$http.delete('http://localhost:8000/PacienteController/destroy', id).then(response => {
+          
+          });
             
         }
 
