@@ -15,6 +15,7 @@ class CreateTipoRespuestasTable extends Migration
     {
         Schema::create('tipo_respuestas', function (Blueprint $table) {
             $table->integer('ID');
+            $table->primary('ID');
             $table->string('significado',20);
         });
     }

@@ -15,6 +15,7 @@ class CreateVacunasTable extends Migration
     {
         Schema::create('vacunas', function (Blueprint $table) {
             $table->integer('idPaciente');
+            
             $table->integer('BCG');
             $table->integer('Poliovirus');
             $table->integer('Hepatitis A');
@@ -23,6 +24,10 @@ class CreateVacunasTable extends Migration
             $table->integer('Influenza');
             $table->integer('DPT');
             $table->integer('SPR');
+
+            $table->foreign('idPaciente')
+            ->references('CUI')
+            ->on('pacientes');
         });
     }
 
