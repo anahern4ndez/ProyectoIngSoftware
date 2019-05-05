@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Vacuna extends Model
 {
     //
-    protected $param=[
+    public $timestamps = false;
+    protected $fillable=[
+        'id',
         'idPaciente',
         'BCG',
         'Poliovirus',
@@ -20,6 +22,6 @@ class Vacuna extends Model
     ];
 
     public function idPaciente(){
-        return $this->hasMany('App\Paciente','CUI', 'idPaciente'); 
+        return $this->hasMany('App\Paciente','idPaciente', 'CUI'); 
     }
 }

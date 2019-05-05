@@ -77,11 +77,18 @@ class PacienteController extends Controller
      * @return null value
      */
     function update(Request $request){
-        $id = $request->id;
-        $toUpdate = Paciente::find($id);
-        //pedira todos los datos, por ahora..
-        $toUpdate->EstadoActual = $request->val;
+        $cosa = $request->id;
+        $toUpdate = Paciente::where('CUI', $cosa)->first();
+        
+        //jalado del objeto
+       
+        $toUpdate->EstadoActual = $request->estadoNuevo;
         $toUpdate->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'actualizado'
+        ], 200);
 
     }
     /**
@@ -90,8 +97,15 @@ class PacienteController extends Controller
      * @param \Illuminate\Http\Request
      * @return null value.
      */
-    function destroy(Request $request, $id){
-        $val = Paciente::find($id)->delete();
+    public function delete(Request $request)
+    {
+        $CUI = $request->cui;
+        $user=Paciente::find($CUI);
+        $user->delete();
+        return response()->json([
+            'success' => true,
+            'message' => 'eliminado'
+        ], 200);
     }
 }
 
