@@ -2,7 +2,7 @@
 
 <template>
   <div class="grey--text text--darken-2">
-    <h1 class="text-center">Ingresar a un paciente</h1>
+    <h1 id="headers" class="text-center">Ingresar a un paciente</h1>
     <div id="datos">
       <div id="datosPersonales">
         <b-container class="bv-example-row1" >
@@ -10,7 +10,7 @@
                 <v-card-title primary-title>
                   <v-flex xs12>
                     <v-layout align-center justify-end column fill-height />
-                      <h3 class="text-xs-center">Datos Personales</h3>
+                      <h3 id="headers" class="text-xs-center">Datos Personales</h3>
                       <br>
                       <div id="inBox">
                         <v-text-field
@@ -73,7 +73,7 @@
               <v-card-title primary-title>
                 <v-flex xs12>
                   <v-layout align-center justify-end column fill-height />
-                    <h3 class="text-xs-center">Datos Generales</h3>
+                    <h3 id="headers"  class="text-xs-center">Datos Generales</h3>
                     <br>
                     <v-text-field
                             v-model="Edad"
@@ -125,7 +125,7 @@
           <v-card-title primary-title>
             <v-flex xs12>
               <v-layout align-center justify-end />
-                <h4 class="text-xs-center">Síndrome Clínico de Presentación</h4>              
+                <h3 id="headers"  class="text-xs-center">Síndrome Clínico de Presentación</h3>              
                   <v-container fluid>
                     <p>{{ selected }}</p>
                     <v-checkbox v-model="selected" label="Sx. Nefrítico" value="Sx. Nefrítico"></v-checkbox>
@@ -148,7 +148,7 @@
           <v-card-title primary-title>
             <v-flex xs12>
               <v-layout align-center justify-end />
-                <h4 class="text-xs-center">Dx. Definitivo</h4>
+                <h3 id="headers"  class="text-xs-center">Dx. Definitivo</h3>
             <v-textarea
               outline
               name="Dx_def"
@@ -163,7 +163,7 @@
           <v-card-title primary-title>
             <v-flex xs12>
               <v-layout align-center justify-end />
-                <h4 class="text-xs-center">Dx. Asociados</h4>
+                <h3 id="headers" class="text-xs-center">Dx. Asociados</h3>
             <v-textarea
               outline
               name="Dx_asoc"
@@ -312,5 +312,17 @@ div#diagAsoc {
   float:left;
   width: 32%;
   height:100%;
+}
+/*
+    configuracion para los headers
+*/
+h3#headers{
+  font-family: Nunito;
+  font-weight: bolder;
+  font-size: x-large;
+}
+h1#headers{
+  font-family: Nunito;
+  font-weight: bolder;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <v-app style="background-color: #EEEEEE; font-family: Montserrat">
+  <v-app style="background-color: #EEEEEE; font-family: Cabin">
     <v-navigation-drawer
       :clipped="clipped"
       enable-resize-watcher app
@@ -97,6 +97,11 @@ export default {
     }
 }
 </script>
+<style lang="scss">
+@import url("https://fonts.googleapis.com/css?family=Nunito");
+@import url("https://fonts.googleapis.com/css?family=Cabin");
+
+</style>
 
 
 
