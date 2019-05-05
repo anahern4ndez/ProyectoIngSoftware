@@ -62,10 +62,6 @@ const routes = [
   {
     path: '/EditarPaciente',
     component: Vue.component('EditarPaciente', require('./components/EditarPaciente.vue').default)
-  },
-  {
-    path: '/EditarEstadoPaciente',
-    component: Vue.component('EditarEstadoPaciente', require('./components/EditarEstadoPaciente.vue').default)
   }
 ];
 
@@ -78,6 +74,6 @@ new Vue({
   router,
   render: h => h(App),
   mounted () {
-    this.$router.push('/login')
+    this.$router.push('/ingresarPaciente')
   }
 }).$mount('#app');
