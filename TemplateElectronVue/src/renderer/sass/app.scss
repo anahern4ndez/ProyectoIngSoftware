@@ -9,6 +9,10 @@
 
 @include font('Montserrat', '../assets/fonts/Montserrat-Black');
 
+h1 {
+  text-align: center;
+}
+
 .custom-font {
     font-family: Montserrat;
 }
