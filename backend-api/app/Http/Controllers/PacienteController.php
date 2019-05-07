@@ -82,13 +82,10 @@ class PacienteController extends Controller
         
         //jalado del objeto
        
-        $toUpdate->EstadoActual = $request->estadoNuevo;
+        $toUpdate->EstadoActual = $request->estado;
         $toUpdate->save();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'actualizado'
-        ], 200);
+        
 
     }
     /**

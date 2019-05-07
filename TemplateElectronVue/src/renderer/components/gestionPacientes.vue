@@ -214,7 +214,6 @@ export default {
         editarDatos(received){
           this.dialog=true;
           this.editedIndex = this.pacientes.indexOf(received)
-          this.$http.get(`http://localhost:8000/PacienteController/update/?val=${this.val}/id=${this.editedIndex}`);
         },
         casoslegales(){
           this.$router.push('/EditarPaciente');
@@ -253,7 +252,7 @@ export default {
             id: this.pacientes[this.editedIndex].CUI,
             estado: this.estadoNuevo,
           }
-          //console.log(data.estado)
+          console.log(data.estado)
           this.$http.put(`http://localhost:8000/PacienteController/update/`,data);
           this.close()
         }, 
