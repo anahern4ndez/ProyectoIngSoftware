@@ -34,7 +34,6 @@
                               label="Apellidos"
                               outline
                           ></v-text-field>
-
                       <div id="inBox">
                           <v-text-field
                                   v-model="Procedencia"
@@ -152,8 +151,7 @@
                 <h3 id="headers"  class="text-xs-center">Dx. Definitivo</h3>
             <v-textarea
               outline
-              name="Dx_Definitivo"
-              label="Dx_Definitivo"
+              name="Dx_def"
               value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
             ></v-textarea>
             </v-flex>
@@ -168,8 +166,7 @@
                 <h3 id="headers" class="text-xs-center">Dx. Asociados</h3>
             <v-textarea
               outline
-              name="Dx_Asociados"
-              label="Dx_Asociados"
+              name="Dx_asoc"
               value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
             ></v-textarea>
             </v-flex>
@@ -209,8 +206,8 @@ export default {
         Edad: '',
         //los siguientes se pondran como predeterminados por cuestion de tiempo, pero se volveran dinámicos después
         Sindrome_Clinico_Presentacion: 1,
-        Dx_Definitivo:'',
-        Dx_Asociados:'',
+        Dx_Definitivo:'Na',
+        Dx_Asociados:'Na',
         Imagen:'None (por ahora)',
         Tipo_de_Sangre: 1,
         Estudia: 1,
@@ -304,7 +301,7 @@ div#diagDef {
   margin-top:2%;
   margin-bottom:2%;
   float:left;
-  width: 30%;
+  width: 32%;
   height:100%;
 }
 div#diagAsoc {
@@ -313,7 +310,7 @@ div#diagAsoc {
   margin-top:2%;
   margin-bottom:2%;
   float:left;
-  width: 30%;
+  width: 32%;
   height:100%;
 }
 /*
