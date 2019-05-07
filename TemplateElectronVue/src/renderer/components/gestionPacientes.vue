@@ -2,135 +2,133 @@
 
 <template>
   <div class="grey--text text--darken-2">
-    <h1 class="text-center">Gestión de Pacientes</h1>
+    <h1 class="text-center" id="headers">Gestión de Pacientes</h1>
     <div>
       <b-container class="bv-example-row1">
         <b-row align-h="around" align-v="center">
           <b-col order="2" cols="30">
-                <div>
-                  <v-card>
-                    <v-text-field
-                        v-model="search"
-                        label="Búsqueda por nombre, apellido o número de CUI"
-                        outline
-                    ></v-text-field>
+              <div id="TablaPacientes">
+                <v-card>
+                  <v-text-field
+                      v-model="search"
+                      label="Búsqueda por nombre, apellido o número de CUI"
+                      outline
+                  ></v-text-field>
 
-                <!--    cuadro de dialogo para cambiar el estado del paciente -->
-                    <v-dialog v-model="dialog" max-width="500px">
-                      <v-card>
-                        <v-card-title>
-                          <span class="headline">Edit</span>
-                        </v-card-title>
-                        <v-card-text>
-                          <v-flex xs12 sm6 md4>
-                            <div>
-                              <label for="changeStatus">Cambio estado de paciente</label>
-                             
-                              <select class='form-control' name='changeStatus' id='changeStatus' v-model='estadoNuevo'>
-                                <option value='1'>1</option>
-                                <option value='2'>2</option>
-                              </select>
-                              
-                              
-                            </div>
-                          </v-flex>
-                        </v-card-text>
-                        
-                        <v-card-actions>
-                          <v-spacer></v-spacer>
-                          <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>
-                          <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
-                        </v-card-actions>
-                        </v-card>
-                    </v-dialog>
-                     
-                    <v-data-table
-                        
-                        :headers="headers"
-                        :items="pacientes"
-                        :search="search"
-                        item-key="id"
-                        v-model="selected"
-                       
-                    >
+              <!--    cuadro de dialogo para cambiar el estado del paciente -->
+                  <v-dialog v-model="dialog" max-width="500px">
+                    <v-card>
+                      <v-card-title>
+                        <span class="headline">Edit</span>
+                      </v-card-title>
+                      <v-card-text>
+                        <v-flex xs12 sm6 md4>
+                          <div>
+                            <label for="changeStatus">Cambio estado de paciente</label>
+                            
+                            <select class='form-control' name='changeStatus' id='changeStatus' v-model='estadoNuevo'>
+                              <option value='1'>1</option>
+                              <option value='2'>2</option>
+                            </select>
+                            
+                            
+                          </div>
+                        </v-flex>
+                      </v-card-text>
                       
-                        <template slot="items" slot-scope="props">
-                          <tr @click="changeSelected(props.item)">
-                              <td class="text-xs-center">{{ props.item.CUI }}</td>
-                              <td class="text-xs-center">{{ props.item.Nombre }}</td>
-                              <td class="text-xs-center">{{ props.item.Apellido }}</td>
-                              <td class="text-xs-center">{{ props.item.Procedencia }}</td>
-                              <td class="text-xs-center">{{ props.item.Fecha_de_nacimiento }}</td>
-                              <td class="text-xs-center">{{ props.item.EstadoActual }}</td>
-                              <td class="justify-center layout px-0">
-                                <v-icon
+                      <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>
+                        <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
+                      </v-card-actions>
+                      </v-card>
+                  </v-dialog>
+                    
+                  <v-data-table
+                      
+                      :headers="headers"
+                      :items="pacientes"
+                      :search="search"
+                      item-key="id"
+                      v-model="selected"
+                      
+                  >
+                    
+                      <template slot="items" slot-scope="props">
+                        <tr @click="changeSelected(props.item)">
+                            <td class="text-xs-center">{{ props.item.CUI }}</td>
+                            <td class="text-xs-center">{{ props.item.Nombre }}</td>
+                            <td class="text-xs-center">{{ props.item.Apellido }}</td>
+                            <td class="text-xs-center">{{ props.item.Procedencia }}</td>
+                            <td class="text-xs-center">{{ props.item.Fecha_de_nacimiento }}</td>
+                            <td class="text-xs-center">{{ props.item.EstadoActual }}</td>
+                            <td class="justify-center layout px-0">
+                              <v-icon
+                              small
+                              class="ma-3"
+                              @click="editarDatos(props.item)"
+                              >
+                                edit
+                              </v-icon>
+                              <v-icon
                                 small
                                 class="ma-3"
-                                @click="editarDatos(props.item)"
-                                >
-                                  edit
-                                </v-icon>
-                                <v-icon
-                                  small
-                                  class="ma-3"
-                                  @click="deleteItem(props.item)"
-                                >
-                                  delete
-                                </v-icon>
-                              </td>
-                            </tr>
-                          </template>
-                        <!-- cuando la busqueda no tenga resultados -->
-                        <template v-slot:no-results>
-                            <v-alert :value="true" color="error">
-                            No se ha encontrado un paciente que tenga "{{ search }}" en su información.
-                            </v-alert>
-                         
+                                @click="deleteItem(props.item)"
+                              >
+                                delete
+                              </v-icon>
+                            </td>
+                          </tr>
                         </template>
-                    </v-data-table>
-                  </v-card>
-                </div>
-                    <template>
-                      <form>
-                        <div class="form-group">
-                            <br>
-                            <br>
-                            <br>
-                        <h2>Nombres </h2>
-                        <h3 class="subheading font-weight-light"> {{selectedPatients.Nombre}}</h3>
-                        </div>
-                        <div class="form-group" >
-                            <h2>Apellidos </h2>
-                            <h3 class="subheading font-weight-light"> {{selectedPatients.Apellido}}</h3>
-                        </div>
-                        <div class="form-group">
-                            <h2> CUI </h2>
-                            <h3 class="subheading font-weight-light"> {{selectedPatients.CUI}}</h3>
-                        </div>
-                        <div class="form-group">
-                            <h2> Estado </h2>
-                            <h3 class="subheading font-weight-light"> {{selectedPatients.EstadoActual}}</h3>
-                        </div>
-                        <div>
-                            <h2> Edad </h2>
-                            <h3 class="subheading font-weight-light"> {{selectedPatients.Edad}}</h3>
-                        </div>
-                        <div>
-                            <h2> Número telefónico </h2>
-                            <h3 class="subheading font-weight-light"> {{selectedPatients.Telefono}}</h3>
-                        </div>
-                        <div>
-                            <h2> Nombre del padre </h2>
-                            <h3 class="subheading font-weight-light"> {{selectedPatients.Nombre_de_padre}}</h3>
-                        </div>
-                        <div>
-                            <h2> Nombre de la madre </h2>
-                            <h3 class="subheading font-weight-light"> {{selectedPatients.Nombre_de_madre}}</h3>
-                        </div>
-                    </form>
-                    </template>
-                    
-                
+                      <!-- cuando la busqueda no tenga resultados -->
+                      <template v-slot:no-results>
+                          <v-alert :value="true" color="error">
+                          No se ha encontrado un paciente que tenga "{{ search }}" en su información.
+                          </v-alert>
+                        
+                      </template>
+                  </v-data-table>
+                </v-card>
+              </div>
+              <div id="InfoPaciente">
+                  <template>
+                    <form>
+                      <div class="form-group">
+                      <h2 id="headers">Nombres </h2>
+                      <h3 class="subheading font-weight-light"> {{selectedPatients.Nombre}}</h3>
+                      </div>
+                      <div class="form-group" >
+                          <h2 id="headers">Apellidos </h2>
+                          <h3 class="subheading font-weight-light"> {{selectedPatients.Apellido}}</h3>
+                      </div>
+                      <div class="form-group">
+                          <h2 id="headers"> CUI </h2>
+                          <h3 class="subheading font-weight-light"> {{selectedPatients.CUI}}</h3>
+                      </div>
+                      <div class="form-group">
+                          <h2 id="headers"> Estado </h2>
+                          <h3 class="subheading font-weight-light"> {{selectedPatients.EstadoActual}}</h3>
+                      </div>
+                      <div>
+                          <h2 id="headers"> Edad </h2>
+                          <h3 class="subheading font-weight-light"> {{selectedPatients.Edad}}</h3>
+                      </div>
+                      <div>
+                          <h2 id="headers"> Número telefónico </h2>
+                          <h3 class="subheading font-weight-light"> {{selectedPatients.Telefono}}</h3>
+                      </div>
+                      <div>
+                          <h2 id="headers"> Nombre del padre </h2>
+                          <h3 class="subheading font-weight-light"> {{selectedPatients.Nombre_de_padre}}</h3>
+                      </div>
+                      <div>
+                          <h2 id="headers"> Nombre de la madre </h2>
+                          <h3 class="subheading font-weight-light"> {{selectedPatients.Nombre_de_madre}}</h3>
+                      </div>
+                  </form>
+                  </template>
+                  
+              </div>
                 </b-col>
             </b-row>
         </b-container>
@@ -174,7 +172,7 @@ export default {
         radioGroup:1,
         lista: [],
         headers: [
-          {text: 'CUI (ID)', align: 'center',value: 'id'},
+          { text: 'CUI (ID)', align: 'center',value: 'id'},
           { text: 'Nombre', align: 'center', value: 'Nombre' },
           { text: 'Apellido', align: 'center', value: 'Apellido' }, 
           { text: 'Procedencia', align: 'center', value: 'Procedencia' },
@@ -291,8 +289,25 @@ export default {
 };
 </script>
 <style>
-div#Tabla {
-  float: right;
+div#TablaPacientes {
   align-items: center;
+  margin-right:1%;
+  margin-left:1%;
+  width: 74%;
+  float: left;
+}
+div#InfoPaciente {
+  margin-left: 1%;
+  margin-right:1%;
+  width: 20%;
+  float: right;
+}
+h2#headers{
+  font-family: Nunito;
+  font-weight: bolder;
+}
+h1#headers{
+  font-family: Nunito;
+  font-weight: bolder;
 }
 </style>
