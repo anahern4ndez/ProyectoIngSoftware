@@ -65,6 +65,10 @@ const routes = [{
     {
         path: '/menu-principal',
         component: Vue.component('MenuPrincipal', require('./components/MenuPrincipal.vue').default)
+    },
+    {
+        path: '/Citas',
+        component: Vue.component('creacion-citas', require('./components/CreacionCitas.vue').default)
     }
 ];
 
