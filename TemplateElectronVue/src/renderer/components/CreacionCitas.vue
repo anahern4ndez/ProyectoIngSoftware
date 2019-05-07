@@ -38,11 +38,7 @@
       <v-select
         v-model="type"
         :items="typeOptions"
-<<<<<<< HEAD
         label="Estilo de Calendario"
-=======
-        label="Type"
->>>>>>> 8c0e781faa97b98bdcc6e1afc6629db74f5639af
       ></v-select>
     </v-flex>
     <v-flex
@@ -62,7 +58,6 @@
     </v-flex>
   </v-layout>
 </template>
-<<<<<<< HEAD
 
 <script>
   export default {
@@ -78,11 +73,3 @@
     })
   }
 </script>
-=======
-<script>
-export default {
-    
-}
-</script>
-
->>>>>>> 8c0e781faa97b98bdcc6e1afc6629db74f5639af
