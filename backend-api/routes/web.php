@@ -57,4 +57,5 @@ $router->post('/logout', 'loginController@logout');
 
 //$router->delete('/users/{id}','ExampleController@destroy');
 
-$router->get('/menu', 'MenuPrincipalController@menu');
+//$router->get('/menu', 'MenuPrincipalController@menu');
+
