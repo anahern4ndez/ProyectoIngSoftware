@@ -34,6 +34,7 @@
                               label="Apellidos"
                               outline
                           ></v-text-field>
+
                       <div id="inBox">
                           <v-text-field
                                   v-model="Procedencia"
@@ -151,8 +152,9 @@
                 <h3 id="headers"  class="text-xs-center">Dx. Definitivo</h3>
             <v-textarea
               outline
-              name="Dx_def"
+              name="Dx_Definitivo"
               value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
+              rows=38
             ></v-textarea>
             </v-flex>
           </v-card-title>
@@ -166,17 +168,34 @@
                 <h3 id="headers" class="text-xs-center">Dx. Asociados</h3>
             <v-textarea
               outline
-              name="Dx_asoc"
+              name="Dx_Asociados"
               value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
+              rows=38
             ></v-textarea>
             </v-flex>
           </v-card-title>
         </v-card>
       </div>
-    </div>
-    <div>
-      <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="ingresarNuevo">Ingresar nuevo paciente</button>
-    </div>
+    
+      <div id="Historia">
+          <v-card>
+            <v-card-title primary-title>
+              <v-flex xs12>
+                <v-layout align-center justify-end />
+                  <h3 id="headers" class="text-xs-center">Historia</h3>
+              <v-textarea
+                outline
+                name="Historia"
+                value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
+              ></v-textarea>
+              </v-flex>
+            </v-card-title>
+          </v-card>
+      </div>
+  </div>  
+  <div>
+    <button float="left" type="button" class="btn btn-lg btn-warning btn-block" v-on:click="ingresarNuevo">Ingresar nuevo paciente</button> 
+  </div>
   </div>
 </template>
 
@@ -206,8 +225,8 @@ export default {
         Edad: '',
         //los siguientes se pondran como predeterminados por cuestion de tiempo, pero se volveran dinámicos después
         Sindrome_Clinico_Presentacion: 1,
-        Dx_Definitivo:'Na',
-        Dx_Asociados:'Na',
+        Dx_Definitivo:'',
+        Dx_Asociados:'',
         Imagen:'None (por ahora)',
         Tipo_de_Sangre: 1,
         Estudia: 1,
@@ -301,8 +320,7 @@ div#diagDef {
   margin-top:2%;
   margin-bottom:2%;
   float:left;
-  width: 32%;
-  height:100%;
+  width: 30%;
 }
 div#diagAsoc {
   margin-left: 2%;
@@ -310,8 +328,17 @@ div#diagAsoc {
   margin-top:2%;
   margin-bottom:2%;
   float:left;
-  width: 32%;
-  height:100%;
+  width: 30%;
+  height:auto;
+}
+div#Historia {
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-top:2%;
+  margin-bottom:2%;
+  width: 96%;
+  float:left;
+
 }
 /*
     configuracion para los headers
