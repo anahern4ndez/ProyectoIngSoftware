@@ -153,8 +153,8 @@
             <v-textarea
               outline
               name="Dx_Definitivo"
-              label="Dx_Definitivo"
               value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
+              rows=38
             ></v-textarea>
             </v-flex>
           </v-card-title>
@@ -169,17 +169,33 @@
             <v-textarea
               outline
               name="Dx_Asociados"
-              label="Dx_Asociados"
               value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
+              rows=38
             ></v-textarea>
             </v-flex>
           </v-card-title>
         </v-card>
       </div>
-    </div>
-    <div>
-      <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="ingresarNuevo">Ingresar nuevo paciente</button>
-    </div>
+    
+      <div id="Historia">
+          <v-card>
+            <v-card-title primary-title>
+              <v-flex xs12>
+                <v-layout align-center justify-end />
+                  <h3 id="headers" class="text-xs-center">Historia</h3>
+              <v-textarea
+                outline
+                name="Historia"
+                value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
+              ></v-textarea>
+              </v-flex>
+            </v-card-title>
+          </v-card>
+      </div>
+  </div>  
+  <div>
+    <button float="left" type="button" class="btn btn-lg btn-warning btn-block" v-on:click="ingresarNuevo">Ingresar nuevo paciente</button> 
+  </div>
   </div>
 </template>
 
@@ -196,8 +212,14 @@ export default {
     data () {
       return {
         search:'',        
+        //datos extra
+        kg_perc:'',
+        Peso:'',
+        Percentil:'',
+        Talla:'',
+        PA:'',
+        cms_perc:'',
         //datos del paciente a ingresar
-        id:'',
         CUI:'', 
         Nombre:'', 
         Apellido:'', 
@@ -224,7 +246,6 @@ export default {
     methods: {
         ingresarNuevo(){
           const info = {
-            id:this.CUI,
             CUI: this.CUI,
             Nombre: this.Nombre,
             Apellido: this.Apellido,
@@ -246,7 +267,6 @@ export default {
         };
           this.$http.post('http://localhost:8000/PacienteController/insert', info).then(response => {
               this.error = false;
-              this.id='';
               this.CUI=''; 
               this.Nombre='';
               this.Apellido='';
@@ -305,7 +325,6 @@ div#diagDef {
   margin-bottom:2%;
   float:left;
   width: 30%;
-  height:100%;
 }
 div#diagAsoc {
   margin-left: 2%;
@@ -314,7 +333,16 @@ div#diagAsoc {
   margin-bottom:2%;
   float:left;
   width: 30%;
-  height:100%;
+  height:auto;
+}
+div#Historia {
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-top:2%;
+  margin-bottom:2%;
+  width: 96%;
+  float:left;
+
 }
 /*
     configuracion para los headers

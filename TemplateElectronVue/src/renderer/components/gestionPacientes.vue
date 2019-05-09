@@ -2,144 +2,140 @@
 
 <template>
   <div class="grey--text text--darken-2">
-    <h1 class="text-center" id="headers">Gestión de Pacientes</h1>
+    <h1 id="headers" class="text-center">Gestión de Pacientes</h1>
+    <br>
+    <br>
     <div>
-      <b-container class="bv-example-row1">
-        <b-row align-h="around" align-v="center">
-          <b-col order="2" cols="30">
-              <div id="TablaPacientes">
-                <v-card>
-                  <v-text-field
-                      v-model="search"
-                      label="Búsqueda por nombre, apellido o número de CUI"
-                      outline
-                  ></v-text-field>
+      <div id="TablaPacientes">
+        <v-card>
+          <v-text-field
+              v-model="search"
+              label="Búsqueda por nombre, apellido o número de CUI"
+              outline
+          ></v-text-field>
 
-              <!--    cuadro de dialogo para cambiar el estado del paciente -->
-                  <v-dialog v-model="dialog" max-width="500px">
-                    <v-card>
-                      <v-card-title>
-                        <span class="headline">Edit</span>
-                      </v-card-title>
-                      <v-card-text>
-                        <v-flex xs12 sm6 md4>
-                          <div>
-                            <label for="changeStatus">Cambio estado de paciente</label>
-                            
-                            <select class='form-control' name='changeStatus' id='changeStatus' v-model='estadoNuevo'>
-                              <option value='1'>1</option>
-                              <option value='2'>2</option>
-                            </select>
-                            
-                            
-                          </div>
-                        </v-flex>
-                      </v-card-text>
-                      
-                      <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>
-                        <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
-                      </v-card-actions>
-                      </v-card>
-                  </v-dialog>
+      <!--    cuadro de dialogo para cambiar el estado del paciente -->
+          <v-dialog v-model="dialog" max-width="500px">
+            <v-card>
+              <v-card-title>
+                <span class="headline">Edit</span>
+              </v-card-title>
+              <v-card-text>
+                <v-flex xs12 sm6 md4>
+                  <div>
+                    <label for="changeStatus">Cambio estado de paciente</label>
                     
-                  <v-data-table
-                      
-                      :headers="headers"
-                      :items="pacientes"
-                      :search="search"
-                      item-key="id"
-                      v-model="selected"
-                      
-                  >
+                    <select class='form-control' name='changeStatus' id='changeStatus' v-model='estadoNuevo'>
+                      <option value='1'>1</option>
+                      <option value='2'>2</option>
+                    </select>
                     
-                      <template slot="items" slot-scope="props">
-                        <tr @click="changeSelected(props.item)">
-                            <td class="text-xs-center">{{ props.item.CUI }}</td>
-                            <td class="text-xs-center">{{ props.item.Nombre }}</td>
-                            <td class="text-xs-center">{{ props.item.Apellido }}</td>
-                            <td class="text-xs-center">{{ props.item.Procedencia }}</td>
-                            <td class="text-xs-center">{{ props.item.Fecha_de_nacimiento }}</td>
-                            <td class="text-xs-center">{{ props.item.EstadoActual }}</td>
-                            <td class="justify-center layout px-0">
-                              <v-icon
-                              small
-                              class="ma-3"
-                              @click="editarDatos(props.item)"
-                              >
-                                edit
-                              </v-icon>
-                              <v-icon
-                                small
-                                class="ma-3"
-                                @click="deleteItem(props.item)"
-                              >
-                                delete
-                              </v-icon>
-                            </td>
-                          </tr>
-                        </template>
-                      <!-- cuando la busqueda no tenga resultados -->
-                      <template v-slot:no-results>
-                          <v-alert :value="true" color="error">
-                          No se ha encontrado un paciente que tenga "{{ search }}" en su información.
-                          </v-alert>
-                        
-                      </template>
-                  </v-data-table>
-                </v-card>
+                    
+                  </div>
+                </v-flex>
+              </v-card-text>
+              
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>
+                <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
+              </v-card-actions>
+              </v-card>
+          </v-dialog>
+            
+          <v-data-table
+              
+              :headers="headers"
+              :items="pacientes"
+              :search="search"
+              item-key="id"
+              v-model="selected"
+              
+          >
+            
+              <template slot="items" slot-scope="props">
+                <tr @click="changeSelected(props.item)">
+                    <td class="text-xs-center">{{ props.item.CUI }}</td>
+                    <td class="text-xs-center">{{ props.item.Nombre }}</td>
+                    <td class="text-xs-center">{{ props.item.Apellido }}</td>
+                    <td class="text-xs-center">{{ props.item.Procedencia }}</td>
+                    <td class="text-xs-center">{{ props.item.Fecha_de_nacimiento }}</td>
+                    <td class="text-xs-center">{{ props.item.EstadoActual }}</td>
+                    <td class="justify-center layout px-0">
+                      <v-icon
+                      small
+                      class="ma-3"
+                      @click="editarDatos(props.item)"
+                      >
+                        edit
+                      </v-icon>
+                      <v-icon
+                        small
+                        class="ma-3"
+                        @click="deleteItem(props.item)"
+                      >
+                        delete
+                      </v-icon>
+                    </td>
+                  </tr>
+                </template>
+              <!-- cuando la busqueda no tenga resultados -->
+              <template v-slot:no-results>
+                  <v-alert :value="true" color="error">
+                  No se ha encontrado un paciente que tenga "{{ search }}" en su información.
+                  </v-alert>
+                
+              </template>
+          </v-data-table>
+        </v-card>
+      </div>
+      <div id="DatosPaciente">
+          <template>
+            <form>
+              <div class="form-group">
+              <h2 id="headers">Nombres </h2>
+              <h3 class="subheading font-weight-light"> {{selectedPatients.Nombre}}</h3>
               </div>
-              <div id="InfoPaciente">
-                  <template>
-                    <form>
-                      <div class="form-group">
-                      <h2 id="headers">Nombres </h2>
-                      <h3 class="subheading font-weight-light"> {{selectedPatients.Nombre}}</h3>
-                      </div>
-                      <div class="form-group" >
-                          <h2 id="headers">Apellidos </h2>
-                          <h3 class="subheading font-weight-light"> {{selectedPatients.Apellido}}</h3>
-                      </div>
-                      <div class="form-group">
-                          <h2 id="headers"> CUI </h2>
-                          <h3 class="subheading font-weight-light"> {{selectedPatients.CUI}}</h3>
-                      </div>
-                      <div class="form-group">
-                          <h2 id="headers"> Estado </h2>
-                          <h3 class="subheading font-weight-light"> {{selectedPatients.EstadoActual}}</h3>
-                      </div>
-                      <div>
-                          <h2 id="headers"> Edad </h2>
-                          <h3 class="subheading font-weight-light"> {{selectedPatients.Edad}}</h3>
-                      </div>
-                      <div>
-                          <h2 id="headers"> Número telefónico </h2>
-                          <h3 class="subheading font-weight-light"> {{selectedPatients.Telefono}}</h3>
-                      </div>
-                      <div>
-                          <h2 id="headers"> Nombre del padre </h2>
-                          <h3 class="subheading font-weight-light"> {{selectedPatients.Nombre_de_padre}}</h3>
-                      </div>
-                      <div>
-                          <h2 id="headers"> Nombre de la madre </h2>
-                          <h3 class="subheading font-weight-light"> {{selectedPatients.Nombre_de_madre}}</h3>
-                      </div>
-                  </form>
-                  </template>
-                  
+              <div class="form-group" >
+                  <h2 id="headers">Apellidos </h2>
+                  <h3 class="subheading font-weight-light"> {{selectedPatients.Apellido}}</h3>
               </div>
-                </b-col>
-            </b-row>
-        </b-container>
+              <div class="form-group">
+                  <h2 id="headers"> CUI </h2>
+                  <h3 class="subheading font-weight-light"> {{selectedPatients.CUI}}</h3>
+              </div>
+              <div class="form-group">
+                  <h2 id="headers"> Estado </h2>
+                  <h3 class="subheading font-weight-light"> {{selectedPatients.EstadoActual}}</h3>
+              </div>
+              <div>
+                  <h2 id="headers"> Edad </h2>
+                  <h3 class="subheading font-weight-light"> {{selectedPatients.Edad}}</h3>
+              </div>
+              <div>
+                  <h2 id="headers"> Número telefónico </h2>
+                  <h3 class="subheading font-weight-light"> {{selectedPatients.Telefono}}</h3>
+              </div>
+              <div>
+                  <h2 id="headers"> Nombre del padre </h2>
+                  <h3 class="subheading font-weight-light"> {{selectedPatients.Nombre_de_padre}}</h3>
+              </div>
+              <div>
+                  <h2 id="headers"> Nombre de la madre </h2>
+                  <h3 class="subheading font-weight-light"> {{selectedPatients.Nombre_de_madre}}</h3>
+              </div>
+          </form>
+          </template>
+          
+      </div>
     </div>
-    <div>
+    <div id="botones">
       <b-container class="bv-example-row2">
         <b-row class="justify-content-md-center">
             <b-col order="4" cols="6">
                 <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="ingresarNuevo">Ingresar nuevo paciente</button>
                 <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="darConsulta"> Dar consulta </button>
-                <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="editarDatos"> Editar datos</button>
+                <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="editarPaciente"> Editar datos</button>
                 <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="archivos"> Archivos </button>
                 <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="reportes"> Reporte</button>
                 <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="estadisticas"> Estadísticas </button>
@@ -159,7 +155,9 @@ export default {
       //esto deberia ser un arrray de pacientes que contengan todos sus atributos...
       
       this.pacientes = response.data.Pacientes;
-      this.selectedPatients = response.data.Pacientes[0]
+      this.selectedPatients = response.data.Pacientes[0];
+      this.Nombre = response.data.Pacientes[0].Nombre;
+      this.Apellido = response.data.Pacientes[0].Apellido;
     });
   },
     data () {
@@ -212,7 +210,9 @@ export default {
         editarDatos(received){
           this.dialog=true;
           this.editedIndex = this.pacientes.indexOf(received)
-          this.$http.get(`http://localhost:8000/PacienteController/update/?val=${this.val}/id=${this.editedIndex}`);
+        },
+        editarPaciente(){
+          this.$router.push('/EditarPaciente');
         },
         casoslegales(){
           this.$router.push('/EditarPaciente');
@@ -226,11 +226,6 @@ export default {
         estadisticas(){
           this.$router.push('/EditarPaciente');
         },
-        showAlert(a){
-          console.log("aver");
-          console.log(a);
-        },
-        
         close () {
           this.dialog = false
           setTimeout(() => {
@@ -251,9 +246,12 @@ export default {
             id: this.pacientes[this.editedIndex].CUI,
             estado: this.estadoNuevo,
           }
-          //console.log(data.estado)
-          this.$http.put(`http://localhost:8000/PacienteController/update/`,data);
+          console.log(data.estado)
           this.close()
+          this.$http.put(`http://localhost:8000/PacienteController/update/`,data).then(response=>{
+            this.selectedPatients.EstadoActual = this.estadoNuevo;
+            this.reloadTable()
+          });
         }, 
         pasoParam(item){
           //capturamos al item que se le dio click...
@@ -290,23 +288,36 @@ export default {
 </script>
 <style>
 div#TablaPacientes {
-  align-items: center;
-  margin-right:1%;
-  margin-left:1%;
-  width: 74%;
+  width: 70%;
+  padding-left: 2%;
+  margin-right: 2%;
   float: left;
 }
-div#InfoPaciente {
-  margin-left: 1%;
-  margin-right:1%;
-  width: 20%;
+div#DatosPaciente {
+  width: 25%;
+  margin-left: 2%;
   float: right;
 }
-h2#headers{
+div#botones{
+
+  width: 96%;
+  margin-left: 2%;
+  margin-right: 2%;
+  float: left;
+}
+/*
+    configuracion para los headers
+*/
+h3#headers{
+  font-family: Nunito;
+  font-weight: bolder;
+  font-size: x-large;
+}
+h1#headers{
   font-family: Nunito;
   font-weight: bolder;
 }
-h1#headers{
+h2#headers{
   font-family: Nunito;
   font-weight: bolder;
 }
