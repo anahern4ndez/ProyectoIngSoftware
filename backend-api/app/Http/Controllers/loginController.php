@@ -20,14 +20,13 @@ class loginController extends Controller
         $user = User::query()->where('email', $request->input('email'))->first();
 
         if(($user->password) === $request->input('password')){ 
-            $api_token = str_random(50);
+            // $api_token = str_random(50);
 
-            $user->api_token = $api_token;
-            $user->save();
+            // $user->api_token = $api_token;
+            // $user->save();
 
             return response()->json([
                 'status' => 'success',
-                'api_token' => $api_token,
                 'message' => $request->data
             ]);
         } else {

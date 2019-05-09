@@ -22,16 +22,16 @@ Vue.use(BootstrapVue);
 Vue.use(VueAxios, axios);
 Vue.use(VueRouter);
 Vue.use(Vuetify, {
-  iconfont: 'fa',
-  theme: {
-    primary: '#324e7b',
-    secondary: '#5068a9',
-    tercero: '#303841',
-    cuarto: '#3A4750',
-    quinto: '#EA9215',
-    sexto: '#EEEEEE',
-    accent: '#f8f8f8',
-  }
+    iconfont: 'fa',
+    theme: {
+        primary: '#324e7b',
+        secondary: '#5068a9',
+        tercero: '#303841',
+        cuarto: '#3A4750',
+        quinto: '#EA9215',
+        sexto: '#EEEEEE',
+        accent: '#f8f8f8',
+    }
 });
 
 const routes = [
@@ -62,11 +62,27 @@ const routes = [
   {
     path: '/EditarPaciente',
     component: Vue.component('EditarPaciente', require('./components/EditarPaciente.vue').default)
-  }
+  },
+  {
+    path: '/darConsulta',
+    component: Vue.component('darConsulta', require('./components/DarConsulta.vue').default)
+  },
+  {
+    path: '/Consulta',
+    component: Vue.component('Consulta', require('./components/Consulta.vue').default)
+  },
+  {
+    path: '/menu-principal',
+    component: Vue.component('MenuPrincipal', require('./components/MenuPrincipal.vue').default)
+  },
+  {
+    path: '/Citas',
+    component: Vue.component('Citas', require('./components/CreacionCitas.vue').default)
+    }
 ];
 
 const router = new VueRouter({
-  routes
+    routes
 });
 
 /* eslint-disable no-new */
@@ -74,6 +90,6 @@ new Vue({
   router,
   render: h => h(App),
   mounted () {
-    this.$router.push('/ingresarPaciente')
+    this.$router.push('/login')
   }
 }).$mount('#app');

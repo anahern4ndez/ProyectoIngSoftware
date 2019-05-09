@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\User;
+
 class ExampleController extends Controller
 {
     /**
@@ -58,11 +60,17 @@ class ExampleController extends Controller
     }
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'email' => 'email',
+            'password' => 'min:6|max:255'
+        ]);
+        
         $user = new User;
         $user->id = $request->id;
-        $user->Nombre = $request->name;
-        $user->Apellido = $request->email;
-        #$user->password = $request->password;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->puesto = $request->puesto;
         $user->save();
 
         return response()->json([
@@ -72,6 +80,11 @@ class ExampleController extends Controller
     }
     public function update(Request $request)
     {
+        $this->validate($request, [
+            'email' => 'email',
+            'password' => 'min:6|max:255'
+        ]);
+
         $id = $request->id;
         $user=User::find($id);
         #$user->name = 'diego';
@@ -80,11 +93,24 @@ class ExampleController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = $request->password;
+        $user->password = $request->password;
+        $user->puesto = $request->puesto;
         $user->save();
 
         return response()->json([
             'success' => true,
             'message' => 'creado'
+        ], 200);
+    }
+    public function getOneUser(Request $request)
+    {
+        $id = $request->idb;
+        $usersi = User::find($id);
+
+        return response()->json([
+            'success' => true,
+            'usersi' => $usersi,
+            'message'=>'Funciono',
         ], 200);
     }
 }
