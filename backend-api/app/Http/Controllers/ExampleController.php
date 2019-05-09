@@ -70,6 +70,7 @@ class ExampleController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = $request->password;
+        $user->puesto = $request->puesto;
         $user->save();
 
         return response()->json([
@@ -92,11 +93,24 @@ class ExampleController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = $request->password;
+        $user->password = $request->password;
+        $user->puesto = $request->puesto;
         $user->save();
 
         return response()->json([
             'success' => true,
             'message' => 'creado'
+        ], 200);
+    }
+    public function getOneUser(Request $request)
+    {
+        $id = $request->idb;
+        $usersi = User::find($id);
+
+        return response()->json([
+            'success' => true,
+            'usersi' => $usersi,
+            'message'=>'Funciono',
         ], 200);
     }
 }

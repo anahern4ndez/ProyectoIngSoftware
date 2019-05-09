@@ -1,5 +1,5 @@
 <template>
-  <v-app style="background-color: #EEEEEE; font-family: Montserrat">
+  <v-app style="background-color: #EEEEEE; font-family: Cabin">
     <v-navigation-drawer
       :clipped="clipped"
       enable-resize-watcher app
@@ -18,31 +18,18 @@
         </v-list-tile>
       </v-list>
       <v-list class="accent--text">
-        <v-list-tile to="/menu-principal" exact>
+        <v-list-tile :to="r.route" exact v-for="r in routes" v-bind:key="r.name"
+          v-on:click="setActiveRoute(r.name)">
           <v-list-tile-action>
-            <v-icon class="grey--text text--darken-3">fa-home</v-icon>
+            <v-icon class="grey--text text--darken-3">{{r.icon}}</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title class="grey--text text--darken-3">Menu Principal</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile to="/page-two" exact>
-          <v-list-tile-action>
-            <v-icon class="grey--text text--darken-3">fa-home</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title class="grey--text text--darken-3">Gestionar Usuario</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile to="/page-four" exact>
-          <v-list-tile-action>
-            <v-icon class="grey--text text--darken-3">fa-home</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title class="grey--text text--darken-3">Gestionar Paciente</v-list-tile-title>
+            <v-list-tile-title class="grey--text text--darken-3">{{r.name}}</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
+
+
     </v-navigation-drawer>
 
     <v-toolbar color="quinto"
@@ -52,7 +39,7 @@
         class="grey--text text--darken-3"
         @click.stop="drawer = !drawer">
       </v-toolbar-side-icon>
-      <v-toolbar-title class="grey--text text--darken-3">Gestión de Usuarios</v-toolbar-title>
+      <v-toolbar-title class="grey--text text--darken-3">{{ activeRoute }}</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn icon class="grey--text text--darken-3">
@@ -84,19 +71,33 @@ export default {
       drawer: true,
       items: [
         {title: 'Title 1', icon: 'fa-home'}
+      ],
+      activeRoute: '',
+      routes: [
+        {name: 'Menu Principal', route: '/page-one', icon:'fa-home'},
+        {name: 'Gestionar Usuario', route: '/page-two', icon:'fa-users'},
+        {name: 'Gestionar Paciente', route: '/page-four', icon:'fa-user-injured'},
+        {name: 'Gestión de Citas', route: '/Citas', icon: 'fa-calendar-check'},
       ]
     }
   },
-
-    methods: {
-        logout(){
-            this.$http.post('http://localhost:8000/logout').then((response) => {
-                this.$router.push('/login');
-            });
-        }
-    }
+  methods: {
+      logout() {
+          this.$http.post('http://localhost:8000/logout').then((response) => {
+              this.$router.push('/login');
+          });
+      },
+      setActiveRoute(name) {
+        this.activeRoute = name;
+      }
+  }
 }
 </script>
+<style lang="scss">
+@import url("https://fonts.googleapis.com/css?family=Nunito");
+@import url("https://fonts.googleapis.com/css?family=Cabin");
+
+</style>
 
 
 
