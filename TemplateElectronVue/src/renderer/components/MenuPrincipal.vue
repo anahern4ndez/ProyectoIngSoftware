@@ -26,7 +26,7 @@
 				<b-row align-h="around" align-v="center" class="pb-5">
 					<b-col order="1" cols="8">
 						<b-button v-on:click="gestionarPaciente" variant="outline-primary">Gestionar Paciente</b-button>
-						<b-button  variant="outline-primary">Generar Reporte</b-button>
+						<b-button v-on:click="darConsulta"  variant="outline-primary">Generar Reporte</b-button>
 						<b-button variant="outline-primary">Informes Estadísticos</b-button>
 						<b-button variant="outline-primary">Datos Generales</b-button>
 					</b-col>
@@ -144,6 +144,9 @@ export default {
 		{
 			this.$router.push('/page-two');
 
+		},
+		darConsulta(){
+			this.$router.push('/Consulta');
 		}
 	}
 	
