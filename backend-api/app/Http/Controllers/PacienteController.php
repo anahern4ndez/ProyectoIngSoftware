@@ -17,7 +17,6 @@ class PacienteController extends Controller
         /*Paciente::create(Request::all());
         return 'true';*/
         $pat = new Paciente;
-        $pat->id = $request->id;
         $pat->Nombre = $request->Nombre;
         $pat->Apellido = $request->Apellido;
         $pat->Fecha_de_nacimiento = $request->Fecha_de_nacimiento;

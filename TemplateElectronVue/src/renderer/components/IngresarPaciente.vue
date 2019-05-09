@@ -212,8 +212,14 @@ export default {
     data () {
       return {
         search:'',        
+        //datos extra
+        kg_perc:'',
+        Peso:'',
+        Percentil:'',
+        Talla:'',
+        PA:'',
+        cms_perc:'',
         //datos del paciente a ingresar
-        id:'',
         CUI:'', 
         Nombre:'', 
         Apellido:'', 
@@ -240,7 +246,6 @@ export default {
     methods: {
         ingresarNuevo(){
           const info = {
-            id:this.CUI,
             CUI: this.CUI,
             Nombre: this.Nombre,
             Apellido: this.Apellido,
@@ -262,7 +267,6 @@ export default {
         };
           this.$http.post('http://localhost:8000/PacienteController/insert', info).then(response => {
               this.error = false;
-              this.id='';
               this.CUI=''; 
               this.Nombre='';
               this.Apellido='';
