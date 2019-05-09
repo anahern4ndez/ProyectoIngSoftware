@@ -64,17 +64,21 @@ const routes = [
     component: Vue.component('EditarPaciente', require('./components/EditarPaciente.vue').default)
   },
   {
-    path: '/EditarEstadoPaciente',
-    component: Vue.component('EditarEstadoPaciente', require('./components/EditarEstadoPaciente.vue').default)
-  },
-  {
     path: '/darConsulta',
     component: Vue.component('darConsulta', require('./components/DarConsulta.vue').default)
   },
   {
     path: '/Consulta',
     component: Vue.component('Consulta', require('./components/Consulta.vue').default)
-  }
+  },
+  {
+    path: '/menu-principal',
+    component: Vue.component('MenuPrincipal', require('./components/MenuPrincipal.vue').default)
+  },
+  {
+    path: '/Citas',
+    component: Vue.component('Citas', require('./components/CreacionCitas.vue').default)
+    }
 ];
 
 const router = new VueRouter({
@@ -86,6 +90,6 @@ new Vue({
   router,
   render: h => h(App),
   mounted () {
-    this.$router.push('/Consulta')
+    this.$router.push('/login')
   }
 }).$mount('#app');
