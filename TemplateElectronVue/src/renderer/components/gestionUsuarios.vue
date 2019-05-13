@@ -16,6 +16,7 @@
                 type="text"
                 class="form-control"
                 v-model="idb"
+                v-on:keyup.enter="getOneUser"
                 placeholder="DPI de usuario a editar permisos"
               >
               <div class="input-group-append">
