@@ -132,7 +132,7 @@ export default {
       this.$router.push("/page-four");
     },
     gestionarUsuario() {
-      this.$router.push("/page-two");
+      this.$router.push("/gestionUsuarios");
     },
     darConsulta() {
       this.$router.push("/Consulta");

@@ -138,6 +138,21 @@
                   placeholder="Contraseña"
                 >
               </div>
+              <div v-if="errorPasswordVerification">
+                <v-alert :value="true" type="error" id="alert">
+                  Las contraseñas ingresadas no coinciden
+                </v-alert>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Ingresar contraseña nuevamente</label>
+                <input
+                  id="passwordInputVerification"
+                  type="password"
+                  v-model="passwordVerification"
+                  class="form-control"
+                  placeholder="Verificación de contraseña"
+                >
+              </div>
               <div v-if="errorTipoUsuario">
                 <v-alert :value="true" type="error" id="alert">
                   Seleccione un tipo de usuario, por favor
@@ -192,6 +207,7 @@ export default {
       name:'',
       email:'',
       password:'',
+      passwordVerification: '',
       selected: '',
       puesto:'',
       idb: '',
