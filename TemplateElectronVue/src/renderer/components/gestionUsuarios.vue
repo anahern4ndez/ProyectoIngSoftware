@@ -220,6 +220,7 @@ export default {
       errorPassword: false,
       errorTipoUsuario: false,
       errorBusqueda: false,
+      errorPasswordVerification: false,
       user: [],
       headers: [
         { text: "DPI", align: "center", value: "DPI" },
@@ -253,6 +254,7 @@ export default {
         this.errorTipoUsuario = false;
         this.errorFormato = false;
         this.errorLargo = false;
+        this.errorPasswordVerification = false;
       }
       });
     },
@@ -263,6 +265,7 @@ export default {
       this.errorPassword = false;
       this.errorTipoUsuario = false;
       this.errorBusqueda = false;
+      this.errorPasswordVerification = false;
 
       if(this.id === ''){
         this.errorDPI = true;
@@ -289,6 +292,7 @@ export default {
       this.errorFormato = false;
       this.errorLargo = false;
       this.errorBusqueda = false;
+      this.errorPasswordVerification = false;
 
       if(this.name === ''){
         this.errorName = true;
@@ -314,6 +318,12 @@ export default {
         this.errorPassword = false;
       }
 
+      if(this.passwordVerification != this.password){
+        this.errorPasswordVerification = true;
+      }else{
+        this.errorPasswordVerification = false;
+      }
+
       if(this.selected == null){
         this.errorTipoUsuario = true;
       }else{
@@ -334,13 +344,14 @@ export default {
       if (this.selected=="Visitante") {
         this.puesto=5;
       }
-      if(this.name != '' && this.id != '' && this.password != '' && this.email != '' && this.selected != null){
+      if(this.name != '' && this.id != '' && this.password != '' && this.email != '' && this.selected != null && this.password == this.passwordVerification){
         this.$http.post(`http://localhost:8000/users/create?id=${this.id}&name=${this.name}&email=${this.email}&password=${this.password}&puesto=${this.puesto}`).then(response=>{
           this.refreshUsers();
           this.name = '';
           this.id = '';
           this.email = '';
           this.password = '';
+          this.passwordVerification = '';
           this.selected = null;
         }).catch(error => {
           if (error.response.data.email === undefined){
@@ -366,6 +377,7 @@ export default {
       this.errorFormato = false;
       this.errorLargo = false;
       this.errorBusqueda = false;
+      this.errorPasswordVerification = false;
 
       if(this.name === ''){
         this.errorName = true;
@@ -391,6 +403,12 @@ export default {
         this.errorPassword = false;
       }
 
+      if(this.passwordVerification != this.password){
+        this.errorPasswordVerification = true;
+      }else{
+        this.errorPasswordVerification = false;
+      }
+
       if(this.selected == null){
         this.errorTipoUsuario = true;
       }else{
@@ -411,13 +429,14 @@ export default {
       if (this.selected=="Visitante") {
         this.puesto=5;
       }
-      if(this.name != '' && this.id != '' && this.password != '' && this.email != '' && this.selected != null){
+      if(this.name != '' && this.id != '' && this.password != '' && this.email != '' && this.selected != null && this.password == this.passwordVerification){
         this.$http.put(`http://localhost:8000/users/update?id=${this.id}&name=${this.name}&email=${this.email}&password=${this.password}&puesto=${this.puesto}`).then(response=>{
           this.refreshUsers();
           this.name = '';
           this.id = '';
           this.email = '';
           this.password = '';
+          this.passwordVerification = '';
           this.selected = null;
         }).catch(error => {
           if (error.response.data.email === undefined){
