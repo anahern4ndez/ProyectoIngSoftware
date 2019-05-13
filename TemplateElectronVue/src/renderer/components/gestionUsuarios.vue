@@ -143,6 +143,11 @@
                   Las contraseñas ingresadas no coinciden
                 </v-alert>
               </div>
+              <div v-if="errorPasswordVerification2">
+                <v-alert :value="true" type="error" id="alert">
+                  Ingrese su contraseña para realizar la validación de contraseñas
+                </v-alert>
+              </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Ingresar contraseña nuevamente</label>
                 <input
@@ -221,6 +226,7 @@ export default {
       errorTipoUsuario: false,
       errorBusqueda: false,
       errorPasswordVerification: false,
+      errorPasswordVerification2: false,
       user: [],
       headers: [
         { text: "DPI", align: "center", value: "DPI" },
@@ -255,6 +261,7 @@ export default {
         this.errorFormato = false;
         this.errorLargo = false;
         this.errorPasswordVerification = false;
+        this.errorPasswordVerification2 = false;
       }
       });
     },
@@ -266,6 +273,7 @@ export default {
       this.errorTipoUsuario = false;
       this.errorBusqueda = false;
       this.errorPasswordVerification = false;
+      this.errorPasswordVerification2 = false;
 
       if(this.id === ''){
         this.errorDPI = true;
@@ -293,6 +301,7 @@ export default {
       this.errorLargo = false;
       this.errorBusqueda = false;
       this.errorPasswordVerification = false;
+      this.errorPasswordVerification2 = false;
 
       if(this.name === ''){
         this.errorName = true;
@@ -318,10 +327,15 @@ export default {
         this.errorPassword = false;
       }
 
-      if(this.passwordVerification != this.password){
-        this.errorPasswordVerification = true;
+      if(this.passwordVerification === ''){
+        this.errorPasswordVerification2 = true;
       }else{
-        this.errorPasswordVerification = false;
+        this.errorPasswordVerification2 = false;
+        if(this.passwordVerification != this.password){
+          this.errorPasswordVerification = true;
+        }else{
+          this.errorPasswordVerification = false;
+        }
       }
 
       if(this.selected == null){
@@ -378,6 +392,7 @@ export default {
       this.errorLargo = false;
       this.errorBusqueda = false;
       this.errorPasswordVerification = false;
+      this.errorPasswordVerification2 = false;
 
       if(this.name === ''){
         this.errorName = true;
@@ -403,10 +418,15 @@ export default {
         this.errorPassword = false;
       }
 
-      if(this.passwordVerification != this.password){
-        this.errorPasswordVerification = true;
+      if(this.passwordVerification === ''){
+        this.errorPasswordVerification2 = true;
       }else{
-        this.errorPasswordVerification = false;
+        this.errorPasswordVerification2 = false;
+        if(this.passwordVerification != this.password){
+          this.errorPasswordVerification = true;
+        }else{
+          this.errorPasswordVerification = false;
+        }
       }
 
       if(this.selected == null){
