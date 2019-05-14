@@ -641,15 +641,11 @@
                                         </b-row>
                                         <b-row>
                                             <b-col>
-                                                <label class="control-label" for="textinput">IMÁGENES</label>  
-                                            </b-col>
-                                            <b-col>
-                                                <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
+                                                <button type="button" class="btn btn-lg btn-warning btn-block" style="margin-top:10%;">Imágenes</button>
                                             </b-col>
                                             <b-col>
                                             </b-col>
-                                            <b-col>
-                                            </b-col>                               
+                                                                          
                                         </b-row>
                                     </b-container> 
                                 </div>
@@ -828,7 +824,7 @@
 
   .encapsulado {
     border: solid #A9A9A9 2px; 
-    margin: 2%; padding: 2%; 
+    margin: 2%; padding: 5%; 
     border-radius: 25px;
   }
 
