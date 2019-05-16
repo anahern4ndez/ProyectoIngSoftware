@@ -52,8 +52,8 @@ const routes = [
     component: Vue.component('page-three', require('./components/PageThree.vue').default)
   },
   {
-    path: '/page-four',
-    component: Vue.component('page-four', require('./components/GestionPacientes.vue').default)
+    path: '/gestionPacientes',
+    component: Vue.component('gestionPacientes', require('./components/GestionPacientes.vue').default)
   },
   {
     path: '/ingresarPaciente',
