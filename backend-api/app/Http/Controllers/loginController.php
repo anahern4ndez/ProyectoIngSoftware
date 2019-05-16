@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\User;
 
 class loginController extends Controller
@@ -18,8 +19,10 @@ class loginController extends Controller
         ]);
         
         $user = User::query()->where('email', $request->input('email'))->first();
-
-        if(($user->password) === $request->input('password')){ 
+        
+        #Hash::check($request->input('password'), $hashed);
+        if(Hash::check($request->input('password'), $user->password)){ 
+        #if(($user->password) === Hash::check($request->input('password'),$hashed)){ 
             // $api_token = str_random(50);
 
             // $user->api_token = $api_token;
