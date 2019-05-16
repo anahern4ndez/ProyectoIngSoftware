@@ -5,11 +5,13 @@
       class="mb-3">
       <v-sheet height="500">
         <v-calendar
+          v-model="startDate"
           :type="calendarType"
           locale="es"
           :now="today"
           :value="today"
-          color="primary">
+          color="primary"
+          @click:day="dayClick">
           <template v-slot:day="{ date }">
             <template v-for="event in eventsMap[date]">
               <v-menu
@@ -29,8 +31,7 @@
                 <v-card
                   color="grey lighten-4"
                   min-width="350px"
-                  flat
-                >
+                  flat>
                   <v-toolbar
                     color="rgb(211, 88, 35)"
                     dark>
@@ -46,19 +47,11 @@
           </template>
         </v-calendar>
 
-        <template v-slot:dayHeader="{ present }">
-          <template
-            v-if="present"
-            class="text-xs-center">
-            Today
-          </template>
-        </template>
-
       </v-sheet>
     </v-flex>
 
     <v-flex>
-      <v-btn v-on:click="showAppointmentDialog">Crear Cita</v-btn>
+      <v-btn outline v-on:click="showAppointmentDialog">Crear Cita</v-btn>
     </v-flex>
 
     <!-- <v-flex
@@ -178,6 +171,7 @@
     data: () => ({
       today: '',
       calendarType: 'month',
+      startDate: '',
       dialogOpen: false,
       dateMenuOpen: false,
       selectedDate: '',
@@ -192,6 +186,7 @@
           title: 'Doctor: Randall Lou',
           details: 'Paciente: Rodrigo Zea',
           date: '2019-05-10',
+          time: '',
           open: false
         },
         {
@@ -218,6 +213,7 @@
     }),
     mounted () {
       this.today = new Date().toISOString().substring(0, 10);
+      this.start = this.today;
       this.selectedDate = new Date().toISOString().substr(0, 10);
     },
     computed: {
@@ -243,6 +239,12 @@
           date: this.selectedDate,
           open: false
         });
+      },
+      dayClick(event) {
+        if (this.calendarType === 'month') {
+          this.startDate = event.date;
+          this.calendarType = 'day';
+        }
       }
     }
   }
