@@ -1,6 +1,6 @@
 <template lang="">
     <div>
-        <div class="body">
+        <div class="cuerpo">
             <form class="form-horizontal">
                 <fieldset>
 
@@ -10,7 +10,7 @@
                 <!-- Text input-->
                 <div class="form-group ">
                 <!-- Lefts-->
-                <div>
+                <div class="encapsulado">
                     <b-container>
                         <b-row class="justify-content-md-center">
                         <b-col>
@@ -23,7 +23,12 @@
                                         <b-col>
                                             <h3>Juan García</h3> 
                                         </b-col>
+                                        <b-col>
+                                        </b-col>
                                     </b-row>
+                                    <b-row>
+                                       <img style="margin-left: 10%; margin-top: 2%" src="../assets/javier.jpg" alt="" width="273" height="183">
+				                    </b-row>
                                 </b-container>
                             </div>
                         </b-col>                       
@@ -53,7 +58,7 @@
                 <!-- Form Name -->
                 <h2 style="text-align: left;">Datos Generales</h2>
 
-                <div class="form-group">
+                <div class="form-group encapsulado">
                     <b-container>
                         <b-row class="justify-content-md-center">
                         <b-col>
@@ -181,7 +186,7 @@
                             <!-- Center-->
                             <div style="margin-left: 2%"class="form-group encapsulado">
                                 <div class="custom-control custom-checkbox">
-                                    <label class="custom-control-label">Dx. Definitivo</label>
+                                    <label>Dx. Definitivo</label>
                                 </div> 
                                 <div class="col-md-15">                     
                                     <textarea rows="13" class="form-control" id="textarea" name="textarea"></textarea>
@@ -192,7 +197,7 @@
                             <!-- Right-->
                             <div style="margin-left: 2%"class="form-group encapsulado">
                                 <div class="custom-control custom-checkbox">
-                                    <label class="custom-control-label">Dx. Asociado</label>
+                                    <label>Dx. Asociado</label>
                                 </div> 
                                 <div class="col-md-15">                     
                                 <textarea rows="13" class="form-control" id="textarea" name="textarea"></textarea>
@@ -571,11 +576,25 @@
                                             <b-col>
                                                 <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
                                             </b-col>
+                                        </b-row>
+                                        <b-row>
                                             <b-col>
                                                 <label class="control-label" for="textinput">Hem</label>  
                                             </b-col>
                                             <b-col>
                                                 <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
+                                            </b-col>
+                                            <b-col>
+                                            </b-col>
+                                            <b-col>
+                                            </b-col>
+                                            <b-col>
+                                            </b-col>
+                                            <b-col>
+                                            </b-col>
+                                            <b-col>
+                                            </b-col>
+                                            <b-col><input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
                                             </b-col>
                                         </b-row>
                                         <b-row>
@@ -622,15 +641,11 @@
                                         </b-row>
                                         <b-row>
                                             <b-col>
-                                                <label class="control-label" for="textinput">IMÁGENES</label>  
-                                            </b-col>
-                                            <b-col>
-                                                <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
+                                                <button type="button" class="btn btn-lg btn-warning btn-block" style="margin-top:10%;">Imágenes</button>
                                             </b-col>
                                             <b-col>
                                             </b-col>
-                                            <b-col>
-                                            </b-col>                               
+                                                                          
                                         </b-row>
                                     </b-container> 
                                 </div>
@@ -640,17 +655,17 @@
                 </b-container>
             </div>
 
-                <table class="table table-bordered">
+                <table class="table table-bordered table-ligth">
                 <tbody>
                     <tr>
-                    <th scope="row" style="width: 10%">COONG</th>
-                    <td style="width: 5%">NI</td>
-                    <td style="text-align: left;"></td>
+                        <th scope="row" style="width: 10%">COONG</th>
+                        <td style="width: 5%">NI</td>
+                        <td style="text-align: left;"></td>
                     </tr>
                     <tr>
-                    <th scope="row" style="width: 10%">Corazón</th>
-                    <td style="width: 5%"></td>
-                    <td style="text-align: left;"></td>
+                        <th scope="row" style="width: 10%">Corazón</th>
+                        <td style="width: 5%"></td>
+                        <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                     <th scope="row" style="width: 10%">Pulmones</th>
@@ -688,7 +703,7 @@
                     <td style="text-align: left;"></td>
                     </tr>
                     <tr>
-                    <th scope="row" style="width: 10%"></th>
+                    <th scope="row" style="width: 10%">   </th>
                     <td style="width: 5%"></td>
                     <td style="text-align: left;"></td>
                     </tr>
@@ -797,10 +812,10 @@
 </template>
 
 <style>
-  body {
-    border: solid #e0ebeb 2px;
+  .cuerpo {
+    border: solid #A9A9A9 2px;
     text-align:  center;
-    margin-left: 0%;
+    margin-left: 5%;
     width: 90%;
     padding: 5%;
     padding-top: 2%;
@@ -808,8 +823,16 @@
   }
 
   .encapsulado {
-    border: solid #e0ebeb 2px; 
-    margin: 2%; padding: 2%; 
+    border: solid #A9A9A9 2px; 
+    margin: 2%; padding: 5%; 
     border-radius: 25px;
   }
+
+  table.table-bordered > tbody > tr >th {
+    border:1px solid  #A9A9A9;
+  }
+  table.table-bordered > tbody > tr >td {
+    border:1px solid  #A9A9A9;
+  }
+
 </style>

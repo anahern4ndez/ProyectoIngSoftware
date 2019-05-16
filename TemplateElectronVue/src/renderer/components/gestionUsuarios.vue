@@ -4,7 +4,7 @@
     <div>
       <b-container class="bv-example-row1">
         <b-row align-h="around" align-v="center">
-          <b-col order="2" cols="6">
+          <b-col order="2" cols="7">
             <div v-if="errorBusqueda">
               <v-alert :value="true" type="error" id="alert">
                 El usuario que busca no se encuentra en la base de datos
@@ -16,6 +16,7 @@
                 type="text"
                 class="form-control"
                 v-model="idb"
+                v-on:keyup.enter="getOneUser"
                 placeholder="DPI de usuario a editar permisos"
               >
               <div class="input-group-append">
@@ -69,7 +70,7 @@
               </template>
             </v-data-table>
           </b-col>
-          <b-col order="1" cols="5">
+          <b-col order="1" cols="4">
             <form>
               <div v-if="errorDPI">
                 <v-alert :value="true" type="error" id="alert">
@@ -138,6 +139,26 @@
                   placeholder="Contraseña"
                 >
               </div>
+              <div v-if="errorPasswordVerification">
+                <v-alert :value="true" type="error" id="alert">
+                  Las contraseñas ingresadas no coinciden
+                </v-alert>
+              </div>
+              <div v-if="errorPasswordVerification2">
+                <v-alert :value="true" type="error" id="alert">
+                  Ingrese su contraseña para realizar la validación de contraseñas
+                </v-alert>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Ingresar contraseña nuevamente</label>
+                <input
+                  id="passwordInputVerification"
+                  type="password"
+                  v-model="passwordVerification"
+                  class="form-control"
+                  placeholder="Verificación de contraseña"
+                >
+              </div>
               <div v-if="errorTipoUsuario">
                 <v-alert :value="true" type="error" id="alert">
                   Seleccione un tipo de usuario, por favor
@@ -192,6 +213,7 @@ export default {
       name:'',
       email:'',
       password:'',
+      passwordVerification: '',
       selected: '',
       puesto:'',
       idb: '',
@@ -204,6 +226,8 @@ export default {
       errorPassword: false,
       errorTipoUsuario: false,
       errorBusqueda: false,
+      errorPasswordVerification: false,
+      errorPasswordVerification2: false,
       user: [],
       headers: [
         { text: "DPI", align: "center", value: "DPI" },
@@ -221,23 +245,40 @@ export default {
     },
     getOneUser(){
       this.$http.get(`http://localhost:8000/users/look?idb=${this.idb}`).then(response => {
-      if(response.data.usersi === null){
-        this.errorBusqueda = true;
-      }else{
-        this.name = response.data.usersi.name;
-        this.id = response.data.usersi.id;
-        this.email = response.data.usersi.email;
-        this.selected = 'Doctor'
-        this.idb = '';
-        this.errorBusqueda = false;
-        this.errorName = false;
-        this.errorDPI = false;
-        this.errorEmail = false;
-        this.errorPassword = false;
-        this.errorTipoUsuario = false;
-        this.errorFormato = false;
-        this.errorLargo = false;
-      }
+        if(response.data.usersi === null){
+          this.errorBusqueda = true;
+        }else{
+          this.name = response.data.usersi.name;
+          this.id = response.data.usersi.id;
+          this.email = response.data.usersi.email;
+          this.idb = '';
+          this.errorBusqueda = false;
+          this.errorName = false;
+          this.errorDPI = false;
+          this.errorEmail = false;
+          this.errorPassword = false;
+          this.errorTipoUsuario = false;
+          this.errorFormato = false;
+          this.errorLargo = false;
+          this.errorPasswordVerification = false;
+          this.errorPasswordVerification2 = false;
+
+          if (response.data.usersi.puesto === 1){
+            this.selected = 'Administrador'; 
+          }
+          if (response.data.usersi.puesto === 2){
+            this.selected = 'Doctor'; 
+          }
+          if (response.data.usersi.puesto === 3){
+            this.selected = 'Secretaria'; 
+          }
+          if (response.data.usersi.puesto === 4){
+            this.selected = 'Asistente'; 
+          }
+          if (response.data.usersi.puesto === 5){
+            this.selected = 'Visitante'; 
+          }
+        }
       });
     },
     eliminar(){
@@ -247,6 +288,8 @@ export default {
       this.errorPassword = false;
       this.errorTipoUsuario = false;
       this.errorBusqueda = false;
+      this.errorPasswordVerification = false;
+      this.errorPasswordVerification2 = false;
 
       if(this.id === ''){
         this.errorDPI = true;
@@ -273,6 +316,8 @@ export default {
       this.errorFormato = false;
       this.errorLargo = false;
       this.errorBusqueda = false;
+      this.errorPasswordVerification = false;
+      this.errorPasswordVerification2 = false;
 
       if(this.name === ''){
         this.errorName = true;
@@ -298,6 +343,17 @@ export default {
         this.errorPassword = false;
       }
 
+      if(this.passwordVerification === ''){
+        this.errorPasswordVerification2 = true;
+      }else{
+        this.errorPasswordVerification2 = false;
+        if(this.passwordVerification != this.password){
+          this.errorPasswordVerification = true;
+        }else{
+          this.errorPasswordVerification = false;
+        }
+      }
+
       if(this.selected == null){
         this.errorTipoUsuario = true;
       }else{
@@ -318,13 +374,14 @@ export default {
       if (this.selected=="Visitante") {
         this.puesto=5;
       }
-      if(this.name != '' && this.id != '' && this.password != '' && this.email != '' && this.selected != null){
+      if(this.name != '' && this.id != '' && this.password != '' && this.email != '' && this.selected != null && this.password == this.passwordVerification){
         this.$http.post(`http://localhost:8000/users/create?id=${this.id}&name=${this.name}&email=${this.email}&password=${this.password}&puesto=${this.puesto}`).then(response=>{
           this.refreshUsers();
           this.name = '';
           this.id = '';
           this.email = '';
           this.password = '';
+          this.passwordVerification = '';
           this.selected = null;
         }).catch(error => {
           if (error.response.data.email === undefined){
@@ -350,6 +407,8 @@ export default {
       this.errorFormato = false;
       this.errorLargo = false;
       this.errorBusqueda = false;
+      this.errorPasswordVerification = false;
+      this.errorPasswordVerification2 = false;
 
       if(this.name === ''){
         this.errorName = true;
@@ -375,6 +434,17 @@ export default {
         this.errorPassword = false;
       }
 
+      if(this.passwordVerification === ''){
+        this.errorPasswordVerification2 = true;
+      }else{
+        this.errorPasswordVerification2 = false;
+        if(this.passwordVerification != this.password){
+          this.errorPasswordVerification = true;
+        }else{
+          this.errorPasswordVerification = false;
+        }
+      }
+
       if(this.selected == null){
         this.errorTipoUsuario = true;
       }else{
@@ -395,13 +465,14 @@ export default {
       if (this.selected=="Visitante") {
         this.puesto=5;
       }
-      if(this.name != '' && this.id != '' && this.password != '' && this.email != '' && this.selected != null){
+      if(this.name != '' && this.id != '' && this.password != '' && this.email != '' && this.selected != null && this.password == this.passwordVerification){
         this.$http.put(`http://localhost:8000/users/update?id=${this.id}&name=${this.name}&email=${this.email}&password=${this.password}&puesto=${this.puesto}`).then(response=>{
           this.refreshUsers();
           this.name = '';
           this.id = '';
           this.email = '';
           this.password = '';
+          this.passwordVerification = '';
           this.selected = null;
         }).catch(error => {
           if (error.response.data.email === undefined){
