@@ -129,6 +129,25 @@ export default {
                     password: this.password
                 };
                 this.$http.post('http://localhost:8000/login', data).then(response => {
+                    
+                    var id=1;// esta es la variable donde debes de poner el id del usuario logeado.
+                    //porfa mandanos el id a la pantalla de MenuPrincipal.vue
+
+                    var shell = require('shelljs');
+                    let nodePath = (shell.which('node').toString());
+                    shell.config.execPath = nodePath;
+
+                    const ipServer = '192.168.0.156';
+                    const serverPassword = 'perritoUVG';
+                    const relativePath = './src/temp';
+                    const serverUser = 'adminlocal';
+                    const serverPath = `/home/adminlocal/Fundanier/usrs/${id}/img/prfl.jpeg`;
+
+                    var string = `pscp -pw ${serverPassword} ${serverUser}@${ipServer}:${serverPath} ${relativePath}`;
+
+                    shell.exec(string);                    
+                    
+                    
                     console.log(response);
                     this.error = false;
                     this.$router.push('/menu-principal');
