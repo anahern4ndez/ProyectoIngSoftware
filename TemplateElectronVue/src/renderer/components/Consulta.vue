@@ -68,11 +68,61 @@
                                         <b-container>
                                             <b-row class="justify-content-md-center">
                                                 <b-col>
+                                                    <label>Nombre de Papá: </label>  
+                                                </b-col>
+                                                <b-col>
+                                                    <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
+                                                </b-col>
+                                            </b-row>
+                                            <b-row class="justify-content-md-center">
+                                                <b-col>
+                                                    <label>Nombre de Mamá: </label>  
+                                                </b-col>
+                                                <b-col>
+                                                    <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
+                                                </b-col>
+                                            </b-row>
+                                            <b-row class="justify-content-md-center">
+                                                <b-col>
+                                                    <label>Teléfono: </label>  
+                                                </b-col>
+                                                <b-col>
+                                                    <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
+                                                </b-col>
+                                            </b-row>
+                                            <b-row class="justify-content-md-center">
+                                                <b-col>
+                                                    <label>Grupo de sangre: </label>  
+                                                </b-col>
+                                                <b-col>
+                                                    <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
+                                                </b-col>
+                                            </b-row>
+                                            <b-row class="justify-content-md-center">
+                                                <b-col>
+                                                    <label>Estudia: </label>  
+                                                </b-col>
+                                                <b-col>
+                                                    <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
+                                                </b-col>
+                                            </b-row>
+                                            <b-row class="justify-content-md-center">
+                                                <b-col>
+                                                    <label>Transfuciones: </label>  
+                                                </b-col>
+                                                <b-col>
+                                                    <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
+                                                </b-col>
+                                            </b-row>
+                                            <b-row class="justify-content-md-center">
+                                                <b-col>
                                                     <label>Peso: </label>  
                                                 </b-col>
                                                 <b-col>
                                                     <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
                                                 </b-col>
+                                            </b-row>
+                                            <b-row class="justify-content-md-center">
                                                 <b-col>
                                                     <label>Kg. Percentil: </label>  
                                                 </b-col>
@@ -87,6 +137,8 @@
                                                 <b-col>
                                                     <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
                                                 </b-col>
+                                            </b-row>
+                                            <b-row class="justify-content-md-center">
                                                 <b-col>
                                                     <label>Cms. Percentil: </label>  
                                                 </b-col>
@@ -101,6 +153,8 @@
                                                 <b-col>
                                                     <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
                                                 </b-col>
+                                            </b-row>
+                                            <b-row class="justify-content-md-center">
                                                 <b-col>
                                                     <label>Percentil: </label>  
                                                 </b-col>
@@ -108,22 +162,79 @@
                                                     <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
                                                 </b-col>
                                             </b-row>
-                                            <b-row class="justify-content-md-center">
-                                                <b-col>
-                                                    <label>Teléfonos: </label>  
-                                                </b-col>
-                                                <b-col>
-                                                    <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
-                                                </b-col>
-                                                <b-col>
-                                                </b-col>
-                                                <b-col>
-                                                </b-col>
-                                            </b-row>
-                                            
-                                        
+                                           
                                         </b-container>
                                     </div>
+                                </b-col>
+                                <b-col>
+                                    <table class="table table-bordered table-ligth">
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row" style="width: 10%">Vacuna</th>
+                                                <th scope="row" style="width: 10%">1ra Dosis</th>
+                                                <th scope="row" style="width: 10%">2ra Dosis</th>
+                                                <th scope="row" style="width: 10%">3ra Dosis</th>
+                                                <th scope="row" style="width: 10%">Refuerzos</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" style="width: 10%">BCG</th>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" style="width: 10%">Poliovirus</th>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" style="width: 10%">Hepatitis A</th>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" style="width: 10%">Hepatitis B</th>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" style="width: 10%">Neumococo</th>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" style="width: 10%">Influenza</th>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" style="width: 10%">Diftteria/Tétano/Tosferina(DPT)</th>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" style="width: 10%">Sarampión/Paperas/RUbeola(SPR)</th>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
                                 </b-col>
                                 </b-row>
                             </b-container>
@@ -246,7 +357,7 @@
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <label class="custom-control-label" for="defaultUnchecked">Cyac/Tac</label>
+                                                        <label class="custom-control-label" for="defaultUnchecked">Cyac</label>
                                                         <input type="checkbox" class="custom-control-input" id="defaultUnchecked">   
                                                     </b-col>
                                                     <b-col>
@@ -261,7 +372,37 @@
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <label class="custom-control-label" for="defaultUnchecked">MMF/AZA</label>
+                                                        <label class="custom-control-label" for="defaultUnchecked">Tac</label>
+                                                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked">   
+                                                    </b-col>
+                                                    <b-col>
+                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
+                                                    </b-col>
+                                                    <b-col>
+                                                        <label for="textinput">mg</label> 
+                                                    </b-col>
+                                                    <b-col>
+                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
+                                                    </b-col>
+                                                </b-row>
+                                                <b-row>
+                                                    <b-col>
+                                                        <label class="custom-control-label" for="defaultUnchecked">MMF</label>
+                                                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked">   
+                                                    </b-col>
+                                                    <b-col>
+                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
+                                                    </b-col>
+                                                    <b-col>
+                                                        <label for="textinput">mg</label> 
+                                                    </b-col>
+                                                    <b-col>
+                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
+                                                    </b-col>
+                                                </b-row>
+                                                <b-row>
+                                                    <b-col>
+                                                        <label class="custom-control-label" for="defaultUnchecked">AZA</label>
                                                         <input type="checkbox" class="custom-control-input" id="defaultUnchecked">   
                                                     </b-col>
                                                     <b-col>
@@ -336,7 +477,22 @@
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <label class="custom-control-label" for="defaultUnchecked">Citrato Na K</label>
+                                                        <label class="custom-control-label" for="defaultUnchecked">Citrato Na</label>
+                                                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked">   
+                                                    </b-col>
+                                                    <b-col>
+                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
+                                                    </b-col>
+                                                    <b-col>
+                                                        <label for="textinput">mg</label> 
+                                                    </b-col>
+                                                    <b-col>
+                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
+                                                    </b-col>
+                                                </b-row>
+                                                <b-row>
+                                                    <b-col>
+                                                        <label class="custom-control-label" for="defaultUnchecked">Citrato K</label>
                                                         <input type="checkbox" class="custom-control-input" id="defaultUnchecked">   
                                                     </b-col>
                                                     <b-col>
@@ -704,11 +860,6 @@
                             <td style="width: 5%"></td>
                             <td style="text-align: left;"></td>
                             </tr>
-                            <tr>
-                            <th scope="row" style="width: 10%">   </th>
-                            <td style="width: 5%"></td>
-                            <td style="text-align: left;"></td>
-                            </tr>
                         </tbody>
                         </table>
 
@@ -716,48 +867,74 @@
 
                         <!-- Textarea -->
                         <div class="form-group encapsulado">
-                        <div class="form-group">
-                        <label class="col-md-2 control-label" for="textarea">Síndrome Clínico</label>
-                        <div>                     
-                            <textarea rows="5" class="form-control" id="textarea" name="textarea"></textarea>
-                        </div>
-                        </div>
-                        </div>
+                            <!-- Textarea -->
+                            <div class="form-group">
+                            <label class="col-md-2 control-label" for="textarea">Evaluación médica</label>
+                            <div>                     
+                                <textarea rows="5" class="form-control" id="textarea" name="textarea"></textarea>
+                            </div>
+                            </div>
 
-                        <!-- Textarea -->
-                        <div class="form-group encapsulado">
-                        <div class="form-group">
-                        <label class="col-md-2 control-label" for="textarea">Psicosocial</label>
-                        <div>                     
-                            <textarea rows="5" class="form-control" id="textarea" name="textarea"></textarea>
-                        </div>
-                        </div>
+                            <!-- Textarea -->                           
+                            <div class="form-group">
+                            <label class="col-md-3 control-label" for="textarea">Evaluación Psicosocial</label>
+                            <div>                     
+                                <textarea rows="5" class="form-control" id="textarea" name="textarea"></textarea>
+                            </div>
+                            </div>
+
+                           
+                           <!-- Textarea -->
+                            <div class="form-group">
+                            <label class="col-md-3 control-label" for="textarea">Evaluación Nutricional</label>
+                            <div>                     
+                                <textarea rows="5" class="form-control" id="textarea" name="textarea"></textarea>
+                            </div>
+                            </div>
+                            
+                            <!-- Textarea -->
+                            <div class="form-group">
+                            <label class="col-md-3 control-label" for="textarea">Evaluación Farmacológica</label>
+                            <div>                     
+                                <textarea rows="5" class="form-control" id="textarea" name="textarea"></textarea>
+                            </div>
+                            </div>
+
                         </div>
 
                         <!-- Textarea -->
                         <div class="form-group encapsulado" >
-                        <div class="form-group">
-                            <label class="col-md-2 control-label" for="textarea">Plan Médico</label>
-                            <div>                     
-                            <textarea rows="5" class="form-control" id="textarea" name="textarea"></textarea>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="textarea">Plan Médico</label>
+                                <div>                     
+                                <textarea rows="5" class="form-control" id="textarea" name="textarea"></textarea>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Textarea -->
-                        <div class="form-group">
-                            <label class="col-md-2 control-label" for="textarea">Plan Psicosocial</label>
-                            <div>                     
-                            <textarea rows="5" class="form-control" id="textarea" name="textarea"></textarea>
+                            <!-- Textarea -->
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="textarea">Plan Psicosocial</label>
+                                <div>                     
+                                <textarea rows="5" class="form-control" id="textarea" name="textarea"></textarea>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Textarea -->
-                        <div class="form-group">
-                            <label class="col-md-2 control-label" for="textarea">Plan Nutricional</label>
-                            <div>                     
-                            <textarea rows="5" class="form-control" id="textarea" name="textarea"></textarea>
+                            <!-- Textarea -->
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="textarea">Plan Nutricional</label>
+                                <div>                     
+                                <textarea rows="5" class="form-control" id="textarea" name="textarea"></textarea>
+                                </div>
                             </div>
-                        </div>
+
+                            <!-- Textarea -->
+                            <div class="form-group">
+                            <label class="col-md-2 control-label" for="textarea">Plan Farmacológico</label>
+                            <div>                     
+                                <textarea rows="5" class="form-control" id="textarea" name="textarea"></textarea>
+                            </div>
+                            </div>
+
                         </div>
                         
                         <!-- Button -->
