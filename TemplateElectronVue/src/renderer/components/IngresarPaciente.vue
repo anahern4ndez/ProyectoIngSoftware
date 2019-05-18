@@ -42,11 +42,36 @@
                                   outline
                               ></v-text-field>
                       </div>
-                      <v-text-field
-                              v-model="Fecha_de_nacimiento"
-                              label="Fecha de nacimiento"
-                              outline
-                          ></v-text-field>
+                      
+                        <v-flex xs12 sm6 md4>
+                          <v-menu
+                            v-model="menu_nacimiento"
+                            :close-on-content-click="false"
+                            :nudge-right="40"
+                            lazy
+                            transition="scale-transition"
+                            offset-y
+                            full-width
+                            min-width="200px"
+                            
+                            
+                          >
+                            <template v-slot:activator="{ on }">
+                              
+                              <v-text-field
+                                v-model="Fecha_de_nacimiento"
+                                label="Fecha de nacimiento"
+                                prepend-icon="event"
+                                readonly
+                                v-on="on"
+                                
+                              ></v-text-field>
+                              
+                            </template>
+                          <v-date-picker v-model="Fecha_de_nacimiento" @input="menu_nacimiento = false, computeAge(Fecha_de_nacimiento)" color="#3A4750" locale='es-ES'></v-date-picker>
+                          </v-menu>
+                        </v-flex>
+                      
                       <v-text-field
                               v-model="Nombre_de_padre"
                               label="Nombre del padre"
@@ -80,6 +105,7 @@
                             v-model="Edad"
                             label="Edad"
                             outline
+                            placeholder="[[this.Edad]]"
                         ></v-text-field>
                     <div id="inBox">
                       <v-text-field
@@ -222,8 +248,11 @@ export default {
         //datos del paciente a ingresar
         CUI:'', 
         Nombre:'', 
-        Apellido:'', 
-        Fecha_de_nacimiento:'',
+        Apellido:'',
+        //aqui se guarda la fecha  
+        Fecha_de_nacimiento: null,
+        //sirve para menu de nacimiento, como un trigger
+        menu_nacimiento: false,
         Procedencia:'',
         Nombre_de_padre:'',
         Nombre_de_madre:'',
@@ -283,7 +312,36 @@ export default {
               console.log("Error");
           });
 
+        },
+
+        computeAge(datePicked){
+          if (this.menu_nacimiento == false){
+            var fechaActual = new Date();
+            var aComputar = new Date(datePicked);
+
+            var diffAnio = fechaActual.getFullYear() - aComputar.getFullYear();
+            var meses = fechaActual.getMonth() - aComputar.getMonth();
+
+            if (meses<0 || (meses == 0 && fechaActual.getDate() < aComputar.getDate())){
+              --diffAnio;
+            }
+            //console.log(diffAnio);
+            if (diffAnio>0){
+              return this.Edad = diffAnio;
+            } else{
+              return this.Edad = meses + ' meses';
+            }
+            
+          }
+        
+        },
+        prettyPlaceholders(){
+          //poner aqui todos los placeholders que cambian en runtime..
+          this.Edad = ' '
         }
+    },
+    beforeMount(){
+      this.prettyPlaceholders();
     }
 };
 </script>
@@ -301,6 +359,12 @@ div#datosGenerales {
 div#inBox {
   margin-left: 5%;
   width: 50%;
+  float: right;
+}
+
+div#inBox-date {
+  margin-left: 5%;
+  width: 100%;
   float: right;
 }
 /*
