@@ -170,7 +170,7 @@ export default {
         radioGroup:1,
         lista: [],
         headers: [
-          { text: 'CUI (ID)', align: 'center',value: 'id'},
+          { text: 'CUI (ID)', align: 'center',value: 'CUI'},
           { text: 'Nombre', align: 'center', value: 'Nombre' },
           { text: 'Apellido', align: 'center', value: 'Apellido' }, 
           { text: 'Procedencia', align: 'center', value: 'Procedencia' },
