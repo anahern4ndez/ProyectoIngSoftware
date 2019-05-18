@@ -16,11 +16,11 @@
                 type="text"
                 class="form-control"
                 v-model="idb"
-                v-on:keyup.enter="getOneUser"
-                placeholder="DPI de usuario a editar permisos"
+                v-on:keyup.enter="getSomeUser"
+                placeholder="Ingrese el nombre o DPI del usuario que desee buscar para editar permisos"
               >
               <div class="input-group-append">
-                <button class="btn btn-warning" type="button" v-on:click="getOneUser">Buscar</button>
+                <button class="btn btn-warning" type="button" v-on:click="getSomeUser">Buscar</button>
               </div>
             </div>
             <br>
@@ -59,14 +59,16 @@
             </div>-->
             <v-data-table :headers="headers" :items="user" class="elevation-1">
               <template v-slot:items="props">
-                <td class="text-xs-center">{{ props.item.id }}</td>
-                <td class="text-xs-center">{{ props.item.name }}</td>
-                <td class="text-xs-center">{{ props.item.email }}</td>
-                <td class="text-xs-center"v-if="props.item.puesto===1" >Administrador</td>
-                <td class="text-xs-center"v-if="props.item.puesto===2" >Doctor</td>
-                <td class="text-xs-center"v-if="props.item.puesto===3" >Secretaria</td>
-                <td class="text-xs-center"v-if="props.item.puesto===4" >Asistente</td>
-                <td class="text-xs-center"v-if="props.item.puesto===5" >Visitante</td>
+                <tr @click="selectUser(props.item)">
+                  <td class="text-xs-center">{{ props.item.id }}</td>
+                  <td class="text-xs-center">{{ props.item.name }}</td>
+                  <td class="text-xs-center">{{ props.item.email }}</td>
+                  <td class="text-xs-center"v-if="props.item.puesto===1" >Administrador</td>
+                  <td class="text-xs-center"v-if="props.item.puesto===2" >Doctor</td>
+                  <td class="text-xs-center"v-if="props.item.puesto===3" >Secretaria</td>
+                  <td class="text-xs-center"v-if="props.item.puesto===4" >Asistente</td>
+                  <td class="text-xs-center"v-if="props.item.puesto===5" >Visitante</td>
+                </tr>
               </template>
             </v-data-table>
           </b-col>
@@ -243,6 +245,16 @@ export default {
       this.user = response.data.users;
     });
     },
+    getSomeUser(){
+      this.$http.get(`http://localhost:8000/users/some?idb=${this.idb}`).then(response => {
+        if(response.data.usersia.length === 0){
+          this.errorBusqueda = true;
+        }else{
+          this.errorBusqueda = false;
+          this.user = response.data.usersia;
+        }
+    });
+    },
     getOneUser(){
       this.$http.get(`http://localhost:8000/users/look?idb=${this.idb}`).then(response => {
         if(response.data.usersi === null){
@@ -280,6 +292,27 @@ export default {
           }
         }
       });
+    },
+    selectUser(recibed){
+      this.name = recibed.name;
+      this.id = recibed.id;
+      this.email = recibed.email;
+      this.idb = '';
+      if (recibed.puesto === 1){
+        this.selected = 'Administrador'; 
+      }
+      if (recibed.puesto === 2){
+        this.selected = 'Doctor'; 
+      }
+      if (recibed.puesto === 3){
+         this.selected = 'Secretaria'; 
+      }
+      if (recibed.puesto === 4){
+        this.selected = 'Asistente'; 
+      }
+      if (recibed.puesto === 5){
+        this.selected = 'Visitante'; 
+      }    
     },
     eliminar(){
       this.errorName = false;

@@ -114,4 +114,15 @@ class ExampleController extends Controller
             'message'=>'Funciono',
         ], 200);
     }
+    public function getSomeUser(Request $request)
+    {
+        $id = $request->idb;
+        $usersia = User::query()->where('name', 'like', "%" . $id . "%")->orWhere('id', 'like', $id)->get();
+
+        return response()->json([
+            'success' => true,
+            'usersia' => $usersia,
+            'message'=>'Funciono',
+        ], 200);
+    }
 }

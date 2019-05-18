@@ -26,6 +26,7 @@ $router->get('/', function () use ($router) {
 $router->get('/test', 'ExampleController@index');
 $router->get('/users', 'ExampleController@getUsers');
 $router->get('/users/look', 'ExampleController@getOneUser');
+$router->get('/users/some', 'ExampleController@getSomeUser');
 $router->post('/message', 'ExampleController@postExample');
 
 //CRUD: TABLA ESTADOS DB
