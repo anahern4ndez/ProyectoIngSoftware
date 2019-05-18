@@ -58,14 +58,13 @@ class PacienteController extends Controller
     }
 
     function findAll(){
-        $val = Paciente::all();
-        foreach ($val as $v) {
-            $v->Sindrome_Clinico_Presentacion;
-            $v->Sexo;
-        }
+        //$val = Paciente::all();
+        $val = Paciente::with('Procedencia', 'Sexo','Sindrome_Clinico_Presentacion', 'tipo_de_sangre', 'EstadoActual', 'tipo_respuesta_estudia', 'tipo_respuesta_trans')->get();
+
         return response()->json([
             'success' => true,
-            'Pacientes' => $val
+            'Pacientes' => $val,
+            //'sexo' => $v->sexo->significado
         ], 200);
         
     }

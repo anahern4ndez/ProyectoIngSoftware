@@ -58,9 +58,9 @@
                     <td class="text-xs-center">{{ props.item.CUI }}</td>
                     <td class="text-xs-center">{{ props.item.Nombre }}</td>
                     <td class="text-xs-center">{{ props.item.Apellido }}</td>
-                    <td class="text-xs-center">{{ props.item.Procedencia }}</td>
+                    <td class="text-xs-center">{{ props.item.procedencia.Significado }}</td>
                     <td class="text-xs-center">{{ props.item.Fecha_de_nacimiento }}</td>
-                    <td class="text-xs-center">{{ props.item.EstadoActual }}</td>
+                    <td class="text-xs-center">{{ props.item.estado_actual.significado }}</td>
                     <td class="justify-center layout px-0">
                       <v-icon
                       small
