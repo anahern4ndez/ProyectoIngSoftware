@@ -2,63 +2,65 @@
   <v-layout wrap>
     <v-flex
       xs12
-      class="mb-3">
+      class="mb-3"> 
+      <v-btn outline v-if="calendarType == 'day'"
+        v-on:click="calendarType = 'month'">
+        <v-icon class="mr-2">fa-arrow-circle-left</v-icon>
+        Regresar a Vista Mensual
+      </v-btn>
       <v-sheet height="500">
         <v-calendar
+          v-model="startDate"
           :type="calendarType"
           locale="es"
           :now="today"
           :value="today"
-          color="primary">
+          color="primary"
+          @click:day="dayClick"
+          @click:time="intervalClick">
+          
+          <!-- template para renderear vista mensual -->
           <template v-slot:day="{ date }">
             <template v-for="event in eventsMap[date]">
-              <v-menu
+              <div
                 :key="event.title"
-                v-model="event.open"
-                full-width
-                offset-x>
-                <template v-slot:activator="{ on }">
-                  <div
-                    v-if="!event.time"
-                    v-ripple
-                    class="my-event"
-                    v-on="on"
-                    v-html="event.title">
-                  </div>
-                </template>
-                <v-card
-                  color="grey lighten-4"
-                  min-width="350px"
-                  flat
-                >
-                  <v-toolbar
-                    color="rgb(211, 88, 35)"
-                    dark>
-                    <v-toolbar-title v-html="event.title"></v-toolbar-title>
-                    <v-spacer></v-spacer>
-                  </v-toolbar>
-                  <v-card-title primary-title>
-                    <span v-html="event.details"></span>
-                  </v-card-title>
-                </v-card>
-              </v-menu>
+                v-ripple
+                class="my-event"
+                v-html="event.title">
+              </div>
             </template>
           </template>
+
+          <!-- template para renderear vista diaria -->
+          <!-- the events at the top (all-day) -->
+          <template v-slot:dayHeader="{ date }">
+            <template v-for="event in eventsMap[date]">
+              <!-- all day events don't have time -->
+              <div
+                v-if="!event.time"
+                :key="event.title"
+                class="my-event"
+                v-html="event.title"
+              ></div>
+            </template>
+          </template>
+          <!-- the events at the bottom (timed) -->
+          <template v-slot:dayBody="{ date, timeToY, minutesToPixels }">
+            <template v-for="event in eventsMap[date]">
+              <!-- timed events -->
+              <div
+                v-if="event.time"
+                :key="event.title"
+                :style="{ top: timeToY(event.time) + 'px', height: minutesToPixels(event.duration) + 'px' }"
+                class="my-event with-time"
+                v-html="event.title"
+              ></div>
+            </template>
+          </template>
+
         </v-calendar>
 
-        <template v-slot:dayHeader="{ present }">
-          <template
-            v-if="present"
-            class="text-xs-center">
-            Today
-          </template>
-        </template>
-
       </v-sheet>
-    </v-flex>
-
-    <v-flex>
-      <v-btn v-on:click="showAppointmentDialog">Crear Cita</v-btn>
     </v-flex>
 
     <!-- <v-flex
@@ -119,7 +121,7 @@
               <v-flex xs12>
                 <v-select :items="dummyDoctors" label="Doctor" required v-model="selectedDoctor"></v-select>
               </v-flex>
-              <v-flex xs12 sm6>
+              <v-flex xs12 sm12>
                 <v-menu
                   ref="menu"
                   v-model="dateMenuOpen"
@@ -137,8 +139,8 @@
                       label="Escoger Fecha de Cita"
                       prepend-icon="event"
                       readonly
-                      v-on="on"
-                    ></v-text-field>
+                      v-on="on">
+                    </v-text-field>
                   </template>
                   <v-date-picker v-model="selectedDate" no-title scrollable locale="es">
                     <v-spacer></v-spacer>
@@ -146,6 +148,38 @@
                     <v-btn flat color="primary" @click="$refs.menu.save(selectedDate)">Aceptar</v-btn>
                   </v-date-picker>
                 </v-menu>
+              </v-flex>
+              <v-flex xs12 sm6>
+                <v-menu
+                  ref="menu"
+                  v-model="timeMenuOpen"
+                  :close-on-content-click="false"
+                  :nudge-right="40"
+                  :return-value.sync="selectedTime"
+                  lazy
+                  transition="scale-transition"
+                  offset-y
+                  full-width
+                  min-width="290px">
+                  <template v-slot:activator="{ on }">
+                    <v-text-field
+                      v-model="selectedTime"
+                      label="Escoger Hora de Cita"
+                      prepend-icon="event"
+                      readonly
+                      v-on="on">
+                    </v-text-field>
+                  </template>
+                  <v-time-picker v-model="selectedTime" :landscape="true" locale="es">
+                    <v-spacer></v-spacer>
+                    <v-btn flat color="primary" @click="timeMenuOpen = false">Cancelar</v-btn>
+                    <v-btn flat color="primary" @click="$refs.menu.save(selectedTime)">Aceptar</v-btn>
+                  </v-time-picker>
+                </v-menu>
+              </v-flex>
+              <v-flex xs12 sm6>
+                <v-text-field label="Duración de Cita (en minutos)" v-model="selectedDuration">
+                </v-text-field>
               </v-flex>
             </v-layout>
           </v-container>
@@ -178,9 +212,13 @@
     data: () => ({
       today: '',
       calendarType: 'month',
+      startDate: '',
       dialogOpen: false,
       dateMenuOpen: false,
+      timeMenuOpen: false,
       selectedDate: '',
+      selectedTime: '',
+      selectedDuration: '',
       newAppointment: '',
       typeOptions: [
         { text: 'Diario', value: 'day' },
@@ -192,13 +230,15 @@
           title: 'Doctor: Randall Lou',
           details: 'Paciente: Rodrigo Zea',
           date: '2019-05-10',
-          open: false
+          time: '09:00',
+          duration: 90
         },
         {
           title: 'Doctor: Celeste Azul',
           details: 'Paciente: Esteban Cabrera',
           date: '2019-05-10',
-          open: false
+          time: '11:00',
+          duration: 45
         }
       ],
       dummyPatients: [
@@ -218,6 +258,7 @@
     }),
     mounted () {
       this.today = new Date().toISOString().substring(0, 10);
+      this.start = this.today;
       this.selectedDate = new Date().toISOString().substr(0, 10);
     },
     computed: {
@@ -229,11 +270,11 @@
       }
     },
     methods: {
-      open (event) {
-        alert(event.title)
-      },
       showAppointmentDialog () {
         this.dialogOpen = true;
+      },
+      showAppointmentDetails () {
+        alert('details');
       },
       createAppointment () {
         this.dialogOpen = false;
@@ -241,8 +282,20 @@
           title: `Doctor: ${this.selectedDoctor}`,
           details: `Paciente: ${this.selectedPatient}`,
           date: this.selectedDate,
-          open: false
+          time: this.selectedTime,
+          duration: this.selectedDuration
         });
+      },
+      dayClick(event) {
+        if (this.calendarType === 'month') {
+          this.selectedDate = event.date;
+          this.startDate = event.date;
+          this.calendarType = 'day';
+        }
+      },
+      intervalClick(event) {
+        this.selectedTime = event.time;
+        this.dialogOpen = true;
       }
     }
   }

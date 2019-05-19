@@ -44,6 +44,10 @@ const routes = [
     component: Vue.component('page-one', require('./components/PageOne.vue').default)
   },
   {
+    path: '/gestionarPaciente',
+    component: Vue.component('page-one', require('./components//gestionarPaciente.vue').default)
+  },
+  {
     path: '/gestionUsuarios',
     component: Vue.component('gestionUsuarios', require('./components/gestionUsuarios.vue').default)
   },
