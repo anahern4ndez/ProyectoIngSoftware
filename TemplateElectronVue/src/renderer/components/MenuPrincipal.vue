@@ -6,7 +6,7 @@
 				<b-row align-h="around" align-v="center">
 
 					<b-col order="1" cols="1">
-						<img src="../assets/Randall.jpeg" alt="" width="120" height="120">
+						<img src="src\temp\prfl.jpeg" alt="" width="120" height="120">
 					</b-col>
 
 					<b-col order="1" cols="6">
@@ -135,7 +135,7 @@ export default {
       this.$router.push("/gestionUsuarios");
     },
     darConsulta() {
-      this.$router.push("/Consulta");
+      this.$router.push("/gestionarPaciente");
     },
 
     hacerCita() {
