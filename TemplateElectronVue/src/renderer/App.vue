@@ -58,7 +58,7 @@
     </v-content>
     <v-footer color="#3A4750">
         <v-spacer></v-spacer>
-        <div class="pa-3 accent--text">Fundanier</div>
+        <div class="pa-3 accent--text" style="font-weight:bold; font-size:large;">Fundanier</div>
     </v-footer>
   </v-app>
 </template>

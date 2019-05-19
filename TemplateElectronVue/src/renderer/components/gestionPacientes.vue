@@ -130,19 +130,24 @@
       </div>
     </div>
     <div id="botones">
-      <b-container class="bv-example-row2">
-        <b-row class="justify-content-md-center">
-            <b-col order="4" cols="6">
-                <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="ingresarNuevo">Ingresar nuevo paciente</button>
-                <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="darConsulta"> Dar consulta </button>
-                <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="editarPaciente"> Editar datos</button>
-                <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="archivos"> Archivos </button>
-                <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="reportes"> Reporte</button>
-                <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="estadisticas"> Estadísticas </button>
-                <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="casoslegales"> Casos legales</button>
-            </b-col>
-        </b-row>
-      </b-container>
+      <div id="boton">
+        <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="ingresarNuevo">Ingresar nuevo paciente</button>
+      </div>
+      <div id="boton">
+        <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="darConsulta"> Dar consulta </button>
+      </div>
+      <div id="boton">
+        <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="editarPaciente"> Editar datos</button>
+      </div>
+      <div id="boton">
+        <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="archivos"> Archivos </button>
+      </div>
+      <div id="boton">
+        <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="reportes"> Reporte</button>
+      </div>
+      <div id="boton">
+        <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="estadisticas"> Estadísticas </button>
+      </div>
     </div>
   </div>
 </template>
@@ -202,7 +207,7 @@ export default {
         /* metodos de redirección de botones */
         // falta vista para dar una consulta
         darConsulta(){
-          this.$router.push('/IngresarPaciente');
+          this.$router.push('/darConsulta');
         },
         eliminar(){
           this.$router.push('/IngresarPaciente');
@@ -212,9 +217,6 @@ export default {
           this.editedIndex = this.pacientes.indexOf(received)
         },
         editarPaciente(){
-          this.$router.push('/EditarPaciente');
-        },
-        casoslegales(){
           this.$router.push('/EditarPaciente');
         },
         archivos(){
@@ -320,5 +322,13 @@ h1#headers{
 h2#headers{
   font-family: Nunito;
   font-weight: bolder;
+}
+div#boton {
+  width: 30%;
+  margin-top: 1%;
+  margin-left: 1%;
+  margin-right: 1%;
+  margin-bottom: 1%;
+  float: left;
 }
 </style>
