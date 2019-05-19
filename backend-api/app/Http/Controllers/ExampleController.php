@@ -63,7 +63,8 @@ class ExampleController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'email' => 'email',
+            'id' => 'min:12|max:12|unique:users,id',
+            'email' => 'email|unique:users,email',
             'password' => 'min:6|max:255'
         ]);
         
@@ -83,6 +84,7 @@ class ExampleController extends Controller
     public function update(Request $request)
     {
         $this->validate($request, [
+            'id' => 'min:12|max:12',
             'email' => 'email',
             'password' => 'min:6|max:255'
         ]);
