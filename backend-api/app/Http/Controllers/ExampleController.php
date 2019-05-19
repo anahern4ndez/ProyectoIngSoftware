@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\User;
@@ -117,7 +118,7 @@ class ExampleController extends Controller
     public function getSomeUser(Request $request)
     {
         $id = $request->idb;
-        $usersia = User::query()->where('name', 'like', "%" . $id . "%")->orWhere('id', 'like', $id)->get();
+        $usersia = User::query()->where(DB::raw('upper(name)'), 'like', "%" . strtoupper($id) . "%")->orWhere('id', 'like', $id)->get();
 
         return response()->json([
             'success' => true,
