@@ -14,7 +14,7 @@ class CreateVacunasTable extends Migration
     public function up()
     {
         Schema::create('vacunas', function (Blueprint $table) {
-            $table->integer('idPaciente');
+            $table->string('idPaciente');
             
             $table->integer('BCG');
             $table->integer('Poliovirus');
