@@ -178,59 +178,59 @@
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">BCG</th>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td><input type="checkbox" /></td>
+                                                <td><input type="checkbox" /></td>
+                                                <td><input type="checkbox" /></td>
+                                                <td><input type="checkbox" /></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Poliovirus</th>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td><input type="checkbox" /></td>
+                                                <td><input type="checkbox" /></td>
+                                                <td><input type="checkbox" /></td>
+                                                <td><input type="checkbox" /></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Hepatitis A</th>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td><input type="checkbox" /></td>
+                                                <td><input type="checkbox" /></td>
+                                                <td><input type="checkbox" /></td>
+                                                <td><input type="checkbox" /></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Hepatitis B</th>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td><input type="checkbox" /></td>
+                                                <td><input type="checkbox" /></td>
+                                                <td><input type="checkbox" /></td>
+                                                <td><input type="checkbox" /></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Neumococo</th>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td><input type="checkbox" /></td>
+                                                <td><input type="checkbox" /></td>
+                                                <td><input type="checkbox" /></td>
+                                                <td><input type="checkbox" /></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Influenza</th>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td><input type="checkbox" /></td>
+                                                <td><input type="checkbox" /></td>
+                                                <td><input type="checkbox" /></td>
+                                                <td><input type="checkbox" /></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Diftteria/Tétano/Tosferina(DPT)</th>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td><input type="checkbox" /></td>
+                                                <td><input type="checkbox" /></td>
+                                                <td><input type="checkbox" /></td>
+                                                <td><input type="checkbox" /></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Sarampión/Paperas/RUbeola(SPR)</th>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td><input type="checkbox" /></td>
+                                                <td><input type="checkbox" /></td>
+                                                <td><input type="checkbox" /></td>
+                                                <td><input type="checkbox" /></td>
                                             </tr>
 
                                         </tbody>
@@ -818,53 +818,51 @@
                             <tr>
                                 <th scope="row" style="width: 10%">COONG</th>
                                 <td style="width: 5%">NI</td>
-                                <td style="text-align: left;"></td>
+                                <td contenteditable='true' style="text-align: left;"></td>
                             </tr>
                             <tr>
                                 <th scope="row" style="width: 10%">Corazón</th>
-                                <td style="width: 5%"></td>
-                                <td style="text-align: left;"></td>
+                                <td style="width: 5%"><input type="checkbox" /></td>
+                                <td contenteditable='true' style="text-align: left;"></td>
                             </tr>
                             <tr>
                             <th scope="row" style="width: 10%">Pulmones</th>
-                            <td style="width: 5%"></td>
-                            <td style="text-align: left;"></td>
+                            <td style="width: 5%"><input class="custom-input" type="checkbox" /></td>
+                            <td contenteditable='true' style="text-align: left;"></td>
                             </tr>
                             <tr>
                             <th scope="row" style="width: 10%">Abdomen</th>
-                            <td style="width: 5%"></td>
-                            <td style="text-align: left;"></td>
+                            <td style="width: 5%"><input type="checkbox" /></td>
+                            <td contenteditable='true' style="text-align: left;"></td>
                             </tr>
                             <tr>
                             <th scope="row" style="width: 10%">Genitales</th>
-                            <td style="width: 5%"></td>
-                            <td style="text-align: left;">Taner</td>
+                            <td style="width: 5%"><input type="checkbox" /></td>
+                            <td contenteditable='true' style="text-align: left;">Taner</td>
                             </tr>
                             <tr>
                             <th scope="row" style="width: 10%">Extremidades</th>
-                            <td style="width: 5%"></td>
-                            <td style="text-align: left;"></td>
+                            <td style="width: 5%"><input type="checkbox" /></td>
+                            <td contenteditable='true' style="text-align: left;"></td>
                             </tr>
                             <tr>
                             <th scope="row" style="width: 10%">Piel</th>
-                            <td style="width: 5%"></td>
-                            <td style="text-align: left;"></td>
+                            <td style="width: 5%"><input type="checkbox" /></td>
+                            <td contenteditable='true' style="text-align: left;"></td>
                             </tr>
                             <tr>
                             <th scope="row" style="width: 10%">SN</th>
-                            <td style="width: 5%"></td>
-                            <td style="text-align: left;"></td>
+                            <td style="width: 5%"><input type="checkbox" /></td>
+                            <td contenteditable='true' style="text-align: left;"></td>
                             </tr>
                             <tr>
                             <th scope="row" style="width: 10%">Otros</th>
-                            <td style="width: 5%"></td>
-                            <td style="text-align: left;"></td>
+                            <td style="width: 5%"><input type="checkbox" id="defaultUnchecked"></td>
+                            <td contenteditable='true' style="text-align: left;"></td>
                             </tr>
                         </tbody>
                         </table>
-
-
-
+                        
                         <!-- Textarea -->
                         <div class="form-group encapsulado">
                             <!-- Textarea -->
@@ -983,9 +981,7 @@
 
                         </fieldset>
                         </form>
-
-                    
-                    
+  
                 </div>
             </b-tab>
             <b-tab class='posicion' title="Tab 2"><b-card-text>Tab Contents 2</b-card-text></b-tab>
