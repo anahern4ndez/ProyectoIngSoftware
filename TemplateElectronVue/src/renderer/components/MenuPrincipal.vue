@@ -135,7 +135,7 @@ export default {
       this.$router.push("/gestionUsuarios");
     },
     darConsulta() {
-      this.$router.push("/Consulta");
+      this.$router.push("/gestionarPaciente");
     },
 
     hacerCita() {
