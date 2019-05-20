@@ -167,7 +167,7 @@ export default {
       //esto deberia ser un arrray de pacientes que contengan todos sus atributos...
       
       this.pacientes = response.data.Pacientes;
-      this.selectedPatients = response.data.Pacientes[0];
+      //this.selectedPatients = response.data.Pacientes[0];
       //console.log(this.selectedPatients = response.data.Pacientes);
       //this.Nombre = response.data.Pacientes[0].Nombre;
       //this.Apellido = response.data.Pacientes[0].Apellido;

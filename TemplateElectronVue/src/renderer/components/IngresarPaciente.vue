@@ -157,16 +157,16 @@
               <v-layout align-center justify-end />
                 <h3 id="headers"  class="text-xs-center">Síndrome Clínico de Presentación</h3>              
                   <v-container fluid>
-                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="Sx. Nefrítico" value="Sx. Nefrítico"></v-checkbox>
-                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="Sx. Nefrotico" value="Sx. Nefrotico"></v-checkbox>
-                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="Anomalías Urinarias Asintomáticas" value="Anomalías Urinarias Asintomáticas"></v-checkbox>
-                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="IRA" value="IRA"></v-checkbox>
-                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="IRC" value="IRC"></v-checkbox>
-                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="ITU" value="ITU"></v-checkbox>
-                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="Uropatía Obstructiva" value="Uropatía Obstructiva"></v-checkbox>
-                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="Tubulopatía" value="Tubulopatía"></v-checkbox>
-                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="HTA" value="HTA"></v-checkbox>
-                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="Nefrolitiasis" value="Nefrolitiasis"></v-checkbox>
+                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="Sx. Nefrítico" value="1"></v-checkbox>
+                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="Sx. Nefrotico" value="2"></v-checkbox>
+                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="Anomalías Urinarias Asintomáticas" value="3"></v-checkbox>
+                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="IRA" value="4"></v-checkbox>
+                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="IRC" value="5"></v-checkbox>
+                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="ITU" value="6"></v-checkbox>
+                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="Uropatía Obstructiva" value="7"></v-checkbox>
+                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="Tubulopatía" value="8"></v-checkbox>
+                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="HTA" value="9"></v-checkbox>
+                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="Nefrolitiasis" value="10"></v-checkbox>
                   </v-container>
             </v-flex>
           </v-card-title>
@@ -218,7 +218,6 @@
                 outline
                 v-model="Historia"
                 name="Historia"
-                value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
               ></v-textarea>
               </v-flex>
             </v-card-title>
@@ -304,9 +303,9 @@ export default {
             Peso: this.Peso,
             Percentil: this.Percentil,
             Talla:this.Talla,
-            PA:this.PA,
+            PA: this.PA,
             Cms_perc: this.cms_perc,
-            Historia:this.Historia,
+            Historia:this.Historia
         };
           this.$http.post('http://localhost:8000/PacienteController/insert', info).then(response => {
               this.error = false;
