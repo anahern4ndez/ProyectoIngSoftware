@@ -1,9 +1,5 @@
 <template lang="">
-<<<<<<< HEAD
-	<div>
-=======
 	<div onload="obtenerNombre">
->>>>>>> 48970e49a5aa8b7fcb033a0fd7c02cdbadf0fc2c
 			<b-container class="containerMenu">
 
 				<!-- FILA 1, FOTOS Y TÍTULO-->
@@ -31,13 +27,8 @@
 						<div>
 							<v-btn outline color="#303841" v-on:click="gestionarPaciente">Gestionar Paciente</v-btn>
 							<v-btn outline color="#303841" v-on:click="darConsulta">Generar Reporte</v-btn>
-<<<<<<< HEAD
-							<v-btn outline color="#303841" v-on:click="imprimirId">Informes Estadísticos</v-btn>
-							<v-btn outline color="#303841">Datos Generales</v-btn>
-=======
 							<v-btn outline color="#303841">Informes Estadísticos</v-btn>
 							<v-btn outline color="#303841"v-on:click="datosGenerales">Datos Generales</v-btn>
->>>>>>> 48970e49a5aa8b7fcb033a0fd7c02cdbadf0fc2c
 						</div>
 					</template>
 					</b-col>
