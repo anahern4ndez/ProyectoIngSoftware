@@ -5,30 +5,91 @@
       <b-container class="bv-example-row1">
         <b-row align-h="around" align-v="center">
           <b-col order="1" cols="8">
-            <div class="input-group">
-              <input
-                id="busquedaInput"
-                type="text"
-                class="form-control"
-                v-model="idb"
-                v-on:keyup.enter="getOneUser"
-                placeholder="Nombre Del paciente que desea buscar">
-            <div class="input-group-append">
-                <button class="btn btn-warning" type="button" v-on:click="getOneUser">Buscar</button>
-            </div>
-            </div>
-            <v-data-table :headers="headers" :items="user" class="elevation-1">
-              <template v-slot:items="props">
-                <td class="text-xs-center">{{ props.item.id }}</td>
-                <td class="text-xs-center">{{ props.item.name }}</td>
-                <td class="text-xs-center">{{ props.item.email }}</td>
-                <td class="text-xs-center"v-if="props.item.puesto===1" >Administrador</td>
-                <td class="text-xs-center"v-if="props.item.puesto===2" >Doctor</td>
-                <td class="text-xs-center"v-if="props.item.puesto===3" >Secretaria</td>
-                <td class="text-xs-center"v-if="props.item.puesto===4" >Asistente</td>
-                <td class="text-xs-center"v-if="props.item.puesto===5" >Visitante</td>
+          
+      <div id="TablaPacientes">
+        <v-card>
+          <v-text-field
+              v-model="search"
+              label="Búsqueda por nombre, apellido o número de CUI"
+              outline
+          ></v-text-field>
+
+      <!--    cuadro de dialogo para cambiar el estado del paciente -->
+          <v-dialog v-model="dialog" max-width="500px">
+            <v-card>
+              <v-card-title>
+                <span class="headline">Edit</span>
+              </v-card-title>
+              <v-card-text>
+                <v-flex xs12 sm6 md4>
+                  <div>
+                    <label for="changeStatus">Cambio estado de paciente</label>
+                    
+                    <select class='form-control' name='changeStatus' id='changeStatus' v-model='estadoNuevo'>
+                      <option value='1'>1</option>
+                      <option value='2'>2</option>
+                    </select>
+                    
+                    
+                  </div>
+                </v-flex>
+              </v-card-text>
+              
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>
+                <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
+              </v-card-actions>
+              </v-card>
+          </v-dialog>
+            
+          <v-data-table
+              
+              :headers="headers"
+              :items="pacientes"
+              :search="search"
+              item-key="id"
+              v-model="selected"
+              
+          >
+            
+              <template slot="items" slot-scope="props">
+                <tr @click="changeSelected(props.item)">
+                    <td class="text-xs-center">{{ props.item.CUI }}</td>
+                    <td class="text-xs-center">{{ props.item.Nombre }}</td>
+                    <td class="text-xs-center">{{ props.item.Apellido }}</td>
+                    <td class="text-xs-center">{{ props.item.Procedencia }}</td>
+                    <td class="text-xs-center">{{ props.item.Fecha_de_nacimiento }}</td>
+                    <td class="text-xs-center">{{ props.item.EstadoActual }}</td>
+                    <td class="justify-center layout px-0">
+                      <v-icon
+                      small
+                      class="ma-3"
+                      @click="editarDatos(props.item)"
+                      >
+                        edit
+                      </v-icon>
+                      <v-icon
+                        small
+                        class="ma-3"
+                        @click="deleteItem(props.item)"
+                      >
+                        delete
+                      </v-icon>
+                    </td>
+                  </tr>
+                </template>
+              <!-- cuando la busqueda no tenga resultados -->
+              <template v-slot:no-results>
+                  <v-alert :value="true" color="error">
+                  No se ha encontrado un paciente que tenga "{{ search }}" en su información.
+                  </v-alert>
               </template>
-            </v-data-table>
+          </v-data-table>
+        </v-card>
+        <br><br>
+         <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="continuar">Continuar</button>
+      </div>
           </b-col>
           <b-col order="3" cols="4">
             <h1 class="text-center">Paciente Seleccionado</h1>
@@ -73,8 +134,12 @@
 <script>
 export default {
   mounted() {
-    this.$http.get("http://localhost:8000/users").then(response => {
-      this.user = response.data.users;
+    this.$http.get("http://localhost:8000/PacienteController/findAll").then(response => {
+      
+      this.pacientes = response.data.Pacientes;
+      this.selectedPatients = response.data.Pacientes[0];
+      this.Nombre = response.data.Pacientes[0].Nombre;
+      this.Apellido = response.data.Pacientes[0].Apellido;
     });
   },
   data() {
@@ -96,7 +161,35 @@ export default {
         { text: "Apellidos", align: "center", value: "Apellidos" },
         { text: "Procedencia", align: "center", value: "Procedencia" },
         { text: "Fecha de Nac", align: "center", value: "FechadeNac" }
-      ]
+      ],
+      //////////////////////////////////////////////////
+      search:'',
+      selected: [],
+      selected2: null,
+      estadoNuevo: null,
+      dialog: false,
+      radioGroup:1,
+      lista: [],
+      headers: [
+        { text: 'CUI (ID)', align: 'center',value: 'id'},
+        { text: 'Nombre', align: 'center', value: 'Nombre' },
+        { text: 'Apellido', align: 'center', value: 'Apellido' }, 
+        { text: 'Procedencia', align: 'center', value: 'Procedencia' },
+        { text: 'Fecha de nacimiento', align: 'center', value: 'Fecha_de_nacimiento' },
+        { text: 'Estado', align: 'center', value: 'EstadoActual' },
+      ],
+      editedIndex: -1,
+      pacientes: [],
+      selectedPatients:'',
+      selectedIndex: 0,
+      deletedCUI: '',
+      editedItem:{
+        Nombre: '',
+        Apellido: '',
+        Procedencia: '',
+        Fecha_de_nacimiento: '',
+        EstadoActual:''
+      }
     };
   },
   methods:{
@@ -104,252 +197,6 @@ export default {
       this.$http.get("http://localhost:8000/users").then(response => {
       this.user = response.data.users;
     });
-    },
-    getOneUser(){
-      this.$http.get(`http://localhost:8000/users/look?idb=${this.idb}`).then(response => {
-        if(response.data.usersi === null){
-          this.errorBusqueda = true;
-        }else{
-          this.name = response.data.usersi.name;
-          this.id = response.data.usersi.id;
-          this.email = response.data.usersi.email;
-          this.idb = '';
-          this.errorBusqueda = false;
-          this.errorName = false;
-          this.errorDPI = false;
-          this.errorEmail = false;
-          this.errorPassword = false;
-          this.errorTipoUsuario = false;
-          this.errorFormato = false;
-          this.errorLargo = false;
-          this.errorPasswordVerification = false;
-          this.errorPasswordVerification2 = false;
-
-          if (response.data.usersi.puesto === 1){
-            this.selected = 'Administrador'; 
-          }
-          if (response.data.usersi.puesto === 2){
-            this.selected = 'Doctor'; 
-          }
-          if (response.data.usersi.puesto === 3){
-            this.selected = 'Secretaria'; 
-          }
-          if (response.data.usersi.puesto === 4){
-            this.selected = 'Asistente'; 
-          }
-          if (response.data.usersi.puesto === 5){
-            this.selected = 'Visitante'; 
-          }
-        }
-      });
-    },
-    eliminar(){
-      this.errorName = false;
-      this.errorDPI = false;
-      this.errorEmail = false;
-      this.errorPassword = false;
-      this.errorTipoUsuario = false;
-      this.errorBusqueda = false;
-      this.errorPasswordVerification = false;
-      this.errorPasswordVerification2 = false;
-
-      if(this.id === ''){
-        this.errorDPI = true;
-      }else{
-        this.errorDPI = false;
-      }
-      if(this.id != ''){
-      this.$http.delete(`http://localhost:8000/users/destroy?id=${this.id}`).then(response=>{
-        this.refreshUsers();
-        this.name = '';
-        this.id = '';
-        this.email = '';
-        this.password = '';
-        this.selected = null;
-      });
-      }
-    },
-    crear(){
-      this.errorName = false;
-      this.errorDPI = false;
-      this.errorEmail = false;
-      this.errorPassword = false;
-      this.errorTipoUsuario = false;
-      this.errorFormato = false;
-      this.errorLargo = false;
-      this.errorBusqueda = false;
-      this.errorPasswordVerification = false;
-      this.errorPasswordVerification2 = false;
-
-      if(this.name === ''){
-        this.errorName = true;
-      }else{
-        this.errorName = false;
-      }
-
-      if(this.id === ''){
-        this.errorDPI = true;
-      }else{
-        this.errorDPI = false;
-      }
-
-      if(this.email === ''){
-        this.errorEmail = true;
-      }else{
-        this.errorEmail = false;
-      }
-
-      if(this.password === ''){
-        this.errorPassword = true;
-      }else{
-        this.errorPassword = false;
-      }
-
-      if(this.passwordVerification === ''){
-        this.errorPasswordVerification2 = true;
-      }else{
-        this.errorPasswordVerification2 = false;
-        if(this.passwordVerification != this.password){
-          this.errorPasswordVerification = true;
-        }else{
-          this.errorPasswordVerification = false;
-        }
-      }
-
-      if(this.selected == null){
-        this.errorTipoUsuario = true;
-      }else{
-        this.errorTipoUsuario = false;
-      }
-      if (this.selected=="Administrador") {
-        this.puesto=1;
-      }
-      if (this.selected=="Doctor") {
-        this.puesto=2;
-      }
-      if (this.selected=="Secretaria") {
-        this.puesto=3;
-      }
-      if (this.selected=="Asistente") {
-        this.puesto=4;
-      }
-      if (this.selected=="Visitante") {
-        this.puesto=5;
-      }
-      if(this.name != '' && this.id != '' && this.password != '' && this.email != '' && this.selected != null && this.password == this.passwordVerification){
-        this.$http.post(`http://localhost:8000/users/create?id=${this.id}&name=${this.name}&email=${this.email}&password=${this.password}&puesto=${this.puesto}`).then(response=>{
-          this.refreshUsers();
-          this.name = '';
-          this.id = '';
-          this.email = '';
-          this.password = '';
-          this.passwordVerification = '';
-          this.selected = null;
-        }).catch(error => {
-          if (error.response.data.email === undefined){
-            this.errorFormato = false;
-          }else{
-            this.errorFormato = true;
-          }
-
-          if (error.response.data.password === undefined){
-            this.errorLargo = false;
-          }else{
-            this.errorLargo = true;
-          }
-        });
-      }
-    },
-    modificar(){
-      this.errorName = false;
-      this.errorDPI = false;
-      this.errorEmail = false;
-      this.errorPassword = false;
-      this.errorTipoUsuario = false;
-      this.errorFormato = false;
-      this.errorLargo = false;
-      this.errorBusqueda = false;
-      this.errorPasswordVerification = false;
-      this.errorPasswordVerification2 = false;
-
-      if(this.name === ''){
-        this.errorName = true;
-      }else{
-        this.errorName = false;
-      }
-
-      if(this.id === ''){
-        this.errorDPI = true;
-      }else{
-        this.errorDPI = false;
-      }
-
-      if(this.email === ''){
-        this.errorEmail = true;
-      }else{
-        this.errorEmail = false;
-      }
-
-      if(this.password === ''){
-        this.errorPassword = true;
-      }else{
-        this.errorPassword = false;
-      }
-
-      if(this.passwordVerification === ''){
-        this.errorPasswordVerification2 = true;
-      }else{
-        this.errorPasswordVerification2 = false;
-        if(this.passwordVerification != this.password){
-          this.errorPasswordVerification = true;
-        }else{
-          this.errorPasswordVerification = false;
-        }
-      }
-
-      if(this.selected == null){
-        this.errorTipoUsuario = true;
-      }else{
-        this.errorTipoUsuario = false;
-      }
-      if (this.selected=="Administrador") {
-        this.puesto=1;
-      }
-      if (this.selected=="Doctor") {
-        this.puesto=2;
-      }
-      if (this.selected=="Secretaria") {
-        this.puesto=3;
-      }
-      if (this.selected=="Asistente") {
-        this.puesto=4;
-      }
-      if (this.selected=="Visitante") {
-        this.puesto=5;
-      }
-      if(this.name != '' && this.id != '' && this.password != '' && this.email != '' && this.selected != null && this.password == this.passwordVerification){
-        this.$http.put(`http://localhost:8000/users/update?id=${this.id}&name=${this.name}&email=${this.email}&password=${this.password}&puesto=${this.puesto}`).then(response=>{
-          this.refreshUsers();
-          this.name = '';
-          this.id = '';
-          this.email = '';
-          this.password = '';
-          this.passwordVerification = '';
-          this.selected = null;
-        }).catch(error => {
-          if (error.response.data.email === undefined){
-            this.errorFormato = false;
-          }else{
-            this.errorFormato = true;
-          }
-
-          if (error.response.data.password === undefined){
-            this.errorLargo = false;
-          }else{
-            this.errorLargo = true;
-          }
-        });
-      }
     }
   }
 };
@@ -358,5 +205,32 @@ export default {
 div#Tabla {
   float: right;
   align-items: center;
+}
+div#TablaPacientes {
+  width: 100%;
+  padding-left: 2%;
+  margin-right: 2%;
+  float: left;
+}
+div#DatosPaciente {
+  width: 25%;
+  margin-left: 2%;
+  float: right;
+}
+/*
+    configuracion para los headers
+*/
+h3#headers{
+  font-family: Nunito;
+  font-weight: bolder;
+  font-size: x-large;
+}
+h1#headers{
+  font-family: Nunito;
+  font-weight: bolder;
+}
+h2#headers{
+  font-family: Nunito;
+  font-weight: bolder;
 }
 </style>
