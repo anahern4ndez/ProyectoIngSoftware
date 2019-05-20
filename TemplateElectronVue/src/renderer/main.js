@@ -94,6 +94,6 @@ new Vue({
   router,
   render: h => h(App),
   mounted () {
-    this.$router.push('/ingresarPaciente')
+    this.$router.push('/login')
   }
 }).$mount('#app');
