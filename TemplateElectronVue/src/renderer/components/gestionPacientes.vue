@@ -26,7 +26,7 @@
                     <label for="changeStatus">Cambio estado de paciente</label>
                     
                     <select class='form-control' name='changeStatus' id='changeStatus' v-model='estadoNuevo'>
-                      <option v-for='item in estados_response' :value='item.ID'>{{item.significado}}</option>
+                      <option v-for='item in estados_response' :key ='item.ID' :value='item.ID'>{{item.significado}}</option>
                     </select>
                     
                     
@@ -111,7 +111,7 @@
               </div>
               <div style="float:left; width: 50%">
                   <h3 id="headers"> Estado </h3>
-                  <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.estado_actual.significado}}</h3>
+                  <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.Estado}}</h3>
               </div>
               <div style="float:left; width: 50%">
                   <h3 id="headers"> Edad </h3>
@@ -119,15 +119,15 @@
               </div>
               <div style="float:left; width: 50%">
                   <h3 id="headers"> Número telefónico </h3>
-                  <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.Telefono}}</h3>
+                  <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.telefono}}</h3>
               </div>
               <div style="float:left; width: 45%">
                   <h3 id="headers"> Nombre del padre </h3>
-                  <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.Nombre_de_padre}}</h3>
+                  <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.Padre}}</h3>
               </div>
               <div style="float:left; width: 50%; margin-left:5%">
                   <h3 id="headers"> Nombre de la madre </h3>
-                  <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.Nombre_de_madre}}</h3>
+                  <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.Madre}}</h3>
               </div>
               <br>
               <br>
@@ -167,11 +167,24 @@ export default {
       //esto deberia ser un arrray de pacientes que contengan todos sus atributos...
       
       this.pacientes = response.data.Pacientes;
-      this.selectedPatients = response.data.Pacientes[0];
-      //console.log(this.selectedPatients = response.data.Pacientes);
-      this.Nombre = response.data.Pacientes[0].Nombre;
-      this.Apellido = response.data.Pacientes[0].Apellido;
-    });
+      //objeto utilizado para los labels..
+      if (response.data.Pacientes[0] == null){
+        console.log('Nothing to do here..');
+      } else {
+        this.selectedPatients.Nombre = response.data.Pacientes[0].Nombre;
+        this.selectedPatients.Apellido = response.data.Pacientes[0].Apellido;
+        this.selectedPatients.Estado = response.data.Pacientes[0].estado_actual.significado;
+        this.selectedPatients.Edad = response.data.Pacientes[0].Edad;
+        this.selectedPatients.CUI = response.data.Pacientes[0].CUI;
+        this.selectedPatients.telefono = response.data.Pacientes[0].Telefono;
+        this.selectedPatients.Madre = response.data.Pacientes[0].Nombre_de_madre;
+        this.selectedPatients.Padre = response.data.Pacientes[0].Nombre_de_padre;
+
+        console.log(this.selectedPatients);
+        this.Nombre = response.data.Pacientes[0].Nombre;
+        this.Apellido = response.data.Pacientes[0].Apellido;
+      }
+          });
     this.$http.get(`http://localhost:8000/EstadoController/getAllEstado`).then(response =>{
       this.estados_response = response.data.Estados;
 
@@ -197,7 +210,16 @@ export default {
         ],
         editedIndex: -1,
         pacientes: [],
-        selectedPatients:'',
+        selectedPatients:{
+          Nombre: '',
+          Apellido: '',
+          Estado: '',
+          Edad: '',
+          telefono: '',
+          Padre: '',
+          Madre: '',
+          CUI: ''
+        },
         selectedIndex: 0,
         deletedCUI: '',
         editedItem:{
@@ -213,6 +235,12 @@ export default {
         //para filtrar los datos de la tabla
         ingresarNuevo(){
           this.$router.push('/IngresarPaciente');
+        },
+        prettySelected(){
+          if (this.selectedPatients == null){
+            this.selectedPatients = '';
+          }
+          
         },
         changeSelected(received){
           this.selectedPatients = received
@@ -276,8 +304,8 @@ export default {
           
         },
         deleteItem(item){
-          this.deletedCUI = item.CUI
-          const cui = this.deletedCUI
+          this.deletedCUI = item.id
+          
           this.$http.delete(`http://localhost:8000/PacienteController/delete?cui=${this.deletedCUI}`).then(response=>{
             this.reloadTable()
           });

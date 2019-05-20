@@ -101,7 +101,7 @@ class PacienteController extends Controller
      */
     public function delete(Request $request)
     {
-        $CUI = $request->cui;
+         (string)$CUI = $request->cui;
         $user=Paciente::find($CUI);
         $user->delete();
         return response()->json([

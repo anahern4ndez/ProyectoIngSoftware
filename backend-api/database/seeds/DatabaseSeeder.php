@@ -17,7 +17,9 @@ class DatabaseSeeder extends Seeder
             SexoTableSeeder::class,
             TipoDeSangreTableSeeder::class,
             SCPTableSeeder::class,
-            CodigoVacunaTableSeeder::class
+            CodigoVacunaTableSeeder::class,
+            TipoDeRespuestaTableSeeder::class,
+            EstadosTableSeeder::class
         ]);
         
     }
