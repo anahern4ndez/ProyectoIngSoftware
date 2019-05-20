@@ -1,5 +1,5 @@
 <template lang="">
-	<div>	
+	<div onload="obtenerNombre">
 			<b-container class="containerMenu">
 
 				<!-- FILA 1, FOTOS Y TÍTULO-->
@@ -11,7 +11,7 @@
 
 					<b-col order="1" cols="6">
 						<h2>BIENVENIDO</h2>
-						<h4>Dr. Randall Lou</h4>
+						<h4 id="nombre" type="text" v-model="name">{{name}}</h4>
 					</b-col>
 
 					<b-col order="1" cols="3" class="pb-4">
@@ -45,7 +45,7 @@
     <v-flex>
       <v-sheet height="420">
         <!-- now is normally calculated by itself, but to keep the calendar in this date range to view events -->
-        <v-calendar ref="calendar" :now="today" :value="today" color="primary" type="week">
+        <v-calendar ref="calendar" :value="today" color="primary" type="week">
           <!-- the events at the top (all-day) -->
           <template v-slot:dayHeader="{ date }">
             <template v-for="event in eventsMap[date]">
@@ -97,22 +97,26 @@ export default {
   name: "menu",
 
   data: () => ({
-    today: Date.now(),
+    today: Date.now().toString(),
     events: [
       {
         title: "Javier Xela",
-        date: "2019-05-14",
+        date: "2019-05-20",
         time: "09:00",
         duration: 45
       },
       {
         title: "Chonguengue",
-        date: "2019-05-17",
+        date: "2019-05-23",
         time: "20:30",
         duration: 180
       }
-    ]
+    ],
+
+    id: "2",
+    name: ''
   }),
+
   computed: {
     // convert the list of events into a map of lists keyed by date
     eventsMap() {
@@ -121,9 +125,11 @@ export default {
       return map;
     }
   },
+
   mounted() {
     this.$refs.calendar.scrollToTime("07:50");
   },
+
   methods: {
     open(event) {
       alert(event.title);
@@ -142,8 +148,18 @@ export default {
     },
     hacerCita() {
       this.$router.push("/Citas");
+    },
+    obtenerNombre() {
+
+      this.$http.get(`http://localhost:8000/get_nombre?id=${this.id}`).then(response => {
+        this.name = response.data.user.name;
+      });
     }
-  }
+  },
+
+  beforeMount(){
+    this.obtenerNombre()
+ },
 };
 </script>
 
