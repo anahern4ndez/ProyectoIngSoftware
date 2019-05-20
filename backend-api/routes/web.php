@@ -55,7 +55,5 @@ $router->post('/login', 'loginController@login');
 
 $router->post('/logout', 'loginController@logout');
 
-//$router->delete('/users/{id}','ExampleController@destroy');
-
-//$router->get('/menu', 'MenuPrincipalController@menu');
-
+// Método de menú principal que obtiene el nombre del usuario logeado
+$router->get('/get_nombre', 'MenuPrincipalController@menu_get_nombre');

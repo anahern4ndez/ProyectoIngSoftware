@@ -16,11 +16,11 @@
                 type="text"
                 class="form-control"
                 v-model="idb"
-                v-on:keyup.enter="getOneUser"
-                placeholder="DPI de usuario a editar permisos"
+                v-on:keyup.enter="getSomeUser"
+                placeholder="Ingrese el nombre o DPI del usuario que desee buscar para editar permisos"
               >
               <div class="input-group-append">
-                <button class="btn btn-warning" type="button" v-on:click="getOneUser">Buscar</button>
+                <button class="btn btn-warning" type="button" v-on:click="getSomeUser">Buscar</button>
               </div>
             </div>
             <br>
@@ -59,14 +59,16 @@
             </div>-->
             <v-data-table :headers="headers" :items="user" class="elevation-1">
               <template v-slot:items="props">
-                <td class="text-xs-center">{{ props.item.id }}</td>
-                <td class="text-xs-center">{{ props.item.name }}</td>
-                <td class="text-xs-center">{{ props.item.email }}</td>
-                <td class="text-xs-center"v-if="props.item.puesto===1" >Administrador</td>
-                <td class="text-xs-center"v-if="props.item.puesto===2" >Doctor</td>
-                <td class="text-xs-center"v-if="props.item.puesto===3" >Secretaria</td>
-                <td class="text-xs-center"v-if="props.item.puesto===4" >Asistente</td>
-                <td class="text-xs-center"v-if="props.item.puesto===5" >Visitante</td>
+                <tr @click="selectUser(props.item)">
+                  <td class="text-xs-center">{{ props.item.id }}</td>
+                  <td class="text-xs-center">{{ props.item.name }}</td>
+                  <td class="text-xs-center">{{ props.item.email }}</td>
+                  <td class="text-xs-center"v-if="props.item.puesto===1" >Administrador</td>
+                  <td class="text-xs-center"v-if="props.item.puesto===2" >Doctor</td>
+                  <td class="text-xs-center"v-if="props.item.puesto===3" >Secretaria</td>
+                  <td class="text-xs-center"v-if="props.item.puesto===4" >Asistente</td>
+                  <td class="text-xs-center"v-if="props.item.puesto===5" >Visitante</td>
+                </tr>
               </template>
             </v-data-table>
           </b-col>
@@ -75,6 +77,16 @@
               <div v-if="errorDPI">
                 <v-alert :value="true" type="error" id="alert">
                   Ingrese un DPI, por favor
+                </v-alert>
+              </div>
+              <div v-if="errorDPILargo">
+                <v-alert :value="true" type="error" id="alert">
+                  El DPI debe tener 12 caracteres exactos
+                </v-alert>
+              </div>
+              <div v-if="errorDPIRepetido">
+                <v-alert :value="true" type="error" id="alert">
+                  Este DPI ya esta registrado
                 </v-alert>
               </div>
               <div class="form-group">
@@ -109,6 +121,11 @@
                   El formato de correo no es válido
                 </v-alert>
               </div>
+              <div v-if="errorEmailRepetido">
+                <v-alert :value="true" type="error" id="alert">
+                  El correo ya esta registrado
+                </v-alert>
+              </div>
               <div class="form-group">
                 <label for="exampleInputEmail1">Correo</label>
                 <input
@@ -121,7 +138,7 @@
               </div>
               <div v-if="errorLargo">
                 <v-alert :value="true" type="error" id="alert">
-                  La contraseña debe tener como mínimo 6 caracteres y un máximo de 255 caracteres
+                  La contraseña debe tener como mínimo 6 caracteres
                 </v-alert>
               </div>
               <div v-if="errorPassword">
@@ -228,6 +245,9 @@ export default {
       errorBusqueda: false,
       errorPasswordVerification: false,
       errorPasswordVerification2: false,
+      errorDPILargo: false,
+      errorDPIRepetido: false,
+      errorEmailRepetido: false,
       user: [],
       headers: [
         { text: "DPI", align: "center", value: "DPI" },
@@ -241,6 +261,16 @@ export default {
     refreshUsers(){
       this.$http.get("http://localhost:8000/users").then(response => {
       this.user = response.data.users;
+    });
+    },
+    getSomeUser(){
+      this.$http.get(`http://localhost:8000/users/some?idb=${this.idb}`).then(response => {
+        if(response.data.usersia.length === 0){
+          this.errorBusqueda = true;
+        }else{
+          this.errorBusqueda = false;
+          this.user = response.data.usersia;
+        }
     });
     },
     getOneUser(){
@@ -262,6 +292,9 @@ export default {
           this.errorLargo = false;
           this.errorPasswordVerification = false;
           this.errorPasswordVerification2 = false;
+          this.errorDPILargo = false;
+          this.errorDPIRepetido = false;
+          this.errorEmailRepetido = false;
 
           if (response.data.usersi.puesto === 1){
             this.selected = 'Administrador'; 
@@ -281,6 +314,27 @@ export default {
         }
       });
     },
+    selectUser(recibed){
+      this.name = recibed.name;
+      this.id = recibed.id;
+      this.email = recibed.email;
+      this.idb = '';
+      if (recibed.puesto === 1){
+        this.selected = 'Administrador'; 
+      }
+      if (recibed.puesto === 2){
+        this.selected = 'Doctor'; 
+      }
+      if (recibed.puesto === 3){
+         this.selected = 'Secretaria'; 
+      }
+      if (recibed.puesto === 4){
+        this.selected = 'Asistente'; 
+      }
+      if (recibed.puesto === 5){
+        this.selected = 'Visitante'; 
+      }    
+    },
     eliminar(){
       this.errorName = false;
       this.errorDPI = false;
@@ -290,6 +344,9 @@ export default {
       this.errorBusqueda = false;
       this.errorPasswordVerification = false;
       this.errorPasswordVerification2 = false;
+      this.errorDPILargo = false;
+      this.errorDPIRepetido = false;
+      this.errorEmailRepetido = false;
 
       if(this.id === ''){
         this.errorDPI = true;
@@ -318,6 +375,9 @@ export default {
       this.errorBusqueda = false;
       this.errorPasswordVerification = false;
       this.errorPasswordVerification2 = false;
+      this.errorDPILargo = false;
+      this.errorDPIRepetido = false;
+      this.errorEmailRepetido = false;
 
       if(this.name === ''){
         this.errorName = true;
@@ -384,10 +444,26 @@ export default {
           this.passwordVerification = '';
           this.selected = null;
         }).catch(error => {
+          if (error.response.data.id === undefined){
+            this.errorDPILargo = false;
+            this.errorDPIRepetido = false;
+          }else{
+            if (error.response.data.id[0] === 'The id has already been taken.'){
+              this.errorDPIRepetido = true;
+            }else{
+              this.errorDPILargo = true;
+            }
+          }
+
           if (error.response.data.email === undefined){
             this.errorFormato = false;
+            this.errorEmailRepetido = false;
           }else{
-            this.errorFormato = true;
+            if (error.response.data.email[0] === 'The email has already been taken.'){
+              this.errorEmailRepetido = true;
+            }else{
+              this.errorFormato = true;
+            }
           }
 
           if (error.response.data.password === undefined){
@@ -409,6 +485,9 @@ export default {
       this.errorBusqueda = false;
       this.errorPasswordVerification = false;
       this.errorPasswordVerification2 = false;
+      this.errorDPILargo = false;
+      this.errorDPIRepetido = false;
+      this.errorEmailRepetido = false;
 
       if(this.name === ''){
         this.errorName = true;
@@ -475,6 +554,12 @@ export default {
           this.passwordVerification = '';
           this.selected = null;
         }).catch(error => {
+          if (error.response.data.id === undefined){
+            this.errorDPILargo = false;
+          }else{
+            this.errorDPILargo = true;
+          }
+
           if (error.response.data.email === undefined){
             this.errorFormato = false;
           }else{

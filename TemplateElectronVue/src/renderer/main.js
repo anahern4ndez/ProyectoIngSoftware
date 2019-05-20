@@ -45,6 +45,10 @@ const routes = [
     component: Vue.component('page-one', require('./components/PageOne.vue').default)
   },
   {
+    path: '/gestionarPaciente',
+    component: Vue.component('page-one', require('./components//gestionarPaciente.vue').default)
+  },
+  {
     path: '/gestionUsuarios',
     component: Vue.component('gestionUsuarios', require('./components/gestionUsuarios.vue').default)
   },
@@ -79,7 +83,15 @@ const routes = [
   {
     path: '/Citas',
     component: Vue.component('Citas', require('./components/CreacionCitas.vue').default)
-    }
+  },
+  {
+    path: '/DatosG',
+    component: Vue.component('DatosG', require('./components/DGeneralesVista.vue').default)
+  },
+  {
+    path: '/Datos',
+    component: Vue.component('Datos', require('./components/DatosVista.vue').default)
+  }
 ];
 
 const router = new VueRouter({

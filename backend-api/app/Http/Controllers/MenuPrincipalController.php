@@ -9,29 +9,14 @@ use App\User;
 
 class menuPrincipalController extends Controller
 {
-    public function doMenu(){
-        echo "hola";
+    public function menu_get_nombre(Request $request){
 
-        $users = DB::table('users')->get();
+        $id = $request->id;
 
-        foreach ($users as $user) {
-            echo $user->id;
-        }
-
+        $user = DB::table('users')->where('id', $id)->first();
 
         return response()->json([
-            'success' => true,
+            'user' => $user,
         ], 200);
-    }
-
-
-    public function menu(Request $request){
-
-        echo "hola";
-
-        $this->validate($request, [
-            'email' => 'email|required',
-            'password' => 'required'
-        ]);
 
     }}

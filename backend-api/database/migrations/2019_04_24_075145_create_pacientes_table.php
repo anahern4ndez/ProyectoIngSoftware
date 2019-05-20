@@ -33,7 +33,7 @@ class CreatePacientesTable extends Migration
             $table->integer('Transfusiones');
             $table->integer('EstadoActual');
             $table->integer('Sexo');
-            $table -> timestamps();
+            
 
             $table->foreign('Sexo')
             ->references('ID')

@@ -97,7 +97,7 @@ export default {
         loginMethod() {
             //this.loader = true;
             this.isLoading = true;
-            
+
             this.errorEmail = false;
             this.errorPass = false;
             this.error = false;
@@ -139,36 +139,37 @@ export default {
                     this.id = response.data.id;
                     store.id = this.id;
                     console.log('Store: ' + store.id);
-                    // serverBus.$emit('loginId', this.id);
-                    
-                    // var shell = require('shelljs');
-                    // let nodePath = (shell.which('node').toString());
-                    // shell.config.execPath = nodePath;
 
-                    // const ipServer = '192.168.0.156';
-                    // const serverPassword = 'perritoUVG';
-                    // const relativePath = './src/temp';
-                    // const serverUser = 'adminlocal';
-                    // const serverPath = `/home/adminlocal/Fundanier/usrs/${id}/img/prfl.jpeg`;
+                    try {
 
-                    // var string = `pscp -pw ${serverPassword} ${serverUser}@${ipServer}:${serverPath} ${relativePath}`;
+                        var shell = require('shelljs');
+                        let nodePath = (shell.which('node').toString());
+                        shell.config.execPath = nodePath;
 
-                    // shell.exec(string);                    
-                    
+                        const ipServer = '192.168.0.156';
+                        const serverPassword = 'perritoUVG';
+                        const relativePath = './src/temp';
+                        const serverUser = 'adminlocal';
+                        const serverPath = `/home/adminlocal/Fundanier/usrs/${id}/img/prfl.jpeg`;
+
+                        var string = `pscp -pw ${serverPassword} ${serverUser}@${ipServer}:${serverPath} ${relativePath}`;
+
+                        shell.exec(string);
+
+                    } catch (error) {
+
+                        console.log("Error con shelljs");
+                    }             
                     console.log("El id (login) es: " + this.id);
-                    this.error = false;
-                    this.$router.push('/menu-principal');
-                    this.success = true;
-                }).
-                catch(error => {
+                }).catch(error => {
                     this.error = true;
                     console.log("Error amigo");
                     this.success = false;
                 });
-            }
 
-            //this.loader = false;
-            setTimeout(() => (this.isLoading = false), 1000);
+                //this.loader = false;
+                setTimeout(() => (this.isLoading = false), 1000);
+            }
         }
     }
 }
