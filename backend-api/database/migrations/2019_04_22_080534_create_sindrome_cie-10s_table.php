@@ -16,7 +16,7 @@ class CreateSindromeCie10sTable extends Migration
         Schema::create('sindrome_cie-10', function (Blueprint $table) {
             $table->integer('ID');
             $table->primary('ID');
-            $table->string('significado',20);
+            $table->string('significado');
         });
     }
 

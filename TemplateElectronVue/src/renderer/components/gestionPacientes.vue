@@ -26,8 +26,7 @@
                     <label for="changeStatus">Cambio estado de paciente</label>
                     
                     <select class='form-control' name='changeStatus' id='changeStatus' v-model='estadoNuevo'>
-                      <option value='1'>1</option>
-                      <option value='2'>2</option>
+                      <option v-for='item in estados_response' :key ='item.ID' :value='item.ID'>{{item.significado}}</option>
                     </select>
                     
                     
@@ -58,9 +57,9 @@
                     <td class="text-xs-center">{{ props.item.CUI }}</td>
                     <td class="text-xs-center">{{ props.item.Nombre }}</td>
                     <td class="text-xs-center">{{ props.item.Apellido }}</td>
-                    <td class="text-xs-center">{{ props.item.Procedencia }}</td>
+                    <td class="text-xs-center">{{ props.item.procedencia.Departamento }}</td>
                     <td class="text-xs-center">{{ props.item.Fecha_de_nacimiento }}</td>
-                    <td class="text-xs-center">{{ props.item.EstadoActual }}</td>
+                    <td class="text-xs-center">{{ props.item.estado_actual.significado }}</td>
                     <td class="justify-center layout px-0">
                       <v-icon
                       small
@@ -92,57 +91,70 @@
       <div id="DatosPaciente">
           <template>
             <form>
-              <div class="form-group">
-              <h2 id="headers">Nombres </h2>
-              <h3 class="subheading font-weight-light"> {{selectedPatients.Nombre}}</h3>
-              </div>
-              <div class="form-group" >
-                  <h2 id="headers">Apellidos </h2>
-                  <h3 class="subheading font-weight-light"> {{selectedPatients.Apellido}}</h3>
-              </div>
-              <div class="form-group">
-                  <h2 id="headers"> CUI </h2>
-                  <h3 class="subheading font-weight-light"> {{selectedPatients.CUI}}</h3>
-              </div>
-              <div class="form-group">
-                  <h2 id="headers"> Estado </h2>
-                  <h3 class="subheading font-weight-light"> {{selectedPatients.EstadoActual}}</h3>
-              </div>
+              <h2 id="headers" style="text-align:center"> Paciente seleccionado </h2>
+              <br>
               <div>
-                  <h2 id="headers"> Edad </h2>
-                  <h3 class="subheading font-weight-light"> {{selectedPatients.Edad}}</h3>
+                <img id="fotoPaciente" style="margin-left: 10%; margin-top: 2%" src="../assets/javier.jpg" alt="" width="273" height="183">
               </div>
-              <div>
-                  <h2 id="headers"> Número telefónico </h2>
-                  <h3 class="subheading font-weight-light"> {{selectedPatients.Telefono}}</h3>
+              <br>
+              <div style="float:left; width: 50%">
+              <h3 id="headers">Nombres </h3>
+              <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.Nombre}}</h3>
               </div>
-              <div>
-                  <h2 id="headers"> Nombre del padre </h2>
-                  <h3 class="subheading font-weight-light"> {{selectedPatients.Nombre_de_padre}}</h3>
+              <div style="float:left; width: 50%">
+                  <h3 id="headers">Apellidos </h3>
+                  <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.Apellido}}</h3>
               </div>
-              <div>
-                  <h2 id="headers"> Nombre de la madre </h2>
-                  <h3 class="subheading font-weight-light"> {{selectedPatients.Nombre_de_madre}}</h3>
+              <div style="float:left; width: 50%">
+                  <h3 id="headers"> CUI </h3>
+                  <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.CUI}}</h3>
               </div>
+              <div style="float:left; width: 50%">
+                  <h3 id="headers"> Estado </h3>
+                  <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.Estado}}</h3>
+              </div>
+              <div style="float:left; width: 50%">
+                  <h3 id="headers"> Edad </h3>
+                  <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.Edad}}</h3>
+              </div>
+              <div style="float:left; width: 50%">
+                  <h3 id="headers"> Número telefónico </h3>
+                  <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.telefono}}</h3>
+              </div>
+              <div style="float:left; width: 45%">
+                  <h3 id="headers"> Nombre del padre </h3>
+                  <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.Padre}}</h3>
+              </div>
+              <div style="float:left; width: 50%; margin-left:5%">
+                  <h3 id="headers"> Nombre de la madre </h3>
+                  <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.Madre}}</h3>
+              </div>
+              <br>
+              <br>
           </form>
           </template>
-          
       </div>
     </div>
     <div id="botones">
-      <b-container class="bv-example-row2">
-        <b-row class="justify-content-md-center">
-            <b-col order="4" cols="6">
-                <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="ingresarNuevo">Ingresar nuevo paciente</button>
-                <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="darConsulta"> Dar consulta </button>
-                <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="editarPaciente"> Editar datos</button>
-                <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="archivos"> Archivos </button>
-                <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="reportes"> Reporte</button>
-                <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="estadisticas"> Estadísticas </button>
-                <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="casoslegales"> Casos legales</button>
-            </b-col>
-        </b-row>
-      </b-container>
+      <br>
+      <div id="boton">
+        <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="ingresarNuevo">Ingresar nuevo paciente</button>
+      </div>
+      <div id="boton">
+        <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="darConsulta"> Dar consulta </button>
+      </div>
+      <div id="boton">
+        <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="editarPaciente"> Editar datos</button>
+      </div>
+      <div id="boton">
+        <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="archivos"> Archivos </button>
+      </div>
+      <div id="boton">
+        <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="reportes"> Reporte</button>
+      </div>
+      <div id="boton">
+        <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="estadisticas"> Estadísticas </button>
+      </div>
     </div>
   </div>
 </template>
@@ -155,9 +167,27 @@ export default {
       //esto deberia ser un arrray de pacientes que contengan todos sus atributos...
       
       this.pacientes = response.data.Pacientes;
-      this.selectedPatients = response.data.Pacientes[0];
-      this.Nombre = response.data.Pacientes[0].Nombre;
-      this.Apellido = response.data.Pacientes[0].Apellido;
+      //objeto utilizado para los labels..
+      if (response.data.Pacientes[0] == null){
+        console.log('Nothing to do here..');
+      } else {
+        this.selectedPatients.Nombre = response.data.Pacientes[0].Nombre;
+        this.selectedPatients.Apellido = response.data.Pacientes[0].Apellido;
+        this.selectedPatients.Estado = response.data.Pacientes[0].estado_actual.significado;
+        this.selectedPatients.Edad = response.data.Pacientes[0].Edad;
+        this.selectedPatients.CUI = response.data.Pacientes[0].CUI;
+        this.selectedPatients.telefono = response.data.Pacientes[0].Telefono;
+        this.selectedPatients.Madre = response.data.Pacientes[0].Nombre_de_madre;
+        this.selectedPatients.Padre = response.data.Pacientes[0].Nombre_de_padre;
+
+        console.log(this.selectedPatients);
+        this.Nombre = response.data.Pacientes[0].Nombre;
+        this.Apellido = response.data.Pacientes[0].Apellido;
+      }
+          });
+    this.$http.get(`http://localhost:8000/EstadoController/getAllEstado`).then(response =>{
+      this.estados_response = response.data.Estados;
+
     });
   },
     data () {
@@ -165,6 +195,7 @@ export default {
         search:'',
         selected: [],
         selected2: null,
+        estados_response: '',
         estadoNuevo: null,
         dialog: false,
         radioGroup:1,
@@ -179,7 +210,16 @@ export default {
         ],
         editedIndex: -1,
         pacientes: [],
-        selectedPatients:'',
+        selectedPatients:{
+          Nombre: '',
+          Apellido: '',
+          Estado: '',
+          Edad: '',
+          telefono: '',
+          Padre: '',
+          Madre: '',
+          CUI: ''
+        },
         selectedIndex: 0,
         deletedCUI: '',
         editedItem:{
@@ -196,13 +236,19 @@ export default {
         ingresarNuevo(){
           this.$router.push('/IngresarPaciente');
         },
+        prettySelected(){
+          if (this.selectedPatients == null){
+            this.selectedPatients = '';
+          }
+          
+        },
         changeSelected(received){
           this.selectedPatients = received
         },
         /* metodos de redirección de botones */
         // falta vista para dar una consulta
         darConsulta(){
-          this.$router.push('/IngresarPaciente');
+          this.$router.push('/darConsulta');
         },
         eliminar(){
           this.$router.push('/IngresarPaciente');
@@ -212,9 +258,6 @@ export default {
           this.editedIndex = this.pacientes.indexOf(received)
         },
         editarPaciente(){
-          this.$router.push('/EditarPaciente');
-        },
-        casoslegales(){
           this.$router.push('/EditarPaciente');
         },
         archivos(){
@@ -261,8 +304,8 @@ export default {
           
         },
         deleteItem(item){
-          this.deletedCUI = item.CUI
-          const cui = this.deletedCUI
+          this.deletedCUI = item.id
+          
           this.$http.delete(`http://localhost:8000/PacienteController/delete?cui=${this.deletedCUI}`).then(response=>{
             this.reloadTable()
           });
@@ -288,13 +331,13 @@ export default {
 </script>
 <style>
 div#TablaPacientes {
-  width: 70%;
+  width: 65%;
   padding-left: 2%;
   margin-right: 2%;
   float: left;
 }
 div#DatosPaciente {
-  width: 25%;
+  width: 30%;
   margin-left: 2%;
   float: right;
 }
@@ -320,5 +363,13 @@ h1#headers{
 h2#headers{
   font-family: Nunito;
   font-weight: bolder;
+}
+div#boton {
+  width: 30%;
+  margin-top: 1%;
+  margin-left: 1%;
+  margin-right: 1%;
+  margin-bottom: 1%;
+  float: left;
 }
 </style>

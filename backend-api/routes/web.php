@@ -41,6 +41,11 @@ $router->post('/PacienteController/insert', 'PacienteController@store');
 $router->put('/PacienteController/update', 'PacienteController@update');
 $router->delete('/PacienteController/delete', 'PacienteController@delete');
 
+//get info from procedencias
+$router->post('/ProcedenciaController/locate', 'ProcedenciaController@getLocation');
+
+//get info from estado
+$router->get('/EstadoController/getAllEstado', 'EstadoController@getAllEstado');
 
 
 $router->delete('/users/destroy','ExampleController@destroy');
