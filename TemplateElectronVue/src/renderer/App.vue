@@ -74,8 +74,8 @@ export default {
       ],
       activeRoute: '',
       routes: [
-        {name: 'Menu Principal', route: '/page-one', icon:'fa-home'},
-        {name: 'Gestionar Usuario', route: '/page-two', icon:'fa-users'},
+        {name: 'Menu Principal', route: '/menu-principal', icon:'fa-home'},
+        {name: 'Gestionar Usuario', route: '/gestionUsuarios', icon:'fa-users'},
         {name: 'Gestionar Paciente', route: '/gestionPacientes', icon:'fa-user-injured'},
         {name: 'Gestión de Citas', route: '/Citas', icon: 'fa-calendar-check'},
         {name: 'Datos paciente', route: '/Datos', icon: 'fa-user-injured'},

@@ -12,19 +12,19 @@
                     <v-layout align-center justify-end column fill-height />
                       <h3 id="headers" class="text-xs-center">Datos Personales</h3>
                       <br>
-                      <div id="inBox">
-                        <v-text-field
-                                v-model="Sexo"
-                                label="Género"
-                                outline
-                            ></v-text-field>
-                      </div>
+                      <div style="float:left; margin-right:5%; width:50%">
                       <v-text-field
                               v-model="CUI"
                               label="Número de CUI"
                               outline
                               @change="checkLocation(CUI)"
                           ></v-text-field>
+                      </div>
+                      <v-radio-group v-model="Sexo" row >
+                          <v-radio label="Mujer" value="1" color="black"></v-radio>
+                          <v-radio label="Hombre" value="2" color="black"></v-radio>
+                        </v-radio-group>
+                      <br>
                       <v-text-field
                               v-model="Nombre"
                               label="Nombres"
@@ -35,17 +35,8 @@
                               label="Apellidos"
                               outline
                           ></v-text-field>
-
-                      <div id="inBox">
-                          <v-text-field
-                                  v-model="Procedencia"
-                                  label="Procedencia"
-                                  outline
-                                  placeholder=[[this.Procedencia]]
-                                  value=[[this.Procedencia]]
-                              ></v-text-field>
-                      </div>
                       
+                      <div style="float:left; width:50%">
                         <v-flex xs12 sm6 md4>
                           <v-menu
                             v-model="menu_nacimiento"
@@ -56,8 +47,6 @@
                             offset-y
                             full-width
                             min-width="200px"
-                            
-                            
                           >
                             <template v-slot:activator="{ on }">
                               
@@ -67,6 +56,7 @@
                                 prepend-icon="event"
                                 readonly
                                 v-on="on"
+                                style="width:250%"
                                 
                               ></v-text-field>
                               
@@ -74,12 +64,20 @@
                           <v-date-picker v-model="Fecha_de_nacimiento" @input="menu_nacimiento = false, computeAge(Fecha_de_nacimiento)" color="#3A4750" locale='es-ES'></v-date-picker>
                           </v-menu>
                         </v-flex>
-                      
+                      </div>
+                      <div>
                       <v-text-field
-                              v-model="Nombre_de_padre"
-                              label="Nombre del padre"
+                              v-model="ProcedenciaTxt"
+                              label="Procedencia"
                               outline
+                              placeholder=[[this.ProcedenciaTxt]]
                           ></v-text-field>
+                        </div>
+                      <v-text-field
+                            v-model="Nombre_de_padre"
+                            label="Nombre del padre"
+                            outline
+                        ></v-text-field>
                       <v-text-field
                               v-model="Nombre_de_madre"
                               label="Nombre de la madre"
@@ -107,34 +105,35 @@
                     <v-text-field
                             v-model="Edad"
                             label="Edad"
+                            placeholder=[[this.Edad]]
                             outline
-                            placeholder="[[this.Edad]]"
-                            value = [[this.Edad]]
                         ></v-text-field>
-                    <div id="inBox">
-                      <v-text-field
-                              v-model="kg_perc"
-                              label="Kg. Percentil"
-                              outline
-                          ></v-text-field>
-                    </div>
+                    
+                    <div style="float:left; margin-right:5%; width:45%">
                     <v-text-field
                             v-model="Peso"
                             label="Peso"
                             outline
                         ></v-text-field>
-                    <div id="inBox">
-                      <v-text-field
-                              v-model="cms_perc"
-                              label="Cms. Percentil"
-                              outline
-                          ></v-text-field>
                     </div>
+                    <v-text-field
+                            v-model="kg_perc"
+                            label="Kg. Percentil"
+                            outline
+                        ></v-text-field>
+                    
+                    <div style="float:left; margin-right:5%; width:45%">
                     <v-text-field
                             v-model="Talla"
                             label="Talla"
                             outline
                         ></v-text-field>
+                    </div>
+                      <v-text-field
+                              v-model="cms_perc"
+                              label="Cms. Percentil"
+                              outline
+                          ></v-text-field>
                     <v-text-field
                             v-model="PA"
                             label="P/A"
@@ -158,17 +157,16 @@
               <v-layout align-center justify-end />
                 <h3 id="headers"  class="text-xs-center">Síndrome Clínico de Presentación</h3>              
                   <v-container fluid>
-                    <p>{{ selected }}</p>
-                    <v-checkbox v-model="selected" label="Sx. Nefrítico" value="Sx. Nefrítico"></v-checkbox>
-                    <v-checkbox v-model="selected" label="Sx. Nefrotico" value="Sx. Nefrotico"></v-checkbox>
-                    <v-checkbox v-model="selected" label="Anomalías Urinarias Asintomáticas" value="Anomalías Urinarias Asintomáticas"></v-checkbox>
-                    <v-checkbox v-model="selected" label="IRA" value="IRA"></v-checkbox>
-                    <v-checkbox v-model="selected" label="IRC" value="IRC"></v-checkbox>
-                    <v-checkbox v-model="selected" label="ITU" value="ITU"></v-checkbox>
-                    <v-checkbox v-model="selected" label="Uropatía Obstructiva" value="Uropatía Obstructiva"></v-checkbox>
-                    <v-checkbox v-model="selected" label="Tubulopatía" value="Tubulopatía"></v-checkbox>
-                    <v-checkbox v-model="selected" label="HTA" value="HTA"></v-checkbox>
-                    <v-checkbox v-model="selected" label="Nefrolitiasis" value="Nefrolitiasis"></v-checkbox>
+                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="Sx. Nefrítico" value="Sx. Nefrítico"></v-checkbox>
+                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="Sx. Nefrotico" value="Sx. Nefrotico"></v-checkbox>
+                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="Anomalías Urinarias Asintomáticas" value="Anomalías Urinarias Asintomáticas"></v-checkbox>
+                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="IRA" value="IRA"></v-checkbox>
+                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="IRC" value="IRC"></v-checkbox>
+                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="ITU" value="ITU"></v-checkbox>
+                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="Uropatía Obstructiva" value="Uropatía Obstructiva"></v-checkbox>
+                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="Tubulopatía" value="Tubulopatía"></v-checkbox>
+                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="HTA" value="HTA"></v-checkbox>
+                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="Nefrolitiasis" value="Nefrolitiasis"></v-checkbox>
                   </v-container>
             </v-flex>
           </v-card-title>
@@ -181,9 +179,11 @@
               <v-layout align-center justify-end />
                 <h3 id="headers"  class="text-xs-center">Dx. Definitivo</h3>
             <v-textarea
+
+              v-model="Dx_Definitivo"
               outline
               name="Dx_Definitivo"
-              value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
+              value=""
               rows=38
             ></v-textarea>
             </v-flex>
@@ -197,9 +197,10 @@
               <v-layout align-center justify-end />
                 <h3 id="headers" class="text-xs-center">Dx. Asociados</h3>
             <v-textarea
+              v-model="Dx_Asociados"
               outline
               name="Dx_Asociados"
-              value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
+              value=""
               rows=38
             ></v-textarea>
             </v-flex>
@@ -215,6 +216,7 @@
                   <h3 id="headers" class="text-xs-center">Historia</h3>
               <v-textarea
                 outline
+                v-model="Historia"
                 name="Historia"
                 value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
               ></v-textarea>
@@ -242,13 +244,14 @@ export default {
     data () {
       return {
         search:'',        
-        //datos extra
+        //datos extra (se pondran en la tabla de pacientes para mientras)
         kg_perc:'',
         Peso:'',
         Percentil:'',
         Talla:'',
         PA:'',
         cms_perc:'',
+        Historia:'',
         //datos del paciente a ingresar
         CUI:'', 
         Nombre:'', 
@@ -257,13 +260,14 @@ export default {
         Fecha_de_nacimiento: null,
         //sirve para menu de nacimiento, como un trigger
         menu_nacimiento: false,
-        Procedencia:'',
+        Procedencia:'', //este es para el codigo de la procedencia (que es el que se metera en la tabla en la db)
+        ProcedenciaTxt:'',  //este es para mostrar el depto, municipio
         Nombre_de_padre:'',
         Nombre_de_madre:'',
         Telefono:'',
         Edad: '',
         //los siguientes se pondran como predeterminados por cuestion de tiempo, pero se volveran dinámicos después
-        Sindrome_Clinico_Presentacion: 1,
+        Sindrome_Clinico_Presentacion: '',
         Dx_Definitivo:'',
         Dx_Asociados:'',
         Imagen:'None (por ahora)',
@@ -271,8 +275,7 @@ export default {
         Estudia: 1,
         Transfusiones:1,
         EstadoActual:1,
-        Sexo:1,
-        selected: null,
+        Sexo: '',
         pacientes: []
       }
   },
@@ -283,7 +286,7 @@ export default {
             Nombre: this.Nombre,
             Apellido: this.Apellido,
             Fecha_de_nacimiento: this.Fecha_de_nacimiento,
-            Procedencia: this.Procedencia,
+            Procedencia: this.CUI.substr(this.CUI.length-4),
             Nombre_de_padre: this.Nombre_de_padre,
             Nombre_de_madre: this.Nombre_de_madre,
             Telefono: this.Telefono,
@@ -296,7 +299,14 @@ export default {
             Estudia: this.Estudia,
             Transfusiones: this.Transfusiones,
             EstadoActual: this.EstadoActual,
-            Sexo: this.Sexo
+            Sexo: this.Sexo,
+            Kg_perc: this.kg_perc,
+            Peso: this.Peso,
+            Percentil: this.Percentil,
+            Talla:this.Talla,
+            PA:this.PA,
+            Cms_perc: this.cms_perc,
+            Historia:this.Historia,
         };
           this.$http.post('http://localhost:8000/PacienteController/insert', info).then(response => {
               this.error = false;
@@ -304,11 +314,20 @@ export default {
               this.Nombre='';
               this.Apellido='';
               this.Fecha_de_nacimiento='';
-              this.Procedencia='';
+              this.ProcedenciaTxt=' ';
               this.Nombre_de_padre='';
               this.Nombre_de_madre='';
               this.Telefono='';
-              this.Edad= '';
+              this.Edad= ' ';
+              this.Historia=' ';
+              this.Dx_Definitivo=' ';
+              this.Dx_Asociados=' ';
+              this.Percentil='';
+              this.Talla='';
+              this.Peso='';
+              this.cms_perc='';
+              this.kg_perc='';
+              this.PA=''
           }).
           catch(error => {
               this.error = true;
@@ -342,7 +361,7 @@ export default {
         prettyPlaceholders(){
           //poner aqui todos los placeholders que cambian en runtime..
           this.Edad = ' ';
-          this.Procedencia = ' ';
+          this.ProcedenciaTxt = ' ';
         },
         checkLocation(inStr){
           //partimos de la premisa que el dpi tiene 13 digitos...
@@ -355,7 +374,7 @@ export default {
             //console.log(response.data.locations[0].Departamento);
             var dep = response.data.locations[0].Departamento;
             var muni = response.data.locations[0].Municipio;
-            this.Procedencia =  dep.concat(', '.concat(muni));
+            this.ProcedenciaTxt =  dep.concat(', '.concat(muni));
           });
           
 
@@ -379,9 +398,7 @@ div#datosGenerales {
   float: right;
 }
 div#inBox {
-  margin-left: 5%;
-  width: 50%;
-  float: right;
+  float:left; margin-right:5%; width:45%
 }
 
 div#inBox-date {

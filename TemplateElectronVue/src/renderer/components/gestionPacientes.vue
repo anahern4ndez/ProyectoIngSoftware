@@ -91,44 +91,52 @@
       <div id="DatosPaciente">
           <template>
             <form>
-              <div class="form-group">
-              <h2 id="headers">Nombres </h2>
-              <h3 class="subheading font-weight-light"> {{selectedPatients.Nombre}}</h3>
-              </div>
-              <div class="form-group" >
-                  <h2 id="headers">Apellidos </h2>
-                  <h3 class="subheading font-weight-light"> {{selectedPatients.Apellido}}</h3>
-              </div>
-              <div class="form-group">
-                  <h2 id="headers"> CUI </h2>
-                  <h3 class="subheading font-weight-light"> {{selectedPatients.CUI}}</h3>
-              </div>
-              <div class="form-group">
-                  <h2 id="headers"> Estado </h2>
-                  <h3 class="subheading font-weight-light"> {{selectedPatients.estado_actual.significado}}</h3>
-              </div>
+              <h2 id="headers" style="text-align:center"> Paciente seleccionado </h2>
+              <br>
               <div>
-                  <h2 id="headers"> Edad </h2>
-                  <h3 class="subheading font-weight-light"> {{selectedPatients.Edad}}</h3>
+                <img id="fotoPaciente" style="margin-left: 10%; margin-top: 2%" src="../assets/javier.jpg" alt="" width="273" height="183">
               </div>
-              <div>
-                  <h2 id="headers"> Número telefónico </h2>
-                  <h3 class="subheading font-weight-light"> {{selectedPatients.Telefono}}</h3>
+              <br>
+              <div style="float:left; width: 50%">
+              <h3 id="headers">Nombres </h3>
+              <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.Nombre}}</h3>
               </div>
-              <div>
-                  <h2 id="headers"> Nombre del padre </h2>
-                  <h3 class="subheading font-weight-light"> {{selectedPatients.Nombre_de_padre}}</h3>
+              <div style="float:left; width: 50%">
+                  <h3 id="headers">Apellidos </h3>
+                  <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.Apellido}}</h3>
               </div>
-              <div>
-                  <h2 id="headers"> Nombre de la madre </h2>
-                  <h3 class="subheading font-weight-light"> {{selectedPatients.Nombre_de_madre}}</h3>
+              <div style="float:left; width: 50%">
+                  <h3 id="headers"> CUI </h3>
+                  <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.CUI}}</h3>
               </div>
+              <div style="float:left; width: 50%">
+                  <h3 id="headers"> Estado </h3>
+                  <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.estado_actual.significado}}</h3>
+              </div>
+              <div style="float:left; width: 50%">
+                  <h3 id="headers"> Edad </h3>
+                  <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.Edad}}</h3>
+              </div>
+              <div style="float:left; width: 50%">
+                  <h3 id="headers"> Número telefónico </h3>
+                  <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.Telefono}}</h3>
+              </div>
+              <div style="float:left; width: 45%">
+                  <h3 id="headers"> Nombre del padre </h3>
+                  <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.Nombre_de_padre}}</h3>
+              </div>
+              <div style="float:left; width: 50%; margin-left:5%">
+                  <h3 id="headers"> Nombre de la madre </h3>
+                  <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.Nombre_de_madre}}</h3>
+              </div>
+              <br>
+              <br>
           </form>
           </template>
-          
       </div>
     </div>
     <div id="botones">
+      <br>
       <div id="boton">
         <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="ingresarNuevo">Ingresar nuevo paciente</button>
       </div>
@@ -161,8 +169,8 @@ export default {
       this.pacientes = response.data.Pacientes;
       this.selectedPatients = response.data.Pacientes[0];
       //console.log(this.selectedPatients = response.data.Pacientes);
-      this.Nombre = response.data.Pacientes[0].Nombre;
-      this.Apellido = response.data.Pacientes[0].Apellido;
+      //this.Nombre = response.data.Pacientes[0].Nombre;
+      //this.Apellido = response.data.Pacientes[0].Apellido;
     });
     this.$http.get(`http://localhost:8000/EstadoController/getAllEstado`).then(response =>{
       this.estados_response = response.data.Estados;
@@ -295,13 +303,13 @@ export default {
 </script>
 <style>
 div#TablaPacientes {
-  width: 70%;
+  width: 65%;
   padding-left: 2%;
   margin-right: 2%;
   float: left;
 }
 div#DatosPaciente {
-  width: 25%;
+  width: 30%;
   margin-left: 2%;
   float: right;
 }

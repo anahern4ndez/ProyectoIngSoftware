@@ -6,9 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Paciente extends Model
 {
-    //
-    public $timestamps = false;
-    protected $primaryKey = 'CUI';
     protected $fillable = [ 
         'id',
         'Nombre', 
@@ -28,7 +25,14 @@ class Paciente extends Model
         'Estudia',
         'Transfusiones',
         'EstadoActual',
-        'Sexo'
+        'Sexo',
+        'Kg_perc',
+        'Peso',
+        'Percentil',
+        'Talla',
+        'PA',
+        'Cms_perc',
+        'Historia'
     ];
     /**
      * Relaciones de la tabla Paciente
