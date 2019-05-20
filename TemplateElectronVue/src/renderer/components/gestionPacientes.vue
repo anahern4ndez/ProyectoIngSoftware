@@ -26,8 +26,7 @@
                     <label for="changeStatus">Cambio estado de paciente</label>
                     
                     <select class='form-control' name='changeStatus' id='changeStatus' v-model='estadoNuevo'>
-                      <option value='1'>1</option>
-                      <option value='2'>2</option>
+                      <option v-for='item in estados_response' :value='item.ID'>{{item.significado}}</option>
                     </select>
                     
                     
@@ -58,7 +57,7 @@
                     <td class="text-xs-center">{{ props.item.CUI }}</td>
                     <td class="text-xs-center">{{ props.item.Nombre }}</td>
                     <td class="text-xs-center">{{ props.item.Apellido }}</td>
-                    <td class="text-xs-center">{{ props.item.procedencia.Significado }}</td>
+                    <td class="text-xs-center">{{ props.item.procedencia.Departamento }}</td>
                     <td class="text-xs-center">{{ props.item.Fecha_de_nacimiento }}</td>
                     <td class="text-xs-center">{{ props.item.estado_actual.significado }}</td>
                     <td class="justify-center layout px-0">
@@ -106,7 +105,7 @@
               </div>
               <div class="form-group">
                   <h2 id="headers"> Estado </h2>
-                  <h3 class="subheading font-weight-light"> {{selectedPatients.EstadoActual}}</h3>
+                  <h3 class="subheading font-weight-light"> {{selectedPatients.estado_actual.significado}}</h3>
               </div>
               <div>
                   <h2 id="headers"> Edad </h2>
@@ -161,8 +160,13 @@ export default {
       
       this.pacientes = response.data.Pacientes;
       this.selectedPatients = response.data.Pacientes[0];
+      //console.log(this.selectedPatients = response.data.Pacientes);
       this.Nombre = response.data.Pacientes[0].Nombre;
       this.Apellido = response.data.Pacientes[0].Apellido;
+    });
+    this.$http.get(`http://localhost:8000/EstadoController/getAllEstado`).then(response =>{
+      this.estados_response = response.data.Estados;
+
     });
   },
     data () {
@@ -170,6 +174,7 @@ export default {
         search:'',
         selected: [],
         selected2: null,
+        estados_response: '',
         estadoNuevo: null,
         dialog: false,
         radioGroup:1,

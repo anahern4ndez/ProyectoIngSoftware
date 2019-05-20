@@ -23,6 +23,7 @@
                               v-model="CUI"
                               label="Número de CUI"
                               outline
+                              @change="checkLocation(CUI)"
                           ></v-text-field>
                       <v-text-field
                               v-model="Nombre"
@@ -40,6 +41,8 @@
                                   v-model="Procedencia"
                                   label="Procedencia"
                                   outline
+                                  placeholder=[[this.Procedencia]]
+                                  value=[[this.Procedencia]]
                               ></v-text-field>
                       </div>
                       
@@ -106,6 +109,7 @@
                             label="Edad"
                             outline
                             placeholder="[[this.Edad]]"
+                            value = [[this.Edad]]
                         ></v-text-field>
                     <div id="inBox">
                       <v-text-field
@@ -337,7 +341,25 @@ export default {
         },
         prettyPlaceholders(){
           //poner aqui todos los placeholders que cambian en runtime..
-          this.Edad = ' '
+          this.Edad = ' ';
+          this.Procedencia = ' ';
+        },
+        checkLocation(inStr){
+          //partimos de la premisa que el dpi tiene 13 digitos...
+          var ultimos=inStr.substr(inStr.length-4);
+          var data = {
+            id_Dep: ultimos
+          }
+          //TODO: AJAX REQUEST..
+          this.$http.post(`http://localhost:8000/ProcedenciaController/locate/`,data).then(response=>{
+            //console.log(response.data.locations[0].Departamento);
+            var dep = response.data.locations[0].Departamento;
+            var muni = response.data.locations[0].Municipio;
+            this.Procedencia =  dep.concat(', '.concat(muni));
+          });
+          
+
+
         }
     },
     beforeMount(){

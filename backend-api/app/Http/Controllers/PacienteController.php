@@ -59,10 +59,9 @@ class PacienteController extends Controller
 
     function findAll(){
         //$val = Paciente::all();
-        $val = Paciente::with('Procedencia', 'Sexo','Sindrome_Clinico_Presentacion', 'tipo_de_sangre', 'EstadoActual', 'tipo_respuesta_estudia', 'tipo_respuesta_trans')->get();
+        $val = Paciente::with('Procedencia', 'sexo_rel','Sindrome_Clinico_Presentacion', 'Tipo_de_Sangre', 'EstadoActual', 'Estudia', 'Transfusiones')->get();
 
         return response()->json([
-            'success' => true,
             'Pacientes' => $val,
             //'sexo' => $v->sexo->significado
         ], 200);
@@ -86,6 +85,7 @@ class PacienteController extends Controller
         
 
     }
+
     /**
      * elimina objeto en busqueda bajo id del elemento.
      * @param id parametro de busqueda para borrar

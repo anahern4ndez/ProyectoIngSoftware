@@ -44,6 +44,13 @@ class EstadoController extends Controller
             'Estados' => $val
         ], 200);
     }
+
+    function getAllEstado(){
+        $val = Estado::all();
+        return response()->json([
+            'Estados' => $val
+        ], 200);    
+    }
     /**
      * hace update a todos los properties del elemento
      * @param int id
