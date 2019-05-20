@@ -1,6 +1,7 @@
+<link {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}, {rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'} >
 <template lang="">
   <div class="grey--text text--darken-2">
-    <h1 class="text-center">Gestión de Usuarios</h1>
+    <h1 class="text-center">Gestión de Paciente</h1>
     <div>
       <b-container class="bv-example-row1">
         <b-row align-h="around" align-v="center">
@@ -88,7 +89,7 @@
           </v-data-table>
         </v-card>
         <br><br>
-         <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="continuar">Continuar</button>
+         <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="dgenerales">Continuar</button>
       </div>
           </b-col>
           <b-col order="3" cols="4">
@@ -197,6 +198,9 @@ export default {
       this.$http.get("http://localhost:8000/users").then(response => {
       this.user = response.data.users;
     });
+    },
+    dgenerales() {
+      this.$router.push("/DatosG");
     }
   }
 };
