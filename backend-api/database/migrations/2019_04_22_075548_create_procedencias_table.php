@@ -13,10 +13,12 @@ class CreateProcedenciasTable extends Migration
      */
     public function up()
     {
+        
         Schema::create('procedencias', function (Blueprint $table) {
             $table->integer('ID');
             $table->primary('ID');
-            $table->string('Significado', 20);
+            $table->string('Departamento', 25);
+            $table->string('Municipio', 32);
         });
     }
 

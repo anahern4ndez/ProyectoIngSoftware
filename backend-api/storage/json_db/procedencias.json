@@ -1,0 +1,1657 @@
+[
+    {
+        "ID": "101",
+        "Departamento": "Guatemala",
+        "Municipio": "Guatemala"
+    },
+    {
+        "ID": "102",
+        "Departamento": "Guatemala",
+        "Municipio": "Santa Catarina Pinula"
+    },
+    {
+        "ID": "103",
+        "Departamento": "Guatemala",
+        "Municipio": "San José Pinula"
+    },
+    {
+        "ID": "104",
+        "Departamento": "Guatemala",
+        "Municipio": "San José del Golfo"
+    },
+    {
+        "ID": "105",
+        "Departamento": "Guatemala",
+        "Municipio": "Palencia"
+    },
+    {
+        "ID": "106",
+        "Departamento": "Guatemala",
+        "Municipio": "Chinautla"
+    },
+    {
+        "ID": "107",
+        "Departamento": "Guatemala",
+        "Municipio": "San Pedro Ayampuc"
+    },
+    {
+        "ID": "108",
+        "Departamento": "Guatemala",
+        "Municipio": "Mixco"
+    },
+    {
+        "ID": "109",
+        "Departamento": "Guatemala",
+        "Municipio": "San Pedro Sacatepéquez"
+    },
+    {
+        "ID": "110",
+        "Departamento": "Guatemala",
+        "Municipio": "San Juan Sacatépequez"
+    },
+    {
+        "ID": "111",
+        "Departamento": "Guatemala",
+        "Municipio": "San Raymundo"
+    },
+    {
+        "ID": "112",
+        "Departamento": "Guatemala",
+        "Municipio": "Chuarrancho"
+    },
+    {
+        "ID": "113",
+        "Departamento": "Guatemala",
+        "Municipio": "Fraijanes"
+    },
+    {
+        "ID": "114",
+        "Departamento": "Guatemala",
+        "Municipio": "Amatitlán"
+    },
+    {
+        "ID": "115",
+        "Departamento": "Guatemala",
+        "Municipio": "Villa Nueva"
+    },
+    {
+        "ID": "116",
+        "Departamento": "Guatemala",
+        "Municipio": "Villa Canales"
+    },
+    {
+        "ID": "117",
+        "Departamento": "Guatemala",
+        "Municipio": "Petapa"
+    },
+    {
+        "ID": "201",
+        "Departamento": "El Progreso",
+        "Municipio": "Guastatoya"
+    },
+    {
+        "ID": "202",
+        "Departamento": "El Progreso",
+        "Municipio": "Morazán"
+    },
+    {
+        "ID": "203",
+        "Departamento": "El Progreso",
+        "Municipio": "San Agustín Acasaguastlán"
+    },
+    {
+        "ID": "204",
+        "Departamento": "El Progreso",
+        "Municipio": "San Cristóbal Acasaguastlán"
+    },
+    {
+        "ID": "205",
+        "Departamento": "El Progreso",
+        "Municipio": "El Jícaro"
+    },
+    {
+        "ID": "206",
+        "Departamento": "El Progreso",
+        "Municipio": "Sansare"
+    },
+    {
+        "ID": "207",
+        "Departamento": "El Progreso",
+        "Municipio": "Sanarate"
+    },
+    {
+        "ID": "208",
+        "Departamento": "El Progreso",
+        "Municipio": "San Antonio La Paz"
+    },
+    {
+        "ID": "301",
+        "Departamento": "Sacatepéquez",
+        "Municipio": "Antigua Guatemala"
+    },
+    {
+        "ID": "302",
+        "Departamento": "Sacatepéquez",
+        "Municipio": "Jocotenango"
+    },
+    {
+        "ID": "303",
+        "Departamento": "Sacatepéquez",
+        "Municipio": "Pastores"
+    },
+    {
+        "ID": "304",
+        "Departamento": "Sacatepéquez",
+        "Municipio": "Sumpango"
+    },
+    {
+        "ID": "305",
+        "Departamento": "Sacatepéquez",
+        "Municipio": "Sto. Domingo Xenacoj"
+    },
+    {
+        "ID": "306",
+        "Departamento": "Sacatepéquez",
+        "Municipio": "Santiago Sacatepéquez"
+    },
+    {
+        "ID": "307",
+        "Departamento": "Sacatepéquez",
+        "Municipio": "San Bartolomé Millpas Altas"
+    },
+    {
+        "ID": "308",
+        "Departamento": "Sacatepéquez",
+        "Municipio": "San Lucas Sacatepéquez"
+    },
+    {
+        "ID": "309",
+        "Departamento": "Sacatepéquez",
+        "Municipio": "Santa Lucia Milpas Altas"
+    },
+    {
+        "ID": "310",
+        "Departamento": "Sacatepéquez",
+        "Municipio": "Magdalena Milpas Altas"
+    },
+    {
+        "ID": "311",
+        "Departamento": "Sacatepéquez",
+        "Municipio": "Santa María de Jesús"
+    },
+    {
+        "ID": "312",
+        "Departamento": "Sacatepéquez",
+        "Municipio": "Ciudad Vieja"
+    },
+    {
+        "ID": "313",
+        "Departamento": "Sacatepéquez",
+        "Municipio": "San Miguel Dueñas"
+    },
+    {
+        "ID": "314",
+        "Departamento": "Sacatepéquez",
+        "Municipio": "Alotenango"
+    },
+    {
+        "ID": "315",
+        "Departamento": "Sacatepéquez",
+        "Municipio": "San Antonio Aguas Calientes"
+    },
+    {
+        "ID": "316",
+        "Departamento": "Sacatepéquez",
+        "Municipio": "Santa Catarina Barahona"
+    },
+    {
+        "ID": "401",
+        "Departamento": "Chimaltenango",
+        "Municipio": "Chimaltenango"
+    },
+    {
+        "ID": "402",
+        "Departamento": "Chimaltenango",
+        "Municipio": "San José Poaquil"
+    },
+    {
+        "ID": "403",
+        "Departamento": "Chimaltenango",
+        "Municipio": "San Martín Jilotepeque"
+    },
+    {
+        "ID": "404",
+        "Departamento": "Chimaltenango",
+        "Municipio": "Comalapa"
+    },
+    {
+        "ID": "405",
+        "Departamento": "Chimaltenango",
+        "Municipio": "Santa Apolonia"
+    },
+    {
+        "ID": "406",
+        "Departamento": "Chimaltenango",
+        "Municipio": "Tecpán Guatemala"
+    },
+    {
+        "ID": "407",
+        "Departamento": "Chimaltenango",
+        "Municipio": "Patzún"
+    },
+    {
+        "ID": "408",
+        "Departamento": "Chimaltenango",
+        "Municipio": "Pochuta"
+    },
+    {
+        "ID": "409",
+        "Departamento": "Chimaltenango",
+        "Municipio": "Patzicia"
+    },
+    {
+        "ID": "410",
+        "Departamento": "Chimaltenango",
+        "Municipio": "Santa Cruz Balanyá"
+    },
+    {
+        "ID": "411",
+        "Departamento": "Chimaltenango",
+        "Municipio": "Acatenango"
+    },
+    {
+        "ID": "412",
+        "Departamento": "Chimaltenango",
+        "Municipio": "Yepocapa"
+    },
+    {
+        "ID": "413",
+        "Departamento": "Chimaltenango",
+        "Municipio": "San Andrés Iztapa"
+    },
+    {
+        "ID": "414",
+        "Departamento": "Chimaltenango",
+        "Municipio": "Parramos"
+    },
+    {
+        "ID": "415",
+        "Departamento": "Chimaltenango",
+        "Municipio": "Zaragoza"
+    },
+    {
+        "ID": "416",
+        "Departamento": "Chimaltenango",
+        "Municipio": "El Tejar"
+    },
+    {
+        "ID": "501",
+        "Departamento": "Escuintla",
+        "Municipio": "Escuintla"
+    },
+    {
+        "ID": "502",
+        "Departamento": "Escuintla",
+        "Municipio": "Santa Lucía Cotzumalguapa"
+    },
+    {
+        "ID": "503",
+        "Departamento": "Escuintla",
+        "Municipio": "La Democracia"
+    },
+    {
+        "ID": "504",
+        "Departamento": "Escuintla",
+        "Municipio": "Siquinalá"
+    },
+    {
+        "ID": "505",
+        "Departamento": "Escuintla",
+        "Municipio": "Masagua"
+    },
+    {
+        "ID": "506",
+        "Departamento": "Escuintla",
+        "Municipio": "Tiquisate"
+    },
+    {
+        "ID": "507",
+        "Departamento": "Escuintla",
+        "Municipio": "La Gomera"
+    },
+    {
+        "ID": "508",
+        "Departamento": "Escuintla",
+        "Municipio": "Guanagazapa"
+    },
+    {
+        "ID": "509",
+        "Departamento": "Escuintla",
+        "Municipio": "San José"
+    },
+    {
+        "ID": "510",
+        "Departamento": "Escuintla",
+        "Municipio": "Iztapa"
+    },
+    {
+        "ID": "511",
+        "Departamento": "Escuintla",
+        "Municipio": "Palín"
+    },
+    {
+        "ID": "512",
+        "Departamento": "Escuintla",
+        "Municipio": "San Vicente Pacaya"
+    },
+    {
+        "ID": "513",
+        "Departamento": "Escuintla",
+        "Municipio": "Nueva Concepción"
+    },
+    {
+        "ID": "601",
+        "Departamento": "Santa Rosa",
+        "Municipio": "Cuilapa"
+    },
+    {
+        "ID": "602",
+        "Departamento": "Santa Rosa",
+        "Municipio": "Barberena"
+    },
+    {
+        "ID": "603",
+        "Departamento": "Santa Rosa",
+        "Municipio": "Santa Rosa de Lima"
+    },
+    {
+        "ID": "604",
+        "Departamento": "Santa Rosa",
+        "Municipio": "Casillas"
+    },
+    {
+        "ID": "605",
+        "Departamento": "Santa Rosa",
+        "Municipio": "San Rafael Las Flores"
+    },
+    {
+        "ID": "606",
+        "Departamento": "Santa Rosa",
+        "Municipio": "Oratorio"
+    },
+    {
+        "ID": "607",
+        "Departamento": "Santa Rosa",
+        "Municipio": "San Juan Tecuaco"
+    },
+    {
+        "ID": "608",
+        "Departamento": "Santa Rosa",
+        "Municipio": "Chiquimulilla"
+    },
+    {
+        "ID": "609",
+        "Departamento": "Santa Rosa",
+        "Municipio": "Taxisco"
+    },
+    {
+        "ID": "610",
+        "Departamento": "Santa Rosa",
+        "Municipio": "Santa María Ixhuatán"
+    },
+    {
+        "ID": "611",
+        "Departamento": "Santa Rosa",
+        "Municipio": "Guazacapán"
+    },
+    {
+        "ID": "612",
+        "Departamento": "Santa Rosa",
+        "Municipio": "Santa Cruz Naranjo"
+    },
+    {
+        "ID": "613",
+        "Departamento": "Santa Rosa",
+        "Municipio": "Pueblo Nuevo Viñas"
+    },
+    {
+        "ID": "614",
+        "Departamento": "Santa Rosa",
+        "Municipio": "Nueva Santa Rosa"
+    },
+    {
+        "ID": "701",
+        "Departamento": "Sololá",
+        "Municipio": "Sololá"
+    },
+    {
+        "ID": "702",
+        "Departamento": "Sololá",
+        "Municipio": "San José Chacayá"
+    },
+    {
+        "ID": "703",
+        "Departamento": "Sololá",
+        "Municipio": "Santa María Visitación"
+    },
+    {
+        "ID": "704",
+        "Departamento": "Sololá",
+        "Municipio": "Santa Lucía Utatlán"
+    },
+    {
+        "ID": "705",
+        "Departamento": "Sololá",
+        "Municipio": "Nahualá"
+    },
+    {
+        "ID": "706",
+        "Departamento": "Sololá",
+        "Municipio": "Santa Catarina Ixtahuacán"
+    },
+    {
+        "ID": "707",
+        "Departamento": "Sololá",
+        "Municipio": "Santa Clara La Laguna"
+    },
+    {
+        "ID": "708",
+        "Departamento": "Sololá",
+        "Municipio": "Concepción"
+    },
+    {
+        "ID": "709",
+        "Departamento": "Sololá",
+        "Municipio": "San Andrés Semetabaj"
+    },
+    {
+        "ID": "710",
+        "Departamento": "Sololá",
+        "Municipio": "Panajachel"
+    },
+    {
+        "ID": "711",
+        "Departamento": "Sololá",
+        "Municipio": "Santa Catarina Palopó"
+    },
+    {
+        "ID": "712",
+        "Departamento": "Sololá",
+        "Municipio": "San Antonio Palopó"
+    },
+    {
+        "ID": "713",
+        "Departamento": "Sololá",
+        "Municipio": "San Lucas Tolimán"
+    },
+    {
+        "ID": "714",
+        "Departamento": "Sololá",
+        "Municipio": "Santa Cruz La Laguna"
+    },
+    {
+        "ID": "715",
+        "Departamento": "Sololá",
+        "Municipio": "San Pablo La Laguna"
+    },
+    {
+        "ID": "716",
+        "Departamento": "Sololá",
+        "Municipio": "San Marcos La Laguna"
+    },
+    {
+        "ID": "717",
+        "Departamento": "Sololá",
+        "Municipio": "San Juan La Laguna"
+    },
+    {
+        "ID": "718",
+        "Departamento": "Sololá",
+        "Municipio": "San Pedro La Laguna"
+    },
+    {
+        "ID": "719",
+        "Departamento": "Sololá",
+        "Municipio": "Santiago Atitlán"
+    },
+    {
+        "ID": "801",
+        "Departamento": "Totonicapán",
+        "Municipio": "Totonicapán"
+    },
+    {
+        "ID": "802",
+        "Departamento": "Totonicapán",
+        "Municipio": "San Cristóbal Totonicapán"
+    },
+    {
+        "ID": "803",
+        "Departamento": "Totonicapán",
+        "Municipio": "San Francisco El Alto"
+    },
+    {
+        "ID": "804",
+        "Departamento": "Totonicapán",
+        "Municipio": "San Andrés Xecul"
+    },
+    {
+        "ID": "805",
+        "Departamento": "Totonicapán",
+        "Municipio": "Momostenango"
+    },
+    {
+        "ID": "806",
+        "Departamento": "Totonicapán",
+        "Municipio": "Santa María Chiquimula"
+    },
+    {
+        "ID": "807",
+        "Departamento": "Totonicapán",
+        "Municipio": "Santa Lucía La Reforma"
+    },
+    {
+        "ID": "808",
+        "Departamento": "Totonicapán",
+        "Municipio": "San Bartolo Aguas Calientes"
+    },
+    {
+        "ID": "901",
+        "Departamento": "Quetzaltenango",
+        "Municipio": "Quetzaltenango"
+    },
+    {
+        "ID": "902",
+        "Departamento": "Quetzaltenango",
+        "Municipio": "Salcajá"
+    },
+    {
+        "ID": "903",
+        "Departamento": "Quetzaltenango",
+        "Municipio": "Olintepeque"
+    },
+    {
+        "ID": "904",
+        "Departamento": "Quetzaltenango",
+        "Municipio": "San Carlos Sija"
+    },
+    {
+        "ID": "905",
+        "Departamento": "Quetzaltenango",
+        "Municipio": "Sibilia"
+    },
+    {
+        "ID": "906",
+        "Departamento": "Quetzaltenango",
+        "Municipio": "Cabricán"
+    },
+    {
+        "ID": "907",
+        "Departamento": "Quetzaltenango",
+        "Municipio": "Cajolá"
+    },
+    {
+        "ID": "908",
+        "Departamento": "Quetzaltenango",
+        "Municipio": "San Miguel Siguilá"
+    },
+    {
+        "ID": "909",
+        "Departamento": "Quetzaltenango",
+        "Municipio": "San Juan Ostuncalco"
+    },
+    {
+        "ID": "910",
+        "Departamento": "Quetzaltenango",
+        "Municipio": "San Mateo"
+    },
+    {
+        "ID": "911",
+        "Departamento": "Quetzaltenango",
+        "Municipio": "Concepción Chiquirichapa"
+    },
+    {
+        "ID": "912",
+        "Departamento": "Quetzaltenango",
+        "Municipio": "San Martín Sacatepéquez"
+    },
+    {
+        "ID": "913",
+        "Departamento": "Quetzaltenango",
+        "Municipio": "Almolonga"
+    },
+    {
+        "ID": "914",
+        "Departamento": "Quetzaltenango",
+        "Municipio": "Cantel"
+    },
+    {
+        "ID": "915",
+        "Departamento": "Quetzaltenango",
+        "Municipio": "Huitán"
+    },
+    {
+        "ID": "916",
+        "Departamento": "Quetzaltenango",
+        "Municipio": "Zunil"
+    },
+    {
+        "ID": "917",
+        "Departamento": "Quetzaltenango",
+        "Municipio": "Colomba"
+    },
+    {
+        "ID": "918",
+        "Departamento": "Quetzaltenango",
+        "Municipio": "San Francisco La Unión"
+    },
+    {
+        "ID": "919",
+        "Departamento": "Quetzaltenango",
+        "Municipio": "El Palmar"
+    },
+    {
+        "ID": "920",
+        "Departamento": "Quetzaltenango",
+        "Municipio": "Coatepeque"
+    },
+    {
+        "ID": "921",
+        "Departamento": "Quetzaltenango",
+        "Municipio": "Génova"
+    },
+    {
+        "ID": "922",
+        "Departamento": "Quetzaltenango",
+        "Municipio": "Flores Costa Cuca"
+    },
+    {
+        "ID": "923",
+        "Departamento": "Quetzaltenango",
+        "Municipio": "La Esperanza"
+    },
+    {
+        "ID": "924",
+        "Departamento": "Quetzaltenango",
+        "Municipio": "Palestina de los Altos"
+    },
+    {
+        "ID": "1001",
+        "Departamento": "Suchitepéquez",
+        "Municipio": "Mazatenango"
+    },
+    {
+        "ID": "1002",
+        "Departamento": "Suchitepéquez",
+        "Municipio": "Cuyotenango"
+    },
+    {
+        "ID": "1003",
+        "Departamento": "Suchitepéquez",
+        "Municipio": "San Francisco Zapotitlán"
+    },
+    {
+        "ID": "1004",
+        "Departamento": "Suchitepéquez",
+        "Municipio": "San Bernardino"
+    },
+    {
+        "ID": "1005",
+        "Departamento": "Suchitepéquez",
+        "Municipio": "San José El ídolo"
+    },
+    {
+        "ID": "1006",
+        "Departamento": "Suchitepéquez",
+        "Municipio": "Santo Domingo Suchitepéquez"
+    },
+    {
+        "ID": "1007",
+        "Departamento": "Suchitepéquez",
+        "Municipio": "San Lorenzo"
+    },
+    {
+        "ID": "1008",
+        "Departamento": "Suchitepéquez",
+        "Municipio": "Samayac"
+    },
+    {
+        "ID": "1009",
+        "Departamento": "Suchitepéquez",
+        "Municipio": "San Pablo Jocopilas"
+    },
+    {
+        "ID": "1010",
+        "Departamento": "Suchitepéquez",
+        "Municipio": "San Antonio Suchitepéquez"
+    },
+    {
+        "ID": "1011",
+        "Departamento": "Suchitepéquez",
+        "Municipio": "San Miguel Panán"
+    },
+    {
+        "ID": "1012",
+        "Departamento": "Suchitepéquez",
+        "Municipio": "San Gabriel"
+    },
+    {
+        "ID": "1013",
+        "Departamento": "Suchitepéquez",
+        "Municipio": "Chicacao"
+    },
+    {
+        "ID": "1014",
+        "Departamento": "Suchitepéquez",
+        "Municipio": "Patulul"
+    },
+    {
+        "ID": "1015",
+        "Departamento": "Suchitepéquez",
+        "Municipio": "Santa Bárbara"
+    },
+    {
+        "ID": "1016",
+        "Departamento": "Suchitepéquez",
+        "Municipio": "San Juan Bautista"
+    },
+    {
+        "ID": "1017",
+        "Departamento": "Suchitepéquez",
+        "Municipio": "Santo Tomás La Unión"
+    },
+    {
+        "ID": "1018",
+        "Departamento": "Suchitepéquez",
+        "Municipio": "Zunilito"
+    },
+    {
+        "ID": "1019",
+        "Departamento": "Suchitepéquez",
+        "Municipio": "Pueblo Nuevo"
+    },
+    {
+        "ID": "1020",
+        "Departamento": "Suchitepéquez",
+        "Municipio": "Río Bravo"
+    },
+    {
+        "ID": "1101",
+        "Departamento": "Retalhuleu",
+        "Municipio": "Retalhuleu"
+    },
+    {
+        "ID": "1102",
+        "Departamento": "Retalhuleu",
+        "Municipio": "San Sebastián"
+    },
+    {
+        "ID": "1103",
+        "Departamento": "Retalhuleu",
+        "Municipio": "Santa Cruz Muluá"
+    },
+    {
+        "ID": "1104",
+        "Departamento": "Retalhuleu",
+        "Municipio": "San Martín Zapotitlán"
+    },
+    {
+        "ID": "1105",
+        "Departamento": "Retalhuleu",
+        "Municipio": "San Felipe Retalhuleu"
+    },
+    {
+        "ID": "1106",
+        "Departamento": "Retalhuleu",
+        "Municipio": "San Andrés Villa Seca"
+    },
+    {
+        "ID": "1107",
+        "Departamento": "Retalhuleu",
+        "Municipio": "Champerico"
+    },
+    {
+        "ID": "1108",
+        "Departamento": "Retalhuleu",
+        "Municipio": "Nuevo San Carlos"
+    },
+    {
+        "ID": "1109",
+        "Departamento": "Retalhuleu",
+        "Municipio": "El Asintal"
+    },
+    {
+        "ID": "1201",
+        "Departamento": "San Marcos",
+        "Municipio": "San Marcos"
+    },
+    {
+        "ID": "1202",
+        "Departamento": "San Marcos",
+        "Municipio": "San Pedro Sacatepéquez"
+    },
+    {
+        "ID": "1203",
+        "Departamento": "San Marcos",
+        "Municipio": "San Antonio Sacatepéquez"
+    },
+    {
+        "ID": "1204",
+        "Departamento": "San Marcos",
+        "Municipio": "Comitancillo"
+    },
+    {
+        "ID": "1205",
+        "Departamento": "San Marcos",
+        "Municipio": "San Miguel Ixtahuacán"
+    },
+    {
+        "ID": "1206",
+        "Departamento": "San Marcos",
+        "Municipio": "Concepción Tutuapa"
+    },
+    {
+        "ID": "1207",
+        "Departamento": "San Marcos",
+        "Municipio": "Tacaná"
+    },
+    {
+        "ID": "1208",
+        "Departamento": "San Marcos",
+        "Municipio": "Sibinal"
+    },
+    {
+        "ID": "1209",
+        "Departamento": "San Marcos",
+        "Municipio": "Tajumulco"
+    },
+    {
+        "ID": "1210",
+        "Departamento": "San Marcos",
+        "Municipio": "Tejutla"
+    },
+    {
+        "ID": "1211",
+        "Departamento": "San Marcos",
+        "Municipio": "San Rafael Pie de la Cuesta"
+    },
+    {
+        "ID": "1212",
+        "Departamento": "San Marcos",
+        "Municipio": "Nuevo Progreso"
+    },
+    {
+        "ID": "1213",
+        "Departamento": "San Marcos",
+        "Municipio": "El Tumbador"
+    },
+    {
+        "ID": "1214",
+        "Departamento": "San Marcos",
+        "Municipio": "El Rodeo"
+    },
+    {
+        "ID": "1215",
+        "Departamento": "San Marcos",
+        "Municipio": "Malacatán"
+    },
+    {
+        "ID": "1216",
+        "Departamento": "San Marcos",
+        "Municipio": "Catarina"
+    },
+    {
+        "ID": "1217",
+        "Departamento": "San Marcos",
+        "Municipio": "Ayutla"
+    },
+    {
+        "ID": "1218",
+        "Departamento": "San Marcos",
+        "Municipio": "Ocós"
+    },
+    {
+        "ID": "1219",
+        "Departamento": "San Marcos",
+        "Municipio": "San Pablo"
+    },
+    {
+        "ID": "1220",
+        "Departamento": "San Marcos",
+        "Municipio": "El Quetzal"
+    },
+    {
+        "ID": "1221",
+        "Departamento": "San Marcos",
+        "Municipio": "La Reforma"
+    },
+    {
+        "ID": "1222",
+        "Departamento": "San Marcos",
+        "Municipio": "Pajapita"
+    },
+    {
+        "ID": "1223",
+        "Departamento": "San Marcos",
+        "Municipio": "Ixchiguán"
+    },
+    {
+        "ID": "1224",
+        "Departamento": "San Marcos",
+        "Municipio": "San José Ojetenam"
+    },
+    {
+        "ID": "1225",
+        "Departamento": "San Marcos",
+        "Municipio": "San Cristóbal Cucho"
+    },
+    {
+        "ID": "1226",
+        "Departamento": "San Marcos",
+        "Municipio": "Sipacapa"
+    },
+    {
+        "ID": "1227",
+        "Departamento": "San Marcos",
+        "Municipio": "Esquipulas Palo Gordo"
+    },
+    {
+        "ID": "1228",
+        "Departamento": "San Marcos",
+        "Municipio": "Río Blanco"
+    },
+    {
+        "ID": "1229",
+        "Departamento": "San Marcos",
+        "Municipio": "San Lorenzo"
+    },
+    {
+        "ID": "1301",
+        "Departamento": "Huehuetenango",
+        "Municipio": "Huehuetenango"
+    },
+    {
+        "ID": "1302",
+        "Departamento": "Huehuetenango",
+        "Municipio": "Chiantla"
+    },
+    {
+        "ID": "1303",
+        "Departamento": "Huehuetenango",
+        "Municipio": "Malacatancito"
+    },
+    {
+        "ID": "1304",
+        "Departamento": "Huehuetenango",
+        "Municipio": "Cuilco"
+    },
+    {
+        "ID": "1305",
+        "Departamento": "Huehuetenango",
+        "Municipio": "Nentón"
+    },
+    {
+        "ID": "1306",
+        "Departamento": "Huehuetenango",
+        "Municipio": "San Pedro Necta"
+    },
+    {
+        "ID": "1307",
+        "Departamento": "Huehuetenango",
+        "Municipio": "Jacaltenango"
+    },
+    {
+        "ID": "1308",
+        "Departamento": "Huehuetenango",
+        "Municipio": "Soloma"
+    },
+    {
+        "ID": "1309",
+        "Departamento": "Huehuetenango",
+        "Municipio": "San Idelfonso Ixtahuacán"
+    },
+    {
+        "ID": "1310",
+        "Departamento": "Huehuetenango",
+        "Municipio": "Santa Bárbara"
+    },
+    {
+        "ID": "1311",
+        "Departamento": "Huehuetenango",
+        "Municipio": "La Libertad"
+    },
+    {
+        "ID": "1312",
+        "Departamento": "Huehuetenango",
+        "Municipio": "La Democracia"
+    },
+    {
+        "ID": "1313",
+        "Departamento": "Huehuetenango",
+        "Municipio": "San Miguel Acatán"
+    },
+    {
+        "ID": "1314",
+        "Departamento": "Huehuetenango",
+        "Municipio": "San Rafael La Indepencia"
+    },
+    {
+        "ID": "1315",
+        "Departamento": "Huehuetenango",
+        "Municipio": "Todos Santos Cuchumatán"
+    },
+    {
+        "ID": "1316",
+        "Departamento": "Huehuetenango",
+        "Municipio": "San Juan Atitán"
+    },
+    {
+        "ID": "1317",
+        "Departamento": "Huehuetenango",
+        "Municipio": "Santa Eulalia"
+    },
+    {
+        "ID": "1318",
+        "Departamento": "Huehuetenango",
+        "Municipio": "San Mateo Ixtatán"
+    },
+    {
+        "ID": "1319",
+        "Departamento": "Huehuetenango",
+        "Municipio": "Colotenango"
+    },
+    {
+        "ID": "1320",
+        "Departamento": "Huehuetenango",
+        "Municipio": "San Sebastián Huehuetenango"
+    },
+    {
+        "ID": "1321",
+        "Departamento": "Huehuetenango",
+        "Municipio": "Tectitán"
+    },
+    {
+        "ID": "1322",
+        "Departamento": "Huehuetenango",
+        "Municipio": "Concepción Huista"
+    },
+    {
+        "ID": "1323",
+        "Departamento": "Huehuetenango",
+        "Municipio": "San Juan Ixcoy"
+    },
+    {
+        "ID": "1324",
+        "Departamento": "Huehuetenango",
+        "Municipio": "San Antonio Huista"
+    },
+    {
+        "ID": "1325",
+        "Departamento": "Huehuetenango",
+        "Municipio": "San Sebastián Coatán"
+    },
+    {
+        "ID": "1326",
+        "Departamento": "Huehuetenango",
+        "Municipio": "Barillas"
+    },
+    {
+        "ID": "1327",
+        "Departamento": "Huehuetenango",
+        "Municipio": "Aguacatán"
+    },
+    {
+        "ID": "1328",
+        "Departamento": "Huehuetenango",
+        "Municipio": "San Rafael Pétzal"
+    },
+    {
+        "ID": "1329",
+        "Departamento": "Huehuetenango",
+        "Municipio": "San Gaspar Ixchil"
+    },
+    {
+        "ID": "1330",
+        "Departamento": "Huehuetenango",
+        "Municipio": "Santiago Chimaltenango"
+    },
+    {
+        "ID": "1331",
+        "Departamento": "Huehuetenango",
+        "Municipio": "Santa Ana Huista"
+    },
+    {
+        "ID": "1401",
+        "Departamento": "Quiché",
+        "Municipio": "Santa Cruz del Quiché"
+    },
+    {
+        "ID": "1402",
+        "Departamento": "Quiché",
+        "Municipio": "Chiché"
+    },
+    {
+        "ID": "1403",
+        "Departamento": "Quiché",
+        "Municipio": "Chinique"
+    },
+    {
+        "ID": "1404",
+        "Departamento": "Quiché",
+        "Municipio": "Zacualpa"
+    },
+    {
+        "ID": "1405",
+        "Departamento": "Quiché",
+        "Municipio": "Chajul"
+    },
+    {
+        "ID": "1406",
+        "Departamento": "Quiché",
+        "Municipio": "Chichicastenango"
+    },
+    {
+        "ID": "1407",
+        "Departamento": "Quiché",
+        "Municipio": "Patzité"
+    },
+    {
+        "ID": "1408",
+        "Departamento": "Quiché",
+        "Municipio": "San Antonio Ilotenango"
+    },
+    {
+        "ID": "1409",
+        "Departamento": "Quiché",
+        "Municipio": "San Pedro Jocopilas"
+    },
+    {
+        "ID": "1410",
+        "Departamento": "Quiché",
+        "Municipio": "Cunén"
+    },
+    {
+        "ID": "1411",
+        "Departamento": "Quiché",
+        "Municipio": "San Juan Cotzal"
+    },
+    {
+        "ID": "1412",
+        "Departamento": "Quiché",
+        "Municipio": "Joyabaj"
+    },
+    {
+        "ID": "1413",
+        "Departamento": "Quiché",
+        "Municipio": "Nebaj"
+    },
+    {
+        "ID": "1414",
+        "Departamento": "Quiché",
+        "Municipio": "San Andrés Sajcabajá"
+    },
+    {
+        "ID": "1415",
+        "Departamento": "Quiché",
+        "Municipio": "Uspantán"
+    },
+    {
+        "ID": "1416",
+        "Departamento": "Quiché",
+        "Municipio": "Sacapulas"
+    },
+    {
+        "ID": "1417",
+        "Departamento": "Quiché",
+        "Municipio": "San Bartolomé Jocotenango"
+    },
+    {
+        "ID": "1418",
+        "Departamento": "Quiché",
+        "Municipio": "Canillá"
+    },
+    {
+        "ID": "1419",
+        "Departamento": "Quiché",
+        "Municipio": "Chicamán"
+    },
+    {
+        "ID": "1420",
+        "Departamento": "Quiché",
+        "Municipio": "Playa Grande -Ixcán"
+    },
+    {
+        "ID": "1421",
+        "Departamento": "Quiché",
+        "Municipio": "Pachalum"
+    },
+    {
+        "ID": "1501",
+        "Departamento": "Baja Verapaz",
+        "Municipio": "Salamá"
+    },
+    {
+        "ID": "1502",
+        "Departamento": "Baja Verapaz",
+        "Municipio": "San Miguel Chicaj"
+    },
+    {
+        "ID": "1503",
+        "Departamento": "Baja Verapaz",
+        "Municipio": "Rabinal"
+    },
+    {
+        "ID": "1504",
+        "Departamento": "Baja Verapaz",
+        "Municipio": "Cubulco"
+    },
+    {
+        "ID": "1505",
+        "Departamento": "Baja Verapaz",
+        "Municipio": "Granados"
+    },
+    {
+        "ID": "1506",
+        "Departamento": "Baja Verapaz",
+        "Municipio": "El Chol"
+    },
+    {
+        "ID": "1507",
+        "Departamento": "Baja Verapaz",
+        "Municipio": "San Jerónimo"
+    },
+    {
+        "ID": "1508",
+        "Departamento": "Baja Verapaz",
+        "Municipio": "Purulhá"
+    },
+    {
+        "ID": "1601",
+        "Departamento": "Alta Verapaz",
+        "Municipio": "Cobán"
+    },
+    {
+        "ID": "1602",
+        "Departamento": "Alta Verapaz",
+        "Municipio": "Santa Cruz Verapaz"
+    },
+    {
+        "ID": "1603",
+        "Departamento": "Alta Verapaz",
+        "Municipio": "San Cristóbal Verapaz"
+    },
+    {
+        "ID": "1604",
+        "Departamento": "Alta Verapaz",
+        "Municipio": "Tactic"
+    },
+    {
+        "ID": "1605",
+        "Departamento": "Alta Verapaz",
+        "Municipio": "Tamahú"
+    },
+    {
+        "ID": "1606",
+        "Departamento": "Alta Verapaz",
+        "Municipio": "Tucurú"
+    },
+    {
+        "ID": "1607",
+        "Departamento": "Alta Verapaz",
+        "Municipio": "Panzós"
+    },
+    {
+        "ID": "1608",
+        "Departamento": "Alta Verapaz",
+        "Municipio": "Senahú"
+    },
+    {
+        "ID": "1609",
+        "Departamento": "Alta Verapaz",
+        "Municipio": "San Pedro Carchá"
+    },
+    {
+        "ID": "1610",
+        "Departamento": "Alta Verapaz",
+        "Municipio": "San Juan Chamelco"
+    },
+    {
+        "ID": "1611",
+        "Departamento": "Alta Verapaz",
+        "Municipio": "Lanquín"
+    },
+    {
+        "ID": "1612",
+        "Departamento": "Alta Verapaz",
+        "Municipio": "Cahabón"
+    },
+    {
+        "ID": "1613",
+        "Departamento": "Alta Verapaz",
+        "Municipio": "Chisec"
+    },
+    {
+        "ID": "1614",
+        "Departamento": "Alta Verapaz",
+        "Municipio": "Chahal"
+    },
+    {
+        "ID": "1615",
+        "Departamento": "Alta Verapaz",
+        "Municipio": "Fray Bartolomé de las Casas"
+    },
+    {
+        "ID": "1616",
+        "Departamento": "Alta Verapaz",
+        "Municipio": "La Tinta"
+    },
+    {
+        "ID": "1701",
+        "Departamento": "Petén",
+        "Municipio": "Flores"
+    },
+    {
+        "ID": "1702",
+        "Departamento": "Petén",
+        "Municipio": "San José"
+    },
+    {
+        "ID": "1703",
+        "Departamento": "Petén",
+        "Municipio": "San Benito"
+    },
+    {
+        "ID": "1704",
+        "Departamento": "Petén",
+        "Municipio": "San Andrés"
+    },
+    {
+        "ID": "1705",
+        "Departamento": "Petén",
+        "Municipio": "La Libertad"
+    },
+    {
+        "ID": "1706",
+        "Departamento": "Petén",
+        "Municipio": "San Francisco"
+    },
+    {
+        "ID": "1707",
+        "Departamento": "Petén",
+        "Municipio": "Santa Ana"
+    },
+    {
+        "ID": "1708",
+        "Departamento": "Petén",
+        "Municipio": "Dolores"
+    },
+    {
+        "ID": "1709",
+        "Departamento": "Petén",
+        "Municipio": "San Luis"
+    },
+    {
+        "ID": "1710",
+        "Departamento": "Petén",
+        "Municipio": "Sayaxché"
+    },
+    {
+        "ID": "1711",
+        "Departamento": "Petén",
+        "Municipio": "Melchor de Mencos"
+    },
+    {
+        "ID": "1712",
+        "Departamento": "Petén",
+        "Municipio": "Poptún"
+    },
+    {
+        "ID": "1801",
+        "Departamento": "Izabal",
+        "Municipio": "Puerto Barrios"
+    },
+    {
+        "ID": "1802",
+        "Departamento": "Izabal",
+        "Municipio": "Livingston"
+    },
+    {
+        "ID": "1803",
+        "Departamento": "Izabal",
+        "Municipio": "El Estor"
+    },
+    {
+        "ID": "1804",
+        "Departamento": "Izabal",
+        "Municipio": "Morales"
+    },
+    {
+        "ID": "1805",
+        "Departamento": "Izabal",
+        "Municipio": "Los Amates"
+    },
+    {
+        "ID": "1901",
+        "Departamento": "Zacapa",
+        "Municipio": "Zacapa"
+    },
+    {
+        "ID": "1902",
+        "Departamento": "Zacapa",
+        "Municipio": "Estanzuela"
+    },
+    {
+        "ID": "1903",
+        "Departamento": "Zacapa",
+        "Municipio": "Río Hondo"
+    },
+    {
+        "ID": "1904",
+        "Departamento": "Zacapa",
+        "Municipio": "Gualán"
+    },
+    {
+        "ID": "1905",
+        "Departamento": "Zacapa",
+        "Municipio": "Teculután"
+    },
+    {
+        "ID": "1906",
+        "Departamento": "Zacapa",
+        "Municipio": "Usumatlán"
+    },
+    {
+        "ID": "1907",
+        "Departamento": "Zacapa",
+        "Municipio": "Cabañas"
+    },
+    {
+        "ID": "1908",
+        "Departamento": "Zacapa",
+        "Municipio": "San Diego"
+    },
+    {
+        "ID": "1909",
+        "Departamento": "Zacapa",
+        "Municipio": "La Unión"
+    },
+    {
+        "ID": "1910",
+        "Departamento": "Zacapa",
+        "Municipio": "Huité"
+    },
+    {
+        "ID": "2001",
+        "Departamento": "Chiquimula",
+        "Municipio": "Chiquimula"
+    },
+    {
+        "ID": "2002",
+        "Departamento": "Chiquimula",
+        "Municipio": "San José La Arada"
+    },
+    {
+        "ID": "2003",
+        "Departamento": "Chiquimula",
+        "Municipio": "San Juan Ermita"
+    },
+    {
+        "ID": "2004",
+        "Departamento": "Chiquimula",
+        "Municipio": "Jocotán"
+    },
+    {
+        "ID": "2005",
+        "Departamento": "Chiquimula",
+        "Municipio": "Camotán"
+    },
+    {
+        "ID": "2006",
+        "Departamento": "Chiquimula",
+        "Municipio": "Olopa"
+    },
+    {
+        "ID": "2007",
+        "Departamento": "Chiquimula",
+        "Municipio": "Esquipulas"
+    },
+    {
+        "ID": "2008",
+        "Departamento": "Chiquimula",
+        "Municipio": "Concepción Las Minas"
+    },
+    {
+        "ID": "2009",
+        "Departamento": "Chiquimula",
+        "Municipio": "Quetzaltepeque"
+    },
+    {
+        "ID": "2010",
+        "Departamento": "Chiquimula",
+        "Municipio": "San Jacinto"
+    },
+    {
+        "ID": "2011",
+        "Departamento": "Chiquimula",
+        "Municipio": "Ipala"
+    },
+    {
+        "ID": "2101",
+        "Departamento": "Jalapa",
+        "Municipio": "Jalapa"
+    },
+    {
+        "ID": "2102",
+        "Departamento": "Jalapa",
+        "Municipio": "San Pedro Pinula"
+    },
+    {
+        "ID": "2103",
+        "Departamento": "Jalapa",
+        "Municipio": "San Luis Jilotepeque"
+    },
+    {
+        "ID": "2104",
+        "Departamento": "Jalapa",
+        "Municipio": "San Manuel Chaparrón"
+    },
+    {
+        "ID": "2105",
+        "Departamento": "Jalapa",
+        "Municipio": "San Carlos Alzatate"
+    },
+    {
+        "ID": "2106",
+        "Departamento": "Jalapa",
+        "Municipio": "Monjas"
+    },
+    {
+        "ID": "2107",
+        "Departamento": "Jalapa",
+        "Municipio": "Mataquescuintla"
+    },
+    {
+        "ID": "2201",
+        "Departamento": "Jutiapa",
+        "Municipio": "Jutiapa"
+    },
+    {
+        "ID": "2202",
+        "Departamento": "Jutiapa",
+        "Municipio": "El Progreso"
+    },
+    {
+        "ID": "2203",
+        "Departamento": "Jutiapa",
+        "Municipio": "Santa Catarina Mita"
+    },
+    {
+        "ID": "2204",
+        "Departamento": "Jutiapa",
+        "Municipio": "Agua Blanca"
+    },
+    {
+        "ID": "2205",
+        "Departamento": "Jutiapa",
+        "Municipio": "Asunción Mita"
+    },
+    {
+        "ID": "2206",
+        "Departamento": "Jutiapa",
+        "Municipio": "Yupiltepeque"
+    },
+    {
+        "ID": "2207",
+        "Departamento": "Jutiapa",
+        "Municipio": "Atescatempa"
+    },
+    {
+        "ID": "2208",
+        "Departamento": "Jutiapa",
+        "Municipio": "Jerez"
+    },
+    {
+        "ID": "2209",
+        "Departamento": "Jutiapa",
+        "Municipio": "El Adelanto"
+    },
+    {
+        "ID": "2210",
+        "Departamento": "Jutiapa",
+        "Municipio": "Zapotitlán"
+    },
+    {
+        "ID": "2211",
+        "Departamento": "Jutiapa",
+        "Municipio": "Comapa"
+    },
+    {
+        "ID": "2212",
+        "Departamento": "Jutiapa",
+        "Municipio": "Jalpatagua"
+    },
+    {
+        "ID": "2213",
+        "Departamento": "Jutiapa",
+        "Municipio": "Conguaco"
+    },
+    {
+        "ID": "2214",
+        "Departamento": "Jutiapa",
+        "Municipio": "Moyuta"
+    },
+    {
+        "ID": "2215",
+        "Departamento": "Jutiapa",
+        "Municipio": "Pasaco"
+    },
+    {
+        "ID": "2216",
+        "Departamento": "Jutiapa",
+        "Municipio": "San José Acatempa"
+    },
+    {
+        "ID": "2217",
+        "Departamento": "Jutiapa",
+        "Municipio": "Quesada"
+    }
+]

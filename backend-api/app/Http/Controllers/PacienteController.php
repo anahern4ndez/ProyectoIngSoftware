@@ -36,6 +36,13 @@ class PacienteController extends Controller
         $pat->Transfusiones = $request->Transfusiones;
         $pat->EstadoActual = $request->EstadoActual;
         $pat->Sexo = $request->Sexo;
+        $pat->Kg_perc = $request->Kg_perc;
+        $pat->Peso = $request->Peso;
+        $pat->Percentil = $request->Percentil;
+        $pat->Talla = $request->Talla;
+        $pat->PA= $request->PA;
+        $pat->Cms_perc= $request->Cms_perc;
+        $pat->Historia = $request->Historia;
         $pat->save();
 
         return response()->json([
@@ -59,10 +66,9 @@ class PacienteController extends Controller
 
     function findAll(){
         //$val = Paciente::all();
-        $val = Paciente::with('Procedencia', 'Sexo','Sindrome_Clinico_Presentacion', 'tipo_de_sangre', 'EstadoActual', 'tipo_respuesta_estudia', 'tipo_respuesta_trans')->get();
+        $val = Paciente::with('Procedencia', 'sexo_rel','Sindrome_Clinico_Presentacion', 'Tipo_de_Sangre', 'EstadoActual', 'Estudia', 'Transfusiones')->get();
 
         return response()->json([
-            'success' => true,
             'Pacientes' => $val,
             //'sexo' => $v->sexo->significado
         ], 200);
@@ -86,6 +92,7 @@ class PacienteController extends Controller
         
 
     }
+
     /**
      * elimina objeto en busqueda bajo id del elemento.
      * @param id parametro de busqueda para borrar
@@ -94,7 +101,7 @@ class PacienteController extends Controller
      */
     public function delete(Request $request)
     {
-        $CUI = $request->cui;
+         (string)$CUI = $request->cui;
         $user=Paciente::find($CUI);
         $user->delete();
         return response()->json([
