@@ -19,18 +19,13 @@ class loginController extends Controller
         ]);
         
         $user = User::query()->where('email', $request->input('email'))->first();
-        
-        #Hash::check($request->input('password'), $hashed);
+        $id = $user->id;
         if(Hash::check($request->input('password'), $user->password)){ 
-        #if(($user->password) === Hash::check($request->input('password'),$hashed)){ 
-            // $api_token = str_random(50);
-
-            // $user->api_token = $api_token;
-            // $user->save();
-
+            
+            // echo $user;
             return response()->json([
                 'status' => 'success',
-                'message' => $request->data
+                'id' => $id
             ]);
         } else {
             return response()->json(['status' => 'fail'], 401);

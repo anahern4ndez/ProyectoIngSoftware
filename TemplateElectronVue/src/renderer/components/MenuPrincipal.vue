@@ -1,5 +1,5 @@
 <template lang="">
-	<div>	
+	<div>
 			<b-container class="containerMenu">
 
 				<!-- FILA 1, FOTOS Y TÍTULO-->
@@ -27,7 +27,7 @@
 						<div>
 							<v-btn outline color="#303841" v-on:click="gestionarPaciente">Gestionar Paciente</v-btn>
 							<v-btn outline color="#303841" v-on:click="darConsulta">Generar Reporte</v-btn>
-							<v-btn outline color="#303841">Informes Estadísticos</v-btn>
+							<v-btn outline color="#303841" v-on:click="imprimirId">Informes Estadísticos</v-btn>
 							<v-btn outline color="#303841">Datos Generales</v-btn>
 						</div>
 					</template>
@@ -93,10 +93,14 @@
 </template>
 
 <script>
+// import { serverBus } from '../main';
+import { store } from '../main';
+
 export default {
   name: "menu",
 
   data: () => ({
+    id: [],
     today: Date.now(),
     events: [
       {
@@ -121,8 +125,7 @@ export default {
       return map;
     }
   },
-  mounted() {
-    this.$refs.calendar.scrollToTime("07:50");
+  components:{
   },
   methods: {
     open(event) {
@@ -140,7 +143,21 @@ export default {
 
     hacerCita() {
       this.$router.push("/Citas");
+    },
+    imprimirId(){
+      console.log('Doctor: ' + this.id);
     }
+  },
+  mounted() {
+    this.$refs.calendar.scrollToTime("07:50");
+    this.id = store.id;
+
+    console.log("ID doctor: " + this.id);
+    // serverBus.$on('loginId', (id) => {
+    //   console.log("El id (menu) es: " + id);
+    //   this.id.push(id);
+    //   console.log('hola mundo ' + this.id);
+    // });
   }
 };
 </script>

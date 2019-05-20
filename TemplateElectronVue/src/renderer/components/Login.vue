@@ -50,6 +50,7 @@
                         id="password"  
                         oninvalid="setCustomValidity('Ingrese su constraseña')"
                         oninput="setCustomValidity('')" 
+                        @keyup.enter='loginMethod'
                         required>
                 </div>
             </form>
@@ -69,6 +70,8 @@
 
 <script>
 import VueLoadingButton from "vue-loading-button";
+import { store } from '../main';
+// import { serverBus } from '../main';
 
 export default {
     name: 'login',
@@ -82,6 +85,7 @@ export default {
             isLoading: false,
             email: '',
             password: '',
+            id: 0
         }
     },
 
@@ -96,9 +100,10 @@ export default {
             
             this.errorEmail = false;
             this.errorPass = false;
+            this.error = false;
 
-            console.log("User: " + this.email);
-            console.log("Pass: " + this.password);
+            // console.log("User: " + this.email);
+            // console.log("Pass: " + this.password);
 
             if(this.email === ''){
                 //this.loader = false;
@@ -122,46 +127,48 @@ export default {
 
 
             if(this.password != '' && this.email != ''){
-                //this.loader = true;
+
                 this.isLoading = true;
                 const data = {
                     email: this.email,
                     password: this.password
                 };
+                // console.log(data);
                 this.$http.post('http://localhost:8000/login', data).then(response => {
                     
-                    var id=1;// esta es la variable donde debes de poner el id del usuario logeado.
-                    //porfa mandanos el id a la pantalla de MenuPrincipal.vue
-
-                    var shell = require('shelljs');
-                    let nodePath = (shell.which('node').toString());
-                    shell.config.execPath = nodePath;
-
-                    const ipServer = '192.168.0.156';
-                    const serverPassword = 'perritoUVG';
-                    const relativePath = './src/temp';
-                    const serverUser = 'adminlocal';
-                    const serverPath = `/home/adminlocal/Fundanier/usrs/${id}/img/prfl.jpeg`;
-
-                    var string = `pscp -pw ${serverPassword} ${serverUser}@${ipServer}:${serverPath} ${relativePath}`;
-
-                    shell.exec(string);                    
+                    this.id = response.data.id;
+                    store.id = this.id;
+                    console.log('Store: ' + store.id);
+                    // serverBus.$emit('loginId', this.id);
                     
+                    // var shell = require('shelljs');
+                    // let nodePath = (shell.which('node').toString());
+                    // shell.config.execPath = nodePath;
+
+                    // const ipServer = '192.168.0.156';
+                    // const serverPassword = 'perritoUVG';
+                    // const relativePath = './src/temp';
+                    // const serverUser = 'adminlocal';
+                    // const serverPath = `/home/adminlocal/Fundanier/usrs/${id}/img/prfl.jpeg`;
+
+                    // var string = `pscp -pw ${serverPassword} ${serverUser}@${ipServer}:${serverPath} ${relativePath}`;
+
+                    // shell.exec(string);                    
                     
-                    console.log(response);
+                    console.log("El id (login) es: " + this.id);
                     this.error = false;
                     this.$router.push('/menu-principal');
                     this.success = true;
                 }).
                 catch(error => {
                     this.error = true;
-                    console.log("Error");
+                    console.log("Error amigo");
                     this.success = false;
                 });
             }
 
             //this.loader = false;
-            setTimeout(() => (this.isLoading = false), 2000);
+            setTimeout(() => (this.isLoading = false), 1000);
         }
     }
 }

@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import Vuex from 'vuex';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VueRouter from 'vue-router';
@@ -84,6 +85,12 @@ const routes = [
 const router = new VueRouter({
     routes
 });
+
+Vue.use(Vuex);
+
+export const store = new Vuex.Store({
+  id: 0
+})
 
 /* eslint-disable no-new */
 new Vue({
