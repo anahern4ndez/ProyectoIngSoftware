@@ -82,7 +82,11 @@ const routes = [
   {
     path: '/Citas',
     component: Vue.component('Citas', require('./components/CreacionCitas.vue').default)
-    }
+  },
+  {
+    path: '/Datos',
+    component: Vue.component('Datos', require('./components/DatosVista.vue').default)
+  }
 ];
 
 const router = new VueRouter({

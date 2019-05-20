@@ -28,7 +28,7 @@
 							<v-btn outline color="#303841" v-on:click="gestionarPaciente">Gestionar Paciente</v-btn>
 							<v-btn outline color="#303841" v-on:click="darConsulta">Generar Reporte</v-btn>
 							<v-btn outline color="#303841">Informes Estadísticos</v-btn>
-							<v-btn outline color="#303841">Datos Generales</v-btn>
+							<v-btn outline color="#303841"v-on:click="datosGenerales">Datos Generales</v-btn>
 						</div>
 					</template>
 					</b-col>
@@ -137,7 +137,9 @@ export default {
     darConsulta() {
       this.$router.push("/gestionarPaciente");
     },
-
+    datosGenerales() {
+      this.$router.push("/Datos");
+    },
     hacerCita() {
       this.$router.push("/Citas");
     }
