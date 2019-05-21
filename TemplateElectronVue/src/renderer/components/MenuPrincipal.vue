@@ -26,7 +26,7 @@
 						<template>
 						<div>
 							<v-btn outline color="#303841" v-on:click="gestionarPaciente">Gestionar Paciente</v-btn>
-							<v-btn outline color="#303841" v-on:click="darConsulta">Generar Reporte</v-btn>
+							<v-btn outline color="#303841" >Generar Reporte</v-btn>
 							<v-btn outline color="#303841">Informes Estadísticos</v-btn>
 							<v-btn outline color="#303841"v-on:click="datosGenerales">Datos Generales</v-btn>
 						</div>
@@ -116,7 +116,7 @@ export default {
       }
     ],
 
-    id: "2",
+    id: '',
     name: ''
   }),
 
@@ -141,7 +141,7 @@ export default {
       alert(event.title);
     },
     gestionarPaciente() {
-      this.$router.push("/page-four");
+      this.$router.push("/gestionPacientes");
     },
     gestionarUsuario() {
       this.$router.push("/gestionUsuarios");
@@ -160,7 +160,7 @@ export default {
     },
     obtenerNombre() {
 
-      this.$http.get(`http://localhost:8000/get_nombre?id=${this.id}`).then(response => {
+      this.$http.get(`http://localhost:8000/get_nombre?id=${store.id}`).then(response => {
         this.name = response.data.user.name;
       });
     }
