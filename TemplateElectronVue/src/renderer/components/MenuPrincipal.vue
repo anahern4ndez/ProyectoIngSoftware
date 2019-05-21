@@ -25,8 +25,8 @@
 					<b-col order="1" cols="9">
 						<template>
 						<div>
-							<v-btn outline color="#303841" v-on:click="gestionarPaciente">Gestionar Paciente</v-btn>
-							<v-btn outline color="#303841" v-on:click="darConsulta">Generar Reporte</v-btn>
+							<v-btn outline color="#303841" v-on:click="darConsulta">Gestionar Paciente</v-btn>
+							<v-btn outline color="#303841" v-on:click="">Generar Reporte</v-btn>
 							<v-btn outline color="#303841">Informes Estadísticos</v-btn>
 							<v-btn outline color="#303841"v-on:click="datosGenerales">Datos Generales</v-btn>
 						</div>

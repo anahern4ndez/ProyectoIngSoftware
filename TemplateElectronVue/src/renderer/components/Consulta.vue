@@ -1,7 +1,7 @@
 <template lang="">
     <div>
         <b-tabs active-nav-item-class="font-weight-bold text-uppercase text-dark"  card vertical>
-            <b-tab title="Tab 1"  active>
+            <b-tab title="Consulta"  active>
                 <div class="cuerpo">
                     <form class="form-horizontal">
                         <fieldset>
@@ -984,11 +984,112 @@
   
                 </div>
             </b-tab>
-            <b-tab class='posicion' title="Tab 2"><b-card-text>Tab Contents 2</b-card-text></b-tab>
-            <b-tab class='posicion' title="Tab 3"><b-card-text>Tab Contents 3</b-card-text></b-tab>
+            <b-tab class='posicion' title="Detalles físicos">
+                <div class="cuerpo">
+                    <h1 style="text-align: center;">Detalles físicos</h1>
+
+                    <div class="encapsulado">
+                        <b-container>
+                            <b-row >
+                                <b-col>
+                                    <h3 style="font-weight: bold;">Paciente: </h3>  
+                                </b-col>
+                                <b-col>
+                                    <h3>Juan García</h3>  
+                                </b-col>
+                                <b-col></b-col>
+                                <b-col></b-col>
+                                <b-col></b-col>
+                                <b-col></b-col>
+                            </b-row>
+
+                            <br>
+
+                            <b-row >
+                                <b-col>
+                                    <v-select
+                                        :items="fisico"
+                                        label="Variable"
+                                        outline
+                                        height = 0.5
+                                    ></v-select>
+                                </b-col>
+                                <b-col>
+                                    <v-select
+                                        :items="tiempo"
+                                        label="Tiempo"
+                                        outline
+                                        height = 0.5
+                                    ></v-select>
+                                </b-col>
+                                <b-col>
+                                    <button type="button" class="btn btn-lg btn-warning btn-block centrado">Generar gráfica</button> 
+                                </b-col>
+                            </b-row >
+                        </b-container>
+                    </div>
+                </div>
+            </b-tab>
+            <b-tab class='posicion' title="Signos vitales">
+                <div class="cuerpo">
+                    <h1 style="text-align: center;">Signos vitales</h1>
+
+                    <div class="encapsulado">
+                        <b-container>
+                            <b-row >
+                                <b-col>
+                                    <h3 style="font-weight: bold;">Paciente: </h3>  
+                                </b-col>
+                                <b-col>
+                                    <h3>Juan García</h3>  
+                                </b-col>
+                                <b-col></b-col>
+                                <b-col></b-col>
+                                <b-col></b-col>
+                                <b-col></b-col>
+                            </b-row>
+
+                            <br>
+
+                            <b-row >
+                                <b-col>
+                                    <v-select
+                                        :items="vital"
+                                        label="Variable"
+                                        outline
+                                        height = 0.5
+                                    ></v-select>
+                                </b-col>
+                                <b-col>
+                                    <v-select
+                                        :items="tiempo"
+                                        label="Tiempo"
+                                        outline
+                                        height = 0.5
+                                    ></v-select>
+                                </b-col>
+                                <b-col>
+                                    <button type="button" class="btn btn-lg btn-warning btn-block centrado">Generar gráfica</button> 
+                                </b-col>
+                            </b-row >
+                        </b-container>
+                    </div>
+                </div>
+            </b-tab>
+            <b-tab class='posicion' title="Mapa"><b-card-text>Tab Contents 4</b-card-text></b-tab>
         </b-tabs>
     </div>
 </template>
+
+<script>
+  export default {
+    data: () => ({
+      fisico: ['Peso', 'Talla', 'IMC'],
+      vital: ['Presión arterial', 'Pulso cardíaco'],
+      tiempo: ['1 mes', '2 meses', '6 meses', '1 año']
+    })
+  }
+</script>
 
 <style>
   .cuerpo {
@@ -1016,6 +1117,10 @@
 
   .posicion {
       position: relative;
+  }
+
+  .centrado {
+      vertical-align: middle;
   }
 
 </style>

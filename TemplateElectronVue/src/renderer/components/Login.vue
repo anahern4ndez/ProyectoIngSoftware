@@ -161,6 +161,7 @@ export default {
                         console.log("Error con shelljs");
                     }             
                     console.log("El id (login) es: " + this.id);
+                    this.$router.push("/menu-principal");
                 }).catch(error => {
                     this.error = true;
                     console.log("Error amigo");
