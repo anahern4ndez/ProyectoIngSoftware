@@ -116,7 +116,10 @@
           <v-container grid-list-md>
             <v-layout wrap>
               <v-flex xs12>
-                <v-select :items="dummyPatients" label="Paciente" required v-model="selectedPatient"></v-select>
+                <!--<v-select :items="dummyPatients" label="Paciente" required v-model="selectedPatient"></v-select> -->
+                <v-autocomplete
+                  :items="dummyPatients" label="Paciente"
+                ></v-autocomplete>
               </v-flex>
               <v-flex xs12>
                 <v-select :items="dummyDoctors" label="Doctor" required v-model="selectedDoctor"></v-select>
@@ -260,6 +263,7 @@
       this.today = new Date().toISOString().substring(0, 10);
       this.start = this.today;
       this.selectedDate = new Date().toISOString().substr(0, 10);
+      this.obtenerPacientes();
     },
     computed: {
       // convert the list of events into a map of lists keyed by date
@@ -296,6 +300,11 @@
       intervalClick(event) {
         this.selectedTime = event.time;
         this.dialogOpen = true;
+      },
+      obtenerPacientes(){
+        this.$http.get("http://localhost:8000/PacienteController/findAll").then(response => {      
+            this.dummyPatients = response.data.Pacientes.map(i => i.Nombre);
+          });
       }
     }
   }
