@@ -16,11 +16,11 @@
                 type="text"
                 class="form-control"
                 v-model="idb"
-                v-on:keyup.enter="getSomeUser"
-                placeholder="Ingrese el nombre o DPI del usuario que desee buscar para editar permisos"
+                v-on:keyup.enter="getOneUser"
+                placeholder="DPI de usuario a editar permisos"
               >
               <div class="input-group-append">
-                <button class="btn btn-warning" type="button" v-on:click="getSomeUser">Buscar</button>
+                <button class="btn btn-warning" type="button" v-on:click="getOneUser">Buscar</button>
               </div>
             </div>
             <br>
@@ -138,7 +138,7 @@
               </div>
               <div v-if="errorLargo">
                 <v-alert :value="true" type="error" id="alert">
-                  La contraseña debe tener como mínimo 6 caracteres
+                  La contraseña debe tener como mínimo 6 caracteres y un máximo de 255 caracteres
                 </v-alert>
               </div>
               <div v-if="errorPassword">

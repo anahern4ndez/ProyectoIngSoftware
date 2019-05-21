@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\User;
@@ -62,7 +63,8 @@ class ExampleController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'email' => 'email',
+            'id' => 'min:12|max:12|unique:users,id',
+            'email' => 'email|unique:users,email',
             'password' => 'min:6|max:255'
         ]);
         
@@ -82,6 +84,7 @@ class ExampleController extends Controller
     public function update(Request $request)
     {
         $this->validate($request, [
+            'id' => 'min:12|max:12',
             'email' => 'email',
             'password' => 'min:6|max:255'
         ]);
@@ -111,6 +114,16 @@ class ExampleController extends Controller
         return response()->json([
             'success' => true,
             'usersi' => $usersi,
+            'message'=>'Funciono',
+        ], 200);
+    }
+    public function getSomeUser(Request $request)
+    {
+        $id = $request->idb;
+        $usersia = User::query()->where(DB::raw('upper(name)'), 'like', "%" . strtoupper($id) . "%")->orWhere('id', 'like', $id)->get();
+        return response()->json([
+            'success' => true,
+            'usersia' => $usersia,
             'message'=>'Funciono',
         ], 200);
     }
