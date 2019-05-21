@@ -1,5 +1,8 @@
 const electron = require('electron');
-const { app, BrowserWindow } = electron;
+const {
+    app,
+    BrowserWindow
+} = electron;
 
 var shell = require('shelljs');
 let nodePath = (shell.which('node').toString());
@@ -22,7 +25,10 @@ function createWindow() {
     /**
      * Initial window options
      */
-    const { width, height } = electron.screen.getPrimaryDisplay().workAreaSize
+    const {
+        width,
+        height
+    } = electron.screen.getPrimaryDisplay().workAreaSize
     mainWindow = new BrowserWindow({
         height: height,
         width: width,
@@ -38,10 +44,10 @@ function createWindow() {
         try {
 
             string = 'cd ./src/temp & rmdir /s /q .';
-            shell.exec(string);
+            // shell.exec(string);
 
         } catch (error) {
-            console.log("EJTA MIERDA NO FUNCIONÓ");
+            console.log("Ocurrió un error al eliminar la imagen...");
         }
 
 
