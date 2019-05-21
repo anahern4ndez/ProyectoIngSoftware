@@ -16,11 +16,11 @@
                 type="text"
                 class="form-control"
                 v-model="idb"
-                v-on:keyup.enter="getOneUser"
+                v-on:keyup.enter="getSomeUser"
                 placeholder="DPI de usuario a editar permisos"
               >
               <div class="input-group-append">
-                <button class="btn btn-warning" type="button" v-on:click="getOneUser">Buscar</button>
+                <button class="btn btn-warning" type="button" v-on:click="getSomeUser">Buscar</button>
               </div>
             </div>
             <br>
