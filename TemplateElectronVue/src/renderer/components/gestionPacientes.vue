@@ -6,7 +6,7 @@
     <br>
     <br>
     <div>
-      <div id="TablaPacientes">
+      <div id="TablaInfoPacientes">
         <v-card>
           <v-text-field
               v-model="search"
@@ -330,7 +330,7 @@ export default {
 };
 </script>
 <style>
-div#TablaPacientes {
+div#TablaInfoPacientes {
   width: 65%;
   padding-left: 2%;
   margin-right: 2%;
