@@ -94,7 +94,7 @@
 
 <script>
 // import { serverBus } from '../main';
-import { store } from '../main';
+import { store } from "../main";
 
 export default {
   name: "menu",
@@ -104,20 +104,20 @@ export default {
     events: [
       {
         title: "Javier Xela",
-        date: "2019-05-20",
+        date: "2019-06-20",
         time: "09:00",
         duration: 45
       },
       {
         title: "Chonguengue",
-        date: "2019-05-23",
+        date: "2019-06-22",
         time: "20:30",
         duration: 180
       }
     ],
 
-    id: '',
-    name: ''
+    id: "",
+    name: ""
   }),
 
   computed: {
@@ -155,19 +155,45 @@ export default {
     hacerCita() {
       this.$router.push("/Citas");
     },
-    imprimirId(){
-      console.log('Doctor: ' + this.id);
+    imprimirId() {
+      console.log("Doctor: " + this.id);
     },
-    obtenerNombre() {
 
-      this.$http.get(`http://localhost:8000/get_nombre?id=${store.id}`).then(response => {
-        this.name = response.data.user.name;
-      });
+    obtenerNombre() {
+      this.$http
+        .get(`http://localhost:8000/get_nombre?id=${store.id}`)
+        .then(response => {
+          this.name = response.data.user.name;
+        });
+    },
+
+    get_citas() {
+      this.$http
+        .get(`http://localhost:8000/get_citas?id=${store.id}`)
+        .then(response => {
+          var array = response.data.citas;
+          var nombres = response.data.nombres;
+
+          for (let i = 0; i < array.length; i++) {
+            const cita = array[i];
+            const nombre = nombres[i];
+
+            const citaN = {
+              title: nombre,
+              date: cita["fecha"],
+              time: cita["hora"],
+              duration: 150
+            };
+
+            this.events.push(citaN);
+          }
+        });
     }
   },
-  beforeMount(){
-    this.obtenerNombre()
- },
+  beforeMount() {
+    this.obtenerNombre();
+    this.get_citas();
+  }
 };
 </script>
 

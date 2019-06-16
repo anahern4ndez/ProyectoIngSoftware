@@ -19,4 +19,25 @@ class menuPrincipalController extends Controller
             'user' => $user,
         ], 200);
 
-    }}
+    }
+
+
+    public function menu_get_citas(Request $request){
+
+        $id = $request->id;
+
+        $citas = DB::table('citas')->where('idUsuario', $id)->get();
+        $nombres = [];
+
+        foreach ($citas as $valor) {
+            $paciente = DB::table('pacientes')->where('id', $valor->idPaciente)->first();
+            array_push($nombres, $paciente->Nombre);
+        }
+
+        return response()->json([
+            'citas' => $citas,
+            'nombres' => $nombres,
+        ], 200);
+
+    }
+}
