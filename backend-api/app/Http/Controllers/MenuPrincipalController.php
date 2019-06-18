@@ -22,11 +22,22 @@ class menuPrincipalController extends Controller
     }
 
 
-    public function menu_get_citas(Request $request){
+    public function menu_get_citas(Request $request)
+    {
 
         $id = $request->id;
+        
+        if($id==0)
+        {
+            $citas = DB::table('citas')->get();
 
-        $citas = DB::table('citas')->where('idUsuario', $id)->get();
+        }
+        else
+        {
+            $citas = DB::table('citas')->where('idUsuario', $id)->get();
+
+        }
+        
         $nombres = [];
 
         foreach ($citas as $valor) {
@@ -38,6 +49,7 @@ class menuPrincipalController extends Controller
             'citas' => $citas,
             'nombres' => $nombres,
         ], 200);
-
+        
+        
     }
 }

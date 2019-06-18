@@ -84,6 +84,7 @@
 					<b-col order="2" sm-8 align-v="left">
 						<v-btn outline color="#303841" v-on:click="hacerCita">Hacer cita</v-btn>
 						<v-btn outline color="#303841" v-on:click="gestionarUsuario">Gestionar Usuarios</v-btn>
+            
 					</b-col>
 
 				</b-row>
@@ -102,18 +103,6 @@ export default {
   data: () => ({
     today: Date.now().toString(),
     events: [
-      {
-        title: "Javier Xela",
-        date: "2019-06-20",
-        time: "09:00",
-        duration: 45
-      },
-      {
-        title: "Chonguengue",
-        date: "2019-06-22",
-        time: "20:30",
-        duration: 180
-      }
     ],
 
     id: "",
