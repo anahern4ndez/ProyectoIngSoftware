@@ -81,17 +81,23 @@
 </template>
 				<br>
 				<b-row>
-					<b-col order="2" sm-8 align-v="left">
+					<b-col order="2" sm="10" align-v="left">
 						<v-btn outline color="#303841" v-on:click="hacerCita">Hacer cita</v-btn>
 						<v-btn outline color="#303841" v-on:click="gestionarUsuario">Gestionar Usuarios</v-btn>
-            
 					</b-col>
+
+          <b-col order="12" sm="2" align-v="left">
+              <!-- <v-switch v-model="switch1" label="Vista general" color="orange" v-on:click="vistaGeneral"></v-switch> -->
+              <v-btn outline color="#303841" v-on:click="vistaGeneral">Vista General</v-btn>
+					</b-col>
+
 
 				</b-row>
 			</b-container>
 		<br>
 	</div>
 </template>
+
 
 <script>
 // import { serverBus } from '../main';
@@ -102,11 +108,11 @@ export default {
 
   data: () => ({
     today: Date.now().toString(),
-    events: [
-    ],
+    events: [],
 
     id: "",
-    name: ""
+    name: "",
+    switch1: false
   }),
 
   computed: {
@@ -156,9 +162,11 @@ export default {
         });
     },
 
-    get_citas() {
+    get_citas(parametro) {
+      if (!parametro == 0) parametro = store.id;
+
       this.$http
-        .get(`http://localhost:8000/get_citas?id=${store.id}`)
+        .get(`http://localhost:8000/get_citas?id=${parametro}`)
         .then(response => {
           var array = response.data.citas;
           var nombres = response.data.nombres;
@@ -171,17 +179,31 @@ export default {
               title: nombre,
               date: cita["fecha"],
               time: cita["hora"],
+              idPaciente: cita["idPaciente"],
               duration: 150
             };
 
             this.events.push(citaN);
           }
         });
+    },
+
+    vistaGeneral() {
+      this.events = [];
+
+      if (this.switch1) this.get_citas(1);
+      else this.get_citas(0);
+
+      if (!this.switch1) this.switch1 = true;
+      else this.switch1 = false;
+
+      console.log(this.switch1);
     }
   },
+
   beforeMount() {
     this.obtenerNombre();
-    this.get_citas();
+    this.get_citas(1);
   }
 };
 </script>
@@ -215,6 +237,3 @@ export default {
   margin-right: 0px;
 }
 </style>
-
-
-
