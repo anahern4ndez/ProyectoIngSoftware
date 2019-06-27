@@ -28,7 +28,7 @@
 							<v-btn outline color="#303841" v-on:click="gestionarPaciente">Gestionar Paciente</v-btn>
 							<v-btn outline color="#303841" v-on:click="darConsulta">Generar Reporte</v-btn>
 							<v-btn outline color="#303841">Informes Estadísticos</v-btn>
-							<v-btn outline color="#303841"v-on:click="datosGenerales">Datos Generales</v-btn>
+							<v-btn outline color="#303841" v-on:click="datosGenerales">Datos Generales</v-btn>
 						</div>
 					</template>
 					</b-col>
@@ -38,11 +38,43 @@
 				<h1 class="pt-2">Calendario de Citas</h1>
 				<br>
 
-
-
 			<template>
   <v-layout>
     <v-flex>
+
+
+<!--BOTONES CALENDARIO-->
+         <v-btn
+        fab
+        outline
+        small
+        absolute
+        left
+        color="primary"
+        @click="$refs.calendar.prev()"
+      >
+        <v-icon dark>
+          keyboard_arrow_left
+        </v-icon>
+      </v-btn>
+      <v-btn
+        fab
+        outline
+        small
+        absolute
+        right
+        color="primary"
+        @click="$refs.calendar.next()"
+      >
+        <v-icon
+          dark
+        >
+          keyboard_arrow_right
+        </v-icon>
+      </v-btn>
+      <!--BOTONES CALENDARIO-->
+
+
       <v-sheet height="420">
         <!-- now is normally calculated by itself, but to keep the calendar in this date range to view events -->
         <v-calendar ref="calendar" :value="today" color="primary" type="week">
@@ -54,6 +86,7 @@
                 v-if="!event.time"
                 :key="event.title"
                 class="my-event"
+                :background-color="red"
                 @click="open(event)"
                 v-html="event.title"
               ></div>
@@ -66,10 +99,10 @@
               <div
                 v-if="event.time"
                 :key="event.title"
-                :style="{ top: timeToY(event.time) + 'px', height: minutesToPixels(event.duration) + 'px' }"
                 class="my-event with-time"
-                color="orange"
-                @click="darConsulta()"
+                :style="{'backgroundColor':colors[event.idUsuario-1],top: timeToY(event.time) + 'px', height: minutesToPixels(event.duration) + 'px' }"
+                :color="red"
+                @click="darConsulta(event.idPaciente)"
                 v-html="event.title"
               ></div>
             </template>
@@ -96,23 +129,25 @@
 			</b-container>
 		<br>
 	</div>
+
+  
 </template>
 
 
 <script>
 // import { serverBus } from '../main';
 import { store } from "../main";
+var fecha= new Date();
 
 export default {
   name: "menu",
-
   data: () => ({
-    today: Date.now().toString(),
+    today: fecha.toString(),
     events: [],
-
     id: "",
     name: "",
-    switch1: false
+    switch1: false,
+    colors : ["#FF9D14","#BF760F","#804F0A","#402705","#E68E12"]
   }),
 
   computed: {
@@ -132,6 +167,23 @@ export default {
   },
 
   methods: {
+    updateCalendar(para)
+    {
+      if(para=="+")
+      {
+        console.log("mas");
+        console.log(fecha.getDate());
+        fecha.setDate(fecha.getDate()+5);
+        console.log(fecha.getDate());
+
+      }
+      else
+      {
+        console.log("menos");
+      }
+      
+      console.log(fecha.toString);
+    },
     open(event) {
       alert(event.title);
     },
@@ -141,7 +193,8 @@ export default {
     gestionarUsuario() {
       this.$router.push("/gestionUsuarios");
     },
-    darConsulta() {
+    darConsulta(id) {
+      console.log(id);
       this.$router.push("/gestionarPaciente");
     },
     datosGenerales() {
@@ -180,6 +233,7 @@ export default {
               date: cita["fecha"],
               time: cita["hora"],
               idPaciente: cita["idPaciente"],
+              idUsuario:cita["idUsuario"],
               duration: 150
             };
 
