@@ -36,44 +36,20 @@
 
 				<hr>
 				<h1 class="pt-2">Calendario de Citas</h1>
+        <h3 style="text-align: center"> Junio 2019 </h3>
 				<br>
 
 			<template>
   <v-layout>
     <v-flex>
-
-
-<!--BOTONES CALENDARIO-->
-         <v-btn
-        fab
-        outline
-        small
-        absolute
-        left
-        color="primary"
-        @click="$refs.calendar.prev()"
-      >
-        <v-icon dark>
-          keyboard_arrow_left
-        </v-icon>
+      <!--BOTONES CALENDARIO-->
+      <v-btn fab outline small absolute left color="primary" @click="interactuar(false)">
+        <v-icon dark>keyboard_arrow_left</v-icon>
       </v-btn>
-      <v-btn
-        fab
-        outline
-        small
-        absolute
-        right
-        color="primary"
-        @click="$refs.calendar.next()"
-      >
-        <v-icon
-          dark
-        >
-          keyboard_arrow_right
-        </v-icon>
+      <v-btn fab outline small absolute right color="primary" @click="interactuar(true)">
+        <v-icon dark>keyboard_arrow_right</v-icon>
       </v-btn>
       <!--BOTONES CALENDARIO-->
-
 
       <v-sheet height="420">
         <!-- now is normally calculated by itself, but to keep the calendar in this date range to view events -->
@@ -137,17 +113,18 @@
 <script>
 // import { serverBus } from '../main';
 import { store } from "../main";
-var fecha= new Date();
+var fecha = new Date();
 
 export default {
   name: "menu",
   data: () => ({
     today: fecha.toString(),
+    start: "2019-06-25",
     events: [],
     id: "",
     name: "",
     switch1: false,
-    colors : ["#FF9D14","#BF760F","#804F0A","#402705","#E68E12"]
+    colors: ["#FF9D14", "#BF760F", "#804F0A", "#402705", "#E68E12"]
   }),
 
   computed: {
@@ -162,26 +139,45 @@ export default {
   mounted() {
     this.$refs.calendar.scrollToTime("07:50");
     this.id = store.id;
-
-    console.log("ID doctor: " + this.id);
   },
 
   methods: {
-    updateCalendar(para)
-    {
-      if(para=="+")
-      {
+    interactuar(type) {
+      var today = new Date(this.today);
+
+      if (!type) {
+        var SemAnt = new Date(
+          today.getFullYear(),
+          today.getMonth(),
+          today.getDate() - 7
+        );
+      } else {
+        var SemAnt = new Date(
+          today.getFullYear(),
+          today.getMonth(),
+          today.getDate() + 7
+        );
+      }
+
+      var diaSemAnt = SemAnt.getDate();
+      var yearSemAnt = SemAnt.getFullYear();
+      var mesSemAnt = SemAnt.getMonth() + 1;
+
+      var fechaSemAnt = yearSemAnt + "-" + mesSemAnt + "-" + diaSemAnt;
+      this.$refs.calendar.start = fechaSemAnt;
+      this.today = fechaSemAnt;
+    },
+
+    updateCalendar(para) {
+      if (para == "+") {
         console.log("mas");
         console.log(fecha.getDate());
-        fecha.setDate(fecha.getDate()+5);
+        fecha.setDate(fecha.getDate() + 5);
         console.log(fecha.getDate());
-
-      }
-      else
-      {
+      } else {
         console.log("menos");
       }
-      
+
       console.log(fecha.toString);
     },
     open(event) {
@@ -233,7 +229,7 @@ export default {
               date: cita["fecha"],
               time: cita["hora"],
               idPaciente: cita["idPaciente"],
-              idUsuario:cita["idUsuario"],
+              idUsuario: cita["idUsuario"],
               duration: 150
             };
 
