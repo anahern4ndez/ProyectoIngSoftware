@@ -85,8 +85,10 @@ class PacienteController extends Controller
         $toUpdate = Paciente::where('CUI', $cosa)->first();
         
         //jalado del objeto
-       
-        $toUpdate->EstadoActual = $request->estado;
+        if($request->estado){
+            $toUpdate->EstadoActual = $request->estado;
+        }
+        $toUpdate->Imagen = $request->img;
         $toUpdate->save();
 
         

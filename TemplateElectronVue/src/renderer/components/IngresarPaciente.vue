@@ -70,7 +70,7 @@
                               v-model="ProcedenciaTxt"
                               label="Procedencia"
                               outline
-                              disabled="true"
+                              :disabled="true"
                           ></v-text-field>
                         </div>
                       <v-text-field
@@ -105,7 +105,7 @@
                     <v-text-field
                             v-model="Edad"
                             label="Edad"
-                            disabled="true"
+                            :disabled="true"
                             outline
                         ></v-text-field>
                     
@@ -269,7 +269,7 @@ export default {
         Sindrome_Clinico_Presentacion: '',
         Dx_Definitivo:'',
         Dx_Asociados:'',
-        Imagen:'None (por ahora)',
+        Imagen:'',
         Tipo_de_Sangre: 1,
         Estudia: 1,
         Transfusiones:1,
