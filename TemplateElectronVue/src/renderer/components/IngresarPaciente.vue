@@ -70,7 +70,7 @@
                               v-model="ProcedenciaTxt"
                               label="Procedencia"
                               outline
-                              placeholder=[[this.ProcedenciaTxt]]
+                              disabled="true"
                           ></v-text-field>
                         </div>
                       <v-text-field
@@ -105,7 +105,7 @@
                     <v-text-field
                             v-model="Edad"
                             label="Edad"
-                            placeholder=[[this.Edad]]
+                            disabled="true"
                             outline
                         ></v-text-field>
                     

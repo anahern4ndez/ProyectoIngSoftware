@@ -93,8 +93,16 @@
             <form>
               <h2 id="headers" style="text-align:center"> Paciente seleccionado </h2>
               <br>
-              <div>
-                <img id="fotoPaciente" style="margin-left: 10%; margin-top: 2%" src="../assets/javier.jpg" alt="" width="273" height="183">
+              <div v-if="imageData">
+                <img id="fotoPaciente" style="margin-left: 10%; margin-top: 2%" :src="imageData" alt="" width="273" height="183">
+              </div>
+              <div v-else> <!-- se utiliza la imagen de javier como default -->
+                <img id="fotoPaciente" style="margin-left: 10%; margin-top: 2%" src="../assets/default.png" alt="" width="273" height="183">
+              </div>
+              <br>
+              <div class="btn btn-lg btn-warning btn-block">
+                <!--input id="selimg" type="file" onchange="readURL"/-->
+                <input id="selimg" type="file" class="btn btn-lg btn-warning btn-block" v-on:change="changeImg"/>
               </div>
               <br>
               <div style="float:left; width: 50%">
@@ -159,7 +167,21 @@
   </div>
 </template>
 
-
+<script type="text/javascript">
+    function readURL(input) {
+      console.log("inside readurl");
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#fotoPaciente').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#selimg").change(function(){
+        readURL(this);
+    });
+</script>
 <script>
 export default {
   mounted() {
@@ -228,7 +250,8 @@ export default {
           Procedencia: '',
           Fecha_de_nacimiento: '',
           EstadoActual:''
-        }
+        },
+        imageData : ""
       }
   },
     methods: {
@@ -315,10 +338,38 @@ export default {
           this.$http.get("http://localhost:8000/PacienteController/findAll").then(response => {      
             this.pacientes = response.data.Pacientes;
           });
+        },
+        /*readURL(){
+          var input = document.getElementById("selimg");
+          var foto = document.getElementById("fotoPaciente");
+          if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                foto.attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+          }
+        },
+        changeImg(){
+          readURL(document.getElementById("selimg"));
+        }*/
+        changeImg: function(event) {
+            // Reference to the DOM input element
+            var input = event.target;
+            // Ensure that you have a file before attempting to read it
+            if (input.files && input.files[0]) {
+                // create a new FileReader to read this image and convert to base64 format
+                var reader = new FileReader();
+                // Define a callback function to run, when FileReader finishes its job
+                reader.onload = (e) => {
+                    // Note: arrow function used here, so that "this.imageData" refers to the imageData of Vue component
+                    // Read image as base64 and set to imageData
+                    this.imageData = e.target.result;
+                }
+                // Start the reader job - read file as a data url (base64 format)
+                reader.readAsDataURL(input.files[0]);
+            }
         }
-
-        
-        
     },
     computed: {
       msg() {
