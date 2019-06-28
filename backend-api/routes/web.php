@@ -36,10 +36,11 @@ $router->post('/EstadoController/insert', 'EstadoController@insert');
 $router->get('/EstadoController/update', 'EstadoController@update');
 
 //CRUD: TABLA PACIENTES
-$router->get('/PacienteController/find', 'PacienteController@find');
+$router->get('/PacienteController/findOne', 'PacienteController@findOne');
 $router->get('/PacienteController/findAll', 'PacienteController@findAll');
 $router->post('/PacienteController/insert', 'PacienteController@store');
 $router->put('/PacienteController/update', 'PacienteController@update');
+$router->put('/PacienteController/updateAll', 'PacienteController@updateAll');
 $router->delete('/PacienteController/delete', 'PacienteController@delete');
 
 //get info from procedencias

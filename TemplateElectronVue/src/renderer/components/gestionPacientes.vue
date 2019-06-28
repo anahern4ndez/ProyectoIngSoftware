@@ -157,7 +157,7 @@
         <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="darConsulta"> Dar consulta </button>
       </div>
       <div id="boton">
-        <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="editarPaciente"> Editar datos</button>
+        <router-link :to="{name: 'EditarPaciente', params: { cui: this.selectedPatients.CUI }}" class="btn btn-lg btn-warning btn-block">Editar datos de paciente seleccionado</router-link>
       </div>
       <div id="boton">
         <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="archivos"> Archivos </button>
@@ -174,6 +174,7 @@
 <script>
 export default {
   mounted() {
+    
     this.$http.get("http://localhost:8000/PacienteController/findAll").then(response => {
       //esto deberia ser un arrray de pacientes que contengan todos sus atributos...
       
@@ -262,7 +263,7 @@ export default {
         /* metodos de redirección de botones */
         // falta vista para dar una consulta
         darConsulta(){
-          this.$router.push('/darConsulta');
+          this.$router.push('/Consulta');
         },
         eliminar(){
           this.$router.push('/IngresarPaciente');
