@@ -34,23 +34,31 @@
 					</b-col>
 				</b-row>
 
-				<hr>
-				<h1 class="pt-2">Calendario de Citas</h1>
-        <h3 style="text-align: center"> Junio 2019 </h3>
-				<br>
+        <hr>
 
-			<template>
+        <!-- FILA 3: SUBTITULO, FECHA Y BOTONES DE CALENDARIO -->
+        <h1 class="pt-2">Calendario de Citas</h1>
+        <v-layout wrap>
+          <v-flex sm4 xs12 class="text-sm-left text-xs-center">
+            <v-btn fab outline small color="primary" @click="interactuar(false)">
+              <v-icon dark>keyboard_arrow_left</v-icon>
+            </v-btn>
+          </v-flex>
+          <v-flex sm4 xs12 class="text-xs-center pt-3">
+            <h3>{{mes}} 2019</h3>
+          </v-flex>
+          <v-flex sm4 xs12 class="text-sm-right text-xs-center">
+            <v-btn fab outline small color="primary" @click="interactuar(true)">
+              <v-icon dark>keyboard_arrow_right</v-icon>
+            </v-btn>
+          </v-flex>
+        </v-layout>
+
+        <br>
+
+<template>
   <v-layout>
     <v-flex>
-      <!--BOTONES CALENDARIO-->
-      <v-btn fab outline small absolute left color="primary" @click="interactuar(false)">
-        <v-icon dark>keyboard_arrow_left</v-icon>
-      </v-btn>
-      <v-btn fab outline small absolute right color="primary" @click="interactuar(true)">
-        <v-icon dark>keyboard_arrow_right</v-icon>
-      </v-btn>
-      <!--BOTONES CALENDARIO-->
-
       <v-sheet height="420">
         <!-- now is normally calculated by itself, but to keep the calendar in this date range to view events -->
         <v-calendar ref="calendar" :value="today" color="primary" type="week">
@@ -88,25 +96,24 @@
     </v-flex>
   </v-layout>
 </template>
-				<br>
-				<b-row>
-					<b-col order="2" sm="10" align-v="left">
-						<v-btn outline color="#303841" v-on:click="hacerCita">Hacer cita</v-btn>
-						<v-btn outline color="#303841" v-on:click="gestionarUsuario">Gestionar Usuarios</v-btn>
-					</b-col>
 
-          <b-col order="12" sm="2" align-v="left">
-              <!-- <v-switch v-model="switch1" label="Vista general" color="orange" v-on:click="vistaGeneral"></v-switch> -->
-              <v-btn outline color="#303841" v-on:click="vistaGeneral">Vista General</v-btn>
-					</b-col>
+    <br>
+    <b-row>
+      <b-col order="2" sm="10" align-v="left">
+        <v-btn outline color="#303841" v-on:click="hacerCita">Hacer cita</v-btn>
+        <v-btn outline color="#303841" v-on:click="gestionarUsuario">Gestionar Usuarios</v-btn>
+      </b-col>
+
+      <b-col order="12" sm="2" align-v="left">
+          <!-- <v-switch v-model="switch1" label="Vista general" color="orange" v-on:click="vistaGeneral"></v-switch> -->
+          <v-btn outline color="#303841" v-on:click="vistaGeneral">Vista General</v-btn>
+      </b-col>
 
 
-				</b-row>
+      </b-row>
 			</b-container>
 		<br>
 	</div>
-
-  
 </template>
 
 
@@ -117,6 +124,7 @@ var fecha = new Date();
 
 export default {
   name: "menu",
+  mes: "Enero",
   data: () => ({
     today: fecha.toString(),
     start: "2019-06-25",
@@ -162,6 +170,7 @@ export default {
       var diaSemAnt = SemAnt.getDate();
       var yearSemAnt = SemAnt.getFullYear();
       var mesSemAnt = SemAnt.getMonth() + 1;
+      this.mes = this.getMes(SemAnt.getMonth());
 
       var fechaSemAnt = yearSemAnt + "-" + mesSemAnt + "-" + diaSemAnt;
       this.$refs.calendar.start = fechaSemAnt;
@@ -248,12 +257,29 @@ export default {
       else this.switch1 = false;
 
       console.log(this.switch1);
+    },
+
+    getMes(mes) {
+      if (mes == 0) return "Enero";
+      else if (mes == 1) return "Febrero";
+      else if (mes == 2) return "Marzo";
+      else if (mes == 3) return "Abril";
+      else if (mes == 4) return "Mayo";
+      else if (mes == 5) return "Junio";
+      else if (mes == 6) return "Julio";
+      else if (mes == 7) return "Agosto";
+      else if (mes == 8) return "Septiembre";
+      else if (mes == 9) return "Octubre";
+      else if (mes == 10) return "Noviembre";
+      else if (mes == 11) return "Diciembre";
+      else return "Error en mes";
     }
   },
 
   beforeMount() {
     this.obtenerNombre();
     this.get_citas(1);
+    this.mes = this.getMes(fecha.getMonth());
   }
 };
 </script>
