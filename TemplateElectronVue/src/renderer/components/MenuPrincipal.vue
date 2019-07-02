@@ -45,7 +45,7 @@
             </v-btn>
           </v-flex>
           <v-flex sm4 xs12 class="text-xs-center pt-3">
-            <h3>{{mes}} 2019</h3>
+            <h3>{{mes}} {{year}}</h3>
           </v-flex>
           <v-flex sm4 xs12 class="text-sm-right text-xs-center">
             <v-btn fab outline small color="primary" @click="interactuar(true)">
@@ -124,7 +124,8 @@ var fecha = new Date();
 
 export default {
   name: "menu",
-  mes: "Enero",
+  mes: "",
+  year: fecha.getFullYear(),
   data: () => ({
     today: fecha.toString(),
     start: "2019-06-25",
@@ -170,11 +171,12 @@ export default {
       var diaSemAnt = SemAnt.getDate();
       var yearSemAnt = SemAnt.getFullYear();
       var mesSemAnt = SemAnt.getMonth() + 1;
-      this.mes = this.getMes(SemAnt.getMonth());
 
       var fechaSemAnt = yearSemAnt + "-" + mesSemAnt + "-" + diaSemAnt;
       this.$refs.calendar.start = fechaSemAnt;
       this.today = fechaSemAnt;
+      this.mes = this.getMes(SemAnt.getMonth());
+      this.year = SemAnt.getFullYear();
     },
 
     updateCalendar(para) {
@@ -280,6 +282,7 @@ export default {
     this.obtenerNombre();
     this.get_citas(1);
     this.mes = this.getMes(fecha.getMonth());
+    this.year = fecha.getFullYear();
   }
 };
 </script>
