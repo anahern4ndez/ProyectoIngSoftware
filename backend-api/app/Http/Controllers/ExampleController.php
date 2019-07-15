@@ -63,13 +63,12 @@ class ExampleController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'id' => 'min:12|max:12|unique:users,id',
             'email' => 'email|unique:users,email',
             'password' => 'min:6|max:255'
         ]);
         
         $user = new User;
-        $user->id = $request->id;
+        //$user->id = $request->id;
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = hash::make($request->password);
