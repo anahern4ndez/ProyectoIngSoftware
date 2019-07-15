@@ -17,7 +17,7 @@
                 class="form-control"
                 v-model="idb"
                 v-on:keyup.enter="getSomeUser"
-                placeholder="DPI de usuario a editar permisos"
+                placeholder="Nombre de usuario a editar permisos"
               >
               <div class="input-group-append">
                 <button class="btn btn-warning" type="button" v-on:click="getSomeUser">Buscar</button>
@@ -410,7 +410,7 @@ export default {
         this.puesto=5;
       }
       if(this.name != '' && this.id != '' && this.password != '' && this.email != '' && this.selected != null && this.password == this.passwordVerification){
-        this.$http.post(`http://localhost:8000/users/create?name=${this.name}&email=${this.email}&password=${this.password}&puesto=${this.puesto}`).then(response=>{
+        this.$http.post(`http://localhost:8000/users/create?name=${this.name}&file=${this.picturee}&password=${this.password}&puesto=${this.puesto}`).then(response=>{
           this.refreshUsers();
           this.name = '';
           this.id = '';

@@ -62,23 +62,24 @@ class ExampleController extends Controller
     }
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'email' => 'email|unique:users,email',
-            'password' => 'min:6|max:255'
-        ]);
+        //$this->validate($request, [
+        //    'email' => 'email|unique:users,email',
+        //    'password' => 'min:6|max:255'
+        //]);
         
-        $user = new User;
-        //$user->id = $request->id;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = hash::make($request->password);
-        $user->puesto = $request->puesto;
-        $user->save();
+        //$user = new User;
+           //$user->id = $request->id;
+        //$user->name = $request->name;
+        //$user->email = $request->email;
+        //$user->password = hash::make($request->password);
+        //$user->puesto = $request->puesto;
+        //$user->save();
+        return $request;
 
-        return response()->json([
-            'success' => true,
-            'message' => 'creado'
-        ], 200);
+        //return response()->json([
+        //    'success' => true,
+        //    'message' => 'creado'
+        //], 200);
     }
     public function update(Request $request)
     {
