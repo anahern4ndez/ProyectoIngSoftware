@@ -6,7 +6,7 @@
     <br>
     <br>
     <div>
-      <div id="TablaPacientes">
+      <div id="TablaInfoPacientes">
         <v-card>
           <v-text-field
               v-model="search"
@@ -93,8 +93,21 @@
             <form>
               <h2 id="headers" style="text-align:center"> Paciente seleccionado </h2>
               <br>
+              <div v-if="imageData">
+                <img id="fotoPaciente" style="margin-left: auto; margin-right: auto; width:50% margin-top: 2%" :src="imageData" alt="" width="273" height="183">
+              </div>
+              <div v-else> <!-- se utiliza la imagen default si no se ha escogido una  -->
+                <img id="fotoPaciente" style="margin-left: auto; margin-right: auto; width:50% margin-top: 2%" src="../assets/default.png" alt="" width="273" height="183">
+              </div>
+              <br>
               <div>
-                <img id="fotoPaciente" style="margin-left: 10%; margin-top: 2%" src="../assets/javier.jpg" alt="" width="273" height="183">
+                <div class="btn btn-lg btn-warning btn-block">
+                  <!--input id="selimg" type="file" onchange="readURL"/-->
+                  <input id="selimg" type="file" class="hide_file" style="height:auto; width:auto;" v-on:change="changeImg"/>
+                  <div class="SelImg">
+                    Seleccionar Imagen
+                  </div>
+                </div>
               </div>
               <br>
               <div style="float:left; width: 50%">
@@ -111,7 +124,7 @@
               </div>
               <div style="float:left; width: 50%">
                   <h3 id="headers"> Estado </h3>
-                  <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.Estado}}</h3>
+                  <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.EstadoActual}}</h3>
               </div>
               <div style="float:left; width: 50%">
                   <h3 id="headers"> Edad </h3>
@@ -119,15 +132,15 @@
               </div>
               <div style="float:left; width: 50%">
                   <h3 id="headers"> Número telefónico </h3>
-                  <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.telefono}}</h3>
+                  <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.Telefono}}</h3>
               </div>
               <div style="float:left; width: 45%">
                   <h3 id="headers"> Nombre del padre </h3>
-                  <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.Padre}}</h3>
+                  <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.Nombre_de_padre}}</h3>
               </div>
               <div style="float:left; width: 50%; margin-left:5%">
                   <h3 id="headers"> Nombre de la madre </h3>
-                  <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.Madre}}</h3>
+                  <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.Nombre_de_madre}}</h3>
               </div>
               <br>
               <br>
@@ -158,8 +171,6 @@
     </div>
   </div>
 </template>
-
-
 <script>
 export default {
   mounted() {
@@ -173,16 +184,16 @@ export default {
       } else {
         this.selectedPatients.Nombre = response.data.Pacientes[0].Nombre;
         this.selectedPatients.Apellido = response.data.Pacientes[0].Apellido;
-        this.selectedPatients.Estado = response.data.Pacientes[0].estado_actual.significado;
+        this.selectedPatients.EstadoActual = response.data.Pacientes[0].estado_actual.significado;
         this.selectedPatients.Edad = response.data.Pacientes[0].Edad;
         this.selectedPatients.CUI = response.data.Pacientes[0].CUI;
-        this.selectedPatients.telefono = response.data.Pacientes[0].Telefono;
-        this.selectedPatients.Madre = response.data.Pacientes[0].Nombre_de_madre;
-        this.selectedPatients.Padre = response.data.Pacientes[0].Nombre_de_padre;
+        this.selectedPatients.Telefono = response.data.Pacientes[0].Telefono;
+        this.selectedPatients.Nombre_de_madre = response.data.Pacientes[0].Nombre_de_madre;
+        this.selectedPatients.Nombre_de_padre = response.data.Pacientes[0].Nombre_de_padre;
 
-        console.log(this.selectedPatients);
         this.Nombre = response.data.Pacientes[0].Nombre;
         this.Apellido = response.data.Pacientes[0].Apellido;
+        this.imageData = response.data.Pacientes[0].Imagen;
       }
           });
     this.$http.get(`http://localhost:8000/EstadoController/getAllEstado`).then(response =>{
@@ -213,11 +224,11 @@ export default {
         selectedPatients:{
           Nombre: '',
           Apellido: '',
-          Estado: '',
+          EstadoActual: '',
           Edad: '',
-          telefono: '',
-          Padre: '',
-          Madre: '',
+          Telefono: '',
+          Nombre_de_padre: '',
+          Nombre_de_madre: '',
           CUI: ''
         },
         selectedIndex: 0,
@@ -228,7 +239,8 @@ export default {
           Procedencia: '',
           Fecha_de_nacimiento: '',
           EstadoActual:''
-        }
+        },
+        imageData : ""
       }
   },
     methods: {
@@ -243,7 +255,9 @@ export default {
           
         },
         changeSelected(received){
-          this.selectedPatients = received
+          this.selectedPatients = this.pacientes[this.pacientes.indexOf(received)];
+          this.selectedPatients.EstadoActual = this.pacientes[this.pacientes.indexOf(received)].estado_actual.significado
+          this.imageData = this.selectedPatients.Imagen;
         },
         /* metodos de redirección de botones */
         // falta vista para dar una consulta
@@ -288,11 +302,13 @@ export default {
           var data = {
             id: this.pacientes[this.editedIndex].CUI,
             estado: this.estadoNuevo,
+            img: this.imageData,
           }
           console.log(data.estado)
           this.close()
           this.$http.put(`http://localhost:8000/PacienteController/update/`,data).then(response=>{
             this.selectedPatients.EstadoActual = this.estadoNuevo;
+            this.selectedPatients.Imagen = this.imageData;
             this.reloadTable()
           });
         }, 
@@ -315,10 +331,30 @@ export default {
           this.$http.get("http://localhost:8000/PacienteController/findAll").then(response => {      
             this.pacientes = response.data.Pacientes;
           });
-        }
+        },
+        changeImg: function(event) {
+          //this.save();
+          var input = event.target;
+          if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            // definir accion a realizar despues que se haya seleccionado una imagen
+            reader.onload = (e) => {
+              this.imageData = e.target.result;
+              var data = {
+                id: this.selectedPatients.CUI,
+                estado: this.estadoNuevo,
+                img: this.imageData,
+              }
+              //guardar el cambio de imagen en db
+              this.$http.put(`http://localhost:8000/PacienteController/update/`,data).then(response=>{
+                this.selectedPatients.EstadoActual = this.estadoNuevo;
+                this.selectedPatients.Imagen = this.imageData;
+              });
+            }
+            }
+            reader.readAsDataURL(input.files[0]);
 
-        
-        
+        }
     },
     computed: {
       msg() {
@@ -330,15 +366,16 @@ export default {
 };
 </script>
 <style>
-div#TablaPacientes {
+div#TablaInfoPacientes {
   width: 65%;
-  padding-left: 2%;
-  margin-right: 2%;
+  margin-left: 2%;
+  margin-right: 0.5%;
   float: left;
 }
 div#DatosPaciente {
   width: 30%;
   margin-left: 2%;
+  margin-right: 2%;
   float: right;
 }
 div#botones{
@@ -371,5 +408,18 @@ div#boton {
   margin-right: 1%;
   margin-bottom: 1%;
   float: left;
+}
+.hide_file {
+  z-index: 10;
+  opacity: 0;
+  cursor: pointer;
+  float: center;
+  height: 100%;
+  width: 100%;
+}
+div#SelImg {
+  z-index: 200;
+  width: min-content;
+  height: fit-content;
 }
 </style>
