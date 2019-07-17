@@ -191,10 +191,10 @@ export default {
         this.selectedPatients.Telefono = response.data.Pacientes[0].Telefono;
         this.selectedPatients.Nombre_de_madre = response.data.Pacientes[0].Nombre_de_madre;
         this.selectedPatients.Nombre_de_padre = response.data.Pacientes[0].Nombre_de_padre;
-
-        this.Nombre = response.data.Pacientes[0].Nombre;
-        this.Apellido = response.data.Pacientes[0].Apellido;
+        //this.Nombre = response.data.Pacientes[0].Nombre;
+        //this.Apellido = response.data.Pacientes[0].Apellido;
         this.imageData = response.data.Pacientes[0].Imagen;
+        this.estadoNuevo = response.data.Pacientes[0].estado_actual.significado;
       }
           });
     this.$http.get(`http://localhost:8000/EstadoController/getAllEstado`).then(response =>{
@@ -211,7 +211,6 @@ export default {
         estadoNuevo: null,
         dialog: false,
         radioGroup:1,
-        lista: [],
         headers: [
           { text: 'CUI (ID)', align: 'center',value: 'CUI'},
           { text: 'Nombre', align: 'center', value: 'Nombre' },
@@ -237,9 +236,14 @@ export default {
         editedItem:{
           Nombre: '',
           Apellido: '',
+          EstadoActual: '',
+          Edad: '',
+          Telefono: '',
+          Nombre_de_padre: '',
+          Nombre_de_madre: '',
+          CUI: '',
           Procedencia: '',
-          Fecha_de_nacimiento: '',
-          EstadoActual:''
+          Fecha_de_nacimiento: ''
         },
         imageData : ""
       }
@@ -271,6 +275,7 @@ export default {
         editarDatos(received){
           this.dialog=true;
           this.editedIndex = this.pacientes.indexOf(received)
+          this.editedItem = Object.assign({}, received)
         },
         editarPaciente(){
           this.$router.push('/EditarPaciente');
@@ -297,6 +302,8 @@ export default {
           this.dialog = true
         },
         save () {
+          console.log(this.editedItem);
+          console.log(this.selectedPatients);
           if (this.editedIndex > -1) {
             Object.assign(this.pacientes[this.editedIndex], this.editedItem)
           }
@@ -305,10 +312,11 @@ export default {
             estado: this.estadoNuevo,
             img: this.imageData,
           }
-          console.log(data.estado)
           this.close()
           this.$http.put(`http://localhost:8000/PacienteController/update/`,data).then(response=>{
-            this.selectedPatients.EstadoActual = this.estadoNuevo;
+            //console.log(this.selectedPatients);
+            //var nuevoEstado = this.estados_response[this.estados_response.ID.indexOf(this.estadoNuevo)];
+            this.selectedPatients.EstadoActual = (this.estados_response[this.estadoNuevo -1]).significado;
             this.selectedPatients.Imagen = this.imageData;
             this.reloadTable()
           });
