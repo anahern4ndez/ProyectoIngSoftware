@@ -1,1 +1,10 @@
 .vscode/
+Fundanier/node_modules/.bin/
+Fundanier/node_modules/@babel/
+Fundanier/node_modules/@nuxt/
+Fundanier/node_modules/@octokit/
+Fundanier/node_modules/@paulcbetts/
+Fundanier/node_modules/@types/
+Fundanier/node_modules/
+Fundanier/out/make/squirrel.windows/
+Fundanier/out/
