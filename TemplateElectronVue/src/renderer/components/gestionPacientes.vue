@@ -194,7 +194,7 @@ export default {
         //this.Nombre = response.data.Pacientes[0].Nombre;
         //this.Apellido = response.data.Pacientes[0].Apellido;
         this.imageData = response.data.Pacientes[0].Imagen;
-        this.estadoNuevo = response.data.Pacientes[0].estado_actual.significado;
+        this.estadoNuevo = response.data.Pacientes[0].estado_actual;
       }
           });
     this.$http.get(`http://localhost:8000/EstadoController/getAllEstado`).then(response =>{
@@ -348,15 +348,16 @@ export default {
             var reader = new FileReader();
             // definir accion a realizar despues que se haya seleccionado una imagen
             reader.onload = (e) => {
+              console.log(this.estadoNuevo);
               this.imageData = e.target.result;
               var data = {
                 id: this.selectedPatients.CUI,
-                estado: this.estadoNuevo,
+                estado: this.estadoNuevo.id,
                 img: this.imageData,
               }
               //guardar el cambio de imagen en db
               this.$http.put(`http://localhost:8000/PacienteController/update/`,data).then(response=>{
-                this.selectedPatients.EstadoActual = this.estadoNuevo;
+                this.selectedPatients.EstadoActual = this.estadoNuevo.significado;
                 this.selectedPatients.Imagen = this.imageData;
               });
             }
