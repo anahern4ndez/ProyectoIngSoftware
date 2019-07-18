@@ -28,19 +28,35 @@
 							<v-btn outline color="#303841" v-on:click="gestionarPaciente">Gestionar Paciente</v-btn>
 							<v-btn outline color="#303841" v-on:click="darConsulta">Generar Reporte</v-btn>
 							<v-btn outline color="#303841">Informes Estadísticos</v-btn>
-							<v-btn outline color="#303841"v-on:click="datosGenerales">Datos Generales</v-btn>
+							<v-btn outline color="#303841" v-on:click="datosGenerales">Datos Generales</v-btn>
 						</div>
 					</template>
 					</b-col>
 				</b-row>
 
-				<hr>
-				<h1 class="pt-2">Calendario de Citas</h1>
-				<br>
+        <hr>
 
+        <!-- FILA 3: SUBTITULO, FECHA Y BOTONES DE CALENDARIO -->
+        <h1 class="pt-2">Calendario de Citas</h1>
+        <v-layout wrap>
+          <v-flex sm4 xs12 class="text-sm-left text-xs-center">
+            <v-btn fab outline small color="primary" @click="interactuar(false)">
+              <v-icon dark>keyboard_arrow_left</v-icon>
+            </v-btn>
+          </v-flex>
+          <v-flex sm4 xs12 class="text-xs-center pt-3">
+            <h3>{{mes}} {{year}}</h3>
+          </v-flex>
+          <v-flex sm4 xs12 class="text-sm-right text-xs-center">
+            <v-btn fab outline small color="primary" @click="interactuar(true)">
+              <v-icon dark>keyboard_arrow_right</v-icon>
+            </v-btn>
+          </v-flex>
+        </v-layout>
 
+        <br>
 
-			<template>
+<template>
   <v-layout>
     <v-flex>
       <v-sheet height="420">
@@ -54,6 +70,7 @@
                 v-if="!event.time"
                 :key="event.title"
                 class="my-event"
+                :background-color="red"
                 @click="open(event)"
                 v-html="event.title"
               ></div>
@@ -66,10 +83,10 @@
               <div
                 v-if="event.time"
                 :key="event.title"
-                :style="{ top: timeToY(event.time) + 'px', height: minutesToPixels(event.duration) + 'px' }"
                 class="my-event with-time"
-                color="orange"
-                @click="darConsulta()"
+                :style="{'backgroundColor':colors[event.idUsuario-1],top: timeToY(event.time) + 'px', height: minutesToPixels(event.duration) + 'px' }"
+                :color="red"
+                @click="darConsulta(event.idPaciente)"
                 v-html="event.title"
               ></div>
             </template>
@@ -79,45 +96,44 @@
     </v-flex>
   </v-layout>
 </template>
-				<br>
-				<b-row>
-					<b-col order="2" sm-8 align-v="left">
-						<v-btn outline color="#303841" v-on:click="hacerCita">Hacer cita</v-btn>
-						<v-btn outline color="#303841" v-on:click="gestionarUsuario">Gestionar Usuarios</v-btn>
-					</b-col>
 
-				</b-row>
+    <br>
+    <b-row>
+      <b-col order="2" sm="10" align-v="left">
+        <v-btn outline color="#303841" v-on:click="hacerCita">Hacer cita</v-btn>
+        <v-btn outline color="#303841" v-on:click="gestionarUsuario">Gestionar Usuarios</v-btn>
+      </b-col>
+
+      <b-col order="12" sm="2" align-v="left">
+          <!-- <v-switch v-model="switch1" label="Vista general" color="orange" v-on:click="vistaGeneral"></v-switch> -->
+          <v-btn outline color="#303841" v-on:click="vistaGeneral">Vista General</v-btn>
+      </b-col>
+
+
+      </b-row>
 			</b-container>
 		<br>
 	</div>
 </template>
 
+
 <script>
 // import { serverBus } from '../main';
-import { store } from '../main';
+import { store } from "../main";
+var fecha = new Date();
 
 export default {
   name: "menu",
-
+  mes: "",
+  year: fecha.getFullYear(),
   data: () => ({
-    today: Date.now().toString(),
-    events: [
-      {
-        title: "Javier Xela",
-        date: "2019-05-20",
-        time: "09:00",
-        duration: 45
-      },
-      {
-        title: "Chonguengue",
-        date: "2019-05-23",
-        time: "20:30",
-        duration: 180
-      }
-    ],
-
-    id: '',
-    name: ''
+    today: fecha.toString(),
+    start: "2019-06-25",
+    events: [],
+    id: "",
+    name: "",
+    switch1: false,
+    colors: ["#FF9D14", "#BF760F", "#804F0A", "#402705", "#E68E12"]
   }),
 
   computed: {
@@ -132,11 +148,49 @@ export default {
   mounted() {
     this.$refs.calendar.scrollToTime("07:50");
     this.id = store.id;
-
-    console.log("ID doctor: " + this.id);
   },
 
   methods: {
+    interactuar(type) {
+      var today = new Date(this.today);
+
+      if (!type) {
+        var SemAnt = new Date(
+          today.getFullYear(),
+          today.getMonth(),
+          today.getDate() - 7
+        );
+      } else {
+        var SemAnt = new Date(
+          today.getFullYear(),
+          today.getMonth(),
+          today.getDate() + 7
+        );
+      }
+
+      var diaSemAnt = SemAnt.getDate();
+      var yearSemAnt = SemAnt.getFullYear();
+      var mesSemAnt = SemAnt.getMonth() + 1;
+
+      var fechaSemAnt = yearSemAnt + "-" + mesSemAnt + "-" + diaSemAnt;
+      this.$refs.calendar.start = fechaSemAnt;
+      this.today = fechaSemAnt;
+      this.mes = this.getMes(SemAnt.getMonth());
+      this.year = SemAnt.getFullYear();
+    },
+
+    updateCalendar(para) {
+      if (para == "+") {
+        console.log("mas");
+        console.log(fecha.getDate());
+        fecha.setDate(fecha.getDate() + 5);
+        console.log(fecha.getDate());
+      } else {
+        console.log("menos");
+      }
+
+      console.log(fecha.toString);
+    },
     open(event) {
       alert(event.title);
     },
@@ -146,7 +200,8 @@ export default {
     gestionarUsuario() {
       this.$router.push("/gestionUsuarios");
     },
-    darConsulta() {
+    darConsulta(id) {
+      console.log(id);
       this.$router.push("/gestionarPaciente");
     },
     datosGenerales() {
@@ -155,19 +210,80 @@ export default {
     hacerCita() {
       this.$router.push("/Citas");
     },
-    imprimirId(){
-      console.log('Doctor: ' + this.id);
+    imprimirId() {
+      console.log("Doctor: " + this.id);
     },
-    obtenerNombre() {
 
-      this.$http.get(`http://localhost:8000/get_nombre?id=${store.id}`).then(response => {
-        this.name = response.data.user.name;
-      });
+    obtenerNombre() {
+      this.$http
+        .get(`http://localhost:8000/get_nombre?id=${store.id}`)
+        .then(response => {
+          this.name = response.data.user.name;
+        });
+    },
+
+    get_citas(parametro) {
+      if (!parametro == 0) parametro = store.id;
+
+      this.$http
+        .get(`http://localhost:8000/get_citas?id=${parametro}`)
+        .then(response => {
+          var array = response.data.citas;
+          var nombres = response.data.nombres;
+
+          for (let i = 0; i < array.length; i++) {
+            const cita = array[i];
+            const nombre = nombres[i];
+
+            const citaN = {
+              title: nombre,
+              date: cita["fecha"],
+              time: cita["hora"],
+              idPaciente: cita["idPaciente"],
+              idUsuario: cita["idUsuario"],
+              duration: 150
+            };
+
+            this.events.push(citaN);
+          }
+        });
+    },
+
+    vistaGeneral() {
+      this.events = [];
+
+      if (this.switch1) this.get_citas(1);
+      else this.get_citas(0);
+
+      if (!this.switch1) this.switch1 = true;
+      else this.switch1 = false;
+
+      console.log(this.switch1);
+    },
+
+    getMes(mes) {
+      if (mes == 0) return "Enero";
+      else if (mes == 1) return "Febrero";
+      else if (mes == 2) return "Marzo";
+      else if (mes == 3) return "Abril";
+      else if (mes == 4) return "Mayo";
+      else if (mes == 5) return "Junio";
+      else if (mes == 6) return "Julio";
+      else if (mes == 7) return "Agosto";
+      else if (mes == 8) return "Septiembre";
+      else if (mes == 9) return "Octubre";
+      else if (mes == 10) return "Noviembre";
+      else if (mes == 11) return "Diciembre";
+      else return "Error en mes";
     }
   },
-  beforeMount(){
-    this.obtenerNombre()
- },
+
+  beforeMount() {
+    this.obtenerNombre();
+    this.get_citas(1);
+    this.mes = this.getMes(fecha.getMonth());
+    this.year = fecha.getFullYear();
+  }
 };
 </script>
 
@@ -200,6 +316,3 @@ export default {
   margin-right: 0px;
 }
 </style>
-
-
-

@@ -17,7 +17,7 @@
                 class="form-control"
                 v-model="idb"
                 v-on:keyup.enter="getSomeUser"
-                placeholder="DPI de usuario a editar permisos"
+                placeholder="Nombre de usuario a editar permisos"
               >
               <div class="input-group-append">
                 <button class="btn btn-warning" type="button" v-on:click="getSomeUser">Buscar</button>
@@ -60,7 +60,6 @@
             <v-data-table :headers="headers" :items="user" class="elevation-1">
               <template v-slot:items="props">
                 <tr @click="selectUser(props.item)">
-                  <td class="text-xs-center">{{ props.item.id }}</td>
                   <td class="text-xs-center">{{ props.item.name }}</td>
                   <td class="text-xs-center">{{ props.item.email }}</td>
                   <td class="text-xs-center"v-if="props.item.puesto===1" >Administrador</td>
@@ -74,25 +73,6 @@
           </b-col>
           <b-col order="1" cols="4">
             <form>
-              <div v-if="errorDPI">
-                <v-alert :value="true" type="error" id="alert">
-                  Ingrese un DPI, por favor
-                </v-alert>
-              </div>
-              <div v-if="errorDPILargo">
-                <v-alert :value="true" type="error" id="alert">
-                  El DPI debe tener 12 caracteres exactos
-                </v-alert>
-              </div>
-              <div v-if="errorDPIRepetido">
-                <v-alert :value="true" type="error" id="alert">
-                  Este DPI ya esta registrado
-                </v-alert>
-              </div>
-              <div class="form-group">
-                <label for="dpiInput">DPI</label>
-                <input id="dpiInput" type="text" v-model="id" class="form-control" placeholder="DPI">
-              </div>
               <div v-if="errorName">
                 <v-alert :value="true" type="error" id="alert">
                   Ingrese un nombre, por favor
@@ -226,7 +206,6 @@ export default {
     return {
       picked: "",
       nombre:'',
-      id:'',
       name:'',
       email:'',
       password:'',
@@ -250,7 +229,6 @@ export default {
       errorEmailRepetido: false,
       user: [],
       headers: [
-        { text: "DPI", align: "center", value: "DPI" },
         { text: "Nombre", align: "center", value: "Nombre" },
         { text: "Correo", align: "center", value: "Correo" },
         { text: "Puesto", align: "center", value: "PUESTO" }
@@ -366,7 +344,6 @@ export default {
     },
     crear(){
       this.errorName = false;
-      this.errorDPI = false;
       this.errorEmail = false;
       this.errorPassword = false;
       this.errorTipoUsuario = false;
@@ -375,8 +352,6 @@ export default {
       this.errorBusqueda = false;
       this.errorPasswordVerification = false;
       this.errorPasswordVerification2 = false;
-      this.errorDPILargo = false;
-      this.errorDPIRepetido = false;
       this.errorEmailRepetido = false;
 
       if(this.name === ''){
@@ -435,7 +410,7 @@ export default {
         this.puesto=5;
       }
       if(this.name != '' && this.id != '' && this.password != '' && this.email != '' && this.selected != null && this.password == this.passwordVerification){
-        this.$http.post(`http://localhost:8000/users/create?id=${this.id}&name=${this.name}&email=${this.email}&password=${this.password}&puesto=${this.puesto}`).then(response=>{
+        this.$http.post(`http://localhost:8000/users/create?name=${this.name}&file=${this.picturee}&password=${this.password}&puesto=${this.puesto}`).then(response=>{
           this.refreshUsers();
           this.name = '';
           this.id = '';
@@ -445,13 +420,10 @@ export default {
           this.selected = null;
         }).catch(error => {
           if (error.response.data.id === undefined){
-            this.errorDPILargo = false;
             this.errorDPIRepetido = false;
           }else{
             if (error.response.data.id[0] === 'The id has already been taken.'){
               this.errorDPIRepetido = true;
-            }else{
-              this.errorDPILargo = true;
             }
           }
 
@@ -476,7 +448,6 @@ export default {
     },
     modificar(){
       this.errorName = false;
-      this.errorDPI = false;
       this.errorEmail = false;
       this.errorPassword = false;
       this.errorTipoUsuario = false;
@@ -486,19 +457,12 @@ export default {
       this.errorPasswordVerification = false;
       this.errorPasswordVerification2 = false;
       this.errorDPILargo = false;
-      this.errorDPIRepetido = false;
       this.errorEmailRepetido = false;
 
       if(this.name === ''){
         this.errorName = true;
       }else{
         this.errorName = false;
-      }
-
-      if(this.id === ''){
-        this.errorDPI = true;
-      }else{
-        this.errorDPI = false;
       }
 
       if(this.email === ''){
@@ -554,11 +518,6 @@ export default {
           this.passwordVerification = '';
           this.selected = null;
         }).catch(error => {
-          if (error.response.data.id === undefined){
-            this.errorDPILargo = false;
-          }else{
-            this.errorDPILargo = true;
-          }
 
           if (error.response.data.email === undefined){
             this.errorFormato = false;

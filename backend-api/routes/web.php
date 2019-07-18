@@ -64,3 +64,7 @@ $router->post('/logout', 'loginController@logout');
 
 // Método de menú principal que obtiene el nombre del usuario logeado
 $router->get('/get_nombre', 'MenuPrincipalController@menu_get_nombre');
+
+$router->get('/get_citas', 'MenuPrincipalController@menu_get_citas');
+
+$router->get('/get_nombre_paciente', 'MenuPrincipalController@paciente_get_nombre');
