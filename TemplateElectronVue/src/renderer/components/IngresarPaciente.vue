@@ -17,10 +17,12 @@
                               v-model="CUI"
                               label="Número de CUI"
                               outline
+                              :rules="cuiRules"
+                              required
                               @change="checkLocation(CUI)"
                           ></v-text-field>
                       </div>
-                      <v-radio-group v-model="Sexo" row >
+                      <v-radio-group v-model="Sexo" row :rules="radioRules" required >
                           <v-radio label="Mujer" value="1" color="black"></v-radio>
                           <v-radio label="Hombre" value="2" color="black"></v-radio>
                         </v-radio-group>
@@ -29,11 +31,15 @@
                               v-model="Nombre"
                               label="Nombres"
                               outline
+                              required
+                              :rules="nombreRules"
                           ></v-text-field>
                       <v-text-field
                               v-model="Apellido"
                               label="Apellidos"
                               outline
+                              required
+                              :rules="nombreRules"
                           ></v-text-field>
                       
                       <div style="float:left; width:50%">
@@ -77,16 +83,22 @@
                             v-model="Nombre_de_padre"
                             label="Nombre del padre"
                             outline
+                            required
+                            :rules="nombreRules"
                         ></v-text-field>
                       <v-text-field
                               v-model="Nombre_de_madre"
                               label="Nombre de la madre"
                               outline
+                              required
+                              :rules="nombreRules"
                           ></v-text-field>
                       <v-text-field
                               v-model="Telefono"
                               label="Teléfonos"
                               outline
+                              required
+                              :rules="nombreRules"
                           ></v-text-field>
                   </v-flex>
                 </v-card-title>
@@ -107,6 +119,8 @@
                             label="Edad"
                             :disabled="true"
                             outline
+                            required
+                            :rules="nombreRules"
                         ></v-text-field>
                     
                     <div style="float:left; margin-right:5%; width:45%">
@@ -114,12 +128,16 @@
                             v-model="Peso"
                             label="Peso"
                             outline
+                            required
+                            :rules="nombreRules"
                         ></v-text-field>
                     </div>
                     <v-text-field
                             v-model="kg_perc"
                             label="Kg. Percentil"
                             outline
+                            required
+                            :rules="nombreRules"
                         ></v-text-field>
                     
                     <div style="float:left; margin-right:5%; width:45%">
@@ -127,12 +145,16 @@
                             v-model="Talla"
                             label="Talla"
                             outline
+                            required
+                            :rules="nombreRules"
                         ></v-text-field>
                     </div>
                       <v-text-field
                               v-model="cms_perc"
                               label="Cms. Percentil"
                               outline
+                              required
+                              :rules="nombreRules"
                           ></v-text-field>
                     <v-text-field
                             v-model="PA"
@@ -143,6 +165,8 @@
                             v-model="Percentil"
                             label="Percentil"
                             outline
+                            required
+                            :rules="nombreRules"
                         ></v-text-field>
                 </v-flex>
               </v-card-title>
@@ -157,16 +181,20 @@
               <v-layout align-center justify-end />
                 <h3 id="headers"  class="text-xs-center">Síndrome Clínico de Presentación</h3>              
                   <v-container fluid>
-                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="Sx. Nefrítico" value="1"></v-checkbox>
-                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="Sx. Nefrotico" value="2"></v-checkbox>
-                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="Anomalías Urinarias Asintomáticas" value="3"></v-checkbox>
-                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="IRA" value="4"></v-checkbox>
-                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="IRC" value="5"></v-checkbox>
-                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="ITU" value="6"></v-checkbox>
-                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="Uropatía Obstructiva" value="7"></v-checkbox>
-                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="Tubulopatía" value="8"></v-checkbox>
-                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="HTA" value="9"></v-checkbox>
-                    <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="Nefrolitiasis" value="10"></v-checkbox>
+                     <v-radio-group v-model="Sindrome_Clinico_Presentacion" row :rules="radioRules" required >
+                       <div style="margin-right: 50%; margin-left: 50%;">
+                        <v-radio label="Sx. Nefrítico" value="1" color="black"></v-radio>
+                        <v-radio label="Sx. Nefrotico" value="2" color="black"></v-radio>
+                        <v-radio label="Anomalías Urinarias Asintomáticas" value="3" color="black"></v-radio>
+                        <v-radio label="IRA" value="4" color="black"></v-radio>
+                        <v-radio label="IRC" value="5" color="black"></v-radio>
+                        <v-radio label="ITU" value="6" color="black"></v-radio>
+                        <v-radio label="Uropatía Obstructiva" value="7" color="black"></v-radio>
+                        <v-radio label="Tubulopatía" value="8" color="black"></v-radio>
+                        <v-radio label="HTA" value="9" color="black"></v-radio>
+                        <v-radio label="Nefrolitiasis" value="10" color="black"></v-radio>
+                       </div>
+                       </v-radio-group>
                   </v-container>
             </v-flex>
           </v-card-title>
@@ -275,11 +303,26 @@ export default {
         Transfusiones:1,
         EstadoActual:1,
         Sexo: '',
-        pacientes: []
+        pacientes: [],
+        pass: false,
+        
+
+        //reglas de FORM
+        cuiRules: [
+          (v) => !!v || 'Se requiere CUI',
+          (v) => v && v.length <= 13 || 'Verifique que el CUI sea de 13 digitos.'
+        ],
+        nombreRules: [
+          (v) => !!v || 'Se requiere este campo',
+          (v) => v && v.length < 60 || 'Se permite como maximo 60 caracteres'
+
+        ],
+        radioRules:[v => !!v || 'Debe seleccionar una opción'],
       }
   },
     methods: {
         ingresarNuevo(){
+          var pass = false;
           const info = {
             CUI: this.CUI,
             Nombre: this.Nombre,
@@ -306,33 +349,37 @@ export default {
             PA: this.PA,
             Cms_perc: this.cms_perc,
             Historia:this.Historia
-        };
+          };
+          
+          
+
           this.$http.post('http://localhost:8000/PacienteController/insert', info).then(response => {
-              this.error = false;
-              this.CUI=''; 
-              this.Nombre='';
-              this.Apellido='';
-              this.Fecha_de_nacimiento='';
-              this.ProcedenciaTxt=' ';
-              this.Nombre_de_padre='';
-              this.Nombre_de_madre='';
-              this.Telefono='';
-              this.Edad= ' ';
-              this.Historia=' ';
-              this.Dx_Definitivo=' ';
-              this.Dx_Asociados=' ';
-              this.Percentil='';
-              this.Talla='';
-              this.Peso='';
-              this.cms_perc='';
-              this.kg_perc='';
-              this.PA=''
+            this.error = false;
+            this.CUI=''; 
+            this.Nombre='';
+            this.Apellido='';
+            this.Fecha_de_nacimiento='';
+            this.ProcedenciaTxt=' ';
+            this.Nombre_de_padre='';
+            this.Nombre_de_madre='';
+            this.Telefono='';
+            this.Edad= ' ';
+            this.Historia=' ';
+            this.Dx_Definitivo=' ';
+            this.Dx_Asociados=' ';
+            this.Percentil='';
+            this.Talla='';
+            this.Peso='';
+            this.cms_perc='';
+            this.kg_perc='';
+            this.PA=''
           }).
           catch(error => {
               this.error = true;
               console.log(error.response.data.status);
               console.log("Error");
           });
+          
 
         },
 
@@ -402,7 +449,7 @@ div#inBox {
 
 div#inBox-date {
   margin-left: 5%;
-  width: 100%;
+  width: 50%;
   float: right;
 }
 /*
