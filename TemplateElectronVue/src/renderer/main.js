@@ -54,7 +54,7 @@ const routes = [
   },
   {
     path: '/gestionPacientes',
-    component: Vue.component('gestionPacientes', require('./components/GestionPacientes.vue').default)
+    component: Vue.component('gestionPacientes', require('./components/gestionPacientes.vue').default)
   },
   {
     path: '/ingresarPaciente',
