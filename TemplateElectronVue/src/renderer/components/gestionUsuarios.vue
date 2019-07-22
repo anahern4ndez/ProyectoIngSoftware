@@ -163,12 +163,13 @@
               </div>
               <div>
                 <label for="levelInput">Tipo de usuario</label>
-                <b-form-select id="levelInput" v-model="selected" class="mb-3">
+                <b-form-select id="levelInput"  v-model="selected" class="mb-3" placeholder="Tipo de usuario">
                   <option value="Administrador">Administrador</option>
                   <option value="Doctor">Doctor</option>
                   <option value="Secretaria">Secretaria</option>
                   <option value="Asistente">Asistente</option>
                   <option value="Visitante">Visitante</option>
+                  <option value="Tipo de usuario">Tipo de usuario</option>
                 </b-form-select>
               </div>
             </form>
@@ -213,7 +214,7 @@ export default {
       selected: '',
       puesto:'',
       idb: '',
-      selected: null,
+      selected: "Tipo de usuario",
       errorFormato: false,
       errorLargo: false,
       errorName: false,
@@ -338,7 +339,7 @@ export default {
         this.id = '';
         this.email = '';
         this.password = '';
-        this.selected = null;
+        this.selected = "Tipo de usuario";
       });
       }
     },
@@ -389,7 +390,7 @@ export default {
         }
       }
 
-      if(this.selected == null){
+      if(this.selected == "Tipo de usuario" ){
         this.errorTipoUsuario = true;
       }else{
         this.errorTipoUsuario = false;
@@ -410,14 +411,14 @@ export default {
         this.puesto=5;
       }
       if(this.name != '' && this.id != '' && this.password != '' && this.email != '' && this.selected != null && this.password == this.passwordVerification){
-        this.$http.post(`http://localhost:8000/users/create?name=${this.name}&file=${this.picturee}&password=${this.password}&puesto=${this.puesto}`).then(response=>{
+        this.$http.post(`http://localhost:8000/users/create?name=${this.name}&email=${this.email}&password=${this.password}&puesto=${this.puesto}`).then(response=>{
           this.refreshUsers();
           this.name = '';
           this.id = '';
           this.email = '';
           this.password = '';
           this.passwordVerification = '';
-          this.selected = null;
+          this.selected = "Tipo de usuario";
         }).catch(error => {
           if (error.response.data.id === undefined){
             this.errorDPIRepetido = false;
@@ -488,7 +489,7 @@ export default {
         }
       }
 
-      if(this.selected == null){
+      if(this.selected == "Tipo de usuario"){
         this.errorTipoUsuario = true;
       }else{
         this.errorTipoUsuario = false;
@@ -516,7 +517,7 @@ export default {
           this.email = '';
           this.password = '';
           this.passwordVerification = '';
-          this.selected = null;
+          this.selected ="Tipo de usuario";
         }).catch(error => {
 
           if (error.response.data.email === undefined){
