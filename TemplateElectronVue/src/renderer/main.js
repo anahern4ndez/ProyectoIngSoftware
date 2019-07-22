@@ -54,14 +54,14 @@ const routes = [
   },
   {
     path: '/gestionPacientes',
-    component: Vue.component('gestionPacientes', require('./components/GestionPacientes.vue').default)
+    component: Vue.component('gestionPacientes', require('./components/gestionPacientes.vue').default)
   },
   {
     path: '/ingresarPaciente',
     component: Vue.component('ingresarPaciente', require('./components/IngresarPaciente.vue').default)
   },
   {
-    path: '/EditarPaciente',
+    path: '/EditarPaciente/:cui', name: 'EditarPaciente',
     component: Vue.component('EditarPaciente', require('./components/EditarPaciente.vue').default)
   },
   {

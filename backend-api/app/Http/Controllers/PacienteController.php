@@ -54,13 +54,16 @@ class PacienteController extends Controller
     /**
      * busca segun id (pasado por URL)
      * @param int id
+     * 
      * @return obj asignado a variable con info de query.
-     */
-    function find($id){
-        $val = Paciente::find($id);
+    */
+    function findOne(Request $request){
+        $cuir = $request->CUI;
+        $paciente = Paciente::where('CUI', $cuir)->with('Procedencia', 'sexo_rel','Sindrome_Clinico_Presentacion', 'Tipo_de_Sangre', 'EstadoActual', 'Estudia', 'Transfusiones')->get();
+        //$val = Paciente::find('3006266730101');
         return response()->json([
             'success' => true,
-            'Pacientes' => $val
+            'Paciente' => $paciente
         ], 200);
     }
 
@@ -75,7 +78,7 @@ class PacienteController extends Controller
         
     }
     /**
-     * hace update a todos los properties del elemento
+     * hace update el estado actual o a la imagen del paciente. 
      * @param int id
      * @param \Illuminate\Http\Request 
      * @return null value
@@ -85,12 +88,48 @@ class PacienteController extends Controller
         $toUpdate = Paciente::where('CUI', $cosa)->first();
         
         //jalado del objeto
-       
-        $toUpdate->EstadoActual = $request->estado;
+        if($request->estado){
+            $toUpdate->EstadoActual = $request->estado;
+        }
+        $toUpdate->Imagen = $request->img;
         $toUpdate->save();
-
-        
-
+    }
+    /**
+     * hace update a toda la información del paciente, en caso alguna se haya modificado al editar el paciente
+     * @param int id
+     * @param \Illuminate\Http\Request 
+     * @return null value
+     */
+    function updateAll(Request $request){
+        $cosa = $request->id;
+        $toUpdate = Paciente::where('id', $cosa)->first();
+        $toUpdate->Nombre = $request->Nombre;
+        $toUpdate->Apellido = $request->Apellido;
+        $toUpdate->Fecha_de_nacimiento = $request->Fecha_de_nacimiento;
+        $toUpdate->Procedencia = $request->Procedencia;
+        $toUpdate->Nombre_de_padre = $request->Nombre_de_padre;
+        $toUpdate->Nombre_de_madre = $request->Nombre_de_madre;
+        $toUpdate->Telefono = $request->Telefono;
+        $toUpdate->Edad = $request->Edad;
+        $toUpdate->Telefono = $request->Telefono;
+        $toUpdate->Sindrome_Clinico_Presentacion = $request->Sindrome_Clinico_Presentacion;
+        $toUpdate->Dx_Definitivo = $request->Dx_Definitivo;
+        $toUpdate->Dx_Asociados = $request->Dx_Asociados;
+        $toUpdate->CUI = $request->CUI;
+        $toUpdate->Imagen = $request->Imagen;
+        $toUpdate->Tipo_de_Sangre = $request->Tipo_de_Sangre;
+        $toUpdate->Estudia = $request->Estudia;
+        $toUpdate->Transfusiones = $request->Transfusiones;
+        $toUpdate->EstadoActual = $request->EstadoActual;
+        $toUpdate->Sexo = $request->Sexo;
+        $toUpdate->Kg_perc = $request->Kg_perc;
+        $toUpdate->Peso = $request->Peso;
+        $toUpdate->Percentil = $request->Percentil;
+        $toUpdate->Talla = $request->Talla;
+        $toUpdate->PA= $request->PA;
+        $toUpdate->Cms_perc= $request->Cms_perc;
+        $toUpdate->Historia = $request->Historia;
+        $toUpdate->save();
     }
 
     /**

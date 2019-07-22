@@ -28,7 +28,7 @@ class CreatePacientesTable extends Migration
             $table->integer('Sindrome_Clinico_Presentacion');
             $table->string('Dx_Definitivo', 200);
             $table->string('Dx_Asociados', 200);
-            $table->string('Imagen', 260);
+            $table->string('Imagen', 200000)->nullable();
             $table->integer('Tipo_de_Sangre');
             $table->integer('Estudia');
             $table->integer('Transfusiones');
