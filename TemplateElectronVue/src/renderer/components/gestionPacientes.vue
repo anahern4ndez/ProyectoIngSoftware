@@ -101,45 +101,40 @@
               </div>
               <br>
               <div>
-                <div class="btn btn-lg btn-warning btn-block">
-                  <!--input id="selimg" type="file" onchange="readURL"/-->
-                  <input id="selimg" type="file" class="hide_file" style="height:auto; width:auto;" v-on:change="changeImg"/>
-                  <div class="SelImg">
-                    Seleccionar Imagen
-                  </div>
-                </div>
+              <input type="file" class="hide_file" style="height:auto; width:auto; visibility:hidden" v-on:change="changeImg" ref="changeImg"/>
+              <v-button class="btn btn-lg btn-warning btn-block" id="botonimagen" @click="imgClick"> Seleccionar Imagen </v-button>
               </div>
               <br>
               <div style="float:left; width: 50%">
-              <h3 id="headers">Nombres </h3>
+              <h4 id="headers">Nombres </h4>
               <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.Nombre}}</h3>
               </div>
               <div style="float:left; width: 50%">
-                  <h3 id="headers">Apellidos </h3>
+                  <h4 id="headers">Apellidos </h4>
                   <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.Apellido}}</h3>
               </div>
               <div style="float:left; width: 50%">
-                  <h3 id="headers"> CUI </h3>
+                  <h4 id="headers"> CUI </h4>
                   <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.CUI}}</h3>
               </div>
               <div style="float:left; width: 50%">
-                  <h3 id="headers"> Estado </h3>
+                  <h4 id="headers"> Estado </h4>
                   <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.EstadoActual}}</h3>
               </div>
               <div style="float:left; width: 50%">
-                  <h3 id="headers"> Edad </h3>
+                  <h4 id="headers"> Edad </h4>
                   <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.Edad}}</h3>
               </div>
               <div style="float:left; width: 50%">
-                  <h3 id="headers"> Número telefónico </h3>
+                  <h4 id="headers"> Número telefónico </h4>
                   <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.Telefono}}</h3>
               </div>
               <div style="float:left; width: 45%">
-                  <h3 id="headers"> Nombre del padre </h3>
+                  <h4 id="headers"> Nombre del padre </h4>
                   <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.Nombre_de_padre}}</h3>
               </div>
               <div style="float:left; width: 50%; margin-left:5%">
-                  <h3 id="headers"> Nombre de la madre </h3>
+                  <h4 id="headers"> Nombre de la madre </h4>
                   <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.Nombre_de_madre}}</h3>
               </div>
               <br>
@@ -341,6 +336,10 @@ export default {
             this.pacientes = response.data.Pacientes;
           });
         },
+        imgClick: function(event){// on a click on the button with id 'one'
+          const btn = this.$refs.changeImg
+          btn.click();// trigger the click on second, and go on 
+        },
         changeImg: function(event) {
           //this.save();
           var input = event.target;
@@ -398,10 +397,10 @@ div#botones{
 /*
     configuracion para los headers
 */
-h3#headers{
+h4#headers{
   font-family: Nunito;
   font-weight: bolder;
-  font-size: x-large;
+  font-size: medium;
 }
 h1#headers{
   font-family: Nunito;
