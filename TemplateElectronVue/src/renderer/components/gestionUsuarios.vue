@@ -172,6 +172,10 @@
                   <option value="Tipo de usuario">Tipo de usuario</option>
                 </b-form-select>
               </div>
+              <div>
+                <label for="levelInput">Foto de usuario</label>
+                <button type="button" class="btn btn-lg btn-outline-secondary btn-light btn-block" v-on:click="">Subir foto</button>
+              </div>
             </form>
           </b-col>
         </b-row>
@@ -230,9 +234,9 @@ export default {
       errorEmailRepetido: false,
       user: [],
       headers: [
-        { text: "Nombre", align: "center", value: "Nombre" },
-        { text: "Correo", align: "center", value: "Correo" },
-        { text: "Puesto", align: "center", value: "PUESTO" }
+        { text: "Nombre", align: "center", value: "Nombre", sortable: false },
+        { text: "Correo", align: "center", value: "Correo", sortable: false },
+        { text: "Puesto", align: "center", value: "PUESTO", sortable: false }
       ]
     };
   },
