@@ -181,20 +181,20 @@
               <v-layout align-center justify-end />
                 <h3 id="headers"  class="text-xs-center">Síndrome Clínico de Presentación</h3>              
                   <v-container fluid>
-                     <v-radio-group v-model="Sindrome_Clinico_Presentacion" row :rules="radioRules" required >
-                       <div style="margin-right: 50%; margin-left: 50%;">
-                        <v-radio label="Sx. Nefrítico" value="1" color="black"></v-radio>
-                        <v-radio label="Sx. Nefrotico" value="2" color="black"></v-radio>
-                        <v-radio label="Anomalías Urinarias Asintomáticas" value="3" color="black"></v-radio>
-                        <v-radio label="IRA" value="4" color="black"></v-radio>
-                        <v-radio label="IRC" value="5" color="black"></v-radio>
-                        <v-radio label="ITU" value="6" color="black"></v-radio>
-                        <v-radio label="Uropatía Obstructiva" value="7" color="black"></v-radio>
-                        <v-radio label="Tubulopatía" value="8" color="black"></v-radio>
-                        <v-radio label="HTA" value="9" color="black"></v-radio>
-                        <v-radio label="Nefrolitiasis" value="10" color="black"></v-radio>
-                       </div>
-                       </v-radio-group>
+                     
+                    <div style="margin-right: 50%; margin-left: 50%;">
+                      <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="Sx. Nefrítico" value="1" color="black"></v-checkbox>
+                      <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="Sx. Nefrotico" value="2" color="black"></v-checkbox>
+                      <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="Anomalías Urinarias Asintomáticas" value="3" color="black"></v-checkbox>
+                      <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="IRA" value="4" color="black"></v-checkbox>
+                      <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="IRC" value="5" color="black"></v-checkbox>
+                      <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="ITU" value="6" color="black"></v-checkbox>
+                      <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="Uropatía Obstructiva" value="7" color="black"></v-checkbox>
+                      <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="Tubulopatía" value="8" color="black"></v-checkbox>
+                      <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="HTA" value="9" color="black"></v-checkbox>
+                      <v-checkbox v-model="Sindrome_Clinico_Presentacion" label="Nefrolitiasis" value="10" color="black"></v-checkbox>
+                    </div>
+                       
                   </v-container>
             </v-flex>
           </v-card-title>
@@ -253,7 +253,7 @@
       </div>
   </div>  
   <div>
-    <button float="left" type="button" class="btn btn-lg btn-warning btn-block" v-on:click="ingresarNuevo">Ingresar nuevo paciente</button> 
+    <button float="left" type="button" class="btn btn-lg btn-warning btn-block" v-on:click="ingresarNuevo" :disabled="this.Sindrome_Clinico_Presentacion===''">Ingresar nuevo paciente</button> 
   </div>
   </div>
 </template>
