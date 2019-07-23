@@ -111,35 +111,35 @@
               </div>
               <br>
               <div style="float:left; width: 50%">
-              <h3 id="headers">Nombres </h3>
+              <h4 id="headers">Nombres </h4>
               <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.Nombre}}</h3>
               </div>
               <div style="float:left; width: 50%">
-                  <h3 id="headers">Apellidos </h3>
+                  <h4 id="headers">Apellidos </h4>
                   <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.Apellido}}</h3>
               </div>
               <div style="float:left; width: 50%">
-                  <h3 id="headers"> CUI </h3>
+                  <h4 id="headers"> CUI </h4>
                   <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.CUI}}</h3>
               </div>
               <div style="float:left; width: 50%">
-                  <h3 id="headers"> Estado </h3>
+                  <h4 id="headers"> Estado </h4>
                   <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.EstadoActual}}</h3>
               </div>
               <div style="float:left; width: 50%">
-                  <h3 id="headers"> Edad </h3>
+                  <h4 id="headers"> Edad </h4>
                   <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.Edad}}</h3>
               </div>
               <div style="float:left; width: 50%">
-                  <h3 id="headers"> Número telefónico </h3>
+                  <h4 id="headers"> Número telefónico </h4>
                   <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.Telefono}}</h3>
               </div>
               <div style="float:left; width: 45%">
-                  <h3 id="headers"> Nombre del padre </h3>
+                  <h4 id="headers"> Nombre del padre </h4>
                   <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.Nombre_de_padre}}</h3>
               </div>
               <div style="float:left; width: 50%; margin-left:5%">
-                  <h3 id="headers"> Nombre de la madre </h3>
+                  <h4 id="headers"> Nombre de la madre </h4>
                   <h3 class="subheading font-weight-light" style="padding-left:10%"> {{selectedPatients.Nombre_de_madre}}</h3>
               </div>
               <br>
@@ -398,10 +398,10 @@ div#botones{
 /*
     configuracion para los headers
 */
-h3#headers{
+h4#headers{
   font-family: Nunito;
   font-weight: bolder;
-  font-size: x-large;
+  font-size: medium;
 }
 h1#headers{
   font-family: Nunito;
