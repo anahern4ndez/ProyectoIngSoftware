@@ -243,6 +243,21 @@ export default {
     });
     },
     getSomeUser(){
+      if (this.idb=="Administrador") {
+        this.idb=1;
+      }
+      if (this.idb=="Doctor") {
+        this.idb=2;
+      }
+      if (this.idb=="Secretaria") {
+        this.idb=3;
+      }
+      if (this.idb=="Asistente") {
+        this.idb=4;
+      }
+      if (this.idb=="Visitante") {
+        this.idb=5;
+      }    
       this.$http.get(`http://localhost:8000/users/some?idb=${this.idb}`).then(response => {
         if(response.data.usersia.length === 0){
           this.errorBusqueda = true;
@@ -250,6 +265,7 @@ export default {
           this.errorBusqueda = false;
           this.user = response.data.usersia;
         }
+        this.idb="";
     });
     },
     getOneUser(){

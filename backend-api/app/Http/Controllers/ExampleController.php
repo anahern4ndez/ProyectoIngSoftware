@@ -120,7 +120,7 @@ class ExampleController extends Controller
     public function getSomeUser(Request $request)
     {
         $id = $request->idb;
-        $usersia = User::query()->where(DB::raw('upper(name)'), 'like', "%" . strtoupper($id) . "%")->orWhere('id', 'like', $id)->get();
+        $usersia = User::query()->where(DB::raw('upper(name)'), 'like', "%" . strtoupper($id) . "%")->orWhere(DB::raw('upper(email)'), 'like', "%" . strtoupper($id) . "%")->orWhere(DB::raw('puesto'), 'like', "%" . $id . "%")->get();
         return response()->json([
             'success' => true,
             'usersia' => $usersia,
