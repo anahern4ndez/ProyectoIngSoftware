@@ -68,3 +68,8 @@ $router->get('/get_nombre', 'MenuPrincipalController@menu_get_nombre');
 $router->get('/get_citas', 'MenuPrincipalController@menu_get_citas');
 
 $router->get('/get_nombre_paciente', 'MenuPrincipalController@paciente_get_nombre');
+
+// CRUD CITAS
+$router->get('/citas', 'CitasController@getCitas');
+$router->post('/citas', 'CitasController@store');
+$router->put('/citas/{id}', 'CitasController@update');
