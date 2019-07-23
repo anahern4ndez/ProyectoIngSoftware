@@ -20,7 +20,7 @@
                                         <b-container>
                                             <b-row class="justify-content-md-center">
                                                 <b-col>
-                                                    <h3 style="font-weight: bold;">Paciente: </h3>  
+                                                    <h3 style="font-weight: bold;">Paciente:</h3>  
                                                 </b-col>
                                                 <b-col>
                                                     <h3>Juan García</h3> 
@@ -39,7 +39,13 @@
                                     <div style="margin-left: 2%">
                                         <h3 style="text-align:center; font-weight: bold;margin-bottom: 2%;">Observaciones especiales: </h3>  
                                         <div>                     
-                                            <textarea rows="8" class="form-control" id="textarea" name="textarea"></textarea>
+                                            <v-textarea
+                                                v-model="Dx_Definitivo"
+                                                outline
+                                                name="Dx_Definitivo"
+                                                value=""
+                                                rows=10
+                                            ></v-textarea>
                                         </div>
                                         <b-container>
                                             <b-row class="justify-content-md-center">
@@ -60,113 +66,118 @@
                         <!-- Form Name -->
                         <h2 style="text-align: left;">Datos Generales</h2>
 
-                        <div class="form-group encapsulado">
+                        <div class="encapsulado">                    
                             <b-container>
-                                <b-row class="justify-content-md-center">
-                                <b-col>
-                                    <div>
-                                        <b-container>
-                                            <b-row class="justify-content-md-center">
-                                                <b-col>
-                                                    <label>Nombre de Papá: </label>  
-                                                </b-col>
-                                                <b-col>
-                                                    <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
-                                                </b-col>
-                                            </b-row>
-                                            <b-row class="justify-content-md-center">
-                                                <b-col>
-                                                    <label>Nombre de Mamá: </label>  
-                                                </b-col>
-                                                <b-col>
-                                                    <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
-                                                </b-col>
-                                            </b-row>
-                                            <b-row class="justify-content-md-center">
-                                                <b-col>
-                                                    <label>Teléfono: </label>  
-                                                </b-col>
-                                                <b-col>
-                                                    <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
-                                                </b-col>
-                                            </b-row>
-                                            <b-row class="justify-content-md-center">
-                                                <b-col>
-                                                    <label>Grupo de sangre: </label>  
-                                                </b-col>
-                                                <b-col>
-                                                    <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
-                                                </b-col>
-                                            </b-row>
-                                            <b-row class="justify-content-md-center">
-                                                <b-col>
-                                                    <label>Estudia: </label>  
-                                                </b-col>
-                                                <b-col>
-                                                    <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
-                                                </b-col>
-                                            </b-row>
-                                            <b-row class="justify-content-md-center">
-                                                <b-col>
-                                                    <label>Transfuciones: </label>  
-                                                </b-col>
-                                                <b-col>
-                                                    <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
-                                                </b-col>
-                                            </b-row>
-                                            <b-row class="justify-content-md-center">
-                                                <b-col>
-                                                    <label>Peso: </label>  
-                                                </b-col>
-                                                <b-col>
-                                                    <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
-                                                </b-col>
-                                            </b-row>
-                                            <b-row class="justify-content-md-center">
-                                                <b-col>
-                                                    <label>Kg. Percentil: </label>  
-                                                </b-col>
-                                                <b-col>
-                                                    <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
-                                                </b-col>
-                                            </b-row>
-                                            <b-row class="justify-content-md-center">
-                                                <b-col>
-                                                    <label>Talla: </label>  
-                                                </b-col>
-                                                <b-col>
-                                                    <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
-                                                </b-col>
-                                            </b-row>
-                                            <b-row class="justify-content-md-center">
-                                                <b-col>
-                                                    <label>Cms. Percentil: </label>  
-                                                </b-col>
-                                                <b-col>
-                                                    <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
-                                                </b-col>
-                                            </b-row>
-                                            <b-row class="justify-content-md-center">
-                                                <b-col>
-                                                    <label>P/A: </label>  
-                                                </b-col>
-                                                <b-col>
-                                                    <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
-                                                </b-col>
-                                            </b-row>
-                                            <b-row class="justify-content-md-center">
-                                                <b-col>
-                                                    <label>Percentil: </label>  
-                                                </b-col>
-                                                <b-col>
-                                                    <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
-                                                </b-col>
-                                            </b-row>
-                                           
-                                        </b-container>
-                                    </div>
-                                </b-col>
-                                <b-col>
+                                    <b-row>
+                                        <b-col>
+                                        <v-text-field
+                                            v-model="Nombre_de_padre"
+                                                        label="Nombre del padre"
+                                                        outline
+                                        ></v-text-field> 
+                                        </b-col>
+                                        <b-col>
+                                        <v-text-field
+                                            v-model="Nombre_de_madre"
+                                            label="Nombre de la madre"
+                                            outline
+                                        ></v-text-field> 
+                                        </b-col>
+                                    </b-row>
+                                    <b-row>
+                                        <b-col>
+                                        <v-text-field
+                                            v-model="Procedencia"
+                                            label="Procedencia"
+                                            outline
+                                        ></v-text-field> 
+                                        </b-col>
+                                        <b-col>
+                                        <v-text-field
+                                            v-model="Telefono"
+                                            label="Télefono"
+                                            outline
+                                        ></v-text-field> 
+                                        </b-col>
+                                    </b-row>
+                                    <b-row>
+                                        <b-col>
+                                        <v-text-field
+                                            v-model="Grupo_De_Sangre"
+                                            label="Grupo de sangre"
+                                            outline
+                                        ></v-text-field>
+                                        </b-col>
+                                        <b-col>
+                                        <v-text-field
+                                            v-model="Estudia"
+                                            label="Estudia"
+                                            outline
+                                        ></v-text-field>
+                                        </b-col>
+                                    </b-row>
+                                    <b-row class="justify-content-md-center">
+                                        <b-col>
+                                        <v-text-field
+                                            v-model="Transfuciones"
+                                            label="Transfuciones"
+                                            outline
+                                        ></v-text-field>
+                                        </b-col>
+                                    </b-row>
+                                    <b-row class="justify-content-md-center">
+                                        <b-col>
+                                        <v-text-field
+                                            v-model="Peso"
+                                            label="Peso"
+                                            outline
+                                        ></v-text-field>
+                                        </b-col>
+                                        <b-col>
+                                        <v-text-field
+                                            v-model="kg_perc"
+                                            label="Kg. Percentil"
+                                            outline
+                                        ></v-text-field>
+                                        </b-col>
+                                        
+                                    </b-row>
+                                    <b-row class="justify-content-md-center">
+                                        <b-col>
+                                        <v-text-field
+                                            v-model="Talla"
+                                            label="Talla"
+                                            outline
+                                        ></v-text-field>
+                                        </b-col>
+                                        <b-col>
+                                        <v-text-field
+                                            v-model="cms_perc"
+                                            label="Cms. Percentil"
+                                            outline
+                                    ></v-text-field>
+                                    </b-col>
+                                
+                                    </b-row>
+                                    <b-row class="justify-content-md-center">
+                                        <b-col>
+                                        <v-text-field
+                                            v-model="PA"
+                                            label="P/A"
+                                            outline
+                                        ></v-text-field>
+                                        </b-col>
+                                        <b-col>
+                                        <v-text-field
+                                            v-model="Percentil"
+                                            label="Percentil"
+                                            outline
+                                        ></v-text-field>
+                                        </b-col>
+                                    </b-row>
+
+                           
+                                    
                                     <table class="table table-bordered table-ligth">
                                         <tbody>
                                             <tr>
@@ -178,67 +189,66 @@
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">BCG</th>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Poliovirus</th>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Hepatitis A</th>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Hepatitis B</th>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Neumococo</th>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Influenza</th>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Diftteria/Tétano/Tosferina(DPT)</th>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Sarampión/Paperas/RUbeola(SPR)</th>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
 
                                         </tbody>
                                     </table>
-                                </b-col>
-                                </b-row>
-                            </b-container>
-                        </div>
+
+                    </b-container>
+                </div>
 
                         <!-- Form Name -->
                         <h2 style="text-align: left;">Dar Consulta</h2>
@@ -246,75 +256,55 @@
                         <b-container class="bv-example-row2">
                             <b-row class="justify-content-md-center">
                                 <b-col>
+                                
                                     <!-- Left-->
                                     <div class="form-group encapsulado" style="text-align:left;">
                                         <div class="form-group">
-                                        <div class=" col-md-10 custom-control custom-checkbox">
-                                            <label class="custom-control-label">Síndorme Clínico de Presentación</label>
-                                        </div> 
-                                        <div class=" col-md-8 custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
-                                            <label class="custom-control-label" for="defaultUnchecked">Sx. Nefrítico</label>
-                                        </div> 
-                                        <div class=" col-md-8 custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
-                                            <label class="custom-control-label" for="defaultUnchecked">Sx. Nefrotico</label>
-                                        </div> 
-                                        <div class=" col-md-10 custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
-                                            <label class="custom-control-label" for="defaultUnchecked">Anomalias Urinarias Asintomáticas</label>
-                                        </div> 
-                                        <div class=" col-md-8 custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
-                                            <label class="custom-control-label" for="defaultUnchecked">IRA</label>
-                                        </div> 
-                                        <div class=" col-md-8 custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
-                                            <label class="custom-control-label" for="defaultUnchecked">IRC</label>
-                                        </div> 
-                                        <div class=" col-md-8 custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
-                                            <label class="custom-control-label" for="defaultUnchecked">ITU</label>
-                                        </div> 
-                                        <div class=" col-md-8 custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
-                                            <label class="custom-control-label" for="defaultUnchecked">Uropatía Obstructiva</label>
-                                        </div> 
-                                        <div class=" col-md-8 custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
-                                            <label class="custom-control-label" for="defaultUnchecked">Tubulopatía</label>
-                                        </div> 
-                                        <div class=" col-md-8 custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
-                                            <label class="custom-control-label" for="defaultUnchecked">HTA</label>
-                                        </div> 
-                                        <div class=" col-md-8 custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
-                                            <label class="custom-control-label" for="defaultUnchecked">Nefrolitiasis</label>
-                                        </div> 
+                                          <v-flex xs12>
+                                            <v-layout align-center justify-end />
+                                                <h3 id="headers"  class="text-xs-center">Síndrome Clínico de Presentación</h3>              
+                                                <v-container fluid >
+                                                    <v-checkbox class="my-0 py-0" v-model="Sindrome_Clinico_Presentacion" label="Sx. Nefrítico" value="1"></v-checkbox>
+                                                    <v-checkbox class="my-0 py-0" v-model="Sindrome_Clinico_Presentacion" label="Sx. Nefrotico" value="2"></v-checkbox>
+                                                    <v-checkbox class="my-0 py-0" v-model="Sindrome_Clinico_Presentacion" label="Anomalías Urinarias Asintomáticas" value="3"></v-checkbox>
+                                                    <v-checkbox class="my-0 py-0" v-model="Sindrome_Clinico_Presentacion" label="IRA" value="4"></v-checkbox>
+                                                    <v-checkbox class="my-0 py-0" v-model="Sindrome_Clinico_Presentacion" label="IRC" value="5"></v-checkbox>
+                                                    <v-checkbox class="my-0 py-0" v-model="Sindrome_Clinico_Presentacion" label="ITU" value="6"></v-checkbox>
+                                                    <v-checkbox class="my-0 py-0" v-model="Sindrome_Clinico_Presentacion" label="Uropatía Obstructiva" value="7"></v-checkbox>
+                                                    <v-checkbox class="my-0 py-0" v-model="Sindrome_Clinico_Presentacion" label="Tubulopatía" value="8"></v-checkbox>
+                                                    <v-checkbox class="my-0 py-0" v-model="Sindrome_Clinico_Presentacion" label="HTA" value="9"></v-checkbox>
+                                                    <v-checkbox class="my-0 py-0" v-model="Sindrome_Clinico_Presentacion" label="Nefrolitiasis" value="10"></v-checkbox>
+                                                </v-container>
+                                            </v-flex>
                                         </div>
                                     </div>
                                 </b-col>
                                 <b-col>
                                     <!-- Center-->
                                     <div style="margin-left: 2%"class="form-group encapsulado">
-                                        <div class="custom-control custom-checkbox">
-                                            <label>Dx. Definitivo</label>
-                                        </div> 
-                                        <div class="col-md-15">                     
-                                            <textarea rows="13" class="form-control" id="textarea" name="textarea"></textarea>
-                                        </div>
+                                         <v-layout align-center justify-end />
+                                            <h3 id="headers"  class="text-xs-center">Dx. Definitivo</h3>
+                                        <v-textarea
+                                            v-model="Dx_Definitivo"
+                                            outline
+                                            name="Dx_Definitivo"
+                                            value=""
+                                            rows=31
+                                        ></v-textarea>
                                     </div>
                                 </b-col>
                                 <b-col>
                                     <!-- Right-->
                                     <div style="margin-left: 2%"class="form-group encapsulado">
-                                        <div class="custom-control custom-checkbox">
-                                            <label>Dx. Asociado</label>
-                                        </div> 
-                                        <div class="col-md-15">                     
-                                        <textarea rows="13" class="form-control" id="textarea" name="textarea"></textarea>
-                                        </div>
+                                        <v-layout align-center justify-end />
+                                            <h3 id="headers"  class="text-xs-center">Dx. Asociado</h3>
+                                        <v-textarea
+                                            v-model="Dx_Asociado"
+                                            outline
+                                            name="Dx_Asociado"
+                                            value=""
+                                            rows=31
+                                        ></v-textarea>
                                     </div>  
                                 </b-col>
                             </b-row>
@@ -324,10 +314,15 @@
                         <!-- Textarea -->
                         <div class="form-group encapsulado">
                         <div class="form-group">
-                            <label class="col-md-2 control-label" for="textarea">Historia</label>
-                            <div>                     
-                                <textarea rows="5" class="form-control" id="textarea" name="textarea"></textarea>
-                            </div>
+                            <v-layout align-center justify-end />
+                                <h3 id="headers"  class="text-xs-center">Historia</h3>
+                            <v-textarea
+                                v-model="Dx_Definitivo"
+                                outline
+                                name="Historia"
+                                value=""
+                                rows=8
+                            ></v-textarea>
                         </div>
                         </div>
 
@@ -339,260 +334,330 @@
                                 <b-col>
                                     <div class="form-group encapsulado" style="text-align:left;">
                                         <div>
+                                            <v-layout align-center justify-end />
+                                                <h3 id="headers"  class="text-xs-center">Medicamentos</h3>
                                             <b-container>
                                                 <b-row>
                                                     <b-col>
-                                                        <label class="custom-control-label" for="defaultUnchecked">Prednisona</label>
-                                                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked">   
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="Prednisona" value="1"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
+                                                        <v-text-field
+                                                            v-model="Prednisona_Cantidad"
+                                                            label="Cantidad"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
-                                                        <label for="textinput">mg</label> 
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
-                                                    </b-col>
-                                                </b-row>
-                                                <b-row>
-                                                    <b-col>
-                                                        <label class="custom-control-label" for="defaultUnchecked">Cyac</label>
-                                                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked">   
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
-                                                    </b-col>
-                                                    <b-col>
-                                                        <label for="textinput">mg</label> 
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
+                                                        <v-text-field
+                                                            v-model="Prednisona_mg"
+                                                            label="mg"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <label class="custom-control-label" for="defaultUnchecked">Tac</label>
-                                                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked">   
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="Cyac" value="1"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
+                                                        <v-text-field
+                                                            v-model="Cyac_Cantidad"
+                                                            label="Cantidad"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
-                                                        <label for="textinput">mg</label> 
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
-                                                    </b-col>
-                                                </b-row>
-                                                <b-row>
-                                                    <b-col>
-                                                        <label class="custom-control-label" for="defaultUnchecked">MMF</label>
-                                                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked">   
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
-                                                    </b-col>
-                                                    <b-col>
-                                                        <label for="textinput">mg</label> 
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
+                                                        <v-text-field
+                                                            v-model="Cyac_mg"
+                                                            label="mg"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <label class="custom-control-label" for="defaultUnchecked">AZA</label>
-                                                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked">   
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="Tac" value="1"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
+                                                        <v-text-field
+                                                            v-model="Tac_Cantidad"
+                                                            label="Cantidad"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
-                                                        <label for="textinput">mg</label> 
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
-                                                    </b-col>
-                                                </b-row>
-                                                <b-row>
-                                                    <b-col>
-                                                        <label class="custom-control-label" for="defaultUnchecked">CFM</label>
-                                                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked">   
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
-                                                    </b-col>
-                                                    <b-col>
-                                                        <label for="textinput">mg</label> 
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
+                                                        <v-text-field
+                                                            v-model="Tac_mg"
+                                                            label="mg"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <label class="custom-control-label" for="defaultUnchecked">Enalapril</label>
-                                                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked">   
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="MMF" value="1"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
+                                                        <v-text-field
+                                                            v-model="MMF_Cantidad"
+                                                            label="Cantidad"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
-                                                        <label for="textinput">mg</label> 
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
-                                                    </b-col>
-                                                </b-row>
-                                                <b-row>
-                                                    <b-col>
-                                                        <label class="custom-control-label" for="defaultUnchecked">Losartan</label>
-                                                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked">   
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
-                                                    </b-col>
-                                                    <b-col>
-                                                        <label for="textinput">mg</label> 
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
+                                                        <v-text-field
+                                                            v-model="MMF_mg"
+                                                            label="mg"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <label class="custom-control-label" for="defaultUnchecked">Amlodipina</label>
-                                                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked">   
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="AZA" value="1"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
+                                                        <v-text-field
+                                                            v-model="AZA_Cantidad"
+                                                            label="Cantidad"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
-                                                        <label for="textinput">mg</label> 
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
-                                                    </b-col>
-                                                </b-row>
-                                                <b-row>
-                                                    <b-col>
-                                                        <label class="custom-control-label" for="defaultUnchecked">Citrato Na</label>
-                                                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked">   
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
-                                                    </b-col>
-                                                    <b-col>
-                                                        <label for="textinput">mg</label> 
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
+                                                        <v-text-field
+                                                            v-model="AZA_mg"
+                                                            label="mg"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <label class="custom-control-label" for="defaultUnchecked">Citrato K</label>
-                                                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked">   
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="CFM" value="1"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
+                                                        <v-text-field
+                                                            v-model="CFM_Cantidad"
+                                                            label="Cantidad"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
-                                                        <label for="textinput">mg</label> 
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
-                                                    </b-col>
-                                                </b-row>
-                                                <b-row>
-                                                    <b-col>
-                                                        <label class="custom-control-label" for="defaultUnchecked">Furosemida</label>
-                                                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked">   
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
-                                                    </b-col>
-                                                    <b-col>
-                                                        <label for="textinput">mg</label> 
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
+                                                        <v-text-field
+                                                            v-model="CFM_mg"
+                                                            label="mg"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <label class="custom-control-label" for="defaultUnchecked">Alfacalcidol</label>
-                                                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked">   
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="Enalapril" value="1"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
+                                                        <v-text-field
+                                                            v-model="Enalapril_Cantidad"
+                                                            label="Cantidad"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
-                                                        <label for="textinput">mg</label> 
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
-                                                    </b-col>
-                                                </b-row>
-                                                <b-row>
-                                                    <b-col>
-                                                        <label class="custom-control-label" for="defaultUnchecked">CaCO3</label>
-                                                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked">   
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
-                                                    </b-col>
-                                                    <b-col>
-                                                        <label for="textinput">mg</label> 
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
+                                                        <v-text-field
+                                                            v-model="Enalapril_mg"
+                                                            label="mg"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <label class="custom-control-label" for="defaultUnchecked">EPO</label>
-                                                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked">   
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="Losartan" value="1"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
+                                                        <v-text-field
+                                                            v-model="Losartan_Cantidad"
+                                                            label="Cantidad"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
-                                                        <label for="textinput">mg</label> 
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
-                                                    </b-col>
-                                                </b-row>
-                                                <b-row>
-                                                    <b-col>
-                                                        <label class="custom-control-label" for="defaultUnchecked">Fe</label>
-                                                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked">   
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
-                                                    </b-col>
-                                                    <b-col>
-                                                        <label for="textinput">mg</label> 
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
+                                                        <v-text-field
+                                                            v-model="Losartan_mg"
+                                                            label="mg"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <label class="custom-control-label" for="defaultUnchecked">Cefradoxilo</label>
-                                                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked">   
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="Amlodipina" value="1"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
+                                                        <v-text-field
+                                                            v-model="Amlodipina_Cantidad"
+                                                            label="Cantidad"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
-                                                        <label for="textinput">mg</label> 
+                                                        <v-text-field
+                                                            v-model="Amlodipina_mg"
+                                                            label="mg"
+                                                            outline
+                                                        ></v-text-field> 
+                                                    </b-col>
+                                                </b-row>
+                                                <b-row>
+                                                    <b-col>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="Citrato Na" value="1"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
+                                                        <v-text-field
+                                                            v-model="Citrato_Na_Cantidad"
+                                                            label="Cantidad"
+                                                            outline
+                                                        ></v-text-field> 
+                                                    </b-col>
+                                                    <b-col>
+                                                        <v-text-field
+                                                            v-model="Citrato_Na_mg"
+                                                            label="mg"
+                                                            outline
+                                                        ></v-text-field> 
+                                                    </b-col>
+                                                </b-row>
+                                                <b-row>
+                                                    <b-col>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="Citrato K" value="1"></v-checkbox>
+                                                    </b-col>
+                                                    <b-col>
+                                                        <v-text-field
+                                                            v-model="Citrato_K_Cantidad"
+                                                            label="Cantidad"
+                                                            outline
+                                                        ></v-text-field> 
+                                                    </b-col>
+                                                    <b-col>
+                                                        <v-text-field
+                                                            v-model="Citrato_K_mg"
+                                                            label="mg"
+                                                            outline
+                                                        ></v-text-field> 
+                                                    </b-col>
+                                                </b-row>
+                                                <b-row>
+                                                    <b-col>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="Furosemida" value="1"></v-checkbox>
+                                                    </b-col>
+                                                    <b-col>
+                                                        <v-text-field
+                                                            v-model="Furosemida_Cantidad"
+                                                            label="Cantidad"
+                                                            outline
+                                                        ></v-text-field> 
+                                                    </b-col>
+                                                    <b-col>
+                                                        <v-text-field
+                                                            v-model="Furosemida_mg"
+                                                            label="mg"
+                                                            outline
+                                                        ></v-text-field> 
+                                                    </b-col>
+                                                </b-row>
+                                                <b-row>
+                                                    <b-col>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="Alfacalcidol" value="1"></v-checkbox>
+                                                    </b-col>
+                                                    <b-col>
+                                                        <v-text-field
+                                                            v-model="Alfacalcidol_Cantidad"
+                                                            label="Cantidad"
+                                                            outline
+                                                        ></v-text-field> 
+                                                    </b-col>
+                                                    <b-col>
+                                                        <v-text-field
+                                                            v-model="Alfacalcidol_mg"
+                                                            label="mg"
+                                                            outline
+                                                        ></v-text-field> 
+                                                    </b-col>
+                                                </b-row>
+                                                <b-row>
+                                                    <b-col>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="CaCO3" value="1"></v-checkbox>
+                                                    </b-col>
+                                                    <b-col>
+                                                        <v-text-field
+                                                            v-model="CaCO3_Cantidad"
+                                                            label="Cantidad"
+                                                            outline
+                                                        ></v-text-field> 
+                                                    </b-col>
+                                                    <b-col>
+                                                        <v-text-field
+                                                            v-model="CaCO3_mg"
+                                                            label="mg"
+                                                            outline
+                                                        ></v-text-field> 
+                                                    </b-col>
+                                                </b-row>
+                                                <b-row>
+                                                    <b-col>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="EPO" value="1"></v-checkbox>
+                                                    </b-col>
+                                                    <b-col>
+                                                        <v-text-field
+                                                            v-model="EPO_Cantidad"
+                                                            label="Cantidad"
+                                                            outline
+                                                        ></v-text-field> 
+                                                    </b-col>
+                                                    <b-col>
+                                                        <v-text-field
+                                                            v-model="EPO_mg"
+                                                            label="mg"
+                                                            outline
+                                                        ></v-text-field> 
+                                                    </b-col>
+                                                </b-row>
+                                                <b-row>
+                                                    <b-col>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="Fe" value="1"></v-checkbox>
+                                                    </b-col>
+                                                    <b-col>
+                                                        <v-text-field
+                                                            v-model="Fe_Cantidad"
+                                                            label="Cantidad"
+                                                            outline
+                                                        ></v-text-field> 
+                                                    </b-col>
+                                                    <b-col>
+                                                        <v-text-field
+                                                            v-model="Fe_mg"
+                                                            label="mg"
+                                                            outline
+                                                        ></v-text-field> 
+                                                    </b-col>
+                                                </b-row>
+                                                <b-row>
+                                                    <b-col>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="Cefadroxilo" value="1"></v-checkbox>
+                                                    </b-col>
+                                                    <b-col>
+                                                        <v-text-field
+                                                            v-model="Cefradoxilo_Cantidad"
+                                                            label="Cantidad"
+                                                            outline
+                                                        ></v-text-field> 
+                                                    </b-col>
+                                                    <b-col>
+                                                        <v-text-field
+                                                            v-model="Cefradoxilo_mg"
+                                                            label="mg"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                             </b-container> 
@@ -604,197 +669,210 @@
                                 <b-col>
                                     <div class="form-group encapsulado" style="text-align:left;">
                                         <div>
+                                            <v-layout align-center justify-end />
+                                                <h3 id="headers"  class="text-xs-center">Medicamentos</h3>
                                             <b-container>
                                                 <b-row>
                                                     <b-col>
-                                                        <label class="control-label" for="textinput">Na</label>  
+                                                        <v-text-field
+                                                            v-model="Na"
+                                                            label="Na"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
+                                                        <v-text-field
+                                                            v-model="Cl"
+                                                            label="Cl"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
-                                                        <label class="control-label" for="textinput">Cl</label>  
+                                                        <v-text-field
+                                                            v-model="BUN"
+                                                            label="BUN"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
-                                                    </b-col>
-                                                    <b-col>
-                                                        <label class="control-label" for="textinput">BUN</label>  
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
-                                                    </b-col>
-                                                    <b-col>
-                                                        <label class="control-label" for="textinput">Glu</label>  
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
+                                                        <v-text-field
+                                                            v-model="Glu"
+                                                            label="Glu"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <label class="control-label" for="textinput">K</label>  
+                                                        <v-text-field
+                                                            v-model="K"
+                                                            label="K"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
+                                                        <v-text-field
+                                                            v-model="HCO"
+                                                            label="HCO"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
-                                                        <label class="control-label" for="textinput">HCO</label>  
+                                                        <v-text-field
+                                                            v-model="Creat"
+                                                            label="Creat"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
-                                                    </b-col>
-                                                    <b-col>
-                                                        <label class="control-label" for="textinput">Creat</label>  
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
-                                                    </b-col>
-                                                    <b-col>
-                                                        <label class="control-label" for="textinput">WB</label>  
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
+                                                        <v-text-field
+                                                            v-model="WB"
+                                                            label="WB"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <label class="control-label" for="textinput">Col</label>  
+                                                        <v-text-field
+                                                            v-model="Col"
+                                                            label="Col"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
+                                                        <v-text-field
+                                                            v-model="Alb"
+                                                            label="Alb"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
-                                                        <label class="control-label" for="textinput">Alb</label>  
+                                                        <v-text-field
+                                                            v-model="HB"
+                                                            label="HB"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
+                                                        <v-text-field
+                                                            v-model="HT"
+                                                            label="HT"
+                                                            outline
+                                                        ></v-text-field> 
+                                                    </b-col>
+                                                </b-row>
+                                                <b-row>
+                                                   <b-col>
+                                                        <v-text-field
+                                                            v-model="Ca"
+                                                            label="Ca"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
-                                                        <label class="control-label" for="textinput">HB</label>  
+                                                        <v-text-field
+                                                            v-model="P"
+                                                            label="P"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
+                                                        <v-text-field
+                                                            v-model="MG"
+                                                            label="MG"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
-                                                        <label class="control-label" for="textinput">HT</label>  
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
+                                                        <v-text-field
+                                                            v-model="PTL"
+                                                            label="PTL"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <label class="control-label" for="textinput">Ca</label>  
+                                                        <v-text-field
+                                                            v-model="EGO"
+                                                            label="EGO"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
+                                                        <v-text-field
+                                                            v-model="pH"
+                                                            label="pH"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
-                                                        <label class="control-label" for="textinput">P</label>  
+                                                        <v-text-field
+                                                            v-model="Glu"
+                                                            label="Glu"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
-                                                    </b-col>
-                                                    <b-col>
-                                                        <label class="control-label" for="textinput">MG</label>  
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
-                                                    </b-col>
-                                                    <b-col>
-                                                        <label class="control-label" for="textinput">PTL</label>  
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
+                                                        <v-text-field
+                                                            v-model="Prot"
+                                                            label="Prot"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <label class="control-label" for="textinput">EGO</label>  
+                                                        <v-text-field
+                                                            v-model="Hem"
+                                                            label="Hem"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
+                                                        <v-text-field
+                                                            v-model="Gr"
+                                                            label="Gr"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
-                                                        <label class="control-label" for="textinput">pH</label>  
+                                                        <v-text-field
+                                                            v-model="GB"
+                                                            label="GB"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
-                                                    </b-col>
-                                                    <b-col>
-                                                        <label class="control-label" for="textinput">Glu</label>  
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
-                                                    </b-col>
-                                                    <b-col>
-                                                        <label class="control-label" for="textinput">Prot</label>  
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
+                                                        <v-text-field
+                                                            v-model="Cil"
+                                                            label="Cil"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <label class="control-label" for="textinput">Hem</label>  
+                                                        <v-text-field
+                                                            v-model="URO"
+                                                            label="URO"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
+                                                        <v-text-field
+                                                            v-model="PTH"
+                                                            label="PTH"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
-                                                    </b-col>
-                                                    <b-col>
-                                                    </b-col>
-                                                    <b-col>
-                                                    </b-col>
-                                                    <b-col>
-                                                    </b-col>
-                                                    <b-col>
-                                                    </b-col>
-                                                    <b-col><input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
-                                                    </b-col>
-                                                </b-row>
-                                                <b-row>
-                                                    <b-col>
-                                                        <label class="control-label" for="textinput">GR</label>  
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
-                                                    </b-col>
-                                                    <b-col>
-                                                        <label class="control-label" for="textinput">GB</label>  
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
-                                                    </b-col>
-                                                    <b-col>
-                                                        <label class="control-label" for="textinput">Cil</label>  
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
-                                                    </b-col>
-                                                    <b-col>
-                                                        <label class="control-label" for="textinput">URO</label>  
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
-                                                    </b-col>
-                                                </b-row>
-                                                <b-row>
-                                                    <b-col>
-                                                        <label class="control-label" for="textinput">PTH</label>  
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
-                                                    </b-col>
-                                                    <b-col>
-                                                        <label class="control-label" for="textinput">Ferritina</label>  
-                                                    </b-col>
-                                                    <b-col>
-                                                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">  
-                                                    </b-col>
-                                                    <b-col>
+                                                        <v-text-field
+                                                            v-model="Ferritina"
+                                                            label="Ferritina"
+                                                            outline
+                                                        ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
@@ -822,42 +900,42 @@
                             </tr>
                             <tr>
                                 <th scope="row" style="width: 10%">Corazón</th>
-                                <td style="width: 5%"><input type="checkbox" /></td>
+                                <td style="width: 5%"><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 my-0 ml-3 "></v-checkbox></v-layout></td>
                                 <td contenteditable='true' style="text-align: left;"></td>
                             </tr>
                             <tr>
                             <th scope="row" style="width: 10%">Pulmones</th>
-                            <td style="width: 5%"><input class="custom-input" type="checkbox" /></td>
+                            <td style="width: 5%"><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 my-0 ml-3 "></v-checkbox></v-layout></td>
                             <td contenteditable='true' style="text-align: left;"></td>
                             </tr>
                             <tr>
                             <th scope="row" style="width: 10%">Abdomen</th>
-                            <td style="width: 5%"><input type="checkbox" /></td>
+                            <td style="width: 5%"><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 my-0 ml-3 "></v-checkbox></v-layout></td>
                             <td contenteditable='true' style="text-align: left;"></td>
                             </tr>
                             <tr>
                             <th scope="row" style="width: 10%">Genitales</th>
-                            <td style="width: 5%"><input type="checkbox" /></td>
+                            <td style="width: 5%"><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 my-0 ml-3 "></v-checkbox></v-layout></td>
                             <td contenteditable='true' style="text-align: left;">Taner</td>
                             </tr>
                             <tr>
                             <th scope="row" style="width: 10%">Extremidades</th>
-                            <td style="width: 5%"><input type="checkbox" /></td>
+                            <td style="width: 5%"><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 my-0 ml-3 "></v-checkbox></v-layout></td>
                             <td contenteditable='true' style="text-align: left;"></td>
                             </tr>
                             <tr>
                             <th scope="row" style="width: 10%">Piel</th>
-                            <td style="width: 5%"><input type="checkbox" /></td>
+                            <td style="width: 5%"><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 my-0 ml-3 "></v-checkbox></v-layout></td>
                             <td contenteditable='true' style="text-align: left;"></td>
                             </tr>
                             <tr>
                             <th scope="row" style="width: 10%">SN</th>
-                            <td style="width: 5%"><input type="checkbox" /></td>
+                            <td style="width: 5%"><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 my-0 ml-3 "></v-checkbox></v-layout></td>
                             <td contenteditable='true' style="text-align: left;"></td>
                             </tr>
                             <tr>
                             <th scope="row" style="width: 10%">Otros</th>
-                            <td style="width: 5%"><input type="checkbox" id="defaultUnchecked"></td>
+                            <td style="width: 5%"><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 my-0 ml-3 "></v-checkbox></v-layout></td>
                             <td contenteditable='true' style="text-align: left;"></td>
                             </tr>
                         </tbody>
@@ -867,35 +945,55 @@
                         <div class="form-group encapsulado">
                             <!-- Textarea -->
                             <div class="form-group">
-                            <label class="col-md-2 control-label" for="textarea">Evaluación médica</label>
-                            <div>                     
-                                <textarea rows="5" class="form-control" id="textarea" name="textarea"></textarea>
-                            </div>
+                            <v-layout align-center justify-end />
+                                <h3 id="headers"  class="text-xs-center">Evaluación Médica</h3>
+                            <v-textarea
+                                v-model="Evaluacion_Medica"
+                                outline
+                                name="Evaluacion_Medica"
+                                value=""
+                                rows=8
+                            ></v-textarea>
                             </div>
 
                             <!-- Textarea -->                           
                             <div class="form-group">
-                            <label class="col-md-3 control-label" for="textarea">Evaluación Psicosocial</label>
-                            <div>                     
-                                <textarea rows="5" class="form-control" id="textarea" name="textarea"></textarea>
-                            </div>
+                            <v-layout align-center justify-end />
+                                <h3 id="headers"  class="text-xs-center">Evaluación Psicosocial</h3>
+                            <v-textarea
+                                v-model="Evaluacion_Psicosocial"
+                                outline
+                                name="Evaluacion_Psicosocial"
+                                value=""
+                                rows=8
+                            ></v-textarea>
                             </div>
 
                            
                            <!-- Textarea -->
                             <div class="form-group">
-                            <label class="col-md-3 control-label" for="textarea">Evaluación Nutricional</label>
-                            <div>                     
-                                <textarea rows="5" class="form-control" id="textarea" name="textarea"></textarea>
-                            </div>
+                            <v-layout align-center justify-end />
+                                <h3 id="headers"  class="text-xs-center">Evaluación Nutricional</h3>
+                            <v-textarea
+                                v-model="Evaluacion_Nutricional"
+                                outline
+                                name="Evaluacion_Nutricional"
+                                value=""
+                                rows=8
+                            ></v-textarea>
                             </div>
                             
                             <!-- Textarea -->
                             <div class="form-group">
-                            <label class="col-md-3 control-label" for="textarea">Evaluación Farmacológica</label>
-                            <div>                     
-                                <textarea rows="5" class="form-control" id="textarea" name="textarea"></textarea>
-                            </div>
+                            <v-layout align-center justify-end />
+                                <h3 id="headers"  class="text-xs-center">Evaluación Farmacológica</h3>
+                            <v-textarea
+                                v-model="Evaluacion_Farmacologica"
+                                outline
+                                name="Evaluacion_Farmacologica"
+                                value=""
+                                rows=8
+                            ></v-textarea>
                             </div>
 
                         </div>
@@ -903,34 +1001,54 @@
                         <!-- Textarea -->
                         <div class="form-group encapsulado" >
                             <div class="form-group">
-                                <label class="col-md-2 control-label" for="textarea">Plan Médico</label>
-                                <div>                     
-                                <textarea rows="5" class="form-control" id="textarea" name="textarea"></textarea>
-                                </div>
+                                <v-layout align-center justify-end />
+                                    <h3 id="headers"  class="text-xs-center">Plan Médico</h3>
+                                <v-textarea
+                                    v-model="Plan_Medico"
+                                    outline
+                                    name="Plan_Medico"
+                                    value=""
+                                    rows=8
+                                ></v-textarea>
                             </div>
 
                             <!-- Textarea -->
                             <div class="form-group">
-                                <label class="col-md-2 control-label" for="textarea">Plan Psicosocial</label>
-                                <div>                     
-                                <textarea rows="5" class="form-control" id="textarea" name="textarea"></textarea>
-                                </div>
+                                <v-layout align-center justify-end />
+                                    <h3 id="headers"  class="text-xs-center">Plan Psicosocial</h3>
+                                <v-textarea
+                                    v-model="Plan_Psicosocial"
+                                    outline
+                                    name="Plan_Psicosocial"
+                                    value=""
+                                    rows=8
+                                ></v-textarea>
                             </div>
 
                             <!-- Textarea -->
                             <div class="form-group">
-                                <label class="col-md-2 control-label" for="textarea">Plan Nutricional</label>
-                                <div>                     
-                                <textarea rows="5" class="form-control" id="textarea" name="textarea"></textarea>
-                                </div>
+                                <v-layout align-center justify-end />
+                                    <h3 id="headers"  class="text-xs-center">Plan Nutricional</h3>
+                                <v-textarea
+                                    v-model="Plan_Nutricional"
+                                    outline
+                                    name="Plan_Nutricional"
+                                    value=""
+                                    rows=8
+                                ></v-textarea>
                             </div>
 
                             <!-- Textarea -->
                             <div class="form-group">
-                            <label class="col-md-2 control-label" for="textarea">Plan Farmacológico</label>
-                            <div>                     
-                                <textarea rows="5" class="form-control" id="textarea" name="textarea"></textarea>
-                            </div>
+                                <v-layout align-center justify-end />
+                                    <h3 id="headers"  class="text-xs-center">Plan Farmacológico</h3>
+                                <v-textarea
+                                    v-model="Plan_Farmacologico"
+                                    outline
+                                    name="Plan_Farmacologico"
+                                    value=""
+                                    rows=8
+                                ></v-textarea>
                             </div>
 
                         </div>
@@ -954,9 +1072,12 @@
                             </div>
                         </div>
         
-                        <div class=" col-md-18 custom-control custom-checkbox" style="margin: 2%">
-                                <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
-                                <label class="custom-control-label" for="defaultUnchecked">Solicitar próxima visita</label>
+                        <div>
+                                <v-switch
+                                    v-model="switch1"
+                                    :label="`Solicitar próxima visita`"
+                                    color="#ffc107"
+                                ></v-switch>
                         </div> 
 
                         <div class="form-inline" style="text-align: center;align-items: center;justify-content: center;">
@@ -1076,51 +1197,639 @@
                     </div>
                 </div>
             </b-tab>
-            <b-tab class='posicion' title="Mapa"><b-card-text>Tab Contents 4</b-card-text></b-tab>
+            <b-tab class='posicion' title="Mapa">
+                <div class="cuerpo">
+                    <h1 style="text-align: center;">Mapa</h1>
+                    <div class="encapsulado">
+                        <table class="table table-bordered table-ligth">
+                        <tbody>
+                            <tr>
+                                <th scope="row" style="width:10%;">Fecha</th>
+                                <th scope="row" style="width:10%;"></th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">Na</th>
+                                <th scope="row" style="width:10%;">136-144</th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">Cl</th>
+                                <th scope="row" style="width:10%;">3.3-5</th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">HCO3</th>
+                                <th scope="row" style="width:10%;">18-25</th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">BUN</th>
+                                <th scope="row" style="width:10%;">7-20</th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">Creatinina</th>
+                                <th scope="row" style="width:10%;">0.5-1.1</th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">Glucosa</th>
+                                <th scope="row" style="width:10%;">60-115</th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">Albumina</th>
+                                <th scope="row" style="width:10%;">3.5-4.6</th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">Colesterol</th>
+                                <th scope="row" style="width:10%;">100-200</th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">Trigliceridos</th>
+                                <th scope="row" style="width:10%;">20-175</th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">CO/C2/TAC</th>
+                                <th scope="row" style="width:10%;"></th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;"></th>
+                                <th scope="row" style="width:10%;"></th>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">Ácido Úrico</th>
+                                <th scope="row" style="width:10%;">3.4-9</th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">Calcio</th>
+                                <th scope="row" style="width:10%;">8.8-10.4</th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">Fósforo</th>
+                                <th scope="row" style="width:10%;">2.4-4.1</th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">Fosfatosa Alk</th>
+                                <th scope="row" style="width:10%;">75-270</th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">PTH</th>
+                                <th scope="row" style="width:10%;">11-54</th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">DHL</th>
+                                <th scope="row" style="width:10%;">405-930</th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;"></th>
+                                <th scope="row" style="width:10%;"></th>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">G. Blancos</th>
+                                <th scope="row" style="width:10%;">3.7-10.1</th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">Hb</th>
+                                <th scope="row" style="width:10%;">14.1-17.5</th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">Ht</th>
+                                <th scope="row" style="width:10%;">43.1-51.5</th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">Plaquetas</th>
+                                <th scope="row" style="width:10%;">140-440</th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">Reticulocitos</th>
+                                <th scope="row" style="width:10%;"></th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;"></th>
+                                <th scope="row" style="width:10%;"></th>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">Hierro</th>
+                                <th scope="row" style="width:10%;">20-151</th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">TIBC</th>
+                                <th scope="row" style="width:10%;">250-400</th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">% Sal</th>
+                                <th scope="row" style="width:10%;">20-50</th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">Ferritina</th>
+                                <th scope="row" style="width:10%;">10-60</th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">Tranferrina</th>
+                                <th scope="row" style="width:10%;">212-360</th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;"></th>
+                                <th scope="row" style="width:10%;"></th>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">Creatinuria</th>
+                                <th scope="row" style="width:10%;">15-20</th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">Proteinuria</th>
+                                <th scope="row" style="width:10%;">0-4</th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">Up/Cr</th>
+                                <th scope="row" style="width:10%;"> <0.2</th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">Calcicluria</th>
+                                <th scope="row" style="width:10%;">0-4</th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">UCa/Cr</th>
+                                <th scope="row" style="width:10%;"><0.21</th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">UAc.Úrico</th>
+                                <th scope="row" style="width:10%;"><0.57</th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">CCr</th>
+                                <th scope="row" style="width:10%;"></th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">-CCr</th>
+                                <th scope="row" style="width:10%;"></th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">KT/V</th>
+                                <th scope="row" style="width:10%;"></th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">PET</th>
+                                <th scope="row" style="width:10%;"></th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;"></th>
+                                <th scope="row" style="width:10%;"></th>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">Biopsia</th>
+                                <th scope="row" style="width:10%;"></th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">US</th>
+                                <th scope="row" style="width:10%;"></th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">Cambio de estatus</th>
+                                <th scope="row" style="width:10%;"></th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">Peso</th>
+                                <th scope="row" style="width:10%;"></th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">Talla</th>
+                                <th scope="row" style="width:10%;"></th>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td contenteditable='true' style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;"></th>
+                                <th scope="row" style="width:10%;"></th>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                            </tr>
+                        </tbody>
+                        </table>
+                    </div>
+                </div>
+            </b-tab>
         </b-tabs>
     </div>
 </template>
 
-<script>
-  export default {
-    data: () => ({
-      fisico: ['Peso', 'Talla', 'IMC'],
-      vital: ['Presión arterial', 'Pulso cardíaco'],
-      tiempo: ['1 mes', '2 meses', '6 meses', '1 año']
-    })
-  }
+<script >
+export default {
+  data: () => ({
+    fisico: ["Peso", "Talla", "IMC"],
+    vital: ["Presión arterial", "Pulso cardíaco"],
+    tiempo: ["1 mes", "2 meses", "6 meses", "1 año"]
+  })
+};
 </script>
 
-<style>
-  .cuerpo {
-    border: solid #A9A9A9 2px;
-    text-align:  center;
-    margin-left: 5%;
-    width: 90%;
-    padding: 5%;
-    padding-top: 2%;
-    padding-bottom: 1%;
-  }
+<style scoped>
 
-  .encapsulado {
-    border: solid #A9A9A9 2px; 
-    margin: 2%; padding: 5%; 
-    border-radius: 25px;
-  }
 
-  table.table-bordered > tbody > tr >th {
-    border:1px solid  #A9A9A9;
-  }
-  table.table-bordered > tbody > tr >td {
-    border:1px solid  #A9A9A9;
-  }
+.cuerpo {
+  border: solid #a9a9a9 2px;
+  text-align: center;
+  margin-left: 5%;
+  width: 90%;
+  padding: 5%;
+  padding-top: 2%;
+  padding-bottom: 1%;
+}
 
-  .posicion {
-      position: relative;
-  }
+.encapsulado {
+    background-color: white;
+  margin: 2%;
+  padding: 5%;
 
-  .centrado {
-      vertical-align: middle;
-  }
+}
 
+table.table-bordered > tbody > tr > th {
+  border: 3px solid #a9a9a9;
+}
+table.table-bordered > tbody > tr > td {
+  border: 3px solid #a9a9a9;
+}
+
+.posicion {
+  position: relative;
+}
+
+.centrado {
+  vertical-align: middle;
+}
 </style>
