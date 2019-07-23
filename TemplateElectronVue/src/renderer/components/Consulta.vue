@@ -1,7 +1,7 @@
 <template lang="">
     <div>
-        <b-tabs active-nav-item-class="font-weight-bold text-uppercase text-dark"  card vertical>
-            <b-tab title="Consulta"  active>
+        <b-tabs active-nav-item-class="font-weight-bold text-uppercase text-dark"  card vertical >
+            <b-tab title="Consulta"  active style="position: sticky;">
                 <div class="cuerpo">
                     <form class="form-horizontal">
                         <fieldset>
@@ -984,22 +984,19 @@
   
                 </div>
             </b-tab>
-            <b-tab class='posicion' title="Detalles físicos">
+            <b-tab class='posicion' title="Detalles físicos" style="position: sticky;">
                 <div class="cuerpo">
                     <h1 style="text-align: center;">Detalles físicos</h1>
 
                     <div class="encapsulado">
                         <b-container>
                             <b-row >
-                                <b-col>
+                                <b-col cols="2">
                                     <h3 style="font-weight: bold;">Paciente: </h3>  
                                 </b-col>
-                                <b-col>
-                                    <h3>Juan García</h3>  
+                                <b-col cols="10">
+                                    <h3 style="text-align: left;">Juan García</h3>  
                                 </b-col>
-                                <b-col></b-col>
-                                <b-col></b-col>
-                                <b-col></b-col>
                                 <b-col></b-col>
                             </b-row>
 
@@ -1030,7 +1027,7 @@
                     </div>
                 </div>
             </b-tab>
-            <b-tab class='posicion' title="Signos vitales">
+            <b-tab class='posicion' title="Signos vitales" style="position: sticky;">
                 <div class="cuerpo">
                     <h1 style="text-align: center;">Signos vitales</h1>
 
@@ -1076,7 +1073,7 @@
                     </div>
                 </div>
             </b-tab>
-            <b-tab class='posicion' title="Mapa"><b-card-text>Tab Contents 4</b-card-text></b-tab>
+            <b-tab class='posicion' title="Mapa" style="position: sticky;"><b-card-text>Tab Contents 4</b-card-text></b-tab>
         </b-tabs>
     </div>
 </template>
