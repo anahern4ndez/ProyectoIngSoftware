@@ -4,7 +4,7 @@
                         <!-- Text input-->
                         <h1 style="text-align: Left;">Consulta</h1>
                         <!-- Text input-->
-                        <div class="form-group ">
+                        <div class="form-group encapsulado">
                         <!-- Lefts-->
                             <b-container>
                                 <b-row class="justify-content-md-center">
@@ -29,55 +29,63 @@
                                     </div>
                                     <div>
                                         <b-container>
-                                            <b-row class="justify-content-md-center">
-                                                <b-col>
-                                                    <label>Nombre de Papá: </label>  
-                                                </b-col>
-                                                <b-col>
-                                                    <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
-                                                </b-col>
-                                            </b-row>
-                                            <b-row class="justify-content-md-center">
-                                                <b-col>
-                                                    <label>Nombre de Mamá: </label>  
-                                                </b-col>
-                                                <b-col>
-                                                    <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
-                                                </b-col>
-                                            </b-row>
-                                            <b-row class="justify-content-md-center">
-                                                <b-col>
-                                                    <label>Teléfono: </label>  
-                                                </b-col>
-                                                <b-col>
-                                                    <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
-                                                </b-col>
-                                            </b-row>
-                                            <b-row class="justify-content-md-center">
-                                                <b-col>
-                                                    <label>Grupo de sangre: </label>  
-                                                </b-col>
-                                                <b-col>
-                                                    <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
-                                                </b-col>
-                                            </b-row>
-                                            <b-row class="justify-content-md-center">
-                                                <b-col>
-                                                    <label>Estudia: </label>  
-                                                </b-col>
-                                                <b-col>
-                                                    <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
-                                                </b-col>
-                                            </b-row>
-                                            <b-row class="justify-content-md-center">
-                                                <b-col>
-                                                    <label>Transfuciones: </label>  
-                                                </b-col>
-                                                <b-col>
-                                                    <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md"> 
-                                                </b-col>
-                                            </b-row>
-                                           
+                                            <b-row>
+                                        <b-col>
+                                        <v-text-field
+                                            v-model="Nombre_de_padre"
+                                                        label="Nombre del padre"
+                                                        outline
+                                        ></v-text-field> 
+                                        </b-col>
+                                        <b-col>
+                                        <v-text-field
+                                            v-model="Nombre_de_madre"
+                                            label="Nombre de la madre"
+                                            outline
+                                        ></v-text-field> 
+                                        </b-col>
+                                    </b-row>
+                                    <b-row>
+                                        <b-col>
+                                        <v-text-field
+                                            v-model="Procedencia"
+                                            label="Procedencia"
+                                            outline
+                                        ></v-text-field> 
+                                        </b-col>
+                                        <b-col>
+                                        <v-text-field
+                                            v-model="Telefono"
+                                            label="Télefono"
+                                            outline
+                                        ></v-text-field> 
+                                        </b-col>
+                                    </b-row>
+                                    <b-row>
+                                        <b-col>
+                                        <v-text-field
+                                            v-model="Grupo_De_Sangre"
+                                            label="Grupo de sangre"
+                                            outline
+                                        ></v-text-field>
+                                        </b-col>
+                                        <b-col>
+                                        <v-text-field
+                                            v-model="Estudia"
+                                            label="Estudia"
+                                            outline
+                                        ></v-text-field>
+                                        </b-col>
+                                    </b-row>
+                                    <b-row class="justify-content-md-center">
+                                        <b-col>
+                                        <v-text-field
+                                            v-model="Transfuciones"
+                                            label="Transfuciones"
+                                            outline
+                                        ></v-text-field>
+                                        </b-col>
+                                    </b-row>
                                         </b-container>
                                     </div>
                                 </b-col>                       
@@ -93,59 +101,59 @@
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">BCG</th>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-2"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Poliovirus</th>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-2"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Hepatitis A</th>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-2"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Hepatitis B</th>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-2"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Neumococo</th>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-2"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Influenza</th>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-2"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Diftteria/Tétano/Tosferina(DPT)</th>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-2"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Sarampión/Paperas/RUbeola(SPR)</th>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
-                                                <td><input type="checkbox" /></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-2"></v-checkbox></v-layout></td>
                                             </tr>
 
                                         </tbody>
@@ -222,32 +230,38 @@ export default {
   }
 };
 </script>
-<style>
-  .cuerpo {
-    border: solid #A9A9A9 2px;
-    text-align:  center;
-    margin-left: 5%;
-    width: 90%;
-    padding: 5%;
-    padding-top: 2%;
-    padding-bottom: 1%;
-  }
+<style scoped>
 
-  .encapsulado {
-    border: solid #A9A9A9 2px; 
-    margin: 2%; padding: 5%; 
-    border-radius: 25px;
-  }
 
-  table.table-bordered > tbody > tr >th {
-    border:1px solid  #A9A9A9;
-  }
-  table.table-bordered > tbody > tr >td {
-    border:1px solid  #A9A9A9;
-  }
+.cuerpo {
+  border: solid #a9a9a9 2px;
+  text-align: center;
+  margin-left: 5%;
+  width: 90%;
+  padding: 5%;
+  padding-top: 2%;
+  padding-bottom: 1%;
+}
 
-  .posicion {
-      position: relative;
-  }
+.encapsulado {
+    background-color: white;
+  margin: 2%;
+  padding: 5%;
 
+}
+
+table.table-bordered > tbody > tr > th {
+  border: 3px solid #a9a9a9;
+}
+table.table-bordered > tbody > tr > td {
+  border: 3px solid #a9a9a9;
+}
+
+.posicion {
+  position: relative;
+}
+
+.centrado {
+  vertical-align: middle;
+}
 </style>
