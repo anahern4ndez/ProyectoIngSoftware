@@ -80,10 +80,16 @@
             <v-container grid-list-md>
               <v-layout wrap>
                 <v-flex xs12>
-                  <v-autocomplete :items="dummyPatients" label="Paciente"></v-autocomplete>
+                  <v-autocomplete :items="dummyPatients" label="Paciente" required></v-autocomplete>
                 </v-flex>
                 <v-flex xs12>
-                  <v-select :items="dummyDoctors" label="Doctor" required v-model="selectedDoctor"></v-select>
+                  <v-select
+                    :items="dummyDoctors"
+                    label="Doctor"
+                    v-model="selectedDoctor"
+                    required
+                    :rules="textboxRules"
+                  ></v-select>
                 </v-flex>
                 <v-flex xs12 sm12>
                   <v-menu
@@ -104,6 +110,7 @@
                         label="Escoger Fecha de Cita"
                         prepend-icon="event"
                         readonly
+                        required
                         v-on="on"
                       ></v-text-field>
                     </template>
@@ -133,6 +140,7 @@
                         label="Escoger Hora de Cita"
                         prepend-icon="event"
                         readonly
+                        required
                         v-on="on"
                       ></v-text-field>
                     </template>
@@ -144,7 +152,11 @@
                   </v-menu>
                 </v-flex>
                 <v-flex xs12 sm6>
-                  <v-text-field label="Duración de Cita (en minutos)" v-model="selectedDuration"></v-text-field>
+                  <v-text-field
+                    label="Duración de Cita (en minutos)"
+                    v-model="selectedDuration"
+                    required
+                  ></v-text-field>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -218,6 +230,7 @@ export default {
       "Sebastian Arriola",
       "Esteban Cabrera"
     ],
+    textboxRules: [v => !!v || "Seleccione una persona"],
     dummyDoctors: ["Randall Lou", "Cristina Zelaya", "Celeste Azul"],
     selectedPatient: "",
     selectedDoctor: ""
@@ -247,16 +260,23 @@ export default {
       alert("details");
     },
     createAppointment() {
-      this.dialogOpen = false;
-      this.events.push({
-        title: `Doctor: ${this.selectedDoctor}`,
-        details: `Paciente: ${this.selectedPatient}`,
-        date: this.selectedDate,
-        time: this.selectedTime,
-        duration: this.selectedDuration
+      this.$http.post("http://localhost:8000/citas").then(response => {
+        //this.dummyPatients = response.data.Pacientes.map(i => i.Nombre);
+        if (response.data.success) {
+          this.dialogOpen = false;
+          this.events.push({
+            title: `Doctor: ${this.selectedDoctor}`,
+            details: `Paciente: ${this.selectedPatient}`,
+            date: this.selectedDate,
+            time: this.selectedTime,
+            duration: this.selectedDuration
+          });
+          this.selectedDoctor = "";
+          this.selectedPatient = "";
+        } else {
+          console.log(response.data);
+        }
       });
-      this.selectedDoctor = "";
-      this.selectedPatient = "";
     },
     dayClick(event) {
       if (this.calendarType === "month") {
