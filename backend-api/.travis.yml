@@ -1,0 +1,23 @@
+language: php
+
+php:
+  - 7.3
+
+addons:
+  postgresql: "11.4"
+
+before_install:
+  - composer self-update
+  - cp .env.travis .env
+  - psql -c 'create database fundanier;' -U postgres
+
+install:
+  - composer require phpunit/phpunit:4.8.* satooshi/php-coveralls:dev-master
+  - composer install --dev
+
+script:
+  - php artisan migrate --seed
+  - ./vendor/bin/phpunit --coverage-clover ./tests/logs/clover.xml
+
+after_script:
+- php vendor/bin/coveralls -v
