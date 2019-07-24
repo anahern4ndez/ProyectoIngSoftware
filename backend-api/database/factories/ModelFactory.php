@@ -58,6 +58,7 @@ $factory->define(App\Models\Cita::class, function (Faker\Generator $faker) {
         'idPaciente' => 6,
         'fecha' => $faker->date(),
         'hora' => $faker->time(),
+        'duracionCita' => $faker->randomNumber(2),
         'estado' => 1
     ];
 });

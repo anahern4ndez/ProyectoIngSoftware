@@ -13,11 +13,14 @@ class CitasControllerTest extends TestCase {
      * 
      */
     public function getCitas() {
+        // Crear 2 citas con datos arbitrarios.
         $citas = factory('App\Models\Cita', 2)->create();
         
+        // GET request
         $this->json('GET', '/citas')
             ->seeJson([
                 'success' => true,
+                'data' => $citas
             ]);
     }
     
@@ -41,6 +44,7 @@ class CitasControllerTest extends TestCase {
             'idPaciente' => $paciente->id,
             'fecha' => $faker->date(),
             'hora' => $faker->time(),
+            'duracionCita' => $faker->randomNumber(2),
             'estado' => 1
         ])->seeJson([
             'success' => true,
@@ -66,6 +70,7 @@ class CitasControllerTest extends TestCase {
             'idUsuario' => $user->id,
             'fecha' => $faker->date(),
             'hora' => $faker->time(),
+            'duracionCita' => $faker->randomNumber(2),
             'estado' => 1
         ])->seeJson([
             'success' => true,
