@@ -13,8 +13,10 @@ class CitasControllerTest extends TestCase {
      * 
      */
     public function getCitas() {
+        // Crear 2 citas con datos arbitrarios.
         $citas = factory('App\Models\Cita', 2)->create();
         
+        // GET request
         $this->json('GET', '/citas')
             ->seeJson([
                 'success' => true,
