@@ -11,11 +11,10 @@ class Citasduracion extends Migration
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         //
         Schema::table('citas', function (Blueprint $table) {
-            $table->integer('duracionCita');
+            $table->integer('duracionCita')->default(0);
         });
     }
 
