@@ -10,6 +10,7 @@ class Comentario extends Model
         'cui',
         'comentarios'
     ];
+    public $timestamps = false;
 
     /**
      * Relaciones de la tabla Paciente

@@ -1,3 +1,5 @@
+
+
 <template lang="">
     <div>
         <b-tabs active-nav-item-class="font-weight-bold text-uppercase text-dark"  card vertical >
@@ -23,9 +25,7 @@
                                                     <h3 style="font-weight: bold;">Paciente:</h3>  
                                                 </b-col>
                                                 <b-col>
-                                                    <h3>Juan García</h3> 
-                                                </b-col>
-                                                <b-col>
+                                                    <h3>{{paciente}}</h3> 
                                                 </b-col>
                                             </b-row>
                                             <b-row>
@@ -40,10 +40,9 @@
                                         <h3 style="text-align:center; font-weight: bold;margin-bottom: 2%;">Observaciones especiales: </h3>  
                                         <div>                     
                                             <v-textarea
-                                                v-model="Dx_Definitivo"
+                                                v-model="comentario"
                                                 outline
-                                                name="Dx_Definitivo"
-                                                value=""
+                                                label=""
                                                 rows=10
                                             ></v-textarea>
                                         </div>
@@ -72,8 +71,8 @@
                                         <b-col>
                                         <v-text-field
                                             v-model="Nombre_de_padre"
-                                                        label="Nombre del padre"
-                                                        outline
+                                            label="Nombre del padre"
+                                            outline
                                         ></v-text-field> 
                                         </b-col>
                                         <b-col>
@@ -189,59 +188,59 @@
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">BCG</th>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="bcg1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="bcg2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="bcg3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="bcgRef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Poliovirus</th>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="poliovirus1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="poliovirus2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="poliovirus3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="poliovirusRef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Hepatitis A</th>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="hepatitisA1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="hepatitisA2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="hepatitisA3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="hepatitisARef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Hepatitis B</th>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="hepatitisB1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="hepatitisB2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="hepatitisB3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="hepatitisBRef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Neumococo</th>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="neumococo1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="neumococo2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="neumococo3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="neumococoRef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Influenza</th>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="influeza1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="influeza2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="influeza3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="influezaRef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Diftteria/Tétano/Tosferina(DPT)</th>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="DPT1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="DPT2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="DPT3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="DPTRef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Sarampión/Paperas/RUbeola(SPR)</th>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="SPR1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="SPR2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="SPR3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="SPRRef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
 
                                         </tbody>
@@ -317,7 +316,7 @@
                             <v-layout align-center justify-end />
                                 <h3 id="headers"  class="text-xs-center">Historia</h3>
                             <v-textarea
-                                v-model="Dx_Definitivo"
+                                v-model="historia"
                                 outline
                                 name="Historia"
                                 value=""
@@ -339,7 +338,7 @@
                                             <b-container>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="Prednisona" value="1"></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="Prednisona"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
@@ -358,7 +357,7 @@
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="Cyac" value="1"></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="cyac" label="Cyac"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
@@ -377,7 +376,7 @@
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="Tac" value="1"></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Tac" label="Tac"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
@@ -396,7 +395,7 @@
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="MMF" value="1"></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="MMF" label="MMF"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
@@ -415,7 +414,7 @@
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="AZA" value="1"></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="AZA" label="AZA" ></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
@@ -434,7 +433,7 @@
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="CFM" value="1"></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="CFM" label="CFM" ></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
@@ -453,7 +452,7 @@
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="Enalapril" value="1"></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Enalapril" label="Enalapril" ></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
@@ -472,7 +471,7 @@
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="Losartan" value="1"></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Losartan" label="Losartan" ></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
@@ -491,7 +490,7 @@
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="Amlodipina" value="1"></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Amlodipina" label="Amlodipina" ></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
@@ -510,7 +509,7 @@
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="Citrato Na" value="1"></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="CitratoNa" label="Citrato Na" ></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
@@ -529,7 +528,7 @@
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="Citrato K" value="1"></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="CitratoK" label="Citrato K" ></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
@@ -548,7 +547,7 @@
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="Furosemida" value="1"></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Furosemida" label="Furosemida" ></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
@@ -567,7 +566,7 @@
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="Alfacalcidol" value="1"></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Alfacalcidol" label="Alfacalcidol" ></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
@@ -586,7 +585,7 @@
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="CaCO3" value="1"></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="CaCO3" label="CaCO3" ></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
@@ -605,7 +604,7 @@
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="EPO" value="1"></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="EPO" label="EPO" ></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
@@ -624,7 +623,7 @@
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="Fe" value="1"></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Fe" label="Fe" ></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
@@ -643,7 +642,7 @@
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="Cefadroxilo" value="1"></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Cefradoxilo" label="Cefadroxilo" ></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
@@ -670,7 +669,7 @@
                                     <div class="form-group encapsulado" style="text-align:left;">
                                         <div>
                                             <v-layout align-center justify-end />
-                                                <h3 id="headers"  class="text-xs-center">Medicamentos</h3>
+                                                <h3 id="headers"  class="text-xs-center">Resultados de laboratorios</h3>
                                             <b-container>
                                                 <b-row>
                                                     <b-col>
@@ -809,7 +808,7 @@
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="Glu"
+                                                            v-model="Glu2"
                                                             label="Glu"
                                                             outline
                                                         ></v-text-field> 
@@ -1058,26 +1057,22 @@
                             <div>
                             <b-container class="bv-example-row2">
                                 <b-row class="justify-content-md-center">
-                                <b-col>
                                 
-                                </b-col>
-                                <b-col>
-                                    <button type="button" class="btn btn-lg btn-warning btn-block" >Agregar imagen</button>
-                                </b-col>
-                                <b-col>
-                                    
-                                </b-col>
+                                    <b-col>
+                                        <button type="button" class="btn btn-lg btn-warning btn-block" >Agregar imagen</button>
+                                    </b-col>
+                                
                                 </b-row>
                             </b-container>
                             </div>
                         </div>
         
                         <div>
-                                <v-switch
-                                    v-model="switch1"
-                                    :label="`Solicitar próxima visita`"
-                                    color="#ffc107"
-                                ></v-switch>
+                            <v-switch
+                                v-model="switch1"
+                                :label="`Solicitar próxima visita`"
+                                color="#ffc107"
+                            ></v-switch>
                         </div> 
 
                         <div class="form-inline" style="text-align: center;align-items: center;justify-content: center;">
@@ -1085,7 +1080,7 @@
                             <b-container class="bv-example-row2">
                                 <b-row class="justify-content-md-center">
                                 <b-col>
-                                    <button type="button" class="btn btn-lg btn-warning btn-block" >Guardar</button>
+                                    <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="guardar" >Guardar</button>
                                 </b-col>
                                 <b-col>
                                     <button type="button" class="btn btn-lg btn-warning btn-block" >Cancelar</button>
@@ -1098,11 +1093,8 @@
                             </div>
                         </div>
                         </fieldset>
-                        </form>
+                    </form>
 
-                        </fieldset>
-                        </form>
-  
                 </div>
             </b-tab>
             <b-tab class='posicion' title="Detalles físicos" style="position: sticky;">
@@ -1194,9 +1186,6 @@
                     </div>
                 </div>
             </b-tab>
-<<<<<<< HEAD
-            <b-tab class='posicion' title="Mapa" style="position: sticky;"><b-card-text>Tab Contents 4</b-card-text></b-tab>
-=======
             <b-tab class='posicion' title="Mapa">
                 <div class="cuerpo">
                     <h1 style="text-align: center;">Mapa</h1>
@@ -1683,6 +1672,7 @@
                                 <td contenteditable='true' style="text-align: left;" ></td>
                                 <td contenteditable='true' style="text-align: left;" ></td>
                             </tr>
+
                             <tr>
                                 <th scope="row" style="width:10%;">PET</th>
                                 <th scope="row" style="width:10%;"></th>
@@ -1784,53 +1774,227 @@
                     </div>
                 </div>
             </b-tab>
->>>>>>> d6840706b5cf5c73f9e9bba42aff49631af9db02
         </b-tabs>
     </div>
 </template>
 
-<script >
+<script>
 export default {
-  data: () => ({
-    fisico: ["Peso", "Talla", "IMC"],
-    vital: ["Presión arterial", "Pulso cardíaco"],
-    tiempo: ["1 mes", "2 meses", "6 meses", "1 año"]
-  })
+    data: () => ({
+        fisico: ["Peso", "Talla", "IMC"],
+        vital: ["Presión arterial", "Pulso cardíaco"],
+        tiempo: ["1 mes", "2 meses", "6 meses", "1 año"],
+
+        paciente: "Juan Garcia",
+        //Variables para inputs
+        comentario: "",
+        Nombre_de_padre: "",
+        Nombre_de_madre: "",
+        Procedencia: "",
+        Telefono: "",
+        Grupo_De_Sangre: "",
+        Estudia: "",
+        Transfuciones: "",
+        Peso: "",
+        kg_perc: "",
+        Talla: "",
+        cms_perc: "",
+        PA: "",
+        Percentil: "",
+        
+        bcg1: false,
+        bcg2: false,
+        bcg3: false,
+        bcgRef: false,
+        poliovirus1: false,
+        poliovirus2: false,
+        poliovirus3: false,
+        poliovirusRef: false,
+        hepatitisA1: false,
+        hepatitisA2: false,
+        hepatitisA3: false,
+        hepatitisARef: false,
+        hepatitisB1: false,
+        hepatitisB2: false,
+        hepatitisB3: false,
+        hepatitisBRef: false,
+        hepatitisC1: false,
+        hepatitisC2: false,
+        hepatitisC3: false,
+        hepatitisCRef: false,
+        neumococo1: false,
+        neumococo2: false,
+        neumococo3: false,
+        neumococoRef: false,
+        influeza1: false,
+        influeza2: false,
+        influeza3: false,
+        influezaRef: false,
+        DPT1: false,
+        DPT2: false,
+        DPT3: false,
+        DPTRef: false,
+        SPR1: false,
+        SPR2: false,
+        SPR3: false,
+        SPRRef: false,
+        Sindrome_Clinico_Presentacion: "",
+        Dx_Definitivo: "",
+        Dx_Asociado: "",
+        historia: "",
+
+        //Medicamentos
+        Prednisona: "",
+        Prednisona_Cantidad: "",
+        Prednisona_mg: "",
+
+        cyac: "",
+        Cyac_Cantidad: "",
+        Cyac_mg: "",
+
+        Tac: "",
+        Tac_Cantidad: "",
+        Tac_mg: "",
+
+        MMF: "",
+        MMF_Cantidad: "",
+        MMF_mg: "",
+
+        AZA: "",
+        AZA_Cantidad: "",
+        AZA_mg: "",
+
+        CFM: "",
+        CFM_Cantidad: "",
+        CFM_mg: "",
+
+        Enalapril: "",
+        Enalapril_Cantidad: "",
+        Enalapril_mg: "",
+
+        Losartan: "",
+        Losartan_Cantidad: "",
+        Losartan_mg: "",
+
+        Amlodipina: "",
+        Amlodipina_Cantidad: "",
+        Amlodipina_mg: "",
+
+        CitratoNa: "",
+        Citrato_Na_Cantidad: "",
+        Citrato_Na_mg: "",
+
+        CitratoK: "",
+        Citrato_K_Cantidad: "",
+        Citrato_K_mg: "",
+
+        Furosemida: "",
+        Furosemida_Cantidad: "",
+        Furosemida_mg: "",
+
+        Alfacalcidol: "",
+        Alfacalcidol_Cantidad: "",
+        Alfacalcidol_mg: "",
+
+        CaCO3: "",
+        CaCO3_Cantidad: "",
+        CaCO3_mg: "",
+
+        EPO: "",
+        EPO_Cantidad: "",
+        EPO_mg: "",
+
+        Fe: "",
+        Fe_Cantidad: "",
+        Fe_mg: "",
+
+        Cefradoxilo: "",
+        Cefradoxilo_Cantidad: "",
+        Cefradoxilo_mg: "",
+
+        //Laboratorios
+        Na: "",
+        Cl: "",
+        BUN: "",
+        Glu: "",
+        K: "",
+        HCO: "",
+        Creat: "",
+        WB: "",
+        Col: "",
+        Alb: "",
+        HB: "",
+        HT: "",
+        Ca: "",
+        P: "",
+        MG: "",
+        PTL: "",
+        EGO: "",
+        pH: "",
+        Glu2: "",
+        Prot: "",
+        Hem: "",
+        Gr: "",
+        GB: "",
+        Cil: "",
+        URO: "",
+        PTH: "",
+        Ferritina: "",
+
+        includeFiles: "",
+
+        Evaluacion_Medica: "",
+        Evaluacion_Psicosocial: "",
+        Evaluacion_Nutricional: "",
+        Evaluacion_Farmacologica: "",
+
+        Plan_Medico: "",
+        Plan_Psicosocial: "",
+        Plan_Nutricional: "",
+        Plan_Farmacologico: "",
+    }),
+    mounted() {
+        
+    },
+    methods: {
+        guardar() {
+            console.log("aaa");
+        }
+        
+    }
 };
 </script>
 
 <style scoped>
+    .cuerpo {
+    border: solid #a9a9a9 2px;
+    text-align: center;
+    margin-left: 5%;
+    width: 90%;
+    padding: 5%;
+    padding-top: 2%;
+    padding-bottom: 1%;
+    }
 
+    .encapsulado {
+        background-color: white;
+    margin: 2%;
+    padding: 5%;
 
-.cuerpo {
-  border: solid #a9a9a9 2px;
-  text-align: center;
-  margin-left: 5%;
-  width: 90%;
-  padding: 5%;
-  padding-top: 2%;
-  padding-bottom: 1%;
-}
+    }
 
-.encapsulado {
-    background-color: white;
-  margin: 2%;
-  padding: 5%;
+    table.table-bordered > tbody > tr > th {
+    border: 3px solid #a9a9a9;
+    }
+    table.table-bordered > tbody > tr > td {
+    border: 3px solid #a9a9a9;
+    }
 
-}
+    .posicion {
+    position: relative;
+    }
 
-table.table-bordered > tbody > tr > th {
-  border: 3px solid #a9a9a9;
-}
-table.table-bordered > tbody > tr > td {
-  border: 3px solid #a9a9a9;
-}
-
-.posicion {
-  position: relative;
-}
-
-.centrado {
-  vertical-align: middle;
-}
+    .centrado {
+    vertical-align: middle;
+    }
 </style>

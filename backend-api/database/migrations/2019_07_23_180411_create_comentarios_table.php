@@ -22,8 +22,6 @@ class CreateComentariosTable extends Migration
             ->on('pacientes');
 
             $table->json('comentarios')->nullable();
-
-            $table->timestamps();
         });
     }
 
