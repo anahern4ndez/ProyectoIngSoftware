@@ -192,7 +192,7 @@
                                     <b-container class="bv-example-row2">
                                         <b-row class="justify-content-md-center">
                                         <b-col>
-                                            <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="consulta">Dar Consulta</button>
+                                            <button type="button" class="btn btn-lg btn-warning btn-block ml-4" v-on:click="consulta">Dar Consulta</button>
                                         </b-col>
                                         <b-col>
                                             <button type="button" class="btn btn-lg btn-warning btn-block">Historial</button>

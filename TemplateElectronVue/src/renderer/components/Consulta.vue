@@ -1,7 +1,7 @@
 <template lang="">
     <div>
         <b-tabs active-nav-item-class="font-weight-bold text-uppercase text-dark"  card vertical>
-            <b-tab title="Consulta"  active>
+            <b-tab title="Consulta"  active >
                 <div class="cuerpo">
                     <form class="form-horizontal">
                         <fieldset>
