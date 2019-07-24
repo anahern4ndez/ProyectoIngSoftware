@@ -44,7 +44,7 @@ class CitasControllerTest extends TestCase {
             'idPaciente' => $paciente->id,
             'fecha' => $faker->date(),
             'hora' => $faker->time(),
-            'duracion' => $faker->randomNumber(2),
+            'duracionCita' => $faker->randomNumber(2),
             'estado' => 1
         ])->seeJson([
             'success' => true,
@@ -70,7 +70,7 @@ class CitasControllerTest extends TestCase {
             'idUsuario' => $user->id,
             'fecha' => $faker->date(),
             'hora' => $faker->time(),
-            'duracion' => $faker->randomNumber(2),
+            'duracionCita' => $faker->randomNumber(2),
             'estado' => 1
         ])->seeJson([
             'success' => true,

@@ -30,7 +30,7 @@ class CitasController extends Controller {
                'idPaciente' => 'required',
                'fecha' => 'required',
                'hora' => 'required',
-               'duracion' => 'required',
+               'duracionCita' => 'required',
                'estado' => 'required'
            ], 
            [
@@ -38,7 +38,7 @@ class CitasController extends Controller {
                'idPaciente.required' => 'El ID del paciente es requerido.',
                'fecha.required' => 'La fecha es requerida.',
                'hora.required' => 'La hora es requerida.',
-               'duracion.required' => 'La duración de la cita es requerida.',
+               'duracionCita.required' => 'La duración de la cita es requerida.',
            ]
        );
         
@@ -49,7 +49,7 @@ class CitasController extends Controller {
         $cita->fecha = $request->fecha;
         $cita->hora = $request->hora;
         $cita->estado = $request->estado;
-        $cita->duracion = $request->duracion;
+        $cita->duracionCita = $request->duracionCita;
         $cita->save();
         
         // Cita creada con exito, se retorna un codigo 200.
@@ -89,7 +89,7 @@ class CitasController extends Controller {
                 'idPaciente' => 'required',
                 'fecha' => 'required',
                 'hora' => 'required',
-                'duracion' => 'required',
+                'duracionCita' => 'required',
                 'estado' => 'required'
             ], 
             [
@@ -97,7 +97,7 @@ class CitasController extends Controller {
                 'idPaciente.required' => 'El ID del paciente es requerido.',
                 'fecha.required' => 'La fecha es requerida.',
                 'hora.required' => 'La hora es requerida.',
-                'duracion.required' => 'La duración de la cita es requerida.',
+                'duracionCita.required' => 'La duración de la cita es requerida.',
             ]
         );
 
@@ -107,7 +107,7 @@ class CitasController extends Controller {
         $cita->fecha = $request->fecha;
         $cita->hora = $request->hora;
         $cita->estado = $request->estado;
-        $cita->duracion = $request->duracion;
+        $cita->duracionCita = $request->duracionCita;
         $cita->save();
 
         // Cita actualizada con exito, se retorna un codigo 200.
