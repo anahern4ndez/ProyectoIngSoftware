@@ -2,13 +2,8 @@
 
 <template lang="">
     <div>
-<<<<<<< HEAD
         <b-tabs active-nav-item-class="font-weight-bold text-uppercase text-dark"  card vertical>
             <b-tab title="Consulta"  active >
-=======
-        <b-tabs active-nav-item-class="font-weight-bold text-uppercase text-dark"  card vertical >
-            <b-tab title="Consulta"  active style="position: sticky;">
->>>>>>> 1c4f47d237efeb9cbd09b68aa3d7283fbd1f3e4c
                 <div class="cuerpo">
                     <form class="form-horizontal">
                         <fieldset>
