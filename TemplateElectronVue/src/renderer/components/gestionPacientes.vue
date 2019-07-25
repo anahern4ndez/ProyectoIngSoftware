@@ -101,7 +101,7 @@
               </div>
               <br>
               <div>
-              
+              <!-- elementos para seleccionar imagen--> 
               <v-button class="btn btn-lg btn-warning btn-block" id="botonimagen" @click="imgClick"> Seleccionar Imagen </v-button>
               <input type="file" class="hide_file" style="height:auto; width:auto; visibility:hidden" v-on:change="changeImg" ref="changeImg"/>
               </div>
@@ -211,9 +211,9 @@ export default {
           { text: 'CUI (ID)', align: 'center',value: 'CUI'},
           { text: 'Nombre', align: 'center', value: 'Nombre' },
           { text: 'Apellido', align: 'center', value: 'Apellido' }, 
-          { text: 'Procedencia', align: 'center', value: 'Procedencia' },
+          { text: 'Procedencia', align: 'center', value: 'procedencia.Departamento' },
           { text: 'Fecha de nacimiento', align: 'center', value: 'Fecha_de_nacimiento' },
-          { text: 'Estado', align: 'center', value: 'EstadoActual' },
+          { text: 'Estado', align: 'center', value: 'estado_actual.significado' },
         ],
         editedIndex: -1,
         pacientes: [],
