@@ -174,7 +174,11 @@
               </div>
               <div>
                 <label for="levelInput">Foto de usuario</label>
-                <button type="button" class="btn btn-lg btn-outline-secondary btn-light btn-block" v-on:click="">Subir foto</button>
+              <div>
+              
+              <v-button class="btn btn-lg btn-warning btn-block" id="botonimagen" @click="imgClick"> Seleccionar Imagen </v-button>
+              <input type="file" class="hide_file" style="height:auto; width:auto; visibility:hidden" v-on:change="changeImg" ref="changeImg"/>
+              </div>
               </div>
             </form>
           </b-col>
@@ -467,6 +471,37 @@ export default {
         });
       }
     },
+        imgClick: function(event){// on a click on the button with id 'one'
+          const btn = this.$refs.changeImg
+          btn.click();// trigger the click on second, and go on 
+        },
+        changeImg: function(event) {
+          //this.save();
+          var input = event.target;
+          if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            // definir accion a realizar despues que se haya seleccionado una imagen
+            reader.onload = (e) => {
+              // console.log(this.estadoNuevo);
+              // console.log(e.target.result);
+              this.imageData = e.target.result.data;
+              var data = {
+                // id: this.selectedPatients.CUI,
+                // estado: this.estadoNuevo.id,
+                id: 1,
+                estado: 1,                
+                img: this.imageData,
+              }
+              //guardar el cambio de imagen en db
+              // this.$http.put(`http://localhost:8000/PacienteController/update/`,data).then(response=>{
+              //   this.selectedPatients.EstadoActual = this.estadoNuevo.significado;
+              //   this.selectedPatients.Imagen = this.imageData;
+              // });
+            }
+            }
+            reader.readAsDataURL(input.files[0]);
+
+        },
     modificar(){
       this.errorName = false;
       this.errorEmail = false;
