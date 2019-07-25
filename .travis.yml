@@ -3,16 +3,15 @@ language: php
 php:
   - 7.3
 
-addons:
-  postgresql: "11.4"
-
 services:
   - postgresql
+
+addons:
+  postgresql: "11.4"
 
 before_install:
   - composer self-update
   - cp .env.travis .env
-  - initdb
   - psql -c 'create database fundanier;' -U postgres
 
 install:
