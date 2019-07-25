@@ -1,0 +1,31 @@
+language: php
+
+php:
+  - 7.3
+
+services:
+  - postgresql
+
+addons:
+  postgresql: "11.4"
+
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install -y postgresql-11 postgresql-client-11
+  - sudo cp /etc/postgresql/11/main/ph_hba.conf
+  - sudo sudo service postgresql restart 11
+  - composer self-update
+  - cp .env.travis .env
+  - psql --version
+  - psql -c 'create database fundanier;' -U postgres
+
+install:
+  - composer require phpunit/phpunit:4.8.* satooshi/php-coveralls:dev-master
+  - composer install --dev
+
+script:
+  - php artisan migrate --seed
+  - ./backend-api/vendor/bin/phpunit --coverage-clover ./tests/logs/clover.xml
+
+after_script:
+- php vendor/bin/coveralls -v

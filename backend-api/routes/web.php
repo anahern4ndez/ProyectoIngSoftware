@@ -43,6 +43,16 @@ $router->put('/PacienteController/update', 'PacienteController@update');
 $router->put('/PacienteController/updateAll', 'PacienteController@updateAll');
 $router->delete('/PacienteController/delete', 'PacienteController@delete');
 
+//CRUD: TABLA CONSULTAS
+$router->post('/ConsultaController/insert', 'ConsultaController@store');
+$router->get('/ConsultaController/findOne', 'ConsultaController@findOne');
+$router->get('/ConsultaController/findAll', 'ConsultaController@findAll');
+
+//CRUD: TABLA COMENTARIO
+$router->post('/ComentarioController/insert', 'ComentarioController@store');
+$router->get('/ComentarioController/findAll', 'ComentarioController@findAll');
+
+
 //get info from procedencias
 $router->post('/ProcedenciaController/locate', 'ProcedenciaController@getLocation');
 
@@ -68,3 +78,8 @@ $router->get('/get_nombre', 'MenuPrincipalController@menu_get_nombre');
 $router->get('/get_citas', 'MenuPrincipalController@menu_get_citas');
 
 $router->get('/get_nombre_paciente', 'MenuPrincipalController@paciente_get_nombre');
+
+// CRUD CITAS
+$router->get('/citas', 'CitasController@getCitas');
+$router->post('/citas', 'CitasController@store');
+$router->put('/citas/{id}', 'CitasController@update');
