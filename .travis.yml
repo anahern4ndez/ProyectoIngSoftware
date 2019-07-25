@@ -10,8 +10,14 @@ addons:
   postgresql: "11.4"
 
 before_install:
+  - sudo apt-get update
+  - sudo apt-get --yes remove postgresql|*
+  - sudo apt-get install -y postgresql-11 postgresql-client-11
+  - sudo cp /etc/postgresql/11/main/ph_hba.conf
+  - sudo sudo service postgresql restart 11
   - composer self-update
   - cp .env.travis .env
+  - psql --version
   - psql -c 'create database fundanier;' -U postgres
 
 install:
