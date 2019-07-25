@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Hash;
+use App\codigo_citas;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,5 +61,13 @@ $factory->define(App\Models\Cita::class, function (Faker\Generator $faker) {
         'hora' => $faker->time(),
         'duracionCita' => $faker->randomNumber(2),
         'estado' => 1
+    ];
+});
+
+$factory->define(App\codigo_citas::class, function (Faker\Generator $faker) {
+    $count = codigo_citas::all()->count();
+    return [
+        'id' => $count + 1,
+        'significado' => 'hola'
     ];
 });
