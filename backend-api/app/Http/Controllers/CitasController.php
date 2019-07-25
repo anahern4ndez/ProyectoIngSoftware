@@ -116,4 +116,25 @@ class CitasController extends Controller {
             'message' => 'Cita actualizada con éxito.'
         ], 200);
     }
+
+    /**
+     * Borra una cita de la DB.
+     */
+    public function destroy(Request $request, $id) {
+        $cita = Cita::find($id);
+
+        if (!$cita) {
+            return response()->json([
+                'success' => true,
+                'message' => 'No se encontró la cita especificada.'
+            ], 404);
+        }
+
+        $cita->destroy();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Cita eliminada con éxito.'
+        ], 200);
+    }
 }

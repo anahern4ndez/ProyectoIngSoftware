@@ -81,4 +81,15 @@ class CitasControllerTest extends TestCase {
         $this->assertTrue($cita->idPaciente == $paciente->id);
         $this->assertTrue($cita->idUsuario == $user->id);
     }
+
+    public function testBorrarCita() {
+        // Crear recurso de cita y guardarlo en DB
+        $cita = factory('App\Models\Cita')->create();
+        $id = $cita->id;
+        // Borrar cita de DB.
+        $cita->destroy();
+        $cita = Cita::find($id);
+
+        $this->assertTrue(!$cita);
+    }
 }
