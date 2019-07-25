@@ -55,7 +55,7 @@ $factory->define(App\Models\Paciente::class, function (Faker\Generator $faker) {
 $factory->define(App\Models\Cita::class, function (Faker\Generator $faker) {
     return [
         'idUsuario' => 1,
-        'idPaciente' => 6,
+        'idPaciente' => 1,
         'fecha' => $faker->date(),
         'hora' => $faker->time(),
         'duracionCita' => $faker->randomNumber(2),

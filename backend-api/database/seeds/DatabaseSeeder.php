@@ -3,15 +3,13 @@
 use Illuminate\Database\Seeder;
 use App\User;
 
-class DatabaseSeeder extends Seeder
-{
+class DatabaseSeeder extends Seeder {
     /**
      * Run the database seeds.
      *
      * @return void
      */
-    public function run()
-    {
+    public function run() {
         $this->call([
             procedenciasTableSeeder::class,
             SexoTableSeeder::class,
@@ -19,7 +17,9 @@ class DatabaseSeeder extends Seeder
             SCPTableSeeder::class,
             CodigoVacunaTableSeeder::class,
             TipoDeRespuestaTableSeeder::class,
-            EstadosTableSeeder::class
+            EstadosTableSeeder::class,
+            UsuariosSeeder::class,
+            PacienteSeeder::class,
         ]);
         
     }

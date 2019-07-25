@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Seeder;
 use App\Procedencia;
-class procedenciasTableSeeder extends Seeder
-{
+
+class procedenciasTableSeeder extends Seeder {
     /**
      * Run the database seeds.
      *
@@ -19,7 +19,5 @@ class procedenciasTableSeeder extends Seeder
             Procedencia::create($elem);
             
         }
-
-        
     }
 }

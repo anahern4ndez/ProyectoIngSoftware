@@ -54,15 +54,15 @@ class CitasControllerTest extends TestCase {
     public function testUpdateCita() {
         // instancia de Faker para simular datos
         $faker = Faker::create();
-        
-        // Crear recurso de cita y guardarlo en DB
-        $cita = factory('App\Models\Cita')->create();
 
         // crear usuario fake
         $user = factory('App\User')->create();
-        
+
         // crear paciente fake
         $paciente = factory('App\Models\Paciente')->create();
+        
+        // Crear recurso de cita y guardarlo en DB
+        $cita = factory('App\Models\Cita')->create();
 
         // http PUT request para actualizar datos de la cita creada
         $this->json('PUT', '/citas'.'/'.$cita->id, [
@@ -80,5 +80,16 @@ class CitasControllerTest extends TestCase {
         $cita = Cita::find($cita->id);
         $this->assertTrue($cita->idPaciente == $paciente->id);
         $this->assertTrue($cita->idUsuario == $user->id);
+    }
+
+    public function testBorrarCita() {
+        // Crear recurso de cita y guardarlo en DB
+        $cita = factory('App\Models\Cita')->create();
+        $id = $cita->id;
+        // Borrar cita de DB.
+        $cita->destroy();
+        $cita = Cita::find($id);
+
+        $this->assertTrue(!$cita);
     }
 }
