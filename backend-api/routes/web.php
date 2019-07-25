@@ -83,3 +83,4 @@ $router->get('/get_nombre_paciente', 'MenuPrincipalController@paciente_get_nombr
 $router->get('/citas', 'CitasController@getCitas');
 $router->post('/citas', 'CitasController@store');
 $router->put('/citas/{id}', 'CitasController@update');
+$router->delete('/citas/{id}', 'CitasController@destroy');

@@ -130,7 +130,7 @@ class CitasController extends Controller {
             ], 404);
         }
 
-        $cita->destroy();
+        Cita::destroy($id);
 
         return response()->json([
             'success' => true,

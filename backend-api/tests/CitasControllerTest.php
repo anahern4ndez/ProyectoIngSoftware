@@ -70,7 +70,7 @@ class CitasControllerTest extends TestCase {
         $cita = factory('App\Models\Cita')->create();
 
         // http PUT request para actualizar datos de la cita creada
-        $this->json('PUT', '/citas'.'/'.$cita->id, [
+        $this->json('PUT', '/citas/'.$cita->id, [
             'idPaciente' => $paciente->id,
             'idUsuario' => $user->id,
             'fecha' => $faker->date(),
@@ -91,11 +91,15 @@ class CitasControllerTest extends TestCase {
         factory('App\codigo_citas')->create();
         // Crear recurso de cita y guardarlo en DB
         $cita = factory('App\Models\Cita')->create();
-        $id = $cita->id;
-        // Borrar cita de DB.
-        Cita::destroy($id);
-        $cita = Cita::find($id);
 
-        $this->assertTrue(!$cita);
+        // http request para borrar cita
+        $this->json('DELETE', '/citas/'.$cita->id)
+            ->seeJson([
+                'success' => true
+            ]);
+        
+        // verificar que cita no exista.
+        $cita = Cita::find($cita->id);
+        $this->assertNull($cita);
     }
 }
