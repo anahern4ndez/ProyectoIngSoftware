@@ -119,8 +119,6 @@
                             label="Edad"
                             :disabled="true"
                             outline
-                            required
-                            :rules="nombreRules"
                         ></v-text-field>
                     
                     <div style="float:left; margin-right:5%; width:45%">
@@ -355,24 +353,24 @@ export default {
 
           this.$http.post('http://localhost:8000/PacienteController/insert', info).then(response => {
             this.error = false;
-            this.CUI=''; 
-            this.Nombre='';
-            this.Apellido='';
-            this.Fecha_de_nacimiento='';
+            this.CUI=' '; 
+            this.Nombre=' ';
+            this.Apellido=' ';
+            this.Fecha_de_nacimiento=' ';
             this.ProcedenciaTxt=' ';
-            this.Nombre_de_padre='';
-            this.Nombre_de_madre='';
-            this.Telefono='';
+            this.Nombre_de_padre=' ';
+            this.Nombre_de_madre=' ';
+            this.Telefono=' ';
             this.Edad= ' ';
             this.Historia=' ';
             this.Dx_Definitivo=' ';
             this.Dx_Asociados=' ';
-            this.Percentil='';
-            this.Talla='';
-            this.Peso='';
-            this.cms_perc='';
-            this.kg_perc='';
-            this.PA=''
+            this.Percentil=' ';
+            this.Talla=' ';
+            this.Peso=' ';
+            this.cms_perc=' ';
+            this.kg_perc=' ';
+            this.PA=' '
           }).
           catch(error => {
               this.error = true;

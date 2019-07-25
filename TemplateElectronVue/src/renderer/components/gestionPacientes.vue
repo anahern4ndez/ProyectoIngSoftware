@@ -156,13 +156,13 @@
         <router-link :to="{name: 'EditarPaciente', params: { cui: this.selectedPatients.CUI }}" class="btn btn-lg btn-warning btn-block">Editar datos de paciente seleccionado</router-link>
       </div>
       <div id="boton">
-        <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="archivos"> Archivos </button>
+        <button type="button" class="btn btn-lg btn-warning btn-block"> Archivos </button>
       </div>
       <div id="boton">
         <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="reportes"> Reporte</button>
       </div>
       <div id="boton">
-        <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="estadisticas"> Estadísticas </button>
+        <button type="button" class="btn btn-lg btn-warning btn-block"> Estadísticas </button>
       </div>
     </div>
   </div>
@@ -280,7 +280,7 @@ export default {
           this.$router.push('/IngresarPaciente');
         },
         reportes(){
-          this.$router.push('/EditarPaciente');
+          this.$router.push('/gestionarPaciente');
         },
         estadisticas(){
           this.$router.push('/EditarPaciente');
