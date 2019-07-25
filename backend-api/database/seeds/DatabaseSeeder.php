@@ -3,8 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\User;
 
-class DatabaseSeeder extends Seeder
-{
+class DatabaseSeeder extends Seeder {
     /**
      * Run the database seeds.
      *
@@ -19,7 +18,8 @@ class DatabaseSeeder extends Seeder
             SCPTableSeeder::class,
             CodigoVacunaTableSeeder::class,
             TipoDeRespuestaTableSeeder::class,
-            EstadosTableSeeder::class
+            EstadosTableSeeder::class,
+            UsuariosSeeder::class,
         ]);
         
     }

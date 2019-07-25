@@ -60,7 +60,6 @@ class CitasControllerTest extends TestCase {
 
         // crear usuario fake
         $user = factory('App\User')->create();
-        echo($user->id);
         
         // crear paciente fake
         $paciente = factory('App\Models\Paciente')->create();
