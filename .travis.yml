@@ -6,6 +6,9 @@ php:
 addons:
   postgresql: "11.4"
 
+services:
+  - postgresql
+
 before_install:
   - composer self-update
   - cp .env.travis .env
@@ -21,6 +24,3 @@ script:
 
 after_script:
 - php vendor/bin/coveralls -v
-
-services:
- - postgresql
