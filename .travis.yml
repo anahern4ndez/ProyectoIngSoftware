@@ -11,12 +11,12 @@ services:
 
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
-  - cd backend-api
+  - cd backend-api/
   - composer self-update
   - composer install --no-interaction
   - cp .env.travis .env
-  - cp .env.travis .env.testing
   - php artisan migrate --force
+  - php artisan db:seed
 
 script:
   - vendor/bin/phpunit
