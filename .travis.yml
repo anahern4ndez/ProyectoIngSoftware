@@ -12,6 +12,7 @@ services:
 before_install:
   - composer self-update
   - cp .env.travis .env
+  - initdb
   - psql -c 'create database fundanier;' -U postgres
 
 install:
