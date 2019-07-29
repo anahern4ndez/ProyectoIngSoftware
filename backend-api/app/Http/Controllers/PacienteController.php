@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Paciente;
+use DB;
 
 class PacienteController extends Controller
 {
@@ -61,6 +62,16 @@ class PacienteController extends Controller
         $cuir = $request->CUI;
         $paciente = Paciente::where('CUI', $cuir)->with('Procedencia', 'sexo_rel','Sindrome_Clinico_Presentacion', 'Tipo_de_Sangre', 'EstadoActual', 'Estudia', 'Transfusiones')->get();
         //$val = Paciente::find('3006266730101');
+        return response()->json([
+            'success' => true,
+            'Paciente' => $paciente
+        ], 200);
+    }
+
+    function findById(Request $request){
+        (int)$id = $request->ID;
+        $paciente =  Paciente::where('id', $id)->with('Procedencia', 'sexo_rel','Sindrome_Clinico_Presentacion', 'Tipo_de_Sangre', 'EstadoActual', 'Estudia', 'Transfusiones')->get();
+
         return response()->json([
             'success' => true,
             'Paciente' => $paciente

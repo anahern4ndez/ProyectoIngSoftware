@@ -25,7 +25,7 @@
                                                     <h3 style="font-weight: bold;">Paciente:</h3>  
                                                 </b-col>
                                                 <b-col>
-                                                    <h3>{{paciente}}</h3> 
+                                                    <h3>{{this.paciente.nombre}} {{this.paciente.apellido}}</h3> 
                                                 </b-col>
                                             </b-row>
                                             <b-row>
@@ -70,73 +70,82 @@
                                     <b-row>
                                         <b-col>
                                         <v-text-field
-                                            v-model="Nombre_de_padre"
+                                            v-model="paciente.Nombre_de_padre"
                                             label="Nombre del padre"
                                             outline
+                                            :disabled="true"
                                         ></v-text-field> 
                                         </b-col>
                                         <b-col>
                                         <v-text-field
-                                            v-model="Nombre_de_madre"
+                                            v-model="paciente.Nombre_de_madre"
                                             label="Nombre de la madre"
                                             outline
+                                            :disabled="true"
                                         ></v-text-field> 
                                         </b-col>
                                     </b-row>
                                     <b-row>
                                         <b-col>
                                         <v-text-field
-                                            v-model="Procedencia"
+                                            v-model="paciente.Procedencia"
                                             label="Procedencia"
                                             outline
+                                            :disabled="true"
                                         ></v-text-field> 
                                         </b-col>
                                         <b-col>
                                         <v-text-field
-                                            v-model="Telefono"
+                                            v-model="paciente.Telefono"
                                             label="Télefono"
                                             outline
+                                            :disabled="true"
                                         ></v-text-field> 
                                         </b-col>
                                     </b-row>
                                     <b-row>
                                         <b-col>
                                         <v-text-field
-                                            v-model="Grupo_De_Sangre"
+                                            v-model="paciente.Grupo_De_Sangre"
                                             label="Grupo de sangre"
                                             outline
+                                            :disabled="true"
                                         ></v-text-field>
                                         </b-col>
                                         <b-col>
                                         <v-text-field
-                                            v-model="Estudia"
+                                            v-model="paciente.Estudia"
                                             label="Estudia"
                                             outline
+                                            :disabled="true"
                                         ></v-text-field>
                                         </b-col>
                                     </b-row>
                                     <b-row class="justify-content-md-center">
                                         <b-col>
                                         <v-text-field
-                                            v-model="Transfuciones"
-                                            label="Transfuciones"
+                                            v-model="paciente.Transfusiones"
+                                            label="Transfusiones"
                                             outline
+                                            :disabled="true"
                                         ></v-text-field>
                                         </b-col>
                                     </b-row>
                                     <b-row class="justify-content-md-center">
                                         <b-col>
                                         <v-text-field
-                                            v-model="Peso"
+                                            v-model="paciente.Peso"
                                             label="Peso"
                                             outline
+                                            :disabled="true"
                                         ></v-text-field>
                                         </b-col>
                                         <b-col>
                                         <v-text-field
-                                            v-model="kg_perc"
+                                            v-model="paciente.kg_perc"
                                             label="Kg. Percentil"
                                             outline
+                                            :disabled="true"
                                         ></v-text-field>
                                         </b-col>
                                         
@@ -144,16 +153,18 @@
                                     <b-row class="justify-content-md-center">
                                         <b-col>
                                         <v-text-field
-                                            v-model="Talla"
+                                            v-model="paciente.Talla"
                                             label="Talla"
                                             outline
+                                            :disabled="true"
                                         ></v-text-field>
                                         </b-col>
                                         <b-col>
                                         <v-text-field
-                                            v-model="cms_perc"
+                                            v-model="paciente.cms_perc"
                                             label="Cms. Percentil"
                                             outline
+                                            :disabled="true"
                                     ></v-text-field>
                                     </b-col>
                                 
@@ -161,16 +172,18 @@
                                     <b-row class="justify-content-md-center">
                                         <b-col>
                                         <v-text-field
-                                            v-model="PA"
+                                            v-model="paciente.PA"
                                             label="P/A"
                                             outline
+                                            :disabled="true"
                                         ></v-text-field>
                                         </b-col>
                                         <b-col>
                                         <v-text-field
-                                            v-model="Percentil"
+                                            v-model="paciente.Percentil"
                                             label="Percentil"
                                             outline
+                                            :disabled="true"
                                         ></v-text-field>
                                         </b-col>
                                     </b-row>
@@ -1779,28 +1792,34 @@
 </template>
 
 <script>
+import { store } from '../main';
 export default {
     data: () => ({
         fisico: ["Peso", "Talla", "IMC"],
         vital: ["Presión arterial", "Pulso cardíaco"],
         tiempo: ["1 mes", "2 meses", "6 meses", "1 año"],
 
-        paciente: "Juan Garcia",
+        paciente: {
+            nombre: '',
+            apellido: '',
+            Nombre_de_padre: "",
+            Nombre_de_madre: "",
+            Procedencia: "",
+            Telefono: "",
+            Grupo_De_Sangre: "",
+            Estudia: "",
+            Transfusiones: "",
+            Peso: "",
+            kg_perc: "",
+            Talla: "",
+            cms_perc: "",
+            PA: "",
+            Percentil: ""
+        },
+        //paciente: "Juan Garcia",
         //Variables para inputs
         comentario: "",
-        Nombre_de_padre: "",
-        Nombre_de_madre: "",
-        Procedencia: "",
-        Telefono: "",
-        Grupo_De_Sangre: "",
-        Estudia: "",
-        Transfuciones: "",
-        Peso: "",
-        kg_perc: "",
-        Talla: "",
-        cms_perc: "",
-        PA: "",
-        Percentil: "",
+        
         
         bcg1: false,
         bcg2: false,
@@ -1952,9 +1971,50 @@ export default {
         Plan_Psicosocial: "",
         Plan_Nutricional: "",
         Plan_Farmacologico: "",
+
+        datos: [],
     }),
     mounted() {
-        
+        console.log("Id de paciente es: " + store.idPaciente);
+
+        const data = {
+            ID: store.idPaciente // Aqui va el ID del paciente
+        };
+
+        this.$http.post(`http://localhost:8000/PacienteController/findById`, data).then(response => {
+            console.log("Sali exitoso: " + response.data.Paciente[0]);
+            
+
+            if(response.data.Paciente[0] == null){
+                console.log('Nothing to do here..');
+            }else{
+                console.log("Dentro de if");
+                this.paciente.nombre = response.data.Paciente[0].Nombre;
+                this.paciente.apellido = response.data.Paciente[0].Apellido;
+                this.paciente.Nombre_de_padre = response.data.Paciente[0].Nombre_de_padre;
+                this.paciente.Nombre_de_madre = response.data.Paciente[0].Nombre_de_madre;
+                this.paciente.Procedencia = response.data.Paciente[0].procedencia.Departamento;
+                this.paciente.Telefono = response.data.Paciente[0].Telefono;
+                this.paciente.Grupo_De_Sangre = response.data.Paciente[0].tipo_de__sangre.significado;
+                this.paciente.Estudia = response.data.Paciente[0].estudia.significado;
+                this.paciente.Transfusiones = response.data.Paciente[0].transfusiones.significado;
+                this.paciente.Peso = response.data.Paciente[0].Peso;
+                this.paciente.kg_perc = response.data.Paciente[0].Kg_perc;
+                this.paciente.Talla = response.data.Paciente[0].Talla;
+                this.paciente.cms_perc = response.data.Paciente[0].Cms_perc;
+                this.paciente.PA = response.data.Paciente[0].PA;
+                this.paciente.Percentil = response.data.Paciente[0].Percentil;
+            }
+            //this.Nombre_de_padre = response.data.Paciente[0].Nombre_de_padre;
+            //this.Nombre_de_madre = response.data.Paciente[0].Nombre_de_madre;
+            //this.Procedencia = response.data.Paciente[0].Procedencia; // Obtener pais y dep
+            //this.Telefono = response.data.Paciente[0].Telefono;
+            //this.Grupo_De_Sangre = response.data.Paciente[0].Tipo_de_Sangre;
+            //this.Estudia = response.data.Paciente[0].Estudia; // Tabla no modelada
+            
+
+        });
+
     },
     methods: {
         guardar() {
