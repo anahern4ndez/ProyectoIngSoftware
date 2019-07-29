@@ -215,8 +215,8 @@ export default {
     },
     darConsulta(id) {
       if(!this.switch1)
-      {
-        console.log(id);
+      { 
+        store.idPaciente = id;
         this.$router.push("/gestionarPaciente");
       }
       
@@ -258,7 +258,7 @@ export default {
               time: cita["hora"],
               idPaciente: cita["idPaciente"],
               idUsuario: cita["idUsuario"],
-              duration: 150
+              duration: 35
             };
 
             this.events.push(citaN);
