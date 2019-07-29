@@ -11,13 +11,13 @@ services:
 
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
+  - psql -c 'SET session_replication_role = 'replica';'
+  - cd backend-api/
   - composer self-update
   - composer install --no-interaction
   - cp .env.travis .env
-  - cp .env.travis .env.testing
   - php artisan migrate --force
-  - npm install
-  - npm run test
+  - php artisan db:seed
 
 script:
   - vendor/bin/phpunit
