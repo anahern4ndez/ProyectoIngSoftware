@@ -260,23 +260,16 @@ export default {
       alert("details");
     },
     createAppointment() {
-      this.$http.post("http://localhost:8000/citas").then(response => {
-        //this.dummyPatients = response.data.Pacientes.map(i => i.Nombre);
-        if (response.data.success) {
-          this.dialogOpen = false;
-          this.events.push({
-            title: `Doctor: ${this.selectedDoctor}`,
-            details: `Paciente: ${this.selectedPatient}`,
-            date: this.selectedDate,
-            time: this.selectedTime,
-            duration: this.selectedDuration
-          });
-          this.selectedDoctor = "";
-          this.selectedPatient = "";
-        } else {
-          console.log(response.data);
-        }
+      this.dialogOpen = false;
+      this.events.push({
+        title: `Doctor: ${this.selectedDoctor}`,
+        details: `Paciente: ${this.selectedPatient}`,
+        date: this.selectedDate,
+        time: this.selectedTime,
+        duration: this.selectedDuration
       });
+      this.selectedDoctor = "";
+      this.selectedPatient = "";
     },
     dayClick(event) {
       if (this.calendarType === "month") {
