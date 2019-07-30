@@ -1,0 +1,22 @@
+os:
+  - linux
+
+language: php
+
+php:
+  - '7.1'
+
+services:
+  - postgresql
+
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
+  - cd backend-api/
+  - composer self-update
+  - composer install --no-interaction
+  - cp .env.travis .env
+  - php artisan migrate --force
+  - php artisan db:seed
+
+script:
+  - vendor/bin/phpunit
