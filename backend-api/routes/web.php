@@ -37,6 +37,7 @@ $router->get('/EstadoController/update', 'EstadoController@update');
 
 //CRUD: TABLA PACIENTES
 $router->get('/PacienteController/findOne', 'PacienteController@findOne');
+$router->post('/PacienteController/findById', 'PacienteController@findById');
 $router->get('/PacienteController/findAll', 'PacienteController@findAll');
 $router->post('/PacienteController/insert', 'PacienteController@store');
 $router->put('/PacienteController/update', 'PacienteController@update');
@@ -83,3 +84,4 @@ $router->get('/get_nombre_paciente', 'MenuPrincipalController@paciente_get_nombr
 $router->get('/citas', 'CitasController@getCitas');
 $router->post('/citas', 'CitasController@store');
 $router->put('/citas/{id}', 'CitasController@update');
+$router->delete('/citas/{id}', 'CitasController@destroy');
