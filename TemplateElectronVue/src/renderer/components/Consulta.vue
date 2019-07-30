@@ -42,7 +42,6 @@
                                             <v-textarea
                                                 v-model="comentario"
                                                 outline
-                                                label=""
                                                 rows=10
                                             ></v-textarea>
                                         </div>

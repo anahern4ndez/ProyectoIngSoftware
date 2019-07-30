@@ -17,9 +17,7 @@
                                                     <h3 style="font-weight: bold;">Paciente: </h3>  
                                                 </b-col>
                                                 <b-col>
-                                                    <h3>Juan García</h3> 
-                                                </b-col>
-                                                <b-col>
+                                                    <h3>{{paciente.nombre}} {{paciente.apellido}}</h3> 
                                                 </b-col>
                                             </b-row>
                                             <b-row>
@@ -32,57 +30,57 @@
                                             <b-row>
                                         <b-col>
                                         <v-text-field
-                                            v-model="Nombre_de_padre"
-                                                        label="Nombre del padre"
-                                                        outline
+                                            v-model="paciente.Nombre_de_padre"
+                                            label="Nombre del padre"
+                                            outline :disabled="true"
                                         ></v-text-field> 
                                         </b-col>
                                         <b-col>
                                         <v-text-field
-                                            v-model="Nombre_de_madre"
+                                            v-model="paciente.Nombre_de_madre"
                                             label="Nombre de la madre"
-                                            outline
+                                            outline :disabled="true"
                                         ></v-text-field> 
                                         </b-col>
                                     </b-row>
                                     <b-row>
                                         <b-col>
                                         <v-text-field
-                                            v-model="Procedencia"
+                                            v-model="paciente.Procedencia"
                                             label="Procedencia"
-                                            outline
+                                            outline :disabled="true"
                                         ></v-text-field> 
                                         </b-col>
                                         <b-col>
                                         <v-text-field
-                                            v-model="Telefono"
+                                            v-model="paciente.Telefono"
                                             label="Télefono"
-                                            outline
+                                            outline :disabled="true"
                                         ></v-text-field> 
                                         </b-col>
                                     </b-row>
                                     <b-row>
                                         <b-col>
                                         <v-text-field
-                                            v-model="Grupo_De_Sangre"
+                                            v-model="paciente.Grupo_De_Sangre"
                                             label="Grupo de sangre"
-                                            outline
+                                            outline :disabled="true"
                                         ></v-text-field>
                                         </b-col>
                                         <b-col>
                                         <v-text-field
-                                            v-model="Estudia"
+                                            v-model="paciente.Estudia"
                                             label="Estudia"
-                                            outline
+                                            outline :disabled="true"
                                         ></v-text-field>
                                         </b-col>
                                     </b-row>
                                     <b-row class="justify-content-md-center">
                                         <b-col>
                                         <v-text-field
-                                            v-model="Transfuciones"
+                                            v-model="paciente.Transfusiones"
                                             label="Transfuciones"
-                                            outline
+                                            outline :disabled="true"
                                         ></v-text-field>
                                         </b-col>
                                     </b-row>
@@ -211,7 +209,49 @@
     </form>
 </template>
 <script>
+import { store } from '../main';
+
 export default {
+    
+    data: () => ({
+        paciente: {
+            nombre: '',
+            apellido: '',
+            Nombre_de_padre: "",
+            Nombre_de_madre: "",
+            Procedencia: "",
+            Telefono: "",
+            Grupo_De_Sangre: "",
+            Estudia: "",
+            Transfusiones: ""
+        }
+    }),
+    mounted() {
+        const data = {
+            ID: store.idPaciente // Aqui va el ID del paciente
+        };
+
+        this.$http.post(`http://localhost:8000/PacienteController/findById`, data).then(response => {
+            console.log("Sali exitoso: " + response.data.Paciente[0]);
+            
+
+            if(response.data.Paciente[0] == null){
+                console.log('Nothing to do here..');
+            }else{
+                console.log("Dentro de if");
+                this.paciente.nombre = response.data.Paciente[0].Nombre;
+                this.paciente.apellido = response.data.Paciente[0].Apellido;
+                this.paciente.Nombre_de_padre = response.data.Paciente[0].Nombre_de_padre;
+                this.paciente.Nombre_de_madre = response.data.Paciente[0].Nombre_de_madre;
+                this.paciente.Procedencia = response.data.Paciente[0].procedencia.Departamento;
+                this.paciente.Telefono = response.data.Paciente[0].Telefono;
+                this.paciente.Grupo_De_Sangre = response.data.Paciente[0].tipo_de__sangre.significado;
+                this.paciente.Estudia = response.data.Paciente[0].estudia.significado;
+                this.paciente.Transfusiones = response.data.Paciente[0].transfusiones.significado;
+            }
+        });
+    }, 
+
   computed: {
     // convert the list of events into a map of lists keyed by date
     eventsMap() {
