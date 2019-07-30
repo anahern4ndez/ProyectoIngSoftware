@@ -172,6 +172,14 @@
                   <option value="Tipo de usuario">Tipo de usuario</option>
                 </b-form-select>
               </div>
+              <div>
+                <label for="levelInput">Foto de usuario</label>
+              <div>
+              
+              <v-button class="btn btn-lg btn-warning btn-block" id="botonimagen" @click="imgClick"> Seleccionar Imagen </v-button>
+              <input type="file" class="hide_file" style="height:auto; width:auto; visibility:hidden" v-on:change="changeImg" ref="changeImg"/>
+              </div>
+              </div>
             </form>
           </b-col>
         </b-row>
@@ -230,9 +238,9 @@ export default {
       errorEmailRepetido: false,
       user: [],
       headers: [
-        { text: "Nombre", align: "center", value: "Nombre" },
-        { text: "Correo", align: "center", value: "Correo" },
-        { text: "Puesto", align: "center", value: "PUESTO" }
+        { text: "Nombre", align: "center", value: "Nombre", sortable: false },
+        { text: "Correo", align: "center", value: "Correo", sortable: false },
+        { text: "Puesto", align: "center", value: "PUESTO", sortable: false }
       ]
     };
   },
@@ -426,7 +434,7 @@ export default {
       if (this.selected=="Visitante") {
         this.puesto=5;
       }
-      if(this.name != '' && this.id != '' && this.password != '' && this.email != '' && this.selected != null && this.password == this.passwordVerification){
+      if(this.name != '' && this.password != '' && this.email != '' && this.selected != null && this.password == this.passwordVerification){
         this.$http.post(`http://localhost:8000/users/create?name=${this.name}&email=${this.email}&password=${this.password}&puesto=${this.puesto}`).then(response=>{
           this.refreshUsers();
           this.name = '';
@@ -463,6 +471,37 @@ export default {
         });
       }
     },
+        imgClick: function(event){// on a click on the button with id 'one'
+          const btn = this.$refs.changeImg
+          btn.click();// trigger the click on second, and go on 
+        },
+        changeImg: function(event) {
+          //this.save();
+          var input = event.target;
+          if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            // definir accion a realizar despues que se haya seleccionado una imagen
+            reader.onload = (e) => {
+              // console.log(this.estadoNuevo);
+              // console.log(e.target.result);
+              this.imageData = e.target.result.data;
+              var data = {
+                // id: this.selectedPatients.CUI,
+                // estado: this.estadoNuevo.id,
+                id: 1,
+                estado: 1,                
+                img: this.imageData,
+              }
+              //guardar el cambio de imagen en db
+              // this.$http.put(`http://localhost:8000/PacienteController/update/`,data).then(response=>{
+              //   this.selectedPatients.EstadoActual = this.estadoNuevo.significado;
+              //   this.selectedPatients.Imagen = this.imageData;
+              // });
+            }
+            }
+            reader.readAsDataURL(input.files[0]);
+
+        },
     modificar(){
       this.errorName = false;
       this.errorEmail = false;
@@ -525,7 +564,7 @@ export default {
       if (this.selected=="Visitante") {
         this.puesto=5;
       }
-      if(this.name != '' && this.id != '' && this.password != '' && this.email != '' && this.selected != null && this.password == this.passwordVerification){
+      if(this.name != '' && this.password != '' && this.email != '' && this.selected != null && this.password == this.passwordVerification){
         this.$http.put(`http://localhost:8000/users/update?id=${this.id}&name=${this.name}&email=${this.email}&password=${this.password}&puesto=${this.puesto}`).then(response=>{
           this.refreshUsers();
           this.name = '';
