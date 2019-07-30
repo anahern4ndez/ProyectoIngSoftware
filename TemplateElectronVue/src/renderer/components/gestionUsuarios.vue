@@ -434,7 +434,7 @@ export default {
       if (this.selected=="Visitante") {
         this.puesto=5;
       }
-      if(this.name != '' && this.id != '' && this.password != '' && this.email != '' && this.selected != null && this.password == this.passwordVerification){
+      if(this.name != '' && this.password != '' && this.email != '' && this.selected != null && this.password == this.passwordVerification){
         this.$http.post(`http://localhost:8000/users/create?name=${this.name}&email=${this.email}&password=${this.password}&puesto=${this.puesto}`).then(response=>{
           this.refreshUsers();
           this.name = '';
@@ -564,7 +564,7 @@ export default {
       if (this.selected=="Visitante") {
         this.puesto=5;
       }
-      if(this.name != '' && this.id != '' && this.password != '' && this.email != '' && this.selected != null && this.password == this.passwordVerification){
+      if(this.name != '' && this.password != '' && this.email != '' && this.selected != null && this.password == this.passwordVerification){
         this.$http.put(`http://localhost:8000/users/update?id=${this.id}&name=${this.name}&email=${this.email}&password=${this.password}&puesto=${this.puesto}`).then(response=>{
           this.refreshUsers();
           this.name = '';
