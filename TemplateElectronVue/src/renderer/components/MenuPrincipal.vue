@@ -105,9 +105,16 @@
       </b-col>
 
       <b-col order="12" sm="2" align-v="left">
-          <!-- <v-switch v-model="switch1" label="Vista general" color="orange" v-on:click="vistaGeneral"></v-switch> -->
-          <v-btn outline color="#303841" v-on:click="vistaGeneral">Vista General</v-btn>
+          <div>
+              <v-switch
+                  v-model="switch1"
+                  :label="`Vista General`"
+                  color="#ffc107"
+              ></v-switch>
+            </div> 
       </b-col>
+
+      
 
 
       </b-row>
@@ -135,6 +142,12 @@ export default {
     switch1: false,
     colors: ["#FF9D14", "#BF760F", "#804F0A", "#402705", "#E68E12"]
   }),
+  watch: {
+      switch1(newValue){
+        //called whenever switch1 changes
+        this.vistaGeneral(newValue);
+      }
+    },
 
   computed: {
     // convert the list of events into a map of lists keyed by date
@@ -201,8 +214,12 @@ export default {
       this.$router.push("/gestionUsuarios");
     },
     darConsulta(id) {
-      console.log(id);
-      this.$router.push("/gestionarPaciente");
+      if(!this.switch1)
+      { 
+        store.idPaciente = id;
+        this.$router.push("/gestionarPaciente");
+      }
+      
     },
     datosGenerales() {
       this.$router.push("/Datos");
@@ -241,7 +258,7 @@ export default {
               time: cita["hora"],
               idPaciente: cita["idPaciente"],
               idUsuario: cita["idUsuario"],
-              duration: 150
+              duration: 35
             };
 
             this.events.push(citaN);
@@ -249,16 +266,17 @@ export default {
         });
     },
 
-    vistaGeneral() {
+    vistaGeneral(valor) {
       this.events = [];
-
-      if (this.switch1) this.get_citas(1);
+      
+      if (!valor) 
+      this.get_citas(1);      
       else this.get_citas(0);
 
-      if (!this.switch1) this.switch1 = true;
-      else this.switch1 = false;
 
-      console.log(this.switch1);
+      
+
+      
     },
 
     getMes(mes) {
