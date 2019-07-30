@@ -84,8 +84,7 @@ class ExampleController extends Controller
     public function update(Request $request)
     {
         $this->validate($request, [
-
-            
+            'id' => 'min:12|max:12',
             'email' => 'email',
             'password' => 'min:6|max:255'
         ]);
