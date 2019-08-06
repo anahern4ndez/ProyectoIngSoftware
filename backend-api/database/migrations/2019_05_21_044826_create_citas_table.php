@@ -29,8 +29,8 @@ class CreateCitasTable extends Migration
             $table->time('hora');
             $table->integer('estado');
             $table->foreign('estado')
-            ->references('id')
-            ->on('codigocitas');
+            ->references('ID')
+            ->on('estados');
         });
     }
 

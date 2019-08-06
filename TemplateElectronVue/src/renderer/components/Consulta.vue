@@ -133,18 +133,16 @@
                                     <b-row class="justify-content-md-center">
                                         <b-col>
                                         <v-text-field
-                                            v-model="paciente.Peso"
+                                            v-model="datos_generales.Peso"
                                             label="Peso"
                                             outline
-                                            :disabled="true"
                                         ></v-text-field>
                                         </b-col>
                                         <b-col>
                                         <v-text-field
-                                            v-model="paciente.kg_perc"
+                                            v-model="datos_generales.kg_perc"
                                             label="Kg. Percentil"
                                             outline
-                                            :disabled="true"
                                         ></v-text-field>
                                         </b-col>
                                         
@@ -152,18 +150,16 @@
                                     <b-row class="justify-content-md-center">
                                         <b-col>
                                         <v-text-field
-                                            v-model="paciente.Talla"
+                                            v-model="datos_generales.Talla"
                                             label="Talla"
                                             outline
-                                            :disabled="true"
                                         ></v-text-field>
                                         </b-col>
                                         <b-col>
                                         <v-text-field
-                                            v-model="paciente.cms_perc"
+                                            v-model="datos_generales.cms_perc"
                                             label="Cms. Percentil"
                                             outline
-                                            :disabled="true"
                                     ></v-text-field>
                                     </b-col>
                                 
@@ -171,18 +167,16 @@
                                     <b-row class="justify-content-md-center">
                                         <b-col>
                                         <v-text-field
-                                            v-model="paciente.PA"
+                                            v-model="datos_generales.PA"
                                             label="P/A"
                                             outline
-                                            :disabled="true"
                                         ></v-text-field>
                                         </b-col>
                                         <b-col>
                                         <v-text-field
-                                            v-model="paciente.Percentil"
+                                            v-model="datos_generales.Percentil"
                                             label="Percentil"
                                             outline
-                                            :disabled="true"
                                         ></v-text-field>
                                         </b-col>
                                     </b-row>
@@ -200,10 +194,10 @@
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">BCG</th>
-                                                <td><v-layout><v-checkbox v-model="bcg1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="bcg2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="bcg3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="bcgRef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="bcg" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="bcg" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="bcg" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox v-model="bcg" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Poliovirus</th>
@@ -1888,7 +1882,10 @@ export default {
             Telefono: "",
             Grupo_De_Sangre: "",
             Estudia: "",
-            Transfusiones: "",
+            Transfusiones: ""
+        },
+
+        datos_generales: {
             Peso: "",
             kg_perc: "",
             Talla: "",
@@ -1896,11 +1893,12 @@ export default {
             PA: "",
             Percentil: ""
         },
+
         //paciente: "Juan Garcia",
         //Variables para inputs
         comentario: "",
         
-        
+        bcg: 0,
         bcg1: false,
         bcg2: false,
         bcg3: false,
@@ -2078,19 +2076,7 @@ export default {
                 this.paciente.Grupo_De_Sangre = response.data.Paciente[0].tipo_de__sangre.significado;
                 this.paciente.Estudia = response.data.Paciente[0].estudia.significado;
                 this.paciente.Transfusiones = response.data.Paciente[0].transfusiones.significado;
-                this.paciente.Peso = response.data.Paciente[0].Peso;
-                this.paciente.kg_perc = response.data.Paciente[0].Kg_perc;
-                this.paciente.Talla = response.data.Paciente[0].Talla;
-                this.paciente.cms_perc = response.data.Paciente[0].Cms_perc;
-                this.paciente.PA = response.data.Paciente[0].PA;
-                this.paciente.Percentil = response.data.Paciente[0].Percentil;
             }
-            //this.Nombre_de_padre = response.data.Paciente[0].Nombre_de_padre;
-            //this.Nombre_de_madre = response.data.Paciente[0].Nombre_de_madre;
-            //this.Procedencia = response.data.Paciente[0].Procedencia; // Obtener pais y dep
-            //this.Telefono = response.data.Paciente[0].Telefono;
-            //this.Grupo_De_Sangre = response.data.Paciente[0].Tipo_de_Sangre;
-            //this.Estudia = response.data.Paciente[0].Estudia; // Tabla no modelada
             
 
         });
@@ -2098,7 +2084,7 @@ export default {
     },
     methods: {
         guardar() {
-            console.log("aaa");
+            console.log(this.bcg);
         }
         
     }
