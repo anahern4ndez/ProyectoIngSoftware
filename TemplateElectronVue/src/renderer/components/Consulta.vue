@@ -200,59 +200,59 @@
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">BCG</th>
-                                                <td><v-layout><v-checkbox v-model="bcg1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="bcg2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="bcg3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="bcgRef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="bcg1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="bcg2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="bcg3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="bcgRef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Poliovirus</th>
-                                                <td><v-layout><v-checkbox v-model="poliovirus1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="poliovirus2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="poliovirus3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="poliovirusRef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="poliovirus1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="poliovirus2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="poliovirus3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="poliovirusRef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Hepatitis A</th>
-                                                <td><v-layout><v-checkbox v-model="hepatitisA1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="hepatitisA2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="hepatitisA3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="hepatitisARef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="hepatitisA1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="hepatitisA2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="hepatitisA3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="hepatitisARef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Hepatitis B</th>
-                                                <td><v-layout><v-checkbox v-model="hepatitisB1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="hepatitisB2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="hepatitisB3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="hepatitisBRef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="hepatitisB1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="hepatitisB2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="hepatitisB3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="hepatitisBRef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Neumococo</th>
-                                                <td><v-layout><v-checkbox v-model="neumococo1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="neumococo2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="neumococo3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="neumococoRef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="neumococo1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="neumococo2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="neumococo3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="neumococoRef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Influenza</th>
-                                                <td><v-layout><v-checkbox v-model="influeza1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="influeza2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="influeza3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="influezaRef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="influeza1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="influeza2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="influeza3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="influezaRef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Diftteria/Tétano/Tosferina(DPT)</th>
-                                                <td><v-layout><v-checkbox v-model="DPT1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="DPT2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="DPT3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="DPTRef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="DPT1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="DPT2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="DPT3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="DPTRef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Sarampión/Paperas/RUbeola(SPR)</th>
-                                                <td><v-layout><v-checkbox v-model="SPR1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="SPR2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="SPR3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="SPRRef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="SPR1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="SPR2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="SPR3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="SPRRef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
 
                                         </tbody>
@@ -275,16 +275,16 @@
                                             <v-layout align-center justify-end />
                                                 <h3 id="headers"  class="text-xs-center">Síndrome Clínico de Presentación</h3>              
                                                 <v-container fluid >
-                                                    <v-checkbox class="my-0 py-0" v-model="Sindrome_Clinico_Presentacion" label="Sx. Nefrítico" value="1"></v-checkbox>
-                                                    <v-checkbox class="my-0 py-0" v-model="Sindrome_Clinico_Presentacion" label="Sx. Nefrotico" value="2"></v-checkbox>
-                                                    <v-checkbox class="my-0 py-0" v-model="Sindrome_Clinico_Presentacion" label="Anomalías Urinarias Asintomáticas" value="3"></v-checkbox>
-                                                    <v-checkbox class="my-0 py-0" v-model="Sindrome_Clinico_Presentacion" label="IRA" value="4"></v-checkbox>
-                                                    <v-checkbox class="my-0 py-0" v-model="Sindrome_Clinico_Presentacion" label="IRC" value="5"></v-checkbox>
-                                                    <v-checkbox class="my-0 py-0" v-model="Sindrome_Clinico_Presentacion" label="ITU" value="6"></v-checkbox>
-                                                    <v-checkbox class="my-0 py-0" v-model="Sindrome_Clinico_Presentacion" label="Uropatía Obstructiva" value="7"></v-checkbox>
-                                                    <v-checkbox class="my-0 py-0" v-model="Sindrome_Clinico_Presentacion" label="Tubulopatía" value="8"></v-checkbox>
-                                                    <v-checkbox class="my-0 py-0" v-model="Sindrome_Clinico_Presentacion" label="HTA" value="9"></v-checkbox>
-                                                    <v-checkbox class="my-0 py-0" v-model="Sindrome_Clinico_Presentacion" label="Nefrolitiasis" value="10"></v-checkbox>
+                                                    <v-checkbox class="my-0 py-0" color="green" v-model="Sindrome_Clinico_Presentacion" label="Sx. Nefrítico" value="1"></v-checkbox>
+                                                    <v-checkbox class="my-0 py-0" color="green" v-model="Sindrome_Clinico_Presentacion" label="Sx. Nefrotico" value="2"></v-checkbox>
+                                                    <v-checkbox class="my-0 py-0" color="green" v-model="Sindrome_Clinico_Presentacion" label="Anomalías Urinarias Asintomáticas" value="3"></v-checkbox>
+                                                    <v-checkbox class="my-0 py-0" color="green" v-model="Sindrome_Clinico_Presentacion" label="IRA" value="4"></v-checkbox>
+                                                    <v-checkbox class="my-0 py-0" color="green" v-model="Sindrome_Clinico_Presentacion" label="IRC" value="5"></v-checkbox>
+                                                    <v-checkbox class="my-0 py-0" color="green" v-model="Sindrome_Clinico_Presentacion" label="ITU" value="6"></v-checkbox>
+                                                    <v-checkbox class="my-0 py-0" color="green" v-model="Sindrome_Clinico_Presentacion" label="Uropatía Obstructiva" value="7"></v-checkbox>
+                                                    <v-checkbox class="my-0 py-0" color="green" v-model="Sindrome_Clinico_Presentacion" label="Tubulopatía" value="8"></v-checkbox>
+                                                    <v-checkbox class="my-0 py-0" color="green" v-model="Sindrome_Clinico_Presentacion" label="HTA" value="9"></v-checkbox>
+                                                    <v-checkbox class="my-0 py-0" color="green" v-model="Sindrome_Clinico_Presentacion" label="Nefrolitiasis" value="10"></v-checkbox>
                                                 </v-container>
                                             </v-flex>
                                         </div>
@@ -350,323 +350,323 @@
                                             <b-container>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="Prednisona"></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="Prednisona" color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="Prednisona_Cantidad"
-                                                            label="Cantidad"
+                                                            label="mg"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="Prednisona_mg"
-                                                            label="mg"
+                                                            label="Frecuencia"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="cyac" label="Cyac"></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="cyac" label="Cyac" color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="Cyac_Cantidad"
-                                                            label="Cantidad"
+                                                            label="mg"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="Cyac_mg"
-                                                            label="mg"
+                                                            label="Frecuencia"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Tac" label="Tac"></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Tac" label="Tac" color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="Tac_Cantidad"
-                                                            label="Cantidad"
+                                                            label="mg"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="Tac_mg"
-                                                            label="mg"
+                                                            label="Frecuencia"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="MMF" label="MMF"></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="MMF" label="MMF" color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="MMF_Cantidad"
-                                                            label="Cantidad"
+                                                            label="mg"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="MMF_mg"
-                                                            label="mg"
+                                                            label="Frecuencia"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="AZA" label="AZA" ></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="AZA" label="AZA" color="green" ></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="AZA_Cantidad"
-                                                            label="Cantidad"
+                                                            label="mg"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="AZA_mg"
-                                                            label="mg"
+                                                            label="Frecuencia"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="CFM" label="CFM" ></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="CFM" label="CFM" color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="CFM_Cantidad"
-                                                            label="Cantidad"
+                                                            label="mg"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="CFM_mg"
-                                                            label="mg"
+                                                            label="Frecuencia"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Enalapril" label="Enalapril" ></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Enalapril" label="Enalapril" color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="Enalapril_Cantidad"
-                                                            label="Cantidad"
+                                                            label="mg"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="Enalapril_mg"
-                                                            label="mg"
+                                                            label="Frecuencia"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Losartan" label="Losartan" ></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Losartan" label="Losartan" color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="Losartan_Cantidad"
-                                                            label="Cantidad"
+                                                            label="mg"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="Losartan_mg"
-                                                            label="mg"
+                                                            label="Frecuencia"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Amlodipina" label="Amlodipina" ></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Amlodipina" label="Amlodipina" color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="Amlodipina_Cantidad"
-                                                            label="Cantidad"
+                                                            label="mg"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="Amlodipina_mg"
-                                                            label="mg"
+                                                            label="Frecuencia"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="CitratoNa" label="Citrato Na" ></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="CitratoNa" label="Citrato Na" color="green" ></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="Citrato_Na_Cantidad"
-                                                            label="Cantidad"
+                                                            label="mili-equi"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="Citrato_Na_mg"
-                                                            label="mg"
+                                                            label="Frecuencia"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="CitratoK" label="Citrato K" ></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="CitratoK" label="Citrato K" color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="Citrato_K_Cantidad"
-                                                            label="Cantidad"
+                                                            label="mili equiva."
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="Citrato_K_mg"
-                                                            label="mg"
+                                                            label="Frecuencia"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Furosemida" label="Furosemida" ></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Furosemida" label="Furosemida" color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="Furosemida_Cantidad"
-                                                            label="Cantidad"
+                                                            label="mg"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="Furosemida_mg"
-                                                            label="mg"
+                                                            label="Frecuencia"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Alfacalcidol" label="Alfacalcidol" ></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Alfacalcidol" label="Alfacalcidol" color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="Alfacalcidol_Cantidad"
-                                                            label="Cantidad"
+                                                            label="micro gr"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="Alfacalcidol_mg"
-                                                            label="mg"
+                                                            label="Frecuencia"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="CaCO3" label="CaCO3" ></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="CaCO3" label="CaCO3" color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="CaCO3_Cantidad"
-                                                            label="Cantidad"
+                                                            label="mg"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="CaCO3_mg"
-                                                            label="mg"
+                                                            label="Frecuencia"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="EPO" label="EPO" ></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="EPO" label="EPO"  color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="EPO_Cantidad"
-                                                            label="Cantidad"
+                                                            label="unidades"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="EPO_mg"
-                                                            label="mg"
+                                                            label="Frecuencia"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Fe" label="Fe" ></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Fe" label="Fe" color="green" ></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="Fe_Cantidad"
-                                                            label="Cantidad"
+                                                            label="mg"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="Fe_mg"
-                                                            label="mg"
+                                                            label="Frecuencia"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Cefradoxilo" label="Cefadroxilo" ></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Cefradoxilo"  color="green" label="Cefadroxilo" ></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="Cefradoxilo_Cantidad"
-                                                            label="Cantidad"
+                                                            label="mg"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="Cefradoxilo_mg"
-                                                            label="mg"
+                                                            label="Frecuencia"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -911,42 +911,42 @@
                             </tr>
                             <tr>
                                 <th scope="row" style="width: 10%">Corazón</th>
-                                <td style="width: 5%"><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 my-0 ml-3 "></v-checkbox></v-layout></td>
+                                <td style="width: 5%"><v-layout><v-checkbox v-model="corazon" hide-details color=green class="shrink py-0 my-0 ml-3 "></v-checkbox></v-layout></td>
                                 <td contenteditable='true' style="text-align: left;"></td>
                             </tr>
                             <tr>
                             <th scope="row" style="width: 10%">Pulmones</th>
-                            <td style="width: 5%"><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 my-0 ml-3 "></v-checkbox></v-layout></td>
+                            <td style="width: 5%"><v-layout><v-checkbox v-model="pulmones" hide-details color=green class="shrink py-0 my-0 ml-3 "></v-checkbox></v-layout></td>
                             <td contenteditable='true' style="text-align: left;"></td>
                             </tr>
                             <tr>
                             <th scope="row" style="width: 10%">Abdomen</th>
-                            <td style="width: 5%"><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 my-0 ml-3 "></v-checkbox></v-layout></td>
+                            <td style="width: 5%"><v-layout><v-checkbox v-model="abdomen" hide-details color=green class="shrink py-0 my-0 ml-3 "></v-checkbox></v-layout></td>
                             <td contenteditable='true' style="text-align: left;"></td>
                             </tr>
                             <tr>
                             <th scope="row" style="width: 10%">Genitales</th>
-                            <td style="width: 5%"><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 my-0 ml-3 "></v-checkbox></v-layout></td>
+                            <td style="width: 5%"><v-layout><v-checkbox v-model="genitales" hide-details color=green class="shrink py-0 my-0 ml-3 "></v-checkbox></v-layout></td>
                             <td contenteditable='true' style="text-align: left;">Taner</td>
                             </tr>
                             <tr>
                             <th scope="row" style="width: 10%">Extremidades</th>
-                            <td style="width: 5%"><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 my-0 ml-3 "></v-checkbox></v-layout></td>
+                            <td style="width: 5%"><v-layout><v-checkbox v-model="extremidades" hide-details color=green class="shrink py-0 my-0 ml-3 "></v-checkbox></v-layout></td>
                             <td contenteditable='true' style="text-align: left;"></td>
                             </tr>
                             <tr>
                             <th scope="row" style="width: 10%">Piel</th>
-                            <td style="width: 5%"><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 my-0 ml-3 "></v-checkbox></v-layout></td>
+                            <td style="width: 5%"><v-layout><v-checkbox v-model="piel" hide-details color=green class="shrink py-0 my-0 ml-3 "></v-checkbox></v-layout></td>
                             <td contenteditable='true' style="text-align: left;"></td>
                             </tr>
                             <tr>
                             <th scope="row" style="width: 10%">SN</th>
-                            <td style="width: 5%"><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 my-0 ml-3 "></v-checkbox></v-layout></td>
+                            <td style="width: 5%"><v-layout><v-checkbox v-model="sn" hide-details color=green class="shrink py-0 my-0 ml-3 "></v-checkbox></v-layout></td>
                             <td contenteditable='true' style="text-align: left;"></td>
                             </tr>
                             <tr>
                             <th scope="row" style="width: 10%">Otros</th>
-                            <td style="width: 5%"><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 my-0 ml-3 "></v-checkbox></v-layout></td>
+                            <td style="width: 5%"><v-layout><v-checkbox v-model="otros" hide-details color=green class="shrink py-0 my-0 ml-3 "></v-checkbox></v-layout></td>
                             <td contenteditable='true' style="text-align: left;"></td>
                             </tr>
                         </tbody>
@@ -954,114 +954,169 @@
                         
                         <!-- Textarea -->
                         <div class="form-group encapsulado">
-                            <!-- Textarea -->
-                            <div class="form-group">
-                            <v-layout align-center justify-end />
-                                <h3 id="headers"  class="text-xs-center">Evaluación Médica</h3>
-                            <v-textarea
-                                v-model="Evaluacion_Medica"
-                                outline
-                                name="Evaluacion_Medica"
-                                value=""
-                                rows=8
-                            ></v-textarea>
-                            </div>
-
+                             <b-container>
+                                <b-row>
+                                    <b-col>
+                                        <!-- Textarea -->
+                                        <div class="form-group">
+                                        <v-layout align-center justify-end />
+                                            <h3 id="headers"  class="text-xs-center">Evaluación Médica</h3>
+                                        <v-textarea
+                                            v-model="Evaluacion_Medica"
+                                            outline
+                                            name="Evaluacion_Medica"
+                                            value=""
+                                            rows=8
+                                        ></v-textarea>
+                                        </div>
+                                    </b-col>
+                                    <b-col>
                             <!-- Textarea -->                           
-                            <div class="form-group">
-                            <v-layout align-center justify-end />
-                                <h3 id="headers"  class="text-xs-center">Evaluación Psicosocial</h3>
-                            <v-textarea
-                                v-model="Evaluacion_Psicosocial"
-                                outline
-                                name="Evaluacion_Psicosocial"
-                                value=""
-                                rows=8
-                            ></v-textarea>
-                            </div>
+                                        <div class="form-group">
+                                        <v-layout align-center justify-end />
+                                            <h3 id="headers"  class="text-xs-center">Plan Médico</h3>
+                                        <v-textarea
+                                            v-model="Plan_Medico"
+                                            outline
+                                            name="Plan_Medico"
+                                            value=""
+                                            rows=8
+                                        ></v-textarea>
+                                        </div>
+                                    </b-col>
+                                </b-row>
+                            </b-container>
+                            <b-container>
+                                <b-row>
+                                    <b-col>
+                                        <!-- Textarea -->
+                                        <div class="form-group">
+                                        <v-layout align-center justify-end />
+                                            <h3 id="headers"  class="text-xs-center">Evaluación Psicológica</h3>
+                                        <v-textarea
+                                            v-model="Evaluacion_Psicologica"
+                                            outline
+                                            name="Evaluacion_Psicologica"
+                                            value=""
+                                            rows=8
+                                        ></v-textarea>
+                                        </div>
+                                    </b-col>
+                                    <b-col>
+                            <!-- Textarea -->                           
+                                        <div class="form-group">
+                                        <v-layout align-center justify-end />
+                                            <h3 id="headers"  class="text-xs-center">Plan Psicológico</h3>
+                                        <v-textarea
+                                            v-model="Plan_Psicologica"
+                                            outline
+                                            name="Plan_Psicologica"
+                                            value=""
+                                            rows=8
+                                        ></v-textarea>
+                                        </div>
+                                    </b-col>
+                                </b-row>
+                            </b-container>
 
-                           
-                           <!-- Textarea -->
-                            <div class="form-group">
-                            <v-layout align-center justify-end />
-                                <h3 id="headers"  class="text-xs-center">Evaluación Nutricional</h3>
-                            <v-textarea
-                                v-model="Evaluacion_Nutricional"
-                                outline
-                                name="Evaluacion_Nutricional"
-                                value=""
-                                rows=8
-                            ></v-textarea>
-                            </div>
+                            <b-container>
+                                <b-row>
+                                    <b-col>
+                                        <!-- Textarea -->
+                                        <div class="form-group">
+                                        <v-layout align-center justify-end />
+                                            <h3 id="headers"  class="text-xs-center">Evaluación de Trabajo Social</h3>
+                                        <v-textarea
+                                            v-model="Evaluacion_Trabajo_Social"
+                                            outline
+                                            name="Evaluacion_Trabajo_Social"
+                                            value=""
+                                            rows=8
+                                        ></v-textarea>
+                                        </div>
+                                    </b-col>
+                                    <b-col>
+                            <!-- Textarea -->                           
+                                        <div class="form-group">
+                                        <v-layout align-center justify-end />
+                                            <h3 id="headers"  class="text-xs-center">Plan de Trabajo Social</h3>
+                                        <v-textarea
+                                            v-model="Plan_Trabajo_Social"
+                                            outline
+                                            name="Plan_Trabajo_Social"
+                                            value=""
+                                            rows=8
+                                        ></v-textarea>
+                                        </div>
+                                    </b-col>
+                                </b-row>
+                            </b-container>
                             
-                            <!-- Textarea -->
-                            <div class="form-group">
-                            <v-layout align-center justify-end />
-                                <h3 id="headers"  class="text-xs-center">Evaluación Farmacológica</h3>
-                            <v-textarea
-                                v-model="Evaluacion_Farmacologica"
-                                outline
-                                name="Evaluacion_Farmacologica"
-                                value=""
-                                rows=8
-                            ></v-textarea>
-                            </div>
-
-                        </div>
-
-                        <!-- Textarea -->
-                        <div class="form-group encapsulado" >
-                            <div class="form-group">
-                                <v-layout align-center justify-end />
-                                    <h3 id="headers"  class="text-xs-center">Plan Médico</h3>
-                                <v-textarea
-                                    v-model="Plan_Medico"
-                                    outline
-                                    name="Plan_Medico"
-                                    value=""
-                                    rows=8
-                                ></v-textarea>
-                            </div>
-
-                            <!-- Textarea -->
-                            <div class="form-group">
-                                <v-layout align-center justify-end />
-                                    <h3 id="headers"  class="text-xs-center">Plan Psicosocial</h3>
-                                <v-textarea
-                                    v-model="Plan_Psicosocial"
-                                    outline
-                                    name="Plan_Psicosocial"
-                                    value=""
-                                    rows=8
-                                ></v-textarea>
-                            </div>
-
-                            <!-- Textarea -->
-                            <div class="form-group">
-                                <v-layout align-center justify-end />
-                                    <h3 id="headers"  class="text-xs-center">Plan Nutricional</h3>
-                                <v-textarea
-                                    v-model="Plan_Nutricional"
-                                    outline
-                                    name="Plan_Nutricional"
-                                    value=""
-                                    rows=8
-                                ></v-textarea>
-                            </div>
-
-                            <!-- Textarea -->
-                            <div class="form-group">
-                                <v-layout align-center justify-end />
-                                    <h3 id="headers"  class="text-xs-center">Plan Farmacológico</h3>
-                                <v-textarea
-                                    v-model="Plan_Farmacologico"
-                                    outline
-                                    name="Plan_Farmacologico"
-                                    value=""
-                                    rows=8
-                                ></v-textarea>
-                            </div>
-
+                            <b-container>
+                                <b-row>
+                                    <b-col>
+                                        <!-- Textarea -->
+                                        <div class="form-group">
+                                        <v-layout align-center justify-end />
+                                            <h3 id="headers"  class="text-xs-center">Evaluación Nutricional</h3>
+                                        <v-textarea
+                                            v-model="Evaluacion_Nutricional"
+                                            outline
+                                            name="Evaluacion_Nutricional"
+                                            value=""
+                                            rows=8
+                                        ></v-textarea>
+                                        </div>
+                                    </b-col>
+                                    <b-col>
+                                        <!-- Textarea -->                           
+                                        <div class="form-group">
+                                        <v-layout align-center justify-end />
+                                            <h3 id="headers"  class="text-xs-center">Plan Nutricional</h3>
+                                        <v-textarea
+                                            v-model="Plan_Nutricional"
+                                            outline
+                                            name="Plan_Nutricional"
+                                            value=""
+                                            rows=8
+                                        ></v-textarea>
+                                        </div>
+                                    </b-col>
+                                </b-row>
+                            </b-container>
+                          
+                            <b-container>
+                                <b-row>
+                                    <b-col>
+                                        <!-- Textarea -->
+                                        <div class="form-group">
+                                        <v-layout align-center justify-end />
+                                            <h3 id="headers"  class="text-xs-center">Evaluación Farmacológica</h3>
+                                        <v-textarea
+                                            v-model="Evaluacion_Farmacologica"
+                                            outline
+                                            name="Evaluacion_Farmacologica"
+                                            value=""
+                                            rows=8
+                                        ></v-textarea>
+                                        </div>
+                                    </b-col>
+                                    <b-col>
+                                        <!-- Textarea -->                           
+                                        <div class="form-group">
+                                        <v-layout align-center justify-end />
+                                            <h3 id="headers"  class="text-xs-center">Plan Farmacológica</h3>
+                                        <v-textarea
+                                            v-model="Plan_Farmacologica"
+                                            outline
+                                            name="Plan_Farmacologica"
+                                            value=""
+                                            rows=8
+                                        ></v-textarea>
+                                        </div>
+                                    </b-col>
+                                </b-row>
+                            </b-container>
                         </div>
                         
                         <!-- Button -->
@@ -1202,142 +1257,174 @@
                 <div class="cuerpo">
                     <h1 style="text-align: center;">Mapa</h1>
                     <div class="encapsulado">
+                        <h3 id="headers"  class="text-xs-center">Sangre</h3>
                         <table class="table table-bordered table-ligth">
                         <tbody>
                             <tr>
                                 <th scope="row" style="width:10%;">Fecha</th>
                                 <th scope="row" style="width:10%;"></th>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">CO</th>
+                                <th scope="row" style="width:10%;"></th>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">C2</th>
+                                <th scope="row" style="width:10%;"></th>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">TAC</th>
+                                <th scope="row" style="width:10%;"></th>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
                             </tr>
                             <tr>
                                 <th scope="row" style="width:10%;">Na</th>
                                 <th scope="row" style="width:10%;">136-144</th>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
                             </tr>
                             <tr>
                                 <th scope="row" style="width:10%;">Cl</th>
                                 <th scope="row" style="width:10%;">3.3-5</th>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
                             </tr>
                             <tr>
                                 <th scope="row" style="width:10%;">HCO3</th>
                                 <th scope="row" style="width:10%;">18-25</th>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
                             </tr>
                             <tr>
                                 <th scope="row" style="width:10%;">BUN</th>
                                 <th scope="row" style="width:10%;">7-20</th>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
                             </tr>
                             <tr>
                                 <th scope="row" style="width:10%;">Creatinina</th>
                                 <th scope="row" style="width:10%;">0.5-1.1</th>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
                             </tr>
                             <tr>
                                 <th scope="row" style="width:10%;">Glucosa</th>
                                 <th scope="row" style="width:10%;">60-115</th>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
                             </tr>
                             <tr>
                                 <th scope="row" style="width:10%;">Albumina</th>
                                 <th scope="row" style="width:10%;">3.5-4.6</th>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
                             </tr>
                             <tr>
                                 <th scope="row" style="width:10%;">Colesterol</th>
                                 <th scope="row" style="width:10%;">100-200</th>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
                             </tr>
                             <tr>
                                 <th scope="row" style="width:10%;">Trigliceridos</th>
                                 <th scope="row" style="width:10%;">20-175</th>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
                             </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="encapsulado">
+                        <h3 id="headers"  class="text-xs-center">Química Snaguínea</h3>
+                        <table class="table table-bordered table-ligth">
+                        <tbody>           
                             <tr>
-                                <th scope="row" style="width:10%;">CO/C2/TAC</th>
-                                <th scope="row" style="width:10%;"></th>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="width:10%;"></th>
+                                <th scope="row" style="width:10%;">Fecha</th>
                                 <th scope="row" style="width:10%;"></th>
                                 <td ></td>
                                 <td ></td>
@@ -1420,8 +1507,15 @@
                                 <td contenteditable='true' style="text-align: left;" ></td>
                                 <td contenteditable='true' style="text-align: left;" ></td>
                             </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="encapsulado">
+                        <h3 id="headers"  class="text-xs-center">Hematología</h3>
+                        <table class="table table-bordered table-ligth">
+                        <tbody>
                             <tr>
-                                <th scope="row" style="width:10%;"></th>
+                                <th scope="row" style="width:10%;">Fecha</th>
                                 <th scope="row" style="width:10%;"></th>
                                 <td ></td>
                                 <td ></td>
@@ -1492,8 +1586,16 @@
                                 <td contenteditable='true' style="text-align: left;" ></td>
                                 <td contenteditable='true' style="text-align: left;" ></td>
                             </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="encapsulado">
+                        
+                        <h3 id="headers"  class="text-xs-center">Dinámica de Hierro</h3>
+                        <table class="table table-bordered table-ligth">
+                        <tbody>
                             <tr>
-                                <th scope="row" style="width:10%;"></th>
+                                <th scope="row" style="width:10%;">Fecha</th>
                                 <th scope="row" style="width:10%;"></th>
                                 <td ></td>
                                 <td ></td>
@@ -1564,8 +1666,15 @@
                                 <td contenteditable='true' style="text-align: left;" ></td>
                                 <td contenteditable='true' style="text-align: left;" ></td>
                             </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="encapsulado">
+                        <h3 id="headers"  class="text-xs-center">Orina</h3>
+                        <table class="table table-bordered table-ligth">
+                        <tbody>
                             <tr>
-                                <th scope="row" style="width:10%;"></th>
+                                <th scope="row" style="width:10%;">Fecha</th>
                                 <th scope="row" style="width:10%;"></th>
                                 <td ></td>
                                 <td ></td>
@@ -1697,8 +1806,15 @@
                                 <td contenteditable='true' style="text-align: left;" ></td>
                                 <td contenteditable='true' style="text-align: left;" ></td>
                             </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="encapsulado">
+                        <h3 id="headers"  class="text-xs-center">Otros</h3>
+                        <table class="table table-bordered table-ligth">
+                        <tbody>
                             <tr>
-                                <th scope="row" style="width:10%;"></th>
+                                <th scope="row" style="width:10%;">Fecha</th>
                                 <th scope="row" style="width:10%;"></th>
                                 <td ></td>
                                 <td ></td>
@@ -1745,42 +1861,8 @@
                                 <td contenteditable='true' style="text-align: left;" ></td>
                                 <td contenteditable='true' style="text-align: left;" ></td>
                             </tr>
-                            <tr>
-                                <th scope="row" style="width:10%;">Peso</th>
-                                <th scope="row" style="width:10%;"></th>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="width:10%;">Talla</th>
-                                <th scope="row" style="width:10%;"></th>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="width:10%;"></th>
-                                <th scope="row" style="width:10%;"></th>
-                                <td ></td>
-                                <td ></td>
-                                <td ></td>
-                                <td ></td>
-                                <td ></td>
-                                <td ></td>
-                                <td ></td>
-                                <td ></td>
-                            </tr>
+                          
+                          
                         </tbody>
                         </table>
                     </div>
