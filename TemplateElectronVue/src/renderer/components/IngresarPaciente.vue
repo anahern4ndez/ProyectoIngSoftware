@@ -9,7 +9,14 @@
         <v-card-title primary-title>
           <v-flex xs12>
             <v-layout align-center justify-end column fill-height />
-    
+              <v-text-field
+                  v-model="Numero_expediente"
+                  label="Número de expediente"
+                  outline
+                  :rules="cuiRules"
+                  required
+                  @change="checkLocation(Numero_expediente)"
+              ></v-text-field>
           </v-flex>
         </v-card-title>
       </v-card>
@@ -245,7 +252,7 @@ export default {
 
         //reglas de FORM
         cuiRules: [
-          (v) => !!v || 'Se requiere CUI',
+          (v) => !!v || 'Se requiere este campo',
           (v) => v && v.length <= 13 || 'Verifique que el CUI sea de 13 digitos.'
         ],
         nombreRules: [

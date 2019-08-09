@@ -107,6 +107,7 @@ class PacienteController extends Controller
     function updateAll(Request $request){
         $cosa = $request->id;
         $toUpdate = Paciente::where('id', $cosa)->first();
+        $toUpdate->Numero_expediente = $request->Numero_expediente;
         $toUpdate->Nombre = $request->Nombre;
         $toUpdate->Apellido = $request->Apellido;
         $toUpdate->Fecha_de_nacimiento = $request->Fecha_de_nacimiento;
