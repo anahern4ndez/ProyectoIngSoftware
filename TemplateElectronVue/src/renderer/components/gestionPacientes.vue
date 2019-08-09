@@ -49,6 +49,7 @@
               :search="search"
               item-key="id"
               v-model="selected"
+              :rows-per-page-text="rowsText"
               
           >
             
@@ -200,6 +201,7 @@ export default {
   },
     data () {
       return {
+        rowsText: "Filas por página: ",
         search:'',
         selected: [],
         selected2: null,

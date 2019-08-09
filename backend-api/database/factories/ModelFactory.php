@@ -43,12 +43,6 @@ $factory->define(App\Models\Paciente::class, function (Faker\Generator $faker) {
         'Transfusiones' => 1,
         'EstadoActual' => 1,
         'Sexo' => 1,
-        'Kg_perc' => 1.0,
-        'Peso' => 1.0,
-        'Percentil' => 1,
-        'Talla' => 1.0,
-        'Cms_perc' => 1.0,
-        'PA' => 1.0,
         'Historia' => 'Historia',
     ];
 });
