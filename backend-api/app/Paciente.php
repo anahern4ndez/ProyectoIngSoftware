@@ -26,12 +26,6 @@ class Paciente extends Model
         'Transfusiones',
         'EstadoActual',
         'Sexo',
-        'Kg_perc',
-        'Peso',
-        'Percentil',
-        'Talla',
-        'PA',
-        'Cms_perc',
         'Historia'
     ];
     /**

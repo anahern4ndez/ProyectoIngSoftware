@@ -203,13 +203,6 @@ export default {
     data () {
       return {
         search:'',        
-        //datos extra (se pondran en la tabla de pacientes para mientras)
-        kg_perc:'',
-        Peso:'',
-        Percentil:'',
-        Talla:'',
-        PA:'',
-        cms_perc:'',
         Historia:'',
         //datos del paciente a ingresar
         CUI:'', 
@@ -274,12 +267,6 @@ export default {
             Transfusiones: this.Transfusiones,
             EstadoActual: this.EstadoActual,
             Sexo: this.Sexo,
-            Kg_perc: this.kg_perc,
-            Peso: this.Peso,
-            Percentil: this.Percentil,
-            Talla:this.Talla,
-            PA: this.PA,
-            Cms_perc: this.cms_perc,
             Historia:this.Historia
           };
           
@@ -299,12 +286,6 @@ export default {
             this.Historia=' ';
             this.Dx_Definitivo=' ';
             this.Dx_Asociados=' ';
-            this.Percentil=' ';
-            this.Talla=' ';
-            this.Peso=' ';
-            this.cms_perc=' ';
-            this.kg_perc=' ';
-            this.PA=' '
           }).
           catch(error => {
               this.error = true;

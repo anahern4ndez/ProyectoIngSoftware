@@ -28,7 +28,7 @@
 
                 <v-text-field
                         v-model="ProcedenciaTxt"
-                        label="Procedencia"
+                        label="Lugar de nacimiento"
                         outline
                         :disabled="true"
                     ></v-text-field>
@@ -255,12 +255,6 @@ export default {
             Transfusiones: this.Transfusiones,
             EstadoActual: this.EstadoActual,
             Sexo: this.Sexo,
-            Kg_perc: this.kg_perc,
-            Peso: this.Peso,
-            Percentil: this.Percentil,
-            Talla:this.Talla,
-            PA: this.PA,
-            Cms_perc: this.cms_perc,
             Historia:this.Historia,
             id: this.id
         };
