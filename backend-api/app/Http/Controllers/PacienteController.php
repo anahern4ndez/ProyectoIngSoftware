@@ -15,9 +15,8 @@ class PacienteController extends Controller
      * @return \Illuminate\Http\Response
      */
     function store(Request $request){
-        /*Paciente::create(Request::all());
-        return 'true';*/
         $pat = new Paciente;
+        $pat->Numero_expediente = $request->Numero_expediente;
         $pat->Nombre = $request->Nombre;
         $pat->Apellido = $request->Apellido;
         $pat->Fecha_de_nacimiento = $request->Fecha_de_nacimiento;
@@ -37,12 +36,6 @@ class PacienteController extends Controller
         $pat->Transfusiones = $request->Transfusiones;
         $pat->EstadoActual = $request->EstadoActual;
         $pat->Sexo = $request->Sexo;
-        $pat->Kg_perc = $request->Kg_perc;
-        $pat->Peso = $request->Peso;
-        $pat->Percentil = $request->Percentil;
-        $pat->Talla = $request->Talla;
-        $pat->PA= $request->PA;
-        $pat->Cms_perc= $request->Cms_perc;
         $pat->Historia = $request->Historia;
         $pat->save();
 

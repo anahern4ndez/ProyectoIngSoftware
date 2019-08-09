@@ -16,6 +16,7 @@ class CreatePacientesTable extends Migration
         Schema::create('pacientes', function (Blueprint $table) {
             
             $table->increments('id');
+            $table->string('Numero_expediente');
             $table->string('CUI', 20) -> unique();
             $table->string('Nombre', 55);
             $table->string('Apellido', 40);
@@ -28,6 +29,7 @@ class CreatePacientesTable extends Migration
             $table->integer('Sindrome_Clinico_Presentacion');
             $table->string('Dx_Definitivo', 200);
             $table->string('Dx_Asociados', 200);
+            $table->string('Historia');
             $table->string('Imagen', 200000)->nullable();
             $table->integer('Tipo_de_Sangre');
             $table->integer('Estudia');
@@ -35,14 +37,6 @@ class CreatePacientesTable extends Migration
             $table->integer('EstadoActual');
             $table->integer('Sexo');
             $table->timestamps();
-            //los siguientes campos están aquí tentativamente, se verá más adelante si mejor se mueven a otra tabla
-            $table->float('Kg_perc');
-            $table->float('Peso');
-            $table->integer('Percentil');
-            $table->float('Talla');
-            $table->float('Cms_perc');
-            $table->float('PA');
-            $table->string('Historia');
 
             $table->foreign('Sexo')
             ->references('ID')

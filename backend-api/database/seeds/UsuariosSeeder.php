@@ -17,7 +17,6 @@ class UsuariosSeeder extends Seeder {
             'password' => Hash::make('password123'),
             'puesto' => 1,
         ];
-
         User::insert($user);
     }
 }
