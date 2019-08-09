@@ -3,7 +3,25 @@
 <template>
   <div class="grey--text text--darken-2">
     <h1 id="headers" class="text-center">Editar información de paciente</h1>
-      <div class="Datos">
+
+    <b-container class="bv-example-row1" >
+      <v-card>  
+        <v-card-title primary-title>
+          <v-flex xs12>
+            <v-layout align-center justify-end column fill-height />
+              <v-text-field
+                  v-model="Numero_expediente"
+                  label="Número de expediente"
+                  outline
+                  :rules="cuiRules"
+                  required
+                  @change="checkLocation(Numero_expediente)"
+              ></v-text-field>
+          </v-flex>
+        </v-card-title>
+      </v-card>
+    </b-container>
+    <div class="Datos">
       <div>
         <b-container class="bv-example-row2" >
           <v-card>
@@ -181,6 +199,7 @@ export default {
   mounted() {
     this.$http.get(`http://localhost:8000/PacienteController/findOne?CUI=${this.$route.params.cui}`).then(response=>{
       console.log(response.data.Paciente[0]);
+      this.Numero_expediente = response.data.Paciente[0].Numero_expediente;
       this.CUI = response.data.Paciente[0].CUI;
       this.Nombre = response.data.Paciente[0].Nombre;
       this.Apellido = response.data.Paciente[0].Apellido;
@@ -208,7 +227,7 @@ export default {
         //datos extra (se pondran en la tabla de pacientes para mientras)
         id:'',
         Historia:'',
-        Numero_expediente: 1,
+        Numero_expediente: '',
         //datos del paciente a ingresar
         CUI:'', 
         Nombre:'', 

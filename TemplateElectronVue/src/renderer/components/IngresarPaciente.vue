@@ -220,7 +220,7 @@ export default {
     data () {
       return {
         search:'',  
-        Numero_expediente: 1,      
+        Numero_expediente: '',      
         Historia:'',
         //datos del paciente a ingresar
         CUI:'', 
