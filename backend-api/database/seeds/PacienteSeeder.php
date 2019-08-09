@@ -33,7 +33,7 @@ class PacienteSeeder extends Seeder
             '2209', '2210', '2211', '2212', '2213', '2214', '2215', '2216', '2217'
 
         ];
-        for ($i=0; $i <20; $i++) { 
+        for ($i=0; $i <10; $i++) { 
             $procedencia = $faker->randomElement($arrayProcedencias);
             $paciente = [
                 'Numero_expediente' => $faker->randomNumber(5),

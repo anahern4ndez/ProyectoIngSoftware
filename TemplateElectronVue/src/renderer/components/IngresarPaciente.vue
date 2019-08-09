@@ -4,6 +4,16 @@
   <div class="grey--text text--darken-2">
     <h1 id="headers" class="text-center">Ingresar a un paciente</h1>
     <br><br>
+    <b-container class="bv-example-row1" >
+      <v-card>  
+        <v-card-title primary-title>
+          <v-flex xs12>
+            <v-layout align-center justify-end column fill-height />
+    
+          </v-flex>
+        </v-card-title>
+      </v-card>
+    </b-container>
     <div class="Datos">
       <div>
         <b-container class="bv-example-row1" >
