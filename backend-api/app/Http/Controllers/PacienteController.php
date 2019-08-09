@@ -126,12 +126,6 @@ class PacienteController extends Controller
         $toUpdate->Transfusiones = $request->Transfusiones;
         $toUpdate->EstadoActual = $request->EstadoActual;
         $toUpdate->Sexo = $request->Sexo;
-        $toUpdate->Kg_perc = $request->Kg_perc;
-        $toUpdate->Peso = $request->Peso;
-        $toUpdate->Percentil = $request->Percentil;
-        $toUpdate->Talla = $request->Talla;
-        $toUpdate->PA= $request->PA;
-        $toUpdate->Cms_perc= $request->Cms_perc;
         $toUpdate->Historia = $request->Historia;
         $toUpdate->save();
     }

@@ -197,6 +197,9 @@ export default {
       this.computeAge(response.data.Paciente[0].Fecha_de_nacimiento);
       this.Sindrome_Clinico_Presentacion = response.data.Paciente[0].Sindrome_Clinico_Presentacion;
       this.id = response.data.Paciente[0].id;
+      this.Tipo_de_Sangre = response.data.Paciente[0].Tipo_de_Sangre;
+      this.Estudia = response.data.Paciente[0].Estudia;
+      this.Transfusiones = response.data.Paciente[0].Transfusiones;
     });
   },
     data () {
@@ -225,6 +228,9 @@ export default {
         Dx_Asociados:'',
         EstadoActual:1,
         Sexo: '',
+        Tipo_de_Sangre: 1,
+        Estudia: 1,
+        Transfusiones:1,
         pacientes: []
       }
   },
