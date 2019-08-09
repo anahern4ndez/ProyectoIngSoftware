@@ -86,6 +86,10 @@
                   </v-alert>
                 
               </template>
+
+              <template v-slot:pageText="props">
+                {{ props.pageStart }} - {{ props.pageStop }} de {{ props.itemsLength }}
+              </template>
           </v-data-table>
         </v-card>
       </div>
