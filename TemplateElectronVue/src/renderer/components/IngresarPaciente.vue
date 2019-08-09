@@ -202,7 +202,8 @@ export default {
   },
     data () {
       return {
-        search:'',        
+        search:'',  
+        Numero_expediente: 1,      
         Historia:'',
         //datos del paciente a ingresar
         CUI:'', 
@@ -249,6 +250,7 @@ export default {
         ingresarNuevo(){
           var pass = false;
           const info = {
+            Numero_expediente: this.Numero_expediente,
             CUI: this.CUI,
             Nombre: this.Nombre,
             Apellido: this.Apellido,

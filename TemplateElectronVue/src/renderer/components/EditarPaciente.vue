@@ -208,6 +208,7 @@ export default {
         //datos extra (se pondran en la tabla de pacientes para mientras)
         id:'',
         Historia:'',
+        Numero_expediente: 1,
         //datos del paciente a ingresar
         CUI:'', 
         Nombre:'', 
@@ -237,6 +238,7 @@ export default {
     methods: {
         save(){
           const info = {
+            Numero_expediente: this.Numero_expediente,
             CUI: this.CUI,
             Nombre: this.Nombre,
             Apellido: this.Apellido,
