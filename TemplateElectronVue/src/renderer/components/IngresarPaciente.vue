@@ -13,14 +13,23 @@
                       <h3 id="headers" class="text-xs-center">Datos Personales</h3>
                       <br>
                       <div style="float:left; margin-right:5%; width:50%">
-                      <v-text-field
-                              v-model="CUI"
-                              label="Número de CUI"
-                              outline
-                              :rules="cuiRules"
-                              required
-                              @change="checkLocation(CUI)"
-                          ></v-text-field>
+                      
+                        <v-text-field
+                          v-model="CUI"
+                          label="Número de CUI"
+                          outline
+                          :rules="cuiRules"
+                          required
+                          @change="checkLocation(CUI)"
+                        ></v-text-field>
+                        <v-text-field
+                          v-model="Numero_Orden"
+                          label="Número de orden"
+                          outline
+                          :rules="nombreRules"
+                          required
+                        ></v-text-field>
+
                       </div>
                       <v-radio-group v-model="Sexo" row :rules="radioRules" required >
                           <v-radio label="Mujer" value="1" color="black"></v-radio>
@@ -305,7 +314,7 @@ export default {
         Sexo: '',
         pacientes: [],
         pass: false,
-        
+        Numero_Orden: 0,
 
         //reglas de FORM
         cuiRules: [
@@ -348,7 +357,8 @@ export default {
             Talla:this.Talla,
             PA: this.PA,
             Cms_perc: this.cms_perc,
-            Historia:this.Historia
+            Historia:this.Historia,
+            Numero_Orden:this.Numero_Orden
           };
           
           
@@ -372,7 +382,8 @@ export default {
             this.Peso='';
             this.cms_perc='';
             this.kg_perc='';
-            this.PA=''
+            this.PA='';
+            this.Numero_Orden="";
           }).
           catch(error => {
               this.error = true;

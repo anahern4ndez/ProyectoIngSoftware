@@ -194,59 +194,59 @@
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">BCG</th>
-                                                <td><v-layout><v-checkbox v-model="bcg" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="bcg" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="bcg" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="bcg" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="bcg1" @change="fillBCG" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="bcg2" @change="fillBCG" :disabled="!bcg1" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="bcg3" @change="fillBCG" :disabled="!bcg2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="bcgRef" :disabled="!bcg3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Poliovirus</th>
-                                                <td><v-layout><v-checkbox v-model="poliovirus1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="poliovirus2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="poliovirus3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="poliovirusRef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="poliovirus1" @change="fillPoliovirus" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="poliovirus2" @change="fillPoliovirus" :disabled="!poliovirus1"  hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="poliovirus3" @change="fillPoliovirus" :disabled="!poliovirus2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="poliovirusRef" :disabled="!poliovirus3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Hepatitis A</th>
-                                                <td><v-layout><v-checkbox v-model="hepatitisA1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="hepatitisA2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="hepatitisA3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="hepatitisARef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="hepatitisA1" @change="fillHepatitisA" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="hepatitisA2" @change="fillHepatitisA" :disabled="!hepatitisA1" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="hepatitisA3" @change="fillHepatitisA" :disabled="!hepatitisA2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="hepatitisARef" :disabled="!hepatitisA3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Hepatitis B</th>
-                                                <td><v-layout><v-checkbox v-model="hepatitisB1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="hepatitisB2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="hepatitisB3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="hepatitisBRef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="hepatitisB1" @change="fillHepatitisB" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="hepatitisB2" @change="fillHepatitisB" :disabled="!hepatitisB1" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="hepatitisB3" @change="fillHepatitisB" :disabled="!hepatitisB2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="hepatitisBRef" :disabled="!hepatitisB3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Neumococo</th>
-                                                <td><v-layout><v-checkbox v-model="neumococo1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="neumococo2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="neumococo3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="neumococoRef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="neumococo1" @change="fillNeumococo" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="neumococo2" @change="fillNeumococo" :disabled="!neumococo1" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="neumococo3" @change="fillNeumococo" :disabled="!neumococo2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="neumococoRef" :disabled="!neumococo3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Influenza</th>
-                                                <td><v-layout><v-checkbox v-model="influeza1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="influeza2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="influeza3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="influezaRef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="influeza1" @change="fillInflueza" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="influeza2" @change="fillInflueza" :disabled="!influenza1" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="influeza3" @change="fillInflueza" :disabled="!influenza2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="influezaRef" :disabled="!influenza3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Diftteria/Tétano/Tosferina(DPT)</th>
-                                                <td><v-layout><v-checkbox v-model="DPT1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="DPT2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="DPT3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="DPTRef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="DPT1" @change="fillDPT" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="DPT2" @change="fillDPT" :disabled="!DPT1" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="DPT3" @change="fillDPT" :disabled="!DPT2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="DPTRef" :disabled="!DPT3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
-                                                <th scope="row" style="width: 10%">Sarampión/Paperas/RUbeola(SPR)</th>
-                                                <td><v-layout><v-checkbox v-model="SPR1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="SPR2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="SPR3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="SPRRef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <th scope="row" style="width: 10%">Sarampión/Paperas/Rubeola(SPR)</th>
+                                                <td><v-layout><v-checkbox color="green" v-model="SPR1" @change="fillSPR" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="SPR2" @change="fillSPR" :disabled="!SPR1" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="SPR3" @change="fillSPR" :disabled="!SPR2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="SPRRef" :disabled="!SPR3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
 
                                         </tbody>
@@ -269,16 +269,17 @@
                                             <v-layout align-center justify-end />
                                                 <h3 id="headers"  class="text-xs-center">Síndrome Clínico de Presentación</h3>              
                                                 <v-container fluid >
-                                                    <v-checkbox class="my-0 py-0" v-model="Sindrome_Clinico_Presentacion" label="Sx. Nefrítico" value="1"></v-checkbox>
-                                                    <v-checkbox class="my-0 py-0" v-model="Sindrome_Clinico_Presentacion" label="Sx. Nefrotico" value="2"></v-checkbox>
-                                                    <v-checkbox class="my-0 py-0" v-model="Sindrome_Clinico_Presentacion" label="Anomalías Urinarias Asintomáticas" value="3"></v-checkbox>
-                                                    <v-checkbox class="my-0 py-0" v-model="Sindrome_Clinico_Presentacion" label="IRA" value="4"></v-checkbox>
-                                                    <v-checkbox class="my-0 py-0" v-model="Sindrome_Clinico_Presentacion" label="IRC" value="5"></v-checkbox>
-                                                    <v-checkbox class="my-0 py-0" v-model="Sindrome_Clinico_Presentacion" label="ITU" value="6"></v-checkbox>
-                                                    <v-checkbox class="my-0 py-0" v-model="Sindrome_Clinico_Presentacion" label="Uropatía Obstructiva" value="7"></v-checkbox>
-                                                    <v-checkbox class="my-0 py-0" v-model="Sindrome_Clinico_Presentacion" label="Tubulopatía" value="8"></v-checkbox>
-                                                    <v-checkbox class="my-0 py-0" v-model="Sindrome_Clinico_Presentacion" label="HTA" value="9"></v-checkbox>
-                                                    <v-checkbox class="my-0 py-0" v-model="Sindrome_Clinico_Presentacion" label="Nefrolitiasis" value="10"></v-checkbox>
+                                                    <v-radio-group v-model="Sindrome_Clinico_Presentacion">
+                                                        <v-radio
+                                                            v-for="s in sindromes"
+                                                            :label="s.significado"
+                                                            :key="s.ID"
+                                                            :value="s.ID"
+                                                            color="green"
+                                                            @change="sindromeValue(s.ID, s.significado)"
+                                                            
+                                                        ></v-radio>
+                                                    </v-radio-group>
                                                 </v-container>
                                             </v-flex>
                                         </div>
@@ -292,9 +293,8 @@
                                         <v-textarea
                                             v-model="Dx_Definitivo"
                                             outline
-                                            name="Dx_Definitivo"
-                                            value=""
-                                            rows=31
+                                            rows=18.5
+                                            :auto-grow=true
                                         ></v-textarea>
                                     </div>
                                 </b-col>
@@ -306,9 +306,8 @@
                                         <v-textarea
                                             v-model="Dx_Asociado"
                                             outline
-                                            name="Dx_Asociado"
-                                            value=""
-                                            rows=31
+                                            rows=18.5
+                                            :auto-grow=true
                                         ></v-textarea>
                                     </div>  
                                 </b-col>
@@ -324,9 +323,8 @@
                             <v-textarea
                                 v-model="historia"
                                 outline
-                                name="Historia"
-                                value=""
                                 rows=8
+                                :auto-grow=true
                             ></v-textarea>
                         </div>
                         </div>
@@ -344,324 +342,358 @@
                                             <b-container>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="Prednisona"></v-checkbox>
-                                                    </b-col>
-                                                    <b-col>
-                                                        <v-text-field
-                                                            v-model="Prednisona_Cantidad"
-                                                            label="mg"
-                                                            outline
-                                                        ></v-text-field> 
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="Prednisona" color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="Prednisona_mg"
+                                                            label="mg"
+                                                            outline
+                                                            :disabled="!Prednisona"
+                                                        ></v-text-field> 
+                                                    </b-col>
+                                                    <b-col>
+                                                        <v-text-field
+                                                            v-model="Prednisona_frecuencia"
                                                             label="Frecuencia"
                                                             outline
+                                                            :disabled="!Prednisona"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="cyac" label="Cyac"></v-checkbox>
-                                                    </b-col>
-                                                    <b-col>
-                                                        <v-text-field
-                                                            v-model="Cyac_Cantidad"
-                                                            label="mg"
-                                                            outline
-                                                        ></v-text-field> 
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="cyac" label="Cyac" color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="Cyac_mg"
+                                                            label="mg"
+                                                            outline
+                                                            :disabled="!cyac"
+                                                        ></v-text-field> 
+                                                    </b-col>
+                                                    <b-col>
+                                                        <v-text-field
+                                                            v-model="Cyac_frecuencia"
                                                             label="Frecuencia"
                                                             outline
+                                                            :disabled="!cyac"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Tac" label="Tac"></v-checkbox>
-                                                    </b-col>
-                                                    <b-col>
-                                                        <v-text-field
-                                                            v-model="Tac_Cantidad"
-                                                            label="mg"
-                                                            outline
-                                                        ></v-text-field> 
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Tac" label="Tac" color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="Tac_mg"
+                                                            label="mg"
+                                                            outline
+                                                            :disabled="!Tac"
+                                                        ></v-text-field> 
+                                                    </b-col>
+                                                    <b-col>
+                                                        <v-text-field
+                                                            v-model="Tac_frecuencia"
                                                             label="Frecuencia"
                                                             outline
+                                                            :disabled="!Tac"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="MMF" label="MMF"></v-checkbox>
-                                                    </b-col>
-                                                    <b-col>
-                                                        <v-text-field
-                                                            v-model="MMF_Cantidad"
-                                                            label="mg"
-                                                            outline
-                                                        ></v-text-field> 
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="MMF" label="MMF" color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="MMF_mg"
+                                                            label="mg"
+                                                            outline
+                                                            :disabled="!MMF"
+                                                        ></v-text-field> 
+                                                    </b-col>
+                                                    <b-col>
+                                                        <v-text-field
+                                                            v-model="MMF_frecuencia"
                                                             label="Frecuencia"
                                                             outline
+                                                            :disabled="!MMF"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="AZA" label="AZA" ></v-checkbox>
-                                                    </b-col>
-                                                    <b-col>
-                                                        <v-text-field
-                                                            v-model="AZA_Cantidad"
-                                                            label="mg"
-                                                            outline
-                                                        ></v-text-field> 
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="AZA" label="AZA" color="green" ></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="AZA_mg"
+                                                            label="mg"
+                                                            outline
+                                                            :disabled="!AZA"
+                                                        ></v-text-field> 
+                                                    </b-col>
+                                                    <b-col>
+                                                        <v-text-field
+                                                            v-model="AZA_frecuencia"
                                                             label="Frecuencia"
                                                             outline
+                                                            :disabled="!AZA"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="CFM" label="CFM" ></v-checkbox>
-                                                    </b-col>
-                                                    <b-col>
-                                                        <v-text-field
-                                                            v-model="CFM_Cantidad"
-                                                            label="mg"
-                                                            outline
-                                                        ></v-text-field> 
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="CFM" label="CFM" color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="CFM_mg"
+                                                            label="mg"
+                                                            outline
+                                                            :disabled="!CFM"
+                                                        ></v-text-field> 
+                                                    </b-col>
+                                                    <b-col>
+                                                        <v-text-field
+                                                            v-model="CFM_frecuencia"
                                                             label="Frecuencia"
                                                             outline
+                                                            :disabled="!CFM"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Enalapril" label="Enalapril" ></v-checkbox>
-                                                    </b-col>
-                                                    <b-col>
-                                                        <v-text-field
-                                                            v-model="Enalapril_Cantidad"
-                                                            label="mg"
-                                                            outline
-                                                        ></v-text-field> 
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Enalapril" label="Enalapril" color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="Enalapril_mg"
+                                                            label="mg"
+                                                            outline
+                                                            :disabled="!Enalapril"
+                                                        ></v-text-field> 
+                                                    </b-col>
+                                                    <b-col>
+                                                        <v-text-field
+                                                            v-model="Enalapril_frecuencia"
                                                             label="Frecuencia"
                                                             outline
+                                                            :disabled="!Enalapril"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Losartan" label="Losartan" ></v-checkbox>
-                                                    </b-col>
-                                                    <b-col>
-                                                        <v-text-field
-                                                            v-model="Losartan_Cantidad"
-                                                            label="mg"
-                                                            outline
-                                                        ></v-text-field> 
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Losartan" label="Losartan" color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="Losartan_mg"
+                                                            label="mg"
+                                                            outline
+                                                            :disabled="!Losartan"
+                                                        ></v-text-field> 
+                                                    </b-col>
+                                                    <b-col>
+                                                        <v-text-field
+                                                            v-model="Losartan_frecuencia"
                                                             label="Frecuencia"
                                                             outline
+                                                            :disabled="!Losartan"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Amlodipina" label="Amlodipina" ></v-checkbox>
-                                                    </b-col>
-                                                    <b-col>
-                                                        <v-text-field
-                                                            v-model="Amlodipina_Cantidad"
-                                                            label="mg"
-                                                            outline
-                                                        ></v-text-field> 
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Amlodipina" label="Amlodipina" color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="Amlodipina_mg"
+                                                            label="mg"
+                                                            outline
+                                                            :disabled="!Amlodipina"
+                                                        ></v-text-field> 
+                                                    </b-col>
+                                                    <b-col>
+                                                        <v-text-field
+                                                            v-model="Amlodipina_frecuencia"
                                                             label="Frecuencia"
                                                             outline
+                                                            :disabled="!Amlodipina"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="CitratoNa" label="Citrato Na" ></v-checkbox>
-                                                    </b-col>
-                                                    <b-col>
-                                                        <v-text-field
-                                                            v-model="Citrato_Na_Cantidad"
-                                                            label="mili-equi"
-                                                            outline
-                                                        ></v-text-field> 
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="CitratoNa" label="Citrato Na" color="green" ></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="Citrato_Na_mg"
+                                                            label="mili-equi"
+                                                            outline
+                                                            :disabled="!CitratoNa"
+                                                        ></v-text-field> 
+                                                    </b-col>
+                                                    <b-col>
+                                                        <v-text-field
+                                                            v-model="Citrato_Na_frecuencia"
                                                             label="Frecuencia"
                                                             outline
+                                                            :disabled="!CitratoNa"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="CitratoK" label="Citrato K" ></v-checkbox>
-                                                    </b-col>
-                                                    <b-col>
-                                                        <v-text-field
-                                                            v-model="Citrato_K_Cantidad"
-                                                            label="mili equiva."
-                                                            outline
-                                                        ></v-text-field> 
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="CitratoK" label="Citrato K" color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="Citrato_K_mg"
+                                                            label="mili equiva."
+                                                            outline
+                                                            :disabled="!CitratoK"
+                                                        ></v-text-field> 
+                                                    </b-col>
+                                                    <b-col>
+                                                        <v-text-field
+                                                            v-model="Citrato_K_frecuencia"
                                                             label="Frecuencia"
                                                             outline
+                                                            :disabled="!CitratoK"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Furosemida" label="Furosemida" ></v-checkbox>
-                                                    </b-col>
-                                                    <b-col>
-                                                        <v-text-field
-                                                            v-model="Furosemida_Cantidad"
-                                                            label="mg"
-                                                            outline
-                                                        ></v-text-field> 
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Furosemida" label="Furosemida" color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="Furosemida_mg"
+                                                            label="mg"
+                                                            outline
+                                                            :disabled="!Furosemida"
+                                                        ></v-text-field> 
+                                                    </b-col>
+                                                    <b-col>
+                                                        <v-text-field
+                                                            v-model="Furosemida_frecuencia"
                                                             label="Frecuencia"
                                                             outline
+                                                            :disabled="!Furosemida"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Alfacalcidol" label="Alfacalcidol" ></v-checkbox>
-                                                    </b-col>
-                                                    <b-col>
-                                                        <v-text-field
-                                                            v-model="Alfacalcidol_Cantidad"
-                                                            label="micro gr"
-                                                            outline
-                                                        ></v-text-field> 
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Alfacalcidol" label="Alfacalcidol" color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="Alfacalcidol_mg"
+                                                            label="micro gr"
+                                                            outline
+                                                            :disabled="!Alfacalcidol"
+                                                        ></v-text-field> 
+                                                    </b-col>
+                                                    <b-col>
+                                                        <v-text-field
+                                                            v-model="Alfacalcidol_frecuencia"
                                                             label="Frecuencia"
                                                             outline
+                                                            :disabled="!Alfacalcidol"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="CaCO3" label="CaCO3" ></v-checkbox>
-                                                    </b-col>
-                                                    <b-col>
-                                                        <v-text-field
-                                                            v-model="CaCO3_Cantidad"
-                                                            label="mg"
-                                                            outline
-                                                        ></v-text-field> 
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="CaCO3" label="CaCO3" color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="CaCO3_mg"
+                                                            label="mg"
+                                                            outline
+                                                            :disabled="!CaCO3"
+                                                        ></v-text-field> 
+                                                    </b-col>
+                                                    <b-col>
+                                                        <v-text-field
+                                                            v-model="CaCO3_frecuencia"
                                                             label="Frecuencia"
                                                             outline
+                                                            :disabled="!CaCO3"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="EPO" label="EPO" ></v-checkbox>
-                                                    </b-col>
-                                                    <b-col>
-                                                        <v-text-field
-                                                            v-model="EPO_Cantidad"
-                                                            label="unidades"
-                                                            outline
-                                                        ></v-text-field> 
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="EPO" label="EPO"  color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="EPO_mg"
+                                                            label="unidades"
+                                                            outline
+                                                            :disabled="!EPO"
+                                                        ></v-text-field> 
+                                                    </b-col>
+                                                    <b-col>
+                                                        <v-text-field
+                                                            v-model="EPO_frecuencia"
                                                             label="Frecuencia"
                                                             outline
+                                                            :disabled="!EPO"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Fe" label="Fe" ></v-checkbox>
-                                                    </b-col>
-                                                    <b-col>
-                                                        <v-text-field
-                                                            v-model="Fe_Cantidad"
-                                                            label="mg"
-                                                            outline
-                                                        ></v-text-field> 
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Fe" label="Fe" color="green" ></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="Fe_mg"
+                                                            label="mg"
+                                                            outline
+                                                            :disabled="!Fe"
+                                                        ></v-text-field> 
+                                                    </b-col>
+                                                    <b-col>
+                                                        <v-text-field
+                                                            v-model="Fe_frecuencia"
                                                             label="Frecuencia"
                                                             outline
+                                                            :disabled="!Fe"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Cefradoxilo" label="Cefadroxilo" ></v-checkbox>
-                                                    </b-col>
-                                                    <b-col>
-                                                        <v-text-field
-                                                            v-model="Cefradoxilo_Cantidad"
-                                                            label="mg"
-                                                            outline
-                                                        ></v-text-field> 
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Cefradoxilo"  color="green" label="Cefadroxilo" ></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="Cefradoxilo_mg"
+                                                            label="mg"
+                                                            outline
+                                                            :disabled="!Cefradoxilo"
+                                                        ></v-text-field> 
+                                                    </b-col>
+                                                    <b-col>
+                                                        <v-text-field
+                                                            v-model="Cefradoxilo_frecuencia"
                                                             label="Frecuencia"
                                                             outline
+                                                            :disabled="!Cefradoxilo"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
@@ -884,8 +916,6 @@
                                                     <b-col>
                                                         <button type="button" class="btn btn-lg btn-warning btn-block" style="margin-top:10%;">Imágenes</button>
                                                     </b-col>
-                                                    <b-col>
-                                                    </b-col>
                                                                                 
                                                 </b-row>
                                             </b-container> 
@@ -896,59 +926,160 @@
                         </b-container>
                     </div>
 
+                    <div class="form-group encapsulado" style="text-align:left;">
+                        <v-layout align-center justify-end />
+                            <h3 id="headers"  class="text-xs-center">Examen físico</h3>
                         <table class="table table-bordered table-ligth">
                         <tbody>
                             <tr>
                                 <th scope="row" style="width: 10%">COONG</th>
                                 <td style="width: 5%">NI</td>
-                                <td contenteditable='true' style="text-align: left;"></td>
+                                <td>
+                                    <v-textarea
+                                        :auto-grow=true
+                                        v-model="examen_fisico.coong"
+                                        rows=1
+                                        hide-details
+                                    ></v-textarea>
+                                </td>
                             </tr>
+
                             <tr>
                                 <th scope="row" style="width: 10%">Corazón</th>
-                                <td style="width: 5%"><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 my-0 ml-3 "></v-checkbox></v-layout></td>
-                                <td contenteditable='true' style="text-align: left;"></td>
+                                <td style="width: 5%">
+                                    <v-checkbox v-model="corazonCheck" hide-details color=green class="shrink py-0 my-0 ml-3 "></v-checkbox>
+                                </td>
+                                <td>
+                                    <v-textarea
+                                        :auto-grow=true
+                                        v-model="examen_fisico.corazon"
+                                        rows=1
+                                        hide-details
+                                        :disabled="!corazonCheck"
+                                    ></v-textarea>
+                                </td>
                             </tr>
+
                             <tr>
-                            <th scope="row" style="width: 10%">Pulmones</th>
-                            <td style="width: 5%"><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 my-0 ml-3 "></v-checkbox></v-layout></td>
-                            <td contenteditable='true' style="text-align: left;"></td>
+                                <th scope="row" style="width: 10%">Pulmones</th>
+                                <td style="width: 5%">
+                                    <v-checkbox v-model="pulmonesCheck" hide-details color=green class="shrink py-0 my-0 ml-3 "></v-checkbox>
+                                </td>
+                                <td>
+                                    <v-textarea
+                                        :auto-grow=true
+                                        v-model="examen_fisico.pulmones"
+                                        rows=1
+                                        hide-details
+                                        :disabled="!pulmonesCheck"
+                                    ></v-textarea>
+                                </td>
                             </tr>
+
                             <tr>
-                            <th scope="row" style="width: 10%">Abdomen</th>
-                            <td style="width: 5%"><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 my-0 ml-3 "></v-checkbox></v-layout></td>
-                            <td contenteditable='true' style="text-align: left;"></td>
+                                <th scope="row" style="width: 10%">Abdomen</th>
+                                <td style="width: 5%">
+                                    <v-checkbox v-model="abdomenCheck" hide-details color=green class="shrink py-0 my-0 ml-3 "></v-checkbox>
+                                </td>
+                                <td>
+                                    <v-textarea
+                                        :auto-grow=true
+                                        v-model="examen_fisico.abdomen"
+                                        rows=1
+                                        hide-details
+                                        :disabled="!abdomenCheck"
+                                    ></v-textarea>
+                                </td>
                             </tr>
+
                             <tr>
-                            <th scope="row" style="width: 10%">Genitales</th>
-                            <td style="width: 5%"><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 my-0 ml-3 "></v-checkbox></v-layout></td>
-                            <td contenteditable='true' style="text-align: left;">Taner</td>
+                                <th scope="row" style="width: 10%">Genitales</th>
+                                <td style="width: 5%">
+                                    <v-checkbox v-model="genitalesCheck" hide-details color=green class="shrink py-0 my-0 ml-3 "></v-checkbox>
+                                </td>
+                                <td>
+                                    <v-textarea
+                                        :auto-grow=true
+                                        v-model="examen_fisico.genitales"
+                                        rows=1
+                                        hide-details
+                                        :disabled="!genitalesCheck"
+                                    ></v-textarea>
+                                </td>
                             </tr>
+
                             <tr>
-                            <th scope="row" style="width: 10%">Extremidades</th>
-                            <td style="width: 5%"><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 my-0 ml-3 "></v-checkbox></v-layout></td>
-                            <td contenteditable='true' style="text-align: left;"></td>
+                                <th scope="row" style="width: 10%">Extremidades</th>
+                                <td style="width: 5%">
+                                    <v-checkbox v-model="extremidadesCheck" hide-details color=green class="shrink py-0 my-0 ml-3 "></v-checkbox>
+                                </td>
+                                <td>
+                                    <v-textarea
+                                        :auto-grow=true
+                                        v-model="examen_fisico.extremidades"
+                                        rows=1
+                                        hide-details
+                                        :disabled="!extremidadesCheck"
+                                    ></v-textarea>
+                                </td>
                             </tr>
+
                             <tr>
-                            <th scope="row" style="width: 10%">Piel</th>
-                            <td style="width: 5%"><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 my-0 ml-3 "></v-checkbox></v-layout></td>
-                            <td contenteditable='true' style="text-align: left;"></td>
+                                <th scope="row" style="width: 10%">Piel</th>
+                                <td style="width: 5%">
+                                    <v-checkbox v-model="pielCheck" hide-details color=green class="shrink py-0 my-0 ml-3 "></v-checkbox>
+                                </td>
+                                <td>
+                                    <v-textarea
+                                        :auto-grow=true
+                                        v-model="examen_fisico.piel"
+                                        rows=1
+                                        hide-details
+                                        :disabled="!pielCheck"
+                                    ></v-textarea>
+                                </td>
                             </tr>
+
                             <tr>
-                            <th scope="row" style="width: 10%">SN</th>
-                            <td style="width: 5%"><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 my-0 ml-3 "></v-checkbox></v-layout></td>
-                            <td contenteditable='true' style="text-align: left;"></td>
+                                <th scope="row" style="width: 10%">SN</th>
+                                <td style="width: 5%">
+                                    <v-checkbox v-model="snCheck" hide-details color=green class="shrink py-0 my-0 ml-3 "></v-checkbox>
+                                </td>
+                                <td>
+                                    <v-textarea
+                                        :auto-grow=true
+                                        v-model="examen_fisico.sn"
+                                        rows=1
+                                        hide-details
+                                        :disabled="!snCheck"
+                                    ></v-textarea>
+                                </td>
                             </tr>
+
                             <tr>
-                            <th scope="row" style="width: 10%">Otros</th>
-                            <td style="width: 5%"><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 my-0 ml-3 "></v-checkbox></v-layout></td>
-                            <td contenteditable='true' style="text-align: left;"></td>
+                                <th scope="row" style="width: 10%">Otros</th>
+                                <td style="width: 5%">
+                                    <v-checkbox v-model="otrosCheck" hide-details color=green class="shrink py-0 my-0 ml-3 "></v-checkbox>
+                                </td>
+                                <td>
+                                    <v-textarea
+                                        :auto-grow=true
+                                        v-model="examen_fisico.otros"
+                                        rows=1
+                                        hide-details
+                                        :disabled="!otrosCheck"
+                                    ></v-textarea>
+                                </td>
                             </tr>
+
                         </tbody>
                         </table>
+                    </div>
                         
                         <!-- Textarea -->
                         <div class="form-group encapsulado">
                              <b-container>
+                                
                                 <b-row>
                                     <b-col>
                                         <!-- Textarea -->
@@ -958,8 +1089,6 @@
                                         <v-textarea
                                             v-model="Evaluacion_Medica"
                                             outline
-                                            name="Evaluacion_Medica"
-                                            value=""
                                             rows=8
                                         ></v-textarea>
                                         </div>
@@ -972,8 +1101,6 @@
                                         <v-textarea
                                             v-model="Plan_Medico"
                                             outline
-                                            name="Plan_Medico"
-                                            value=""
                                             rows=8
                                         ></v-textarea>
                                         </div>
@@ -990,8 +1117,6 @@
                                         <v-textarea
                                             v-model="Evaluacion_Psicologica"
                                             outline
-                                            name="Evaluacion_Psicologica"
-                                            value=""
                                             rows=8
                                         ></v-textarea>
                                         </div>
@@ -1004,8 +1129,6 @@
                                         <v-textarea
                                             v-model="Plan_Psicologica"
                                             outline
-                                            name="Plan_Psicologica"
-                                            value=""
                                             rows=8
                                         ></v-textarea>
                                         </div>
@@ -1023,8 +1146,6 @@
                                         <v-textarea
                                             v-model="Evaluacion_Trabajo_Social"
                                             outline
-                                            name="Evaluacion_Trabajo_Social"
-                                            value=""
                                             rows=8
                                         ></v-textarea>
                                         </div>
@@ -1037,8 +1158,6 @@
                                         <v-textarea
                                             v-model="Plan_Trabajo_Social"
                                             outline
-                                            name="Plan_Trabajo_Social"
-                                            value=""
                                             rows=8
                                         ></v-textarea>
                                         </div>
@@ -1056,8 +1175,6 @@
                                         <v-textarea
                                             v-model="Evaluacion_Nutricional"
                                             outline
-                                            name="Evaluacion_Nutricional"
-                                            value=""
                                             rows=8
                                         ></v-textarea>
                                         </div>
@@ -1070,8 +1187,6 @@
                                         <v-textarea
                                             v-model="Plan_Nutricional"
                                             outline
-                                            name="Plan_Nutricional"
-                                            value=""
                                             rows=8
                                         ></v-textarea>
                                         </div>
@@ -1089,8 +1204,6 @@
                                         <v-textarea
                                             v-model="Evaluacion_Farmacologica"
                                             outline
-                                            name="Evaluacion_Farmacologica"
-                                            value=""
                                             rows=8
                                         ></v-textarea>
                                         </div>
@@ -1099,12 +1212,10 @@
                                         <!-- Textarea -->                           
                                         <div class="form-group">
                                         <v-layout align-center justify-end />
-                                            <h3 id="headers"  class="text-xs-center">Plan Farmacológica</h3>
+                                            <h3 id="headers"  class="text-xs-center">Plan Farmacológico</h3>
                                         <v-textarea
-                                            v-model="Plan_Farmacologica"
+                                            v-model="Plan_Farmacologic"
                                             outline
-                                            name="Plan_Farmacologica"
-                                            value=""
                                             rows=8
                                         ></v-textarea>
                                         </div>
@@ -1804,6 +1915,7 @@
                     </table>
                 </div>
                 <div class="encapsulado">
+                        <h3 id="headers"  class="text-xs-center">Otros</h3>
                         <table class="table table-bordered table-ligth">
                         <tbody>
                             <tr>
@@ -1867,8 +1979,14 @@
 
 <script>
 import { store } from '../main';
+// import { onlyFloat } from 'vue-input-only-number';
+
+// Vue.use(onlyFloat);
+
+
 export default {
     data: () => ({
+        
         fisico: ["Peso", "Talla", "IMC"],
         vital: ["Presión arterial", "Pulso cardíaco"],
         tiempo: ["1 mes", "2 meses", "6 meses", "1 año"],
@@ -1935,79 +2053,79 @@ export default {
         SPR2: false,
         SPR3: false,
         SPRRef: false,
-        Sindrome_Clinico_Presentacion: "",
+        Sindrome_Clinico_Presentacion: 1,
         Dx_Definitivo: "",
         Dx_Asociado: "",
         historia: "",
 
         //Medicamentos
         Prednisona: "",
-        Prednisona_Cantidad: "",
         Prednisona_mg: "",
+        Prednisona_frecuencia: "",
 
         cyac: "",
-        Cyac_Cantidad: "",
         Cyac_mg: "",
+        Cyac_frecuencia: "",
 
         Tac: "",
-        Tac_Cantidad: "",
         Tac_mg: "",
+        Tac_frecuencia: "",
 
         MMF: "",
-        MMF_Cantidad: "",
         MMF_mg: "",
+        MMF_frecuencia: "",
 
         AZA: "",
-        AZA_Cantidad: "",
         AZA_mg: "",
+        AZA_frecuencia: "",
 
         CFM: "",
-        CFM_Cantidad: "",
         CFM_mg: "",
+        CFM_frecuencia: "",
 
         Enalapril: "",
-        Enalapril_Cantidad: "",
         Enalapril_mg: "",
+        Enalapril_frecuencia: "",
 
         Losartan: "",
-        Losartan_Cantidad: "",
         Losartan_mg: "",
+        Losartan_frecuencia: "",
 
         Amlodipina: "",
-        Amlodipina_Cantidad: "",
         Amlodipina_mg: "",
+        Amlodipina_frecuencia: "",
 
         CitratoNa: "",
-        Citrato_Na_Cantidad: "",
         Citrato_Na_mg: "",
+        Citrato_Na_frecuencia: "",
 
         CitratoK: "",
-        Citrato_K_Cantidad: "",
         Citrato_K_mg: "",
+        Citrato_K_frecuencia: "",
 
         Furosemida: "",
-        Furosemida_Cantidad: "",
         Furosemida_mg: "",
+        Furosemida_frecuencia: "",
 
         Alfacalcidol: "",
-        Alfacalcidol_Cantidad: "",
         Alfacalcidol_mg: "",
+        Alfacalcidol_frecuencia: "",
 
         CaCO3: "",
-        CaCO3_Cantidad: "",
         CaCO3_mg: "",
+        CaCO3_frecuencia: "",
 
         EPO: "",
-        EPO_Cantidad: "",
         EPO_mg: "",
+        EPO_frecuencia: "",
 
         Fe: "",
-        Fe_Cantidad: "",
         Fe_mg: "",
+        Fe_frecuencia: "",
 
         Cefradoxilo: "",
-        Cefradoxilo_Cantidad: "",
         Cefradoxilo_mg: "",
+        Cefradoxilo_frecuencia: "",
 
         //Laboratorios
         Na: "",
@@ -2041,27 +2159,59 @@ export default {
         includeFiles: "",
 
         Evaluacion_Medica: "",
-        Evaluacion_Psicosocial: "",
+        Evaluacion_Psicologica: "",
+        Evaluacion_Trabajo_Social: "",
         Evaluacion_Nutricional: "",
         Evaluacion_Farmacologica: "",
 
         Plan_Medico: "",
-        Plan_Psicosocial: "",
+        Plan_Psicologica: "",
+        Plan_Trabajo_Social: "",
         Plan_Nutricional: "",
         Plan_Farmacologico: "",
 
+        corazonCheck: false,
+        pulmonesCheck: false,
+        abdomenCheck: false,
+        genitalesCheck: false,
+        extremidadesCheck: false,
+        pielCheck: false,
+        snCheck: false,
+        otrosCheck: false,
+
+
+        examen_fisico: {
+            coong: "",
+            corazon: "",
+            pulmones: "",
+            abdomen: "",
+            genitales: "",
+            extremidades: "",
+            piel: "",
+            sn: "",
+            otros: ""
+        },
+
+        fecha: "",
+
         datos: [],
+        sindromes: [],
+        radioRules:[v => !!v || 'Debe seleccionar una opción'],
     }),
+    created() {
+        
+    },
+
     mounted() {
         console.log("Id de paciente es: " + store.idPaciente);
+
+        this.fecha = new Date().toISOString().slice(0, 10)
 
         const data = {
             ID: store.idPaciente // Aqui va el ID del paciente
         };
 
-        this.$http.post(`http://localhost:8000/PacienteController/findById`, data).then(response => {
-            console.log("Sali exitoso: " + response.data.Paciente[0]);
-            
+        this.$http.post(`http://localhost:8000/PacienteController/findById`, data).then(response => {            
 
             if(response.data.Paciente[0] == null){
                 console.log('Nothing to do here..');
@@ -2076,17 +2226,158 @@ export default {
                 this.paciente.Grupo_De_Sangre = response.data.Paciente[0].tipo_de__sangre.significado;
                 this.paciente.Estudia = response.data.Paciente[0].estudia.significado;
                 this.paciente.Transfusiones = response.data.Paciente[0].transfusiones.significado;
+
+                this.Sindrome_Clinico_Presentacion = response.data.Paciente[0].Sindrome_Clinico_Presentacion;
             }
             
 
         });
 
+        this.$http.get(`http://localhost:8000/sindromeController/getAll`).then(response => {
+            if(response.data.Sindrome[0] == null){
+                console.log('Nothing to do here..');
+            }else{
+                
+                this.sindromes = response.data.Sindrome;
+                console.log("Sindromes" + console.table(this.sindromes));
+            }
+        });
+
     },
     methods: {
-        guardar() {
-            console.log(this.bcg);
-        }
         
+
+        guardar() {
+            console.log("Fecha: " + this.fecha)
+            console.log("")
+
+
+
+        },
+        fillBCG: function() {
+            
+            if(!this.bcg1){
+                this.bcg2 = false;
+                this.bcg3 = false;
+                this.bcgRef = false;
+            }
+            if(!this.bcg2){
+                this.bcg3 = false;
+                this.bcgRef = false;
+            }
+            if(!this.bcg3){
+                this.bcgRef = false;
+            }
+        },
+        fillPoliovirus: function() {
+            
+            if(!this.poliovirus1){
+                this.poliovirus2 = false;
+                this.poliovirus3 = false;
+                this.poliovirusRef = false;
+            }
+            if(!this.poliovirus2){
+                this.poliovirus3 = false;
+                this.poliovirusRef = false;
+            }
+            if(!this.poliovirus3){
+                this.poliovirusRef = false;
+            }
+        },
+        fillHepatitisA: function(){
+
+            if(!this.hepatitisA1){
+                this.hepatitisA2 = false;
+                this.hepatitisA3 = false;
+                this.hepatitisARef = false;
+            }
+            if(!this.hepatitisA2){
+                this.hepatitisA3 = false;
+                this.hepatitisARef = false;
+            }
+            if(!this.hepatitisA3){
+                this.hepatitisARef = false;
+            }
+        },
+        fillHepatitisB: function(){
+
+            if(!this.hepatitisB1){
+                this.hepatitisB2 = false;
+                this.hepatitisB3 = false;
+                this.hepatitisBRef = false;
+            }
+            if(!this.hepatitisB2){
+                this.hepatitisB3 = false;
+                this.hepatitisBRef = false;
+            }
+            if(!this.hepatitisB3){
+                this.hepatitisBRef = false;
+            }
+        },
+        fillNeumococo: function(){
+
+            if(!this.neumococo1){
+                this.neumococo2 = false;
+                this.neumococo3 = false;
+                this.neumococoRef = false;
+            }
+            if(!this.neumococo2){
+                this.neumococo3 = false;
+                this.neumococoRef = false;
+            }
+            if(!this.neumococo3){
+                this.neumococoRef = false;
+            }
+        },
+        fillInflueza: function(){
+            
+            if(!this.influenza1){
+                this.influenza2 = false;
+                this.influenza3 = false;
+                this.influenzaRef = false;
+            }
+            if(!this.influenza2){
+                this.influenza3 = false;
+                this.influenzaRef = false;
+            }
+            if(!this.influenza3){
+                this.influenzaRef = false;
+            }
+        },
+        fillDPT: function(){
+
+            if(!this.DPT1){
+                this.DPT2 = false;
+                this.DPT3 = false;
+                this.DPTRef = false;
+            }
+            if(!this.DPT2){
+                this.DPT3 = false;
+                this.DPTRef = false;
+            }
+            if(!this.DPT3){
+                this.DPTRef = false;
+            }
+        },
+        fillSPR: function(){
+
+            if(!this.SPR1){
+                this.SPR2 = false;
+                this.SPR3 = false;
+                this.SPRRef = false;
+            }
+            if(!this.SPR2){
+                this.SPR3 = false;
+                this.SPRRef = false;
+            }
+            if(!this.SPR3){
+                this.SPRRef = false;
+            }
+        },
+        sindromeValue: function(id, significado){
+            this.Sindrome_Clinico_Presentacion = parseInt(id);
+            console.log("Selected:", id, significado);
+        }
     }
 };
 </script>

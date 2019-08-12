@@ -25,6 +25,7 @@ class Consulta extends Model
         'laboratorio',
         'resultados_laboratorio',
         'medicamento',
+        'examen_fisico',
         'proxima_visita'
     ];
 

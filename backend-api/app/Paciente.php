@@ -32,7 +32,8 @@ class Paciente extends Model
         'Talla',
         'PA',
         'Cms_perc',
-        'Historia'
+        'Historia',
+        'Numero_Orden'
     ];
     /**
      * Relaciones de la tabla Paciente
