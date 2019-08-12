@@ -53,6 +53,8 @@ $router->get('/ConsultaController/findAll', 'ConsultaController@findAll');
 $router->post('/ComentarioController/insert', 'ComentarioController@store');
 $router->get('/ComentarioController/findAll', 'ComentarioController@findAll');
 
+//get de sindromes
+$router->get('/sindromeController/getAll', 'sindromeController@getAll');
 
 //get info from procedencias
 $router->post('/ProcedenciaController/locate', 'ProcedenciaController@getLocation');

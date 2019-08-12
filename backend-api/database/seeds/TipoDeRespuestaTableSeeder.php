@@ -12,8 +12,8 @@ class TipoDeRespuestaTableSeeder extends Seeder
     public function run()
     {
         $val = [
-            ['ID' => 1, 'significado' => 'si'],
-            ['ID' => 2, 'significado' => 'no']
+            ['ID' => 1, 'significado' => 'Si'],
+            ['ID' => 2, 'significado' => 'No']
         ];
         foreach($val as $values){
             tipo_respuesta::insert($values);
