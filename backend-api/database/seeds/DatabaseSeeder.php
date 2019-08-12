@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder {
             EstadosTableSeeder::class,
             UsuariosSeeder::class,
             PacienteSeeder::class,
+            tipoCitasSeeder::class
         ]);
         
     }

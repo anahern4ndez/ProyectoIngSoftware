@@ -31,7 +31,12 @@ class CreateCitasTable extends Migration
             $table->foreign('estado')
             ->references('id')
             ->on('codigocitas');
+            $table->integer('tipoCitaID');
+            $table->foreign('tipoCitaID')
+            ->references('id')
+            ->on('tipo_citas');
         });
+
     }
 
     /**

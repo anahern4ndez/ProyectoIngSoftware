@@ -50,6 +50,7 @@ class CitasController extends Controller {
         $cita->hora = $request->hora;
         $cita->estado = $request->estado;
         $cita->duracionCita = $request->duracionCita;
+        $cita->tipoCitaID = $request->tipoCitaID;
         $cita->save();
         
         // Cita creada con exito, se retorna un codigo 200.
