@@ -40,6 +40,7 @@ class Consulta extends Migration
             $table->json('laboratorio')->nullable();
             $table->json('resultados_laboratorio')->nullable();
             $table->json('medicamento')->nullable();
+            $table->json('examen_fisico')->nullable();
             $table->json('proxima_visita')->nullable();
             $table->timestamps();
         });
