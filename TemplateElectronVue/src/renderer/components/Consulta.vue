@@ -1,11 +1,11 @@
 
 
-<template lang="">
+<template lang="es">
     <div>
         <b-tabs active-nav-item-class="font-weight-bold text-uppercase text-dark"  card vertical>
             <b-tab title="Consulta"  active >
                 <div class="cuerpo">
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" >
                         <fieldset>
 
                         <!-- Text input-->
@@ -135,8 +135,10 @@
                                         <v-text-field
                                             v-model="paciente.Peso"
                                             label="Peso"
+                                            :counter="10"
+                                            :rules="nameRules"
+                                            required
                                             outline
-                                            :disabled="true"
                                         ></v-text-field>
                                         </b-col>
                                         <b-col>
@@ -155,7 +157,6 @@
                                             v-model="paciente.Talla"
                                             label="Talla"
                                             outline
-                                            :disabled="true"
                                         ></v-text-field>
                                         </b-col>
                                         <b-col>
@@ -174,7 +175,6 @@
                                             v-model="paciente.PA"
                                             label="P/A"
                                             outline
-                                            :disabled="true"
                                         ></v-text-field>
                                         </b-col>
                                         <b-col>
@@ -257,9 +257,8 @@
 
                                         </tbody>
                                     </table>
-
-                    </b-container>
-                </div>
+                                </b-container>
+                        </div>
 
                         <!-- Form Name -->
                         <h2 style="text-align: left;">Dar Consulta</h2>
@@ -2104,6 +2103,8 @@ export default {
         
     }
 };
+
+
 </script>
 
 <style scoped>
