@@ -4,12 +4,12 @@ use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use GuzzleHttp\Client;
+use Behat\MinkExtension\Context\MinkContext;
 
 /**
  * Defines application features from the specific context.
  */
-class FeatureContext extends TestCase implements Context
-{
+class FeatureContext extends MinkContext implements Context {
     /**
      * Initializes context.
      *
@@ -20,12 +20,15 @@ class FeatureContext extends TestCase implements Context
     public function __construct()
     {
         $this->client = new Client([
-            'base_uri' => 'http://localhost:8000/api/'
+            'base_uri' => 'http://localhost:8000/'
         ]);
+
+        $this->phpunit = new BaseContext;
     }
 
     protected $client;
     protected $response;
+    protected $phpunit;
 
     /**
      * @When /^I send a ([A-Z]+) request to "([^"]*)"$/
@@ -38,7 +41,7 @@ class FeatureContext extends TestCase implements Context
      * @Then /^the response code should be (\d+)$/
      */
     public function theResponseCodeShouldBe($response_code) {
-        $this->assertEquals($response_code, $this->response->getStatusCode());
+        $this->phpunit->assertEquals($response_code, $this->response->getStatusCode());
     }
 
     /**
@@ -46,7 +49,7 @@ class FeatureContext extends TestCase implements Context
      */
     public function theJsonResponseShouldHaveAContaining($var_name, $var_contain_val) {
         $json_data = json_decode($this->response->getBody(), true);
-        $this->assertArrayHasKey($var_name, $json_data);
-        $this->assertContains($var_contain_val, $json_data[$var_name]);
+        $this->phpunit->assertArrayHasKey($var_name, $json_data);
+        $this->phpunit->assertContains($var_contain_val, $json_data[$var_name]);
     }
 }
