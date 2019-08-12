@@ -52,4 +52,27 @@ class FeatureContext extends MinkContext implements Context {
         $this->phpunit->assertArrayHasKey($var_name, $json_data);
         $this->phpunit->assertContains($var_contain_val, $json_data[$var_name]);
     }
+
+    /**
+     * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with values:$/
+     */
+    public function iSendARequestWithValues($method, $uri, TableNode $post) {
+        $fields = [];
+        foreach ($post->getRowsHash() as $key => $val) {
+            // var_dump($val);
+            $fields[$key] = $key;
+        }
+
+        var_dump($fields);
+
+        $this->response = $this->client->request($method, $uri, $data);
+    }
+
+    /**
+     * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with body:$/
+     */
+    public function iSendARequestWithBody($method, $uri, PyStringNode $string) {
+        $data = json_decode($string, true);
+        $this->response = $this->client->request($method, $uri, ['json' => $data]);
+    }
 }
