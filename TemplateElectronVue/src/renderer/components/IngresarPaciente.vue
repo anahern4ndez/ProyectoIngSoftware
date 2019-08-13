@@ -40,13 +40,6 @@
                           required
                           @change="checkLocation(CUI)"
                         ></v-text-field>
-                        <v-text-field
-                          v-model="Numero_Orden"
-                          label="Número de orden"
-                          outline
-                          :rules="nombreRules"
-                          required
-                        ></v-text-field>
 
                       </div>
                       <v-radio-group v-model="Sexo" row :rules="radioRules" required >
