@@ -14,16 +14,20 @@ class CreateHemodialisesTable extends Migration
     public function up()
     {
         Schema::create('hemodialises', function (Blueprint $table) {
+            $table->integer('IdPaciente');
             $table->foreign('IdPaciente')
             -> references('id')
             -> on('pacientes');
 
+            $table->integer('Estado');
             $table->foreign('Estado')
             -> references('EstadoActual')
             -> on('pacientes');
 
             $table->time('HoraEstimada');
             $table->time('HoraServicio');
+            
+            $table->integer('IdDoctor');
             $table->foreign('IdDoctor')
             -> references('id')
             -> on('users');
