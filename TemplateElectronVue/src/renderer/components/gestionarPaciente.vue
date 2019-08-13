@@ -88,7 +88,8 @@
                                     </div>
                                 </b-col>                       
                                 <b-col>
-                                       <table class="table table-bordered table-ligth">
+                                     
+                                     <table class="table table-bordered table-ligth">
                                         <tbody>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Vacuna</th>
@@ -99,63 +100,64 @@
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">BCG</th>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2 "></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-2"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="bcg1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="bcg2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="bcg3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="bcgRef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Poliovirus</th>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2 "></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-2"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="poliovirus1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="poliovirus2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="poliovirus3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="poliovirusRef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Hepatitis A</th>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2 "></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-2"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="hepatitisA1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="hepatitisA2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="hepatitisA3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="hepatitisARef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Hepatitis B</th>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2 "></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-2"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="hepatitisB1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="hepatitisB2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="hepatitisB3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="hepatitisBRef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Neumococo</th>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2 "></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-2"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="neumococo1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="neumococo2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="neumococo3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="neumococoRef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Influenza</th>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2 "></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-2"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="influeza1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="influeza2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="influeza3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="influezaRef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Diftteria/Tétano/Tosferina(DPT)</th>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2 "></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-2"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="DPT1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="DPT2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="DPT3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="DPTRef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Sarampión/Paperas/RUbeola(SPR)</th>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2 "></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-2 my-0 ml-2"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox v-model="includeFiles" hide-details class="shrink py-0 pl-3 my-0 ml-2"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="SPR1" value="1" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="SPR2" value="2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="SPR3" value="3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="SPRRef" value="4" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
 
                                         </tbody>
                                     </table>
+
                                     <table class="table table-bordered table-ligth" >
                                     <tbody>
                                         <tr>

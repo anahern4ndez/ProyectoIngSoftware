@@ -63,7 +63,7 @@
                   <td class="text-xs-center">{{ props.item.name }}</td>
                   <td class="text-xs-center">{{ props.item.email }}</td>
                   <td class="text-xs-center"v-if="props.item.puesto===1" >Administrador</td>
-                  <td class="text-xs-center"v-if="props.item.puesto===2" >Doctor</td>
+                  <td class="text-xs-center"v-if="props.item.puesto===2" >Profesional</td>
                   <td class="text-xs-center"v-if="props.item.puesto===3" >Secretaria</td>
                   <td class="text-xs-center"v-if="props.item.puesto===4" >Asistente</td>
                   <td class="text-xs-center"v-if="props.item.puesto===5" >Visitante</td>
@@ -165,7 +165,7 @@
                 <label for="levelInput">Tipo de usuario</label>
                 <b-form-select id="levelInput"  v-model="selected" class="mb-3" placeholder="Tipo de usuario">
                   <option value="Administrador">Administrador</option>
-                  <option value="Doctor">Doctor</option>
+                  <option value="Profesional">Profesional</option>
                   <option value="Secretaria">Secretaria</option>
                   <option value="Asistente">Asistente</option>
                   <option value="Visitante">Visitante</option>
@@ -254,7 +254,7 @@ export default {
       if (this.idb=="Administrador") {
         this.idb=1;
       }
-      if (this.idb=="Doctor") {
+      if (this.idb=="Profesional") {
         this.idb=2;
       }
       if (this.idb=="Secretaria") {
@@ -303,7 +303,7 @@ export default {
             this.selected = 'Administrador'; 
           }
           if (response.data.usersi.puesto === 2){
-            this.selected = 'Doctor'; 
+            this.selected = 'Profesional'; 
           }
           if (response.data.usersi.puesto === 3){
             this.selected = 'Secretaria'; 
@@ -326,7 +326,7 @@ export default {
         this.selected = 'Administrador'; 
       }
       if (recibed.puesto === 2){
-        this.selected = 'Doctor'; 
+        this.selected = 'Profesional'; 
       }
       if (recibed.puesto === 3){
          this.selected = 'Secretaria'; 
@@ -422,7 +422,7 @@ export default {
       if (this.selected=="Administrador") {
         this.puesto=1;
       }
-      if (this.selected=="Doctor") {
+      if (this.selected=="Profesional") {
         this.puesto=2;
       }
       if (this.selected=="Secretaria") {
@@ -552,7 +552,7 @@ export default {
       if (this.selected=="Administrador") {
         this.puesto=1;
       }
-      if (this.selected=="Doctor") {
+      if (this.selected=="Profesional") {
         this.puesto=2;
       }
       if (this.selected=="Secretaria") {
