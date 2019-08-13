@@ -57,6 +57,7 @@ $factory->define(App\Models\Cita::class, function (Faker\Generator $faker) {
         'hora' => $faker->time(),
         'duracionCita' => $faker->randomNumber(2),
         'estado' => $estado,
+        'tipoCitaID' => 1,
     ];
 });
 
