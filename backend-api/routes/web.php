@@ -62,6 +62,9 @@ $router->post('/ProcedenciaController/locate', 'ProcedenciaController@getLocatio
 //get info from estado
 $router->get('/EstadoController/getAllEstado', 'EstadoController@getAllEstado');
 
+//change status
+$router->post('/cambioEstadoController/save', 'cambioEstadoController@save');
+
 
 $router->delete('/users/destroy','ExampleController@destroy');
 $router->post('/users/create', 'ExampleController@store');
