@@ -182,14 +182,14 @@
                 if(this.name != '' && this.age != '' && this.register != '' && this.sexo != '' && this.fecha != null && this.actual != '' && this.cambio != ''){
                     this.$http.post(`http://localhost:8000/cambioEstadoController/save?name=${this.name}&age=${this.age}&register=${this.register}&sexo=${this.sexo}&fecha=${this.fecha}&actual=${this.actual}&cambio=${this.cambio}`).then(response=>{
                         this.errorFaltanDatos = false;
-                        this.name = '';
-                        this.age = '';
-                        this.register = '';
-                        this.sexo = '';
+                        this.name = ' ';
+                        this.age = ' ';
+                        this.register = ' ';
+                        this.sexo = ' ';
                         this.fecha = null;
                         this.menu = false;
-                        this.actual = '';
-                        this.cambio = '';
+                        this.actual = ' ';
+                        this.cambio = ' ';
                         //document.location.reload();
                     }).catch(error => {
                         console.log("Error");
