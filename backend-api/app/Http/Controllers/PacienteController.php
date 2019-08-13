@@ -37,7 +37,6 @@ class PacienteController extends Controller
         $pat->EstadoActual = $request->EstadoActual;
         $pat->Sexo = $request->Sexo;
         $pat->Historia = $request->Historia;
-        $pat->Numero_Orden = $request->Numero_Orden;
         $pat->save();
 
         return response()->json([
@@ -129,7 +128,6 @@ class PacienteController extends Controller
         $toUpdate->EstadoActual = $request->EstadoActual;
         $toUpdate->Sexo = $request->Sexo;
         $toUpdate->Historia = $request->Historia;
-        $toUpdate->Numero_Orden = $request->Numero_Orden;
         $toUpdate->save();
     }
 

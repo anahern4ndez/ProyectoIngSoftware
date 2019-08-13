@@ -250,7 +250,6 @@ export default {
         Sexo: '',
         pacientes: [],
         pass: false,
-        Numero_Orden: 0,
 
         //reglas de FORM
         cuiRules: [
