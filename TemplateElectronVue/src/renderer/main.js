@@ -91,6 +91,10 @@ const routes = [
   {
     path: '/cambioEstado',
     component: Vue.component('cambioEstado', require('./components/cambioEstado.vue').default)
+  },
+  {
+    path: '/Hemodialisis',
+    component: Vue.component('cambioEstado', require('./components/Hemodialisis.vue').default)
   }
 ];
 
