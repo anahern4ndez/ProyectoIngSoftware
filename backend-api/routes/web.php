@@ -71,8 +71,8 @@ $router->post('/doLogin', 'HomeController@printInfo');
 $router->get('/evaluateLogin', 'loginController@doLogin');
 $router->get('/verifyLogin', 'loginController@login');
 
-$router->post('/login', 'loginController@login');
 
+$router->post('/login', 'loginController@login');
 $router->post('/logout', 'loginController@logout');
 
 // Método de menú principal que obtiene el nombre del usuario logeado

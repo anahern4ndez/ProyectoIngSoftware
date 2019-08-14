@@ -135,10 +135,10 @@
                                         <v-text-field
                                             v-model="datos_generales.Peso"
                                             label="Peso"
-                                            :counter="10"
-                                            :rules="nameRules"
-                                            required
                                             outline
+                                            type =number
+                                            :rules="minRules"
+                                            min=0
                                         ></v-text-field>
                                         </b-col>
                                         <b-col>
@@ -146,6 +146,7 @@
                                             v-model="datos_generales.kg_perc"
                                             label="Kg. Percentil"
                                             outline
+                                            :disabled="true"
                                         ></v-text-field>
                                         </b-col>
                                         
@@ -156,6 +157,9 @@
                                             v-model="datos_generales.Talla"
                                             label="Talla"
                                             outline
+                                            type =number
+                                            :rules="minRules"
+                                            min=0
                                         ></v-text-field>
                                         </b-col>
                                         <b-col>
@@ -163,6 +167,7 @@
                                             v-model="datos_generales.cms_perc"
                                             label="Cms. Percentil"
                                             outline
+                                            :disabled="true"
                                     ></v-text-field>
                                     </b-col>
                                 
@@ -173,6 +178,9 @@
                                             v-model="datos_generales.PA"
                                             label="P/A"
                                             outline
+                                            type =number
+                                            min=0
+                                            :rules="minRules"
                                         ></v-text-field>
                                         </b-col>
                                         <b-col>
@@ -180,6 +188,7 @@
                                             v-model="datos_generales.Percentil"
                                             label="Percentil"
                                             outline
+                                            :disabled="true"
                                         ></v-text-field>
                                         </b-col>
                                     </b-row>
@@ -352,6 +361,9 @@
                                                             label="mg"
                                                             outline
                                                             :disabled="!Prednisona"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
@@ -360,6 +372,9 @@
                                                             label="Frecuencia"
                                                             outline
                                                             :disabled="!Prednisona"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
@@ -373,6 +388,9 @@
                                                             label="mg"
                                                             outline
                                                             :disabled="!cyac"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
@@ -381,6 +399,9 @@
                                                             label="Frecuencia"
                                                             outline
                                                             :disabled="!cyac"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
@@ -394,6 +415,9 @@
                                                             label="mg"
                                                             outline
                                                             :disabled="!Tac"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
@@ -402,6 +426,9 @@
                                                             label="Frecuencia"
                                                             outline
                                                             :disabled="!Tac"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
@@ -415,6 +442,9 @@
                                                             label="mg"
                                                             outline
                                                             :disabled="!MMF"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
@@ -423,6 +453,9 @@
                                                             label="Frecuencia"
                                                             outline
                                                             :disabled="!MMF"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
@@ -436,6 +469,9 @@
                                                             label="mg"
                                                             outline
                                                             :disabled="!AZA"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
@@ -444,6 +480,9 @@
                                                             label="Frecuencia"
                                                             outline
                                                             :disabled="!AZA"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
@@ -457,6 +496,9 @@
                                                             label="mg"
                                                             outline
                                                             :disabled="!CFM"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
@@ -465,6 +507,9 @@
                                                             label="Frecuencia"
                                                             outline
                                                             :disabled="!CFM"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
@@ -478,6 +523,9 @@
                                                             label="mg"
                                                             outline
                                                             :disabled="!Enalapril"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
@@ -486,6 +534,9 @@
                                                             label="Frecuencia"
                                                             outline
                                                             :disabled="!Enalapril"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
@@ -499,6 +550,9 @@
                                                             label="mg"
                                                             outline
                                                             :disabled="!Losartan"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
@@ -507,6 +561,9 @@
                                                             label="Frecuencia"
                                                             outline
                                                             :disabled="!Losartan"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
@@ -520,6 +577,9 @@
                                                             label="mg"
                                                             outline
                                                             :disabled="!Amlodipina"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
@@ -528,6 +588,9 @@
                                                             label="Frecuencia"
                                                             outline
                                                             :disabled="!Amlodipina"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
@@ -541,6 +604,9 @@
                                                             label="mili-equi"
                                                             outline
                                                             :disabled="!CitratoNa"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
@@ -549,6 +615,9 @@
                                                             label="Frecuencia"
                                                             outline
                                                             :disabled="!CitratoNa"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
@@ -558,10 +627,14 @@
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
+
                                                             v-model="Citrato_K_mg"
                                                             label="mili equiva."
                                                             outline
                                                             :disabled="!CitratoK"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
@@ -570,6 +643,9 @@
                                                             label="Frecuencia"
                                                             outline
                                                             :disabled="!CitratoK"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
@@ -583,6 +659,9 @@
                                                             label="mg"
                                                             outline
                                                             :disabled="!Furosemida"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
@@ -591,6 +670,9 @@
                                                             label="Frecuencia"
                                                             outline
                                                             :disabled="!Furosemida"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
@@ -604,6 +686,9 @@
                                                             label="micro gr"
                                                             outline
                                                             :disabled="!Alfacalcidol"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
@@ -612,6 +697,9 @@
                                                             label="Frecuencia"
                                                             outline
                                                             :disabled="!Alfacalcidol"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
@@ -625,6 +713,9 @@
                                                             label="mg"
                                                             outline
                                                             :disabled="!CaCO3"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
@@ -633,6 +724,9 @@
                                                             label="Frecuencia"
                                                             outline
                                                             :disabled="!CaCO3"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
@@ -646,6 +740,9 @@
                                                             label="unidades"
                                                             outline
                                                             :disabled="!EPO"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
@@ -654,6 +751,9 @@
                                                             label="Frecuencia"
                                                             outline
                                                             :disabled="!EPO"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
@@ -667,6 +767,9 @@
                                                             label="mg"
                                                             outline
                                                             :disabled="!Fe"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
@@ -675,6 +778,9 @@
                                                             label="Frecuencia"
                                                             outline
                                                             :disabled="!Fe"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
@@ -688,6 +794,9 @@
                                                             label="mg"
                                                             outline
                                                             :disabled="!Cefradoxilo"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
@@ -696,6 +805,9 @@
                                                             label="Frecuencia"
                                                             outline
                                                             :disabled="!Cefradoxilo"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
@@ -716,6 +828,9 @@
                                                         <v-text-field
                                                             v-model="Na"
                                                             label="Na"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -723,6 +838,9 @@
                                                         <v-text-field
                                                             v-model="Cl"
                                                             label="Cl"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -730,6 +848,9 @@
                                                         <v-text-field
                                                             v-model="BUN"
                                                             label="BUN"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -737,6 +858,9 @@
                                                         <v-text-field
                                                             v-model="Glu"
                                                             label="Glu"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -746,6 +870,9 @@
                                                         <v-text-field
                                                             v-model="K"
                                                             label="K"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -753,6 +880,9 @@
                                                         <v-text-field
                                                             v-model="HCO"
                                                             label="HCO"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -760,6 +890,9 @@
                                                         <v-text-field
                                                             v-model="Creat"
                                                             label="Creat"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -767,6 +900,9 @@
                                                         <v-text-field
                                                             v-model="WB"
                                                             label="WB"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -776,6 +912,9 @@
                                                         <v-text-field
                                                             v-model="Col"
                                                             label="Col"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -783,6 +922,9 @@
                                                         <v-text-field
                                                             v-model="Alb"
                                                             label="Alb"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -790,6 +932,9 @@
                                                         <v-text-field
                                                             v-model="HB"
                                                             label="HB"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -797,6 +942,9 @@
                                                         <v-text-field
                                                             v-model="HT"
                                                             label="HT"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -806,6 +954,9 @@
                                                         <v-text-field
                                                             v-model="Ca"
                                                             label="Ca"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -813,6 +964,9 @@
                                                         <v-text-field
                                                             v-model="P"
                                                             label="P"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -820,6 +974,9 @@
                                                         <v-text-field
                                                             v-model="MG"
                                                             label="MG"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -827,6 +984,9 @@
                                                         <v-text-field
                                                             v-model="PTL"
                                                             label="PTL"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -836,6 +996,9 @@
                                                         <v-text-field
                                                             v-model="EGO"
                                                             label="EGO"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -843,6 +1006,9 @@
                                                         <v-text-field
                                                             v-model="pH"
                                                             label="pH"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -850,6 +1016,9 @@
                                                         <v-text-field
                                                             v-model="Glu2"
                                                             label="Glu"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -857,6 +1026,9 @@
                                                         <v-text-field
                                                             v-model="Prot"
                                                             label="Prot"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -866,6 +1038,9 @@
                                                         <v-text-field
                                                             v-model="Hem"
                                                             label="Hem"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -873,6 +1048,9 @@
                                                         <v-text-field
                                                             v-model="Gr"
                                                             label="Gr"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -880,6 +1058,9 @@
                                                         <v-text-field
                                                             v-model="GB"
                                                             label="GB"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -887,6 +1068,9 @@
                                                         <v-text-field
                                                             v-model="Cil"
                                                             label="Cil"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -896,6 +1080,9 @@
                                                         <v-text-field
                                                             v-model="URO"
                                                             label="URO"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -903,6 +1090,9 @@
                                                         <v-text-field
                                                             v-model="PTH"
                                                             label="PTH"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -910,6 +1100,9 @@
                                                         <v-text-field
                                                             v-model="Ferritina"
                                                             label="Ferritina"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -2198,7 +2391,13 @@ export default {
 
         datos: [],
         sindromes: [],
-        radioRules:[v => !!v || 'Debe seleccionar una opción'],
+        inputRules: [
+          (v) => !!v || 'Se requiere el campo',
+        ],
+        minRules:[
+            (v) => !!v && parseInt(v) > 0   || 'El número debe de ser mayor a 0'
+        ]
+        
     }),
     created() {
         
@@ -2417,5 +2616,9 @@ export default {
 
     .centrado {
     vertical-align: middle;
+    }
+
+    div.col-auto > ul > li.nav-item {
+        color:red;
     }
 </style>
