@@ -21,6 +21,7 @@ class PacienteController extends Controller
         $pat->Apellido = $request->Apellido;
         $pat->Fecha_de_nacimiento = $request->Fecha_de_nacimiento;
         $pat->Procedencia = $request->Procedencia;
+        $pat->Residencia = $request->Residencia;
         $pat->Nombre_de_padre = $request->Nombre_de_padre;
         $pat->Nombre_de_madre = $request->Nombre_de_madre;
         $pat->Telefono = $request->Telefono;
@@ -112,6 +113,7 @@ class PacienteController extends Controller
         $toUpdate->Apellido = $request->Apellido;
         $toUpdate->Fecha_de_nacimiento = $request->Fecha_de_nacimiento;
         $toUpdate->Procedencia = $request->Procedencia;
+        $toUpdate->Residencia = $request->Residencia;
         $toUpdate->Nombre_de_padre = $request->Nombre_de_padre;
         $toUpdate->Nombre_de_madre = $request->Nombre_de_madre;
         $toUpdate->Telefono = $request->Telefono;

@@ -20,9 +20,11 @@ class CreateHemodialisesTable extends Migration
             -> on('pacientes');
 
             $table->integer('Estado');
+            /* no se que querras hacer con esto...
             $table->foreign('Estado')
             -> references('EstadoActual')
             -> on('pacientes');
+            */
 
             $table->time('HoraEstimada');
             $table->time('HoraServicio');

@@ -54,6 +54,32 @@
                               outline
                               :disabled="true"
                           ></v-text-field>
+                      
+                      <v-select
+                        v-if="procedenciasOpc"
+                        v-bind:items="procedenciasOpc"
+                        item-text="`${data.item.Departamento}, ${data.item.Municipio}`"
+                        item-value="`${data.item.ID}`"
+                        label = "Residencia actual" 
+                        :rules ="radioRules"
+                        outline
+                        required
+                      >
+                        <template
+                          slot="selection" slot-scope="data">
+                          {{ data.item.Departamento}}, {{data.item.Municipio}}
+
+                        </template>
+
+                        <template slot="item" slot-scope="data">
+                          <v-list-tile-content>
+                            <v-list-tile-title v-html="`${data.item.Departamento}, ${data.item.Municipio}, ${data.item.ID}`">
+                            </v-list-tile-title>
+                          </v-list-tile-content>
+                        </template>
+                        
+                      </v-select>
+
                       <v-text-field
                               v-model="Nombre"
                               label="Nombres"
@@ -211,12 +237,19 @@
 
 
 <script>
+import { debug } from 'util';
 export default {
   mounted() {
     this.$http.get("http://localhost:8000/PacienteController/findAll").then(response => {
       //esto deberia ser un arrray de pacientes que contengan todos sus atributos...
       this.pacientes = response.data.Pacientes;
 
+
+    });
+
+    this.$http.get("http://localhost:8000/ProcedenciaController/getAllLocation").then(response => {
+      this.procedenciasOpc = response.data.locations;
+      console.log(this.procedenciasOpc);
     });
   },
     data () {
@@ -236,6 +269,7 @@ export default {
         ProcedenciaTxt:'',  //este es para mostrar el depto, municipio
         Nombre_de_padre:'',
         Nombre_de_madre:'',
+        residencia:'',
         Telefono:'',
         Edad: '',
         //los siguientes se pondran como predeterminados por cuestion de tiempo, pero se volveran dinámicos después
@@ -250,6 +284,7 @@ export default {
         Sexo: '',
         pacientes: [],
         pass: false,
+        procedenciasOpc: undefined,
 
         //reglas de FORM
         cuiRules: [
@@ -274,6 +309,7 @@ export default {
             Apellido: this.Apellido,
             Fecha_de_nacimiento: this.Fecha_de_nacimiento,
             Procedencia: this.CUI.substr(this.CUI.length-4),
+            Residencia: this.residencia,
             Nombre_de_padre: this.Nombre_de_padre,
             Nombre_de_madre: this.Nombre_de_madre,
             Telefono: this.Telefono,
@@ -294,18 +330,19 @@ export default {
 
           this.$http.post('http://localhost:8000/PacienteController/insert', info).then(response => {
             this.error = false;
-            this.CUI=' '; 
-            this.Nombre=' ';
-            this.Apellido=' ';
-            this.Fecha_de_nacimiento=' ';
-            this.ProcedenciaTxt=' ';
-            this.Nombre_de_padre=' ';
-            this.Nombre_de_madre=' ';
-            this.Telefono=' ';
-            this.Edad= ' ';
-            this.Historia=' ';
-            this.Dx_Definitivo=' ';
-            this.Dx_Asociados=' ';
+            this.CUI=''; 
+            this.Nombre='';
+            this.Apellido='';
+            this.Fecha_de_nacimiento='';
+            this.residencia = '';
+            this.ProcedenciaTxt='';
+            this.Nombre_de_padre='';
+            this.Nombre_de_madre='';
+            this.Telefono='';
+            this.Edad= '';
+            this.Historia='';
+            this.Dx_Definitivo='';
+            this.Dx_Asociados='';
           }).
           catch(error => {
               this.error = true;

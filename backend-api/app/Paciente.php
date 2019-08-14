@@ -13,6 +13,7 @@ class Paciente extends Model
         'Apellido', 
         'Fecha_de_nacimiento',
         'Procedencia',
+        'residencia',
         'Nombre_de_padre',
         'Nombre_de_madre',
         'Telefono',
@@ -41,6 +42,11 @@ class Paciente extends Model
     public function Procedencia(){
         return $this->hasOne('App\Procedencia','ID', 'Procedencia');
     }
+
+    public function Residencia(){
+        return $this->hasOne('App\Procedencia','ID', 'Procedencia');
+    }
+
     public function EstadoActual(){
         return $this->hasOne('App\Estado','ID', 'EstadoActual');
     }

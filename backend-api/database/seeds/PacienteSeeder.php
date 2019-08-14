@@ -42,6 +42,7 @@ class PacienteSeeder extends Seeder
                 'Apellido' => $faker->lastName(),
                 'Fecha_de_nacimiento' => $faker->date(),
                 'Procedencia' => (int)$procedencia,
+                'Residencia' => (int)$procedencia,
                 'Nombre_de_padre' => $faker->name('male'),
                 'Nombre_de_madre' => $faker->name('female'),
                 'Telefono' => $faker->randomNumber(7),

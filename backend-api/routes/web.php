@@ -49,6 +49,9 @@ $router->post('/ConsultaController/insert', 'ConsultaController@store');
 $router->get('/ConsultaController/findOne', 'ConsultaController@findOne');
 $router->get('/ConsultaController/findAll', 'ConsultaController@findAll');
 
+//Locations
+$router->get('/ProcedenciaController/getAllLocation', 'ProcedenciaController@getAllLocation');
+
 //CRUD: TABLA COMENTARIO
 $router->post('/ComentarioController/insert', 'ComentarioController@store');
 $router->get('/ComentarioController/findAll', 'ComentarioController@findAll');
