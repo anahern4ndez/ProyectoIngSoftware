@@ -4,18 +4,22 @@
   <div class="grey--text text--darken-2">
     <h1 id="headers" class="text-center">Ingresar a un paciente</h1>
     <br><br>
+    <v-form
+      ref="form"
+      v-model="pass"
+    >
     <b-container class="bv-example-row1" >
       <v-card>  
         <v-card-title primary-title>
           <v-flex xs12>
             <v-layout align-center justify-end column fill-height />
+            
               <v-text-field
                   v-model="Numero_expediente"
                   label="Número de expediente"
                   outline
                   :rules="cuiRules"
                   required
-                  @change="checkLocation(Numero_expediente)"
               ></v-text-field>
           </v-flex>
         </v-card-title>
@@ -65,7 +69,6 @@
                         :rules ="radioRules"
                         outline
                         required
-                        @input="logID"
                       >
                         <template
                           slot="selection" slot-scope="data">
@@ -194,6 +197,7 @@
               name="Dx_Definitivo"
               value=""
               rows=38
+              :rules="nombreRules"
             ></v-textarea>
             </v-flex>
           </v-card-title>
@@ -209,6 +213,7 @@
                 name="Dx_Asociados"
                 value=""
                 rows=38
+                :rules="nombreRules"
               ></v-textarea>
               </v-flex>
             </v-card-title>
@@ -226,14 +231,16 @@
               v-model="Historia"
               name="Historia"
               rows=40
+              :rules="nombreRules"
             ></v-textarea>
             </v-flex>
           </v-card-title>
         </v-card>
     </div>
-  <div>
-    <button float="left" type="button" class="btn btn-lg btn-warning btn-block" v-on:click="ingresarNuevo" :disabled="this.Sindrome_Clinico_Presentacion===''">Ingresar nuevo paciente</button> 
-  </div>
+    <div>
+      <button float="left" type="button" class="btn btn-lg btn-warning btn-block" v-on:click="ingresarNuevo" :disabled="!pass">Ingresar nuevo paciente</button> 
+    </div>
+    </v-form>
   </div>
 </template>
 
@@ -303,7 +310,7 @@ export default {
   },
     methods: {
         ingresarNuevo(){
-          var pass = false;
+          var pass = true;
           const info = {
             Numero_expediente: this.Numero_expediente,
             CUI: this.CUI,
@@ -333,6 +340,8 @@ export default {
           this.$http.post('http://localhost:8000/PacienteController/insert', info).then(response => {
             this.error = false;
             this.CUI=''; 
+            this.residencia='';
+            this.Numero_expediente='';
             this.Nombre='';
             this.Apellido='';
             this.Fecha_de_nacimiento='';
@@ -345,6 +354,8 @@ export default {
             this.Historia='';
             this.Dx_Definitivo='';
             this.Dx_Asociados='';
+            this.reset();
+            this.resetValidation();
           }).
           catch(error => {
               this.error = true;
@@ -376,8 +387,11 @@ export default {
           }
         
         },
-        logID(event){
-          console.log(typeof event);
+        resetValidation () {
+          this.$refs.form.resetValidation()
+        },
+        reset () {
+          this.$refs.form.reset()
         },
         prettyPlaceholders(){
           //poner aqui todos los placeholders que cambian en runtime..
