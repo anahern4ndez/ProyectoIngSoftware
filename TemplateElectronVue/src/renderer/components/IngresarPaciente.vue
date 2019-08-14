@@ -58,12 +58,14 @@
                       <v-select
                         v-if="procedenciasOpc"
                         v-bind:items="procedenciasOpc"
+                        v-model="residencia"
                         item-text="`${data.item.Departamento}, ${data.item.Municipio}`"
-                        item-value="`${data.item.ID}`"
+                        item-value="ID"
                         label = "Residencia actual" 
                         :rules ="radioRules"
                         outline
                         required
+                        @input="logID"
                       >
                         <template
                           slot="selection" slot-scope="data">
@@ -73,7 +75,7 @@
 
                         <template slot="item" slot-scope="data">
                           <v-list-tile-content>
-                            <v-list-tile-title v-html="`${data.item.Departamento}, ${data.item.Municipio}, ${data.item.ID}`">
+                            <v-list-tile-title v-html="`${data.item.Departamento}, ${data.item.Municipio}`">
                             </v-list-tile-title>
                           </v-list-tile-content>
                         </template>
@@ -373,6 +375,9 @@ export default {
             
           }
         
+        },
+        logID(event){
+          console.log(typeof event);
         },
         prettyPlaceholders(){
           //poner aqui todos los placeholders que cambian en runtime..
