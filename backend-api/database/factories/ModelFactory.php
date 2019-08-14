@@ -25,6 +25,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Models\Paciente::class, function (Faker\Generator $faker) {
     return [
+        'Numero_expediente' => $faker->randomNumber(5),
         'CUI' => $faker->randomNumber(7),
         'Nombre' => $faker->firstName(),
         'Apellido' => $faker->lastName(),
@@ -43,12 +44,6 @@ $factory->define(App\Models\Paciente::class, function (Faker\Generator $faker) {
         'Transfusiones' => 1,
         'EstadoActual' => 1,
         'Sexo' => 1,
-        'Kg_perc' => 1.0,
-        'Peso' => 1.0,
-        'Percentil' => 1,
-        'Talla' => 1.0,
-        'Cms_perc' => 1.0,
-        'PA' => 1.0,
         'Historia' => 'Historia',
     ];
 });
@@ -62,6 +57,7 @@ $factory->define(App\Models\Cita::class, function (Faker\Generator $faker) {
         'hora' => $faker->time(),
         'duracionCita' => $faker->randomNumber(2),
         'estado' => $estado,
+        'tipoCitaID' => 1,
     ];
 });
 

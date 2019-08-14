@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cita;
+use DB;
 
 class CitasController extends Controller {
     /**
@@ -15,6 +16,20 @@ class CitasController extends Controller {
             'message' => 'Consulta de citas realizada con éxito.',
             'data' => Cita::all(),
         ], 200);
+    }
+
+    /* 
+     *Encuentra citas segun el tipo de cita.
+    */
+    public function getCitasByTipo(Request $request){
+        (int)$tipo = $request->tipoCitaID;
+        $citas = Cita::where('tipoCitaID',$tipo)->with('tipodeCita')->get();
+
+        return response()->json([
+            'success' => true,
+            'Citas' => $citas
+        ], 200);
+
     }
 
     /**
@@ -50,6 +65,7 @@ class CitasController extends Controller {
         $cita->hora = $request->hora;
         $cita->estado = $request->estado;
         $cita->duracionCita = $request->duracionCita;
+        $cita->tipoCitaID = $request->tipoCitaID;
         $cita->save();
         
         // Cita creada con exito, se retorna un codigo 200.
@@ -108,6 +124,7 @@ class CitasController extends Controller {
         $cita->hora = $request->hora;
         $cita->estado = $request->estado;
         $cita->duracionCita = $request->duracionCita;
+        $cita->tipoCitaID = $request->tipoCitaID;
         $cita->save();
 
         // Cita actualizada con exito, se retorna un codigo 200.

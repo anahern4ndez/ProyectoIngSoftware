@@ -19,24 +19,19 @@ class cambioEstadoController extends Controller
         
     }
 
-    public function guardarEstado(Request $request)
-    {
-        $this->validate($request, [
-            'email' => 'email|unique:users,email',
-            'password' => 'min:6|max:255'
-        ]);
-        
-        $user = new User;
+    public function save(Request $request)
+    {   
+        //$user = new User;
         //$user->id = $request->id;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->puesto = $request->puesto;
-        $user->save();
+        //$user->name = $request->name;
+        //$user->email = $request->email;
+        //$user->puesto = $request->puesto;
+        //$user->save();
         return $request;
 
         return response()->json([
             'success' => true,
-            'message' => 'creado'
+            'message' => 'guardado'
         ], 200);
     }
 
