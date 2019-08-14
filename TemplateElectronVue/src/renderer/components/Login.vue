@@ -159,17 +159,22 @@ export default {
                     } catch (error) {
 
                         console.log("Error con shelljs");
-                    }             
-                    console.log("El id (login) es: " + this.id);
+                    }
+                    
+                }).then(() => {
+                    this.isLoading = false
+                }).then(() => {
                     this.$router.push("/menu-principal");
                 }).catch(error => {
+                    this.isLoading = false
                     this.error = true;
-                    console.log("Error amigo");
                     this.success = false;
                 });
 
                 //this.loader = false;
-                setTimeout(() => (this.isLoading = false), 1000);
+                // setTimeout(() => (this.isLoading = false), 1000);
+            }else{
+                this.isLoading = false;
             }
         }
     }

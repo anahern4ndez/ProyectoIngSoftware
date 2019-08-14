@@ -13,27 +13,59 @@ class ConsultaController extends Controller
      * @return \Illuminate\Http\Response
      */
     function store(Request $request){
-        /*Paciente::create(Request::all());
-        return 'true';*/
+        
         $consulta = new Consulta;
+
         $consulta->cui = $request->cui;
         $consulta->fecha = $request->fecha;
         $consulta->peso = $request->peso;
         $consulta->talla = $request->talla;
         $consulta->pa = $request->pa;
-        $consulta->historia = $request->historia;
         $consulta->sindrome_clinico = $request->sindrome_clinico;
-        $consulta->psicosocial = $request->psicosocial;
-        $consulta->nutricion = $request->nutricion;
-        $consulta->plan_medico = $request->plan_medico;
-        $consulta->plan_psicosocial = $request->plan_psicosocial;
-        $consulta->plan_nutricional = $request->plan_nutricional;
-        $consulta->plan_farmacologico = $request->plan_farmacologico;
-        $consulta->id_imagenes_lab = $request->id_imagenes_lab;
-        $consulta->laboratorio = $request->laboratorio;
-        $consulta->resultados_laboratorio = $request->resultados_laboratorio;
+        $consulta->Dx_Definitivo = $request->Dx_Definitivo;
+        $consulta->Dx_Asociados = $request->Dx_Asociados;
+        $consulta->historia = $request->historia;
         $consulta->medicamento = $request->medicamento;
-        $consulta->proxima_visita = $request->proxima_visita;
+        $consulta->resultados_laboratorio = $request->resultados_laboratorio;
+        $consulta->examen_fisico = $request->examen_fisico;
+        $consulta->evaluacion_medica = $request->evaluacion_medica;
+        $consulta->plan_medico = $request->plan_medico;
+        $consulta->evaluacion_psicologica = $request->evaluacion_psicologica;
+        $consulta->plan_psicologico = $request->plan_psicologico;
+        $consulta->evaluacion_trabajo_social = $request->evaluacion_trabajo_social;
+        $consulta->plan_trabajo_social = $request->plan_trabajo_social;
+        $consulta->evaluacion_nutricional = $request->evaluacion_nutricional;
+        $consulta->plan_nutricional = $request->plan_nutricional;
+        $consulta->evaluacion_farmacologica = $request->evaluacion_farmacologica;
+        $consulta->plan_farmacologico = $request->plan_farmacologico;
+
+        // DB::select('exec insertConsulta(
+        //         "$consulta->cui",
+        //         "$consulta->fecha",
+        //         "$consulta->peso",
+        //         "$consulta->talla",
+        //         "$consulta->pa",
+        //         "$consulta->sindrome_clinico",
+        //         "$consulta->Dx_Definitivo",
+        //         "$consulta->Dx_Asociados",
+        //         "$consulta->historia",
+        //         "$consulta->medicamento",
+        //         "$consulta->resultados_laboratorio",
+        //         "$consulta->examen_fisico",
+        //         "$consulta->evaluacion_medica",
+        //         "$consulta->plan_medico",
+        //         "$consulta->evaluacion_psicologica",
+        //         "$consulta->plan_psicologico",
+        //         "$consulta->evaluacion_trabajo_social",
+        //         "$consulta->plan_trabajo_social",
+        //         "$consulta->evaluacion_nutricional",
+        //         "$consulta->plan_nutricional",
+        //         "$consulta->evaluacion_farmacologica",
+        //         "$consulta->plan_farmacologico"
+        //     )');
+        
+        // $consulta->id_imagenes_lab = $request->id_imagenes_lab;
+        
         $consulta->save();
 
         return response()->json([
