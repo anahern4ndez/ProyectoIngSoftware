@@ -53,12 +53,17 @@ $router->get('/ConsultaController/findAll', 'ConsultaController@findAll');
 $router->post('/ComentarioController/insert', 'ComentarioController@store');
 $router->get('/ComentarioController/findAll', 'ComentarioController@findAll');
 
+//get de sindromes
+$router->get('/sindromeController/getAll', 'sindromeController@getAll');
 
 //get info from procedencias
 $router->post('/ProcedenciaController/locate', 'ProcedenciaController@getLocation');
 
 //get info from estado
 $router->get('/EstadoController/getAllEstado', 'EstadoController@getAllEstado');
+
+//change status
+$router->post('/cambioEstadoController/save', 'cambioEstadoController@save');
 
 
 $router->delete('/users/destroy','ExampleController@destroy');
