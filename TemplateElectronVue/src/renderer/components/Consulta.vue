@@ -9,7 +9,11 @@
                         <fieldset>
 
                         <!-- Text input-->
-                        <h1 style="text-align: center;">Consulta General</h1>
+                        <div style="display: flex; justify-content:space-between;">
+                            <h1 >Consulta General</h1>
+                            <h1 >{{this.fecha}}</h1>
+                        </div>
+                        
 
                         <!-- Text input-->
                         <div class="form-group ">
@@ -1985,6 +1989,8 @@ import { store } from '../main';
 
 export default {
     data: () => ({
+        update: false,
+
         
         fisico: ["Peso", "Talla", "IMC"],
         vital: ["Presión arterial", "Pulso cardíaco"],
@@ -2232,6 +2238,40 @@ export default {
             }
             
 
+        }).then(() => {
+            const data2 = {
+                cui: this.paciente.CUI,
+                fecha: this.fecha
+            }
+            this.$http.post(`http://localhost:8000/ConsultaController/findOne`, data2).then(response => {
+                this.update = response.data.success
+                
+            }).then(() => {
+                if(this.update){
+
+                    this.$http.post(`http://localhost:8000/ConsultaController/findAll`, data2).then(response => {
+                        this.datos_generales.Peso = response.data.Consulta[0].peso
+                        this.datos_generales.Talla = response.data.Consulta[0].talla
+                        this.datos_generales.PA = response.data.Consulta[0].pa
+                        
+                        this.Dx_Definitivo = response.data.Consulta[0].Dx_Definitivo
+                        this.Dx_Asociado = response.data.Consulta[0].Dx_Asociados
+                        this.historia = response.data.Consulta[0].historia
+
+                        this.Evaluacion_Medica = response.data.Consulta[0].evaluacion_medica
+                        this.Plan_Medico = response.data.Consulta[0].plan_medica
+                        this.Evaluacion_Psicologica = response.data.Consulta[0].evaluacion_psicologica
+                        this.Plan_Psicologica = response.data.Consulta[0].plan_psicologico
+                        this.Evaluacion_Trabajo_Social = response.data.Consulta[0].evaluacion_trabajo_social
+                        this.Plan_Trabajo_Socia = response.data.Consulta[0].plan_trabajo_social
+                        this.Evaluacion_Nutricional = response.data.Consulta[0].evaluacion_nutricional
+                        this.Plan_Nutricional = response.data.Consulta[0].plan_nutricional
+                        this.Evaluacion_Farmacologica = response.data.Consulta[0].evaluacion_farmacologica
+                        this.Plan_Farmacologico = response.data.Consulta[0].plan_farmacologico
+
+                    })
+                }
+            })
         });
 
         this.$http.get(`http://localhost:8000/sindromeController/getAll`).then(response => {
@@ -2240,9 +2280,10 @@ export default {
             }else{
                 
                 this.sindromes = response.data.Sindrome;
-                console.log("Sindromes" + console.table(this.sindromes));
             }
         });
+
+        
 
     },
     methods: {
@@ -2365,8 +2406,6 @@ export default {
                 }})
             }
 
-            console.table(medicamento)
-
 
 //--------------------------------------------------------------------------------------------------
             let resultado_laboratorio = {}
@@ -2399,8 +2438,6 @@ export default {
                 "PTH": Number(this.PTH),
                 "Ferritina": Number(this.Ferritina),
             })
-
-            console.table(resultado_laboratorio)
 
 //--------------------------------------------------------------------------------------------------
 
@@ -2442,8 +2479,6 @@ export default {
                 "otros": this.examen_fisico.otros
             })}
 
-            console.table(examenFisico)
-
             const medicamentoJSON = JSON.stringify(medicamento)
             const resultados_labJSON = JSON.stringify(resultado_laboratorio)
             const examen_fisicoJSON = JSON.stringify(examenFisico)
@@ -2474,12 +2509,20 @@ export default {
                 // id_imagenes_lab: null
             }
 
-            this.$http.post('http://localhost:8000/ConsultaController/insert', info).then(response => {
-                // console.table(response.data)
-                console.log("Si pase")
-            }).catch(error => {
+            if(this.update){
+                this.$http.put('http://localhost:8000/ConsultaController/update', info).then(response => {
+                    console.log("Si pase update")
+                }).catch(error => {
 
-            })
+                })
+            }else{
+                this.$http.post('http://localhost:8000/ConsultaController/insert', info).then(response => {
+                    console.log("Si pase insert")
+                }).catch(error => {
+
+                })
+            }
+            
 
         },
         fillBCG: function() {
