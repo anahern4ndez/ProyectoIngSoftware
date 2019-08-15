@@ -65,7 +65,7 @@
                             required
                         ></v-text-field>
                         </div>
-                            <div v-if="errorRegistro">
+                            <div v-if="errorRegistro" class="subir3">
                             <v-alert :value="true" type="error" id="alert">
                             Por favor, ingrese un número de registro que aun no haya sido ingresado
                             </v-alert>
