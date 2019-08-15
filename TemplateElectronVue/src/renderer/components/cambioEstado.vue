@@ -121,7 +121,7 @@
                 <br>
                 <div v-if="errorFaltanDatos">
                     <v-alert :value="true" type="error" id="alert">
-                    Por favor, ingrese los datos requeridos
+                    Por favor, revise que haya ingresado los datos requeridos, y que sean válidos
                     </v-alert>
                 </div>
                 <div>
@@ -139,6 +139,7 @@
         },
         data() {
             return {
+                cui: '',
                 name:'',
                 age: '',
                 register: '',
@@ -155,14 +156,19 @@
                 nameRules: [
                     (v) => !!v || 'Se requiere el nombre del paciente',
                     (v) => v && v.length < 60 || 'Se permite como maximo 60 caracteres'
+                    
                 ],
                 ageRules: [
                     (v) => !!v || 'Se requiere la edad del paciente',
-                    (v) => v && v.length <= 3 || 'Verifique que la edad tenga como maximo 3 digitos.'
+                    (v) => v && v.length <= 3 || 'Verifique que la edad tenga como maximo 3 digitos.',
+                    (v) => v && isNaN(v) == false || 'La edad debe ser un numero',
+                    (v) => v && v>=0 || 'La edad debe estar entre 0 años a 200 años',
+                    (v) => v && v<=200 || 'La edad debe estar entre 0 años a 200 años'
                 ],
                 registerRules: [
                     (v) => !!v || 'Se requiere el número de registro del paciente',
-                    (v) => v && v.length < 60 || 'Se permite como maximo 60 caracteres'
+                    (v) => v && v.length < 60 || 'Se permite como maximo 60 caracteres',
+                    (v) => v && isNaN(v) == false || 'El numero de registro debe ser un numero'
                 ],
                 dateRules: [
                     (v) => !!v || 'Se requiere una fecha'
@@ -171,16 +177,8 @@
         },
         methods:{
             ingresarNuevoEstado(){
-                console.log(this.name);
-                console.log(this.age);
-                console.log(this.register);
-                console.log(this.sexo);
-                console.log(this.fecha);
-                console.log(this.actual);
-                console.log(this.cambio);
-
-                if(this.name != '' && this.age != '' && this.register != '' && this.sexo != '' && this.fecha != null && this.actual != '' && this.cambio != ''){
-                    this.$http.post(`http://localhost:8000/cambioEstadoController/save?name=${this.name}&age=${this.age}&register=${this.register}&sexo=${this.sexo}&fecha=${this.fecha}&actual=${this.actual}&cambio=${this.cambio}`).then(response=>{
+                if(this.name != '' && this.age != '' && this.register != '' && this.sexo != '' && this.fecha != null && this.actual != '' && this.cambio != '' && isNaN(this.age) === false && (this.age.length <= 3) === true && (this.name.length < 60) === true && (this.register.length < 60) === true && isNaN(this.register) === false && (this.age <= 200 && this.age >= 0) === true){
+                    this.$http.post(`http://localhost:8000/cambioEstadoController/save?name=${this.name}&age=${this.age}&register=${this.register}&sexo=${this.sexo}&fecha=${this.fecha}&actual=${this.actual}&cambio=${this.cambio}&cui=${this.cui}`).then(response=>{
                         this.errorFaltanDatos = false;
                         this.name = ' ';
                         this.age = ' ';
