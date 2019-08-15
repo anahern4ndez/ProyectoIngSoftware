@@ -9,7 +9,11 @@
                         <fieldset>
 
                         <!-- Text input-->
-                        <h1 style="text-align: center;">Consulta General</h1>
+                        <div style="display: flex; justify-content:space-between;">
+                            <h1 >Consulta General</h1>
+                            <h1 >{{this.fecha}}</h1>
+                        </div>
+                        
 
                         <!-- Text input-->
                         <div class="form-group ">
@@ -229,10 +233,10 @@
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Influenza</th>
-                                                <td><v-layout><v-checkbox color="green" v-model="influeza1" @change="fillInflueza" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox color="green" v-model="influeza2" @change="fillInflueza" :disabled="!influenza1" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox color="green" v-model="influeza3" @change="fillInflueza" :disabled="!influenza2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
-                                                <td><v-layout><v-checkbox color="green" v-model="influezaRef" :disabled="!influenza3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="influenza1" @change="fillInflueza" hide-details class="shrink py-0 pl-3 my-0 ml-5 "></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="influenza2" @change="fillInflueza" :disabled="!influenza1" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="influenza3" @change="fillInflueza" :disabled="!influenza2" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
+                                                <td><v-layout><v-checkbox color="green" v-model="influenzaRef" :disabled="!influenza3" hide-details class="shrink py-0 pl-3 my-0 ml-5"></v-checkbox></v-layout></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 10%">Diftteria/Tétano/Tosferina(DPT)</th>
@@ -678,22 +682,22 @@
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Cefradoxilo"  color="green" label="Cefadroxilo" ></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Cefadroxilo"  color="green" label="Cefadroxilo" ></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="Cefradoxilo_mg"
+                                                            v-model="Cefadroxilo_mg"
                                                             label="mg"
                                                             outline
-                                                            :disabled="!Cefradoxilo"
+                                                            :disabled="!Cefadroxilo"
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="Cefradoxilo_frecuencia"
+                                                            v-model="Cefadroxilo_frecuencia"
                                                             label="Frecuencia"
                                                             outline
-                                                            :disabled="!Cefradoxilo"
+                                                            :disabled="!Cefadroxilo"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
@@ -1214,7 +1218,7 @@
                                         <v-layout align-center justify-end />
                                             <h3 id="headers"  class="text-xs-center">Plan Farmacológico</h3>
                                         <v-textarea
-                                            v-model="Plan_Farmacologic"
+                                            v-model="Plan_Farmacologico"
                                             outline
                                             rows=8
                                         ></v-textarea>
@@ -1241,7 +1245,6 @@
         
                         <div>
                             <v-switch
-                                v-model="switch1"
                                 :label="`Solicitar próxima visita`"
                                 color="#ffc107"
                             ></v-switch>
@@ -1986,6 +1989,8 @@ import { store } from '../main';
 
 export default {
     data: () => ({
+        update: false,
+
         
         fisico: ["Peso", "Talla", "IMC"],
         vital: ["Presión arterial", "Pulso cardíaco"],
@@ -1994,6 +1999,7 @@ export default {
         paciente: {
             nombre: '',
             apellido: '',
+            CUI: 0,
             Nombre_de_padre: "",
             Nombre_de_madre: "",
             Procedencia: "",
@@ -2041,10 +2047,10 @@ export default {
         neumococo2: false,
         neumococo3: false,
         neumococoRef: false,
-        influeza1: false,
-        influeza2: false,
-        influeza3: false,
-        influezaRef: false,
+        influenza1: false,
+        influenza2: false,
+        influenza3: false,
+        influenzaRef: false,
         DPT1: false,
         DPT2: false,
         DPT3: false,
@@ -2059,73 +2065,73 @@ export default {
         historia: "",
 
         //Medicamentos
-        Prednisona: "",
+        Prednisona: false,
         Prednisona_mg: "",
         Prednisona_frecuencia: "",
 
-        cyac: "",
+        cyac: false,
         Cyac_mg: "",
         Cyac_frecuencia: "",
 
-        Tac: "",
+        Tac: false,
         Tac_mg: "",
         Tac_frecuencia: "",
 
-        MMF: "",
+        MMF: false,
         MMF_mg: "",
         MMF_frecuencia: "",
 
-        AZA: "",
+        AZA: false,
         AZA_mg: "",
         AZA_frecuencia: "",
 
-        CFM: "",
+        CFM: false,
         CFM_mg: "",
         CFM_frecuencia: "",
 
-        Enalapril: "",
+        Enalapril: false,
         Enalapril_mg: "",
         Enalapril_frecuencia: "",
 
-        Losartan: "",
+        Losartan: false,
         Losartan_mg: "",
         Losartan_frecuencia: "",
 
-        Amlodipina: "",
+        Amlodipina: false,
         Amlodipina_mg: "",
         Amlodipina_frecuencia: "",
 
-        CitratoNa: "",
+        CitratoNa: false,
         Citrato_Na_mg: "",
         Citrato_Na_frecuencia: "",
 
-        CitratoK: "",
+        CitratoK: false,
         Citrato_K_mg: "",
         Citrato_K_frecuencia: "",
 
-        Furosemida: "",
+        Furosemida: false,
         Furosemida_mg: "",
         Furosemida_frecuencia: "",
 
-        Alfacalcidol: "",
+        Alfacalcidol: false,
         Alfacalcidol_mg: "",
         Alfacalcidol_frecuencia: "",
 
-        CaCO3: "",
+        CaCO3: false,
         CaCO3_mg: "",
         CaCO3_frecuencia: "",
 
-        EPO: "",
+        EPO: false,
         EPO_mg: "",
         EPO_frecuencia: "",
 
-        Fe: "",
+        Fe: false,
         Fe_mg: "",
         Fe_frecuencia: "",
 
-        Cefradoxilo: "",
-        Cefradoxilo_mg: "",
-        Cefradoxilo_frecuencia: "",
+        Cefadroxilo: false,
+        Cefadroxilo_mg: "",
+        Cefadroxilo_frecuencia: "",
 
         //Laboratorios
         Na: "",
@@ -2219,6 +2225,7 @@ export default {
                 console.log("Dentro de if");
                 this.paciente.nombre = response.data.Paciente[0].Nombre;
                 this.paciente.apellido = response.data.Paciente[0].Apellido;
+                this.paciente.CUI = response.data.Paciente[0].CUI;
                 this.paciente.Nombre_de_padre = response.data.Paciente[0].Nombre_de_padre;
                 this.paciente.Nombre_de_madre = response.data.Paciente[0].Nombre_de_madre;
                 this.paciente.Procedencia = response.data.Paciente[0].procedencia.Departamento;
@@ -2231,6 +2238,40 @@ export default {
             }
             
 
+        }).then(() => {
+            const data2 = {
+                cui: this.paciente.CUI,
+                fecha: this.fecha
+            }
+            this.$http.post(`http://localhost:8000/ConsultaController/findOne`, data2).then(response => {
+                this.update = response.data.success
+                
+            }).then(() => {
+                if(this.update){
+
+                    this.$http.post(`http://localhost:8000/ConsultaController/findAll`, data2).then(response => {
+                        this.datos_generales.Peso = response.data.Consulta[0].peso
+                        this.datos_generales.Talla = response.data.Consulta[0].talla
+                        this.datos_generales.PA = response.data.Consulta[0].pa
+                        
+                        this.Dx_Definitivo = response.data.Consulta[0].Dx_Definitivo
+                        this.Dx_Asociado = response.data.Consulta[0].Dx_Asociados
+                        this.historia = response.data.Consulta[0].historia
+
+                        this.Evaluacion_Medica = response.data.Consulta[0].evaluacion_medica
+                        this.Plan_Medico = response.data.Consulta[0].plan_medica
+                        this.Evaluacion_Psicologica = response.data.Consulta[0].evaluacion_psicologica
+                        this.Plan_Psicologica = response.data.Consulta[0].plan_psicologico
+                        this.Evaluacion_Trabajo_Social = response.data.Consulta[0].evaluacion_trabajo_social
+                        this.Plan_Trabajo_Socia = response.data.Consulta[0].plan_trabajo_social
+                        this.Evaluacion_Nutricional = response.data.Consulta[0].evaluacion_nutricional
+                        this.Plan_Nutricional = response.data.Consulta[0].plan_nutricional
+                        this.Evaluacion_Farmacologica = response.data.Consulta[0].evaluacion_farmacologica
+                        this.Plan_Farmacologico = response.data.Consulta[0].plan_farmacologico
+
+                    })
+                }
+            })
         });
 
         this.$http.get(`http://localhost:8000/sindromeController/getAll`).then(response => {
@@ -2239,9 +2280,10 @@ export default {
             }else{
                 
                 this.sindromes = response.data.Sindrome;
-                console.log("Sindromes" + console.table(this.sindromes));
             }
         });
+
+        
 
     },
     methods: {
@@ -2249,9 +2291,238 @@ export default {
 
         guardar() {
             console.log("Fecha: " + this.fecha)
-            console.log("")
+            console.log("CUI: " + this.paciente.CUI)
+            console.log("Peso: " + this.datos_generales.Peso)
+            console.log("Talla: " + this.datos_generales.Talla)
+            console.log("PA: " + this.datos_generales.PA)
+            console.log("Dx_Definitivo: " + this.Dx_Definitivo)
+            console.log("Dx_Asociado: " + this.Dx_Asociado)
+            console.log("Historia: " + this.historia)
 
 
+//--------------------------------------------------------------------------------------------------
+            let medicamento = {}
+            
+            if(this.Prednisona){
+                medicamento = Object.assign(medicamento, {"Prednisona": {
+                    "mg": Number( this.Prednisona_mg),
+                    "frecuencia": Number( this.Prednisona_frecuencia)
+                }})
+            }
+            if(this.cyac){
+                medicamento = Object.assign(medicamento, {"Cyac": {
+                    "mg": Number( this.Cyac_mg),
+                    "frecuencia": Number( this.Cyac_frecuencia)
+                }})
+            }
+            if(this.Tac){
+                medicamento = Object.assign(medicamento, {"Tac": {
+                    "mg": Number( this.Tac_mg),
+                    "frecuencia": Number( this.Tac_frecuencia)
+                }})
+            }
+            if(this.MMF){
+                medicamento = Object.assign(medicamento, {"MMF": {
+                    "mg": Number( this.MMF_mg),
+                    "frecuencia": Number( this.MMF_frecuencia)
+                }})
+            }
+            if(this.AZA){
+                medicamento = Object.assign(medicamento, {"AZA": {
+                    "mg": Number( this.AZA_mg),
+                    "frecuencia": Number( this.AZA_frecuencia)
+                }})
+            }
+            if(this.CFM){
+                medicamento = Object.assign(medicamento, {"CFM": {
+                    "mg": Number( this.CFM_mg),
+                    "frecuencia": Number( this.CFM_frecuencia)
+                }})
+            }
+            if(this.Enalapril){
+                medicamento = Object.assign(medicamento, {"Enalapril": {
+                    "mg": Number( this.Enalapril_mg),
+                    "frecuencia": Number( this.Enalapril_frecuencia)
+                }})
+            }
+            if(this.Losartan){
+                medicamento = Object.assign(medicamento, {"Losartan": {
+                    "mg": Number( this.Losartan_mg),
+                    "frecuencia": Number( this.Losartan_frecuencia)
+                }})
+            }
+            if(this.Amlodipina){
+                medicamento = Object.assign(medicamento, {"Amlodipina": {
+                    "mg": Number( this.Amlodipina_mg),
+                    "frecuencia": Number( this.Amlodipina_frecuencia)
+                }})
+            }
+            if(this.CitratoNa){
+                medicamento = Object.assign(medicamento, {"Citrato_Na": {
+                    "mg": Number( this.Citrato_Na_mg),
+                    "frecuencia": Number( this.Citrato_Na_frecuencia)
+                }})
+            }
+            if(this.CitratoK){
+                medicamento = Object.assign(medicamento, {"Citrato_K": {
+                    "mg": Number( this.Citrato_K_mg),
+                    "frecuencia": Number( this.Citrato_K_frecuencia)
+                }})
+            }
+            if(this.Furosemida){
+                medicamento = Object.assign(medicamento, {"Furosemida": {
+                    "mg": Number( this.Furosemida_mg),
+                    "frecuencia": Number( this.Furosemida_frecuencia)
+                }})
+            }
+            if(this.Alfacalcidol){
+                medicamento = Object.assign(medicamento, {"Alfacalcidol": {
+                    "mg": Number( this.Alfacalcidol_mg),
+                    "frecuencia": Number( this.Alfacalcidol_frecuencia)
+                }})
+            }
+            if(this.CaCO3){
+                medicamento = Object.assign(medicamento, {"CaCO3": {
+                    "mg": Number( this.CaCO3_mg),
+                    "frecuencia": Number( this.CaCO3_frecuencia)
+                }})
+            }
+            if(this.EPO){
+                medicamento = Object.assign(medicamento, {"EPO": {
+                    "mg": Number( this.EPO_mg),
+                    "frecuencia": Number( this.EPO_frecuencia)
+                }})
+            }
+            if(this.Fe){
+                medicamento = Object.assign(medicamento, {"Fe": {
+                    "mg": Number( this.Fe_mg),
+                    "frecuencia": Number( this.Fe_frecuencia)
+                }})
+            }
+            if(this.Cefadroxilo){
+                medicamento = Object.assign(medicamento, {"Cefadroxilo": {
+                    "mg": Number( this.Cefadroxilo_mg),
+                    "frecuencia": Number( this.Cefadroxilo_frecuencia)
+                }})
+            }
+
+
+//--------------------------------------------------------------------------------------------------
+            let resultado_laboratorio = {}
+
+            resultado_laboratorio = Object.assign(resultado_laboratorio, {
+                "Na": Number(this.Na),
+                "Cl": Number(this.Cl),
+                "BUN": Number(this.BUN),
+                "Glu": Number(this.Glu),
+                "K": Number(this.HCO),
+                "Creat": Number(this.Creat),
+                "WB": Number(this.WB),
+                "Col": Number(this.Col),
+                "Alb": Number(this.Alb),
+                "HB": Number(this.HB),
+                "HT": Number(this.HT),
+                "Ca": Number(this.Ca),
+                "P": Number(this.P),
+                "MG": Number(this.MG),
+                "PTL": Number(this.PTL),
+                "EGO": Number(this.EGO),
+                "pH": Number(this.pH),
+                "Glu2": Number(this.Glu2),
+                "Prot": Number(this.Prot),
+                "Hem": Number(this.Hem),
+                "Gr": Number(this.Gr),
+                "GB": Number(this.GB),
+                "Cil": Number(this.Cil),
+                "URO": Number(this.URO),
+                "PTH": Number(this.PTH),
+                "Ferritina": Number(this.Ferritina),
+            })
+
+//--------------------------------------------------------------------------------------------------
+
+            let examenFisico = {}
+
+            examenFisico = Object.assign(examenFisico, {
+                "COONG": this.examen_fisico.coong
+            })
+            if(this.corazonCheck){
+                examenFisico = Object.assign(examenFisico, {
+                "corazon": this.examen_fisico.corazon
+            })}
+            if(this.pulmonesCheck){
+                examenFisico = Object.assign(examenFisico, {
+                "pulmones": this.examen_fisico.pulmones
+            })}
+            if(this.abdomenCheck){
+                examenFisico = Object.assign(examenFisico, {
+                "abdomen": this.examen_fisico.abdomen
+            })}
+            if(this.genitalesCheck){
+                examenFisico = Object.assign(examenFisico, {
+                "genitales": this.examen_fisico.genitales
+            })}
+            if(this.extremidadesCheck){
+                examenFisico = Object.assign(examenFisico, {
+                "extremidades": this.examen_fisico.extremidades
+            })}
+            if(this.pielCheck){
+                examenFisico = Object.assign(examenFisico, {
+                "piel": this.examen_fisico.piel
+            })}
+            if(this.snCheck){
+                examenFisico = Object.assign(examenFisico, {
+                "sn": this.examen_fisico.sn
+            })}
+            if(this.otrosCheck){
+                examenFisico = Object.assign(examenFisico, {
+                "otros": this.examen_fisico.otros
+            })}
+
+            const medicamentoJSON = JSON.stringify(medicamento)
+            const resultados_labJSON = JSON.stringify(resultado_laboratorio)
+            const examen_fisicoJSON = JSON.stringify(examenFisico)
+
+            const info = {
+                cui: this.paciente.CUI,
+                fecha: this.fecha,
+                peso: this.datos_generales.Peso,
+                talla: this.datos_generales.Talla,
+                pa: this.datos_generales.PA,
+                sindrome_clinico: this.Sindrome_Clinico_Presentacion,
+                Dx_Definitivo: this.Dx_Definitivo,
+                Dx_Asociados: this.Dx_Asociado,
+                historia: this.historia,
+                medicamento: medicamentoJSON,
+                resultados_laboratorio: resultados_labJSON,
+                examen_fisico: examen_fisicoJSON,
+                evaluacion_medica: this.Evaluacion_Medica,
+                plan_medico: this.Plan_Medico,
+                evaluacion_psicologica: this.Evaluacion_Psicologica,
+                plan_psicologico: this.Plan_Psicologica,
+                evaluacion_trabajo_social: this.Evaluacion_Trabajo_Social,
+                plan_trabajo_social: this.Plan_Trabajo_Social,
+                evaluacion_nutricional: this.Evaluacion_Nutricional,
+                plan_nutricional: this.Plan_Nutricional,
+                evaluacion_farmacologica: this.Evaluacion_Farmacologica,
+                plan_farmacologico: this.Plan_Farmacologico,
+                // id_imagenes_lab: null
+            }
+
+            if(this.update){
+                this.$http.put('http://localhost:8000/ConsultaController/update', info).then(response => {
+                    console.log("Si pase update")
+                }).catch(error => {
+
+                })
+            }else{
+                this.$http.post('http://localhost:8000/ConsultaController/insert', info).then(response => {
+                    console.log("Si pase insert")
+                }).catch(error => {
+
+                })
+            }
+            
 
         },
         fillBCG: function() {

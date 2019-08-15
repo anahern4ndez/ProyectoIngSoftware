@@ -5,7 +5,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\User;
+use App\registroestado;
+use App\Paciente;
 
 class cambioEstadoController extends Controller
 {
@@ -19,24 +20,26 @@ class cambioEstadoController extends Controller
         
     }
 
-    public function guardarEstado(Request $request)
-    {
-        $this->validate($request, [
-            'email' => 'email|unique:users,email',
-            'password' => 'min:6|max:255'
-        ]);
-        
-        $user = new User;
-        //$user->id = $request->id;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->puesto = $request->puesto;
-        $user->save();
+    public function save(Request $request)
+    {   
+        $registroestado = new registroestado;
+        $registroestado->idregistroestado = $request->register;
+        if($request->cui == ''){
+            $cui = Paciente::query()->first();
+            //$registroestado->cui = 1412300920;
+            $registroestado->cui = $cui->CUI;
+        }else{
+            $registroestado->cui = $request->cui;            
+        }
+        $registroestado->fecha = $request->fecha;
+        $registroestado->estadoinicial = $request->actual;
+        $registroestado->estadofinal = $request->cambio;
+        $registroestado->save();
         return $request;
 
         return response()->json([
             'success' => true,
-            'message' => 'creado'
+            'message' => 'guardado'
         ], 200);
     }
 
