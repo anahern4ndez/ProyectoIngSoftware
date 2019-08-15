@@ -35,59 +35,63 @@ Vue.use(Vuetify, {
     }
 });
 
-const routes = [
-  {
-    path: '/login',
-    component: Vue.component('login', require('./components/Login.vue').default)
-  },
-  {
-    path: '/page-one',
-    component: Vue.component('page-one', require('./components/PageOne.vue').default)
-  },
-  {
-    path: '/gestionarPaciente',
-    component: Vue.component('page-one', require('./components//gestionarPaciente.vue').default)
-  },
-  {
-    path: '/gestionUsuarios',
-    component: Vue.component('gestionUsuarios', require('./components/gestionUsuarios.vue').default)
-  },
-  {
-    path: '/gestionPacientes',
-    component: Vue.component('gestionPacientes', require('./components/gestionPacientes.vue').default)
-  },
-  {
-    path: '/ingresarPaciente',
-    component: Vue.component('ingresarPaciente', require('./components/IngresarPaciente.vue').default)
-  },
-  {
-    path: '/EditarPaciente/:cui', name: 'EditarPaciente',
-    component: Vue.component('EditarPaciente', require('./components/EditarPaciente.vue').default)
-  },
-  {
-    path: '/darConsulta',
-    component: Vue.component('darConsulta', require('./components/DarConsulta.vue').default)
-  },
-  {
-    path: '/Consulta',
-    component: Vue.component('Consulta', require('./components/Consulta.vue').default)
-  },
-  {
-    path: '/menu-principal',
-    component: Vue.component('MenuPrincipal', require('./components/MenuPrincipal.vue').default)
-  },
-  {
-    path: '/Citas',
-    component: Vue.component('Citas', require('./components/CreacionCitas.vue').default)
-  },
-  {
-    path: '/DatosG',
-    component: Vue.component('DatosG', require('./components/DGeneralesVista.vue').default)
-  },
-  {
-    path: '/Datos',
-    component: Vue.component('Datos', require('./components/DatosVista.vue').default)
-  }
+const routes = [{
+        path: '/login',
+        component: Vue.component('login', require('./components/Login.vue').default)
+    },
+    {
+        path: '/page-one',
+        component: Vue.component('page-one', require('./components/PageOne.vue').default)
+    },
+    {
+        path: '/gestionarPaciente',
+        component: Vue.component('page-one', require('./components//gestionarPaciente.vue').default)
+    },
+    {
+        path: '/gestionUsuarios',
+        component: Vue.component('gestionUsuarios', require('./components/gestionUsuarios.vue').default)
+    },
+    {
+        path: '/gestionPacientes',
+        component: Vue.component('gestionPacientes', require('./components/gestionPacientes.vue').default)
+    },
+    {
+        path: '/ingresarPaciente',
+        component: Vue.component('ingresarPaciente', require('./components/IngresarPaciente.vue').default)
+    },
+    {
+        path: '/EditarPaciente/:cui',
+        name: 'EditarPaciente',
+        component: Vue.component('EditarPaciente', require('./components/EditarPaciente.vue').default)
+    },
+    {
+        path: '/darConsulta',
+        component: Vue.component('darConsulta', require('./components/DarConsulta.vue').default)
+    },
+    {
+        path: '/Consulta',
+        component: Vue.component('Consulta', require('./components/Consulta.vue').default)
+    },
+    {
+        path: '/menu-principal',
+        component: Vue.component('MenuPrincipal', require('./components/MenuPrincipal.vue').default)
+    },
+    {
+        path: '/Citas',
+        component: Vue.component('Citas', require('./components/CreacionCitas.vue').default)
+    },
+    {
+        path: '/DatosG',
+        component: Vue.component('DatosG', require('./components/DGeneralesVista.vue').default)
+    },
+    {
+        path: '/Datos',
+        component: Vue.component('Datos', require('./components/DatosVista.vue').default)
+    },
+    {
+        path: '/EstadisticaGeneral',
+        component: Vue.component('EstadisticaGeneral', require('./components/EstadisticaGeneral.vue').default)
+    }
 ];
 
 const router = new VueRouter({
@@ -97,14 +101,14 @@ const router = new VueRouter({
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
-  id: 0
+    id: 0
 })
 
 /* eslint-disable no-new */
 new Vue({
-  router,
-  render: h => h(App),
-  mounted () {
-    this.$router.push('/login')
-  }
+    router,
+    render: h => h(App),
+    mounted() {
+        this.$router.push('/login')
+    }
 }).$mount('#app');
