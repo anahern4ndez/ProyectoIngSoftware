@@ -31,6 +31,7 @@ $factory->define(App\Models\Paciente::class, function (Faker\Generator $faker) {
         'Apellido' => $faker->lastName(),
         'Fecha_de_nacimiento' => $faker->date(),
         'Procedencia' => 101,
+        'Residencia' => 101,
         'Nombre_de_padre' => $faker->name('male'),
         'Nombre_de_madre' => $faker->name('female'),
         'Telefono' => $faker->randomNumber(7),

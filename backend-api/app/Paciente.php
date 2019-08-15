@@ -13,7 +13,7 @@ class Paciente extends Model
         'Apellido', 
         'Fecha_de_nacimiento',
         'Procedencia',
-        'residencia',
+        'Residencia',
         'Nombre_de_padre',
         'Nombre_de_madre',
         'Telefono',
