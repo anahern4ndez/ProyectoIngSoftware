@@ -7,6 +7,9 @@ use App\Models\Cita;
 use DB;
 
 class CitasController extends Controller {
+    const MIN_HOUR = 7;
+    const MAX_HOUR = 18;
+    
     /**
      * Retorna todas las citas que existen en la BD.
      */
@@ -56,6 +59,15 @@ class CitasController extends Controller {
                'duracionCita.required' => 'La duración de la cita es requerida.',
            ]
        );
+
+       // validar que la hora de la cita sea entre horas laborales (7 AM - 6 PM)
+       if (!$this->validateAppointmentHour($request->hora)) {
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Error en petición al servidor.'
+            ], 422);
+       }
         
         // Crear nueva cita, asignarle los datos necesarios y guardarla en DB.
         $cita = new Cita;
@@ -117,6 +129,15 @@ class CitasController extends Controller {
             ]
         );
 
+        // validar que la hora de la cita sea entre horas laborales (7 AM - 6 PM)
+       if (!$this->validateAppointmentHour($request->hora)) {
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Error en petición al servidor.'
+            ], 422);
+        }
+
         // actualizar datos de cita
         $cita->idUsuario = $request->idUsuario;
         $cita->idPaciente = $request->idPaciente;
@@ -142,7 +163,7 @@ class CitasController extends Controller {
 
         if (!$cita) {
             return response()->json([
-                'success' => true,
+                'success' => false,
                 'message' => 'No se encontró la cita especificada.'
             ], 404);
         }
@@ -153,5 +174,17 @@ class CitasController extends Controller {
             'success' => true,
             'message' => 'Cita eliminada con éxito.'
         ], 200);
+    }
+
+    /**
+     * Valida que la hora este entre MIN_HOUR y MAX_HOUR.
+     */
+    private function validateAppointmentHour($hour) {
+        $hourPart = substr($hour, 0, 2);
+        if ($hourPart < self::MIN_HOUR || $hourPart > self::MAX_HOUR) {
+            return false;
+        }
+
+        return true;
     }
 }
