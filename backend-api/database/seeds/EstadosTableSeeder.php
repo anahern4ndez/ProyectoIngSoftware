@@ -12,8 +12,10 @@ class EstadosTableSeeder extends Seeder
     public function run()
     {
         $val = [
-            ['ID' => 1, 'significado' => 'estable'],
-            ['ID' => 2, 'significado' => 'enfermo']
+            ['ID' => 1, 'significado' => 'Pre dialisis'],
+            ['ID' => 2, 'significado' => 'Dialisis peritoneal'],
+            ['ID' => 3, 'significado' => 'Hemodialisis'],
+            ['ID' => 4, 'significado' => 'Transplante renal']
         ];
         foreach($val as $values){
             Estado::insert($values);

@@ -91,6 +91,10 @@ const routes = [{
     {
         path: '/EstadisticaGeneral',
         component: Vue.component('EstadisticaGeneral', require('./components/EstadisticaGeneral.vue').default)
+    },
+    {
+        path: '/cambioEstado',
+        component: Vue.component('cambioEstado', require('./components/cambioEstado.vue').default)
     }
 ];
 

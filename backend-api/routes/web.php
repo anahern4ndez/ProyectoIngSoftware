@@ -46,19 +46,25 @@ $router->delete('/PacienteController/delete', 'PacienteController@delete');
 
 //CRUD: TABLA CONSULTAS
 $router->post('/ConsultaController/insert', 'ConsultaController@store');
-$router->get('/ConsultaController/findOne', 'ConsultaController@findOne');
-$router->get('/ConsultaController/findAll', 'ConsultaController@findAll');
+$router->put('/ConsultaController/update', 'ConsultaController@updateAll');
+$router->post('/ConsultaController/findOne', 'ConsultaController@findOne');
+$router->post('/ConsultaController/findAll', 'ConsultaController@findAll');
 
 //CRUD: TABLA COMENTARIO
 $router->post('/ComentarioController/insert', 'ComentarioController@store');
 $router->get('/ComentarioController/findAll', 'ComentarioController@findAll');
 
+//get de sindromes
+$router->get('/sindromeController/getAll', 'sindromeController@getAll');
 
 //get info from procedencias
 $router->post('/ProcedenciaController/locate', 'ProcedenciaController@getLocation');
 
 //get info from estado
 $router->get('/EstadoController/getAllEstado', 'EstadoController@getAllEstado');
+
+//change status
+$router->post('/cambioEstadoController/save', 'cambioEstadoController@save');
 
 
 $router->delete('/users/destroy','ExampleController@destroy');

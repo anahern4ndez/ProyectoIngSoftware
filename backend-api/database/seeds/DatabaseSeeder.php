@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\User;
 
 class DatabaseSeeder extends Seeder {
     /**
@@ -20,6 +19,7 @@ class DatabaseSeeder extends Seeder {
             EstadosTableSeeder::class,
             UsuariosSeeder::class,
             PacienteSeeder::class,
+            tipoCitasSeeder::class
         ]);
         
     }

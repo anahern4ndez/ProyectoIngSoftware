@@ -15,18 +15,24 @@ class Consulta extends Model
         'pa',
         'historia',
         'sindrome_clinico',
-        'psicosocial',
-        'nutricion',
-        'plan_medico',
-        'plan_psicosocial',
-        'plan_nutricional',
-        'plan_farmacologico',
-        'id_imagenes_lab',
-        'laboratorio',
-        'resultados_laboratorio',
+        'Dx_Definitivo',
+        'Dx_Asociados',
         'medicamento',
-        'proxima_visita'
+        'resultados_laboratorio',
+        'examen_fisico',
+        'evaluacion_medica', 
+        'plan_medico',
+        'evaluacion_psicologica',
+        'plan_psicologico',
+        'evaluacion_trabajo_social',
+        'plan_trabajo_social',
+        'evaluacion_nutricional', 
+        'plan_nutricional',
+        'evaluacion_farmacologica', 
+        'plan_farmacologico'
+        // 'id_imagenes_lab'
     ];
+    public $timestamps = false;
 
     /**
      * Relaciones de la tabla Paciente
