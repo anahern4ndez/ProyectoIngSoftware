@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cita;
+use Carbon\Carbon;
 use DB;
 
 class CitasController extends Controller {
@@ -60,12 +61,21 @@ class CitasController extends Controller {
            ]
        );
 
+       // validar que la fecha enviada en Request sea hoy o al futuro
+       if (Carbon::parse($request->fecha)->isPast()) {
+
+            return response()->json([
+                'success' => false,
+                'message' => 'La fecha de la cita no puede ser en el pasado.'
+            ], 422);
+       }
+
        // validar que la hora de la cita sea entre horas laborales (7 AM - 6 PM)
        if (!$this->validateAppointmentHour($request->hora)) {
 
             return response()->json([
                 'success' => false,
-                'message' => 'Error en petición al servidor.'
+                'message' => 'La hora de la cita debe estar entre 07:00 y 18:00.'
             ], 422);
        }
         
@@ -128,6 +138,15 @@ class CitasController extends Controller {
                 'duracionCita.required' => 'La duración de la cita es requerida.',
             ]
         );
+
+        // validar que la fecha enviada en Request sea hoy o al futuro
+       if (Carbon::parse($request->fecha)->isPast()) {
+
+            return response()->json([
+                'success' => false,
+                'message' => 'La fecha de la cita no puede ser en el pasado.'
+            ], 422);
+        }
 
         // validar que la hora de la cita sea entre horas laborales (7 AM - 6 PM)
        if (!$this->validateAppointmentHour($request->hora)) {
