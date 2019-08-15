@@ -59,11 +59,16 @@
                         <div class="subir3">
                         <v-text-field
                             v-model="register"
-                            label="Número del registro del paciente"
+                            label="Número de registro"
                             outline
                             :rules="registerRules"
                             required
                         ></v-text-field>
+                        </div>
+                            <div v-if="errorRegistro">
+                            <v-alert :value="true" type="error" id="alert">
+                            Por favor, ingrese un número de registro que aun no haya sido ingresado
+                            </v-alert>
                         </div>
                     </b-col>
                 </b-row>
@@ -149,6 +154,7 @@
                 actual: '',
                 cambio: '',
                 errorFaltanDatos: false,
+                errorRegistro: false,
                 //Hacer las reglas
                 radioRules:[
                     v => !!v || 'Debe seleccionar una opción'
@@ -180,6 +186,7 @@
                 if(this.name != '' && this.age != '' && this.register != '' && this.sexo != '' && this.fecha != null && this.actual != '' && this.cambio != '' && isNaN(this.age) === false && (this.age.length <= 3) === true && (this.name.length < 60) === true && (this.register.length < 60) === true && isNaN(this.register) === false && (this.age <= 200 && this.age >= 0) === true){
                     this.$http.post(`http://localhost:8000/cambioEstadoController/save?name=${this.name}&age=${this.age}&register=${this.register}&sexo=${this.sexo}&fecha=${this.fecha}&actual=${this.actual}&cambio=${this.cambio}&cui=${this.cui}`).then(response=>{
                         this.errorFaltanDatos = false;
+                        this.errorRegistro = false;
                         this.name = ' ';
                         this.age = ' ';
                         this.register = ' ';
@@ -191,6 +198,7 @@
                         //document.location.reload();
                     }).catch(error => {
                         console.log("Error");
+                        this.errorRegistro = true;
                     });
                 }
                 else{
