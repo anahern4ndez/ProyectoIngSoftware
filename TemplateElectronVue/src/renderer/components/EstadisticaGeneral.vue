@@ -85,7 +85,7 @@
                 <b-col>
                     <v-text-field
                         label="Solo"
-                        v-model="textoAgrupcion[index]"
+                        v-model="textoAgrupacion[index]"
                         placeholder="Ingrese titulo"
                         solo
                     >
@@ -139,7 +139,7 @@
                 <tbody>
                     <tr v-for="(variable,index) in varEstudio">
                         <td>{{variable}}</td>
-                        <td>{{condiciones[index]}}</td>
+                        <td>{{condiciones[index]}} {{simboloAgrupacion[index]}} {{textoAgrupacion[index]}}</td>
                         <td>{{agrupacion}}</td>
                     </tr>
                 </tbody>
@@ -168,9 +168,9 @@ export default {
       clearable: false,
       varEstudio: [],
       condiciones: [],
-      agrupacion: [],
+      agrupacion: "",
       simboloAgrupacion:[],
-      textoAgrupcion:[],
+      textoAgrupacion:[],
       simbolosCondiciones: ["=",">",">=","<","<=","diferente"],
   }),
 
@@ -200,7 +200,7 @@ export default {
           console.log(this.condiciones);
 
           console.log(this.simboloAgrupacion[0]);
-          console.log(this.textoAgrupcion[1]);
+          console.log(this.textoAgrupacion[1]);
       }
 
     },
@@ -212,7 +212,7 @@ export default {
 <style>
 table {
   font-family: 'Open Sans', sans-serif;
-  width: 750px;
+  min-width: 900px;
   border-collapse: collapse;
   border: 3px solid #44475C;
   margin: 10px 10px 0 10px;
@@ -228,6 +228,7 @@ table th {
 }
 
 table td {
+  max-width: 100px;
   text-align: left;
   padding: 8px;
   border-right: 2px solid #7D82A8;
