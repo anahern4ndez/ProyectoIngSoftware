@@ -138,7 +138,7 @@
                       <v-text-field
                         v-model="selectedTime"
                         label="Escoger Hora de Cita"
-                        prepend-icon="event"
+                        prepend-icon="access_time"
                         readonly
                         required
                         v-on="on"
@@ -295,13 +295,13 @@ export default {
       if (!type) {
         var SemAnt = new Date(
           today.getFullYear(),
-          today.getMonth()-1,
+          today.getMonth() - 1,
           today.getDate()
         );
       } else {
         var SemAnt = new Date(
           today.getFullYear(),
-          today.getMonth()+1,
+          today.getMonth() + 1,
           today.getDate()
         );
       }
