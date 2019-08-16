@@ -71,20 +71,21 @@
             <b-row v-for="(a,index) in condiciones" :key="index">
                 <b-col>
                     {{a}}
+                    {{index}}
                 </b-col> 
 
                 <b-col>
                     <v-select
                     :items="simbolosCondiciones"
                     label="Seleccione uno: "
-                    v-model="a.simbolo"
+                    v-model="simboloAgrupacion[index]"
                     ></v-select>
                 </b-col>    
 
                 <b-col>
                     <v-text-field
                         label="Solo"
-                        v-model="a.text"
+                        v-model="textoAgrupcion[index]"
                         placeholder="Ingrese titulo"
                         solo
                     >
@@ -155,6 +156,8 @@ export default {
       varEstudio: [],
       condiciones: [],
       agrupacion: [],
+      simboloAgrupacion:[],
+      textoAgrupcion:[],
       simbolosCondiciones: ["=",">",">=","<","<=","diferente"]
   }),
 
@@ -170,11 +173,13 @@ export default {
 
   methods: {
       prueba()
-      {
-          
+      { 
           console.log(this.varEstudio);
           console.log(this.agrupacion);
           console.log(this.condiciones);
+
+          console.log(this.simboloAgrupacion[0]);
+          console.log(this.textoAgrupcion[1]);
           
       }
 
