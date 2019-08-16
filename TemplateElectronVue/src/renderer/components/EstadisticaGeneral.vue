@@ -1,5 +1,5 @@
 <template lang="">
-	<div onload="obtenerNombre">
+	<div>
         <b-container class="containerMenu">
 
             <!-- FILA 1 variable a estudiar-->
@@ -7,7 +7,7 @@
                 <b-col>
                     <h2>Ingrese la variable a estudiar:</h2>
                 </b-col>
-                
+
                 <b-col>
                     <v-combobox
                         v-model="varEstudio"
@@ -39,7 +39,7 @@
                 <b-col>
                     <h2>Ingrese las condiciones:</h2>
                 </b-col>
-                
+
                 <b-col>
                     <v-combobox
                         v-model="condiciones"
@@ -72,7 +72,7 @@
                 <b-col>
                     {{a}}
                     {{index}}
-                </b-col> 
+                </b-col>
 
                 <b-col>
                     <v-select
@@ -80,7 +80,7 @@
                     label="Seleccione uno: "
                     v-model="simboloAgrupacion[index]"
                     ></v-select>
-                </b-col>    
+                </b-col>
 
                 <b-col>
                     <v-text-field
@@ -89,8 +89,8 @@
                         placeholder="Ingrese titulo"
                         solo
                     >
-                    </v-text-field>   
-                </b-col>             
+                    </v-text-field>
+                </b-col>
 
             </b-row>
 
@@ -101,11 +101,11 @@
                 <b-col>
                     <h2>Ingrese la variable de agrupacion:</h2>
                 </b-col>
-                
+
                 <b-col>
                     <v-combobox
                         v-model="agrupacion"
-                        :items="posiblesVariables"                
+                        :items="posiblesVariables"
                         label="Seleccione las variables de agrupacion."
                     >
                         <template v-if="noData" v-slot:no-data>
@@ -122,15 +122,28 @@
                 </b-col>
             </b-row>
 
-            <!-- FILA 2-->
+            <!-- FILA 4-->
             <b-row align-h="around" align-v="center" class="pb-2">
-                <v-btn outline color="#303841" v-on:click="prueba">Aceptar</v-btn>                
+                <v-btn outline color="#303841" v-on:click="prueba">Aceptar</v-btn>
             </b-row>
-
 
             <!-- Tabla-->
-            <b-row align-h="around" align-v="center" class="pb-2">        
-            </b-row>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="text-left">Variables</th>
+                        <th class="text-left">Condiciones</th>
+                        <th class="text-left">Agrupación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(variable,index) in varEstudio">
+                        <td>{{variable}}</td>
+                        <td>{{condiciones[index]}}</td>
+                        <td>{{agrupacion}}</td>
+                    </tr>
+                </tbody>
+            </table>
 
 
 
@@ -146,7 +159,7 @@ var fecha = new Date();
 export default {
 
   data: () => ({
-      posiblesVariables: ['Presion Arterial', 'Tipo de sango', 'Edad', 'Peso'],
+      posiblesVariables: ['Presion Arterial', 'Tipo de sangre', 'Edad', 'Peso'],
       search: null,
       chips: true,
       multiple: true,
@@ -158,7 +171,7 @@ export default {
       agrupacion: [],
       simboloAgrupacion:[],
       textoAgrupcion:[],
-      simbolosCondiciones: ["=",">",">=","<","<=","diferente"]
+      simbolosCondiciones: ["=",">",">=","<","<=","diferente"],
   }),
 
   watch: {
@@ -169,18 +182,25 @@ export default {
     },
 
   computed: {
+
+    //   Método útil en caso de que se usen objetos!
+       "columns": function columns() {
+            if (this.varEstudio.length == 0) {
+                return [];
+            }
+            return Object.keys(this.varEstudio[0])
+        }
   },
 
   methods: {
       prueba()
-      { 
+      {
           console.log(this.varEstudio);
           console.log(this.agrupacion);
           console.log(this.condiciones);
 
           console.log(this.simboloAgrupacion[0]);
           console.log(this.textoAgrupcion[1]);
-          
       }
 
     },
@@ -190,5 +210,34 @@ export default {
 
 
 <style>
+table {
+  font-family: 'Open Sans', sans-serif;
+  width: 750px;
+  border-collapse: collapse;
+  border: 3px solid #44475C;
+  margin: 10px 10px 0 10px;
+}
+
+table th {
+  text-transform: uppercase;
+  text-align: left;
+  background: #44475C;
+  color: #FFF;
+  padding: 8px;
+  min-width: 30px;
+}
+
+table td {
+  text-align: left;
+  padding: 8px;
+  border-right: 2px solid #7D82A8;
+}
+table td:last-child {
+  border-right: none;
+}
+table tbody tr:nth-child(2n) td {
+  background: #D4D8F9;
+}
+
 
 </style>
