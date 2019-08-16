@@ -278,7 +278,15 @@ export default {
             Sexo: this.Sexo,
             Historia:this.Historia,
             id: this.id
-        };
+          };
+
+          if (info.Edad.substr(info.Edad.length -5, info.Edad.length) === "meses") {
+            info.Edad = parseFloat((this.Edad).substring(0,info.Edad.length -6))/12.0;
+          }
+          else{
+            info.Edad = parseFloat((this.Edad).substring(0,info.Edad.length -5));
+          }
+
           this.$http.put('http://localhost:8000/PacienteController/updateAll', info).then(response => {
               this.error = false;
           }).

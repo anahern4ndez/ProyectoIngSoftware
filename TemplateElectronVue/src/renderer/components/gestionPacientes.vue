@@ -86,7 +86,7 @@
                   </v-alert>
                 
               </template>
-
+              <!-- para que tenga el footer de la tabla en espanol -->
               <template v-slot:pageText="props">
                 {{ props.pageStart }} - {{ props.pageStop }} de {{ props.itemsLength }}
               </template>
@@ -182,20 +182,28 @@ export default {
       this.pacientes = response.data.Pacientes;
       //objeto utilizado para los labels..
       if (response.data.Pacientes[0] == null){
-        console.log('Nothing to do here..');
+        console.log('No se han recibido pacientes. ');
       } else {
         this.selectedPatients.Nombre = response.data.Pacientes[0].Nombre;
         this.selectedPatients.Apellido = response.data.Pacientes[0].Apellido;
         this.selectedPatients.EstadoActual = response.data.Pacientes[0].estado_actual.significado;
-        this.selectedPatients.Edad = response.data.Pacientes[0].Edad;
         this.selectedPatients.CUI = response.data.Pacientes[0].CUI;
         this.selectedPatients.Telefono = response.data.Pacientes[0].Telefono;
         this.selectedPatients.Nombre_de_madre = response.data.Pacientes[0].Nombre_de_madre;
         this.selectedPatients.Nombre_de_padre = response.data.Pacientes[0].Nombre_de_padre;
-        //this.Nombre = response.data.Pacientes[0].Nombre;
-        //this.Apellido = response.data.Pacientes[0].Apellido;
         this.imageData = response.data.Pacientes[0].Imagen;
         this.estadoNuevo = response.data.Pacientes[0].estado_actual;
+        //modificacion para el display de la edad para cada elemento recibido
+        for (let index = 0; index < response.data.Pacientes.length; index++) {
+          const edadPaciente = response.data.Pacientes[index].Edad;
+          if (edadPaciente < 1){
+            response.data.Pacientes[index].Edad = (edadPaciente*12.0) + ' meses';
+          }
+          else{
+            response.data.Pacientes[index].Edad = edadPaciente + ' años';
+          } 
+        }
+        this.selectedPatients.Edad = response.data.Pacientes[0].Edad;
       }
           });
     this.$http.get(`http://localhost:8000/EstadoController/getAllEstado`).then(response =>{
