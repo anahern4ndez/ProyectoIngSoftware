@@ -149,11 +149,11 @@ class CitasController extends Controller {
         }
 
         // validar que la hora de la cita sea entre horas laborales (7 AM - 6 PM)
-       if (!$this->validateAppointmentHour($request->hora)) {
+        if (!$this->validateAppointmentHour($request->hora)) {
 
             return response()->json([
                 'success' => false,
-                'message' => 'Error en petición al servidor.'
+                'message' => 'La hora de la cita debe estar entre 07:00 y 18:00.'
             ], 422);
         }
 
