@@ -10,7 +10,6 @@
                 </v-tabs>
             </v-toolbar>
         </v-card>
-
     </div>
 </template>
 

@@ -317,7 +317,7 @@ export default {
             Nombre: this.Nombre,
             Apellido: this.Apellido,
             Fecha_de_nacimiento: this.Fecha_de_nacimiento,
-            Procedencia: this.CUI.substr(this.CUI.length-4),
+            Procedencia: this.CUI.substring(this.CUI.length-4),
             Residencia: this.residencia,
             Nombre_de_padre: this.Nombre_de_padre,
             Nombre_de_madre: this.Nombre_de_madre,
@@ -334,8 +334,8 @@ export default {
             Sexo: this.Sexo,
             Historia:this.Historia
           };
-          
-          if (info.Edad.substr(info.Edad.length -5, info.Edad.length) === "meses") {
+          //para que la edad ingrese bien
+          if (info.Edad.substring(info.Edad.length -5, info.Edad.length) === "meses") {
             info.Edad = parseFloat((this.Edad).substring(0,1))/12.0;
           }
           else{
@@ -403,7 +403,7 @@ export default {
         },
         checkLocation(inStr){
           //partimos de la premisa que el dpi tiene 13 digitos...
-          var ultimos=inStr.substr(inStr.length-4);
+          var ultimos=inStr.substring(inStr.length-4);
           var data = {
             id_Dep: ultimos
           }
