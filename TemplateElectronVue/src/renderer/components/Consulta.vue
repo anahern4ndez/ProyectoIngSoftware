@@ -18,53 +18,83 @@
                         <!-- Text input-->
                         <div class="form-group ">
                         <!-- Lefts-->
-                        <div class="encapsulado">
-                            <b-container>
-                                <b-row class="justify-content-md-center">
-                                <b-col>
-                                    <div>
-                                        <b-container>
-                                            <b-row class="justify-content-md-center">
-                                                <b-col>
-                                                    <h3 style="font-weight: bold;">Paciente:</h3>  
-                                                </b-col>
-                                                <b-col>
-                                                    <h3>{{this.paciente.nombre}} {{this.paciente.apellido}}</h3> 
-                                                </b-col>
-                                            </b-row>
-                                            <b-row>
-                                            <img style="margin-left: 10%; margin-top: 2%" src="../assets/javier.jpg" alt="" width="273" height="183">
-                                            </b-row>
-                                        </b-container>
-                                    </div>
-                                </b-col>                       
-                                <b-col>
-                                    <!-- Right-->
-                                    <div style="margin-left: 2%">
-                                        <h3 style="text-align:center; font-weight: bold;margin-bottom: 2%;">Observaciones especiales: </h3>  
-                                        <div>                     
-                                            <v-textarea
-                                                v-model="comentario"
-                                                outline
-                                                rows=10
-                                            ></v-textarea>
+                            <div class="encapsulado">
+                                <b-container>
+                                    <b-row class="justify-content-md-center">
+                                    <b-col>
+                                        <div>
+                                            <b-container>
+                                                <b-row class="justify-content-md-center">
+                                                    <b-col>
+                                                        <h3 style="font-weight: bold;">Paciente:</h3>  
+                                                    </b-col>
+                                                    <b-col>
+                                                        <h3>{{this.paciente.nombre}} {{this.paciente.apellido}}</h3> 
+                                                    </b-col>
+                                                </b-row>
+                                                <b-row>
+                                                <img style="margin-left: 10%; margin-top: 2%" src="../assets/javier.jpg" alt="" width="273" height="183">
+                                                </b-row>
+                                            </b-container>
                                         </div>
-                                        <b-container>
-                                            <b-row class="justify-content-md-center">
-                                                <b-col>
-                                                    <button type="button" class="btn btn-lg btn-warning btn-block">Agregar Comentario</button> 
-                                                </b-col>
-                                                <b-col>
-                                                    <button type="button" class="btn btn-lg btn-warning btn-block">Ver más</button>
-                                                </b-col>
-                                            </b-row>
-                                        </b-container>
-                                    </div>
-                                </b-col>
-                                </b-row>
-                            </b-container>
+                                    </b-col>                       
+                                    <b-col>
+                                        <!-- Right-->
+                                        <div style="margin-left: 2%">
+                                            <h3 style="text-align:center; font-weight: bold;margin-bottom: 2%;">Observaciones especiales: </h3>  
+                                            <div>                     
+                                                <v-textarea
+                                                    v-model="comentario"
+                                                    outline
+                                                    rows=10
+                                                ></v-textarea>
+                                            </div>
+                                            <b-container>
+                                                <b-row class="justify-content-md-center">
+                                                    <b-col>
+                                                        <button type="button" class="btn btn-lg btn-warning btn-block">Agregar Comentario</button> 
+                                                    </b-col>
+                                                    <b-col>
+                                                        <button type="button" class="btn btn-lg btn-warning btn-block">Ver más</button>
+                                                    </b-col>
+                                                </b-row>
+                                            </b-container>
+                                        </div>
+                                    </b-col>
+                                    </b-row>
+                                </b-container>
+                            </div>
                         </div>
-                        </div>
+
+                        <!-- Loading -->
+                        <!-- https://vuetifyjs.com/en/components/cards -->
+                        <v-dialog
+                            v-model="dialog"
+                            max-width="290"
+                            persistent
+                        >
+                            <v-card>
+                                <v-card-title class="headline">Está obteniéndose la información del paciente.</v-card-title>
+
+                                <v-card-text>
+                                    Espere mientras se cargan los datos...
+                                </v-card-text>
+
+                                <v-card-actions>
+                                
+                                    <v-spacer></v-spacer>
+
+                                    <v-progress-linear
+                                        color="orange accent-4"
+                                        indeterminate
+                                        rounded
+                                        height="10"
+                                    ></v-progress-linear>
+                                </v-card-actions>
+                            </v-card>
+                        </v-dialog>
+                        <!-- Loading -->
+
                         <!-- Form Name -->
                         <h2 style="text-align: left;">Datos Generales</h2>
 
@@ -1989,6 +2019,8 @@ import { store } from '../main';
 
 export default {
     data: () => ({
+        dialog: false,
+
         update: false,
 
         
@@ -2233,6 +2265,7 @@ export default {
     },
 
     mounted() {
+        this.dialog = true
         console.log("Id de paciente es: " + store.idPaciente);
 
         const date = new Date()
@@ -2333,16 +2366,22 @@ export default {
                     })
                 }
             })
+        }).then(() => {
+            this.$http.get(`http://localhost:8000/sindromeController/getAll`).then(response => {
+                if(response.data.Sindrome[0] == null){
+                    console.log('Nothing to do here..');
+                }else{
+                    
+                    this.sindromes = response.data.Sindrome;
+                }
+            });
+        }).then(() => {
+            this.dialog = false;
+        }).catch(error => {
+            this.dialog = false;
         });
 
-        this.$http.get(`http://localhost:8000/sindromeController/getAll`).then(response => {
-            if(response.data.Sindrome[0] == null){
-                console.log('Nothing to do here..');
-            }else{
-                
-                this.sindromes = response.data.Sindrome;
-            }
-        });
+        
 
         
 
