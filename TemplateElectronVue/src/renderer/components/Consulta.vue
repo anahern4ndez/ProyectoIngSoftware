@@ -66,7 +66,7 @@
                         </div>
                         </div>
                         <!-- Form Name -->
-                        <h2 style="text-align: left;">Datos Generales</h2>
+                        <h2 id="headers" style="text-align: left;">Datos Generales</h2>
 
                         <div class="encapsulado">                    
                             <b-container>
@@ -92,7 +92,7 @@
                                         <b-col>
                                         <v-text-field
                                             v-model="paciente.Procedencia"
-                                            label="Procedencia"
+                                            label="Lugar de nacimiento"
                                             outline
                                             :disabled="true"
                                         ></v-text-field> 
@@ -100,7 +100,7 @@
                                         <b-col>
                                         <v-text-field
                                             v-model="paciente.Telefono"
-                                            label="Télefono"
+                                            label="Teléfono"
                                             outline
                                             :disabled="true"
                                         ></v-text-field> 
@@ -260,7 +260,7 @@
                 </div>
 
                         <!-- Form Name -->
-                        <h2 style="text-align: left;">Dar Consulta</h2>
+                        <h2 id="headers" style="text-align: left;">Dar Consulta</h2>
                         <div>
                         <b-container class="bv-example-row2">
                             <b-row class="justify-content-md-center">
@@ -1528,7 +1528,7 @@
                     </table>
                 </div>
                 <div class="encapsulado">
-                        <h3 id="headers"  class="text-xs-center">Química Snaguínea</h3>
+                        <h3 id="headers"  class="text-xs-center">Química Sanguínea</h3>
                         <table class="table table-bordered table-ligth">
                         <tbody>           
                             <tr>

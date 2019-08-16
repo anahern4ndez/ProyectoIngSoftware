@@ -65,10 +65,6 @@ const routes = [{
         component: Vue.component('EditarPaciente', require('./components/EditarPaciente.vue').default)
     },
     {
-        path: '/darConsulta',
-        component: Vue.component('darConsulta', require('./components/DarConsulta.vue').default)
-    },
-    {
         path: '/Consulta',
         component: Vue.component('Consulta', require('./components/Consulta.vue').default)
     },
@@ -117,6 +113,6 @@ new Vue({
   router,
   render: h => h(App),
   mounted () {
-    this.$router.push('/login')
+    this.$router.push('/Hemodialisis')
   }
 }).$mount('#app');

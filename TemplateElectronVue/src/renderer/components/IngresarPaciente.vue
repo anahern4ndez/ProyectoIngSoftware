@@ -424,7 +424,7 @@ export default {
     }
 };
 </script>
-<style>
+<style scoped>
 .Datos {
   padding-left:3%;
   padding-right:8%;

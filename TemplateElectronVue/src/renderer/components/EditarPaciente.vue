@@ -270,7 +270,6 @@ export default {
       this.Estudia = response.data.Paciente[0].Estudia;
       this.Transfusiones = response.data.Paciente[0].Transfusiones;
       this.residencia = response.data.Paciente[0].Residencia;
-      console.log(this.Sexo +',' + this.Sindrome_Clinico_Presentacion);
     });
 
     this.$http.get("http://localhost:8000/ProcedenciaController/getAllLocation").then(response => {
@@ -321,7 +320,6 @@ export default {
           (v) => v && v.length < 60 || 'Se permite como maximo 60 caracteres'
 
         ],
-        radioRules:[v => !!v || 'Debe seleccionar una opción'],
         phoneRules: [
           (v) => !!v || 'Se requiere este campo'
         ]
@@ -425,7 +423,7 @@ export default {
     }
 };
 </script>
-<style>
+<style scoped>
 .Datos {
   padding-left:3%;
   padding-right:8%;
