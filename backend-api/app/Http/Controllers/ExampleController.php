@@ -74,7 +74,8 @@ class ExampleController extends Controller
         $user->password = hash::make($request->password);
         $user->puesto = $request->puesto;
         $user->save();
-        return $request;
+        //Comente esto
+        //return $request;
 
         return response()->json([
             'success' => true,
