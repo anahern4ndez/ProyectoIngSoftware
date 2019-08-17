@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Paciente;
+use App\Paciente;
 use DB;
 
 class PacienteController extends Controller

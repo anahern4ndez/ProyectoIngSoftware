@@ -11,9 +11,9 @@ class Procedencia extends Model
     protected $fillable=['ID', 'significado'];
     public $timestamps=false;
     public function procede(){
-        return $this->belongsTo('App\Models\Paciente', 'ID', 'Procedencia');
+        return $this->belongsTo('App\Paciente', 'ID', 'Procedencia');
     }
     public function reside(){
-        return $this->belongsTo('App\Models\Paciente', 'ID', 'Residencia');
+        return $this->belongsTo('App\Paciente', 'ID', 'Residencia');
     }
 }

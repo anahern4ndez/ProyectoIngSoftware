@@ -12,6 +12,6 @@ class sexo extends Model
     public $timestamps = false;
     
     public function genPaciente(){
-        return $this->belongsTo('App\Models\Paciente', "ID", "Sexo");
+        return $this->belongsTo('App\Paciente', "ID", "Sexo");
     }
 }

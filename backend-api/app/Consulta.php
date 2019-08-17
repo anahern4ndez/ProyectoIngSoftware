@@ -38,6 +38,6 @@ class Consulta extends Model
      * Relaciones de la tabla Paciente
      */
     public function cui(){
-        return $this->hasMany('App\Models\Paciente','CUI','cui'); 
+        return $this->hasMany('App\Paciente','CUI','cui'); 
     }
 }

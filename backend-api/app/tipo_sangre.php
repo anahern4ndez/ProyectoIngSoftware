@@ -12,6 +12,6 @@ class tipo_sangre extends Model
     public $timestamps = false;
 
     public function Sindrome_Clinico_Presentacion(){
-        return $this->hasOne('App\Models\Paciente','ID','Tipo_de_Sangre'); 
+        return $this->hasOne('App\Paciente','ID','Tipo_de_Sangre'); 
     }
 }

@@ -4,7 +4,7 @@ use Laravel\Lumen\Testing\DatabaseMigrations;
 use Laravel\Lumen\Testing\DatabaseTransactions;
 use Laravel\Lumen\Testing\WithoutMiddleware;
 use Faker\Factory as Faker;
-use App\Models\Paciente;
+use App\Paciente;
 /**
  *  Clase para pruebas unitarias relativos al controlador de Pacientes. 
  */
@@ -43,7 +43,7 @@ class PacienteControllerTest extends TestCase {
     }
     public function testFindOne(){
         //crear paciente a encontrar
-        $pacienteDummy = factory('App\Models\Paciente')->create();
+        $pacienteDummy = factory('App\Paciente')->create();
         $this->json('GET', '/PacienteController/findOne?CUI='.$pacienteDummy->CUI)
             ->seeJson([
                 'success' => true,
@@ -51,7 +51,7 @@ class PacienteControllerTest extends TestCase {
     }
     /*public function testFindById(){
         //crear paciente a encontrar
-        $pacienteDummy = factory('App\Models\Paciente')->create();
+        $pacienteDummy = factory('App\Paciente')->create();
         $this->json('GET', '/PacienteController/findById?id='.$pacienteDummy->id);
         dd($this->response->getContent());
     }*/
@@ -65,7 +65,7 @@ class PacienteControllerTest extends TestCase {
     public function testUpdateAll(){
         $faker = Faker::create();
         //crear paciente a updatear
-        $pacienteDummy = factory('App\Models\Paciente')->create();
+        $pacienteDummy = factory('App\Paciente')->create();
         //hacerle un update, modificando todos los campos (excepto id)
         $this->json('PUT', '/PacienteController/updateAll',[
             'id' => $pacienteDummy->id,
@@ -98,7 +98,7 @@ class PacienteControllerTest extends TestCase {
     public function testEliminarPaciente(){
 
         //crear paciente a eliminar
-        $pacienteDummy = factory('App\Models\Paciente')->create();
+        $pacienteDummy = factory('App\Paciente')->create();
         $patientCUI = $pacienteDummy->CUI;
         $this->json('DELETE', '/PacienteController/delete?cui='.$patientCUI)    
             ->seeJson([

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Paciente;
+use App\Paciente;
 use Faker\Factory as Faker;
 
 class PacienteSeeder extends Seeder

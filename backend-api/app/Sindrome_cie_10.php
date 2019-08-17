@@ -12,6 +12,6 @@ class Sindrome_cie_10 extends Model
     public $timestamps = false;
 
     public function presentacionPaciente(){
-        return $this->belongsTo('App\Models\Paciente','ID','Sindrome_Clinico_Presentacion'); 
+        return $this->belongsTo('App\Paciente','ID','Sindrome_Clinico_Presentacion'); 
     }
 }

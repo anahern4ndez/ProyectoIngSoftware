@@ -11,9 +11,9 @@ class tipo_respuesta extends Model
     public $timestamps = false;
 
     public function respuesta_Estudio(){
-        return $this->belongsTo('App\Models\Paciente', "ID", "Estudia");
+        return $this->belongsTo('App\Paciente', "ID", "Estudia");
     }
     public function respuesta_Trans(){
-        return $this->belongsTo('App\Models\Paciente', "ID", "Transfusiones");
+        return $this->belongsTo('App\Paciente', "ID", "Transfusiones");
     }
 }
