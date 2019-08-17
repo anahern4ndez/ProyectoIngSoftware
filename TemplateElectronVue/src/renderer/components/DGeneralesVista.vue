@@ -14,11 +14,11 @@
           </b-col>
           <b-col>
               <label class="text-center"><b>Percentil</b></label>
-              <input id="Percentil1" type="text" v-model="Percentil1" class="form-control" placeholder="Percentil">
+              <input id="Percentil1" type="text" v-model="percentilPeso" class="form-control" placeholder="Percentil">
               <label class="text-center"><b>Percentil</b></label>
-              <input id="Percentil2" type="text" v-model="Percentil2" class="form-control" placeholder="Percentil">
+              <input id="Percentil2" type="text" v-model="percentilTalla" class="form-control" placeholder="Percentil">
               <label class="text-center"><b>Percentil</b></label>
-              <input id="Percentil3" type="text" v-model="Percentil3" class="form-control" placeholder="Percentil">
+              <input id="Percentil3" type="text" v-model="percentilPA" class="form-control" placeholder="Percentil">
           </b-col>
         </b-row>
         <label class="text-center"><b>Telefono</b></label>
@@ -39,19 +39,26 @@
 
 
 <script>
+import { store } from '../main';
 export default {
   mounted() {
-    
+    this.id=store.CUI
   },
   data() {
     return {
+      peso:'',
+      id:'',
+      telefono:'',
+      talla:'',
+      pa:''
     };
   },
   methods:{
-    eliminar(){
-      
+    agregar(){
+        this.$http.put(`http://localhost:8000/DG/updateDG?id=${this.id}&Telefono=${this.telefono}&Peso=${this.peso}&Talla=${this.talla}&PA=${this.pa}`).then(response=>{
+      })
     }
-  }
+  }  
 };
 </script>
 <style>

@@ -33,7 +33,6 @@ class loginController extends Controller
     }
 
     public function logout(){
-        print("hola");
 
         if(Auth::check()){
             $api_token = Auth::user()->api_token;
@@ -47,7 +46,6 @@ class loginController extends Controller
     }
 
     public function doLogin(){
-        echo "hola";
         $users = DB::table('users')->get();
 
         foreach ($users as $user) {
