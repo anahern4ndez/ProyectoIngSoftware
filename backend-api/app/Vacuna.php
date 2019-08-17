@@ -22,6 +22,6 @@ class Vacuna extends Model
     ];
 
     public function idPaciente(){
-        return $this->hasMany('App\Paciente','idPaciente', 'CUI'); 
+        return $this->hasMany('App\Models\Paciente','idPaciente', 'CUI'); 
     }
 }

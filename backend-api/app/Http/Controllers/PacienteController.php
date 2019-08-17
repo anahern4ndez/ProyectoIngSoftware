@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Paciente;
+use App\Models\Paciente;
 use DB;
 
 class PacienteController extends Controller
@@ -76,7 +76,8 @@ class PacienteController extends Controller
         $val = Paciente::with('Procedencia', 'sexo_rel','Sindrome_Clinico_Presentacion', 'Tipo_de_Sangre', 'EstadoActual', 'Estudia', 'Transfusiones')->get();
 
         return response()->json([
-            'Pacientes' => $val,
+            'success' => true,
+            'Pacientes' => $val
             //'sexo' => $v->sexo->significado
         ], 200);
         
@@ -130,6 +131,10 @@ class PacienteController extends Controller
         $toUpdate->Sexo = $request->Sexo;
         $toUpdate->Historia = $request->Historia;
         $toUpdate->save();
+        
+        return response()->json([
+            'success' => true,
+        ], 200);
     }
 
     /**
@@ -141,11 +146,18 @@ class PacienteController extends Controller
     public function delete(Request $request)
     {
          (string)$CUI = $request->cui;
-        $user=Paciente::find($CUI);
-        $user->delete();
+        $paciente = Paciente::find($CUI);
+        
+        if(!$paciente){
+            return response()->json([
+                'success' => true,
+                'message' => 'No se encontró el paciente especificado.'
+            ], 404);
+        }
+        $paciente->delete();
         return response()->json([
             'success' => true,
-            'message' => 'eliminado'
+            'message' => 'Paciente eliminado con éxito.'
         ], 200);
     }
 }

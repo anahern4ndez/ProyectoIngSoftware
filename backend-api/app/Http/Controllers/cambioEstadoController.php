@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\registroestado;
-use App\Paciente;
+use App\Models\Paciente;
 
 class cambioEstadoController extends Controller
 {
