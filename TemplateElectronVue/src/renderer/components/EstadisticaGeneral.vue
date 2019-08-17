@@ -2,13 +2,20 @@
 	<div>
         <b-container class="containerMenu">
 
-            <!-- FILA 1 variable a estudiar-->
+            <!-- FILA 1, TÍTULO-->
             <b-row align-h="around" align-v="center">
                 <b-col>
-                    <h2>Ingrese la variable a estudiar:</h2>
+                    <h2 class="text-center">INFORMES ESTADÍSTICOS</h2>
                 </b-col>
+            </b-row>
 
+            <br><hr><br>
+
+            <!-- COLUMNA1, VARIABLES A ESTUDIAR -->
+            <b-row align-h="around" align-v="center">
                 <b-col>
+                    <h3>Ingrese la variable a estudiar:</h3>
+                    <br>
                     <v-combobox
                         v-model="varEstudio"
                         :items="posiblesVariables"
@@ -19,6 +26,57 @@
                         persistent-hint
                         :small-chips="chips"
                         :clearable="clearable"
+                        v-on:click=""
+                    >
+                        <template v-if="noData" v-slot:no-data>
+                            <v-list-item>
+                            <v-list-item-content>
+                                <v-list-item-title>
+                                No se encontró "<strong>{{ search }}</strong>".
+                                </v-list-item-title>
+                            </v-list-item-content>
+                            </v-list-item>
+                        </template>
+                    </v-combobox>
+                </b-col>
+
+                <!-- COLUMNA 2, CONDICIONES -->
+                <b-col>
+                    <h3>Ingrese las condiciones:</h3>
+                    <br>
+                    <v-combobox
+                        v-model="condiciones"
+                        :items="posiblesVariables"
+                        :search-input.sync="search"
+                        :hide-selected="hideSelected"
+                        label="Seleccione las variables a estudiar."
+                        :multiple="multiple"
+                        persistent-hint
+                        :small-chips="chips"
+                        :clearable="clearable"
+                         v-on:click=""
+                    >
+                        <template v-if="noData" v-slot:no-data>
+                            <v-list-item>
+                            <v-list-item-content>
+                                <v-list-item-title>
+                                No se encontró "<strong>{{ search }}</strong>".
+                                </v-list-item-title>
+                            </v-list-item-content>
+                            </v-list-item>
+                        </template>
+                    </v-combobox>
+                </b-col>
+
+                <!-- COLUMNA 3, AGRUPACION -->
+                <b-col>
+                    <h3>Ingrese la variable de agrupacion:</h3>
+                    <br>
+                    <v-combobox
+                        v-model="agrupacion"
+                        :items="posiblesVariables"
+                        label="Seleccione las variables de agrupacion."
+                         v-on:click=""
                     >
                         <template v-if="noData" v-slot:no-data>
                             <v-list-item>
@@ -34,40 +92,9 @@
             </b-row>
 
             <br>
-            <!-- FILA 2 condiciones-->
-            <b-row align-h="around" align-v="center">
-                <b-col>
-                    <h2>Ingrese las condiciones:</h2>
-                </b-col>
 
-                <b-col>
-                    <v-combobox
-                        v-model="condiciones"
-                        :items="posiblesVariables"
-                        :search-input.sync="search"
-                        :hide-selected="hideSelected"
-                        label="Seleccione las variables a estudiar."
-                        :multiple="multiple"
-                        persistent-hint
-                        :small-chips="chips"
-                        :clearable="clearable"
-                    >
-                        <template v-if="noData" v-slot:no-data>
-                            <v-list-item>
-                            <v-list-item-content>
-                                <v-list-item-title>
-                                No se encontró "<strong>{{ search }}</strong>".
-                                </v-list-item-title>
-                            </v-list-item-content>
-                            </v-list-item>
-                        </template>
-                    </v-combobox>
-                </b-col>
-            </b-row>
-
-
-            <hr>
-
+            <!-- ESPECIFICACIÓN DE LAS CONDICIONES -->
+            <h4 v-if="this.condiciones.length > 0">Por favor, especifique las condiciones seleccionadas:</h4>
             <b-row v-for="(a,index) in condiciones" :key="index">
                 <b-col>
                     {{a}}
@@ -94,57 +121,37 @@
 
             </b-row>
 
-            <hr>
+            <br>
 
-            <!-- FILA 3 agrupacion-->
-            <b-row align-h="around" align-v="center">
-                <b-col>
-                    <h2>Ingrese la variable de agrupacion:</h2>
-                </b-col>
-
-                <b-col>
-                    <v-combobox
-                        v-model="agrupacion"
-                        :items="posiblesVariables"
-                        label="Seleccione las variables de agrupacion."
-                    >
-                        <template v-if="noData" v-slot:no-data>
-                            <v-list-item>
-                            <v-list-item-content>
-                                <v-list-item-title>
-                                No se encontró "<strong>{{ search }}</strong>".
-                                </v-list-item-title>
-                            </v-list-item-content>
-                            </v-list-item>
-                        </template>
-
-                    </v-combobox>
+            <!-- FILA 3, BOTON DE ACEPTAR/CANCELAR -->
+            <b-row align-v="center" class="text-center">
+                <b-col order="4">
+                    <v-btn outline color="#303841" v-on:click="concatenar">Aceptar</v-btn>
+                    <v-btn outline color="#303841" v-on:click="clearData">Cancelar</v-btn>
                 </b-col>
             </b-row>
 
-            <!-- FILA 4-->
-            <b-row align-h="around" align-v="center" class="pb-2">
-                <v-btn outline color="#303841" v-on:click="prueba">Aceptar</v-btn>
-            </b-row>
+            <br><hr><br>
 
             <!-- Tabla-->
-            <table>
-                <thead>
-                    <tr>
-                        <th class="text-left">Variables</th>
-                        <th class="text-left">Condiciones</th>
-                        <th class="text-left">Agrupación</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="(variable,index) in varEstudio">
-                        <td>{{variable}}</td>
-                        <td>{{condiciones[index]}} {{simboloAgrupacion[index]}} {{textoAgrupacion[index]}}</td>
-                        <td>{{agrupacion}}</td>
-                    </tr>
-                </tbody>
-            </table>
-
+            <b-row align-h="center">
+                <table v-if="this.showTable">
+                    <thead>
+                        <tr>
+                            <th class="text-left">Variables</th>
+                            <th class="text-left">Condiciones</th>
+                            <th class="text-left">Agrupación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{variablesEstudio}}</td>
+                            <td>{{variablesCondiciones}}</td>
+                            <td>{{agrupacion}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </b-row>
 
 
         </b-container>
@@ -172,6 +179,21 @@ export default {
       simboloAgrupacion:[],
       textoAgrupacion:[],
       simbolosCondiciones: ["=",">",">=","<","<=","diferente"],
+      variablesEstudio: "",
+      variablesCondiciones: "",
+
+    //   Variable solo para hacer pruebas
+      showTable: false,
+
+    // Ejemplo de un array de objetos
+      rows: [
+      { id: 1, name: "Chandler Bing", phone: '305-917-1301', profession: 'IT Manager' },
+      { id: 2, name: "Ross Geller", phone: '210-684-8953', profession: 'Paleontologist' },
+      { id: 3, name: "Rachel Green", phone: '765-338-0312', profession: 'Waitress'},
+      { id: 4, name: "Monica Geller", phone: '714-541-3336', profession: 'Head Chef' },
+      { id: 5, name: "Joey Tribbiani", phone: '972-297-6037', profession: 'Actor' },
+      { id: 6, name: "Phoebe Buffay", phone: '760-318-8376', profession: 'Masseuse' }
+    ]
   }),
 
   watch: {
@@ -201,6 +223,52 @@ export default {
 
           console.log(this.simboloAgrupacion[0]);
           console.log(this.textoAgrupacion[1]);
+      },
+
+      concatenar()
+      {
+            this.variablesEstudio = "";
+            this.variablesCondiciones = "";
+
+            if (this.varEstudio.length > 0)
+            {
+                for (let i = 0; i < this.varEstudio.length; i++) {
+                    if (i == this.varEstudio.length - 1)
+                        this.variablesEstudio += this.varEstudio[i];
+                    else
+                        this.variablesEstudio += this.varEstudio[i] + "; ";
+                }
+            }
+
+            if (this.condiciones.length > 0)
+            {
+                for (let i = 0; i < this.condiciones.length; i++) {
+                    if (i == this.condiciones.length - 1)
+                        this.variablesCondiciones += this.condiciones[i] + " " + this.simboloAgrupacion[i] + " " + this.textoAgrupacion[i];
+                    else
+                        this.variablesCondiciones += this.condiciones[i] + " " + this.simboloAgrupacion[i] + " " + this.textoAgrupacion[i] + "; ";
+                }
+            }
+
+            this.guardarDatos();
+      },
+
+    // En esta función iría todo el backend para insertar en array de objetos y extraer de bd.
+      guardarDatos()
+      {
+          this.showTable = true;
+      },
+
+      clearData()
+      {
+          this.varEstudio = [];
+          this.condiciones = [];
+          this.agrupacion = "";
+          this.variablesEstudio = "";
+          this.variablesCondiciones = "";
+          this.showTable = false;
+
+          this.concatenar();
       }
 
     },
