@@ -27,7 +27,10 @@ class Paciente extends Model
         'Transfusiones',
         'EstadoActual',
         'Sexo',
-        'Historia'
+        'Historia',
+        'Peso',
+        'Talla',
+        'PA'
     ];
     /**
      * Relaciones de la tabla Paciente
