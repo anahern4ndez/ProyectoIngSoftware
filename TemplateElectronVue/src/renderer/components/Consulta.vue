@@ -18,53 +18,83 @@
                         <!-- Text input-->
                         <div class="form-group ">
                         <!-- Lefts-->
-                        <div class="encapsulado">
-                            <b-container>
-                                <b-row class="justify-content-md-center">
-                                <b-col>
-                                    <div>
-                                        <b-container>
-                                            <b-row class="justify-content-md-center">
-                                                <b-col>
-                                                    <h3 style="font-weight: bold;">Paciente:</h3>  
-                                                </b-col>
-                                                <b-col>
-                                                    <h3>{{this.paciente.nombre}} {{this.paciente.apellido}}</h3> 
-                                                </b-col>
-                                            </b-row>
-                                            <b-row>
-                                            <img style="margin-left: 10%; margin-top: 2%" src="../assets/javier.jpg" alt="" width="273" height="183">
-                                            </b-row>
-                                        </b-container>
-                                    </div>
-                                </b-col>                       
-                                <b-col>
-                                    <!-- Right-->
-                                    <div style="margin-left: 2%">
-                                        <h3 style="text-align:center; font-weight: bold;margin-bottom: 2%;">Observaciones especiales: </h3>  
-                                        <div>                     
-                                            <v-textarea
-                                                v-model="comentario"
-                                                outline
-                                                rows=10
-                                            ></v-textarea>
+                            <div class="encapsulado">
+                                <b-container>
+                                    <b-row class="justify-content-md-center">
+                                    <b-col>
+                                        <div>
+                                            <b-container>
+                                                <b-row class="justify-content-md-center">
+                                                    <b-col>
+                                                        <h3 style="font-weight: bold;">Paciente:</h3>  
+                                                    </b-col>
+                                                    <b-col>
+                                                        <h3>{{this.paciente.nombre}} {{this.paciente.apellido}}</h3> 
+                                                    </b-col>
+                                                </b-row>
+                                                <b-row>
+                                                <img style="margin-left: 10%; margin-top: 2%" src="../assets/javier.jpg" alt="" width="273" height="183">
+                                                </b-row>
+                                            </b-container>
                                         </div>
-                                        <b-container>
-                                            <b-row class="justify-content-md-center">
-                                                <b-col>
-                                                    <button type="button" class="btn btn-lg btn-warning btn-block">Agregar Comentario</button> 
-                                                </b-col>
-                                                <b-col>
-                                                    <button type="button" class="btn btn-lg btn-warning btn-block">Ver más</button>
-                                                </b-col>
-                                            </b-row>
-                                        </b-container>
-                                    </div>
-                                </b-col>
-                                </b-row>
-                            </b-container>
+                                    </b-col>                       
+                                    <b-col>
+                                        <!-- Right-->
+                                        <div style="margin-left: 2%">
+                                            <h3 style="text-align:center; font-weight: bold;margin-bottom: 2%;">Observaciones especiales: </h3>  
+                                            <div>                     
+                                                <v-textarea
+                                                    v-model="comentario"
+                                                    outline
+                                                    rows=10
+                                                ></v-textarea>
+                                            </div>
+                                            <b-container>
+                                                <b-row class="justify-content-md-center">
+                                                    <b-col>
+                                                        <button type="button" class="btn btn-lg btn-warning btn-block">Agregar Comentario</button> 
+                                                    </b-col>
+                                                    <b-col>
+                                                        <button type="button" class="btn btn-lg btn-warning btn-block">Ver más</button>
+                                                    </b-col>
+                                                </b-row>
+                                            </b-container>
+                                        </div>
+                                    </b-col>
+                                    </b-row>
+                                </b-container>
+                            </div>
                         </div>
-                        </div>
+
+                        <!-- Loading -->
+                        <!-- https://vuetifyjs.com/en/components/cards -->
+                        <v-dialog
+                            v-model="dialog"
+                            max-width="290"
+                            persistent
+                        >
+                            <v-card>
+                                <v-card-title class="headline">Está obteniéndose la información del paciente.</v-card-title>
+
+                                <v-card-text>
+                                    Espere mientras se cargan los datos...
+                                </v-card-text>
+
+                                <v-card-actions>
+                                
+                                    <v-spacer></v-spacer>
+
+                                    <v-progress-linear
+                                        color="orange accent-4"
+                                        indeterminate
+                                        rounded
+                                        height="10"
+                                    ></v-progress-linear>
+                                </v-card-actions>
+                            </v-card>
+                        </v-dialog>
+                        <!-- Loading -->
+
                         <!-- Form Name -->
                         <h2 style="text-align: left;">Datos Generales</h2>
 
@@ -357,461 +387,452 @@
                                             <b-container>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Prednisona" label="Prednisona" color="green"></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="misMedicamentos.prednisona.estado" label="Prednisona" color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="Prednisona_mg"
+                                                            v-model="misMedicamentos.prednisona.mg"
                                                             label="mg"
                                                             outline
-                                                            :disabled="!Prednisona"
                                                             type =number
                                                             min="0"
                                                             :rules="minRules"
+                                                            :disabled="!misMedicamentos.prednisona.estado"
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="Prednisona_frecuencia"
+                                                            v-model="misMedicamentos.prednisona.frecuencia"
                                                             label="Frecuencia"
                                                             outline
-                                                            :disabled="!Prednisona"
                                                             type =number
                                                             min="0"
                                                             :rules="minRules"
+                                                            :disabled="!misMedicamentos.prednisona.estado"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="cyac" label="Cyac" color="green"></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="misMedicamentos.cyac.estado" label="Cyac" color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="Cyac_mg"
+                                                            v-model="misMedicamentos.cyac.mg"
                                                             label="mg"
                                                             outline
-                                                            :disabled="!cyac"
                                                             type =number
                                                             min="0"
                                                             :rules="minRules"
+                                                            :disabled="!misMedicamentos.cyac.estado"
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="Cyac_frecuencia"
+                                                            v-model="misMedicamentos.cyac.frecuencia"
                                                             label="Frecuencia"
                                                             outline
-                                                            :disabled="!cyac"
                                                             type =number
                                                             min="0"
                                                             :rules="minRules"
+                                                            :disabled="!misMedicamentos.cyac.estado"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Tac" label="Tac" color="green"></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="misMedicamentos.tac.estado" label="Tac" color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="Tac_mg"
+                                                            v-model="misMedicamentos.tac.mg"
                                                             label="mg"
                                                             outline
-                                                            :disabled="!Tac"
-                                                            type =number
                                                             min="0"
                                                             :rules="minRules"
-                                                        ></v-text-field> 
-                                                    </b-col>
-                                                    <b-col>
+                                                            :disabled="!misMedicamentos.tac.estado"
                                                         <v-text-field
-                                                            v-model="Tac_frecuencia"
+                                                            v-model="misMedicamentos.tac.frecuencia"
                                                             label="Frecuencia"
                                                             outline
-                                                            :disabled="!Tac"
                                                             type =number
                                                             min="0"
                                                             :rules="minRules"
+                                                            :disabled="!misMedicamentos.tac.estado"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="MMF" label="MMF" color="green"></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="misMedicamentos.mmf.estado" label="MMF" color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="MMF_mg"
+                                                            v-model="misMedicamentos.mmf.mg"
                                                             label="mg"
                                                             outline
-                                                            :disabled="!MMF"
                                                             type =number
                                                             min="0"
                                                             :rules="minRules"
+                                                            :disabled="!misMedicamentos.mmf.estado"
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="MMF_frecuencia"
+                                                            v-model="misMedicamentos.mmf.frecuencia"
                                                             label="Frecuencia"
                                                             outline
-                                                            :disabled="!MMF"
                                                             type =number
                                                             min="0"
                                                             :rules="minRules"
+                                                            :disabled="!misMedicamentos.mmf.estado"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="AZA" label="AZA" color="green" ></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="misMedicamentos.aza.estado" label="AZA" color="green" ></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="AZA_mg"
+                                                            v-model="misMedicamentos.aza.mg"
                                                             label="mg"
                                                             outline
-                                                            :disabled="!AZA"
                                                             type =number
                                                             min="0"
                                                             :rules="minRules"
+                                                            :disabled="!misMedicamentos.aza.estado"
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="AZA_frecuencia"
+                                                            v-model="misMedicamentos.aza.frecuencia"
                                                             label="Frecuencia"
                                                             outline
-                                                            :disabled="!AZA"
                                                             type =number
                                                             min="0"
                                                             :rules="minRules"
+                                                            :disabled="!misMedicamentos.aza.estado"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="CFM" label="CFM" color="green"></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="misMedicamentos.cfm.estado" label="CFM" color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="CFM_mg"
+                                                            v-model="misMedicamentos.cfm.mg"
                                                             label="mg"
                                                             outline
-                                                            :disabled="!CFM"
                                                             type =number
                                                             min="0"
                                                             :rules="minRules"
+                                                            :disabled="!misMedicamentos.cfm.estado"
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="CFM_frecuencia"
+                                                            v-model="misMedicamentos.cfm.frecuencia"
                                                             label="Frecuencia"
                                                             outline
-                                                            :disabled="!CFM"
                                                             type =number
                                                             min="0"
                                                             :rules="minRules"
+                                                            :disabled="!misMedicamentos.cfm.estado"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Enalapril" label="Enalapril" color="green"></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="misMedicamentos.enalapril.estado" label="Enalapril" color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="Enalapril_mg"
+                                                            v-model="misMedicamentos.enalapril.mg"
                                                             label="mg"
                                                             outline
-                                                            :disabled="!Enalapril"
                                                             type =number
                                                             min="0"
                                                             :rules="minRules"
-                                                        ></v-text-field> 
+
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="Enalapril_frecuencia"
+                                                            v-model="misMedicamentos.enalapril.frecuencia"
                                                             label="Frecuencia"
                                                             outline
-                                                            :disabled="!Enalapril"
                                                             type =number
                                                             min="0"
                                                             :rules="minRules"
+                                                            :disabled="!misMedicamentos.enalapril.estado"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Losartan" label="Losartan" color="green"></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="misMedicamentos.losartan.estado" label="Losartan" color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="Losartan_mg"
+                                                            v-model="misMedicamentos.losartan.mg"
                                                             label="mg"
                                                             outline
-                                                            :disabled="!Losartan"
                                                             type =number
                                                             min="0"
                                                             :rules="minRules"
+                                                            :disabled="!misMedicamentos.losartan.estado"
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="Losartan_frecuencia"
+                                                            v-model="misMedicamentos.losartan.frecuencia"
                                                             label="Frecuencia"
                                                             outline
-                                                            :disabled="!Losartan"
                                                             type =number
                                                             min="0"
                                                             :rules="minRules"
+=======
+>>>>>>> 024263f327f0839d7a631332ad11bab2bc0c7777
+                                                    </b-col>
+                                                </b-row>
+                                                <b-row>
+                                                    <b-col>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="misMedicamentos.amlodipina.estado" label="Amlodipina" color="green"></v-checkbox>
+                                                    </b-col>
+                                                    <b-col>
+                                                        <v-text-field
+                                                            v-model="misMedicamentos.amlodipina.mg"
+                                                            label="mg"
+                                                            outline
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
+                                                            :disabled="!misMedicamentos.amlodipina.estado"
+                                                        ></v-text-field> 
+                                                    </b-col>
+                                                    <b-col>
+                                                        <v-text-field
+                                                            v-model="misMedicamentos.amlodipina.frecuencia"
+                                                            label="Frecuencia"
+                                                            outline
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
+                                                            :disabled="!misMedicamentos.amlodipina.estado"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Amlodipina" label="Amlodipina" color="green"></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="misMedicamentos.citratoNa.estado" label="Citrato Na" color="green" ></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="Amlodipina_mg"
-                                                            label="mg"
-                                                            outline
-                                                            :disabled="!Amlodipina"
-                                                            type =number
-                                                            min="0"
-                                                            :rules="minRules"
-                                                        ></v-text-field> 
-                                                    </b-col>
-                                                    <b-col>
-                                                        <v-text-field
-                                                            v-model="Amlodipina_frecuencia"
-                                                            label="Frecuencia"
-                                                            outline
-                                                            :disabled="!Amlodipina"
-                                                            type =number
-                                                            min="0"
-                                                            :rules="minRules"
-                                                        ></v-text-field> 
-                                                    </b-col>
-                                                </b-row>
-                                                <b-row>
-                                                    <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="CitratoNa" label="Citrato Na" color="green" ></v-checkbox>
-                                                    </b-col>
-                                                    <b-col>
-                                                        <v-text-field
-                                                            v-model="Citrato_Na_mg"
+                                                            v-model="misMedicamentos.citratoNa.mg"
                                                             label="mili-equi"
                                                             outline
-                                                            :disabled="!CitratoNa"
                                                             type =number
                                                             min="0"
                                                             :rules="minRules"
+                                                            :disabled="!misMedicamentos.citratoNa.estado"
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="Citrato_Na_frecuencia"
+                                                            v-model="misMedicamentos.citratoNa.frecuencia"
                                                             label="Frecuencia"
                                                             outline
-                                                            :disabled="!CitratoNa"
                                                             type =number
                                                             min="0"
                                                             :rules="minRules"
+                                                            :disabled="!misMedicamentos.citratoNa.estado"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="CitratoK" label="Citrato K" color="green"></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="misMedicamentos.citratoK.estado" label="Citrato K" color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
 
-                                                            v-model="Citrato_K_mg"
+                                                            type =number
+                                                            min="0"
+                                                            :rules="minRules"
+                                                            v-model="misMedicamentos.citratoK.mg"
                                                             label="mili equiva."
                                                             outline
-                                                            :disabled="!CitratoK"
-                                                            type =number
-                                                            min="0"
-                                                            :rules="minRules"
+                                                            :disabled="!misMedicamentos.citratoK.estado"
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="Citrato_K_frecuencia"
+                                                            v-model="misMedicamentos.citratoK.frecuencia"
                                                             label="Frecuencia"
                                                             outline
-                                                            :disabled="!CitratoK"
                                                             type =number
                                                             min="0"
                                                             :rules="minRules"
+                                                            :disabled="!misMedicamentos.citratoK.estado"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Furosemida" label="Furosemida" color="green"></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="misMedicamentos.furosemida.estado" label="Furosemida" color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="Furosemida_mg"
+                                                            v-model="misMedicamentos.furosemida.mg"
                                                             label="mg"
                                                             outline
-                                                            :disabled="!Furosemida"
                                                             type =number
                                                             min="0"
                                                             :rules="minRules"
+                                                            :disabled="!misMedicamentos.furosemida.estado"
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="Furosemida_frecuencia"
+                                                            v-model="misMedicamentos.furosemida.frecuencia"
                                                             label="Frecuencia"
                                                             outline
-                                                            :disabled="!Furosemida"
                                                             type =number
                                                             min="0"
                                                             :rules="minRules"
+                                                            :disabled="!misMedicamentos.furosemida.estado"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Alfacalcidol" label="Alfacalcidol" color="green"></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="misMedicamentos.alfacalcidol.estado" label="Alfacalcidol" color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="Alfacalcidol_mg"
+                                                            v-model="misMedicamentos.alfacalcidol.mg"
                                                             label="micro gr"
                                                             outline
-                                                            :disabled="!Alfacalcidol"
                                                             type =number
                                                             min="0"
                                                             :rules="minRules"
+                                                            :disabled="!misMedicamentos.alfacalcidol.estado"
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="Alfacalcidol_frecuencia"
+                                                            v-model="misMedicamentos.alfacalcidol.frecuencia"
                                                             label="Frecuencia"
                                                             outline
-                                                            :disabled="!Alfacalcidol"
                                                             type =number
                                                             min="0"
                                                             :rules="minRules"
+                                                            :disabled="!misMedicamentos.alfacalcidol.estado"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="CaCO3" label="CaCO3" color="green"></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="misMedicamentos.CaCO3.estado" label="CaCO3" color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="CaCO3_mg"
+                                                            v-model="misMedicamentos.CaCO3.mg"
                                                             label="mg"
                                                             outline
-                                                            :disabled="!CaCO3"
                                                             type =number
                                                             min="0"
                                                             :rules="minRules"
+                                                            :disabled="!misMedicamentos.CaCO3.estado"
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="CaCO3_frecuencia"
+                                                            v-model="misMedicamentos.CaCO3.frecuencia"
                                                             label="Frecuencia"
                                                             outline
-                                                            :disabled="!CaCO3"
                                                             type =number
                                                             min="0"
                                                             :rules="minRules"
+                                                            :disabled="!misMedicamentos.CaCO3.estado"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="EPO" label="EPO"  color="green"></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="misMedicamentos.epo.estado" label="EPO"  color="green"></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="EPO_mg"
+                                                            v-model="misMedicamentos.epo.mg"
                                                             label="unidades"
                                                             outline
-                                                            :disabled="!EPO"
                                                             type =number
                                                             min="0"
                                                             :rules="minRules"
+                                                            :disabled="!misMedicamentos.epo.estado"
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="EPO_frecuencia"
+                                                            v-model="misMedicamentos.epo.frecuencia"
                                                             label="Frecuencia"
                                                             outline
-                                                            :disabled="!EPO"
                                                             type =number
                                                             min="0"
                                                             :rules="minRules"
+                                                            :disabled="!misMedicamentos.epo.estado"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Fe" label="Fe" color="green" ></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="misMedicamentos.fe.estado" label="Fe" color="green" ></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="Fe_mg"
+                                                            v-model="misMedicamentos.fe.mg"
                                                             label="mg"
                                                             outline
-                                                            :disabled="!Fe"
                                                             type =number
                                                             min="0"
                                                             :rules="minRules"
+                                                            :disabled="!misMedicamentos.fe.estado"
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="Fe_frecuencia"
+                                                            v-model="misMedicamentos.fe.frecuencia"
                                                             label="Frecuencia"
                                                             outline
-                                                            :disabled="!Fe"
-                                                            type =number
                                                             min="0"
                                                             :rules="minRules"
-                                                        ></v-text-field> 
-                                                    </b-col>
-                                                </b-row>
+                                                            :disabled="!misMedicamentos.fe.estado"
                                                 <b-row>
                                                     <b-col>
-                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="Cefadroxilo"  color="green" label="Cefadroxilo" ></v-checkbox>
+                                                        <v-checkbox class="my-0 mt-4 py-0 " v-model="misMedicamentos.cefadroxilo.estado"  color="green" label="Cefadroxilo" ></v-checkbox>
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="Cefadroxilo_mg"
+                                                            v-model="misMedicamentos.cefadroxilo.mg"
                                                             label="mg"
                                                             outline
-                                                            :disabled="!Cefradoxilo"
                                                             type =number
                                                             min="0"
                                                             :rules="minRules"
+                                                            :disabled="!misMedicamentos.cefadroxilo.estado"
                                                         ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="Cefadroxilo_frecuencia"
+                                                            v-model="misMedicamentos.cefadroxilo.frecuencia"
                                                             label="Frecuencia"
                                                             outline
-                                                            :disabled="!Cefradoxilo"
                                                             type =number
                                                             min="0"
                                                             :rules="minRules"
+                                                            :disabled="!misMedicamentos.cefadroxilo.estado"
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
@@ -830,7 +851,7 @@
                                                 <b-row>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="Na"
+                                                            v-model="resultados_de_laboratorio.Na"
                                                             label="Na"
                                                             type =number
                                                             min="0"
@@ -840,7 +861,7 @@
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="Cl"
+                                                            v-model="resultados_de_laboratorio.Cl"
                                                             label="Cl"
                                                             type =number
                                                             min="0"
@@ -850,7 +871,7 @@
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="BUN"
+                                                            v-model="resultados_de_laboratorio.BUN"
                                                             label="BUN"
                                                             type =number
                                                             min="0"
@@ -860,7 +881,7 @@
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="Glu"
+                                                            v-model="resultados_de_laboratorio.Glu"
                                                             label="Glu"
                                                             type =number
                                                             min="0"
@@ -872,7 +893,7 @@
                                                 <b-row>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="K"
+                                                            v-model="resultados_de_laboratorio.K"
                                                             label="K"
                                                             type =number
                                                             min="0"
@@ -882,7 +903,7 @@
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="HCO"
+                                                            v-model="resultados_de_laboratorio.HCO"
                                                             label="HCO"
                                                             type =number
                                                             min="0"
@@ -892,7 +913,7 @@
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="Creat"
+                                                            v-model="resultados_de_laboratorio.Creat"
                                                             label="Creat"
                                                             type =number
                                                             min="0"
@@ -902,7 +923,7 @@
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="WB"
+                                                            v-model="resultados_de_laboratorio.WB"
                                                             label="WB"
                                                             type =number
                                                             min="0"
@@ -914,7 +935,7 @@
                                                 <b-row>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="Col"
+                                                            v-model="resultados_de_laboratorio.Col"
                                                             label="Col"
                                                             type =number
                                                             min="0"
@@ -924,7 +945,7 @@
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="Alb"
+                                                            v-model="resultados_de_laboratorio.Alb"
                                                             label="Alb"
                                                             type =number
                                                             min="0"
@@ -934,7 +955,7 @@
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="HB"
+                                                            v-model="resultados_de_laboratorio.HB"
                                                             label="HB"
                                                             type =number
                                                             min="0"
@@ -944,7 +965,7 @@
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="HT"
+                                                            v-model="resultados_de_laboratorio.HT"
                                                             label="HT"
                                                             type =number
                                                             min="0"
@@ -956,7 +977,7 @@
                                                 <b-row>
                                                    <b-col>
                                                         <v-text-field
-                                                            v-model="Ca"
+                                                            v-model="resultados_de_laboratorio.Ca"
                                                             label="Ca"
                                                             type =number
                                                             min="0"
@@ -966,7 +987,7 @@
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="P"
+                                                            v-model="resultados_de_laboratorio.P"
                                                             label="P"
                                                             type =number
                                                             min="0"
@@ -976,7 +997,7 @@
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="MG"
+                                                            v-model="resultados_de_laboratorio.MG"
                                                             label="MG"
                                                             type =number
                                                             min="0"
@@ -986,7 +1007,7 @@
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="PTL"
+                                                            v-model="resultados_de_laboratorio.PTL"
                                                             label="PTL"
                                                             type =number
                                                             min="0"
@@ -998,7 +1019,7 @@
                                                 <b-row>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="EGO"
+                                                            v-model="resultados_de_laboratorio.EGO"
                                                             label="EGO"
                                                             type =number
                                                             min="0"
@@ -1008,7 +1029,7 @@
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="pH"
+                                                            v-model="resultados_de_laboratorio.pH"
                                                             label="pH"
                                                             type =number
                                                             min="0"
@@ -1018,7 +1039,7 @@
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="Glu2"
+                                                            v-model="resultados_de_laboratorio.Glu2"
                                                             label="Glu"
                                                             type =number
                                                             min="0"
@@ -1028,7 +1049,7 @@
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="Prot"
+                                                            v-model="resultados_de_laboratorio.Prot"
                                                             label="Prot"
                                                             type =number
                                                             min="0"
@@ -1040,7 +1061,7 @@
                                                 <b-row>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="Hem"
+                                                            v-model="resultados_de_laboratorio.Hem"
                                                             label="Hem"
                                                             type =number
                                                             min="0"
@@ -1050,7 +1071,7 @@
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="Gr"
+                                                            v-model="resultados_de_laboratorio.Gr"
                                                             label="Gr"
                                                             type =number
                                                             min="0"
@@ -1060,7 +1081,7 @@
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="GB"
+                                                            v-model="resultados_de_laboratorio.GB"
                                                             label="GB"
                                                             type =number
                                                             min="0"
@@ -1070,7 +1091,7 @@
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="Cil"
+                                                            v-model="resultados_de_laboratorio.Cil"
                                                             label="Cil"
                                                             type =number
                                                             min="0"
@@ -1082,7 +1103,7 @@
                                                 <b-row>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="URO"
+                                                            v-model="resultados_de_laboratorio.URO"
                                                             label="URO"
                                                             type =number
                                                             min="0"
@@ -1092,7 +1113,7 @@
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="PTH"
+                                                            v-model="resultados_de_laboratorio.PTH"
                                                             label="PTH"
                                                             type =number
                                                             min="0"
@@ -1102,7 +1123,7 @@
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
-                                                            v-model="Ferritina"
+                                                            v-model="resultados_de_laboratorio.Ferritina"
                                                             label="Ferritina"
                                                             type =number
                                                             min="0"
@@ -1136,7 +1157,7 @@
                                 <td>
                                     <v-textarea
                                         :auto-grow=true
-                                        v-model="examen_fisico.coong"
+                                        v-model="examen_fisico.COONG"
                                         rows=1
                                         hide-details
                                     ></v-textarea>
@@ -1146,7 +1167,7 @@
                             <tr>
                                 <th scope="row" style="width: 10%">Corazón</th>
                                 <td style="width: 5%">
-                                    <v-checkbox v-model="corazonCheck" hide-details color=green class="shrink py-0 my-0 ml-3 "></v-checkbox>
+                                    <v-checkbox v-model="examen_fisico_check.corazon" hide-details color=green class="shrink py-0 my-0 ml-3 "></v-checkbox>
                                 </td>
                                 <td>
                                     <v-textarea
@@ -1154,7 +1175,7 @@
                                         v-model="examen_fisico.corazon"
                                         rows=1
                                         hide-details
-                                        :disabled="!corazonCheck"
+                                        :disabled="!examen_fisico_check.corazon"
                                     ></v-textarea>
                                 </td>
                             </tr>
@@ -1162,7 +1183,7 @@
                             <tr>
                                 <th scope="row" style="width: 10%">Pulmones</th>
                                 <td style="width: 5%">
-                                    <v-checkbox v-model="pulmonesCheck" hide-details color=green class="shrink py-0 my-0 ml-3 "></v-checkbox>
+                                    <v-checkbox v-model="examen_fisico_check.pulmones" hide-details color=green class="shrink py-0 my-0 ml-3 "></v-checkbox>
                                 </td>
                                 <td>
                                     <v-textarea
@@ -1170,7 +1191,7 @@
                                         v-model="examen_fisico.pulmones"
                                         rows=1
                                         hide-details
-                                        :disabled="!pulmonesCheck"
+                                        :disabled="!examen_fisico_check.pulmones"
                                     ></v-textarea>
                                 </td>
                             </tr>
@@ -1178,7 +1199,7 @@
                             <tr>
                                 <th scope="row" style="width: 10%">Abdomen</th>
                                 <td style="width: 5%">
-                                    <v-checkbox v-model="abdomenCheck" hide-details color=green class="shrink py-0 my-0 ml-3 "></v-checkbox>
+                                    <v-checkbox v-model="examen_fisico_check.abdomen" hide-details color=green class="shrink py-0 my-0 ml-3 "></v-checkbox>
                                 </td>
                                 <td>
                                     <v-textarea
@@ -1186,7 +1207,7 @@
                                         v-model="examen_fisico.abdomen"
                                         rows=1
                                         hide-details
-                                        :disabled="!abdomenCheck"
+                                        :disabled="!examen_fisico_check.abdomen"
                                     ></v-textarea>
                                 </td>
                             </tr>
@@ -1194,7 +1215,7 @@
                             <tr>
                                 <th scope="row" style="width: 10%">Genitales</th>
                                 <td style="width: 5%">
-                                    <v-checkbox v-model="genitalesCheck" hide-details color=green class="shrink py-0 my-0 ml-3 "></v-checkbox>
+                                    <v-checkbox v-model="examen_fisico_check.genitales" hide-details color=green class="shrink py-0 my-0 ml-3 "></v-checkbox>
                                 </td>
                                 <td>
                                     <v-textarea
@@ -1202,7 +1223,7 @@
                                         v-model="examen_fisico.genitales"
                                         rows=1
                                         hide-details
-                                        :disabled="!genitalesCheck"
+                                        :disabled="!examen_fisico_check.genitales"
                                     ></v-textarea>
                                 </td>
                             </tr>
@@ -1210,7 +1231,7 @@
                             <tr>
                                 <th scope="row" style="width: 10%">Extremidades</th>
                                 <td style="width: 5%">
-                                    <v-checkbox v-model="extremidadesCheck" hide-details color=green class="shrink py-0 my-0 ml-3 "></v-checkbox>
+                                    <v-checkbox v-model="examen_fisico_check.extremidades" hide-details color=green class="shrink py-0 my-0 ml-3 "></v-checkbox>
                                 </td>
                                 <td>
                                     <v-textarea
@@ -1218,7 +1239,7 @@
                                         v-model="examen_fisico.extremidades"
                                         rows=1
                                         hide-details
-                                        :disabled="!extremidadesCheck"
+                                        :disabled="!examen_fisico_check.extremidades"
                                     ></v-textarea>
                                 </td>
                             </tr>
@@ -1226,7 +1247,7 @@
                             <tr>
                                 <th scope="row" style="width: 10%">Piel</th>
                                 <td style="width: 5%">
-                                    <v-checkbox v-model="pielCheck" hide-details color=green class="shrink py-0 my-0 ml-3 "></v-checkbox>
+                                    <v-checkbox v-model="examen_fisico_check.piel" hide-details color=green class="shrink py-0 my-0 ml-3 "></v-checkbox>
                                 </td>
                                 <td>
                                     <v-textarea
@@ -1234,7 +1255,7 @@
                                         v-model="examen_fisico.piel"
                                         rows=1
                                         hide-details
-                                        :disabled="!pielCheck"
+                                        :disabled="!examen_fisico_check.piel"
                                     ></v-textarea>
                                 </td>
                             </tr>
@@ -1242,7 +1263,7 @@
                             <tr>
                                 <th scope="row" style="width: 10%">SN</th>
                                 <td style="width: 5%">
-                                    <v-checkbox v-model="snCheck" hide-details color=green class="shrink py-0 my-0 ml-3 "></v-checkbox>
+                                    <v-checkbox v-model="examen_fisico_check.sn" hide-details color=green class="shrink py-0 my-0 ml-3 "></v-checkbox>
                                 </td>
                                 <td>
                                     <v-textarea
@@ -1250,7 +1271,7 @@
                                         v-model="examen_fisico.sn"
                                         rows=1
                                         hide-details
-                                        :disabled="!snCheck"
+                                        :disabled="!examen_fisico_check.sn"
                                     ></v-textarea>
                                 </td>
                             </tr>
@@ -1258,7 +1279,7 @@
                             <tr>
                                 <th scope="row" style="width: 10%">Otros</th>
                                 <td style="width: 5%">
-                                    <v-checkbox v-model="otrosCheck" hide-details color=green class="shrink py-0 my-0 ml-3 "></v-checkbox>
+                                    <v-checkbox v-model="examen_fisico_check.otros" hide-details color=green class="shrink py-0 my-0 ml-3 "></v-checkbox>
                                 </td>
                                 <td>
                                     <v-textarea
@@ -1266,7 +1287,7 @@
                                         v-model="examen_fisico.otros"
                                         rows=1
                                         hide-details
-                                        :disabled="!otrosCheck"
+                                        :disabled="!examen_fisico_check.otros"
                                     ></v-textarea>
                                 </td>
                             </tr>
@@ -2184,6 +2205,8 @@ import { store } from '../main';
 
 export default {
     data: () => ({
+        dialog: false,
+
         update: false,
 
         
@@ -2260,102 +2283,125 @@ export default {
         historia: "",
 
         //Medicamentos
-        Prednisona: false,
-        Prednisona_mg: "",
-        Prednisona_frecuencia: "",
 
-        cyac: false,
-        Cyac_mg: "",
-        Cyac_frecuencia: "",
-
-        Tac: false,
-        Tac_mg: "",
-        Tac_frecuencia: "",
-
-        MMF: false,
-        MMF_mg: "",
-        MMF_frecuencia: "",
-
-        AZA: false,
-        AZA_mg: "",
-        AZA_frecuencia: "",
-
-        CFM: false,
-        CFM_mg: "",
-        CFM_frecuencia: "",
-
-        Enalapril: false,
-        Enalapril_mg: "",
-        Enalapril_frecuencia: "",
-
-        Losartan: false,
-        Losartan_mg: "",
-        Losartan_frecuencia: "",
-
-        Amlodipina: false,
-        Amlodipina_mg: "",
-        Amlodipina_frecuencia: "",
-
-        CitratoNa: false,
-        Citrato_Na_mg: "",
-        Citrato_Na_frecuencia: "",
-
-        CitratoK: false,
-        Citrato_K_mg: "",
-        Citrato_K_frecuencia: "",
-
-        Furosemida: false,
-        Furosemida_mg: "",
-        Furosemida_frecuencia: "",
-
-        Alfacalcidol: false,
-        Alfacalcidol_mg: "",
-        Alfacalcidol_frecuencia: "",
-
-        CaCO3: false,
-        CaCO3_mg: "",
-        CaCO3_frecuencia: "",
-
-        EPO: false,
-        EPO_mg: "",
-        EPO_frecuencia: "",
-
-        Fe: false,
-        Fe_mg: "",
-        Fe_frecuencia: "",
-
-        Cefadroxilo: false,
-        Cefadroxilo_mg: "",
-        Cefadroxilo_frecuencia: "",
+        misMedicamentos: {
+            prednisona: {
+                estado: false,
+                mg: "",
+                frecuencia: ""
+            },
+            cyac: {
+                estado: false,
+                mg: "",
+                frecuencia: ""
+            },
+            tac: {
+                estado: false,
+                mg: "",
+                frecuencia: ""
+            },
+            mmf: {
+                estado: false,
+                mg: "",
+                frecuencia: ""
+            },
+            aza: {
+                estado: false,
+                mg: "",
+                frecuencia: ""
+            },
+            cfm: {
+                estado: false,
+                mg: "",
+                frecuencia: ""
+            },
+            enalapril: {
+                estado: false,
+                mg: "",
+                frecuencia: ""
+            },
+            losartan: {
+                estado: false,
+                mg: "",
+                frecuencia: ""
+            },
+            amlodipina: {
+                estado: false,
+                mg: "",
+                frecuencia: ""
+            },
+            citratoNa: {
+                estado: false,
+                mg: "",
+                frecuencia: ""
+            },
+            citratoK: {
+                estado: false,
+                mg: "",
+                frecuencia: ""
+            },
+            furosemida: {
+                estado: false,
+                mg: "",
+                frecuencia: ""
+            },
+            alfacalcidol: {
+                estado: false,
+                mg: "",
+                frecuencia: ""
+            },
+            CaCO3: {
+                estado: false,
+                mg: "",
+                frecuencia: ""
+            },
+            epo: {
+                estado: false,
+                mg: "",
+                frecuencia: ""
+            },
+            fe: {
+                estado: false,
+                mg: "",
+                frecuencia: ""
+            },
+            cefadroxilo: {
+                estado: false,
+                mg: "",
+                frecuencia: ""
+            }
+        },
 
         //Laboratorios
-        Na: "",
-        Cl: "",
-        BUN: "",
-        Glu: "",
-        K: "",
-        HCO: "",
-        Creat: "",
-        WB: "",
-        Col: "",
-        Alb: "",
-        HB: "",
-        HT: "",
-        Ca: "",
-        P: "",
-        MG: "",
-        PTL: "",
-        EGO: "",
-        pH: "",
-        Glu2: "",
-        Prot: "",
-        Hem: "",
-        Gr: "",
-        GB: "",
-        Cil: "",
-        URO: "",
-        PTH: "",
-        Ferritina: "",
+        resultados_de_laboratorio: {
+            Na: "",
+            Cl: "",
+            BUN: "",
+            Glu: "",
+            K: "",
+            HCO: "",
+            Creat: "",
+            WB: "",
+            Col: "",
+            Alb: "",
+            HB: "",
+            HT: "",
+            Ca: "",
+            P: "",
+            MG: "",
+            PTL: "",
+            EGO: "",
+            pH: "",
+            Glu2: "",
+            Prot: "",
+            Hem: "",
+            Gr: "",
+            GB: "",
+            Cil: "",
+            URO: "",
+            PTH: "",
+            Ferritina: ""
+        },        
 
         includeFiles: "",
 
@@ -2371,18 +2417,8 @@ export default {
         Plan_Nutricional: "",
         Plan_Farmacologico: "",
 
-        corazonCheck: false,
-        pulmonesCheck: false,
-        abdomenCheck: false,
-        genitalesCheck: false,
-        extremidadesCheck: false,
-        pielCheck: false,
-        snCheck: false,
-        otrosCheck: false,
-
-
         examen_fisico: {
-            coong: "",
+            COONG: "",
             corazon: "",
             pulmones: "",
             abdomen: "",
@@ -2391,6 +2427,17 @@ export default {
             piel: "",
             sn: "",
             otros: ""
+        },
+
+        examen_fisico_check: {
+            corazon: false,
+            pulmones: false,
+            abdomen: false,
+            genitales: false,
+            extremidades: false,
+            piel: false,
+            sn: false,
+            otros: false
         },
 
         fecha: "",
@@ -2410,9 +2457,11 @@ export default {
     },
 
     mounted() {
+        this.dialog = true
         console.log("Id de paciente es: " + store.idPaciente);
 
-        this.fecha = new Date().toISOString().slice(0, 10)
+        const date = new Date()
+        this.fecha = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
 
         const data = {
             ID: store.idPaciente // Aqui va el ID del paciente
@@ -2423,7 +2472,6 @@ export default {
             if(response.data.Paciente[0] == null){
                 console.log('Nothing to do here..');
             }else{
-                console.log("Dentro de if");
                 this.paciente.nombre = response.data.Paciente[0].Nombre;
                 this.paciente.apellido = response.data.Paciente[0].Apellido;
                 this.paciente.CUI = response.data.Paciente[0].CUI;
@@ -2460,29 +2508,72 @@ export default {
                         this.historia = response.data.Consulta[0].historia
 
                         this.Evaluacion_Medica = response.data.Consulta[0].evaluacion_medica
-                        this.Plan_Medico = response.data.Consulta[0].plan_medica
+                        this.Plan_Medico = response.data.Consulta[0].plan_medico
                         this.Evaluacion_Psicologica = response.data.Consulta[0].evaluacion_psicologica
                         this.Plan_Psicologica = response.data.Consulta[0].plan_psicologico
                         this.Evaluacion_Trabajo_Social = response.data.Consulta[0].evaluacion_trabajo_social
-                        this.Plan_Trabajo_Socia = response.data.Consulta[0].plan_trabajo_social
+                        this.Plan_Trabajo_Social = response.data.Consulta[0].plan_trabajo_social
                         this.Evaluacion_Nutricional = response.data.Consulta[0].evaluacion_nutricional
                         this.Plan_Nutricional = response.data.Consulta[0].plan_nutricional
                         this.Evaluacion_Farmacologica = response.data.Consulta[0].evaluacion_farmacologica
                         this.Plan_Farmacologico = response.data.Consulta[0].plan_farmacologico
 
+                        this.resultados_de_laboratorio = JSON.parse(response.data.Consulta[0].resultados_laboratorio)
+                        for(var key in this.resultados_de_laboratorio){
+                            if(this.resultados_de_laboratorio[key] == 0){
+                                this.resultados_de_laboratorio[key] = ""
+                            }
+                        }
+
+                        const jsonTemp = JSON.parse(response.data.Consulta[0].examen_fisico)
+                        
+                        for(var key in this.examen_fisico){
+
+                            if(jsonTemp.hasOwnProperty(key)){
+                                this.examen_fisico[key] = jsonTemp[key]
+                                
+                                if(key != "coong"){
+                                    this.examen_fisico_check[key] = true
+                                }
+                            }else{
+                                this.examen_fisico[key] = ""
+                                this.examen_fisico_check[key] = false
+                            }
+                        }
+
+                        const jsonTemp2 = JSON.parse(response.data.Consulta[0].medicamento)
+                        // console.table(jsonTemp2)
+                        for(var key in this.misMedicamentos){
+                            // console.log(key)
+                            if(jsonTemp2.hasOwnProperty(key)){
+                                this.misMedicamentos[key].mg = jsonTemp2[key].mg
+                                this.misMedicamentos[key].frecuencia = jsonTemp2[key].frecuencia
+                                this.misMedicamentos[key].estado = true
+                            }else{
+                                this.misMedicamentos[key].mg = ""
+                                this.misMedicamentos[key].frecuencia = ""
+                                this.misMedicamentos[key].estado = false
+                            }
+                        }
                     })
                 }
             })
+        }).then(() => {
+            this.$http.get(`http://localhost:8000/sindromeController/getAll`).then(response => {
+                if(response.data.Sindrome[0] == null){
+                    console.log('Nothing to do here..');
+                }else{
+                    
+                    this.sindromes = response.data.Sindrome;
+                }
+            });
+        }).then(() => {
+            this.dialog = false;
+        }).catch(error => {
+            this.dialog = false;
         });
 
-        this.$http.get(`http://localhost:8000/sindromeController/getAll`).then(response => {
-            if(response.data.Sindrome[0] == null){
-                console.log('Nothing to do here..');
-            }else{
-                
-                this.sindromes = response.data.Sindrome;
-            }
-        });
+        
 
         
 
@@ -2491,119 +2582,117 @@ export default {
         
 
         guardar() {
-            console.log("Fecha: " + this.fecha)
-            console.log("CUI: " + this.paciente.CUI)
-            console.log("Peso: " + this.datos_generales.Peso)
-            console.log("Talla: " + this.datos_generales.Talla)
-            console.log("PA: " + this.datos_generales.PA)
-            console.log("Dx_Definitivo: " + this.Dx_Definitivo)
-            console.log("Dx_Asociado: " + this.Dx_Asociado)
-            console.log("Historia: " + this.historia)
+            // console.log("Fecha: " + this.fecha)
+            // console.log("CUI: " + this.paciente.CUI)
+            // console.log("Peso: " + this.datos_generales.Peso)
+            // console.log("Talla: " + this.datos_generales.Talla)
+            // console.log("PA: " + this.datos_generales.PA)
+            // console.log("Dx_Definitivo: " + this.Dx_Definitivo)
+            // console.log("Dx_Asociado: " + this.Dx_Asociado)
+            // console.log("Historia: " + this.historia)
 
-
-//--------------------------------------------------------------------------------------------------
             let medicamento = {}
             
-            if(this.Prednisona){
-                medicamento = Object.assign(medicamento, {"Prednisona": {
-                    "mg": Number( this.Prednisona_mg),
-                    "frecuencia": Number( this.Prednisona_frecuencia)
+            if(this.misMedicamentos.prednisona.estado){
+                medicamento = Object.assign(medicamento, {"prednisona": {
+                    "mg": Number( this.misMedicamentos.prednisona.mg),
+                    "frecuencia": Number( this.misMedicamentos.prednisona.frecuencia)
                 }})
             }
-            if(this.cyac){
-                medicamento = Object.assign(medicamento, {"Cyac": {
-                    "mg": Number( this.Cyac_mg),
-                    "frecuencia": Number( this.Cyac_frecuencia)
+            if(this.misMedicamentos.cyac.estado){
+                medicamento = Object.assign(medicamento, {"cyac": {
+                    "mg": Number( this.misMedicamentos.cyac.mg),
+                    "frecuencia": Number( this.misMedicamentos.cyac.frecuencia)
                 }})
             }
-            if(this.Tac){
-                medicamento = Object.assign(medicamento, {"Tac": {
-                    "mg": Number( this.Tac_mg),
-                    "frecuencia": Number( this.Tac_frecuencia)
+            if(this.misMedicamentos.tac.estado){
+                medicamento = Object.assign(medicamento, {"tac": {
+                    "mg": Number( this.misMedicamentos.tac.mg),
+                    "frecuencia": Number( this.misMedicamentos.tac.frecuencia)
                 }})
             }
-            if(this.MMF){
-                medicamento = Object.assign(medicamento, {"MMF": {
-                    "mg": Number( this.MMF_mg),
-                    "frecuencia": Number( this.MMF_frecuencia)
+            if(this.misMedicamentos.mmf.estado){
+                medicamento = Object.assign(medicamento, {"mmf": {
+                    "mg": Number( this.misMedicamentos.mmf.mg),
+                    "frecuencia": Number( this.misMedicamentos.mmf.frecuencia)
                 }})
             }
-            if(this.AZA){
-                medicamento = Object.assign(medicamento, {"AZA": {
-                    "mg": Number( this.AZA_mg),
-                    "frecuencia": Number( this.AZA_frecuencia)
+            if(this.misMedicamentos.aza.estado){
+                medicamento = Object.assign(medicamento, {"aza": {
+                    "mg": Number( this.misMedicamentos.aza.mg),
+                    "frecuencia": Number( this.misMedicamentos.aza.frecuencia)
                 }})
             }
-            if(this.CFM){
-                medicamento = Object.assign(medicamento, {"CFM": {
-                    "mg": Number( this.CFM_mg),
-                    "frecuencia": Number( this.CFM_frecuencia)
+            if(this.misMedicamentos.cfm.estado){
+                medicamento = Object.assign(medicamento, {"cfm": {
+                    "mg": Number( this.misMedicamentos.cfm.mg),
+                    "frecuencia": Number( this.misMedicamentos.cfm.frecuencia)
                 }})
             }
-            if(this.Enalapril){
-                medicamento = Object.assign(medicamento, {"Enalapril": {
-                    "mg": Number( this.Enalapril_mg),
-                    "frecuencia": Number( this.Enalapril_frecuencia)
+            if(this.misMedicamentos.enalapril.estado){
+                medicamento = Object.assign(medicamento, {"enalapril": {
+                    "mg": Number( this.misMedicamentos.enalapril.mg),
+                    "frecuencia": Number( this.misMedicamentos.enalapril.frecuencia)
                 }})
             }
-            if(this.Losartan){
-                medicamento = Object.assign(medicamento, {"Losartan": {
-                    "mg": Number( this.Losartan_mg),
-                    "frecuencia": Number( this.Losartan_frecuencia)
+            if(this.misMedicamentos.losartan.estado){
+                medicamento = Object.assign(medicamento, {"losartan": {
+                    "mg": Number( this.misMedicamentos.losartan.mg),
+                    "frecuencia": Number( this.misMedicamentos.losartan.frecuencia)
                 }})
             }
-            if(this.Amlodipina){
-                medicamento = Object.assign(medicamento, {"Amlodipina": {
-                    "mg": Number( this.Amlodipina_mg),
-                    "frecuencia": Number( this.Amlodipina_frecuencia)
+            if(this.misMedicamentos.amlodipina.estado){
+                medicamento = Object.assign(medicamento, {"amlodipina": {
+                    "mg": Number( this.misMedicamentos.amlodipina.mg),
+                    "frecuencia": Number( this.misMedicamentos.amlodipina.frecuencia)
                 }})
             }
-            if(this.CitratoNa){
-                medicamento = Object.assign(medicamento, {"Citrato_Na": {
-                    "mg": Number( this.Citrato_Na_mg),
-                    "frecuencia": Number( this.Citrato_Na_frecuencia)
+            if(this.misMedicamentos.citratoNa.estado){
+                medicamento = Object.assign(medicamento, {"citratoNa": {
+                    "mg": Number( this.misMedicamentos.citratoNa.mg),
+                    "frecuencia": Number( this.misMedicamentos.citratoNa.frecuencia)
                 }})
             }
-            if(this.CitratoK){
-                medicamento = Object.assign(medicamento, {"Citrato_K": {
-                    "mg": Number( this.Citrato_K_mg),
-                    "frecuencia": Number( this.Citrato_K_frecuencia)
+            if(this.misMedicamentos.citratoK.estado){
+                medicamento = Object.assign(medicamento, {"citratoK": {
+                    "mg": Number( this.misMedicamentos.citratoK.mg),
+                    "frecuencia": Number( this.misMedicamentos.citratoK.frecuencia)
                 }})
             }
-            if(this.Furosemida){
-                medicamento = Object.assign(medicamento, {"Furosemida": {
-                    "mg": Number( this.Furosemida_mg),
-                    "frecuencia": Number( this.Furosemida_frecuencia)
+            if(this.misMedicamentos.furosemida.estado){
+                medicamento = Object.assign(medicamento, {"furosemida": {
+                    "mg": Number( this.misMedicamentos.furosemida.mg),
+                    "frecuencia": Number( this.misMedicamentos.furosemida.frecuencia)
                 }})
             }
-            if(this.Alfacalcidol){
-                medicamento = Object.assign(medicamento, {"Alfacalcidol": {
-                    "mg": Number( this.Alfacalcidol_mg),
-                    "frecuencia": Number( this.Alfacalcidol_frecuencia)
+            if(this.misMedicamentos.alfacalcidol.estado){
+                medicamento = Object.assign(medicamento, {"alfacalcidol": {
+                    "mg": Number( this.misMedicamentos.alfacalcidol.mg),
+                    "frecuencia": Number( this.misMedicamentos.alfacalcidol.frecuencia)
                 }})
             }
-            if(this.CaCO3){
+            if(this.misMedicamentos.CaCO3.estado){
                 medicamento = Object.assign(medicamento, {"CaCO3": {
-                    "mg": Number( this.CaCO3_mg),
-                    "frecuencia": Number( this.CaCO3_frecuencia)
+                    "mg": Number( this.misMedicamentos.CaCO3.mg),
+                    "frecuencia": Number( this.misMedicamentos.CaCO3.frecuencia)
                 }})
             }
-            if(this.EPO){
-                medicamento = Object.assign(medicamento, {"EPO": {
-                    "mg": Number( this.EPO_mg),
-                    "frecuencia": Number( this.EPO_frecuencia)
+            if(this.misMedicamentos.epo.estado){
+                medicamento = Object.assign(medicamento, {"epo": {
+                    "mg": Number( this.misMedicamentos.epo.mg),
+                    "frecuencia": Number( this.misMedicamentos.epo.frecuencia)
                 }})
             }
-            if(this.Fe){
-                medicamento = Object.assign(medicamento, {"Fe": {
-                    "mg": Number( this.Fe_mg),
-                    "frecuencia": Number( this.Fe_frecuencia)
+            if(this.misMedicamentos.fe.estado){
+                medicamento = Object.assign(medicamento, {"fe": {
+                    "mg": Number( this.misMedicamentos.fe.mg),
+                    "frecuencia": Number( this.misMedicamentos.fe.frecuencia)
                 }})
             }
-            if(this.Cefadroxilo){
-                medicamento = Object.assign(medicamento, {"Cefadroxilo": {
-                    "mg": Number( this.Cefadroxilo_mg),
-                    "frecuencia": Number( this.Cefadroxilo_frecuencia)
+            if(this.misMedicamentos.cefadroxilo.estado){
+                medicamento = Object.assign(medicamento, {"cefadroxilo": {
+                    "mg": Number( this.misMedicamentos.cefadroxilo.mg),
+                    "frecuencia": Number( this.misMedicamentos.cefadroxilo.frecuencia)
                 }})
             }
 
@@ -2612,70 +2701,69 @@ export default {
             let resultado_laboratorio = {}
 
             resultado_laboratorio = Object.assign(resultado_laboratorio, {
-                "Na": Number(this.Na),
-                "Cl": Number(this.Cl),
-                "BUN": Number(this.BUN),
-                "Glu": Number(this.Glu),
-                "K": Number(this.HCO),
-                "Creat": Number(this.Creat),
-                "WB": Number(this.WB),
-                "Col": Number(this.Col),
-                "Alb": Number(this.Alb),
-                "HB": Number(this.HB),
-                "HT": Number(this.HT),
-                "Ca": Number(this.Ca),
-                "P": Number(this.P),
-                "MG": Number(this.MG),
-                "PTL": Number(this.PTL),
-                "EGO": Number(this.EGO),
-                "pH": Number(this.pH),
-                "Glu2": Number(this.Glu2),
-                "Prot": Number(this.Prot),
-                "Hem": Number(this.Hem),
-                "Gr": Number(this.Gr),
-                "GB": Number(this.GB),
-                "Cil": Number(this.Cil),
-                "URO": Number(this.URO),
-                "PTH": Number(this.PTH),
-                "Ferritina": Number(this.Ferritina),
+                "Na": Number(this.resultados_de_laboratorio.Na),
+                "Cl": Number(this.resultados_de_laboratorio.Cl),
+                "BUN": Number(this.resultados_de_laboratorio.BUN),
+                "Glu": Number(this.resultados_de_laboratorio.Glu),
+                "K": Number(this.resultados_de_laboratorio.K),
+                "HCO": Number(this.resultados_de_laboratorio.HCO),
+                "Creat": Number(this.resultados_de_laboratorio.Creat),
+                "WB": Number(this.resultados_de_laboratorio.WB),
+                "Col": Number(this.resultados_de_laboratorio.Col),
+                "Alb": Number(this.resultados_de_laboratorio.Alb),
+                "HB": Number(this.resultados_de_laboratorio.HB),
+                "HT": Number(this.resultados_de_laboratorio.HT),
+                "Ca": Number(this.resultados_de_laboratorio.Ca),
+                "P": Number(this.resultados_de_laboratorio.P),
+                "MG": Number(this.resultados_de_laboratorio.MG),
+                "PTL": Number(this.resultados_de_laboratorio.PTL),
+                "EGO": Number(this.resultados_de_laboratorio.EGO),
+                "pH": Number(this.resultados_de_laboratorio.pH),
+                "Glu2": Number(this.resultados_de_laboratorio.Glu2),
+                "Prot": Number(this.resultados_de_laboratorio.Prot),
+                "Hem": Number(this.resultados_de_laboratorio.Hem),
+                "Gr": Number(this.resultados_de_laboratorio.Gr),
+                "GB": Number(this.resultados_de_laboratorio.GB),
+                "Cil": Number(this.resultados_de_laboratorio.Cil),
+                "URO": Number(this.resultados_de_laboratorio.URO),
+                "PTH": Number(this.resultados_de_laboratorio.PTH),
+                "Ferritina": Number(this.resultados_de_laboratorio.Ferritina),
             })
-
-//--------------------------------------------------------------------------------------------------
 
             let examenFisico = {}
 
             examenFisico = Object.assign(examenFisico, {
-                "COONG": this.examen_fisico.coong
+                "COONG": this.examen_fisico.COONG
             })
-            if(this.corazonCheck){
+            if(this.examen_fisico_check.corazon){
                 examenFisico = Object.assign(examenFisico, {
                 "corazon": this.examen_fisico.corazon
             })}
-            if(this.pulmonesCheck){
+            if(this.examen_fisico_check.pulmones){
                 examenFisico = Object.assign(examenFisico, {
                 "pulmones": this.examen_fisico.pulmones
             })}
-            if(this.abdomenCheck){
+            if(this.examen_fisico_check.abdomen){
                 examenFisico = Object.assign(examenFisico, {
                 "abdomen": this.examen_fisico.abdomen
             })}
-            if(this.genitalesCheck){
+            if(this.examen_fisico_check.genitales){
                 examenFisico = Object.assign(examenFisico, {
                 "genitales": this.examen_fisico.genitales
             })}
-            if(this.extremidadesCheck){
+            if(this.examen_fisico_check.extremidades){
                 examenFisico = Object.assign(examenFisico, {
                 "extremidades": this.examen_fisico.extremidades
             })}
-            if(this.pielCheck){
+            if(this.examen_fisico_check.piel){
                 examenFisico = Object.assign(examenFisico, {
                 "piel": this.examen_fisico.piel
             })}
-            if(this.snCheck){
+            if(this.examen_fisico_check.sn){
                 examenFisico = Object.assign(examenFisico, {
                 "sn": this.examen_fisico.sn
             })}
-            if(this.otrosCheck){
+            if(this.examen_fisico_check.otros){
                 examenFisico = Object.assign(examenFisico, {
                 "otros": this.examen_fisico.otros
             })}
@@ -2712,13 +2800,13 @@ export default {
 
             if(this.update){
                 this.$http.put('http://localhost:8000/ConsultaController/update', info).then(response => {
-                    console.log("Si pase update")
+                    // console.log("Si pase update")
                 }).catch(error => {
 
                 })
             }else{
                 this.$http.post('http://localhost:8000/ConsultaController/insert', info).then(response => {
-                    console.log("Si pase insert")
+                    // console.log("Si pase insert")
                 }).catch(error => {
 
                 })

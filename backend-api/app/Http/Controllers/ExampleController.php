@@ -74,7 +74,8 @@ class ExampleController extends Controller
         $user->password = hash::make($request->password);
         $user->puesto = $request->puesto;
         $user->save();
-        return $request;
+        //Comente esto
+        //return $request;
 
         return response()->json([
             'success' => true,
@@ -116,6 +117,21 @@ class ExampleController extends Controller
             'success' => true,
             'usersi' => $usersi,
             'message'=>'Funciono',
+        ], 200);
+    }
+    public function updateDG(Request $request)
+    {
+        $id = $request->id;
+        $paciente=Paciente::find($id);
+        $paciente->Telefono = $request->Telefono;
+        $paciente->Peso = $request->Peso;
+        $paciente->Talla = $request->Talla;
+        $paciente->PA = $request->PA;
+        $paciente->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Datos Generales'
         ], 200);
     }
     public function getSomeUser(Request $request)
