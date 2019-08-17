@@ -8,6 +8,7 @@ class Paciente extends Model
 {
     protected $fillable = [ 
         'id',
+        'Numero_expediente',
         'Nombre', 
         'Apellido', 
         'Fecha_de_nacimiento',
@@ -26,14 +27,7 @@ class Paciente extends Model
         'Transfusiones',
         'EstadoActual',
         'Sexo',
-        'Kg_perc',
-        'Peso',
-        'Percentil',
-        'Talla',
-        'PA',
-        'Cms_perc',
-        'Historia',
-        'Numero_Orden'
+        'Historia'
     ];
     /**
      * Relaciones de la tabla Paciente

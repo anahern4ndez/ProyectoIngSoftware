@@ -87,6 +87,10 @@ const routes = [
   {
     path: '/Datos',
     component: Vue.component('Datos', require('./components/DatosVista.vue').default)
+  },
+  {
+    path: '/cambioEstado',
+    component: Vue.component('cambioEstado', require('./components/cambioEstado.vue').default)
   }
 ];
 

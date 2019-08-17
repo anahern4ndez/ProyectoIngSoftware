@@ -49,6 +49,7 @@
               :search="search"
               item-key="id"
               v-model="selected"
+              :rows-per-page-text="rowsText"
               
           >
             
@@ -85,6 +86,10 @@
                   </v-alert>
                 
               </template>
+
+              <template v-slot:pageText="props">
+                {{ props.pageStart }} - {{ props.pageStop }} de {{ props.itemsLength }}
+              </template>
           </v-data-table>
         </v-card>
       </div>
@@ -101,7 +106,7 @@
               </div>
               <br>
               <div>
-              
+              <!-- elementos para seleccionar imagen--> 
               <v-button class="btn btn-lg btn-warning btn-block" id="botonimagen" @click="imgClick"> Seleccionar Imagen </v-button>
               <input type="file" class="hide_file" style="height:auto; width:auto; visibility:hidden" v-on:change="changeImg" ref="changeImg"/>
               </div>
@@ -156,13 +161,13 @@
         <router-link :to="{name: 'EditarPaciente', params: { cui: this.selectedPatients.CUI }}" class="btn btn-lg btn-warning btn-block">Editar datos de paciente seleccionado</router-link>
       </div>
       <div id="boton">
-        <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="archivos"> Archivos </button>
+        <button type="button" class="btn btn-lg btn-warning btn-block"> Archivos </button>
       </div>
       <div id="boton">
         <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="reportes"> Reporte</button>
       </div>
       <div id="boton">
-        <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="estadisticas"> Estadísticas </button>
+        <button type="button" class="btn btn-lg btn-warning btn-block"> Estadísticas </button>
       </div>
     </div>
   </div>
@@ -200,6 +205,7 @@ export default {
   },
     data () {
       return {
+        rowsText: "Filas por página: ",
         search:'',
         selected: [],
         selected2: null,
@@ -211,9 +217,9 @@ export default {
           { text: 'CUI (ID)', align: 'center',value: 'CUI'},
           { text: 'Nombre', align: 'center', value: 'Nombre' },
           { text: 'Apellido', align: 'center', value: 'Apellido' }, 
-          { text: 'Procedencia', align: 'center', value: 'Procedencia' },
+          { text: 'Procedencia', align: 'center', value: 'procedencia.Departamento' },
           { text: 'Fecha de nacimiento', align: 'center', value: 'Fecha_de_nacimiento' },
-          { text: 'Estado', align: 'center', value: 'EstadoActual' },
+          { text: 'Estado', align: 'center', value: 'estado_actual.significado' },
         ],
         editedIndex: -1,
         pacientes: [],
@@ -280,7 +286,7 @@ export default {
           this.$router.push('/IngresarPaciente');
         },
         reportes(){
-          this.$router.push('/EditarPaciente');
+          this.$router.push('/gestionarPaciente');
         },
         estadisticas(){
           this.$router.push('/EditarPaciente');
