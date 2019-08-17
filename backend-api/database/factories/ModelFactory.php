@@ -39,7 +39,7 @@ $factory->define(App\Models\Paciente::class, function (Faker\Generator $faker) {
         'Sindrome_Clinico_Presentacion' => 1,
         'Dx_Definitivo' => 'Dx Definitivo',
         'Dx_Asociados' => 'Dx Asociados',
-        'Imagen' => '',
+        'Imagen' => 'imagen',
         'Tipo_de_Sangre' => 1,
         'Estudia' => 1,
         'Transfusiones' => 1,

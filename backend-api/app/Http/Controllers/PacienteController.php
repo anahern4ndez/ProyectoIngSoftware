@@ -26,7 +26,6 @@ class PacienteController extends Controller
         $pat->Nombre_de_madre = $request->Nombre_de_madre;
         $pat->Telefono = $request->Telefono;
         $pat->Edad = $request->Edad;
-        $pat->Telefono = $request->Telefono;
         $pat->Sindrome_Clinico_Presentacion = $request->Sindrome_Clinico_Presentacion;
         $pat->Dx_Definitivo = $request->Dx_Definitivo;
         $pat->Dx_Asociados = $request->Dx_Asociados;
@@ -42,7 +41,7 @@ class PacienteController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'creado'
+            'message' => 'Paciente creado con éxito'
         ], 200);
     }
 

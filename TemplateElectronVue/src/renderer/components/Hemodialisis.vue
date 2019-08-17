@@ -2,6 +2,7 @@
 <template>
     <div>
         <h1 class ="headers">Hemodiálisis</h1>  
+        <b-tabs-title> Pacientes agendados para hoy: {{todaysDate}}</b-tabs-title>
         <b-tabs active-nav-item-class="font-weight-bold text-uppercase text-dark"  card vertical>
             <b-tab v-for="(paciente) in this.pacientes" :key="paciente.nombre" :title="paciente.Nombre">
                 <div class="cuerpo">
@@ -78,6 +79,9 @@ export default {
             const engDateYear = new Date().getFullYear();
             const engDateDate = new Date().getDate();
             this.todaysDate = ''.concat(daysOfWeek[engDateDay], ', ', engDateDate, ' de ',  months[engDateMonth], ' del ', engDateYear);
+        },
+        eliminarPaciente(){
+            console.log('hola');
         }
     }
 }
