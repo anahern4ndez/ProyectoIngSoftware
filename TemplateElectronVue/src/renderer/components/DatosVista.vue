@@ -55,7 +55,7 @@
           >
             
               <template slot="items" slot-scope="props">
-                <tr @click="changeSelected(props.item)">
+                <tr @click="selectUser(props.item)">
                     <td class="text-xs-center">{{ props.item.CUI }}</td>
                     <td class="text-xs-center">{{ props.item.Nombre }}</td>
                     <td class="text-xs-center">{{ props.item.Apellido }}</td>
@@ -123,6 +123,7 @@
             <b-col>
               <label class="text-center"><b>Nombre de Madre</b></label>
               <label class="text-center">Lulu Martinez</label>
+              <input id="prueba" type="text" v-model="prueba" class="form-control" placeholder="Prueba">
             </b-col> 
         </b-col>
         </b-row>
@@ -133,71 +134,93 @@
 
 
 <script>
+import { store } from '../main';
 export default {
   mounted() {
     this.$http.get("http://localhost:8000/PacienteController/findAll").then(response => {
+      //esto deberia ser un arrray de pacientes que contengan todos sus atributos...
       
       this.pacientes = response.data.Pacientes;
-      this.selectedPatients = response.data.Pacientes[0];
-      this.Nombre = response.data.Pacientes[0].Nombre;
-      this.Apellido = response.data.Pacientes[0].Apellido;
+      //objeto utilizado para los labels..
+      if (response.data.Pacientes[0] == null){
+        console.log('Nothing to do here..');
+      } else {
+        this.selectedPatients.Nombre = response.data.Pacientes[0].Nombre;
+        this.selectedPatients.Apellido = response.data.Pacientes[0].Apellido;
+        this.selectedPatients.EstadoActual = response.data.Pacientes[0].estado_actual.significado;
+        this.selectedPatients.Edad = response.data.Pacientes[0].Edad;
+        this.selectedPatients.CUI = response.data.Pacientes[0].CUI;
+        this.selectedPatients.Telefono = response.data.Pacientes[0].Telefono;
+        this.selectedPatients.Nombre_de_madre = response.data.Pacientes[0].Nombre_de_madre;
+        this.selectedPatients.Nombre_de_padre = response.data.Pacientes[0].Nombre_de_padre;
+        //this.Nombre = response.data.Pacientes[0].Nombre;
+        //this.Apellido = response.data.Pacientes[0].Apellido;
+        this.imageData = response.data.Pacientes[0].Imagen;
+        this.estadoNuevo = response.data.Pacientes[0].estado_actual;
+      }
+          });
+    this.$http.get(`http://localhost:8000/EstadoController/getAllEstado`).then(response =>{
+      this.estados_response = response.data.Estados;
+
     });
   },
   data() {
     return {
-      picked: "",
-      nombre:'',
-      id:'',
-      name:'',
-      email:'',
-      password:'',
-      passwordVerification: '',
-      selected: '',
-      puesto:'',
-      idb: '',
-      selected: null,
-      user: [],
-      headers: [
-        { text: "Nombres", align: "center", value: "Nombres" },
-        { text: "Apellidos", align: "center", value: "Apellidos" },
-        { text: "Procedencia", align: "center", value: "Procedencia" },
-        { text: "Fecha de Nac", align: "center", value: "FechadeNac" }
-      ],
-      //////////////////////////////////////////////////
-      search:'',
-      selected: [],
-      selected2: null,
-      estadoNuevo: null,
-      dialog: false,
-      radioGroup:1,
-      lista: [],
-      headers: [
-        { text: 'CUI (ID)', align: 'center',value: 'id'},
-        { text: 'Nombre', align: 'center', value: 'Nombre' },
-        { text: 'Apellido', align: 'center', value: 'Apellido' }, 
-        { text: 'Procedencia', align: 'center', value: 'Procedencia' },
-        { text: 'Fecha de nacimiento', align: 'center', value: 'Fecha_de_nacimiento' },
-        { text: 'Estado', align: 'center', value: 'EstadoActual' },
-      ],
-      editedIndex: -1,
-      pacientes: [],
-      selectedPatients:'',
-      selectedIndex: 0,
-      deletedCUI: '',
-      editedItem:{
-        Nombre: '',
-        Apellido: '',
-        Procedencia: '',
-        Fecha_de_nacimiento: '',
-        EstadoActual:''
+      rowsText: "Filas por página: ",
+        search:'',
+        prueba:'',
+        selected: [],
+        selected2: null,
+        estados_response: '',
+        estadoNuevo: null,
+        dialog: false,
+        radioGroup:1,
+        headers: [
+          { text: 'CUI (ID)', align: 'center',value: 'CUI'},
+          { text: 'Nombre', align: 'center', value: 'Nombre' },
+          { text: 'Apellido', align: 'center', value: 'Apellido' }, 
+          { text: 'Procedencia', align: 'center', value: 'procedencia.Departamento' },
+          { text: 'Fecha de nacimiento', align: 'center', value: 'Fecha_de_nacimiento' },
+          { text: 'Estado', align: 'center', value: 'estado_actual.significado' },
+        ],
+        editedIndex: -1,
+        pacientes: [],
+        selectedPatients:{
+          Nombre: '',
+          Apellido: '',
+          EstadoActual: '',
+          Edad: '',
+          Telefono: '',
+          Nombre_de_padre: '',
+          Nombre_de_madre: '',
+          CUI: ''
+        },
+        selectedIndex: 0,
+        deletedCUI: '',
+        editedItem:{
+          Nombre: '',
+          Apellido: '',
+          EstadoActual: '',
+          Edad: '',
+          Telefono: '',
+          Nombre_de_padre: '',
+          Nombre_de_madre: '',
+          CUI: '',
+          Procedencia: '',
+          Fecha_de_nacimiento: ''
+        },
+        imageData : ""
       }
-    };
   },
   methods:{
     refreshUsers(){
       this.$http.get("http://localhost:8000/users").then(response => {
       this.user = response.data.users;
     });
+    },
+    selectUser(recibed){
+      this.prueba = recibed.id;
+      store.CUI=this.prueba   
     },
     dgenerales() {
       this.$router.push("/DatosG");

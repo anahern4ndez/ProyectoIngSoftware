@@ -72,6 +72,8 @@ $router->post('/users/create', 'ExampleController@store');
 $router->put('/users/update', 'ExampleController@update');
 $router->post('/doLogin', 'HomeController@printInfo');
 
+$router->put('/DG/updateDG', 'ExampleController@updateDG');
+
 $router->get('/evaluateLogin', 'loginController@doLogin');
 $router->get('/verifyLogin', 'loginController@login');
 

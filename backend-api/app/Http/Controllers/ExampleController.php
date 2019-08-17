@@ -119,6 +119,21 @@ class ExampleController extends Controller
             'message'=>'Funciono',
         ], 200);
     }
+    public function updateDG(Request $request)
+    {
+        $id = $request->id;
+        $paciente=Paciente::find($id);
+        $paciente->Telefono = $request->Telefono;
+        $paciente->Peso = $request->Peso;
+        $paciente->Talla = $request->Talla;
+        $paciente->PA = $request->PA;
+        $paciente->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Datos Generales'
+        ], 200);
+    }
     public function getSomeUser(Request $request)
     {
         $id = $request->idb;
