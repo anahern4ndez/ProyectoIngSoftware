@@ -155,6 +155,7 @@
                   <v-text-field
                     label="Duración de Cita (en minutos)"
                     v-model="selectedDuration"
+                    :rules="duracionRules"
                     required
                   ></v-text-field>
                 </v-flex>
@@ -249,7 +250,12 @@ export default {
       "Esteban Cabrera"
     ],
     textboxRules: [v => !!v || "Seleccione una persona"],
-    dummyDoctors: ["Randall Lou", "Cristina Zelaya", "Celeste Azul"],
+    duracionRules: [
+      v => !!v || "Escriba una duración de cita en minutos.",
+      v => (v && v.length < 5) || "Verifique la duracion en citas.",
+      v => /^[0-9]*$/.test(v) || "Ingrese una duración de cita en números."
+    ],
+    dummyDoctors: ["Randall Lou", "Cristina Zelaya", "Celeste Espell"],
     selectedPatient: "",
     selectedDoctor: "",
     infoDialog: false,
@@ -259,7 +265,7 @@ export default {
     //this.start = this.today;
     this.todayDate = new Date();
     this.today = this.todayDate.toISOString().substring(0, 10);
-    this.selectedDate = this.today;
+    //this.selectedDate = this.today;
     this.month = this.getMes(this.todayDate.getMonth());
     this.year = this.todayDate.getFullYear();
     this.obtenerPacientes();
@@ -317,6 +323,9 @@ export default {
             }
           });
           this.infoDialog = true;
+          this.selectedDoctor = "";
+          this.selectedPatient = "";
+          this.selectedDuration = "";
         });
     },
     dayClick(event) {
