@@ -169,6 +169,24 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
+
+      <!-- dialogo para mostrar mensajes a usuario -->
+      <div class="text-xs-center">
+        <v-dialog v-model="infoDialog" width="500">
+          <v-card>
+            <v-card-title
+              class="headline lighten-2 info-dialog-title-background"
+              primary-title
+            >Información</v-card-title>
+            <v-card-text>{{ this.infoMessage }}</v-card-text>
+            <v-divider></v-divider>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="primary" flat @click="infoDialog = false">Aceptar</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </div>
     </v-layout>
   </b-container>
 </template>
@@ -233,7 +251,9 @@ export default {
     textboxRules: [v => !!v || "Seleccione una persona"],
     dummyDoctors: ["Randall Lou", "Cristina Zelaya", "Celeste Azul"],
     selectedPatient: "",
-    selectedDoctor: ""
+    selectedDoctor: "",
+    infoDialog: false,
+    infoMessage: ""
   }),
   mounted() {
     //this.start = this.today;
@@ -261,18 +281,43 @@ export default {
     },
     createAppointment() {
       this.dialogOpen = false;
-      this.events.push({
-        title: `Doctor: ${this.selectedDoctor}`,
-        details: `Paciente: ${this.selectedPatient}`,
-        date: this.selectedDate,
-        time: this.selectedTime,
-        duration: this.selectedDuration
-      });
 
-      // reset dialog data
-      this.selectedDoctor = "";
-      this.selectedPatient = "";
-      this.selectedDuration = "";
+      const data = {
+        idUsuario: 1,
+        idPaciente: 1,
+        fecha: this.selectedDate,
+        hora: this.selectedTime,
+        duracionCita: this.selectedDuration,
+        estado: 1,
+        tipoCitaID: 1
+      };
+
+      this.$http
+        .post("http://localhost:8000/citas", data)
+        .then(response => {
+          // empujar nuevo evento a array local de eventos
+          this.events.push({
+            title: `Doctor: ${this.selectedDoctor}`,
+            details: `Paciente: ${this.selectedPatient}`,
+            date: this.selectedDate,
+            time: this.selectedTime,
+            duration: this.selectedDuration
+          });
+
+          // resetear campos de dialogo
+          this.selectedDoctor = "";
+          this.selectedPatient = "";
+          this.selectedDuration = "";
+        })
+        .catch(error => {
+          this.infoMessage = "";
+          Object.keys(error.response.data).forEach(key => {
+            if (key != "success") {
+              this.infoMessage += error.response.data[key];
+            }
+          });
+          this.infoDialog = true;
+        });
     },
     dayClick(event) {
       if (this.calendarType === "month") {

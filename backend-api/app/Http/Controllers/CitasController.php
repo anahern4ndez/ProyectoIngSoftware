@@ -50,7 +50,8 @@ class CitasController extends Controller {
                'fecha' => 'required',
                'hora' => 'required',
                'duracionCita' => 'required',
-               'estado' => 'required'
+               'estado' => 'required',
+               'tipoCitaID' => 'required'
            ], 
            [
                'idUsuario.required' => 'El ID del usuario es requerido.',
@@ -58,6 +59,7 @@ class CitasController extends Controller {
                'fecha.required' => 'La fecha es requerida.',
                'hora.required' => 'La hora es requerida.',
                'duracionCita.required' => 'La duración de la cita es requerida.',
+               'tipoCitaID.required' => 'El tipo de cita es requerido.'
            ]
        );
 
