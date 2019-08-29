@@ -49,6 +49,7 @@ $router->post('/ConsultaController/insert', 'ConsultaController@store');
 $router->put('/ConsultaController/update', 'ConsultaController@updateAll');
 $router->post('/ConsultaController/findOne', 'ConsultaController@findOne');
 $router->post('/ConsultaController/findAll', 'ConsultaController@findAll');
+$router->post('/ConsultaController/getID', 'ConsultaController@getIDConsulta');
 
 //Locations
 $router->get('/ProcedenciaController/getAllLocation', 'ProcedenciaController@getAllLocation');
