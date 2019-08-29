@@ -27,6 +27,6 @@ class CreateSindromeCie10sTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sindrome_cie-10s');
+        Schema::dropIfExists('sindrome_cie-10');
     }
 }

@@ -117,7 +117,7 @@
                     <v-date-picker v-model="selectedDate" no-title scrollable locale="es">
                       <v-spacer></v-spacer>
                       <v-btn flat color="primary" @click="dateMenuOpen = false">Cancelar</v-btn>
-                      <v-btn flat color="primary" @click="$refs.menu.save(selectedDate)">Aceptar</v-btn>
+                      <v-btn flat color="primary" @click="saveAppointmentDate">Aceptar</v-btn>
                     </v-date-picker>
                   </v-menu>
                 </v-flex>
@@ -147,7 +147,7 @@
                     <v-time-picker v-model="selectedTime" :landscape="true" locale="es">
                       <v-spacer></v-spacer>
                       <v-btn flat color="primary" @click="timeMenuOpen = false">Cancelar</v-btn>
-                      <v-btn flat color="primary" @click="$refs.menu.save(selectedTime)">Aceptar</v-btn>
+                      <v-btn flat color="primary" @click="saveAppointmentHour">Aceptar</v-btn>
                     </v-time-picker>
                   </v-menu>
                 </v-flex>
@@ -315,6 +315,14 @@ export default {
       this.today = fechaSemAnt;
       this.month = this.getMes(SemAnt.getMonth());
       this.year = SemAnt.getFullYear();
+    },
+    saveAppointmentHour() {
+      this.timeMenuOpen = false;
+      this.$refs.menu.save(selectedTime);
+    },
+    saveAppointmentDate() {
+      this.dateMenuOpen = false;
+      this.$refs.menu.save(selectedDate)
     }
   }
 };

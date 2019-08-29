@@ -13,4 +13,7 @@ class Procedencia extends Model
     public function procede(){
         return $this->belongsTo('App\Paciente', 'ID', 'Procedencia');
     }
+    public function reside(){
+        return $this->belongsTo('App\Paciente', 'ID', 'Residencia');
+    }
 }

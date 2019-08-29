@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class PesoPercentil extends Migration
+class DxAsociado extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,13 @@ class PesoPercentil extends Migration
      */
     public function up()
     {
-        $table->float('Edad');
-        $table->int('Genero');
-        $table->foreign('Genero')
-        ->references('ID')
-        ->on('sexos');
-        $table->float('p1');
-        $table->float('p2');
-        $table->float('p3');
-        $table->float('p4');
-        $table->float('p5');
+        Schema::create('dx_asociados', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('letra');
+            $table->integer('entero');
+            $table->integer('decimal');
+            $table->string('significado');
+        });
     }
 
     /**
@@ -32,6 +29,6 @@ class PesoPercentil extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('dx_asociados');
     }
 }

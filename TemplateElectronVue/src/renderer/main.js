@@ -65,10 +65,6 @@ const routes = [{
         component: Vue.component('EditarPaciente', require('./components/EditarPaciente.vue').default)
     },
     {
-        path: '/darConsulta',
-        component: Vue.component('darConsulta', require('./components/DarConsulta.vue').default)
-    },
-    {
         path: '/Consulta',
         component: Vue.component('Consulta', require('./components/Consulta.vue').default)
     },
@@ -95,6 +91,10 @@ const routes = [{
     {
         path: '/cambioEstado',
         component: Vue.component('cambioEstado', require('./components/cambioEstado.vue').default)
+    },
+    {
+      path: '/Hemodialisis',
+      component: Vue.component('cambioEstado', require('./components/Hemodialisis.vue').default)
     }
 ];
 
@@ -110,9 +110,9 @@ export const store = new Vuex.Store({
 
 /* eslint-disable no-new */
 new Vue({
-    router,
-    render: h => h(App),
-    mounted() {
-        this.$router.push('/login')
-    }
+  router,
+  render: h => h(App),
+  mounted () {
+    this.$router.push('/login')
+  }
 }).$mount('#app');

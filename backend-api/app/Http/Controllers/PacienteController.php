@@ -21,11 +21,11 @@ class PacienteController extends Controller
         $pat->Apellido = $request->Apellido;
         $pat->Fecha_de_nacimiento = $request->Fecha_de_nacimiento;
         $pat->Procedencia = $request->Procedencia;
+        $pat->Residencia = $request->Residencia;
         $pat->Nombre_de_padre = $request->Nombre_de_padre;
         $pat->Nombre_de_madre = $request->Nombre_de_madre;
         $pat->Telefono = $request->Telefono;
         $pat->Edad = $request->Edad;
-        $pat->Telefono = $request->Telefono;
         $pat->Sindrome_Clinico_Presentacion = $request->Sindrome_Clinico_Presentacion;
         $pat->Dx_Definitivo = $request->Dx_Definitivo;
         $pat->Dx_Asociados = $request->Dx_Asociados;
@@ -37,12 +37,11 @@ class PacienteController extends Controller
         $pat->EstadoActual = $request->EstadoActual;
         $pat->Sexo = $request->Sexo;
         $pat->Historia = $request->Historia;
-        $pat->Numero_Orden = $request->Numero_Orden;
         $pat->save();
 
         return response()->json([
             'success' => true,
-            'message' => 'creado'
+            'message' => 'Paciente creado con éxito'
         ], 200);
     }
 
@@ -77,7 +76,8 @@ class PacienteController extends Controller
         $val = Paciente::with('Procedencia', 'sexo_rel','Sindrome_Clinico_Presentacion', 'Tipo_de_Sangre', 'EstadoActual', 'Estudia', 'Transfusiones')->get();
 
         return response()->json([
-            'Pacientes' => $val,
+            'success' => true,
+            'Pacientes' => $val
             //'sexo' => $v->sexo->significado
         ], 200);
         
@@ -113,6 +113,7 @@ class PacienteController extends Controller
         $toUpdate->Apellido = $request->Apellido;
         $toUpdate->Fecha_de_nacimiento = $request->Fecha_de_nacimiento;
         $toUpdate->Procedencia = $request->Procedencia;
+        $toUpdate->Residencia = $request->Residencia;
         $toUpdate->Nombre_de_padre = $request->Nombre_de_padre;
         $toUpdate->Nombre_de_madre = $request->Nombre_de_madre;
         $toUpdate->Telefono = $request->Telefono;
@@ -129,8 +130,11 @@ class PacienteController extends Controller
         $toUpdate->EstadoActual = $request->EstadoActual;
         $toUpdate->Sexo = $request->Sexo;
         $toUpdate->Historia = $request->Historia;
-        $toUpdate->Numero_Orden = $request->Numero_Orden;
         $toUpdate->save();
+        
+        return response()->json([
+            'success' => true,
+        ], 200);
     }
 
     /**
@@ -142,11 +146,18 @@ class PacienteController extends Controller
     public function delete(Request $request)
     {
          (string)$CUI = $request->cui;
-        $user=Paciente::find($CUI);
-        $user->delete();
+        $paciente = Paciente::find($CUI);
+        
+        if(!$paciente){
+            return response()->json([
+                'success' => true,
+                'message' => 'No se encontró el paciente especificado.'
+            ], 404);
+        }
+        $paciente->delete();
         return response()->json([
             'success' => true,
-            'message' => 'eliminado'
+            'message' => 'Paciente eliminado con éxito.'
         ], 200);
     }
 }

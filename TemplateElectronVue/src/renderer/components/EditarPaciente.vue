@@ -2,20 +2,24 @@
 
 <template>
   <div class="grey--text text--darken-2">
-    <h1 id="headers" class="text-center">Editar información de paciente</h1>
-
+    <h1 id="headers" class="text-center">Editar información del paciente</h1>
+    <br><br>
+    <v-form
+      ref="form"
+      v-model="pass"
+    >
     <b-container class="bv-example-row1" >
       <v-card>  
         <v-card-title primary-title>
           <v-flex xs12>
             <v-layout align-center justify-end column fill-height />
+            
               <v-text-field
                   v-model="Numero_expediente"
                   label="Número de expediente"
                   outline
                   :rules="cuiRules"
                   required
-                  @change="checkLocation(Numero_expediente)"
               ></v-text-field>
           </v-flex>
         </v-card-title>
@@ -23,102 +27,144 @@
     </b-container>
     <div class="Datos">
       <div>
-        <b-container class="bv-example-row2" >
-          <v-card>
-            <v-card-title primary-title>
-              <v-flex xs12>
-                <v-layout align-center justify-end column fill-height />
-                <h3 id="headers" class="text-xs-center">Datos Personales</h3>
-                <br>
-                <div style="float:left; margin-right:5%; width:50%">
-                  <v-text-field
+        <b-container class="bv-example-row1" >
+              <v-card>
+                <v-card-title primary-title>
+                  <v-flex xs12>
+                    <v-layout align-center justify-end column fill-height />
+                      <h3 id="headers" class="text-xs-center">Datos Personales</h3>
+                      <br>
+                      <div style="float:left; margin-right:5%; width:50%">
+                      
+                        <v-text-field
                           v-model="CUI"
                           label="Número de CUI"
                           outline
+                          :rules="cuiRules"
+                          required
                           @change="checkLocation(CUI)"
-                      ></v-text-field>
-                </div>
-                <v-radio-group v-model="Sexo" row >
-                  <v-radio name="Sexo" label="Mujer" :value="1" color="black"></v-radio>
-                  <v-radio name="Sexo" label="Hombre" :value="2" color="black"></v-radio>
-                </v-radio-group>
-                <br>
-
-                <v-text-field
-                        v-model="ProcedenciaTxt"
-                        label="Lugar de nacimiento"
-                        outline
-                        :disabled="true"
-                    ></v-text-field>
-                <v-text-field
-                        v-model="Nombre"
-                        label="Nombres"
-                        outline
-                    ></v-text-field>
-                <v-text-field
-                        v-model="Apellido"
-                        label="Apellidos"
-                        outline
-                    ></v-text-field>
-                
-                <div style="float:left; width:50%">
-                  <v-flex xs12 sm6 md4>
-                    <v-menu
-                      v-model="menu_nacimiento"
-                      :close-on-content-click="false"
-                      :nudge-right="40"
-                      lazy
-                      transition="scale-transition"
-                      offset-y
-                      full-width
-                      min-width="200px"
-                    >
-                      <template v-slot:activator="{ on }">
-                        
-                        <v-text-field
-                          v-model="Fecha_de_nacimiento"
-                          label="Fecha de nacimiento"
-                          prepend-icon="event"
-                          readonly
-                          v-on="on"
-                          style="width:250%"
-                          
                         ></v-text-field>
-                        
-                      </template>
-                      <v-date-picker v-model="Fecha_de_nacimiento" @input="menu_nacimiento = false, computeAge(Fecha_de_nacimiento)" color="#3A4750" locale='es-ES'></v-date-picker>
-                    </v-menu>
-                    </v-flex>
-                  </div>
-                  <div>
 
-                  <v-text-field
-                          v-model="Edad"
-                          label="Edad"
-                          :disabled="true"
-                          outline
-                      ></v-text-field>
                       </div>
+                      <v-radio-group v-model="Sexo" row >
+                        <v-radio name="Sexo" label="Mujer" :value="1" color="black"></v-radio>
+                        <v-radio name="Sexo" label="Hombre" :value="2" color="black"></v-radio>
+                      </v-radio-group>
+                      <br>
+
+                      <v-text-field
+                              v-model="ProcedenciaTxt"
+                              label="Lugar de nacimiento"
+                              outline
+                              :disabled="true"
+                          ></v-text-field>
+                      
+                      <v-select
+                        v-if="procedenciasOpc"
+                        v-bind:items="procedenciasOpc"
+                        v-model="residencia"
+                        item-text="`${data.item.Departamento}, ${data.item.Municipio}`"
+                        item-value="ID"
+                        label = "Residencia actual" 
+                        :rules ="radioRules"
+                        outline
+                        required
+                      >
+                        <template
+                          slot="selection" slot-scope="data">
+                          {{ data.item.Departamento}}, {{data.item.Municipio}}
+
+                        </template>
+
+                        <template slot="item" slot-scope="data">
+                          <v-list-tile-content>
+                            <v-list-tile-title v-html="`${data.item.Departamento}, ${data.item.Municipio}`">
+                            </v-list-tile-title>
+                          </v-list-tile-content>
+                        </template>
+                        
+                      </v-select>
+
+                      <v-text-field
+                              v-model="Nombre"
+                              label="Nombres"
+                              outline
+                              required
+                              :rules="nombreRules"
+                          ></v-text-field>
+                      <v-text-field
+                              v-model="Apellido"
+                              label="Apellidos"
+                              outline
+                              required
+                              :rules="nombreRules"
+                          ></v-text-field>
+                      
+                      <div style="float:left; width:50%">
+                        <v-flex xs12 sm6 md4>
+                          <v-menu
+                            v-model="menu_nacimiento"
+                            :close-on-content-click="false"
+                            :nudge-right="40"
+                            lazy
+                            transition="scale-transition"
+                            offset-y
+                            full-width
+                            min-width="200px"
+                          >
+                            <template v-slot:activator="{ on }">
+                              
+                              <v-text-field
+                                v-model="Fecha_de_nacimiento"
+                                label="Fecha de nacimiento"
+                                prepend-icon="event"
+                                readonly
+                                v-on="on"
+                                style="width:250%"
+                                
+                              ></v-text-field>
+                              
+                            </template>
+                          <v-date-picker v-model="Fecha_de_nacimiento" @input="menu_nacimiento = false, computeAge(Fecha_de_nacimiento)" color="#3A4750" locale='es-ES'></v-date-picker>
+                          </v-menu>
+                        </v-flex>
+                      </div>
+                      <div>
+
                     <v-text-field
-                          v-model="Nombre_de_padre"
-                          label="Nombre del padre"
-                          outline
-                      ></v-text-field>
-                    <v-text-field
-                            v-model="Nombre_de_madre"
-                            label="Nombre de la madre"
+                            v-model="Edad"
+                            label="Edad"
+                            :disabled="true"
                             outline
                         ></v-text-field>
-                    <v-text-field
-                            v-model="Telefono"
-                            label="Teléfonos"
+                        </div>
+                      <v-text-field
+                            v-model="Nombre_de_padre"
+                            label="Nombre del padre"
                             outline
+                            required
+                            :rules="nombreRules"
                         ></v-text-field>
-              </v-flex>
-            </v-card-title>
-          </v-card>
+                      <v-text-field
+                              v-model="Nombre_de_madre"
+                              label="Nombre de la madre"
+                              outline
+                              required
+                              :rules="nombreRules"
+                          ></v-text-field>
+                      <v-text-field
+                              v-model="Telefono"
+                              label="Teléfonos"
+                              outline
+                              required
+                              :rules="phoneRules"
+                          ></v-text-field>
+                  </v-flex>
+                </v-card-title>
+              </v-card>
         </b-container>
       </div>
+
       <v-card>
         <v-card-title primary-title>
           <v-flex xs12>
@@ -139,38 +185,41 @@
           </v-flex>
         </v-card-title>
       </v-card>
-      <v-card>
-        <v-card-title primary-title>
-          <v-flex xs12>
-            <v-layout align-center justify-end />
-              <h3 id="headers"  class="text-xs-center">Dx. Definitivo</h3>
-          <v-textarea
-            v-model="Dx_Definitivo"
-            outline
-            name="Dx_Definitivo"
-            value=""
-            rows=38
-          ></v-textarea>
-          </v-flex>
-        </v-card-title>
-      </v-card>
-      <v-card>
-        <v-card-title primary-title>
-          <v-flex xs12>
-            <v-layout align-center justify-end />
-              <h3 id="headers" class="text-xs-center">Dx. Asociados</h3>
-          <v-textarea
-            v-model="Dx_Asociados"
-            outline
-            name="Dx_Asociados"
-            value=""
-            rows=38
-          ></v-textarea>
-          </v-flex>
-        </v-card-title>
-      </v-card>
-    </div>
-    
+        <v-card>
+          <v-card-title primary-title>
+            <v-flex xs12>
+              <v-layout align-center justify-end />
+                <h3 id="headers"  class="text-xs-center">Dx. Definitivo</h3>
+            <v-textarea
+
+              v-model="Dx_Definitivo"
+              outline
+              name="Dx_Definitivo"
+              value=""
+              rows=38
+              :rules="nombreRules"
+            ></v-textarea>
+            </v-flex>
+          </v-card-title>
+        </v-card>
+        <v-card>
+          <v-card-title primary-title>
+            <v-flex xs12>
+              <v-layout align-center justify-end />
+                <h3 id="headers" class="text-xs-center">Dx. Asociados</h3>
+              <v-textarea
+                v-model="Dx_Asociados"
+                outline
+                name="Dx_Asociados"
+                value=""
+                rows=38
+                :rules="nombreRules"
+              ></v-textarea>
+              </v-flex>
+            </v-card-title>
+          </v-card>
+    </div>  
+
     <div id="Historia">
         <v-card>
           <v-card-title primary-title>
@@ -182,14 +231,16 @@
               v-model="Historia"
               name="Historia"
               rows=40
+              :rules="nombreRules"
             ></v-textarea>
             </v-flex>
           </v-card-title>
         </v-card>
-    </div>  
-    <div>
-      <button float="left" type="button" class="btn btn-lg btn-warning btn-block" v-on:click="save">Guardar cambios</button> 
     </div>
+    <div>
+      <button float="left" type="button" class="btn btn-lg btn-warning btn-block" v-on:click="save" :disabled="!pass">Guardar cambios</button> 
+    </div>
+    </v-form>
   </div>
 </template>
 
@@ -198,7 +249,6 @@
 export default {
   mounted() {
     this.$http.get(`http://localhost:8000/PacienteController/findOne?CUI=${this.$route.params.cui}`).then(response=>{
-      console.log(response.data.Paciente[0]);
       this.Numero_expediente = response.data.Paciente[0].Numero_expediente;
       this.CUI = response.data.Paciente[0].CUI;
       this.Nombre = response.data.Paciente[0].Nombre;
@@ -219,6 +269,11 @@ export default {
       this.Tipo_de_Sangre = response.data.Paciente[0].Tipo_de_Sangre;
       this.Estudia = response.data.Paciente[0].Estudia;
       this.Transfusiones = response.data.Paciente[0].Transfusiones;
+      this.residencia = response.data.Paciente[0].Residencia;
+    });
+
+    this.$http.get("http://localhost:8000/ProcedenciaController/getAllLocation").then(response => {
+      this.procedenciasOpc = response.data.locations;
     });
   },
     data () {
@@ -251,11 +306,28 @@ export default {
         Tipo_de_Sangre: 1,
         Estudia: 1,
         Transfusiones:1,
-        pacientes: []
+        pacientes: [],
+        procedenciasOpc: undefined,
+        pass: false,
+        residencia:'',
+        //reglas de FORM
+        cuiRules: [
+          (v) => !!v || 'Se requiere este campo',
+          (v) => v && v.length <= 13 || 'Verifique que el CUI sea de 13 digitos.'
+        ],
+        nombreRules: [
+          (v) => !!v || 'Se requiere este campo',
+          (v) => v && v.length < 60 || 'Se permite como maximo 60 caracteres'
+
+        ],
+        phoneRules: [
+          (v) => !!v || 'Se requiere este campo'
+        ]
       }
   },
     methods: {
         save(){
+          var pass = true;
           const info = {
             Numero_expediente: this.Numero_expediente,
             CUI: this.CUI,
@@ -266,7 +338,7 @@ export default {
             Nombre_de_padre: this.Nombre_de_padre,
             Nombre_de_madre: this.Nombre_de_madre,
             Telefono: this.Telefono,
-            Edad: this.Edad,
+            Edad: (this.Edad).toString(),
             Sindrome_Clinico_Presentacion: this.Sindrome_Clinico_Presentacion,
             Dx_Definitivo: this.Dx_Definitivo,
             Dx_Asociados: this.Dx_Asociados,
@@ -277,10 +349,19 @@ export default {
             EstadoActual: this.EstadoActual,
             Sexo: this.Sexo,
             Historia:this.Historia,
-            id: this.id
-        };
+            id: this.id,
+            Residencia: this.residencia,
+          };
+          if (info.Edad.substring(info.Edad.length -5, info.Edad.length) === "meses") {
+            info.Edad = parseFloat((this.Edad).substring(0,info.Edad.length -6))/12.0;
+          }
+          else{
+            info.Edad = parseFloat((this.Edad).substring(0,info.Edad.length -5));
+          }
+
           this.$http.put('http://localhost:8000/PacienteController/updateAll', info).then(response => {
               this.error = false;
+              this.resetValidation();
           }).
           catch(error => {
               this.error = true;
@@ -298,18 +379,24 @@ export default {
             var diffAnio = fechaActual.getFullYear() - aComputar.getFullYear();
             var meses = fechaActual.getMonth() - aComputar.getMonth();
 
-            if (meses<0 || (meses == 0 && fechaActual.getDate() < aComputar.getDate())){
+            /*if (meses<0 || (meses == 0 && fechaActual.getDate() < aComputar.getDate())){
               --diffAnio;
-            }
+            }*/
             //console.log(diffAnio);
             if (diffAnio>0){
-              return this.Edad = diffAnio;
+              return this.Edad = diffAnio + ' años';
             } else{
               return this.Edad = meses + ' meses';
             }
             
           }
         
+        },
+        resetValidation () {
+          this.$refs.form.resetValidation()
+        },
+        reset () {
+          this.$refs.form.reset()
         },
         prettyPlaceholders(){
           //poner aqui todos los placeholders que cambian en runtime..
@@ -336,7 +423,7 @@ export default {
     }
 };
 </script>
-<style>
+<style scoped>
 .Datos {
   padding-left:3%;
   padding-right:8%;

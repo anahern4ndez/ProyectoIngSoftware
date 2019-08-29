@@ -1,7 +1,8 @@
 
 
 <template lang="es">
-    <div>
+  
+<div>
         <b-tabs active-nav-item-class="font-weight-bold text-uppercase text-dark"  card vertical>
             <b-tab title="Consulta"  active >
                 <div class="cuerpo">
@@ -96,7 +97,7 @@
                         <!-- Loading -->
 
                         <!-- Form Name -->
-                        <h2 style="text-align: left;">Datos Generales</h2>
+                        <h2 id="headers" style="text-align: left;">Datos Generales</h2>
 
                         <div class="encapsulado">                    
                             <b-container>
@@ -122,7 +123,7 @@
                                         <b-col>
                                         <v-text-field
                                             v-model="paciente.Procedencia"
-                                            label="Procedencia"
+                                            label="Lugar de nacimiento"
                                             outline
                                             :disabled="true"
                                         ></v-text-field> 
@@ -130,7 +131,7 @@
                                         <b-col>
                                         <v-text-field
                                             v-model="paciente.Telefono"
-                                            label="Télefono"
+                                            label="Teléfono"
                                             outline
                                             :disabled="true"
                                         ></v-text-field> 
@@ -301,7 +302,7 @@
                         </div>
 
                         <!-- Form Name -->
-                        <h2 style="text-align: left;">Dar Consulta</h2>
+                        <h2 id="headers" style="text-align: left;">Dar Consulta</h2>
                         <div>
                         <b-container class="bv-example-row2">
                             <b-row class="justify-content-md-center">
@@ -348,11 +349,37 @@
                                     <div style="margin-left: 2%"class="form-group encapsulado">
                                         <v-layout align-center justify-end />
                                             <h3 id="headers"  class="text-xs-center">Dx. Asociado</h3>
+                                        <v-select
+                                            v-if="dxs"
+                                            v-bind:items="dxs"
+                                            v-model="enfermedad"
+                                            item-text="`${data.item}`"
+                                            item-value="ID"
+                                            label = "Enfermedades"
+                                            v-on:change="agregarEnfermedad"
+                                        >
+                                        <template
+                                        slot="selection" slot-scope="data">
+                                        {{data.item.letra}} {{data.item.entero}} {{data.item.decimal}} {{data.item.significado}}
+
+                                        </template>
+
+                                        <template slot="item" slot-scope="data">
+                                        <v-list-tile-content>
+                                            <v-list-tile-title v-html="` ${data.item.letra} ${data.item.entero} ${data.item.decimal} ${data.item.significado} `">
+                                            </v-list-tile-title>
+                                        </v-list-tile-content>
+                                        </template>
+                                        
+                                        </v-select>
+
+                                        <br/>
                                         <v-textarea
                                             v-model="Dx_Asociado"
                                             outline
-                                            rows=18.5
+                                            rows=16
                                             :auto-grow=true
+                
                                         ></v-textarea>
                                     </div>  
                                 </b-col>
@@ -374,7 +401,6 @@
                         </div>
                         </div>
 
-                        <!-- Text input-->
                     <div class="form-group ">
                         <!-- Left-->
                         <b-container>
@@ -412,7 +438,7 @@
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
-                                                <b-row>
+                                                 <b-row>
                                                     <b-col>
                                                         <v-checkbox class="my-0 mt-4 py-0 " v-model="misMedicamentos.cyac.estado" label="Cyac" color="green"></v-checkbox>
                                                     </b-col>
@@ -439,6 +465,7 @@
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
+                                                <!-- Tal vez toque arreglar -->
                                                 <b-row>
                                                     <b-col>
                                                         <v-checkbox class="my-0 mt-4 py-0 " v-model="misMedicamentos.tac.estado" label="Tac" color="green"></v-checkbox>
@@ -451,6 +478,9 @@
                                                             min="0"
                                                             :rules="minRules"
                                                             :disabled="!misMedicamentos.tac.estado"
+                                                            ></v-text-field> 
+                                                    </b-col>
+                                                    <b-col>
                                                         <v-text-field
                                                             v-model="misMedicamentos.tac.frecuencia"
                                                             label="Frecuencia"
@@ -555,7 +585,7 @@
                                                             type =number
                                                             min="0"
                                                             :rules="minRules"
-
+                                                        ></v-text-field> 
                                                     </b-col>
                                                     <b-col>
                                                         <v-text-field
@@ -592,8 +622,7 @@
                                                             type =number
                                                             min="0"
                                                             :rules="minRules"
-=======
->>>>>>> 024263f327f0839d7a631332ad11bab2bc0c7777
+                                                        ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
@@ -809,6 +838,9 @@
                                                             min="0"
                                                             :rules="minRules"
                                                             :disabled="!misMedicamentos.fe.estado"
+                                                        ></v-text-field>     
+                                                    </b-col>
+                                                </b-row>
                                                 <b-row>
                                                     <b-col>
                                                         <v-checkbox class="my-0 mt-4 py-0 " v-model="misMedicamentos.cefadroxilo.estado"  color="green" label="Cefadroxilo" ></v-checkbox>
@@ -837,7 +869,6 @@
                                                     </b-col>
                                                 </b-row>
                                             </b-container> 
-            
                                         </div>
                                     </div>
                                 </b-col>
@@ -848,7 +879,7 @@
                                             <v-layout align-center justify-end />
                                                 <h3 id="headers"  class="text-xs-center">Resultados de laboratorios</h3>
                                             <b-container>
-                                                <b-row>
+   <b-row>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="resultados_de_laboratorio.Na"
@@ -1146,6 +1177,10 @@
                         </b-container>
                     </div>
 
+
+
+                        <!-- Text input-->
+                   
                     <div class="form-group encapsulado" style="text-align:left;">
                         <v-layout align-center justify-end />
                             <h3 id="headers"  class="text-xs-center">Examen físico</h3>
@@ -1744,7 +1779,7 @@
                     </table>
                 </div>
                 <div class="encapsulado">
-                        <h3 id="headers"  class="text-xs-center">Química Snaguínea</h3>
+                        <h3 id="headers"  class="text-xs-center">Química Sanguínea</h3>
                         <table class="table table-bordered table-ligth">
                         <tbody>           
                             <tr>
@@ -2194,17 +2229,24 @@
             </b-tab>
         </b-tabs>
     </div>
+
+
 </template>
 
 <script>
+
+function check(a){
+    if (a === -1){
+        return ""
+    } else {
+        return a
+    }
+}
+
 import { store } from '../main';
-// import { onlyFloat } from 'vue-input-only-number';
-
-// Vue.use(onlyFloat);
-
-
 export default {
     data: () => ({
+        enfermedad: '',
         dialog: false,
 
         update: false,
@@ -2280,6 +2322,7 @@ export default {
         Sindrome_Clinico_Presentacion: 1,
         Dx_Definitivo: "",
         Dx_Asociado: "",
+        dxs: undefined,
         historia: "",
 
         //Medicamentos
@@ -2466,7 +2509,11 @@ export default {
         const data = {
             ID: store.idPaciente // Aqui va el ID del paciente
         };
-
+        this.$http.get("http://localhost:8000/dxs").then(response => {
+            this.dxs = response.data.dxs;
+            console.log(response.data.dxs)
+            
+            });
         this.$http.post(`http://localhost:8000/PacienteController/findById`, data).then(response => {            
 
             if(response.data.Paciente[0] == null){
@@ -2573,14 +2620,20 @@ export default {
             this.dialog = false;
         });
 
-        
-
-        
-
     },
     methods: {
         
+        agregarEnfermedad(){
+            let s =  this.enfermedad.letra + " "
+            if (this.enfermedad.entero>0)
+                s = s + this.enfermedad.entero
+            if (this.enfermedad.decimal>0)
+                s = s +"."+ this.enfermedad.decimal
+            s = s + " " + this.enfermedad.significado
 
+            this.Dx_Asociado = this.Dx_Asociado + s +"\n"
+            //console.log(this.enfermedad)
+        },
         guardar() {
             // console.log("Fecha: " + this.fecha)
             // console.log("CUI: " + this.paciente.CUI)
@@ -2696,9 +2749,7 @@ export default {
                 }})
             }
 
-
-//--------------------------------------------------------------------------------------------------
-            let resultado_laboratorio = {}
+           let resultado_laboratorio = {}
 
             resultado_laboratorio = Object.assign(resultado_laboratorio, {
                 "Na": Number(this.resultados_de_laboratorio.Na),

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Paciente;
+use App\Paciente;
 use Faker\Factory as Faker;
 
 class PacienteSeeder extends Seeder
@@ -42,6 +42,7 @@ class PacienteSeeder extends Seeder
                 'Apellido' => $faker->lastName(),
                 'Fecha_de_nacimiento' => $faker->date(),
                 'Procedencia' => (int)$procedencia,
+                'Residencia' => (int)$faker->randomElement($arrayProcedencias),
                 'Nombre_de_padre' => $faker->name('male'),
                 'Nombre_de_madre' => $faker->name('female'),
                 'Telefono' => $faker->randomNumber(7),

@@ -4,18 +4,22 @@
   <div class="grey--text text--darken-2">
     <h1 id="headers" class="text-center">Ingresar a un paciente</h1>
     <br><br>
+    <v-form
+      ref="form"
+      v-model="pass"
+    >
     <b-container class="bv-example-row1" >
       <v-card>  
         <v-card-title primary-title>
           <v-flex xs12>
             <v-layout align-center justify-end column fill-height />
+            
               <v-text-field
                   v-model="Numero_expediente"
                   label="Número de expediente"
                   outline
                   :rules="cuiRules"
                   required
-                  @change="checkLocation(Numero_expediente)"
               ></v-text-field>
           </v-flex>
         </v-card-title>
@@ -54,6 +58,33 @@
                               outline
                               :disabled="true"
                           ></v-text-field>
+                      
+                      <v-select
+                        v-if="procedenciasOpc"
+                        v-bind:items="procedenciasOpc"
+                        v-model="residencia"
+                        item-text="`${data.item.Departamento}, ${data.item.Municipio}`"
+                        item-value="ID"
+                        label = "Residencia actual" 
+                        :rules ="radioRules"
+                        outline
+                        required
+                      >
+                        <template
+                          slot="selection" slot-scope="data">
+                          {{ data.item.Departamento}}, {{data.item.Municipio}}
+
+                        </template>
+
+                        <template slot="item" slot-scope="data">
+                          <v-list-tile-content>
+                            <v-list-tile-title v-html="`${data.item.Departamento}, ${data.item.Municipio}`">
+                            </v-list-tile-title>
+                          </v-list-tile-content>
+                        </template>
+                        
+                      </v-select>
+
                       <v-text-field
                               v-model="Nombre"
                               label="Nombres"
@@ -166,6 +197,7 @@
               name="Dx_Definitivo"
               value=""
               rows=38
+              :rules="nombreRules"
             ></v-textarea>
             </v-flex>
           </v-card-title>
@@ -181,6 +213,7 @@
                 name="Dx_Asociados"
                 value=""
                 rows=38
+                :rules="nombreRules"
               ></v-textarea>
               </v-flex>
             </v-card-title>
@@ -198,25 +231,34 @@
               v-model="Historia"
               name="Historia"
               rows=40
+              :rules="nombreRules"
             ></v-textarea>
             </v-flex>
           </v-card-title>
         </v-card>
     </div>
-  <div>
-    <button float="left" type="button" class="btn btn-lg btn-warning btn-block" v-on:click="ingresarNuevo" :disabled="this.Sindrome_Clinico_Presentacion===''">Ingresar nuevo paciente</button> 
-  </div>
+    <div>
+      <button float="left" type="button" class="btn btn-lg btn-warning btn-block" v-on:click="ingresarNuevo" :disabled="!pass">Ingresar nuevo paciente</button> 
+    </div>
+    </v-form>
   </div>
 </template>
 
 
 <script>
+import { debug } from 'util';
 export default {
   mounted() {
     this.$http.get("http://localhost:8000/PacienteController/findAll").then(response => {
       //esto deberia ser un arrray de pacientes que contengan todos sus atributos...
       this.pacientes = response.data.Pacientes;
 
+
+    });
+
+    this.$http.get("http://localhost:8000/ProcedenciaController/getAllLocation").then(response => {
+      this.procedenciasOpc = response.data.locations;
+      console.log(this.procedenciasOpc);
     });
   },
     data () {
@@ -236,6 +278,7 @@ export default {
         ProcedenciaTxt:'',  //este es para mostrar el depto, municipio
         Nombre_de_padre:'',
         Nombre_de_madre:'',
+        residencia:'',
         Telefono:'',
         Edad: '',
         //los siguientes se pondran como predeterminados por cuestion de tiempo, pero se volveran dinámicos después
@@ -250,6 +293,7 @@ export default {
         Sexo: '',
         pacientes: [],
         pass: false,
+        procedenciasOpc: undefined,
 
         //reglas de FORM
         cuiRules: [
@@ -266,14 +310,15 @@ export default {
   },
     methods: {
         ingresarNuevo(){
-          var pass = false;
+          var pass = true;
           const info = {
             Numero_expediente: this.Numero_expediente,
             CUI: this.CUI,
             Nombre: this.Nombre,
             Apellido: this.Apellido,
             Fecha_de_nacimiento: this.Fecha_de_nacimiento,
-            Procedencia: this.CUI.substr(this.CUI.length-4),
+            Procedencia: this.CUI.substring(this.CUI.length-4),
+            Residencia: this.residencia,
             Nombre_de_padre: this.Nombre_de_padre,
             Nombre_de_madre: this.Nombre_de_madre,
             Telefono: this.Telefono,
@@ -289,23 +334,33 @@ export default {
             Sexo: this.Sexo,
             Historia:this.Historia
           };
-          
-          
+          //para que la edad ingrese bien
+          if (info.Edad.substring(info.Edad.length -5, info.Edad.length) === "meses") {
+            info.Edad = parseFloat((this.Edad).substring(0,1))/12.0;
+          }
+          else{
+            info.Edad = parseFloat((this.Edad).substring(0,info.Edad.length -5));
+          }
 
           this.$http.post('http://localhost:8000/PacienteController/insert', info).then(response => {
             this.error = false;
-            this.CUI=' '; 
-            this.Nombre=' ';
-            this.Apellido=' ';
-            this.Fecha_de_nacimiento=' ';
-            this.ProcedenciaTxt=' ';
-            this.Nombre_de_padre=' ';
-            this.Nombre_de_madre=' ';
-            this.Telefono=' ';
-            this.Edad= ' ';
-            this.Historia=' ';
-            this.Dx_Definitivo=' ';
-            this.Dx_Asociados=' ';
+            this.CUI=''; 
+            this.residencia='';
+            this.Numero_expediente='';
+            this.Nombre='';
+            this.Apellido='';
+            this.Fecha_de_nacimiento='';
+            this.residencia = '';
+            this.ProcedenciaTxt='';
+            this.Nombre_de_padre='';
+            this.Nombre_de_madre='';
+            this.Telefono='';
+            this.Edad= '';
+            this.Historia='';
+            this.Dx_Definitivo='';
+            this.Dx_Asociados='';
+            this.reset();
+            this.resetValidation();
           }).
           catch(error => {
               this.error = true;
@@ -323,19 +378,23 @@ export default {
 
             var diffAnio = fechaActual.getFullYear() - aComputar.getFullYear();
             var meses = fechaActual.getMonth() - aComputar.getMonth();
-
-            if (meses<0 || (meses == 0 && fechaActual.getDate() < aComputar.getDate())){
+            /*if (meses<0 || (meses == 0 && fechaActual.getDate() < aComputar.getDate())){
               --diffAnio;
-            }
-            //console.log(diffAnio);
+            }*/
             if (diffAnio>0){
-              return this.Edad = diffAnio;
+              return this.Edad = diffAnio + ' años';
             } else{
               return this.Edad = meses + ' meses';
             }
             
           }
         
+        },
+        resetValidation () {
+          this.$refs.form.resetValidation()
+        },
+        reset () {
+          this.$refs.form.reset()
         },
         prettyPlaceholders(){
           //poner aqui todos los placeholders que cambian en runtime..
@@ -344,7 +403,7 @@ export default {
         },
         checkLocation(inStr){
           //partimos de la premisa que el dpi tiene 13 digitos...
-          var ultimos=inStr.substr(inStr.length-4);
+          var ultimos=inStr.substring(inStr.length-4);
           var data = {
             id_Dep: ultimos
           }
@@ -365,7 +424,7 @@ export default {
     }
 };
 </script>
-<style>
+<style scoped>
 .Datos {
   padding-left:3%;
   padding-right:8%;

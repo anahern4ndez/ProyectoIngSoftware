@@ -40,7 +40,7 @@ class CitasControllerTest extends TestCase {
         $user = factory('App\User')->create();
         
         // crear paciente fake
-        $paciente = factory('App\Models\Paciente')->create();
+        $paciente = factory('App\Paciente')->create();
         
         // http post request a ruta de creacion de citas con data
         $this->json('POST', '/citas', [
@@ -67,7 +67,7 @@ class CitasControllerTest extends TestCase {
         $user = factory('App\User')->create();
         
         // crear paciente fake
-        $paciente = factory('App\Models\Paciente')->create();
+        $paciente = factory('App\Paciente')->create();
         
         // http post request a ruta de creacion de citas con data
         $this->json('POST', '/citas', [
@@ -94,7 +94,7 @@ class CitasControllerTest extends TestCase {
         $user = factory('App\User')->create();
         
         // crear paciente fake
-        $paciente = factory('App\Models\Paciente')->create();
+        $paciente = factory('App\Paciente')->create();
         
         // http post request a ruta de creacion de citas con data
         $this->json('POST', '/citas', [
@@ -118,7 +118,7 @@ class CitasControllerTest extends TestCase {
         $user = factory('App\User')->create();
 
         // crear paciente fake
-        $paciente = factory('App\Models\Paciente')->create();
+        $paciente = factory('App\Paciente')->create();
 
         factory('App\codigo_citas')->create();
         

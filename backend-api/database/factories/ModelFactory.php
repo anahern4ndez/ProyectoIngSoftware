@@ -23,14 +23,15 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Models\Paciente::class, function (Faker\Generator $faker) {
+$factory->define(App\Paciente::class, function (Faker\Generator $faker) {
     return [
-        'Numero_expediente' => $faker->randomNumber(5),
+        'Numero_expediente' => $faker->randomNumber(8),
         'CUI' => $faker->randomNumber(7),
         'Nombre' => $faker->firstName(),
         'Apellido' => $faker->lastName(),
         'Fecha_de_nacimiento' => $faker->date(),
         'Procedencia' => 101,
+        'Residencia' => 101,
         'Nombre_de_padre' => $faker->name('male'),
         'Nombre_de_madre' => $faker->name('female'),
         'Telefono' => $faker->randomNumber(7),
@@ -38,7 +39,7 @@ $factory->define(App\Models\Paciente::class, function (Faker\Generator $faker) {
         'Sindrome_Clinico_Presentacion' => 1,
         'Dx_Definitivo' => 'Dx Definitivo',
         'Dx_Asociados' => 'Dx Asociados',
-        'Imagen' => '',
+        'Imagen' => 'imagen',
         'Tipo_de_Sangre' => 1,
         'Estudia' => 1,
         'Transfusiones' => 1,

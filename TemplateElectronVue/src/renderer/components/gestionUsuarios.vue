@@ -24,39 +24,6 @@
               </div>
             </div>
             <br>
-            <!--
-            <br>
-            <br>
-            <div class="row justify-content-center">
-              <div class="col-auto">
-                <table class="table table-responsive text-center">
-                  <thead>
-                    <tr>
-                      <th>First Name</th>
-                      <th>Last Name</th>
-                      <th>Email</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>John</td>
-                      <td>Doe</td>
-                      <td>[email protected]</td>
-                    </tr>
-                    <tr>
-                      <td>Smith</td>
-                      <td>Thomas</td>
-                      <td>[email protected]</td>
-                    </tr>
-                    <tr>
-                      <td>Merry</td>
-                      <td>Jim</td>
-                      <td>[email protected]</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>-->
             <v-data-table :headers="headers" :items="user" class="elevation-1">
               <template v-slot:items="props">
                 <tr @click="selectUser(props.item)">

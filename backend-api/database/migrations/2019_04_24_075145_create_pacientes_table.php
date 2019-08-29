@@ -16,12 +16,13 @@ class CreatePacientesTable extends Migration
         Schema::create('pacientes', function (Blueprint $table) {
             
             $table->increments('id');
-            $table->string('Numero_expediente');
+            $table->string('Numero_expediente') -> unique();
             $table->string('CUI', 20) -> unique();
             $table->string('Nombre', 55);
             $table->string('Apellido', 40);
             $table->date("Fecha_de_nacimiento");
             $table->integer("Procedencia");
+            $table->integer("Residencia");
             $table->string('Nombre_de_padre', 55);
             $table->string('Nombre_de_madre', 55);
             $table->integer('Telefono');
@@ -47,6 +48,10 @@ class CreatePacientesTable extends Migration
             ->on('tipo_respuestas');
 
             $table->foreign('Procedencia')
+            ->references('ID')
+            ->on('procedencias');
+
+            $table->foreign('Residencia')
             ->references('ID')
             ->on('procedencias');
 
