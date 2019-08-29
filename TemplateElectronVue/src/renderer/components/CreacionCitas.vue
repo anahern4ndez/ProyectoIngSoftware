@@ -268,8 +268,11 @@ export default {
         time: this.selectedTime,
         duration: this.selectedDuration
       });
+
+      // reset dialog data
       this.selectedDoctor = "";
       this.selectedPatient = "";
+      this.selectedDuration = "";
     },
     dayClick(event) {
       if (this.calendarType === "month") {
@@ -318,11 +321,12 @@ export default {
     },
     saveAppointmentHour() {
       this.timeMenuOpen = false;
-      this.$refs.menu.save(selectedTime);
+      this.$refs.menu.save(this.selectedTime);
     },
     saveAppointmentDate() {
       this.dateMenuOpen = false;
-      this.$refs.menu.save(selectedDate)
+      this.$refs.menu.save(this.selectedDate);
+      console.log(this.selectedDate);
     }
   }
 };
