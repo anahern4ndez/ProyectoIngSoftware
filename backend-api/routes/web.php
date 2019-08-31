@@ -98,3 +98,7 @@ $router->get('/citas', 'CitasController@getCitas');
 $router->post('/citas', 'CitasController@store');
 $router->put('/citas/{id}', 'CitasController@update');
 $router->delete('/citas/{id}', 'CitasController@destroy');
+
+//
+
+$router->get('/dxs', 'DxController@getDxs');

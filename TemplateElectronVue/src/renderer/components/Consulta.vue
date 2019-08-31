@@ -355,11 +355,37 @@
                                     <div style="margin-left: 2%"class="form-group encapsulado">
                                         <v-layout align-center justify-end />
                                             <h3 id="headers"  class="text-xs-center">Dx. Asociado</h3>
+                                        <v-select
+                                            v-if="dxs"
+                                            v-bind:items="dxs"
+                                            v-model="enfermedad"
+                                            item-text="`${data.item}`"
+                                            item-value="ID"
+                                            label = "Enfermedades"
+                                            v-on:change="agregarEnfermedad"
+                                        >
+                                        <template
+                                        slot="selection" slot-scope="data">
+                                        {{data.item.letra}} {{data.item.entero}} {{data.item.decimal}} {{data.item.significado}}
+
+                                        </template>
+
+                                        <template slot="item" slot-scope="data">
+                                        <v-list-tile-content>
+                                            <v-list-tile-title v-html="` ${data.item.letra} ${data.item.entero} ${data.item.decimal} ${data.item.significado} `">
+                                            </v-list-tile-title>
+                                        </v-list-tile-content>
+                                        </template>
+                                        
+                                        </v-select>
+
+                                        <br/>
                                         <v-textarea
                                             v-model="Dx_Asociado"
                                             outline
-                                            rows=18.5
+                                            rows=16
                                             :auto-grow=true
+                
                                         ></v-textarea>
                                     </div>  
                                 </b-col>
@@ -2214,9 +2240,19 @@
 </template>
 
 <script>
+
+function check(a){
+    if (a === -1){
+        return ""
+    } else {
+        return a
+    }
+}
+
 import { store } from '../main';
 export default {
     data: () => ({
+        enfermedad: '',
         dialog: false,
 
         update: false,
@@ -2292,6 +2328,7 @@ export default {
         Sindrome_Clinico_Presentacion: 1,
         Dx_Definitivo: "",
         Dx_Asociado: "",
+        dxs: undefined,
         historia: "",
 
         //Medicamentos
@@ -2483,7 +2520,11 @@ export default {
         const data = {
             ID: store.idPaciente // Aqui va el ID del paciente
         };
-
+        this.$http.get("http://localhost:8000/dxs").then(response => {
+            this.dxs = response.data.dxs;
+            console.log(response.data.dxs)
+            
+            });
         this.$http.post(`http://localhost:8000/PacienteController/findById`, data).then(response => {            
 
             if(response.data.Paciente[0] == null){
@@ -2610,6 +2651,7 @@ export default {
     },
     methods: {
         
+<<<<<<< HEAD
         agregarComentario(){
             
             if(this.comentario != ""){
@@ -2623,6 +2665,19 @@ export default {
 
         },        
 
+=======
+        agregarEnfermedad(){
+            let s =  this.enfermedad.letra + " "
+            if (this.enfermedad.entero>0)
+                s = s + this.enfermedad.entero
+            if (this.enfermedad.decimal>0)
+                s = s +"."+ this.enfermedad.decimal
+            s = s + " " + this.enfermedad.significado
+
+            this.Dx_Asociado = this.Dx_Asociado + s +"\n"
+            //console.log(this.enfermedad)
+        },
+>>>>>>> d98cd5d35c99feb2fe4d7856c2bafec9ee195a5f
         guardar() {
 
             let medicamento = {}

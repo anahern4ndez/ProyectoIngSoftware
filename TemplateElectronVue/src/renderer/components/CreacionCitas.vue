@@ -155,6 +155,7 @@
                   <v-text-field
                     label="Duración de Cita (en minutos)"
                     v-model="selectedDuration"
+                    :rules="duracionRules"
                     required
                   ></v-text-field>
                 </v-flex>
@@ -169,6 +170,24 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
+
+      <!-- dialogo para mostrar mensajes a usuario -->
+      <div class="text-xs-center">
+        <v-dialog v-model="infoDialog" width="500">
+          <v-card>
+            <v-card-title
+              class="headline lighten-2 info-dialog-title-background"
+              primary-title
+            >Información</v-card-title>
+            <v-card-text>{{ this.infoMessage }}</v-card-text>
+            <v-divider></v-divider>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="primary" flat @click="infoDialog = false">Aceptar</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </div>
     </v-layout>
   </b-container>
 </template>
@@ -231,15 +250,22 @@ export default {
       "Esteban Cabrera"
     ],
     textboxRules: [v => !!v || "Seleccione una persona"],
-    dummyDoctors: ["Randall Lou", "Cristina Zelaya", "Celeste Azul"],
+    duracionRules: [
+      v => !!v || "Escriba una duración de cita en minutos.",
+      v => (v && v.length < 5) || "Verifique la duracion en citas.",
+      v => /^[0-9]*$/.test(v) || "Ingrese una duración de cita en números."
+    ],
+    dummyDoctors: ["Randall Lou", "Cristina Zelaya", "Celeste Espell"],
     selectedPatient: "",
-    selectedDoctor: ""
+    selectedDoctor: "",
+    infoDialog: false,
+    infoMessage: ""
   }),
   mounted() {
     //this.start = this.today;
     this.todayDate = new Date();
     this.today = this.todayDate.toISOString().substring(0, 10);
-    this.selectedDate = this.today;
+    //this.selectedDate = this.today;
     this.month = this.getMes(this.todayDate.getMonth());
     this.year = this.todayDate.getFullYear();
     this.obtenerPacientes();
@@ -261,15 +287,46 @@ export default {
     },
     createAppointment() {
       this.dialogOpen = false;
-      this.events.push({
-        title: `Doctor: ${this.selectedDoctor}`,
-        details: `Paciente: ${this.selectedPatient}`,
-        date: this.selectedDate,
-        time: this.selectedTime,
-        duration: this.selectedDuration
-      });
-      this.selectedDoctor = "";
-      this.selectedPatient = "";
+
+      const data = {
+        idUsuario: 1,
+        idPaciente: 1,
+        fecha: this.selectedDate,
+        hora: this.selectedTime,
+        duracionCita: this.selectedDuration,
+        estado: 1,
+        tipoCitaID: 1
+      };
+
+      this.$http
+        .post("http://localhost:8000/citas", data)
+        .then(response => {
+          // empujar nuevo evento a array local de eventos
+          this.events.push({
+            title: `Doctor: ${this.selectedDoctor}`,
+            details: `Paciente: ${this.selectedPatient}`,
+            date: this.selectedDate,
+            time: this.selectedTime,
+            duration: this.selectedDuration
+          });
+
+          // resetear campos de dialogo
+          this.selectedDoctor = "";
+          this.selectedPatient = "";
+          this.selectedDuration = "";
+        })
+        .catch(error => {
+          this.infoMessage = "";
+          Object.keys(error.response.data).forEach(key => {
+            if (key != "success") {
+              this.infoMessage += error.response.data[key];
+            }
+          });
+          this.infoDialog = true;
+          this.selectedDoctor = "";
+          this.selectedPatient = "";
+          this.selectedDuration = "";
+        });
     },
     dayClick(event) {
       if (this.calendarType === "month") {
@@ -318,11 +375,12 @@ export default {
     },
     saveAppointmentHour() {
       this.timeMenuOpen = false;
-      this.$refs.menu.save(selectedTime);
+      this.$refs.menu.save(this.selectedTime);
     },
     saveAppointmentDate() {
       this.dateMenuOpen = false;
-      this.$refs.menu.save(selectedDate)
+      this.$refs.menu.save(this.selectedDate);
+      console.log(this.selectedDate);
     }
   }
 };
