@@ -2651,7 +2651,6 @@ export default {
     },
     methods: {
         
-<<<<<<< HEAD
         agregarComentario(){
             
             if(this.comentario != ""){
@@ -2665,7 +2664,6 @@ export default {
 
         },        
 
-=======
         agregarEnfermedad(){
             let s =  this.enfermedad.letra + " "
             if (this.enfermedad.entero>0)
@@ -2677,7 +2675,6 @@ export default {
             this.Dx_Asociado = this.Dx_Asociado + s +"\n"
             //console.log(this.enfermedad)
         },
->>>>>>> d98cd5d35c99feb2fe4d7856c2bafec9ee195a5f
         guardar() {
 
             let medicamento = {}
