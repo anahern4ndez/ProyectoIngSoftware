@@ -203,6 +203,7 @@ export default {
       errorDPILargo: false,
       errorDPIRepetido: false,
       errorEmailRepetido: false,
+      imagen: null,
       user: [],
       headers: [
         { text: "Nombre", align: "center", value: "Nombre", sortable: false },
@@ -402,7 +403,7 @@ export default {
         this.puesto=5;
       }
       if(this.name != '' && this.password != '' && this.email != '' && this.selected != null && this.password == this.passwordVerification){
-        this.$http.post(`http://localhost:8000/users/create?name=${this.name}&email=${this.email}&password=${this.password}&puesto=${this.puesto}`).then(response=>{
+        this.$http.post(`http://localhost:8000/users/create?name=${this.name}&email=${this.email}&password=${this.password}&puesto=${this.puesto}`, this.imagen).then(response=>{
           this.refreshUsers();
           this.name = '';
           this.id = '';
@@ -410,7 +411,9 @@ export default {
           this.password = '';
           this.passwordVerification = '';
           this.selected = "Tipo de usuario";
+          this.imagen = null;
         }).catch(error => {
+
           if (error.response.data.id === undefined){
             this.errorDPIRepetido = false;
           }else{
@@ -438,37 +441,33 @@ export default {
         });
       }
     },
-        imgClick: function(event){// on a click on the button with id 'one'
-          const btn = this.$refs.changeImg
-          btn.click();// trigger the click on second, and go on 
-        },
-        changeImg: function(event) {
-          //this.save();
-          var input = event.target;
-          if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            // definir accion a realizar despues que se haya seleccionado una imagen
-            reader.onload = (e) => {
-              // console.log(this.estadoNuevo);
-              // console.log(e.target.result);
-              this.imageData = e.target.result.data;
-              var data = {
-                // id: this.selectedPatients.CUI,
-                // estado: this.estadoNuevo.id,
-                id: 1,
-                estado: 1,                
-                img: this.imageData,
-              }
-              //guardar el cambio de imagen en db
-              // this.$http.put(`http://localhost:8000/PacienteController/update/`,data).then(response=>{
-              //   this.selectedPatients.EstadoActual = this.estadoNuevo.significado;
-              //   this.selectedPatients.Imagen = this.imageData;
-              // });
-            }
-            }
-            reader.readAsDataURL(input.files[0]);
-
-        },
+    imgClick: function(event){// on a click on the button with id 'one'
+      const btn = this.$refs.changeImg
+      btn.click();// trigger the click on second, and go on 
+    },
+    changeImg: function(event) {
+      var input = event.target;
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        // definir accion a realizar despues que se haya seleccionado una imagen
+        reader.onload = (e) => {
+          this.imageData = e.target.result;
+          var data = {
+            id: 1,
+            estado: 1,
+            img: this.imageData,
+          }
+          console.log(data.img);
+          this.imagen = data;
+          //Guardar la imagen
+          //this.$http.put(`http://localhost:8000/PacienteController/update/`,data).then(response=>{
+            //this.selectedPatients.EstadoActual = this.estadoNuevo.significado;
+            //this.selectedPatients.Imagen = this.imageData;
+          //});
+        }
+      }
+      reader.readAsDataURL(input.files[0]);
+    },
     modificar(){
       this.errorName = false;
       this.errorEmail = false;
@@ -540,6 +539,7 @@ export default {
           this.password = '';
           this.passwordVerification = '';
           this.selected ="Tipo de usuario";
+          this.imagen = null;
         }).catch(error => {
 
           if (error.response.data.email === undefined){

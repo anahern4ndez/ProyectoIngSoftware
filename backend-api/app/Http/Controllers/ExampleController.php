@@ -73,6 +73,7 @@ class ExampleController extends Controller
         $user->email = $request->email;
         $user->password = hash::make($request->password);
         $user->puesto = $request->puesto;
+        $user->imagen = $request->img;
         $user->save();
         //Comente esto
         //return $request;
