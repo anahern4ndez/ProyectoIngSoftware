@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSindromeCie10sTable extends Migration
+class DxAsociado extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateSindromeCie10sTable extends Migration
      */
     public function up()
     {
-        Schema::create('sindrome_cie-10', function (Blueprint $table) {
-            $table->integer('ID');
-            $table->primary('ID');
+        Schema::create('dx_asociados', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('letra');
+            $table->integer('entero');
+            $table->integer('decimal');
             $table->string('significado');
         });
     }
@@ -27,6 +29,6 @@ class CreateSindromeCie10sTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sindrome_cie-10');
+        Schema::dropIfExists('dx_asociados');
     }
 }

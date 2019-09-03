@@ -49,13 +49,15 @@ $router->post('/ConsultaController/insert', 'ConsultaController@store');
 $router->put('/ConsultaController/update', 'ConsultaController@updateAll');
 $router->post('/ConsultaController/findOne', 'ConsultaController@findOne');
 $router->post('/ConsultaController/findAll', 'ConsultaController@findAll');
+$router->post('/ConsultaController/getID', 'ConsultaController@getIDConsulta');
 
 //Locations
 $router->get('/ProcedenciaController/getAllLocation', 'ProcedenciaController@getAllLocation');
 
 //CRUD: TABLA COMENTARIO
 $router->post('/ComentarioController/insert', 'ComentarioController@store');
-$router->get('/ComentarioController/findAll', 'ComentarioController@findAll');
+$router->post('/ComentarioController/findAll', 'ComentarioController@findAll');
+$router->put('/ComentarioController/update', 'ComentarioController@update');
 
 //get de sindromes
 $router->get('/sindromeController/getAll', 'sindromeController@getAll');
@@ -96,3 +98,7 @@ $router->get('/citas', 'CitasController@getCitas');
 $router->post('/citas', 'CitasController@store');
 $router->put('/citas/{id}', 'CitasController@update');
 $router->delete('/citas/{id}', 'CitasController@destroy');
+
+//
+
+$router->get('/dxs', 'DxController@getDxs');

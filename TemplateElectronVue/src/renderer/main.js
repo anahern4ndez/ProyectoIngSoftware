@@ -52,6 +52,10 @@ const routes = [{
         component: Vue.component('gestionUsuarios', require('./components/gestionUsuarios.vue').default)
     },
     {
+        path: '/FormularioMortalidad',
+        component: Vue.component('FormularioMortalidad', require('./components/FormularioMortalidad.vue').default)
+    },
+    {
         path: '/gestionPacientes',
         component: Vue.component('gestionPacientes', require('./components/gestionPacientes.vue').default)
     },

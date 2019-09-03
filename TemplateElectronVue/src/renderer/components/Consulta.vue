@@ -12,7 +12,7 @@
                         <!-- Text input-->
                         <div style="display: flex; justify-content:space-between;">
                             <h1 >Consulta General</h1>
-                            <h1 >{{this.fecha}}</h1>
+                            <h2 >{{this.fecha}}</h2>
                         </div>
                         
 
@@ -53,7 +53,7 @@
                                             <b-container>
                                                 <b-row class="justify-content-md-center">
                                                     <b-col>
-                                                        <button type="button" class="btn btn-lg btn-warning btn-block">Agregar Comentario</button> 
+                                                        <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="agregarComentario">Agregar Comentario</button> 
                                                     </b-col>
                                                     <b-col>
                                                         <button type="button" class="btn btn-lg btn-warning btn-block">Ver más</button>
@@ -71,11 +71,16 @@
                         <!-- https://vuetifyjs.com/en/components/cards -->
                         <v-dialog
                             v-model="dialog"
-                            max-width="290"
+                            max-width="40%"
                             persistent
                         >
                             <v-card>
-                                <v-card-title class="headline">Está obteniéndose la información del paciente.</v-card-title>
+                                <v-card-title 
+                                    class="headline grey lighten-2"
+                                    primary-title
+                                >
+                                    Está obteniéndose la información del paciente.
+                                </v-card-title>
 
                                 <v-card-text>
                                     Espere mientras se cargan los datos...
@@ -88,8 +93,9 @@
                                     <v-progress-linear
                                         color="orange accent-4"
                                         indeterminate
-                                        rounded
-                                        height="10"
+                                        :rounded="true"
+                                        opacity="0.2"
+                                        height="15"
                                     ></v-progress-linear>
                                 </v-card-actions>
                             </v-card>
@@ -349,11 +355,37 @@
                                     <div style="margin-left: 2%"class="form-group encapsulado">
                                         <v-layout align-center justify-end />
                                             <h3 id="headers"  class="text-xs-center">Dx. Asociado</h3>
+                                        <v-select
+                                            v-if="dxs"
+                                            v-bind:items="dxs"
+                                            v-model="enfermedad"
+                                            item-text="`${data.item}`"
+                                            item-value="ID"
+                                            label = "Enfermedades"
+                                            v-on:change="agregarEnfermedad"
+                                        >
+                                        <template
+                                        slot="selection" slot-scope="data">
+                                        {{data.item.letra}} {{data.item.entero}} {{data.item.decimal}} {{data.item.significado}}
+
+                                        </template>
+
+                                        <template slot="item" slot-scope="data">
+                                        <v-list-tile-content>
+                                            <v-list-tile-title v-html="` ${data.item.letra} ${data.item.entero} ${data.item.decimal} ${data.item.significado} `">
+                                            </v-list-tile-title>
+                                        </v-list-tile-content>
+                                        </template>
+                                        
+                                        </v-select>
+
+                                        <br/>
                                         <v-textarea
                                             v-model="Dx_Asociado"
                                             outline
-                                            rows=18.5
+                                            rows=16
                                             :auto-grow=true
+                
                                         ></v-textarea>
                                     </div>  
                                 </b-col>
@@ -2208,9 +2240,19 @@
 </template>
 
 <script>
+
+function check(a){
+    if (a === -1){
+        return ""
+    } else {
+        return a
+    }
+}
+
 import { store } from '../main';
 export default {
     data: () => ({
+        enfermedad: '',
         dialog: false,
 
         update: false,
@@ -2286,6 +2328,7 @@ export default {
         Sindrome_Clinico_Presentacion: 1,
         Dx_Definitivo: "",
         Dx_Asociado: "",
+        dxs: undefined,
         historia: "",
 
         //Medicamentos
@@ -2447,6 +2490,11 @@ export default {
         },
 
         fecha: "",
+        nuevoComentario: false,
+        horaActual: "",
+        idConsulta: 0,
+        hasComments: false,
+        allComments: {},
 
         datos: [],
         sindromes: [],
@@ -2454,7 +2502,7 @@ export default {
           (v) => !!v || 'Se requiere el campo',
         ],
         minRules:[
-            (v) => !!v && parseInt(v) > 0   || 'El número debe de ser mayor a 0'
+            (v) => !!v && parseInt(v) >= 0   || 'El número debe de ser mayor o igual a 0'
         ]
         
     }),
@@ -2472,7 +2520,11 @@ export default {
         const data = {
             ID: store.idPaciente // Aqui va el ID del paciente
         };
-
+        this.$http.get("http://localhost:8000/dxs").then(response => {
+            this.dxs = response.data.dxs;
+            console.log(response.data.dxs)
+            
+            });
         this.$http.post(`http://localhost:8000/PacienteController/findById`, data).then(response => {            
 
             if(response.data.Paciente[0] == null){
@@ -2563,6 +2615,25 @@ export default {
                         }
                     })
                 }
+            }).then(() => {
+                const data3 = {
+                    CUI: this.paciente.CUI
+                }
+
+                this.$http.post(`http://localhost:8000/ComentarioController/findAll`, data3).then(response => {
+                    if(response.data.Comentarios.length > 0){
+                        this.hasComments = true
+                        this.allComments = JSON.parse(response.data.Comentarios[0].comentarios)
+                        console.log(this.allComments)
+                        
+                    }else{
+                        this.hasComments = false
+                    }
+
+                    console.log("Tiene comentarios? " + this.hasComments)
+                }).then(() => {
+                    this.dialog = false;
+                })
             })
         }).then(() => {
             this.$http.get(`http://localhost:8000/sindromeController/getAll`).then(response => {
@@ -2573,8 +2644,6 @@ export default {
                     this.sindromes = response.data.Sindrome;
                 }
             });
-        }).then(() => {
-            this.dialog = false;
         }).catch(error => {
             this.dialog = false;
         });
@@ -2582,16 +2651,31 @@ export default {
     },
     methods: {
         
+        agregarComentario(){
+            
+            if(this.comentario != ""){
+                const d = new Date()
+                this.horaActual = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds()
 
+                this.nuevoComentario = true
+            }else{
+                this.nuevoComentario = false
+            }
+
+        },        
+
+        agregarEnfermedad(){
+            let s =  this.enfermedad.letra + " "
+            if (this.enfermedad.entero>0)
+                s = s + this.enfermedad.entero
+            if (this.enfermedad.decimal>0)
+                s = s +"."+ this.enfermedad.decimal
+            s = s + " " + this.enfermedad.significado
+
+            this.Dx_Asociado = this.Dx_Asociado + s +"\n"
+            //console.log(this.enfermedad)
+        },
         guardar() {
-            // console.log("Fecha: " + this.fecha)
-            // console.log("CUI: " + this.paciente.CUI)
-            // console.log("Peso: " + this.datos_generales.Peso)
-            // console.log("Talla: " + this.datos_generales.Talla)
-            // console.log("PA: " + this.datos_generales.PA)
-            // console.log("Dx_Definitivo: " + this.Dx_Definitivo)
-            // console.log("Dx_Asociado: " + this.Dx_Asociado)
-            // console.log("Historia: " + this.historia)
 
             let medicamento = {}
             
@@ -2794,21 +2878,202 @@ export default {
                 evaluacion_nutricional: this.Evaluacion_Nutricional,
                 plan_nutricional: this.Plan_Nutricional,
                 evaluacion_farmacologica: this.Evaluacion_Farmacologica,
-                plan_farmacologico: this.Plan_Farmacologico,
-                // id_imagenes_lab: null
+                plan_farmacologico: this.Plan_Farmacologico
             }
+
+            console.log("Update? " + this.update)
 
             if(this.update){
                 this.$http.put('http://localhost:8000/ConsultaController/update', info).then(response => {
                     // console.log("Si pase update")
+                }).then(() => {
+                    if(this.nuevoComentario){
+                        this.$http.post('http://localhost:8000/ConsultaController/getID', info).then(response => {
+                            console.log("ID de consulta: " + response.data.id)
+                            var a = response.data.id
+                            var b = store.id
+                            
+                            if(!this.hasComments){
+                                var string = `{
+                                    "` + a + `": ` + `{
+                                        "` + b + `": ` + `{
+                                            
+                                        }` + `
+                                    }` + `
+                                }`
+
+                                var json = JSON.parse(string)
+                                
+                                json[String(a)][String(b)].hora = []
+                                json[String(a)][String(b)].comentario = []
+
+                                json[String(a)][String(b)].hora.push(this.horaActual)
+                                json[String(a)][String(b)].comentario.push(this.comentario)
+
+                                const info = {
+                                    cui: this.paciente.CUI,
+                                    comentarios: JSON.stringify(json)
+                                }
+
+                                console.log(info)
+
+                                this.$http.post('http://localhost:8000/ComentarioController/insert', info).then(response => {
+                                    console.log("Comentario guardado")
+                                })
+                            }else{
+                                if(this.allComments[String(a)] == undefined){
+                                    var string = `{
+                                        "` + a + `": ` + `{
+                                            "` + b + `": ` + `{
+                                                
+                                            }` + `
+                                        }` + `
+                                    }`
+
+                                    var json = JSON.parse(string)
+                                    
+                                    json[String(a)][String(b)].hora = []
+                                    json[String(a)][String(b)].comentario = []
+
+                                    json[String(a)][String(b)].hora.push(this.horaActual)
+                                    json[String(a)][String(b)].comentario.push(this.comentario)
+
+                                    Object.assign(this.allComments, json)
+                                }else{
+                                    if(this.allComments[String(a)][String(b)] == undefined){
+                                        var string = `{
+                                            "` + b + `": ` + `{
+                                                
+                                            }` + `
+                                        }`
+
+                                        var json = JSON.parse(string)
+                                    
+                                        json[String(a)][String(b)].hora = []
+                                        json[String(a)][String(b)].comentario = []
+
+                                        json[String(a)][String(b)].hora.push(this.horaActual)
+                                        json[String(a)][String(b)].comentario.push(this.comentario)
+
+                                        Object.assign(this.allComments[String(a)], json)
+                                    }else{
+                                        this.allComments[String(a)][String(b)].hora.push(this.horaActual)
+                                        this.allComments[String(a)][String(b)].comentario.push(this.comentario)
+                                    }
+                                }
+                            }
+
+                            const info = {
+                                cui: this.paciente.CUI,
+                                comentarios: JSON.stringify(this.allComments)
+                            }
+                            this.$http.put('http://localhost:8000/ComentarioController/update', info).then(response => {
+                                console.log("Comentario actualizado")
+                            })
+                            
+                        })
+                    }
+                }).then(() => {
+                    this.$router.push("/menu-principal");
                 }).catch(error => {
 
                 })
             }else{
                 this.$http.post('http://localhost:8000/ConsultaController/insert', info).then(response => {
-                    // console.log("Si pase insert")
-                }).catch(error => {
+                    console.log("Si pase insert")
 
+                    if(this.nuevoComentario){
+                        this.$http.post('http://localhost:8000/ConsultaController/getID', info).then(response => {
+                            console.log("ID de consulta: " + response.data.id)
+                            var a = response.data.id
+                            var b = store.id
+                            
+                            if(!this.hasComments){
+                                var string = `{
+                                    "` + a + `": ` + `{
+                                        "` + b + `": ` + `{
+                                            
+                                        }` + `
+                                    }` + `
+                                }`
+
+                                var json = JSON.parse(string)
+                                
+                                json[String(a)][String(b)].hora = []
+                                json[String(a)][String(b)].comentario = []
+
+                                json[String(a)][String(b)].hora.push(this.horaActual)
+                                json[String(a)][String(b)].comentario.push(this.comentario)
+
+                                const info = {
+                                    cui: this.paciente.CUI,
+                                    comentarios: JSON.stringify(json)
+                                }
+
+                                console.log(info)
+
+                                this.$http.post('http://localhost:8000/ComentarioController/insert', info).then(response => {
+                                    console.log("Comentario guardado")
+                                })
+                            }else{
+                                if(this.allComments[String(a)] == undefined){
+                                    var string = `{
+                                        "` + a + `": ` + `{
+                                            "` + b + `": ` + `{
+                                                
+                                            }` + `
+                                        }` + `
+                                    }`
+
+                                    var json = JSON.parse(string)
+                                    
+                                    json[String(a)][String(b)].hora = []
+                                    json[String(a)][String(b)].comentario = []
+
+                                    json[String(a)][String(b)].hora.push(this.horaActual)
+                                    json[String(a)][String(b)].comentario.push(this.comentario)
+
+                                    Object.assign(this.allComments, json)
+                                }else{
+                                    if(this.allComments[String(a)][String(b)] == undefined){
+                                        var string = `{
+                                            "` + b + `": ` + `{
+                                                
+                                            }` + `
+                                        }`
+
+                                        var json = JSON.parse(string)
+                                    
+                                        json[String(a)][String(b)].hora = []
+                                        json[String(a)][String(b)].comentario = []
+
+                                        json[String(a)][String(b)].hora.push(this.horaActual)
+                                        json[String(a)][String(b)].comentario.push(this.comentario)
+
+                                        Object.assign(this.allComments[String(a)], json)
+                                    }else{
+                                        this.allComments[String(a)][String(b)].hora.push(this.horaActual)
+                                        this.allComments[String(a)][String(b)].comentario.push(this.comentario)
+                                    }
+                                }
+                            }
+
+                            const info = {
+                                cui: this.paciente.CUI,
+                                comentarios: JSON.stringify(this.allComments)
+                            }
+                            this.$http.put('http://localhost:8000/ComentarioController/update', info).then(response => {
+                                console.log("Comentario actualizado")
+                            })
+                            
+                        })
+                    }
+                    
+                }).then(() => {
+                    this.$router.push("/menu-principal");
+                })
+                .catch(error => {
+                    console.log("Ocurrio un error")
                 })
             }
             

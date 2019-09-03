@@ -28,11 +28,21 @@ class ComentarioController extends Controller
 
     function findAll(Request $request){
         $cuir = $request->CUI;
-        $val = comentario::where('cui', $cuir)->with('cui')->get();
+        $val = comentario::select('comentarios')->where('cui', $cuir)->limit(1)->get();
 
         return response()->json([
             'Comentarios' => $val,
         ], 200);
-        
+    }
+
+    function update(Request $request){
+        $cui = $request->cui;
+
+        $toUpdate = comentario::where([['cui', '=', $cui]])->first();
+
+        $toUpdate->cui = $request->cui;
+        $toUpdate->comentarios = $request->comentarios;
+
+        $toUpdate->save();
     }
 }
