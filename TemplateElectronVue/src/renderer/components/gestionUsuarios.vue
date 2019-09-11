@@ -204,6 +204,7 @@ export default {
       errorDPIRepetido: false,
       errorEmailRepetido: false,
       imagen: null,
+      path: '',
       user: [],
       headers: [
         { text: "Nombre", align: "center", value: "Nombre", sortable: false },
@@ -447,6 +448,10 @@ export default {
     },
     changeImg: function(event) {
       var input = event.target;
+      //console.log(input.files)
+      //Este el el path de la imagen
+      this.path = input.files[0].path;
+      console.log(this.path);
       if (input.files && input.files[0]) {
         var reader = new FileReader();
         // definir accion a realizar despues que se haya seleccionado una imagen
@@ -459,11 +464,7 @@ export default {
           }
           console.log(data.img);
           this.imagen = data;
-          //Guardar la imagen
-          //this.$http.put(`http://localhost:8000/PacienteController/update/`,data).then(response=>{
-            //this.selectedPatients.EstadoActual = this.estadoNuevo.significado;
-            //this.selectedPatients.Imagen = this.imageData;
-          //});
+          input.value = '';
         }
       }
       reader.readAsDataURL(input.files[0]);
