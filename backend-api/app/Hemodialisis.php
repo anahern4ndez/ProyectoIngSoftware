@@ -8,10 +8,33 @@ class Hemodialisis extends Model
 {
     protected $fillable = [ 
         'IdPaciente',
-        'Estado',
-        'HoraEstimada',
-        'HoraServicio',
-        'IdDoctor'
+        'Fecha',
+        'NoHemodialisis',
+        'LugarDeProcedencia',
+        'TipoDeHemodialisis',
+        'Via',
+        'LineasPediatrica',
+        'Filtro',
+        'FlujoDializante',
+        'FlujoDeSangre',
+        'UF',
+        'Heparinizacion_cebado',
+        'Heparinizacion_Trans-dialisis',
+        'TiempoH',
+        'TiempoM',
+        'Conductividad_Na+',
+        'Conductividad_K',
+        'Conductividad_HCO3',
+        'PesoPre',
+        'PesoPost',
+        'Talla',
+        'PesoDelta',
+        'Especiales',
+        'Tabla1',
+        'Observacion',
+        'Tecnico',
+        'PA',
+        'Tabla2'
     ];
     public $timestamps = false;
 
