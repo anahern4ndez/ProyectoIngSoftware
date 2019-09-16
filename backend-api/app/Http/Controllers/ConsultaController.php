@@ -104,7 +104,17 @@ class ConsultaController extends Controller
         
     }
 
+    function getIDConsulta(Request $request){
+        $cuir = $request->cui;
+        $fecha = $request->fecha;
 
+        $consulta = Consulta::select('id')->where([['cui', '=', $cuir], ['fecha', '=', $fecha]])->get();
+
+        return response()->json([
+            'success' => true,
+            'id' => $consulta[0]->id
+        ], 200);
+    }
 
     function findAll(Request $request){
         
