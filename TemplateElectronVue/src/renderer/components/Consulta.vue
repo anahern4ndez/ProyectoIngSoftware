@@ -68,7 +68,7 @@
                         </div>
 
                         <!-- Loading -->
-                        
+
                         <v-dialog
                             v-model="dialog"
                             max-width="290"
@@ -217,7 +217,7 @@
                                             outline
                                             type =number
                                             min=0
-                                            :rules="minRules"
+                                            :disabled="true"
                                         ></v-text-field>
                                         </b-col>
                                         <b-col>
@@ -2669,6 +2669,24 @@ export default {
                     this.datos_generales.kg_perc = "No aplica";
                 }
             });
+            if (this.datos_generales.Talla > 0){
+                const data = {
+                talla : parseFloat(this.datos_generales.Talla),
+                sexo : parseInt(this.paciente.sexo),
+                peso : parseFloat(this.datos_generales.Peso)
+                }
+
+                this.datos_generales.PA = this.datos_generales.Peso / this.datos_generales.Talla
+
+                this.$http.post("http://localhost:8000/percentilPesoTalla", data).then(response => {
+                
+                if (response.data.encontrado){
+                    this.datos_generales.Percentil = response.data.percentil.percentil;
+                } else {
+                    this.datos_generales.Percentil = "No aplica";
+                }
+                });
+            }
             
         },
         tallaPercentil(){
@@ -2686,7 +2704,24 @@ export default {
                     this.datos_generales.cms_perc = "No aplica";
                 }
             });
-            
+            if (this.datos_generales.Peso > 0){
+                const data = {
+                talla : parseFloat(this.datos_generales.Talla),
+                sexo : parseInt(this.paciente.sexo),
+                peso : parseFloat(this.datos_generales.Peso)
+                }
+
+                this.datos_generales.PA = this.datos_generales.Peso / this.datos_generales.Talla
+
+                this.$http.post("http://localhost:8000/percentilPesoTalla", data).then(response => {
+                
+                if (response.data.encontrado){
+                    this.datos_generales.Percentil = response.data.percentil.percentil;
+                } else {
+                    this.datos_generales.Percentil = "No aplica";
+                }
+                });
+            }
         },
         guardar() {
             // console.log("Fecha: " + this.fecha)
