@@ -54,7 +54,10 @@
             </template>
 
             <template v-slot:interval="{ hour }">
-              <div v-if="hour < 7 || hour > 22" class="text-center daily-invalid-hour">No Disponible</div>
+              <div
+                v-if="hour < minAppointmentHour || hour > maxAppointmentHour"
+                class="text-center daily-invalid-hour"
+              >No Disponible</div>
             </template>
 
             <!-- the events at the bottom (timed) -->
@@ -111,6 +114,7 @@
                   >
                     <template v-slot:activator="{ on }">
                       <v-text-field
+                        disabled
                         v-model="selectedDate"
                         label="Escoger Fecha de Cita"
                         prepend-icon="event"
@@ -269,7 +273,9 @@ export default {
     selectedPatient: "",
     selectedDoctor: "",
     infoDialog: false,
-    infoMessage: ""
+    infoMessage: "",
+    minAppointmentHour: 6,
+    maxAppointmentHour: 20
   }),
   mounted() {
     //this.start = this.today;
@@ -300,7 +306,7 @@ export default {
 
       // validacion de hora de cita
       const time = Number(this.selectedTime.substring(0, 2));
-      if (time < 6 || time > 20) {
+      if (time < this.minAppointmentHour || time > this.maxAppointmentHour) {
         this.infoMessage = "Por favor escoge una hora disponible.";
         this.infoDialog = true;
         return;
@@ -356,7 +362,7 @@ export default {
     intervalClick(event) {
       const time = Number(event.time.substring(0, 2));
       // no permitir click en horas invalidas
-      if (time < 6 || time > 20) {
+      if (time < this.minAppointmentHour || time > this.maxAppointmentHour) {
         return;
       }
 
@@ -404,7 +410,6 @@ export default {
     saveAppointmentDate() {
       this.dateMenuOpen = false;
       this.$refs.menu.save(this.selectedDate);
-      console.log(this.selectedDate);
     }
   }
 };
