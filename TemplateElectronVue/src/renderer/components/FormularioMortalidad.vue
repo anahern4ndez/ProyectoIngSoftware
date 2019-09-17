@@ -132,7 +132,7 @@
         <b-container class="bv-example-row2">
           <b-row class="justify-content-md-center">
             <b-col>
-              <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="agregar">Guardar</button>
+              <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="dgenerales">Guardar</button>
             </b-col>
           </b-row>
         </b-container>
@@ -160,6 +160,9 @@ export default {
     agregar(){
         this.$http.put(`http://localhost:8000/DG/updateDG?id=${this.id}&Telefono=${this.telefono}&Peso=${this.peso}&Talla=${this.talla}&PA=${this.pa}`).then(response=>{
       })
+    },
+    dgenerales() {
+      this.$router.push("/FormularioHemodialisis");
     }
   }  
 };
