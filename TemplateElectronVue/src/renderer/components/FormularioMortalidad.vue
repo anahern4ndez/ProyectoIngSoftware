@@ -117,7 +117,7 @@
                       value="EventoCardiovascular"
                     ></v-radio>
                     <v-radio
-                      v-model="enabled"
+                      v-model="peso"
                       hide-details
                       label="otro"
                       color="orange"
@@ -150,7 +150,6 @@ export default {
   data() {
     return {
       peso:'',
-      enabled: true,
       id:'',
       telefono:'',
       talla:'',

@@ -56,7 +56,8 @@ $router->get('/ProcedenciaController/getAllLocation', 'ProcedenciaController@get
 
 //CRUD: TABLA COMENTARIO
 $router->post('/ComentarioController/insert', 'ComentarioController@store');
-$router->get('/ComentarioController/findAll', 'ComentarioController@findAll');
+$router->post('/ComentarioController/findAll', 'ComentarioController@findAll');
+$router->put('/ComentarioController/update', 'ComentarioController@update');
 
 //get de sindromes
 $router->get('/sindromeController/getAll', 'sindromeController@getAll');

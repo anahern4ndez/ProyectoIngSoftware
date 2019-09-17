@@ -16,6 +16,7 @@ class UsuariosSeeder extends Seeder {
             'email' => 'prueba@dom.com',
             'password' => Hash::make('password123'),
             'puesto' => 1,
+            'imagen' => null,
         ];
         User::insert($user);
     }
