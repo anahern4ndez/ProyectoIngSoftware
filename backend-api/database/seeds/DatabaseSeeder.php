@@ -20,7 +20,10 @@ class DatabaseSeeder extends Seeder {
             UsuariosSeeder::class,
             PacienteSeeder::class,
             tipoCitasSeeder::class,
-            DxAsociadoSeeder::class
+            DxAsociadoSeeder::class,
+            percentilPesoSeeder::class,
+            percentilTallaSeeder::class,
+            percentilPesoAlturaSeeder::class
         ]);
         
     }

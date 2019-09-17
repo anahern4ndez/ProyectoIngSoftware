@@ -452,22 +452,37 @@ export default {
       //Este el el path de la imagen
       this.path = input.files[0].path;
       console.log(this.path);
-      if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        // definir accion a realizar despues que se haya seleccionado una imagen
-        reader.onload = (e) => {
-          this.imageData = e.target.result;
-          var data = {
-            id: 1,
-            estado: 1,
-            img: this.imageData,
-          }
-          console.log(data.img);
-          this.imagen = data;
-          input.value = '';
-        }
+
+      try 
+      {
+
+        var shell = require('shelljs');
+        let nodePath = (shell.which('node').toString());
+        shell.config.execPath = nodePath;
+
+        const ipServer = '192.168.0.156';
+        const serverPassword = 'perritoUVG';
+        const pcPath = this.path;
+        const serverUser = 'adminlocal';
+        const serverPath = '/home/adminlocal/Dowloads';
+
+        var string =`pscp -pw ${serverPassword} "${pcPath}" ${serverUser}@${ipServer}:${serverPath}`;        
+
+        shell.exec(string);
+
+      } catch (error) 
+      {
+
+        console.log("Error al subir imagen al servidor");
       }
-      reader.readAsDataURL(input.files[0]);
+
+
+
+
+
+
+
+
     },
     modificar(){
       this.errorName = false;

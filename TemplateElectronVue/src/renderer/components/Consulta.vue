@@ -68,7 +68,7 @@
                         </div>
 
                         <!-- Loading -->
-                        <!-- https://vuetifyjs.com/en/components/cards -->
+
                         <v-dialog
                             v-model="dialog"
                             max-width="40%"
@@ -175,10 +175,11 @@
                                         <b-col>
                                         <v-text-field
                                             v-model="datos_generales.Peso"
-                                            label="Peso"
+                                            label="Peso (Kg.)"
                                             outline
                                             type =number
                                             :rules="minRules"
+                                            v-on:change="pesoPercentil"
                                             min=0
                                         ></v-text-field>
                                         </b-col>
@@ -196,10 +197,11 @@
                                         <b-col>
                                         <v-text-field
                                             v-model="datos_generales.Talla"
-                                            label="Talla"
+                                            label="Talla (cm.)"
                                             outline
                                             type =number
                                             :rules="minRules"
+                                            v-on:change="tallaPercentil"
                                             min=0
                                         ></v-text-field>
                                         </b-col>
@@ -221,7 +223,7 @@
                                             outline
                                             type =number
                                             min=0
-                                            :rules="minRules"
+                                            :disabled="true"
                                         ></v-text-field>
                                         </b-col>
                                         <b-col>
@@ -372,7 +374,7 @@
 
                                         <template slot="item" slot-scope="data">
                                         <v-list-tile-content>
-                                            <v-list-tile-title v-html="` ${data.item.letra} ${data.item.entero} ${data.item.decimal} ${data.item.significado} `">
+                                            <v-list-tile-title v-html="` ${data.item.letra} ${data.item.entero} ${data.item.decimal} ${data.item.significado}`">
                                             </v-list-tile-title>
                                         </v-list-tile-content>
                                         </template>
@@ -383,7 +385,7 @@
                                         <v-textarea
                                             v-model="Dx_Asociado"
                                             outline
-                                            rows=16
+                                            rows=14
                                             :auto-grow=true
                 
                                         ></v-textarea>
@@ -1060,7 +1062,7 @@
                                                             label="EGO"
                                                             type =number
                                                             min="0"
-                                                            :rules="minRules"
+                                                            :rules="neRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -1080,7 +1082,7 @@
                                                             label="Glu"
                                                             type =number
                                                             min="0"
-                                                            :rules="minRules"
+                                                            :rules="neRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -1090,7 +1092,7 @@
                                                             label="Prot"
                                                             type =number
                                                             min="0"
-                                                            :rules="minRules"
+                                                            :rules="neRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -1102,7 +1104,7 @@
                                                             label="Hem"
                                                             type =number
                                                             min="0"
-                                                            :rules="minRules"
+                                                            :rules="neRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -1112,7 +1114,7 @@
                                                             label="Gr"
                                                             type =number
                                                             min="0"
-                                                            :rules="minRules"
+                                                            :rules="neRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -1122,7 +1124,7 @@
                                                             label="GB"
                                                             type =number
                                                             min="0"
-                                                            :rules="minRules"
+                                                            :rules="neRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -1132,7 +1134,7 @@
                                                             label="Cil"
                                                             type =number
                                                             min="0"
-                                                            :rules="minRules"
+                                                            :rules="neRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -1144,7 +1146,7 @@
                                                             label="URO"
                                                             type =number
                                                             min="0"
-                                                            :rules="minRules"
+                                                            :rules="neRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -2272,7 +2274,11 @@ export default {
             Telefono: "",
             Grupo_De_Sangre: "",
             Estudia: "",
-            Transfusiones: ""
+            Transfusiones: "",
+            fechaDeNacimiento: null,
+            sexo:0,
+            meses:0,
+            years:0
         },
 
         datos_generales: {
@@ -2502,7 +2508,10 @@ export default {
           (v) => !!v || 'Se requiere el campo',
         ],
         minRules:[
-            (v) => !!v && parseInt(v) >= 0   || 'El número debe de ser mayor o igual a 0'
+            (v) => !!v && parseInt(v) > 0   || 'El número debe de ser mayor a 0'
+        ],
+        neRules:[
+            (v) => !!v && parseInt(v) >= 0   || 'El número debe de ser positivo'
         ]
         
     }),
@@ -2522,7 +2531,6 @@ export default {
         };
         this.$http.get("http://localhost:8000/dxs").then(response => {
             this.dxs = response.data.dxs;
-            console.log(response.data.dxs)
             
             });
         this.$http.post(`http://localhost:8000/PacienteController/findById`, data).then(response => {            
@@ -2530,6 +2538,7 @@ export default {
             if(response.data.Paciente[0] == null){
                 console.log('Nothing to do here..');
             }else{
+                console.log(response.data.Paciente[0])
                 this.paciente.nombre = response.data.Paciente[0].Nombre;
                 this.paciente.apellido = response.data.Paciente[0].Apellido;
                 this.paciente.CUI = response.data.Paciente[0].CUI;
@@ -2540,6 +2549,13 @@ export default {
                 this.paciente.Grupo_De_Sangre = response.data.Paciente[0].tipo_de__sangre.significado;
                 this.paciente.Estudia = response.data.Paciente[0].estudia.significado;
                 this.paciente.Transfusiones = response.data.Paciente[0].transfusiones.significado;
+
+                this.paciente.sexo = response.data.Paciente[0].Sexo;
+                this.paciente.fechaDeNacimiento = response.data.Paciente[0].Fecha_de_nacimiento;
+                this.computeAge(this.paciente.fechaDeNacimiento);
+                console.log(this.paciente);
+                
+
 
                 this.Sindrome_Clinico_Presentacion = response.data.Paciente[0].Sindrome_Clinico_Presentacion;
             }
@@ -2650,6 +2666,12 @@ export default {
 
     },
     methods: {
+        computeAge(datePicked){
+            var fechaActual = new Date();
+            var aComputar = new Date(datePicked);
+            this.paciente.years = fechaActual.getFullYear() - aComputar.getFullYear();
+            this.paciente.meses = fechaActual.getMonth() - aComputar.getMonth();
+        },
         
         agregarComentario(){
             
@@ -2666,14 +2688,85 @@ export default {
 
         agregarEnfermedad(){
             let s =  this.enfermedad.letra + " "
-            if (this.enfermedad.entero>0)
-                s = s + this.enfermedad.entero
-            if (this.enfermedad.decimal>0)
-                s = s +"."+ this.enfermedad.decimal
+            s = s + this.enfermedad.entero
+            if (this.enfermedad.decimal != '' && this.enfermedad.entero != '.')
+                s = s +"."
+            if (this.enfermedad.decimal === 0 && this.enfermedad.entero != '.')
+                s = s +"."
+            s = s + this.enfermedad.decimal
             s = s + " " + this.enfermedad.significado
 
             this.Dx_Asociado = this.Dx_Asociado + s +"\n"
-            //console.log(this.enfermedad)
+        
+        },
+        pesoPercentil(){
+            const data = {
+                year : parseInt(this.paciente.years),
+                meses : parseInt(this.paciente.meses),
+                sexo : parseInt(this.paciente.sexo),
+                peso : parseFloat(this.datos_generales.Peso)
+            
+            };
+            this.$http.post("http://localhost:8000/percentilPeso", data).then(response => {
+                if (response.data.encontrado){
+                    this.datos_generales.kg_perc = response.data.percentil.percentil;
+                } else {
+                    this.datos_generales.kg_perc = "No aplica";
+                }
+            });
+            if (this.datos_generales.Talla > 0){
+                const data = {
+                talla : parseFloat(this.datos_generales.Talla),
+                sexo : parseInt(this.paciente.sexo),
+                peso : parseFloat(this.datos_generales.Peso)
+                }
+
+                this.datos_generales.PA = this.datos_generales.Peso / this.datos_generales.Talla
+
+                this.$http.post("http://localhost:8000/percentilPesoTalla", data).then(response => {
+                
+                if (response.data.encontrado){
+                    this.datos_generales.Percentil = response.data.percentil.percentil;
+                } else {
+                    this.datos_generales.Percentil = "No aplica";
+                }
+                });
+            }
+            
+        },
+        tallaPercentil(){
+            const data = {
+                year : parseInt(this.paciente.years),
+                meses : parseInt(this.paciente.meses),
+                sexo : parseInt(this.paciente.sexo),
+                talla : parseFloat(this.datos_generales.Talla)
+            
+            };
+            this.$http.post("http://localhost:8000/percentilTalla", data).then(response => {
+                if (response.data.encontrado){
+                    this.datos_generales.cms_perc = response.data.percentil.percentil;
+                } else {
+                    this.datos_generales.cms_perc = "No aplica";
+                }
+            });
+            if (this.datos_generales.Peso > 0){
+                const data = {
+                talla : parseFloat(this.datos_generales.Talla),
+                sexo : parseInt(this.paciente.sexo),
+                peso : parseFloat(this.datos_generales.Peso)
+                }
+
+                this.datos_generales.PA = this.datos_generales.Peso / this.datos_generales.Talla
+
+                this.$http.post("http://localhost:8000/percentilPesoTalla", data).then(response => {
+                
+                if (response.data.encontrado){
+                    this.datos_generales.Percentil = response.data.percentil.percentil;
+                } else {
+                    this.datos_generales.Percentil = "No aplica";
+                }
+                });
+            }
         },
         guardar() {
 

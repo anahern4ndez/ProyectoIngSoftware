@@ -99,6 +99,14 @@ $router->post('/citas', 'CitasController@store');
 $router->put('/citas/{id}', 'CitasController@update');
 $router->delete('/citas/{id}', 'CitasController@destroy');
 
-//
-
+// Enfermedades CIE 10
 $router->get('/dxs', 'DxController@getDxs');
+
+// percentil de pesos 
+$router->post('/percentilPeso', 'percentilPesoController@getPesos');
+
+// percentil de Tallas
+$router->post('/percentilTalla', 'percentilTallaController@getTallas');
+
+// percentil peso talla
+$router->post('/percentilPesoTalla', 'percentilPesoAlturaController@getPesoAlturas');
