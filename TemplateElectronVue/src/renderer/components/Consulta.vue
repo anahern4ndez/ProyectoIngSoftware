@@ -169,7 +169,7 @@
                                         <b-col>
                                         <v-text-field
                                             v-model="datos_generales.Peso"
-                                            label="Peso"
+                                            label="Peso (Kg.)"
                                             outline
                                             type =number
                                             :rules="minRules"
@@ -191,7 +191,7 @@
                                         <b-col>
                                         <v-text-field
                                             v-model="datos_generales.Talla"
-                                            label="Talla"
+                                            label="Talla (cm.)"
                                             outline
                                             type =number
                                             :rules="minRules"
@@ -362,13 +362,13 @@
                                         >
                                         <template
                                         slot="selection" slot-scope="data">
-                                        {{data.item.letra}} {{data.item.entero}} {{+data.item.decimal}} {{data.item.significado}}
+                                        {{data.item.letra}} {{data.item.entero}} {{data.item.decimal}} {{data.item.significado}}
 
                                         </template>
 
                                         <template slot="item" slot-scope="data">
                                         <v-list-tile-content>
-                                            <v-list-tile-title v-html="` ${data.item.letra} ${data.item.entero} ${data.item.decimal} ${data.item.significado} `">
+                                            <v-list-tile-title v-html="` ${data.item.letra} ${data.item.entero} ${data.item.decimal} ${data.item.significado}`">
                                             </v-list-tile-title>
                                         </v-list-tile-content>
                                         </template>
@@ -379,7 +379,7 @@
                                         <v-textarea
                                             v-model="Dx_Asociado"
                                             outline
-                                            rows=16
+                                            rows=14
                                             :auto-grow=true
                 
                                         ></v-textarea>
@@ -1056,7 +1056,7 @@
                                                             label="EGO"
                                                             type =number
                                                             min="0"
-                                                            :rules="minRules"
+                                                            :rules="neRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -1076,7 +1076,7 @@
                                                             label="Glu"
                                                             type =number
                                                             min="0"
-                                                            :rules="minRules"
+                                                            :rules="neRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -1086,7 +1086,7 @@
                                                             label="Prot"
                                                             type =number
                                                             min="0"
-                                                            :rules="minRules"
+                                                            :rules="neRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -1098,7 +1098,7 @@
                                                             label="Hem"
                                                             type =number
                                                             min="0"
-                                                            :rules="minRules"
+                                                            :rules="neRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -1108,7 +1108,7 @@
                                                             label="Gr"
                                                             type =number
                                                             min="0"
-                                                            :rules="minRules"
+                                                            :rules="neRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -1118,7 +1118,7 @@
                                                             label="GB"
                                                             type =number
                                                             min="0"
-                                                            :rules="minRules"
+                                                            :rules="neRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -1128,7 +1128,7 @@
                                                             label="Cil"
                                                             type =number
                                                             min="0"
-                                                            :rules="minRules"
+                                                            :rules="neRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -1140,7 +1140,7 @@
                                                             label="URO"
                                                             type =number
                                                             min="0"
-                                                            :rules="minRules"
+                                                            :rules="neRules"
                                                             outline
                                                         ></v-text-field> 
                                                     </b-col>
@@ -2498,6 +2498,9 @@ export default {
         ],
         minRules:[
             (v) => !!v && parseInt(v) > 0   || 'El número debe de ser mayor a 0'
+        ],
+        neRules:[
+            (v) => !!v && parseInt(v) >= 0   || 'El número debe de ser positivo'
         ]
         
     }),
