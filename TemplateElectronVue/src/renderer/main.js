@@ -56,6 +56,14 @@ const routes = [{
         component: Vue.component('FormularioMortalidad', require('./components/FormularioMortalidad.vue').default)
     },
     {
+        path: '/FormularioHemodialisis',
+        component: Vue.component('FormularioHemodialisis', require('./components/FormularioHemodialisis.vue').default)
+    },
+    {
+        path: '/FormularioTransfusiones',
+        component: Vue.component('FormularioTransfusiones', require('./components/FormularioTransfusiones.vue').default)
+    },
+    {
         path: '/gestionPacientes',
         component: Vue.component('gestionPacientes', require('./components/gestionPacientes.vue').default)
     },
