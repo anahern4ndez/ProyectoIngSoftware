@@ -11,6 +11,13 @@ class DxController extends Controller
 {
     public function getDxs() {
         $dxs = DxAsociado::all();
+
+        foreach ($dxs as $dx){
+            if ($dx->entero == -1)
+                $dx->entero = '.';
+            if ($dx->decimal == -1)
+                $dx->decimal = '';
+        }
         return response()->json([
             'success' => true,
             'dxs' => $dxs,

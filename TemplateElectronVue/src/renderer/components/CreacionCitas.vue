@@ -52,6 +52,14 @@
                 <div v-if="!event.time" :key="event.title" class="my-event" v-html="event.title"></div>
               </template>
             </template>
+
+            <template v-slot:interval="{ hour }">
+              <div
+                v-if="hour < minAppointmentHour || hour > maxAppointmentHour"
+                class="text-center daily-invalid-hour"
+              >No Disponible</div>
+            </template>
+
             <!-- the events at the bottom (timed) -->
             <template v-slot:dayBody="{ date, timeToY, minutesToPixels }">
               <template v-for="event in eventsMap[date]">
@@ -106,6 +114,7 @@
                   >
                     <template v-slot:activator="{ on }">
                       <v-text-field
+                        disabled
                         v-model="selectedDate"
                         label="Escoger Fecha de Cita"
                         prepend-icon="event"
@@ -200,6 +209,11 @@
   color: white;
   border-radius: 5%;
 }
+
+.daily-invalid-hour {
+  background-color: rgb(255, 163, 163);
+  width: 100%;
+}
 </style>
 
 
@@ -259,7 +273,9 @@ export default {
     selectedPatient: "",
     selectedDoctor: "",
     infoDialog: false,
-    infoMessage: ""
+    infoMessage: "",
+    minAppointmentHour: 6,
+    maxAppointmentHour: 20
   }),
   mounted() {
     //this.start = this.today;
@@ -287,6 +303,14 @@ export default {
     },
     createAppointment() {
       this.dialogOpen = false;
+
+      // validacion de hora de cita
+      const time = Number(this.selectedTime.substring(0, 2));
+      if (time < this.minAppointmentHour || time > this.maxAppointmentHour) {
+        this.infoMessage = "Por favor escoge una hora disponible.";
+        this.infoDialog = true;
+        return;
+      }
 
       const data = {
         idUsuario: 1,
@@ -336,6 +360,12 @@ export default {
       }
     },
     intervalClick(event) {
+      const time = Number(event.time.substring(0, 2));
+      // no permitir click en horas invalidas
+      if (time < this.minAppointmentHour || time > this.maxAppointmentHour) {
+        return;
+      }
+
       this.selectedTime = event.time;
       this.dialogOpen = true;
     },
@@ -380,7 +410,6 @@ export default {
     saveAppointmentDate() {
       this.dateMenuOpen = false;
       this.$refs.menu.save(this.selectedDate);
-      console.log(this.selectedDate);
     }
   }
 };

@@ -81,6 +81,7 @@ export default {
         {name: 'Datos paciente', route: '/Datos', icon: 'fa-user-injured'},
         {name: 'Cambio Estado', route: '/cambioEstado', icon: 'fa-flag'},
         {name: 'Hemodialisis', route: '/Hemodialisis', icon: 'fa-flag'},
+        {name: 'Peritonitis', route: '/Peritonitis', icon: 'fa-flag'},
       ]
     }
   },

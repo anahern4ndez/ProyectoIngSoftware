@@ -103,5 +103,14 @@ $router->delete('/citas/{id}', 'CitasController@destroy');
 $router->post('/hemodialisis', 'HemodialisisController@store');
 
 //
-
+// Enfermedades CIE 10
 $router->get('/dxs', 'DxController@getDxs');
+
+// percentil de pesos 
+$router->post('/percentilPeso', 'percentilPesoController@getPesos');
+
+// percentil de Tallas
+$router->post('/percentilTalla', 'percentilTallaController@getTallas');
+
+// percentil peso talla
+$router->post('/percentilPesoTalla', 'percentilPesoAlturaController@getPesoAlturas');
