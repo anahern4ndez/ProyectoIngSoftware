@@ -52,6 +52,11 @@
                 <div v-if="!event.time" :key="event.title" class="my-event" v-html="event.title"></div>
               </template>
             </template>
+
+            <template v-slot:interval="{ hour }">
+              <div v-if="hour < 7 || hour > 22" class="text-center daily-invalid-hour">No Disponible</div>
+            </template>
+
             <!-- the events at the bottom (timed) -->
             <template v-slot:dayBody="{ date, timeToY, minutesToPixels }">
               <template v-for="event in eventsMap[date]">
@@ -200,6 +205,11 @@
   color: white;
   border-radius: 5%;
 }
+
+.daily-invalid-hour {
+  background-color: rgb(255, 163, 163);
+  width: 100%;
+}
 </style>
 
 
@@ -288,6 +298,14 @@ export default {
     createAppointment() {
       this.dialogOpen = false;
 
+      // validacion de hora de cita
+      const time = Number(this.selectedTime.substring(0, 2));
+      if (time < 6 || time > 20) {
+        this.infoMessage = "Por favor escoge una hora disponible.";
+        this.infoDialog = true;
+        return;
+      }
+
       const data = {
         idUsuario: 1,
         idPaciente: 1,
@@ -336,6 +354,12 @@ export default {
       }
     },
     intervalClick(event) {
+      const time = Number(event.time.substring(0, 2));
+      // no permitir click en horas invalidas
+      if (time < 6 || time > 20) {
+        return;
+      }
+
       this.selectedTime = event.time;
       this.dialogOpen = true;
     },
