@@ -18,20 +18,20 @@ class CreateHemodialisesTable extends Migration
             
             $table->integer('idPaciente');
             $table->date('fecha');
-            $table->integer('No-Hemodialisis');
+            $table->integer('NoHemodialisis');
             $table->integer('LugarDeProcedencia');
             $table->integer('TipoDeHemodialisis');
-            $table->json("Via");
+            $table->jsonb("Via");
             $table->integer('LineasPediatrica');
             $table->integer('Filtro');
             $table->integer('FlujoDializante');
             $table->float('FlujoDeSangre');
             $table->float('UF');
             $table->float('Heparinizacion_de_cebado');
-            $table->float('Heparinizacion_Trans-dialisis');
+            $table->float('Heparinizacion_TransDialisis');
             $table->integer('TiempoH');
             $table->integer('TiempoM');
-            $table->float('Conductividad_Na+');
+            $table->float('Conductividad_Na');
             $table->float('Conductividad_K');
             $table->float('Conductividad_HCO3');
             $table->float('PesoPre');
@@ -39,11 +39,11 @@ class CreateHemodialisesTable extends Migration
             $table->float('Talla');
             $table->float('PesoDelta');
             $table->string('Especiales');
-            $table->json('Tabla1');
+            $table->jsonb('Tabla1');
             $table->string('Observaciones');
             $table->integer('Tecnico');
             $table->integer('PA');
-            $table->json('Tabla2');
+            $table->jsonb('Tabla2');
         });
     }
 

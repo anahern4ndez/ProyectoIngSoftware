@@ -19,10 +19,10 @@ class Hemodialisis extends Model
         'FlujoDeSangre',
         'UF',
         'Heparinizacion_cebado',
-        'Heparinizacion_Trans-dialisis',
+        'Heparinizacion_TransDialisis',
         'TiempoH',
         'TiempoM',
-        'Conductividad_Na+',
+        'Conductividad_Na',
         'Conductividad_K',
         'Conductividad_HCO3',
         'PesoPre',
@@ -37,6 +37,11 @@ class Hemodialisis extends Model
         'Tabla2'
     ];
     public $timestamps = false;
+    protected $casts =[
+        'Via' => 'array',
+        'Tabla1' => 'array',
+        'Tabla2' => 'array'
+    ];
 
     /**
      * Relaciones de la tabla de hemodialisis

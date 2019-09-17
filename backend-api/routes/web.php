@@ -99,6 +99,9 @@ $router->post('/citas', 'CitasController@store');
 $router->put('/citas/{id}', 'CitasController@update');
 $router->delete('/citas/{id}', 'CitasController@destroy');
 
+// Hemodialisis
+$router->post('/hemodialisis', 'HemodialisisController@store');
+
 //
 
 $router->get('/dxs', 'DxController@getDxs');
