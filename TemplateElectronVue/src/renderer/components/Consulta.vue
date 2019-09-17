@@ -4,7 +4,12 @@
   
 <div>
     <v-card>
-        <v-tabs>
+
+        <v-toolbar flat color="primary" dark>
+            <v-toolbar-title style="text-align: center">Fecha: {{todaysDate}}</v-toolbar-title>
+        </v-toolbar>
+
+        <v-tabs fixed-tabs vertical dark>
             <v-tab>
                 Consulta
             </v-tab>
@@ -27,9 +32,8 @@
                         <fieldset>
 
                         <!-- Text input-->
-                        <div style="display: flex; justify-content:space-between;">
+                        <div style="display: flex; justify-content:center;">
                             <h1 >Consulta General</h1>
-                            <h2 >{{this.fecha}}</h2>
                         </div>
                         
 
@@ -2512,6 +2516,7 @@ export default {
             otros: false
         },
 
+        todaysDate: "",
         fecha: "",
         nuevoComentario: false,
         horaActual: "",
@@ -2542,6 +2547,7 @@ export default {
 
         const date = new Date()
         this.fecha = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+        this.todaysDate = date.getDate() + "-" +   + (date.getMonth() + 1) + "-" + date.getFullYear()
 
         const data = {
             ID: store.idPaciente // Aqui va el ID del paciente
@@ -3324,7 +3330,7 @@ export default {
     text-align: center;
     margin-left: 5%;
     width: 90%;
-    padding: 5%;
+    padding: 0.2%;
     padding-top: 2%;
     padding-bottom: 1%;
     }
