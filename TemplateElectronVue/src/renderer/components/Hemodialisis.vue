@@ -36,6 +36,7 @@
                                                 label="Nombre"
                                                 filled
                                                 disabled
+                                                
                                             ></v-text-field>
                                             <v-text-field
                                                 :value="paciente.Apellido"
@@ -105,131 +106,132 @@
                                         </v-container>
                                     </v-layout>
                                 </div>
+                                <br><br><br>
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row" style="width:10%;">No.</th>
+                                            <th scope="row" style="width:10%;">Hora</th>
+                                            <th scope="row" style="width:10%;">P/A</th>
+                                            <th scope="row" style="width:10%;">PULSO</th>
+                                            <th scope="row" style="width:10%;">TEMP</th>
+                                            <th scope="row" style="width:10%;">QB</th>
+                                            <th scope="row" style="width:10%;">PV</th>
+                                            <th scope="row" style="width:10%;">PA</th>
+                                            <th scope="row" style="width:10%;">UF/H</th>
+                                            <th scope="row" style="width:10%;">MEDICAMENTOS</th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" style="width:10%;">1</th>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" style="width:10%;">2</th>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" style="width:10%;">3</th>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" style="width:10%;">4</th>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" style="width:10%;">5</th>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" style="width:10%;">6</th>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" style="width:10%;">7</th>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" style="width:10%;">8</th>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" style="width:10%;"></th>
+                                            <td style="text-align: left; max-width: 10%;" ></td>
+                                            <td style="text-align: left; max-width: 10%;" ></td>
+                                            <td style="text-align: left; max-width: 10%;" ></td>
+                                            <td style="text-align: left; max-width: 10%;" ></td>
+                                            <td style="text-align: left; max-width: 10%;" ></td>
+                                            <td style="text-align: left; max-width: 10%;" ></td>
+                                            <td style="text-align: left; max-width: 10%;" ></td>
+                                            <th style="text-align: left; max-width: 10%;" >UF/TOTAL</th>
+                                            <td style="text-align: left; max-width: 10%;" ></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                                 <div class="encapsulado">
-                                    <table class="table table-bordered">
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row" style="width:10%;">No.</th>
-                                                <th scope="row" style="width:10%;">Hora</th>
-                                                <th scope="row" style="width:10%;">P/A</th>
-                                                <th scope="row" style="width:10%;">PULSO</th>
-                                                <th scope="row" style="width:10%;">TEMP</th>
-                                                <th scope="row" style="width:10%;">QB</th>
-                                                <th scope="row" style="width:10%;">PV</th>
-                                                <th scope="row" style="width:10%;">PA</th>
-                                                <th scope="row" style="width:10%;">UF/H</th>
-                                                <th scope="row" style="width:10%;">MEDICAMENTOS</th>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row" style="width:10%;">1</th>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row" style="width:10%;">2</th>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row" style="width:10%;">3</th>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row" style="width:10%;">4</th>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row" style="width:10%;">5</th>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row" style="width:10%;">6</th>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row" style="width:10%;">7</th>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row" style="width:10%;">8</th>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row" style="width:10%;"></th>
-                                                <td style="text-align: left; max-width: 10%;" ></td>
-                                                <td style="text-align: left; max-width: 10%;" ></td>
-                                                <td style="text-align: left; max-width: 10%;" ></td>
-                                                <td style="text-align: left; max-width: 10%;" ></td>
-                                                <td style="text-align: left; max-width: 10%;" ></td>
-                                                <td style="text-align: left; max-width: 10%;" ></td>
-                                                <td style="text-align: left; max-width: 10%;" ></td>
-                                                <th style="text-align: left; max-width: 10%;" >UF/TOTAL</th>
-                                                <td style="text-align: left; max-width: 10%;" ></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
                                     <h2 class="headers">...</h2>
                                     <br><br><br>
                                     <div>
@@ -243,7 +245,7 @@
                                                     </v-container>
                                                 </v-layout>
                                             </ul>
-                                            <ul>
+                                            <ul id="via">
                                                 <h4 class="headers">2. Vía:</h4>
                                                 <v-layout align-center justify-end>
                                                     <v-container fluid row align-center justify-space-around>
@@ -265,16 +267,19 @@
                                             </ul>
                                             <ul>
                                                 <h4 class="headers">3. Líneas pediátricas:</h4>
+                                                <br>
                                                 <v-text-field
                                                     :v-model="Lineas_pediatricas"
                                                     placeholder="6.5 Mm."
                                                     outline
+                                                    class="mitad"
                                                     ></v-text-field>
 
                                                 <v-text-field
                                                     :v-model="Lineas_pediatricas"
                                                     placeholder="8.0 Mm."
                                                     outline
+                                                    class="mitad"
                                                     ></v-text-field>
                                             </ul>
                                             <ul>
@@ -305,6 +310,7 @@
                                             </ul>
                                             <ul>
                                                 <h4 class="headers">6. Flujo de sangre</h4>
+                                                <br>
                                                 <v-text-field
                                                     :v-model="Flujo_sangre"
                                                     label="QB (ml/min)"
@@ -321,28 +327,34 @@
                                             </ul>
                                             <ul>
                                                 <h4 class="headers">8. Heparinización</h4>
+                                                <br>
                                                 <v-text-field
                                                     :v-model="Heparinizacion"
                                                     label="Cebado (UL)"
                                                     outline
+                                                    class="mitad"
                                                 ></v-text-field>
                                                 <v-text-field
                                                     :v-model="Heparinizacion"
                                                     label="Trans-Diálisis (UL/hora)"
                                                     outline
+                                                    class="mitad"
                                                 ></v-text-field>
                                             </ul>
                                             <ul>
                                                 <h4 class="headers">9. Tiempo</h4>
+                                                <br>
                                                 <v-text-field
                                                     :v-model="Tiempo"
                                                     label="Horas"
                                                     outline
+                                                    class="mitad"
                                                 ></v-text-field>
                                                 <v-text-field
                                                     :v-model="Tiempo"
                                                     label="Minutos"
                                                     outline
+                                                    class="mitad"
                                                 ></v-text-field>
                                             </ul>
                                             <ul>
@@ -355,30 +367,35 @@
                                             </ul>
                                             <ul>
                                                 <h4 class="headers">10. Peso/Talla</h4>
+                                                <br>
                                                 <v-text-field
                                                     :v-model="Peso_pre"
                                                     label="Peso Pre-Hemodiálisis (kg)"
                                                     outline
+                                                    class="mitad"
                                                 ></v-text-field>
                                                 <v-text-field
                                                     :v-model="Peso_post"
                                                     label="Peso Post-Hemodiálisis (kg)"
                                                     outline
+                                                    class="mitad"
                                                 ></v-text-field>
                                                 <v-text-field
                                                     :v-model="Talla"
                                                     label="Talla (m)"
                                                     outline
+                                                    class="mitad"
                                                 ></v-text-field>
                                                 <v-text-field
                                                     :v-model="Peso_delta"
                                                     label="Peso delta"
                                                     outline
+                                                    class="mitad"
                                                 ></v-text-field>
                                             </ul>
                                         </ol>
                                     </div>
-                                    <br><br><br>
+                                    <br><br>
                                     <div>
                                         <v-flex xs12 sm6 md4>
                                         <v-menu
@@ -510,7 +527,7 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <br>
+                                    <br><br><br>
                                     <h3 id="headers" class="text-xs-center">Especiales</h3>
                                     <v-textarea
                                         v-model="Especiales"
@@ -548,6 +565,7 @@ export default {
             this.pacientes = response.data.Pacientes;
         });
         this.getTodaysDate();
+        this.Fecha_col_cat = new Date()
     },
     data(){
         return{
@@ -575,7 +593,13 @@ export default {
             Procedencia: '',
             Registro: '', //registro de que?
             Numero: '', //¿Número de orden? ¿número de qué?
-            Observaciones: ''
+            Observaciones: '',
+            nombreRules: [
+            (v) => !!v || 'Se requiere este campo',
+            (v) => v && v.length < 60 || 'Se permite como maximo 60 caracteres'
+
+            ],
+            radioRules:[v => !!v || 'Debe seleccionar una opción'],
         }
     },
     methods: {
@@ -590,7 +614,7 @@ export default {
         },
         guardar(){
             var pass = true;
-            console.log(save)
+            console.log("guardado")
         }
     }
 }
@@ -620,6 +644,7 @@ export default {
     padding-bottom: 1%;
     display: flexbox;
     align-items: center;
+    justify-content: center;
 }
 .encapsulado {
     background-color: white;
@@ -630,9 +655,6 @@ export default {
     width: 45%;
     float: left;
     margin-right: 5%;
-}
-table.table-bordered{
-    margin:10px;
 }
 table.table-bordered > tbody > tr > th {
     border: 3px solid #a9a9a9;
@@ -656,8 +678,8 @@ ol {
   break-inside: avoid-column;
   -webkit-column-break-inside: avoid;
 }
-v-checkbox{
-    padding: 5px;
-    margin: 5px;
+ul{
+  break-inside: avoid-column;
+  -webkit-column-break-inside: avoid;
 }
 </style>
