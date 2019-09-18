@@ -129,6 +129,6 @@ new Vue({
   router,
   render: h => h(App),
   mounted () {
-    this.$router.push('/Hemodialisis')
+    this.$router.push('/ingresarPaciente')
   }
 }).$mount('#app');

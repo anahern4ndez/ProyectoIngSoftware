@@ -18,8 +18,9 @@
                   v-model="Numero_expediente"
                   label="Número de expediente"
                   outline
-                  :rules="cuiRules"
+                  :rules="expedienteRules"
                   required
+                  @change="checkType(Numero_expediente)"
               ></v-text-field>
           </v-flex>
         </v-card-title>
@@ -258,13 +259,12 @@ export default {
 
     this.$http.get("http://localhost:8000/ProcedenciaController/getAllLocation").then(response => {
       this.procedenciasOpc = response.data.locations;
-      console.log(this.procedenciasOpc);
     });
   },
     data () {
       return {
         search:'',  
-        Numero_expediente: '',      
+        Numero_expediente: null,      
         Historia:'',
         //datos del paciente a ingresar
         CUI:'', 
@@ -298,7 +298,12 @@ export default {
         //reglas de FORM
         cuiRules: [
           (v) => !!v || 'Se requiere este campo',
-          (v) => v && v.length <= 13 || 'Verifique que el CUI sea de 13 digitos.'
+          (v) => v && v.length <= 13 || 'Verifique que el CUI sea de 13 digitos.',
+          (v) => v && this.checkType(v) || 'Verifique que el CUI sean números.'
+        ],
+        expedienteRules: [
+          (v) => !!v || 'Se requiere este campo',
+          (v) => v && this.checkType(v) || 'Verifique que el número de expediente sean números.'
         ],
         nombreRules: [
           (v) => !!v || 'Se requiere este campo',
@@ -414,14 +419,18 @@ export default {
             var muni = response.data.locations[0].Municipio;
             this.ProcedenciaTxt =  dep.concat(', '.concat(muni));
           });
-          
-
-
+        },
+        checkType(expediente){
+          let isNumber = false;
+          if(!isNaN(parseInt(expediente))){
+            isNumber = true;
+          }
+          return isNumber;
         }
     },
     beforeMount(){
       this.prettyPlaceholders();
-    }
+    },
 };
 </script>
 <style scoped>
@@ -446,7 +455,7 @@ div#inBox-date {
 div#Historia {
   margin-left: 5%;
   margin-bottom: 5%;
-
+  margin-right: 5%;
 }
 /*
     configuracion para los headers
