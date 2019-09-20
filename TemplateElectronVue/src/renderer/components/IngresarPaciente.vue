@@ -299,11 +299,11 @@ export default {
         cuiRules: [
           (v) => !!v || 'Se requiere este campo',
           (v) => v && v.length <= 13 || 'Verifique que el CUI sea de 13 digitos.',
-          (v) => v && this.checkType(v) || 'Verifique que el CUI sean números.'
+          (v) => v && this.isANumber(v) || 'Verifique que el CUI sean números.'
         ],
         expedienteRules: [
           (v) => !!v || 'Se requiere este campo',
-          (v) => v && this.checkType(v) || 'Verifique que el número de expediente sean números.'
+          (v) => v && this.isANumber(v) || 'Verifique que el número de expediente sean números.'
         ],
         nombreRules: [
           (v) => !!v || 'Se requiere este campo',

@@ -87,13 +87,13 @@
                                 <div class="encapsulado">
                                     <br><br>
                                     <v-text-field
-                                        :v-model="Registro"
+                                        :v-model="tabs[pacientes.indexOf(paciente)].Registro"
                                         label="Registro"
                                         outline
                                         class="mitad"
                                     ></v-text-field>
                                     <v-text-field
-                                        :v-model="Numero"
+                                        :v-model="tabs[pacientes.indexOf(paciente)].Numero"
                                         label="No."
                                         outline
                                         class="mitad"
@@ -101,8 +101,8 @@
                                     <v-layout align-center justify-end style="width: 100%">
                                         <v-container fluid row align-center justify-space-around fill-height>
                                             <h4 class="headers" style="margin-right: 10%">Lugar de procedencia:</h4>
-                                            <v-checkbox v-model="Procedencia" label="Hospitalizado" value="1" color="green"></v-checkbox>
-                                            <v-checkbox v-model="Procedencia" label="Ambulatorio" value="2" color="green"></v-checkbox>
+                                            <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Procedencia" label="Hospitalizado" value="1" color="green"></v-checkbox>
+                                            <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Procedencia" label="Ambulatorio" value="2" color="green"></v-checkbox>
                                         </v-container>
                                     </v-layout>
                                 </div>
@@ -240,8 +240,8 @@
                                                 <h4 class="headers">1. Hemodiálisis:</h4>
                                                 <v-layout align-center justify-end>
                                                     <v-container fluid row align-center justify-space-around fill-height>
-                                                        <v-checkbox v-model="Hemodialisis" label="Aguda" value="1" color="green"></v-checkbox>
-                                                        <v-checkbox v-model="Hemodialisis" label="Crónica" value="2" color="green"></v-checkbox>
+                                                        <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Hemodialisis" label="Aguda" value="1" color="green"></v-checkbox>
+                                                        <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Hemodialisis" label="Crónica" value="2" color="green"></v-checkbox>
                                                     </v-container>
                                                 </v-layout>
                                             </ul>
@@ -249,13 +249,13 @@
                                                 <h4 class="headers">2. Vía:</h4>
                                                 <v-layout align-center justify-end>
                                                     <v-container fluid row align-center justify-space-around>
-                                                        <v-checkbox v-model="Via" label="Femoral" value="1" color="green"></v-checkbox>
-                                                        <v-checkbox v-model="Via" label="Subclavio" value="2" color="green"></v-checkbox>
-                                                        <v-checkbox v-model="Via" label="Yugular" value="3" color="green"></v-checkbox>
-                                                        <v-checkbox v-model="Via" label="Derecho" value="4" color="green"></v-checkbox>
-                                                        <v-checkbox v-model="Via" label="Izquierdo" value="5" color="green"></v-checkbox>
-                                                        <v-checkbox v-model="Via" label="Invertido" value="6" color="green"></v-checkbox>
-                                                        <v-checkbox v-model="Via" label="Normal" value="7" color="green"></v-checkbox>
+                                                        <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Via" label="Femoral" value="1" color="green"></v-checkbox>
+                                                        <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Via" label="Subclavio" value="2" color="green"></v-checkbox>
+                                                        <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Via" label="Yugular" value="3" color="green"></v-checkbox>
+                                                        <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Via" label="Derecho" value="4" color="green"></v-checkbox>
+                                                        <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Via" label="Izquierdo" value="5" color="green"></v-checkbox>
+                                                        <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Via" label="Invertido" value="6" color="green"></v-checkbox>
+                                                        <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Via" label="Normal" value="7" color="green"></v-checkbox>
                                                         <!--v-text-field
                                                         :v-model="Via"
                                                         value="8"
@@ -269,14 +269,14 @@
                                                 <h4 class="headers">3. Líneas pediátricas:</h4>
                                                 <br>
                                                 <v-text-field
-                                                    :v-model="Lineas_pediatricas"
+                                                    :v-model="tabs[pacientes.indexOf(paciente)].Lineas_pediatricas"
                                                     placeholder="6.5 Mm."
                                                     outline
                                                     class="mitad"
                                                     ></v-text-field>
 
                                                 <v-text-field
-                                                    :v-model="Lineas_pediatricas"
+                                                    :v-model="tabs[pacientes.indexOf(paciente)].Lineas_pediatricas"
                                                     placeholder="8.0 Mm."
                                                     outline
                                                     class="mitad"
@@ -285,12 +285,12 @@
                                             <ul>
                                                 <h4 class="headers">4. Filtro #:</h4>
                                                 <v-container fluid row align-center justify-space-around>
-                                                    <v-checkbox v-model="Filtro" label="0.7 m2" value="0.7" color="green"></v-checkbox>
-                                                    <v-checkbox v-model="Filtro" label="0.9 m2" value="0.9" color="green"></v-checkbox>
-                                                    <v-checkbox v-model="Filtro" label="0.11 m2" value="0.11" color="green"></v-checkbox>
-                                                    <v-checkbox v-model="Filtro" label="1.5 m2" value="1.5" color="green"></v-checkbox>
+                                                    <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Filtro" label="0.7 m2" value="0.7" color="green"></v-checkbox>
+                                                    <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Filtro" label="0.9 m2" value="0.9" color="green"></v-checkbox>
+                                                    <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Filtro" label="0.11 m2" value="0.11" color="green"></v-checkbox>
+                                                    <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Filtro" label="1.5 m2" value="1.5" color="green"></v-checkbox>
                                                     <v-text-field
-                                                    :v-model="Filtro"
+                                                    :v-model="tabs[pacientes.indexOf(paciente)].Filtro"
                                                     label="Otros"
                                                     outline
                                                     ></v-text-field>
@@ -299,10 +299,10 @@
                                             <ul>
                                                 <h4 class="headers">5. Flujo de dializante:</h4>
                                                 <v-container fluid row align-center justify-space-around>
-                                                    <v-checkbox v-model="Flujo_dializante" label="300 ml/min" value="300" color="green"></v-checkbox>
-                                                    <v-checkbox v-model="Flujo_dializante" label="400 ml/min" value="400" color="green"></v-checkbox>
+                                                    <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Flujo_dializante" label="300 ml/min" value="300" color="green"></v-checkbox>
+                                                    <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Flujo_dializante" label="400 ml/min" value="400" color="green"></v-checkbox>
                                                     <v-text-field
-                                                    :v-model="Flujo_dializante"
+                                                    :v-model="tabs[pacientes.indexOf(paciente)].Flujo_dializante"
                                                     label="Otros (ml/min)"
                                                     outline
                                                     ></v-text-field>
@@ -312,7 +312,7 @@
                                                 <h4 class="headers">6. Flujo de sangre</h4>
                                                 <br>
                                                 <v-text-field
-                                                    :v-model="Flujo_sangre"
+                                                    :v-model="tabs[pacientes.indexOf(paciente)].Flujo_sangre"
                                                     label="QB (ml/min)"
                                                     outline
                                                 ></v-text-field>
@@ -320,7 +320,7 @@
                                             <ul>
                                                 <h4 class="headers">7. UF</h4>
                                                 <v-text-field
-                                                    :v-model="UF"
+                                                    :v-model="tabs[pacientes.indexOf(paciente)].UF"
                                                     label="(ml total)"
                                                     outline
                                                 ></v-text-field>
@@ -329,13 +329,13 @@
                                                 <h4 class="headers">8. Heparinización</h4>
                                                 <br>
                                                 <v-text-field
-                                                    :v-model="Heparinizacion"
+                                                    :v-model="tabs[pacientes.indexOf(paciente)].Heparinizacion"
                                                     label="Cebado (UL)"
                                                     outline
                                                     class="mitad"
                                                 ></v-text-field>
                                                 <v-text-field
-                                                    :v-model="Heparinizacion"
+                                                    :v-model="tabs[pacientes.indexOf(paciente)].Heparinizacion"
                                                     label="Trans-Diálisis (UL/hora)"
                                                     outline
                                                     class="mitad"
@@ -345,13 +345,13 @@
                                                 <h4 class="headers">9. Tiempo</h4>
                                                 <br>
                                                 <v-text-field
-                                                    :v-model="Tiempo"
+                                                    :v-model="tabs[pacientes.indexOf(paciente)].Tiempo"
                                                     label="Horas"
                                                     outline
                                                     class="mitad"
                                                 ></v-text-field>
                                                 <v-text-field
-                                                    :v-model="Tiempo"
+                                                    :v-model="tabs[pacientes.indexOf(paciente)].Tiempo"
                                                     label="Minutos"
                                                     outline
                                                     class="mitad"
@@ -360,34 +360,34 @@
                                             <ul>
                                                 <h4 class="headers">10. Conductividad</h4>
                                                 <v-container row align-center justify-space-around fill-height>
-                                                    <v-checkbox v-model="Conductividad" label="Na+" value="0" color="green"></v-checkbox>
-                                                    <v-checkbox v-model="Conductividad" label="K+" value="1" color="green"></v-checkbox>
-                                                    <v-checkbox v-model="Conductividad" label="HCO3" value="2" color="green"></v-checkbox>
+                                                    <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Conductividad" label="Na+" value="0" color="green"></v-checkbox>
+                                                    <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Conductividad" label="K+" value="1" color="green"></v-checkbox>
+                                                    <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Conductividad" label="HCO3" value="2" color="green"></v-checkbox>
                                                 </v-container>
                                             </ul>
                                             <ul>
                                                 <h4 class="headers">10. Peso/Talla</h4>
                                                 <br>
                                                 <v-text-field
-                                                    :v-model="Peso_pre"
+                                                    :v-model="tabs[pacientes.indexOf(paciente)].Peso_pre"
                                                     label="Peso Pre-Hemodiálisis (kg)"
                                                     outline
                                                     class="mitad"
                                                 ></v-text-field>
                                                 <v-text-field
-                                                    :v-model="Peso_post"
+                                                    :v-model="tabs[pacientes.indexOf(paciente)].Peso_post"
                                                     label="Peso Post-Hemodiálisis (kg)"
                                                     outline
                                                     class="mitad"
                                                 ></v-text-field>
                                                 <v-text-field
-                                                    :v-model="Talla"
+                                                    :v-model="tabs[pacientes.indexOf(paciente)].Talla"
                                                     label="Talla (m)"
                                                     outline
                                                     class="mitad"
                                                 ></v-text-field>
                                                 <v-text-field
-                                                    :v-model="Peso_delta"
+                                                    :v-model="tabs[pacientes.indexOf(paciente)].Peso_delta"
                                                     label="Peso delta"
                                                     outline
                                                     class="mitad"
@@ -397,33 +397,34 @@
                                     </div>
                                     <br><br>
                                     <div>
-                                        <v-flex xs12 sm6 md4>
-                                        <v-menu
-                                            v-model="menu_col_cat"
-                                            :close-on-content-click="false"
-                                            :nudge-right="40"
-                                            lazy
-                                            transition="scale-transition"
-                                            offset-y
-                                            full-width
-                                            min-width="200px"
-                                        >
-                                            <template v-slot:activator="{ on }">
-                                            
-                                            <v-text-field
-                                                v-model="Fecha_col_cat"
-                                                label="Fecha de colocación de catéter"
-                                                prepend-icon="event"
-                                                readonly
-                                                v-on="on"
-                                                style="width:250%"
-                                                
-                                            ></v-text-field>
-                                            
-                                            </template>
-                                        <v-date-picker v-model="Fecha_col_cat" @input="menu_col_cat = false" color="#3A4750" locale='es-ES'></v-date-picker>
-                                        </v-menu>
-                                        </v-flex>
+                                        <div style="float:left; width:50%">
+                                            <v-flex xs12 sm6 md4>
+                                                <v-menu
+                                                    v-model="tabs[pacientes.indexOf(paciente)].menu_col_cat"
+                                                    :close-on-content-click="false"
+                                                    lazy
+                                                    transition="scale-transition"
+                                                    offset-y
+                                                    full-width
+                                                    min-width="200px"
+                                                >
+                                                    <template v-slot:activator="{ on }">
+                                                    
+                                                    <v-text-field
+                                                        v-model="tabs[pacientes.indexOf(paciente)].Fecha_col_cat"
+                                                        label="Fecha de colocación de catéter"
+                                                        prepend-icon="event"
+                                                        readonly
+                                                        v-on="on"
+                                                        style="width:250%"
+                                                        
+                                                    ></v-text-field>
+                                                    
+                                                    </template>
+                                                <v-date-picker v-model="tabs[pacientes.indexOf(paciente)].Fecha_col_cat" @input="tabs[pacientes.indexOf(paciente)].menu_col_cat = false" color="#3A4750" locale='es-ES'></v-date-picker>
+                                            </v-menu>
+                                            </v-flex>
+                                        </div>
                                         <table class="table table-bordered">
                                             <tbody>
                                                 <tr>
@@ -530,7 +531,7 @@
                                     <br><br><br>
                                     <h3 id="headers" class="text-xs-center">Especiales</h3>
                                     <v-textarea
-                                        v-model="Especiales"
+                                        v-model="tabs[pacientes.indexOf(paciente)].Especiales"
                                         outline
                                         name="Especiales"
                                         value=""
@@ -539,14 +540,14 @@
                                     <br><br>
                                     <h4 class="headers">Observaciones</h4>
                                     <v-textarea
-                                        v-model="Observaciones"
+                                        v-model="tabs[pacientes.indexOf(paciente)].Observaciones"
                                         outline
                                         name="Observaciones"
                                         value=""
                                         rows=10
                                     ></v-textarea>
                                 </div>
-                                <button float="left" type="button" class="btn btn-lg btn-warning btn-block" v-on:click="guardar" :disabled="!pass">Guardar información</button> 
+                                <button float="left" type="button" class="btn btn-lg btn-warning btn-block" v-on:click="guardar" :disabled="!tabs[pacientes.indexOf(paciente)].pass">Guardar información</button> 
                             </fieldset>
                         </form>
                     </div>
@@ -563,41 +564,50 @@ export default {
     mounted(){
         this.$http.get("http://localhost:8000/PacienteController/findAll").then(response => {
             this.pacientes = response.data.Pacientes;
+            for (let index = 0; index < response.data.Pacientes.length; index++) {
+            //const element = array[index];
+            this.tabs.push(
+                {
+                    tabid: index,
+                    pass: true,
+                    Hemodialisis: '',
+                    Via: '',
+                    Lineas_pediatricas: '',
+                    Filtro: '',
+                    Flujo_dializante: '',
+                    Flujo_sangre: '',
+                    UF: '',
+                    Heparinizacion: '',
+                    Tiempo: '',
+                    Conductividad: '',
+                    Peso_pre: '',
+                    Peso_post: '',
+                    Peso_delta: '',
+                    Talla: '',
+                    Fecha_col_cat: null,
+                    menu_col_cat: false,
+                    Especiales: '',
+                    Procedencia: '',
+                    Registro: '',
+                    Numero: '',
+                    Observaciones: '',
+                }
+            )
+        }
         });
         this.getTodaysDate();
-        this.Fecha_col_cat = new Date()
+        //this.Fecha_col_cat = new Date()
+        
+        console.log(this.pacientes);
     },
     data(){
         return{
-            pass: true,
             pacientes: [],
-            todaysDate: '',
-            Hemodialisis: '',
-            Via: '',
-            Lineas_pediatricas: '',
-            Filtro: '',
-            Flujo_dializante: '',
-            Flujo_sangre: '',
-            UF: '',
-            Heparinizacion: '',
-            Tiempo: '',
-            Conductividad: '',
-            Peso_pre: '',
-            Peso_post: '',
-            Peso_delta: '',
-            Talla: '',
-            Fecha_col_cat: null,
-            menu_col_cat: false,
-            Especiales: '',
-            //
-            Procedencia: '',
-            Registro: '', //registro de que?
-            Numero: '', //¿Número de orden? ¿número de qué?
-            Observaciones: '',
+            tabs: [],
+            todaysDate: null,
             nombreRules: [
             (v) => !!v || 'Se requiere este campo',
             (v) => v && v.length < 60 || 'Se permite como maximo 60 caracteres'
-
             ],
             radioRules:[v => !!v || 'Debe seleccionar una opción'],
         }
@@ -614,7 +624,9 @@ export default {
         },
         guardar(){
             var pass = true;
-            console.log("guardado")
+        },
+        computeAge(date){
+            console.log(date);
         }
     }
 }
