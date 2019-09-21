@@ -569,7 +569,7 @@ export default {
             this.tabs.push(
                 {
                     tabid: index,
-                    pass: true,
+                    pass: false,
                     Hemodialisis: '',
                     Via: '',
                     Lineas_pediatricas: '',
@@ -605,9 +605,13 @@ export default {
             pacientes: [],
             tabs: [],
             todaysDate: null,
+            expedienteRules: [
+                (v) => !!v || 'Se requiere este campo', 
+                (v) => v && this.isANumber(v) || 'Verifique que el número de expediente sean números.'
+            ],
             nombreRules: [
-            (v) => !!v || 'Se requiere este campo',
-            (v) => v && v.length < 60 || 'Se permite como maximo 60 caracteres'
+                (v) => !!v || 'Se requiere este campo',
+                (v) => v && v.length < 60 || 'Se permite como maximo 60 caracteres'
             ],
             radioRules:[v => !!v || 'Debe seleccionar una opción'],
         }
@@ -627,6 +631,13 @@ export default {
         },
         computeAge(date){
             console.log(date);
+        },
+        checkType(expediente){
+          let isNumber = false;
+          if(!isNaN(parseInt(expediente))){
+            isNumber = true;
+          }
+          return isNumber;
         }
     }
 }
@@ -668,11 +679,16 @@ export default {
     float: left;
     margin-right: 5%;
 }
+table.table-bordered {
+    table-layout:fixed;
+}
 table.table-bordered > tbody > tr > th {
     border: 3px solid #a9a9a9;
 }
 table.table-bordered > tbody > tr > td {
     border: 3px solid #a9a9a9;
+    width: 10%;
+    word-wrap: break-word;
 }
 h4 .headers{
     font-family: Nunito;
@@ -690,7 +706,7 @@ ol {
   break-inside: avoid-column;
   -webkit-column-break-inside: avoid;
 }
-ul{
+ol > ul{
   break-inside: avoid-column;
   -webkit-column-break-inside: avoid;
 }
