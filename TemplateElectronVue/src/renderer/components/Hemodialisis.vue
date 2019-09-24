@@ -249,13 +249,13 @@
                                                 <h4 class="headers">2. Vía:</h4>
                                                 <v-layout align-center justify-end>
                                                     <v-container fluid row align-center justify-space-around>
-                                                        <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Via" label="Femoral" value="1" color="green"></v-checkbox>
-                                                        <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Via" label="Subclavio" value="2" color="green"></v-checkbox>
-                                                        <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Via" label="Yugular" value="3" color="green"></v-checkbox>
-                                                        <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Via" label="Derecho" value="4" color="green"></v-checkbox>
-                                                        <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Via" label="Izquierdo" value="5" color="green"></v-checkbox>
-                                                        <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Via" label="Invertido" value="6" color="green"></v-checkbox>
-                                                        <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Via" label="Normal" value="7" color="green"></v-checkbox>
+                                                        <v-checkbox :rules="radioRules" v-model="tabs[pacientes.indexOf(paciente)].Via" label="Femoral" value="1" color="green"></v-checkbox>
+                                                        <v-checkbox :rules="radioRules" v-model="tabs[pacientes.indexOf(paciente)].Via" label="Subclavio" value="2" color="green"></v-checkbox>
+                                                        <v-checkbox :rules="radioRules" v-model="tabs[pacientes.indexOf(paciente)].Via" label="Yugular" value="3" color="green"></v-checkbox>
+                                                        <v-checkbox :rules="radioRules" v-model="tabs[pacientes.indexOf(paciente)].Via" label="Derecho" value="4" color="green"></v-checkbox>
+                                                        <v-checkbox :rules="radioRules" v-model="tabs[pacientes.indexOf(paciente)].Via" label="Izquierdo" value="5" color="green"></v-checkbox>
+                                                        <v-checkbox :rules="radioRules" v-model="tabs[pacientes.indexOf(paciente)].Via" label="Invertido" value="6" color="green"></v-checkbox>
+                                                        <v-checkbox :rules="radioRules" v-model="tabs[pacientes.indexOf(paciente)].Via" label="Normal" value="7" color="green"></v-checkbox>
                                                         <!--v-text-field
                                                         :v-model="Via"
                                                         value="8"
