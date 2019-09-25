@@ -18,7 +18,7 @@
           <v-dialog v-model="dialog" max-width="500px">
             <v-card>
               <v-card-title>
-                <span class="headline">Edit</span>
+                <span class="headline">Editar estado</span>
               </v-card-title>
               <v-card-text>
                 <v-flex xs12 sm6 md4>
@@ -36,8 +36,26 @@
               
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>
-                <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
+                <v-btn color="blue darken-1" flat @click="close">Cancelar</v-btn>
+                <v-btn color="blue darken-1" flat @click="save">Guardar</v-btn>
+              </v-card-actions>
+              </v-card>
+          </v-dialog>
+          <!--    cuadro de dialogo para eliminar el paciente -->
+          <v-dialog v-model="dialog_delete" max-width="500px">
+            <v-card>
+              <v-card-title>
+                <span class="headline">Eliminar paciente</span>
+              </v-card-title>
+
+              <v-card-text>
+                <p>¿Desea eliminar el paciente?</p>
+              </v-card-text>
+              
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" flat @click="close">Cancelar</v-btn>
+                <v-btn color="red darken-1" flat @click="deleteItem(selectedPatients)">Eliminar</v-btn>
               </v-card-actions>
               </v-card>
           </v-dialog>
@@ -72,7 +90,7 @@
                       <v-icon
                         small
                         class="ma-3"
-                        @click="deleteItem(props.item)"
+                        @click="showDeleteDiag()"
                       >
                         delete
                       </v-icon>
@@ -220,6 +238,7 @@ export default {
         estados_response: '',
         estadoNuevo: null,
         dialog: false,
+        dialog_delete: false,
         radioGroup:1,
         headers: [
           { text: 'CUI (ID)', align: 'center',value: 'CUI'},
@@ -301,6 +320,7 @@ export default {
         },
         close () {
           this.dialog = false
+          this.dialog_delete = false
           setTimeout(() => {
             this.editedItem = Object.assign({}, this.defaultItem)
             this.editedIndex = -1
@@ -338,11 +358,18 @@ export default {
           this.selected2 = this.editedItem.CUI;
           
         },
+
+        showDeleteDiag(){
+          this.dialog_delete = true;
+        },
+
         deleteItem(item){
+          
           this.deletedCUI = item.id
           
           this.$http.delete(`http://localhost:8000/PacienteController/delete?cui=${this.deletedCUI}`).then(response=>{
             this.reloadTable()
+            this.close()
           });
             
         },
