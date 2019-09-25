@@ -3,16 +3,37 @@
 <template lang="es">
   
 <div>
-        <b-tabs active-nav-item-class="font-weight-bold text-uppercase text-dark"  card vertical>
-            <b-tab title="Consulta"  active >
+    <v-card>
+
+        <v-toolbar flat color="primary" dark>
+            <v-toolbar-title style="text-align: center">Fecha: {{todaysDate}}</v-toolbar-title>
+        </v-toolbar>
+
+        <v-tabs fixed-tabs vertical dark>
+            <v-tab>
+                Consulta
+            </v-tab>
+
+            <v-tab>
+                Detalles físicos
+            </v-tab>
+
+            <v-tab>
+                Signos vitales
+            </v-tab>
+
+            <v-tab>
+                Mapa
+            </v-tab>
+
+            <v-tab-item>
                 <div class="cuerpo">
                     <form class="form-horizontal" >
                         <fieldset>
 
                         <!-- Text input-->
-                        <div style="display: flex; justify-content:space-between;">
+                        <div style="display: flex; justify-content:center;">
                             <h1 >Consulta General</h1>
-                            <h2 >{{this.fecha}}</h2>
                         </div>
                         
 
@@ -236,7 +257,7 @@
                                         </b-col>
                                     </b-row>
 
-                           
+                            
                                     
                                     <table class="table table-bordered table-ligth">
                                         <tbody>
@@ -319,7 +340,7 @@
                                     <!-- Left-->
                                     <div class="form-group encapsulado" style="text-align:left;">
                                         <div class="form-group">
-                                          <v-flex xs12>
+                                            <v-flex xs12>
                                             <v-layout align-center justify-end />
                                                 <h3 id="headers"  class="text-xs-center">Síndrome Clínico de Presentación</h3>              
                                                 <v-container fluid >
@@ -342,7 +363,7 @@
                                 <b-col>
                                     <!-- Center-->
                                     <div style="margin-left: 2%"class="form-group encapsulado">
-                                         <v-layout align-center justify-end />
+                                            <v-layout align-center justify-end />
                                             <h3 id="headers"  class="text-xs-center">Dx. Definitivo</h3>
                                         <v-textarea
                                             v-model="Dx_Definitivo"
@@ -446,7 +467,7 @@
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
-                                                 <b-row>
+                                                    <b-row>
                                                     <b-col>
                                                         <v-checkbox class="my-0 mt-4 py-0 " v-model="misMedicamentos.cyac.estado" label="Cyac" color="green"></v-checkbox>
                                                     </b-col>
@@ -887,7 +908,7 @@
                                             <v-layout align-center justify-end />
                                                 <h3 id="headers"  class="text-xs-center">Resultados de laboratorios</h3>
                                             <b-container>
-   <b-row>
+                                                <b-row>
                                                     <b-col>
                                                         <v-text-field
                                                             v-model="resultados_de_laboratorio.Na"
@@ -1014,7 +1035,7 @@
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
-                                                   <b-col>
+                                                    <b-col>
                                                         <v-text-field
                                                             v-model="resultados_de_laboratorio.Ca"
                                                             label="Ca"
@@ -1184,11 +1205,7 @@
                             </b-row>
                         </b-container>
                     </div>
-
-
-
-                        <!-- Text input-->
-                   
+                    
                     <div class="form-group encapsulado" style="text-align:left;">
                         <v-layout align-center justify-end />
                             <h3 id="headers"  class="text-xs-center">Examen físico</h3>
@@ -1341,7 +1358,7 @@
                         
                         <!-- Textarea -->
                         <div class="form-group encapsulado">
-                             <b-container>
+                                <b-container>
                                 
                                 <b-row>
                                     <b-col>
@@ -1456,7 +1473,7 @@
                                     </b-col>
                                 </b-row>
                             </b-container>
-                          
+                            
                             <b-container>
                                 <b-row>
                                     <b-col>
@@ -1528,10 +1545,11 @@
                         </div>
                         </fieldset>
                     </form>
-
                 </div>
-            </b-tab>
-            <b-tab class='posicion' title="Detalles físicos" style="position: sticky;">
+
+            </v-tab-item>
+
+            <v-tab-item>
                 <div class="cuerpo">
                     <h1 style="text-align: center;">Detalles físicos</h1>
 
@@ -1573,8 +1591,9 @@
                         </b-container>
                     </div>
                 </div>
-            </b-tab>
-            <b-tab class='posicion' title="Signos vitales" style="position: sticky;">
+            </v-tab-item>
+
+            <v-tab-item>
                 <div class="cuerpo">
                     <h1 style="text-align: center;">Signos vitales</h1>
 
@@ -1619,8 +1638,9 @@
                         </b-container>
                     </div>
                 </div>
-            </b-tab>
-            <b-tab class='posicion' title="Mapa">
+            </v-tab-item>
+            
+            <v-tab-item>
                 <div class="cuerpo">
                     <h1 style="text-align: center;">Mapa</h1>
                     <div class="encapsulado">
@@ -2228,15 +2248,16 @@
                                 <td contenteditable='true' style="text-align: left;" ></td>
                                 <td contenteditable='true' style="text-align: left;" ></td>
                             </tr>
-                          
-                          
+                            
+                            
                         </tbody>
                         </table>
                     </div>
                 </div>
-            </b-tab>
-        </b-tabs>
-    </div>
+            </v-tab-item>
+        </v-tabs>
+    </v-card>
+</div>
 
 
 </template>
@@ -2495,6 +2516,7 @@ export default {
             otros: false
         },
 
+        todaysDate: "",
         fecha: "",
         nuevoComentario: false,
         horaActual: "",
@@ -2525,6 +2547,7 @@ export default {
 
         const date = new Date()
         this.fecha = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+        this.todaysDate = date.getDate() + "-" +   + (date.getMonth() + 1) + "-" + date.getFullYear()
 
         const data = {
             ID: store.idPaciente // Aqui va el ID del paciente
@@ -3307,7 +3330,7 @@ export default {
     text-align: center;
     margin-left: 5%;
     width: 90%;
-    padding: 5%;
+    padding: 0.2%;
     padding-top: 2%;
     padding-bottom: 1%;
     }
