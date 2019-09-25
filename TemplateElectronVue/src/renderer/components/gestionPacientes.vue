@@ -59,6 +59,25 @@
               </v-card-actions>
               </v-card>
           </v-dialog>
+
+
+          <!--    cuadro de dialogo para confirmar accion el paciente -->
+          <v-dialog v-model="completeDialog" max-width="500px">
+            <v-card>
+              <v-card-title>
+                <span class="headline">Acción realizada</span>
+              </v-card-title>
+
+              <v-card-text>
+                <p>Acción completada exitosamente</p>
+              </v-card-text>
+              
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" flat @click="completeDialog=false">OK</v-btn>
+              </v-card-actions>
+              </v-card>
+          </v-dialog>
             
           <v-data-table
               
@@ -239,6 +258,7 @@ export default {
         estadoNuevo: null,
         dialog: false,
         dialog_delete: false,
+        completeDialog: false,
         radioGroup:1,
         headers: [
           { text: 'CUI (ID)', align: 'center',value: 'CUI'},
@@ -348,6 +368,7 @@ export default {
             //var nuevoEstado = this.estados_response[this.estados_response.ID.indexOf(this.estadoNuevo)];
             this.selectedPatients.EstadoActual = (this.estados_response[this.estadoNuevo -1]).significado;
             this.selectedPatients.Imagen = this.imageData;
+            this.completeDialog = true
             this.reloadTable()
           });
         }, 
@@ -370,6 +391,7 @@ export default {
           this.$http.delete(`http://localhost:8000/PacienteController/delete?cui=${this.deletedCUI}`).then(response=>{
             this.reloadTable()
             this.close()
+            this.completeDialog = true
           });
             
         },
