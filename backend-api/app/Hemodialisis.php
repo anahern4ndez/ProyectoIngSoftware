@@ -30,7 +30,15 @@ class Hemodialisis extends Model
         'Talla',
         'PesoDelta',
         'Especiales',
-        'Tabla1',
+        'PAstr',
+        'Pulso',
+        'Temp',
+        'QB',
+        'PV',
+        'PA_table',
+        'UFH',
+        'Medicamentos',
+        'UFTotal',
         'Observacion',
         'Tecnico',
         'PA',
@@ -39,7 +47,6 @@ class Hemodialisis extends Model
     public $timestamps = false;
     protected $casts =[
         'Via' => 'array',
-        'Tabla1' => 'array',
         'Tabla2' => 'array'
     ];
 

@@ -39,7 +39,17 @@ class CreateHemodialisesTable extends Migration
             $table->float('Talla');
             $table->float('PesoDelta');
             $table->string('Especiales');
-            $table->jsonb('Tabla1');
+            //tabla 1
+            $table->string("PA_str");
+            $table->string("Pulso");
+            $table->string("Temp");
+            $table->string("QB");
+            $table->string("PV");
+            $table->string("PA_table");
+            $table->string("UFH");
+            $table->string("Medicamentos");
+            $table->string("UFTotal")->nullable();
+            //fin tabla 1
             $table->string('Observaciones');
             $table->integer('Tecnico');
             $table->integer('PA');

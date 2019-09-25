@@ -7,7 +7,6 @@ use App\Hemodialisis;
 class HemodialisisController extends Controller
 {
     //
-
     public function store(Request $request){
         $Hemodialisis = new Hemodialisis;
         $Hemodialisis->idPaciente = $request->idPaciente;
@@ -34,8 +33,19 @@ class HemodialisisController extends Controller
         $Hemodialisis->Talla = $request->Talla;
         $Hemodialisis->PesoDelta = $request->PesoDelta;
         $Hemodialisis->Especiales = $request->Especiales;
-        $data_table1 = $request->Tabla1;
-        $Hemodialisis['Tabla1'] = json_decode($data_table1);
+
+        //tabla 1
+        $Hemodialisis->PAstr = $request->PAstr;
+        $Hemodialisis->Pulso = $request->Pulso;
+        $Hemodialisis->Temp = $request->Temp;
+        $Hemodialisis->QB = $request->QB;
+        $Hemodialisis->PV = $request->PV;
+        $Hemodialisis->PA_table = $request->PA_table;
+        $Hemodialisis->UFH = $request->UFH;
+        $Hemodialisis->Medicamentos = $request->Medicamentos;
+        $Hemodialisis->UFTotal = $request->UFTotal;
+        //fin tabla 1
+        
         $Hemodialisis->Observaciones = $request->Observaciones;
         $Hemodialisis->Tecnico = $request->Tecnico;
         $Hemodialisis->PA = $request->PA;
