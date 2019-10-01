@@ -144,7 +144,7 @@
         },
         data() {
             return {
-                cui: '',
+                cui: this.$route.params.cui,
                 name:'',
                 age: '',
                 register: '',
@@ -184,7 +184,9 @@
         methods:{
             ingresarNuevoEstado(){
                 if(this.name != '' && this.age != '' && this.register != '' && this.sexo != '' && this.fecha != null && this.actual != '' && this.cambio != '' && isNaN(this.age) === false && (this.age.length <= 3) === true && (this.name.length < 60) === true && (this.register.length < 60) === true && isNaN(this.register) === false && (this.age <= 200 && this.age >= 0) === true){
-                    this.$http.post(`http://localhost:8000/cambioEstadoController/save?name=${this.name}&age=${this.age}&register=${this.register}&sexo=${this.sexo}&fecha=${this.fecha}&actual=${this.actual}&cambio=${this.cambio}&cui=${this.cui}`).then(response=>{
+                    this.$http.post(`http://localhost:8000/cambioEstadoController/save?name=${this.name}&age=${this.age}&register=${this.register}&sexo=${this.sexo}&fecha=${this.fecha}&actual=${this.actual}&cambio=${this.cambio}&cui=${this.cui}`).then(
+                        this.$http.put(`http://localhost:8000/cambioEstadoController/updateEstadoPaciente?cui=${this.cui}&cambio=${this.cambio}`)  
+                    ).then(response=>{
                         this.errorFaltanDatos = false;
                         this.errorRegistro = false;
                         this.name = ' ';

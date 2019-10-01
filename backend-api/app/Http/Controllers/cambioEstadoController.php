@@ -26,7 +26,6 @@ class cambioEstadoController extends Controller
         $registroestado->idregistroestado = $request->register;
         if($request->cui == ''){
             $cui = Paciente::query()->first();
-            //$registroestado->cui = 1412300920;
             $registroestado->cui = $cui->CUI;
         }else{
             $registroestado->cui = $request->cui;            
@@ -43,4 +42,14 @@ class cambioEstadoController extends Controller
         ], 200);
     }
 
+    public function updateEstadoPaciente(Request $request)
+    {
+        $toUpdate = Paciente::where('CUI', $request->cui)->first();
+        $toUpdate->EstadoActual = $request->cambio;
+        $toUpdate->save();
+
+        return response()->json([
+            'success' => true,
+        ], 200);
+    }
 }

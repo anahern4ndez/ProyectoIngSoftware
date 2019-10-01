@@ -70,6 +70,7 @@ $router->get('/EstadoController/getAllEstado', 'EstadoController@getAllEstado');
 
 //change status
 $router->post('/cambioEstadoController/save', 'cambioEstadoController@save');
+$router->put('/cambioEstadoController/updateEstadoPaciente', 'cambioEstadoController@updateEstadoPaciente');
 
 
 $router->delete('/users/destroy','ExampleController@destroy');
