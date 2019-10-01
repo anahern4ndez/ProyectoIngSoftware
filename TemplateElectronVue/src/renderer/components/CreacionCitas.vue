@@ -457,7 +457,9 @@ export default {
       this.$http
         .get("http://localhost:8000/PacienteController/findAll")
         .then(response => {
-          this.patients = response.data.Pacientes.map(i => i.Nombre);
+          this.patients = response.data.Pacientes.map(
+            i => i.Apellido + ", " + i.Nombre + " - " + i.CUI
+          );
         });
     },
     interactuar(type) {
