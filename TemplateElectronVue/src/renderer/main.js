@@ -101,7 +101,8 @@ const routes = [{
         component: Vue.component('EstadisticaGeneral', require('./components/EstadisticaGeneral.vue').default)
     },
     {
-        path: '/cambioEstado',
+        path: '/cambioEstado/:cui',
+        name: 'cambioEstado',
         component: Vue.component('cambioEstado', require('./components/cambioEstado.vue').default)
     },
     {

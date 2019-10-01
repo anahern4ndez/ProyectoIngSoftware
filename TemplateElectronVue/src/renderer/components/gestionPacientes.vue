@@ -144,7 +144,7 @@
               <br>
               <div>
               <!-- elementos para seleccionar imagen--> 
-              <v-button class="btn btn-lg btn-warning btn-block" id="botonimagen" @click="imgClick"> Seleccionar Imagen </v-button>
+              <button class="btn btn-lg btn-warning btn-block" id="botonimagen" @click="imgClick"> Seleccionar Imagen </button>
               <input type="file" class="hide_file" style="height:auto; width:auto; visibility:hidden" v-on:change="changeImg" ref="changeImg"/>
               </div>
               <br>
@@ -195,7 +195,7 @@
         <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="darConsulta"> Dar consulta </button>
       </div>
       <div id="boton">
-        <router-link :to="{name: 'EditarPaciente', params: { cui: this.selectedPatients.CUI }}" class="btn btn-lg btn-warning btn-block">Editar datos de paciente seleccionado</router-link>
+        <router-link :to="{name: 'cambiarEstado', params: { cui: this.selectedPatients.CUI }}" class="btn btn-lg btn-warning btn-block">Editar estado de paciente seleccionado</router-link>
       </div>
       <div id="boton">
         <button type="button" class="btn btn-lg btn-warning btn-block"> Archivos </button>
@@ -322,21 +322,20 @@ export default {
           this.$router.push('/IngresarPaciente');
         },
         editarDatos(received){
-          this.dialog=true;
+          //this.dialog=true;
           this.editedIndex = this.pacientes.indexOf(received)
           this.editedItem = Object.assign({}, received)
-        },
-        editarPaciente(){
-          this.$router.push('/EditarPaciente');
+          this.$router.push({name: 'EditarPaciente', params: { cui: this.editedItem.CUI }})
+          
         },
         archivos(){
-          this.$router.push('/IngresarPaciente');
+          
         },
         reportes(){
-          this.$router.push('/gestionarPaciente');
+          
         },
         estadisticas(){
-          this.$router.push('/EditarPaciente');
+          
         },
         close () {
           this.dialog = false
@@ -346,14 +345,7 @@ export default {
             this.editedIndex = -1
           }, 300)
         },
-        editItem (item) {
-          this.editedIndex = this.pacientes.indexOf(item)
-          this.editedItem = Object.assign({}, item)
-          this.dialog = true
-        },
         save () {
-          console.log(this.editedItem);
-          console.log(this.selectedPatients);
           if (this.editedIndex > -1) {
             Object.assign(this.pacientes[this.editedIndex], this.editedItem)
           }
@@ -411,7 +403,6 @@ export default {
             var reader = new FileReader();
             // definir accion a realizar despues que se haya seleccionado una imagen
             reader.onload = (e) => {
-              console.log(this.estadoNuevo);
               this.imageData = e.target.result;
               var data = {
                 id: this.selectedPatients.CUI,
