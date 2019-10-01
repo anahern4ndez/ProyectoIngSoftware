@@ -95,7 +95,8 @@ class CitasController extends Controller {
         // Cita creada con exito, se retorna un codigo 200.
         return response()->json([
             'success' => true,
-            'message' => 'Cita creada con éxito.'
+            'message' => 'Cita creada con éxito.',
+            'data' => $cita
         ], 200);
     }
 
@@ -172,7 +173,8 @@ class CitasController extends Controller {
         // Cita actualizada con exito, se retorna un codigo 200.
         return response()->json([
             'success' => true,
-            'message' => 'Cita actualizada con éxito.'
+            'message' => 'Cita actualizada con éxito.',
+            'data' => $cita,
         ], 200);
     }
 

@@ -28,6 +28,7 @@ $router->get('/users', 'ExampleController@getUsers');
 $router->get('/users/look', 'ExampleController@getOneUser');
 $router->get('/users/some', 'ExampleController@getSomeUser');
 $router->post('/message', 'ExampleController@postExample');
+$router->post('/ExampleController/findById', 'ExampleController@findById');
 
 //CRUD: TABLA ESTADOS DB
 $router->get('/EstadoController/find', 'EstadoController@find');
@@ -70,6 +71,7 @@ $router->get('/EstadoController/getAllEstado', 'EstadoController@getAllEstado');
 
 //change status
 $router->post('/cambioEstadoController/save', 'cambioEstadoController@save');
+$router->put('/cambioEstadoController/updateEstadoPaciente', 'cambioEstadoController@updateEstadoPaciente');
 
 
 $router->delete('/users/destroy','ExampleController@destroy');
@@ -114,3 +116,7 @@ $router->post('/percentilTalla', 'percentilTallaController@getTallas');
 
 // percentil peso talla
 $router->post('/percentilPesoTalla', 'percentilPesoAlturaController@getPesoAlturas');
+//Formularios
+
+$router->post('/forms/mortalidad', 'FormulariosController@storeMortalidad');
+$router->post('/forms/hemodialisis', 'FormulariosController@storeHemodialisis');

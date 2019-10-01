@@ -3,6 +3,8 @@
 <template lang="es">
   
 <div>
+    <h1 class ="headers">Consulta general</h1>  
+
     <v-card>
 
         <v-toolbar flat color="primary" dark>
@@ -10,32 +12,17 @@
         </v-toolbar>
 
         <v-tabs fixed-tabs vertical dark>
-            <v-tab>
-                Consulta
-            </v-tab>
-
-            <v-tab>
-                Detalles físicos
-            </v-tab>
-
-            <v-tab>
-                Signos vitales
-            </v-tab>
-
-            <v-tab>
-                Mapa
+            <v-tab
+                v-for="tab in tabs"
+                :key="tab"
+            >
+                {{tab}}
             </v-tab>
 
             <v-tab-item>
                 <div class="cuerpo">
                     <form class="form-horizontal" >
-                        <fieldset>
-
-                        <!-- Text input-->
-                        <div style="display: flex; justify-content:center;">
-                            <h1 >Consulta General</h1>
-                        </div>
-                        
+                        <fieldset>                       
 
                         <!-- Text input-->
                         <div class="form-group ">
@@ -48,14 +35,14 @@
                                             <b-container>
                                                 <b-row class="justify-content-md-center">
                                                     <b-col>
-                                                        <h3 style="font-weight: bold;">Paciente:</h3>  
+                                                        <h3 class="headers" style="font-weight: bold;">Paciente:</h3>  
                                                     </b-col>
                                                     <b-col>
-                                                        <h3>{{this.paciente.nombre}} {{this.paciente.apellido}}</h3> 
+                                                        <h3 class="headers">{{this.paciente.nombre}} {{this.paciente.apellido}}</h3> 
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
-                                                <img style="margin-left: 10%; margin-top: 2%" src="../assets/javier.jpg" alt="" width="273" height="183">
+                                                <img style="margin-left: 10%; margin-top: 2%" src="../assets/javier.jpg" alt="" width="320" height="220">
                                                 </b-row>
                                             </b-container>
                                         </div>
@@ -63,7 +50,7 @@
                                     <b-col>
                                         <!-- Right-->
                                         <div style="margin-left: 2%">
-                                            <h3 style="text-align:center; font-weight: bold;margin-bottom: 2%;">Observaciones especiales: </h3>  
+                                            <h3 class="headers" style="text-align:center; font-weight: bold;margin-bottom: 2%;">Observaciones especiales: </h3>  
                                             <div>                     
                                                 <v-textarea
                                                     v-model="comentario"
@@ -77,7 +64,7 @@
                                                         <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="agregarComentario">Agregar Comentario</button> 
                                                     </b-col>
                                                     <b-col>
-                                                        <button type="button" class="btn btn-lg btn-warning btn-block">Ver más</button>
+                                                        <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="verMas">Ver más</button>
                                                     </b-col>
                                                 </b-row>
                                             </b-container>
@@ -123,10 +110,81 @@
                         </v-dialog>
                         <!-- Loading -->
 
-                        <!-- Form Name -->
-                        <h2 id="headers" style="text-align: left;">Datos Generales</h2>
+                        <!-- Guardando informacion -->
+                        <v-dialog
+                            v-model="guardando"
+                            max-width="40%"
+                            persistent
+                        >
+                            <v-card>
+                                <v-card-title 
+                                    class="headline grey lighten-2"
+                                    primary-title
+                                >
+                                    Guardando...
+                                </v-card-title>
+
+                                <v-card-text>
+                                    Se esta guardando la informacion proveida.
+                                </v-card-text>
+
+                                <v-card-actions>
+                                
+                                    <v-spacer></v-spacer>
+
+                                    <v-progress-linear
+                                        color="orange accent-4"
+                                        indeterminate
+                                        :rounded="true"
+                                        opacity="0.2"
+                                        height="15"
+                                    ></v-progress-linear>
+                                </v-card-actions>
+                            </v-card>
+                        </v-dialog>
+
+                        <v-dialog
+                            v-model="verComentarios"
+                            max-width="40%"
+                        >
+                            <v-card>
+                                <v-card-title 
+                                    class="headline grey lighten-2"
+                                    primary-title
+                                >
+                                    {{this.paciente.nombre}} {{this.paciente.apellido}}
+                                </v-card-title>
+
+                                <v-card-title>
+                                    <ul>
+                                        <li v-for="com in this.showComments">
+                                            <span class="grey--text subtitle-1 font-weight-regular">{{com.hora}} 
+                                                <span class="font-weight-black subtitle-1 black--text">{{com.doctor}}: </span>
+                                                <span class="font-weight-regular subtitle-1 black--text">{{com.comentario}}</span>
+                                                <br />
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </v-card-title>
+
+                                <v-card-actions>
+                                <div class="flex-grow-1"></div>
+
+                                <v-btn
+                                    color="green darken-1"
+                                    text
+                                    @click="verComentarios = false"
+                                >
+                                    Cerrar
+                                </v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-dialog>
 
                         <div class="encapsulado">                    
+                            <!-- Form Name -->
+                            <h2 class="headers" style="text-align: left;">Datos Generales</h2>
+                            
                             <b-container>
                                     <b-row>
                                         <b-col>
@@ -330,9 +388,11 @@
                                 </b-container>
                         </div>
 
-                        <!-- Form Name -->
-                        <h2 id="headers" style="text-align: left;">Dar Consulta</h2>
                         <div>
+
+                        <!-- Form Name -->
+                        <h2 class="headers" style="text-align: left;">Dar Consulta</h2>
+
                         <b-container class="bv-example-row2">
                             <b-row class="justify-content-md-center">
                                 <b-col>
@@ -342,7 +402,7 @@
                                         <div class="form-group">
                                             <v-flex xs12>
                                             <v-layout align-center justify-end />
-                                                <h3 id="headers"  class="text-xs-center">Síndrome Clínico de Presentación</h3>              
+                                                <h3 class="headers text-xs-center">Síndrome Clínico de Presentación</h3>              
                                                 <v-container fluid >
                                                     <v-radio-group v-model="Sindrome_Clinico_Presentacion">
                                                         <v-radio
@@ -364,7 +424,7 @@
                                     <!-- Center-->
                                     <div style="margin-left: 2%"class="form-group encapsulado">
                                             <v-layout align-center justify-end />
-                                            <h3 id="headers"  class="text-xs-center">Dx. Definitivo</h3>
+                                            <h3 class="headers text-xs-center">Dx. Definitivo</h3>
                                         <v-textarea
                                             v-model="Dx_Definitivo"
                                             outline
@@ -377,7 +437,7 @@
                                     <!-- Right-->
                                     <div style="margin-left: 2%"class="form-group encapsulado">
                                         <v-layout align-center justify-end />
-                                            <h3 id="headers"  class="text-xs-center">Dx. Asociado</h3>
+                                            <h3 class="headers text-xs-center">Dx. Asociado</h3>
                                         <v-select
                                             v-if="dxs"
                                             v-bind:items="dxs"
@@ -420,7 +480,7 @@
                         <div class="form-group encapsulado">
                         <div class="form-group">
                             <v-layout align-center justify-end />
-                                <h3 id="headers"  class="text-xs-center">Historia</h3>
+                                <h3 class="headers text-xs-center">Historia</h3>
                             <v-textarea
                                 v-model="historia"
                                 outline
@@ -438,7 +498,7 @@
                                     <div class="form-group encapsulado" style="text-align:left;">
                                         <div>
                                             <v-layout align-center justify-end />
-                                                <h3 id="headers"  class="text-xs-center">Medicamentos</h3>
+                                                <h3 class="headers text-xs-center">Medicamentos</h3>
                                             <b-container>
                                                 <b-row>
                                                     <b-col>
@@ -906,7 +966,7 @@
                                     <div class="form-group encapsulado" style="text-align:left;">
                                         <div>
                                             <v-layout align-center justify-end />
-                                                <h3 id="headers"  class="text-xs-center">Resultados de laboratorios</h3>
+                                                <h3 class="headers text-xs-center">Resultados de laboratorios</h3>
                                             <b-container>
                                                 <b-row>
                                                     <b-col>
@@ -1208,7 +1268,7 @@
                     
                     <div class="form-group encapsulado" style="text-align:left;">
                         <v-layout align-center justify-end />
-                            <h3 id="headers"  class="text-xs-center">Examen físico</h3>
+                            <h3 class="headers text-xs-center">Examen físico</h3>
                         <table class="table table-bordered table-ligth">
                         <tbody>
                             <tr>
@@ -1365,7 +1425,7 @@
                                         <!-- Textarea -->
                                         <div class="form-group">
                                         <v-layout align-center justify-end />
-                                            <h3 id="headers"  class="text-xs-center">Evaluación Médica</h3>
+                                            <h3 class="headers text-xs-center">Evaluación Médica</h3>
                                         <v-textarea
                                             v-model="Evaluacion_Medica"
                                             outline
@@ -1377,7 +1437,7 @@
                             <!-- Textarea -->                           
                                         <div class="form-group">
                                         <v-layout align-center justify-end />
-                                            <h3 id="headers"  class="text-xs-center">Plan Médico</h3>
+                                            <h3 class="headers text-xs-center">Plan Médico</h3>
                                         <v-textarea
                                             v-model="Plan_Medico"
                                             outline
@@ -1393,7 +1453,7 @@
                                         <!-- Textarea -->
                                         <div class="form-group">
                                         <v-layout align-center justify-end />
-                                            <h3 id="headers"  class="text-xs-center">Evaluación Psicológica</h3>
+                                            <h3 class="headers text-xs-center">Evaluación Psicológica</h3>
                                         <v-textarea
                                             v-model="Evaluacion_Psicologica"
                                             outline
@@ -1405,7 +1465,7 @@
                             <!-- Textarea -->                           
                                         <div class="form-group">
                                         <v-layout align-center justify-end />
-                                            <h3 id="headers"  class="text-xs-center">Plan Psicológico</h3>
+                                            <h3 class="headers text-xs-center">Plan Psicológico</h3>
                                         <v-textarea
                                             v-model="Plan_Psicologica"
                                             outline
@@ -1422,7 +1482,7 @@
                                         <!-- Textarea -->
                                         <div class="form-group">
                                         <v-layout align-center justify-end />
-                                            <h3 id="headers"  class="text-xs-center">Evaluación de Trabajo Social</h3>
+                                            <h3 class="headers text-xs-center">Evaluación de Trabajo Social</h3>
                                         <v-textarea
                                             v-model="Evaluacion_Trabajo_Social"
                                             outline
@@ -1434,7 +1494,7 @@
                             <!-- Textarea -->                           
                                         <div class="form-group">
                                         <v-layout align-center justify-end />
-                                            <h3 id="headers"  class="text-xs-center">Plan de Trabajo Social</h3>
+                                            <h3 class="headers text-xs-center">Plan de Trabajo Social</h3>
                                         <v-textarea
                                             v-model="Plan_Trabajo_Social"
                                             outline
@@ -1451,7 +1511,7 @@
                                         <!-- Textarea -->
                                         <div class="form-group">
                                         <v-layout align-center justify-end />
-                                            <h3 id="headers"  class="text-xs-center">Evaluación Nutricional</h3>
+                                            <h3 class="headers text-xs-center">Evaluación Nutricional</h3>
                                         <v-textarea
                                             v-model="Evaluacion_Nutricional"
                                             outline
@@ -1463,7 +1523,7 @@
                                         <!-- Textarea -->                           
                                         <div class="form-group">
                                         <v-layout align-center justify-end />
-                                            <h3 id="headers"  class="text-xs-center">Plan Nutricional</h3>
+                                            <h3 class="headers text-xs-center">Plan Nutricional</h3>
                                         <v-textarea
                                             v-model="Plan_Nutricional"
                                             outline
@@ -1480,7 +1540,7 @@
                                         <!-- Textarea -->
                                         <div class="form-group">
                                         <v-layout align-center justify-end />
-                                            <h3 id="headers"  class="text-xs-center">Evaluación Farmacológica</h3>
+                                            <h3 class="headers text-xs-center">Evaluación Farmacológica</h3>
                                         <v-textarea
                                             v-model="Evaluacion_Farmacologica"
                                             outline
@@ -1492,7 +1552,7 @@
                                         <!-- Textarea -->                           
                                         <div class="form-group">
                                         <v-layout align-center justify-end />
-                                            <h3 id="headers"  class="text-xs-center">Plan Farmacológico</h3>
+                                            <h3 class="headers text-xs-center">Plan Farmacológico</h3>
                                         <v-textarea
                                             v-model="Plan_Farmacologico"
                                             outline
@@ -1601,7 +1661,7 @@
                         <b-container>
                             <b-row >
                                 <b-col>
-                                    <h3 style="font-weight: bold;">Paciente: </h3>  
+                                    <h3 class="headers" style="font-weight: bold;">Paciente: </h3>  
                                 </b-col>
                                 <b-col>
                                     <h3>Juan García</h3>  
@@ -1644,7 +1704,7 @@
                 <div class="cuerpo">
                     <h1 style="text-align: center;">Mapa</h1>
                     <div class="encapsulado">
-                        <h3 id="headers"  class="text-xs-center">Sangre</h3>
+                        <h3 class="headers text-xs-center">Sangre</h3>
                         <table class="table table-bordered table-ligth">
                         <tbody>
                             <tr>
@@ -1807,7 +1867,7 @@
                     </table>
                 </div>
                 <div class="encapsulado">
-                        <h3 id="headers"  class="text-xs-center">Química Sanguínea</h3>
+                        <h3 class="headers text-xs-center">Química Sanguínea</h3>
                         <table class="table table-bordered table-ligth">
                         <tbody>           
                             <tr>
@@ -1898,7 +1958,7 @@
                     </table>
                 </div>
                 <div class="encapsulado">
-                        <h3 id="headers"  class="text-xs-center">Hematología</h3>
+                        <h3 class="headers text-xs-center">Hematología</h3>
                         <table class="table table-bordered table-ligth">
                         <tbody>
                             <tr>
@@ -1978,7 +2038,7 @@
                 </div>
                 <div class="encapsulado">
                         
-                        <h3 id="headers"  class="text-xs-center">Dinámica de Hierro</h3>
+                        <h3 class="headers text-xs-center">Dinámica de Hierro</h3>
                         <table class="table table-bordered table-ligth">
                         <tbody>
                             <tr>
@@ -2057,7 +2117,7 @@
                     </table>
                 </div>
                 <div class="encapsulado">
-                        <h3 id="headers"  class="text-xs-center">Orina</h3>
+                        <h3 class="headers text-xs-center">Orina</h3>
                         <table class="table table-bordered table-ligth">
                         <tbody>
                             <tr>
@@ -2197,7 +2257,7 @@
                     </table>
                 </div>
                 <div class="encapsulado">
-                        <h3 id="headers"  class="text-xs-center">Otros</h3>
+                        <h3 class="headers text-xs-center">Otros</h3>
                         <table class="table table-bordered table-ligth">
                         <tbody>
                             <tr>
@@ -2277,6 +2337,8 @@ export default {
     data: () => ({
         enfermedad: '',
         dialog: false,
+        guardando: false,
+        verComentarios: false,
 
         update: false,
 
@@ -2522,7 +2584,10 @@ export default {
         horaActual: "",
         idConsulta: 0,
         hasComments: false,
-        allComments: {},
+        allComments: [],
+        showComments: [],
+
+        tabs: ["Consulta", "Detalles físicos", "Signos vitales", "Mapa médico"],
 
         datos: [],
         sindromes: [],
@@ -2559,9 +2624,8 @@ export default {
         this.$http.post(`http://localhost:8000/PacienteController/findById`, data).then(response => {            
 
             if(response.data.Paciente[0] == null){
-                console.log('Nothing to do here..');
+                
             }else{
-                console.log(response.data.Paciente[0])
                 this.paciente.nombre = response.data.Paciente[0].Nombre;
                 this.paciente.apellido = response.data.Paciente[0].Apellido;
                 this.paciente.CUI = response.data.Paciente[0].CUI;
@@ -2576,9 +2640,6 @@ export default {
                 this.paciente.sexo = response.data.Paciente[0].Sexo;
                 this.paciente.fechaDeNacimiento = response.data.Paciente[0].Fecha_de_nacimiento;
                 this.computeAge(this.paciente.fechaDeNacimiento);
-                console.log(this.paciente);
-                
-
 
                 this.Sindrome_Clinico_Presentacion = response.data.Paciente[0].Sindrome_Clinico_Presentacion;
             }
@@ -2639,9 +2700,7 @@ export default {
                         }
 
                         const jsonTemp2 = JSON.parse(response.data.Consulta[0].medicamento)
-                        // console.table(jsonTemp2)
                         for(var key in this.misMedicamentos){
-                            // console.log(key)
                             if(jsonTemp2.hasOwnProperty(key)){
                                 this.misMedicamentos[key].mg = jsonTemp2[key].mg
                                 this.misMedicamentos[key].frecuencia = jsonTemp2[key].frecuencia
@@ -2662,14 +2721,12 @@ export default {
                 this.$http.post(`http://localhost:8000/ComentarioController/findAll`, data3).then(response => {
                     if(response.data.Comentarios.length > 0){
                         this.hasComments = true
-                        this.allComments = JSON.parse(response.data.Comentarios[0].comentarios)
-                        console.log(this.allComments)
-                        
+                        this.allComments.push(JSON.parse(response.data.Comentarios[0].comentarios))
+
+                        this.orderComments(this.allComments)
                     }else{
                         this.hasComments = false
                     }
-
-                    console.log("Tiene comentarios? " + this.hasComments)
                 }).then(() => {
                     this.dialog = false;
                 })
@@ -2677,7 +2734,7 @@ export default {
         }).then(() => {
             this.$http.get(`http://localhost:8000/sindromeController/getAll`).then(response => {
                 if(response.data.Sindrome[0] == null){
-                    console.log('Nothing to do here..');
+                    
                 }else{
                     
                     this.sindromes = response.data.Sindrome;
@@ -2695,18 +2752,56 @@ export default {
             this.paciente.years = fechaActual.getFullYear() - aComputar.getFullYear();
             this.paciente.meses = fechaActual.getMonth() - aComputar.getMonth();
         },
+
+        orderComments (comments) {
+            var datos = []
+            comments.map(obj => {
+                for(var key in obj){
+                    for(var key2 in obj[key]){
+                        for(var i = 0; i<obj[key][key2].hora.length; i++){
+
+                            var temp = {}
+                            
+                            temp["doctor"] = key2
+                            temp["hora"] = obj[key][key2].hora[i]
+                            temp["comentario"] = obj[key][key2].comentario[i]
+                            this.showComments.push(temp)
+                        }
+                    }
+                }
+            })
+
+            this.showComments.sort(function (d1, d2) {
+                return new Date(d1.hora) - new Date(d2.hora)
+            })
+
+            this.showComments.map(array => {
+                const data = {
+                    ID: array.doctor
+                }
+
+                this.$http.post(`http://localhost:8000/ExampleController/findById`, data).then(response => {
+                    array.doctor = response.data.User
+                })
+            })
+        },
+
+        verMas () {
+            this.verComentarios = true
+        },
         
         agregarComentario(){
             
             if(this.comentario != ""){
                 const d = new Date()
-                this.horaActual = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds()
+                this.horaActual = d.getMonth() + "/" + d.getDate() + "/" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds()
 
                 this.nuevoComentario = true
             }else{
                 this.nuevoComentario = false
             }
 
+            console.log("comentarios? " + this.nuevoComentario)
         },        
 
         agregarEnfermedad(){
@@ -2792,7 +2887,7 @@ export default {
             }
         },
         guardar() {
-
+            this.guardando = true
             let medicamento = {}
             
             if(this.misMedicamentos.prednisona.estado){
@@ -2997,19 +3092,20 @@ export default {
                 plan_farmacologico: this.Plan_Farmacologico
             }
 
-            console.log("Update? " + this.update)
 
             if(this.update){
                 this.$http.put('http://localhost:8000/ConsultaController/update', info).then(response => {
-                    // console.log("Si pase update")
+
                 }).then(() => {
                     if(this.nuevoComentario){
                         this.$http.post('http://localhost:8000/ConsultaController/getID', info).then(response => {
-                            console.log("ID de consulta: " + response.data.id)
                             var a = response.data.id
                             var b = store.id
                             
                             if(!this.hasComments){
+
+                                console.log("No tiene comentarios")
+
                                 var string = `{
                                     "` + a + `": ` + `{
                                         "` + b + `": ` + `{
@@ -3031,13 +3127,15 @@ export default {
                                     comentarios: JSON.stringify(json)
                                 }
 
-                                console.log(info)
-
                                 this.$http.post('http://localhost:8000/ComentarioController/insert', info).then(response => {
-                                    console.log("Comentario guardado")
+
                                 })
                             }else{
-                                if(this.allComments[String(a)] == undefined){
+
+                                console.log("consulta: " + String(a))
+                                
+                                if(this.allComments[0][String(a)] == undefined){
+                                    console.log("Si tiene comentarios pero no consulta")
                                     var string = `{
                                         "` + a + `": ` + `{
                                             "` + b + `": ` + `{
@@ -3054,9 +3152,11 @@ export default {
                                     json[String(a)][String(b)].hora.push(this.horaActual)
                                     json[String(a)][String(b)].comentario.push(this.comentario)
 
-                                    Object.assign(this.allComments, json)
+                                    Object.assign(this.allComments[0], json)
                                 }else{
-                                    if(this.allComments[String(a)][String(b)] == undefined){
+
+                                    if(this.allComments[0][String(a)][String(b)] == undefined){
+                                        console.log("Si tiene comentarios y consulta pero no doctor")
                                         var string = `{
                                             "` + b + `": ` + `{
                                                 
@@ -3071,36 +3171,37 @@ export default {
                                         json[String(a)][String(b)].hora.push(this.horaActual)
                                         json[String(a)][String(b)].comentario.push(this.comentario)
 
-                                        Object.assign(this.allComments[String(a)], json)
+                                        Object.assign(this.allComments[0][String(a)], json)
                                     }else{
-                                        this.allComments[String(a)][String(b)].hora.push(this.horaActual)
-                                        this.allComments[String(a)][String(b)].comentario.push(this.comentario)
+                                        console.log("tiene todo")
+                                        this.allComments[0][String(a)][String(b)].hora.push(this.horaActual)
+                                        this.allComments[0][String(a)][String(b)].comentario.push(this.comentario)
+                                        console.log(JSON.stringify(this.allComments[0]))
                                     }
                                 }
+                                const info = {
+                                    cui: this.paciente.CUI,
+                                    comentarios: JSON.stringify(this.allComments[0])
+                                }
+                                this.$http.put('http://localhost:8000/ComentarioController/update', info).then(response => {
+                                    
+                                })
                             }
-
-                            const info = {
-                                cui: this.paciente.CUI,
-                                comentarios: JSON.stringify(this.allComments)
-                            }
-                            this.$http.put('http://localhost:8000/ComentarioController/update', info).then(response => {
-                                console.log("Comentario actualizado")
-                            })
-                            
                         })
                     }
                 }).then(() => {
+                    this.guardando = false
+                })
+                .then(() => {
                     this.$router.push("/menu-principal");
                 }).catch(error => {
 
                 })
             }else{
                 this.$http.post('http://localhost:8000/ConsultaController/insert', info).then(response => {
-                    console.log("Si pase insert")
 
                     if(this.nuevoComentario){
                         this.$http.post('http://localhost:8000/ConsultaController/getID', info).then(response => {
-                            console.log("ID de consulta: " + response.data.id)
                             var a = response.data.id
                             var b = store.id
                             
@@ -3126,13 +3227,10 @@ export default {
                                     comentarios: JSON.stringify(json)
                                 }
 
-                                console.log(info)
-
                                 this.$http.post('http://localhost:8000/ComentarioController/insert', info).then(response => {
-                                    console.log("Comentario guardado")
                                 })
                             }else{
-                                if(this.allComments[String(a)] == undefined){
+                                if(this.allComments[0][String(a)] == undefined){
                                     var string = `{
                                         "` + a + `": ` + `{
                                             "` + b + `": ` + `{
@@ -3149,9 +3247,9 @@ export default {
                                     json[String(a)][String(b)].hora.push(this.horaActual)
                                     json[String(a)][String(b)].comentario.push(this.comentario)
 
-                                    Object.assign(this.allComments, json)
+                                    Object.assign(this.allComments[0], json)
                                 }else{
-                                    if(this.allComments[String(a)][String(b)] == undefined){
+                                    if(this.allComments[0][String(a)][String(b)] == undefined){
                                         var string = `{
                                             "` + b + `": ` + `{
                                                 
@@ -3166,20 +3264,19 @@ export default {
                                         json[String(a)][String(b)].hora.push(this.horaActual)
                                         json[String(a)][String(b)].comentario.push(this.comentario)
 
-                                        Object.assign(this.allComments[String(a)], json)
+                                        Object.assign(this.allComments[0][String(a)], json)
                                     }else{
-                                        this.allComments[String(a)][String(b)].hora.push(this.horaActual)
-                                        this.allComments[String(a)][String(b)].comentario.push(this.comentario)
+                                        this.allComments[0][String(a)][String(b)].hora.push(this.horaActual)
+                                        this.allComments[0][String(a)][String(b)].comentario.push(this.comentario)
                                     }
                                 }
                             }
 
                             const info = {
                                 cui: this.paciente.CUI,
-                                comentarios: JSON.stringify(this.allComments)
+                                comentarios: JSON.stringify(this.allComments[0])
                             }
                             this.$http.put('http://localhost:8000/ComentarioController/update', info).then(response => {
-                                console.log("Comentario actualizado")
                             })
                             
                         })
@@ -3316,7 +3413,6 @@ export default {
         },
         sindromeValue: function(id, significado){
             this.Sindrome_Clinico_Presentacion = parseInt(id);
-            console.log("Selected:", id, significado);
         }
     }
 };
@@ -3326,20 +3422,20 @@ export default {
 
 <style scoped>
     .cuerpo {
-    border: solid #a9a9a9 2px;
-    text-align: center;
-    margin-left: 5%;
-    width: 90%;
-    padding: 0.2%;
-    padding-top: 2%;
-    padding-bottom: 1%;
+        border: solid #a9a9a9 2px;
+        text-align: center;
+        margin-left: 5%;
+        width: 90%;
+        padding: 5%;
+        padding-top: 2%;
+        padding-bottom: 1%;
     }
 
     .encapsulado {
         background-color: white;
-    margin: 2%;
-    padding: 5%;
-
+        margin: 2%;
+        padding: 3%;
+        /* padding-top: 2%; */
     }
 
     table.table-bordered > tbody > tr > th {
@@ -3359,5 +3455,15 @@ export default {
 
     div.col-auto > ul > li.nav-item {
         color:red;
+    }
+
+    h1, h2, h3, h4 {
+        font-family: Nunito;
+        font-weight: bolder;
+    }
+
+    .headers{
+        font-family: Nunito;
+        font-weight: bolder;
     }
 </style>
