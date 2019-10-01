@@ -8,7 +8,7 @@
         <input id="edad" type="text" v-model="edad" class="form-control" placeholder="Edad">
         <b-row align-h="around" align-v="center">
           <b-col>
-            <v-radio-group v-model="row" row>
+            <v-radio-group v-model="sexo" row>
               <br><label class="text-left"><b>Sexo:</b></label>
               <b-col>
                 <v-radio label="Masculino" value="Masculino" color="orange" ></v-radio>
@@ -22,15 +22,15 @@
 
 
             <label class="text-center"><b>Registro</b></label>
-            <input id="registro" type="text" v-model="registro" class="form-control" placeholder="No. de registro">
+            <input id="no_de_registro" type="text" v-model="no_de_registro" class="form-control" placeholder="No. de registro">
 
             <label class="text-center"><b>Fecha</b></label>
-            <input id="deceso" type="date" v-model="deceso" class="form-control" placeholder="Fecha de deceso">
+            <input id="fecha" type="date" v-model="fecha" class="form-control" placeholder="Fecha de deceso">
 
             <br><label class="text-center"><b>Ultima terapia en la que encontrba el paciente:</b></label>
               <b-row align-h="around" align-v="center">
                 <b-col>
-                  <v-radio-group v-model="row" row>
+                  <v-radio-group v-model="ultima_terapia" row>
                   <b-col>
                   <v-radio label="FUNDANIER" value="FUNDANIER" color="orange" ></v-radio>
                   </b-col>
@@ -44,12 +44,12 @@
                 </b-col>
               </b-row>
             <label class="text-center"><b>Fecha de colocacion del cateter</b></label>
-            <input id="deceso" type="date" v-model="fechaCateter" class="form-control">
+            <input id="deceso" type="date" v-model="fecha_cateter" class="form-control">
 
             <br><label class="text-center"><b>Localizacion del cateter femoral, subclavio y yugular (Derecho/Izquierdo)</b></label>
             <b-row align-h="around" align-v="center">
               <b-col>
-                <v-radio-group v-model="row" row>
+                <v-radio-group v-model="femoral" row>
                   <br><label class="text-left"><b>Femoral:</b></label>
                   <b-col>
                     <v-radio label="Derecho" value="Derecho" color="orange" ></v-radio>
@@ -66,7 +66,7 @@
 
             <b-row align-h="around" align-v="center">
               <b-col>
-                <v-radio-group v-model="row" row>
+                <v-radio-group v-model="subclavio" row>
                   <br><label class="text-left"><b>Subclavio:</b></label>
                   <b-col>
                     <v-radio label="Derecho" value="Derecho" color="orange" ></v-radio>
@@ -83,7 +83,7 @@
 
             <b-row align-h="around" align-v="center">
               <b-col>
-                <v-radio-group v-model="row" row>
+                <v-radio-group v-model="yugular" row>
                   <br><label class="text-left"><b>Yugular:</b></label>
                   <b-col>
                     <v-radio label="Derecho" value="Derecho" color="orange" ></v-radio>
@@ -101,7 +101,7 @@
             <label class="text-center"><b>No. de sesiones por semana</b></label>
               <v-row>
                 <v-col cols="12" sm="6" md="6">
-                  <v-radio-group v-model="ex7" column>
+                  <v-radio-group v-model="no_sesiones" column>
                     <v-radio
                       label="Uno"
                       color="orange"
@@ -123,7 +123,7 @@
             <label class="text-center"><b>Turno</b></label>
               <v-row>
                 <v-col cols="12" sm="6" md="6">
-                  <v-radio-group v-model="ex7" column>
+                  <v-radio-group v-model="turno" column>
                     <v-radio
                       label="Uno"
                       color="orange"
@@ -143,26 +143,26 @@
                   </v-col>
                 </v-row>
             <label class="text-center"><b>Fecha de realizacion de cultivo</b></label>
-            <input id="FechaCultivo" type="date" v-model="deceso" class="form-control" placeholder="Nombre de medico">
+            <input id="FechaCultivo" type="date" v-model="fecha_cultivo" class="form-control" placeholder="Nombre de medico">
 
             <b-row align-h="around" align-v="center">
                 <b-col>
                   <label class="text-center"><b>Resultado de cultivo</b></label>
-                  <input id="FechaCultivo" type="text" v-model="deceso" class="form-control" placeholder="Positivo/Negativo">
+                  <input id="FechaCultivo" type="text" v-model="resultado_cultivo" class="form-control" placeholder="Positivo/Negativo">
                 </b-col>
                 <b-col>
                   <label class="text-center"><b>Microorganizmo aislado</b></label>
-                  <input id="Microorganizmo" type="text" v-model="deceso" class="form-control" placeholder="Microorganizmo aislado">
+                  <input id="Microorganizmo" type="text" v-model="microorganizmo_aislado" class="form-control" placeholder="Microorganizmo aislado">
                 </b-col>
             </b-row>
             <label class="text-center"><b>Medico que reporta el evento</b></label>
-            <input id="NombreMedico" type="text" v-model="deceso" class="form-control" placeholder="Nombre de medico">
+            <input id="NombreMedico" type="text" v-model="medico_reporta_evento" class="form-control" placeholder="Nombre de medico">
       </div>
       <div>
         <b-container class="bv-example-row2">
           <b-row class="justify-content-md-center">
             <b-col>
-              <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="dgenerales">Guardar</button>
+              <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="agregar">Guardar</button>
             </b-col>
           </b-row>
         </b-container>
@@ -179,16 +179,27 @@ export default {
   },
   data() {
     return {
-      peso:'',
-      id:'',
-      telefono:'',
-      talla:'',
-      pa:''
+      nombre:'',
+      edad:'',
+      sexo:'',
+      no_de_registro:'',
+      fecha:'',
+      ultima_terapia:'',
+      fecha_cateter:'',
+      femoral:'',
+      subclavio:'',
+      yugular:'',
+      no_sesiones:'',
+      turno:'',
+      fecha_cultivo:'',
+      resultado_cultivo:'',
+      microorganizmo_aislado:'',
+      medico_reporta_evento:''
     };
   },
   methods:{
     agregar(){
-        this.$http.put(`http://localhost:8000/DG/updateDG?id=${this.id}&Telefono=${this.telefono}&Peso=${this.peso}&Talla=${this.talla}&PA=${this.pa}`).then(response=>{
+        this.$http.post(`http://localhost:8000/forms/hemodialisis?nombre=${this.nombre}&edad=${this.edad}&sexo=${this.sexo}&no_de_registro=${this.no_de_registro}&fecha=${this.fecha}&ultima_terapia=${this.ultima_terapia}&fecha_cateter=${this.fecha_cateter}&femoral=${this.femoral}&subclavio=${this.subclavio}&yugular=${this.yugular}&no_sesiones=${this.no_sesiones}&turno=${this.turno}&fecha_cultivo=${this.fecha_cultivo}&resultado_cultivo=${this.resultado_cultivo}&microorganizmo_aislado=${this.microorganizmo_aislado}&medico_reporta_evento=${this.medico_reporta_evento}`).then(response=>{
       })
     },
     dgenerales() {

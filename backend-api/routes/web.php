@@ -114,3 +114,7 @@ $router->post('/percentilTalla', 'percentilTallaController@getTallas');
 
 // percentil peso talla
 $router->post('/percentilPesoTalla', 'percentilPesoAlturaController@getPesoAlturas');
+//Formularios
+
+$router->post('/forms/mortalidad', 'FormulariosController@storeMortalidad');
+$router->post('/forms/hemodialisis', 'FormulariosController@storeHemodialisis');

@@ -6,7 +6,7 @@
           <input id="nombre" type="text" v-model="nombre" class="form-control" placeholder="Nombre">
             <b-row align-h="around" align-v="center">
               <b-col>
-              <v-radio-group v-model="row" row>
+              <v-radio-group v-model="sexo" row>
                   <br><label class="text-left"><b>Sexo:</b></label>
                   <b-col>
                   <v-radio label="Masculino" value="Masculino" color="orange" ></v-radio>
@@ -22,16 +22,16 @@
             <input id="edad" type="text" v-model="edad" class="form-control" placeholder="Edad">
 
             <label class="text-center"><b>No. de registro</b></label>
-            <input id="registro" type="text" v-model="registro" class="form-control" placeholder="No. de registro">
+            <input id="no_de_registro" type="text" v-model="no_de_registro" class="form-control" placeholder="No. de registro">
 
             <label class="text-center"><b>Fecha de deceso</b></label>
-            <input id="deceso" type="date" v-model="deceso" class="form-control" placeholder="Fecha de deceso">
+            <input id="fecha_de_deceso" type="date" v-model="fecha_de_deceso" class="form-control" placeholder="Fecha de deceso">
 
             <br><label class="text-center"><b>Ultima terapia en la que encontrba el paciente:</b></label>
             <!-- <b-container class="bv-example-row1"> -->
               <b-row align-h="around" align-v="center">
                 <b-col>
-                  <v-radio-group v-model="row" row>
+                  <v-radio-group v-model="ultima_terapia" row>
                   
                   <b-col>
                   <v-radio label="Pre Dialisis" value="preDialisis" color="orange" ></v-radio>
@@ -82,7 +82,7 @@
             <!-- <v-container fluid> -->
               <v-row>
                 <v-col cols="12" sm="6" md="6">
-                  <v-radio-group v-model="ex7" column>
+                  <v-radio-group v-model="sitio_deceso" column>
                     <v-radio
                       label="Hospicio"
                       color="orange"
@@ -105,7 +105,7 @@
             <label class="text-center"><b>Causa de muerte</b></label>
               <v-row>
                 <v-col cols="12" sm="6" md="6">
-                  <v-radio-group v-model="ex7" column>
+                  <v-radio-group v-model="causa" column>
                     <v-radio
                       label="Infecciosa"
                       color="orange"
@@ -117,8 +117,6 @@
                       value="EventoCardiovascular"
                     ></v-radio>
                     <v-radio
-                      v-model="peso"
-                      hide-details
                       label="otro"
                       color="orange"
                       value="Casa"
@@ -149,16 +147,19 @@ export default {
   },
   data() {
     return {
-      peso:'',
-      id:'',
-      telefono:'',
-      talla:'',
-      pa:''
+      nombre:'',
+      sexo:'',
+      edad:'',
+      no_de_registro:'',
+      fecha_de_deceso:'',
+      ultima_terapia:'',
+      sitio_deceso:'',
+      causa:''
     };
   },
   methods:{
     agregar(){
-        this.$http.put(`http://localhost:8000/DG/updateDG?id=${this.id}&Telefono=${this.telefono}&Peso=${this.peso}&Talla=${this.talla}&PA=${this.pa}`).then(response=>{
+        this.$http.post(`http://localhost:8000/forms/mortalidad?nombre=${this.nombre}&sexo=${this.sexo}&edad=${this.edad}&no_de_registro=${this.no_de_registro}&fecha_de_deceso=${this.fecha_de_deceso}&ultima_terapia=${this.ultima_terapia}&sitio_deceso=${this.sitio_deceso}&causa=${this.causa}`).then(response=>{
       })
     },
     dgenerales() {
