@@ -355,16 +355,19 @@ export default {
       this.$http
         .post("http://localhost:8000/citas", data)
         .then(response => {
-          // empujar nuevo evento a array local de eventos
-          this.events.push({
-            title: `Doctor: ${this.selectedDoctor}`,
-            details: `Paciente: ${this.selectedPatient}`,
-            date: this.selectedDate,
-            time: this.selectedTime,
-            duration: this.selectedDuration,
-            doctor: this.selectedDoctor,
-            patient: this.selectedPatient
-          });
+          if (response.data.success) {
+            // empujar nuevo evento a array local de eventos
+            this.events.push({
+              id: response.data.data.id,
+              title: `Doctor: ${this.selectedDoctor}`,
+              details: `Paciente: ${this.selectedPatient}`,
+              date: this.selectedDate,
+              time: this.selectedTime,
+              duration: this.selectedDuration,
+              doctor: this.selectedDoctor,
+              patient: this.selectedPatient
+            });
+          }
 
           // resetear campos de dialogo
           this.selectedDoctor = "";
@@ -372,12 +375,12 @@ export default {
           this.selectedDuration = "";
         })
         .catch(error => {
-          this.infoMessage = "";
-          Object.keys(error.response.data).forEach(key => {
-            if (key != "success") {
-              this.infoMessage += error.response.data[key];
-            }
-          });
+          this.infoMessage = "Ocurrió un error al crear cita.";
+          // Object.keys(error.response.data).forEach(key => {
+          //   if (key != "success") {
+          //     this.infoMessage += error.response.data[key];
+          //   }
+          // });
           this.infoDialog = true;
           this.selectedDoctor = "";
           this.selectedPatient = "";
