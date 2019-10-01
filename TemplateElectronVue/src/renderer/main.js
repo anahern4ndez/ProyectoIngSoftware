@@ -174,6 +174,13 @@ const routes = [
       'TransplanteRenal',
       require('./components/FormularioTransplanteRenal.vue').default
     )
+  },
+  {
+    path: '/ColocacionCateter',
+    component: Vue.component(
+      'ColocacionCateter',
+      require('./components/ColocacionCateter.vue').default
+    )
   }
 ];
 
