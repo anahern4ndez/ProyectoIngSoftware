@@ -375,12 +375,12 @@ export default {
           this.selectedDuration = "";
         })
         .catch(error => {
-          this.infoMessage = "";
-          Object.keys(error.response.data).forEach(key => {
-            if (key != "success") {
-              this.infoMessage += error.response.data[key];
-            }
-          });
+          this.infoMessage = "Ocurrió un error al crear cita.";
+          // Object.keys(error.response.data).forEach(key => {
+          //   if (key != "success") {
+          //     this.infoMessage += error.response.data[key];
+          //   }
+          // });
           this.infoDialog = true;
           this.selectedDoctor = "";
           this.selectedPatient = "";
