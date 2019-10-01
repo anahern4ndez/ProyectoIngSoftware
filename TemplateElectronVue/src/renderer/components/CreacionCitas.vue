@@ -40,7 +40,7 @@
             <!-- template para renderear vista mensual -->
             <template v-slot:day="{ date }">
               <template v-for="event in eventsMap[date]">
-                <div :key="event.title" v-ripple class="my-event" v-html="event.title"></div>
+                <div :key="event.id" v-ripple class="my-event" v-html="event.title"></div>
               </template>
             </template>
 
@@ -49,7 +49,7 @@
             <template v-slot:dayHeader="{ date }">
               <template v-for="event in eventsMap[date]">
                 <!-- all day events don't have time -->
-                <div v-if="!event.time" :key="event.title" class="my-event" v-html="event.title"></div>
+                <div v-if="!event.time" :key="event.id" class="my-event" v-html="event.title"></div>
               </template>
             </template>
 
@@ -67,7 +67,7 @@
                 <div
                   v-on:click="appointmentClick(event)"
                   v-if="event.time"
-                  :key="event.title"
+                  :key="event.id"
                   :style="{ top: timeToY(event.time) + 'px', height: minutesToPixels(event.duration) + 'px' }"
                   class="my-event with-time"
                   v-html="event.title"
@@ -89,7 +89,7 @@
             <v-container grid-list-md>
               <v-layout wrap>
                 <v-flex xs12>
-                  <v-autocomplete :items="dummyPatients" label="Paciente" required></v-autocomplete>
+                  <v-autocomplete :items="patients" label="Paciente" required></v-autocomplete>
                 </v-flex>
                 <v-flex xs12>
                   <v-select
@@ -245,29 +245,11 @@ export default {
       { text: "Semanal", value: "week" },
       { text: "Mensual", value: "month" }
     ],
-    events: [
-      {
-        title: "Doctor: Randall Lou",
-        details: "Paciente: Rodrigo Zea",
-        date: "2019-05-10",
-        time: "09:00",
-        duration: 90
-      },
-      {
-        title: "Doctor: Celeste Azul",
-        details: "Paciente: Esteban Cabrera",
-        date: "2019-05-10",
-        time: "11:00",
-        duration: 45
-      }
-    ],
-    dummyPatients: [
-      "Rodrigo Zea",
-      "Ana Lucía Hernandez",
-      "Francisco Molina",
-      "Sebastian Arriola",
-      "Esteban Cabrera"
-    ],
+    events: [],
+    doctors: {
+      1: "Randall Lou"
+    },
+    patients: [],
     textboxRules: [v => !!v || "Seleccione una persona"],
     duracionRules: [
       v => !!v || "Escriba una duración de cita en minutos.",
@@ -282,16 +264,16 @@ export default {
     minAppointmentHour: 6,
     maxAppointmentHour: 20,
     updatingAppointment: false,
-    appointmentDialogTitle: "Crear Nueva Cita"
+    appointmentDialogTitle: "Crear Nueva Cita",
+    selectedAppointment: ""
   }),
   mounted() {
-    //this.start = this.today;
     this.todayDate = new Date();
     this.today = this.todayDate.toISOString().substring(0, 10);
-    //this.selectedDate = this.today;
     this.month = this.getMes(this.todayDate.getMonth());
     this.year = this.todayDate.getFullYear();
     this.obtenerPacientes();
+    this.getAppointments();
   },
   computed: {
     // convert the list of events into a map of lists keyed by date
@@ -308,6 +290,28 @@ export default {
     },
     showAppointmentDetails() {
       alert("details");
+    },
+    getAppointments() {
+      this.$http
+        .get("http://localhost:8000/citas")
+        .then(response => {
+          const e = response.data.data.map(i => {
+            return {
+              id: i.id,
+              title: `Doctor: ${this.doctors[i.idUsuario]}`,
+              details: `Paciente: ${i.idPaciente}`,
+              date: i.fecha,
+              time: i.hora,
+              duration: i.duracionCita
+            };
+          });
+          e.forEach(i => {
+            this.events.push(i);
+          });
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
     createAppointment() {
       this.dialogOpen = false;
@@ -365,6 +369,34 @@ export default {
     updateAppointment() {
       this.updatingAppointment = false;
       this.dialogOpen = false;
+
+      const data = {
+        idUsuario: 1,
+        idPaciente: 1,
+        fecha: this.selectedDate,
+        hora: this.selectedTime,
+        duracionCita: this.selectedDuration,
+        estado: 1,
+        tipoCitaID: 1
+      };
+
+      this.$http
+        .put(`http://localhost:8000/citas/${this.selectedAppointment.id}`, data)
+        .then(response => {
+          if (response.data.success) {
+            this.infoMessage = "Cita actualizada";
+            this.infoDialog = true;
+            const a = response.data.data;
+            this.selectedAppointment.time = a.hora;
+            this.selectedAppointment.date = a.fecha;
+            this.selectedAppointment.duration = a.duracionCita;
+            this.selectedAppointment.doctor = a.idUsuario;
+            this.selectedAppointment.patient = a.idPaciente;
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
     dayClick(event) {
       if (this.calendarType === "month") {
@@ -390,7 +422,7 @@ export default {
       this.$http
         .get("http://localhost:8000/PacienteController/findAll")
         .then(response => {
-          this.dummyPatients = response.data.Pacientes.map(i => i.Nombre);
+          this.patients = response.data.Pacientes.map(i => i.Nombre);
         });
     },
     interactuar(type) {
@@ -432,6 +464,7 @@ export default {
       this.updatingAppointment = true;
       this.appointmentDialogTitle = "Actualizando Cita";
       // load selected appointment details
+      this.selectedAppointment = appointment;
       this.selectedDate = appointment.date;
       this.selectedTime = appointment.time;
       this.selectedDoctor = appointment.doctor;
