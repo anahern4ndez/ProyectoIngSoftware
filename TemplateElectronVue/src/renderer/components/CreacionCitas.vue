@@ -174,6 +174,12 @@
             <small>*Campos Requeridos</small>
           </v-card-text>
           <v-card-actions>
+            <v-btn
+              color="red"
+              flat
+              v-if="updatingAppointment"
+              @click="confirmDeleteAppointment"
+            >Eliminar Cita</v-btn>
             <v-spacer></v-spacer>
             <v-btn color="blue darken-1" flat @click="closeAppointmentDialog">Cancelar</v-btn>
             <v-btn
@@ -197,7 +203,18 @@
             <v-divider></v-divider>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="primary" flat @click="infoDialog = false">Aceptar</v-btn>
+              <v-btn
+                color="primary"
+                flat
+                @click="infoDialog = false"
+                v-if="!deletingAppointment"
+              >Aceptar</v-btn>
+              <v-btn
+                color="primary"
+                flat
+                v-if="deletingAppointment"
+                @click="deleteAppointment"
+              >Eliminar</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -265,7 +282,8 @@ export default {
     maxAppointmentHour: 20,
     updatingAppointment: false,
     appointmentDialogTitle: "Crear Nueva Cita",
-    selectedAppointment: ""
+    selectedAppointment: "",
+    deletingAppointment: ""
   }),
   mounted() {
     this.todayDate = new Date();
@@ -398,6 +416,23 @@ export default {
           console.log(err);
         });
     },
+    deleteAppointment() {
+      this.updatingAppointment = false;
+      this.infoDialog = false;
+
+      this.$http
+        .delete(`http://localhost:8000/citas/${this.selectedAppointment.id}`)
+        .then(response => {
+          if (response.data.success) {
+            this.events = this.events.filter(i => {
+              return i.id != this.selectedAppointment.id;
+            });
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
     dayClick(event) {
       if (this.calendarType === "month") {
         this.selectedDate = event.date;
@@ -480,6 +515,12 @@ export default {
       this.selectedDoctor = "";
       this.selectedPatient = "";
       this.selectedDuration = "";
+    },
+    confirmDeleteAppointment() {
+      this.dialogOpen = false;
+      this.deletingAppointment = true;
+      this.infoMessage = "¿Estás seguro?";
+      this.infoDialog = true;
     }
   }
 };
