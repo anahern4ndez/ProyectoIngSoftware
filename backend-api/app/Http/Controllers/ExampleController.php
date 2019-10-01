@@ -120,6 +120,17 @@ class ExampleController extends Controller
             'message'=>'Funciono',
         ], 200);
     }
+
+    function findById(Request $request){
+        (int)$id = $request->ID;
+        $user =  User::where('id', $id)->get();
+
+        return response()->json([
+            'success' => true,
+            'User' => $user[0]->name
+        ], 200);
+    }
+
     public function updateDG(Request $request)
     {
         $id = $request->id;

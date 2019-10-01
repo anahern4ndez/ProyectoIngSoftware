@@ -155,9 +155,17 @@
                                     {{this.paciente.nombre}} {{this.paciente.apellido}}
                                 </v-card-title>
 
-                                <v-card-text>
-                                    HOla
-                                </v-card-text>
+                                <v-card-title>
+                                    <ul>
+                                        <li v-for="com in this.showComments">
+                                            <span class="grey--text subtitle-1 font-weight-regular">{{com.hora}} 
+                                                <span class="font-weight-black subtitle-1 black--text">{{com.doctor}}: </span>
+                                                <span class="font-weight-regular subtitle-1 black--text">{{com.comentario}}</span>
+                                                <br />
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </v-card-title>
 
                                 <v-card-actions>
                                 <div class="flex-grow-1"></div>
@@ -2576,7 +2584,8 @@ export default {
         horaActual: "",
         idConsulta: 0,
         hasComments: false,
-        allComments: {},
+        allComments: [],
+        showComments: [],
 
         tabs: ["Consulta", "Detalles físicos", "Signos vitales", "Mapa médico"],
 
@@ -2712,8 +2721,9 @@ export default {
                 this.$http.post(`http://localhost:8000/ComentarioController/findAll`, data3).then(response => {
                     if(response.data.Comentarios.length > 0){
                         this.hasComments = true
-                        this.allComments = JSON.parse(response.data.Comentarios[0].comentarios)
-                        console.log(JSON.stringify(this.allComments))
+                        this.allComments.push(JSON.parse(response.data.Comentarios[0].comentarios))
+
+                        this.orderComments(this.allComments)
                     }else{
                         this.hasComments = false
                     }
@@ -2743,6 +2753,39 @@ export default {
             this.paciente.meses = fechaActual.getMonth() - aComputar.getMonth();
         },
 
+        orderComments (comments) {
+            var datos = []
+            comments.map(obj => {
+                for(var key in obj){
+                    for(var key2 in obj[key]){
+                        for(var i = 0; i<obj[key][key2].hora.length; i++){
+
+                            var temp = {}
+                            
+                            temp["doctor"] = key2
+                            temp["hora"] = obj[key][key2].hora[i]
+                            temp["comentario"] = obj[key][key2].comentario[i]
+                            this.showComments.push(temp)
+                        }
+                    }
+                }
+            })
+
+            this.showComments.sort(function (d1, d2) {
+                return new Date(d1.hora) - new Date(d2.hora)
+            })
+
+            this.showComments.map(array => {
+                const data = {
+                    ID: array.doctor
+                }
+
+                this.$http.post(`http://localhost:8000/ExampleController/findById`, data).then(response => {
+                    array.doctor = response.data.User
+                })
+            })
+        },
+
         verMas () {
             this.verComentarios = true
         },
@@ -2751,13 +2794,14 @@ export default {
             
             if(this.comentario != ""){
                 const d = new Date()
-                this.horaActual = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds()
+                this.horaActual = d.getMonth() + "/" + d.getDate() + "/" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds()
 
                 this.nuevoComentario = true
             }else{
                 this.nuevoComentario = false
             }
 
+            console.log("comentarios? " + this.nuevoComentario)
         },        
 
         agregarEnfermedad(){
@@ -3059,6 +3103,9 @@ export default {
                             var b = store.id
                             
                             if(!this.hasComments){
+
+                                console.log("No tiene comentarios")
+
                                 var string = `{
                                     "` + a + `": ` + `{
                                         "` + b + `": ` + `{
@@ -3080,12 +3127,15 @@ export default {
                                     comentarios: JSON.stringify(json)
                                 }
 
-
                                 this.$http.post('http://localhost:8000/ComentarioController/insert', info).then(response => {
 
                                 })
                             }else{
-                                if(this.allComments[String(a)] == undefined){
+
+                                console.log("consulta: " + String(a))
+                                
+                                if(this.allComments[0][String(a)] == undefined){
+                                    console.log("Si tiene comentarios pero no consulta")
                                     var string = `{
                                         "` + a + `": ` + `{
                                             "` + b + `": ` + `{
@@ -3102,9 +3152,11 @@ export default {
                                     json[String(a)][String(b)].hora.push(this.horaActual)
                                     json[String(a)][String(b)].comentario.push(this.comentario)
 
-                                    Object.assign(this.allComments, json)
+                                    Object.assign(this.allComments[0], json)
                                 }else{
-                                    if(this.allComments[String(a)][String(b)] == undefined){
+
+                                    if(this.allComments[0][String(a)][String(b)] == undefined){
+                                        console.log("Si tiene comentarios y consulta pero no doctor")
                                         var string = `{
                                             "` + b + `": ` + `{
                                                 
@@ -3119,22 +3171,22 @@ export default {
                                         json[String(a)][String(b)].hora.push(this.horaActual)
                                         json[String(a)][String(b)].comentario.push(this.comentario)
 
-                                        Object.assign(this.allComments[String(a)], json)
+                                        Object.assign(this.allComments[0][String(a)], json)
                                     }else{
-                                        this.allComments[String(a)][String(b)].hora.push(this.horaActual)
-                                        this.allComments[String(a)][String(b)].comentario.push(this.comentario)
+                                        console.log("tiene todo")
+                                        this.allComments[0][String(a)][String(b)].hora.push(this.horaActual)
+                                        this.allComments[0][String(a)][String(b)].comentario.push(this.comentario)
+                                        console.log(JSON.stringify(this.allComments[0]))
                                     }
                                 }
+                                const info = {
+                                    cui: this.paciente.CUI,
+                                    comentarios: JSON.stringify(this.allComments[0])
+                                }
+                                this.$http.put('http://localhost:8000/ComentarioController/update', info).then(response => {
+                                    
+                                })
                             }
-
-                            const info = {
-                                cui: this.paciente.CUI,
-                                comentarios: JSON.stringify(this.allComments)
-                            }
-                            this.$http.put('http://localhost:8000/ComentarioController/update', info).then(response => {
-                                
-                            })
-                            
                         })
                     }
                 }).then(() => {
@@ -3178,7 +3230,7 @@ export default {
                                 this.$http.post('http://localhost:8000/ComentarioController/insert', info).then(response => {
                                 })
                             }else{
-                                if(this.allComments[String(a)] == undefined){
+                                if(this.allComments[0][String(a)] == undefined){
                                     var string = `{
                                         "` + a + `": ` + `{
                                             "` + b + `": ` + `{
@@ -3195,9 +3247,9 @@ export default {
                                     json[String(a)][String(b)].hora.push(this.horaActual)
                                     json[String(a)][String(b)].comentario.push(this.comentario)
 
-                                    Object.assign(this.allComments, json)
+                                    Object.assign(this.allComments[0], json)
                                 }else{
-                                    if(this.allComments[String(a)][String(b)] == undefined){
+                                    if(this.allComments[0][String(a)][String(b)] == undefined){
                                         var string = `{
                                             "` + b + `": ` + `{
                                                 
@@ -3212,17 +3264,17 @@ export default {
                                         json[String(a)][String(b)].hora.push(this.horaActual)
                                         json[String(a)][String(b)].comentario.push(this.comentario)
 
-                                        Object.assign(this.allComments[String(a)], json)
+                                        Object.assign(this.allComments[0][String(a)], json)
                                     }else{
-                                        this.allComments[String(a)][String(b)].hora.push(this.horaActual)
-                                        this.allComments[String(a)][String(b)].comentario.push(this.comentario)
+                                        this.allComments[0][String(a)][String(b)].hora.push(this.horaActual)
+                                        this.allComments[0][String(a)][String(b)].comentario.push(this.comentario)
                                     }
                                 }
                             }
 
                             const info = {
                                 cui: this.paciente.CUI,
-                                comentarios: JSON.stringify(this.allComments)
+                                comentarios: JSON.stringify(this.allComments[0])
                             }
                             this.$http.put('http://localhost:8000/ComentarioController/update', info).then(response => {
                             })
