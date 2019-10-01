@@ -82,6 +82,7 @@ export default {
         {name: 'Cambio Estado', route: '/cambioEstado', icon: 'fa-flag'},
         {name: 'Hemodialisis', route: '/Hemodialisis', icon: 'fa-flag'},
         {name: 'Peritonitis', route: '/Peritonitis', icon: 'fa-flag'},
+        {name: 'Transplante Renal', route: '/TransplanteRenal', icon: 'fa-flag'},
       ]
     }
   },
