@@ -65,6 +65,7 @@
               <template v-for="event in eventsMap[date]">
                 <!-- timed events -->
                 <div
+                  v-on:click="appointmentClick(event)"
                   v-if="event.time"
                   :key="event.title"
                   :style="{ top: timeToY(event.time) + 'px', height: minutesToPixels(event.duration) + 'px' }"
@@ -82,7 +83,7 @@
         <template v-slot:activator="{ on }"></template>
         <v-card>
           <v-card-title>
-            <span class="headline">Crear Nueva Cita</span>
+            <span class="headline">{{ appointmentDialogTitle }}</span>
           </v-card-title>
           <v-card-text>
             <v-container grid-list-md>
@@ -174,8 +175,12 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" flat @click="dialogOpen = false">Cancelar</v-btn>
-            <v-btn color="blue darken-1" flat @click="createAppointment">Crear Cita</v-btn>
+            <v-btn color="blue darken-1" flat @click="closeAppointmentDialog">Cancelar</v-btn>
+            <v-btn
+              color="blue darken-1"
+              flat
+              @click="updatingAppointment ? updateAppointment() : createAppointment()"
+            >{{ updatingAppointment ? 'Actualizar Cita' : 'Crear Cita' }}</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -275,7 +280,9 @@ export default {
     infoDialog: false,
     infoMessage: "",
     minAppointmentHour: 6,
-    maxAppointmentHour: 20
+    maxAppointmentHour: 20,
+    updatingAppointment: false,
+    appointmentDialogTitle: "Crear Nueva Cita"
   }),
   mounted() {
     //this.start = this.today;
@@ -296,6 +303,7 @@ export default {
   },
   methods: {
     showAppointmentDialog() {
+      this.appointmentDialogTitle = "Crear Nueva Cita";
       this.dialogOpen = true;
     },
     showAppointmentDetails() {
@@ -331,7 +339,9 @@ export default {
             details: `Paciente: ${this.selectedPatient}`,
             date: this.selectedDate,
             time: this.selectedTime,
-            duration: this.selectedDuration
+            duration: this.selectedDuration,
+            doctor: this.selectedDoctor,
+            patient: this.selectedPatient
           });
 
           // resetear campos de dialogo
@@ -352,6 +362,10 @@ export default {
           this.selectedDuration = "";
         });
     },
+    updateAppointment() {
+      this.updatingAppointment = false;
+      this.dialogOpen = false;
+    },
     dayClick(event) {
       if (this.calendarType === "month") {
         this.selectedDate = event.date;
@@ -360,6 +374,9 @@ export default {
       }
     },
     intervalClick(event) {
+      if (this.updatingAppointment) return;
+
+      this.appointmentDialogTitle = "Crear Nueva Cita";
       const time = Number(event.time.substring(0, 2));
       // no permitir click en horas invalidas
       if (time < this.minAppointmentHour || time > this.maxAppointmentHour) {
@@ -410,6 +427,26 @@ export default {
     saveAppointmentDate() {
       this.dateMenuOpen = false;
       this.$refs.menu.save(this.selectedDate);
+    },
+    appointmentClick(appointment) {
+      this.updatingAppointment = true;
+      this.appointmentDialogTitle = "Actualizando Cita";
+      // load selected appointment details
+      this.selectedDate = appointment.date;
+      this.selectedTime = appointment.time;
+      this.selectedDoctor = appointment.doctor;
+      this.selectedPatient = appointment.patient;
+      this.selectedDuration = appointment.duration;
+      this.dialogOpen = true;
+    },
+    closeAppointmentDialog() {
+      this.dialogOpen = false;
+      this.updatingAppointment = false;
+      this.selectedDate = "";
+      this.selectedTime = "";
+      this.selectedDoctor = "";
+      this.selectedPatient = "";
+      this.selectedDuration = "";
     }
   }
 };
