@@ -14,8 +14,9 @@ class HemodialisisController extends Controller
         $Hemodialisis->NoHemodialisis = $request->NoHemodialisis;
         $Hemodialisis->LugarDeProcedencia = $request->LugarDeProcedencia;
         $Hemodialisis->TipoDeHemodialisis = $request->TipoDeHemodialisis;
-        $Via = $request->Via;
-        $Hemodialisis['Via'] = json_encode($Via);
+        //$Via = $request->Via;
+        //$Hemodialisis['Via'] = json_encode($Via);
+        $Hemodialisis->Via = $request->Via;
         $Hemodialisis->LineasPediatrica = $request->LineasPediatrica;
         $Hemodialisis->Filtro = $request->Filtro;
         $Hemodialisis->FlujoDeSangre = $request->FlujoDeSangre;
@@ -33,9 +34,11 @@ class HemodialisisController extends Controller
         $Hemodialisis->Talla = $request->Talla;
         $Hemodialisis->PesoDelta = $request->PesoDelta;
         $Hemodialisis->Especiales = $request->Especiales;
+        $Hemodialisis->Fecha_col_cat = $request->Fecha_col_cat;
+
 
         //tabla 1
-        $Hemodialisis->PAstr = $request->PAstr;
+        /*$Hemodialisis->PAstr = $request->PAstr;
         $Hemodialisis->Pulso = $request->Pulso;
         $Hemodialisis->Temp = $request->Temp;
         $Hemodialisis->QB = $request->QB;
@@ -43,14 +46,18 @@ class HemodialisisController extends Controller
         $Hemodialisis->PA_table = $request->PA_table;
         $Hemodialisis->UFH = $request->UFH;
         $Hemodialisis->Medicamentos = $request->Medicamentos;
-        $Hemodialisis->UFTotal = $request->UFTotal;
+        $Hemodialisis->UFTotal = $request->UFTotal;*/
         //fin tabla 1
         
         $Hemodialisis->Observaciones = $request->Observaciones;
         $Hemodialisis->Tecnico = $request->Tecnico;
         $Hemodialisis->PA = $request->PA;
         $data_table2 = $request->Tabla2;
-        $Hemodialisis['Tabla2'] = json_decode($data_table2);
+        $fechaT2 = $request->fechaT2;
+        $Hemodialisis['fechaT2'] = json_decode($fechaT2);
+        $Hemodialisis['Pre'] = json_encode($request->Pre);
+        $Hemodialisis['Post'] = json_encode($request->Post);
+        $Hemodialisis['Urr'] = json_encode($request->Urr);
         $Hemodialisis->save();
     }
 }
