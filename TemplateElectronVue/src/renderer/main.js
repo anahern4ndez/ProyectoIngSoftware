@@ -107,6 +107,10 @@ const routes = [{
     {
       path: '/Hemodialisis',
       component: Vue.component('cambioEstado', require('./components/Hemodialisis.vue').default)
+    },
+    {
+      path: '/History',
+      component: Vue.component('History', require('./components/History.vue').default)
     }
 ];
 

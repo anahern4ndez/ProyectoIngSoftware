@@ -2228,8 +2228,6 @@
                                 <td contenteditable='true' style="text-align: left;" ></td>
                                 <td contenteditable='true' style="text-align: left;" ></td>
                             </tr>
-                          
-                          
                         </tbody>
                         </table>
                     </div>
