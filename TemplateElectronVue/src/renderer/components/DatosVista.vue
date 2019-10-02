@@ -223,7 +223,7 @@ export default {
       store.CUI=this.prueba   
     },
     dgenerales() {
-      this.$router.push("/FormularioTransfusiones");
+      this.$router.push("/FormularioMortalidad");
     }
   }
 };

@@ -18,7 +18,7 @@
           <v-dialog v-model="dialog" max-width="500px">
             <v-card>
               <v-card-title>
-                <span class="headline">Edit</span>
+                <span class="headline">Editar estado</span>
               </v-card-title>
               <v-card-text>
                 <v-flex xs12 sm6 md4>
@@ -36,8 +36,45 @@
               
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>
-                <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
+                <v-btn color="blue darken-1" flat @click="close">Cancelar</v-btn>
+                <v-btn color="blue darken-1" flat @click="save">Guardar</v-btn>
+              </v-card-actions>
+              </v-card>
+          </v-dialog>
+          <!--    cuadro de dialogo para eliminar el paciente -->
+          <v-dialog v-model="dialog_delete" max-width="500px">
+            <v-card>
+              <v-card-title>
+                <span class="headline">Eliminar paciente</span>
+              </v-card-title>
+
+              <v-card-text>
+                <p>¿Desea eliminar el paciente?</p>
+              </v-card-text>
+              
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" flat @click="close">Cancelar</v-btn>
+                <v-btn color="red darken-1" flat @click="deleteItem(selectedPatients)">Eliminar</v-btn>
+              </v-card-actions>
+              </v-card>
+          </v-dialog>
+
+
+          <!--    cuadro de dialogo para confirmar accion el paciente -->
+          <v-dialog v-model="completeDialog" max-width="500px">
+            <v-card>
+              <v-card-title>
+                <span class="headline">Acción realizada</span>
+              </v-card-title>
+
+              <v-card-text>
+                <p>Acción completada exitosamente</p>
+              </v-card-text>
+              
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" flat @click="completeDialog=false">OK</v-btn>
               </v-card-actions>
               </v-card>
           </v-dialog>
@@ -72,7 +109,7 @@
                       <v-icon
                         small
                         class="ma-3"
-                        @click="deleteItem(props.item)"
+                        @click="showDeleteDiag()"
                       >
                         delete
                       </v-icon>
@@ -107,7 +144,7 @@
               <br>
               <div>
               <!-- elementos para seleccionar imagen--> 
-              <v-button class="btn btn-lg btn-warning btn-block" id="botonimagen" @click="imgClick"> Seleccionar Imagen </v-button>
+              <button class="btn btn-lg btn-warning btn-block" id="botonimagen" @click="imgClick"> Seleccionar Imagen </button>
               <input type="file" class="hide_file" style="height:auto; width:auto; visibility:hidden" v-on:change="changeImg" ref="changeImg"/>
               </div>
               <br>
@@ -158,7 +195,7 @@
         <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="darConsulta"> Dar consulta </button>
       </div>
       <div id="boton">
-        <router-link :to="{name: 'EditarPaciente', params: { cui: this.selectedPatients.CUI }}" class="btn btn-lg btn-warning btn-block">Editar datos de paciente seleccionado</router-link>
+        <router-link :to="{name: 'cambioEstado', params: { cui: this.selectedPatients.CUI, nombre: this.selectedPatients.Nombre, edad: this.selectedPatients.Edad, sexo: this.selectedPatients.Sexo, estado: this.selectedPatients.estado_actual }}" class="btn btn-lg btn-warning btn-block">Editar estado de paciente seleccionado</router-link>
       </div>
       <div id="boton">
         <button type="button" class="btn btn-lg btn-warning btn-block"> Archivos </button>
@@ -220,6 +257,8 @@ export default {
         estados_response: '',
         estadoNuevo: null,
         dialog: false,
+        dialog_delete: false,
+        completeDialog: false,
         radioGroup:1,
         headers: [
           { text: 'CUI (ID)', align: 'center',value: 'CUI'},
@@ -283,37 +322,30 @@ export default {
           this.$router.push('/IngresarPaciente');
         },
         editarDatos(received){
-          this.dialog=true;
+          //this.dialog=true;
           this.editedIndex = this.pacientes.indexOf(received)
           this.editedItem = Object.assign({}, received)
-        },
-        editarPaciente(){
-          this.$router.push('/EditarPaciente');
+          this.$router.push({name: 'EditarPaciente', params: { cui: this.editedItem.CUI }})
+          
         },
         archivos(){
-          this.$router.push('/IngresarPaciente');
+          
         },
         reportes(){
-          this.$router.push('/gestionarPaciente');
+          
         },
         estadisticas(){
-          this.$router.push('/EditarPaciente');
+          
         },
         close () {
           this.dialog = false
+          this.dialog_delete = false
           setTimeout(() => {
             this.editedItem = Object.assign({}, this.defaultItem)
             this.editedIndex = -1
           }, 300)
         },
-        editItem (item) {
-          this.editedIndex = this.pacientes.indexOf(item)
-          this.editedItem = Object.assign({}, item)
-          this.dialog = true
-        },
         save () {
-          console.log(this.editedItem);
-          console.log(this.selectedPatients);
           if (this.editedIndex > -1) {
             Object.assign(this.pacientes[this.editedIndex], this.editedItem)
           }
@@ -328,6 +360,7 @@ export default {
             //var nuevoEstado = this.estados_response[this.estados_response.ID.indexOf(this.estadoNuevo)];
             this.selectedPatients.EstadoActual = (this.estados_response[this.estadoNuevo -1]).significado;
             this.selectedPatients.Imagen = this.imageData;
+            this.completeDialog = true
             this.reloadTable()
           });
         }, 
@@ -338,11 +371,19 @@ export default {
           this.selected2 = this.editedItem.CUI;
           
         },
+
+        showDeleteDiag(){
+          this.dialog_delete = true;
+        },
+
         deleteItem(item){
+          
           this.deletedCUI = item.id
           
           this.$http.delete(`http://localhost:8000/PacienteController/delete?cui=${this.deletedCUI}`).then(response=>{
             this.reloadTable()
+            this.close()
+            this.completeDialog = true
           });
             
         },
@@ -362,7 +403,6 @@ export default {
             var reader = new FileReader();
             // definir accion a realizar despues que se haya seleccionado una imagen
             reader.onload = (e) => {
-              console.log(this.estadoNuevo);
               this.imageData = e.target.result;
               var data = {
                 id: this.selectedPatients.CUI,

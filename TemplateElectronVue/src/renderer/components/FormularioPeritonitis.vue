@@ -1,6 +1,6 @@
 <template lang="">
     <div class="grey--text text--darken-2">
-        <h1 class="text-center" style="font-weight: bolder; font-family: Nunito;">Cambio de Estado</h1>
+        <h1 class="text-center" style="font-weight: bolder; font-family: Nunito;">Peritonitis o Infección de orificio de salida dialisis peritoneal</h1>
         <div>
             <b-container class="bv-example-row1" >
                 <b-row align-h="around" align-v="center">
@@ -11,7 +11,6 @@
                           outline
                           :rules="nameRules"
                           required
-                          readonly
                         ></v-text-field>
                         <v-text-field
                           v-model="age"
@@ -19,7 +18,6 @@
                           outline
                           :rules="ageRules"
                           required
-                          readonly
                         ></v-text-field>
                         <div style="float:left; width:50%">
                             <v-flex xs12 sm6 md4>
@@ -53,9 +51,9 @@
                     <b-col order="2" cols="5">
                         <label style="font-family: Nunito;" for="nameInput" class="subir">Sexo del paciente</label>
                         <div class="subir2">
-                            <v-radio-group v-model="sexo" row :rules="radioRules" required readonly>
-                                <v-radio name='sexo' label="Femenino" :value="1" color="black"></v-radio>
-                                <v-radio name='sexo' label="Masculino" :value="2" color="black"></v-radio>
+                            <v-radio-group v-model="sexo" row :rules="radioRules" required>
+                                <v-radio label="Femenino" value="1" color="black"></v-radio>
+                                <v-radio label="Masculino" value="2" color="black"></v-radio>
                             </v-radio-group>
                         </div>
                         <div class="subir3">
@@ -80,7 +78,7 @@
             <b-container class="bv-example-row1" >
                 <b-row align-h="around" align-v="center">    
                     <b-col order="1" cols="5">
-                        <label for="nameInput" style="font-weight: bold; font-family: Nunito; font-size: 120%;">Terapia actual en la que se encuentra el paciente</label> 
+                        <label for="nameInput" style="font-weight: bold; font-family: Nunito; font-size: 120%;">Servicio de procedencia</label> 
                     </b-col> 
                     <b-col order="2" cols="5">
                     </b-col>                        
@@ -91,11 +89,17 @@
             <b-container class="bv-example-row1" >
                 <b-row align-h="around" align-v="center">  
                     <div>
-                        <v-radio-group v-model="actual" row :rules="radioRules" required readonly>
-                            <v-radio name='actual' label="Pre diálisis" :value="1" color="black"></v-radio>
-                            <v-radio name='actual' label="Diálisis peritoneal" :value="2" color="black"></v-radio>
-                            <v-radio name='actual' label="Hemodiálisis" :value="3" color="black"></v-radio>
-                            <v-radio name='actual' label="Transplante renal" :value="4" color="black"></v-radio>
+                        <v-radio-group v-model="actual" row :rules="radioRules" required>
+                            <v-radio label="FUNDANIER" value="1" color="black"></v-radio>
+                            <v-radio label="UNAERC" value="2" color="black"></v-radio>
+                            <v-radio label="Otros" value="3" color="black"></v-radio>
+                            <v-text-field
+                                v-model="service"
+                                label="Nombre del servicio"
+                                outline
+                                :rules="serviceRules"
+                                required
+                            ></v-text-field>
                         </v-radio-group>
                     </div>             
                 </b-row>
@@ -105,7 +109,7 @@
             <b-container class="bv-example-row1" >
                 <b-row align-h="around" align-v="center">    
                     <b-col order="1" cols="5">
-                        <label for="nameInput" style="font-weight: bold; font-family: Nunito; font-size: 120%;">Cambio de Status de paciente a</label> 
+                        <!-- <label for="nameInput" style="font-weight: bold; font-family: Nunito; font-size: 120%;">Cambio de Status de paciente a</label> -->
                     </b-col> 
                     <b-col order="2" cols="5">
                     </b-col>                        
@@ -114,25 +118,13 @@
         </div>
         <div>
             <b-container class="bv-example-row1" >
-                <b-row align-h="around" align-v="center">  
-                        <div>
-                            <v-radio-group v-model="cambio" row :rules="radioRules" required>
-                                <v-radio label="Pre diálisis" value="1" color="black"></v-radio>
-                                <v-radio label="Diálisis peritoneal" value="2" color="black"></v-radio>
-                                <v-radio label="Hemodiálisis" value="3" color="black"></v-radio>
-                                <v-radio label="Transplante renal" value="4" color="black"></v-radio>
-                            </v-radio-group>
-                        </div>             
-                </b-row>
-                <br>
-                <br>
                 <div v-if="errorFaltanDatos">
                     <v-alert :value="true" type="error" id="alert">
                     Por favor, revise que haya ingresado los datos requeridos, y que sean válidos
                     </v-alert>
                 </div>
                 <div>
-                    <button float="left" type="button" class="btn btn-lg btn-warning btn-block" v-on:click="ingresarNuevoEstado">Ingresar nuevo estado</button> 
+                    <button float="left" type="button" class="btn btn-lg btn-warning btn-block" v-on:click="">Ingresar formulario de Peritonitis</button> 
                 </div>
             </b-container>
         </div>
@@ -146,14 +138,15 @@
         },
         data() {
             return {
-                cui: this.$route.params.cui,
-                name:this.$route.params.nombre,
-                age: this.$route.params.edad,
+                cui: '',
+                name:'',
+                age: '',
                 register: '',
-                sexo: this.$route.params.sexo,
-                fecha: new Date().toISOString().slice(0,10),
+                service: '',
+                sexo: '',
+                fecha: null,
                 menu: false,
-                actual: this.$route.params.estado.ID,
+                actual: '',
                 cambio: '',
                 errorFaltanDatos: false,
                 errorRegistro: false,
@@ -168,15 +161,19 @@
                 ],
                 ageRules: [
                     (v) => !!v || 'Se requiere la edad del paciente',
-                    //(v) => v && v.length <= 3 || 'Verifique que la edad tenga como maximo 3 digitos.',
-                    //(v) => v && isNaN(v) == false || 'La edad debe ser un numero',
-                    //(v) => v && v>=0 || 'La edad debe estar entre 0 años a 200 años',
-                    //(v) => v && v<=200 || 'La edad debe estar entre 0 años a 200 años'
+                    (v) => v && v.length <= 3 || 'Verifique que la edad tenga como maximo 3 digitos.',
+                    (v) => v && isNaN(v) == false || 'La edad debe ser un numero',
+                    (v) => v && v>=0 || 'La edad debe estar entre 0 años a 200 años',
+                    (v) => v && v<=200 || 'La edad debe estar entre 0 años a 200 años'
                 ],
                 registerRules: [
                     (v) => !!v || 'Se requiere el número de registro del paciente',
                     (v) => v && v.length < 60 || 'Se permite como maximo 60 caracteres',
                     (v) => v && isNaN(v) == false || 'El numero de registro debe ser un numero'
+                ],
+                serviceRules: [
+                    (v) => !!v || 'Se requiere el nombre del servicio',
+                    (v) => v && v.length < 60 || 'Se permite como maximo 60 caracteres',
                 ],
                 dateRules: [
                     (v) => !!v || 'Se requiere una fecha'
@@ -185,25 +182,22 @@
         },
         methods:{
             ingresarNuevoEstado(){
-                if(this.name != '' && this.age != '' && this.register != '' && this.sexo != '' && this.fecha != null && this.actual != '' && this.cambio != '' && (this.name.length < 60) === true && (this.register.length < 60) === true && isNaN(this.register) === false){
-                    this.$http.post(`http://localhost:8000/cambioEstadoController/save?name=${this.name}&age=${this.age}&register=${this.register}&sexo=${this.sexo}&fecha=${this.fecha}&actual=${this.actual}&cambio=${this.cambio}&cui=${this.cui}`).then(
-                        this.$http.put(`http://localhost:8000/cambioEstadoController/updateEstadoPaciente?cui=${this.cui}&cambio=${this.cambio}`)  
-                    ).then(response=>{
+                if(this.name != '' && this.age != '' && this.register != '' && this.sexo != '' && this.fecha != null && this.actual != '' && this.cambio != '' && isNaN(this.age) === false && (this.age.length <= 3) === true && (this.name.length < 60) === true && (this.register.length < 60) === true && isNaN(this.register) === false && (this.age <= 200 && this.age >= 0) === true){
+                    //this.$http.post(`http://localhost:8000/cambioEstadoController/save?name=${this.name}&age=${this.age}&register=${this.register}&sexo=${this.sexo}&fecha=${this.fecha}&actual=${this.actual}&cambio=${this.cambio}&cui=${this.cui}`).then(response=>{
                         this.errorFaltanDatos = false;
                         this.errorRegistro = false;
-                        //this.name = ' ';
-                        //this.age = ' ';
+                        this.name = ' ';
+                        this.age = ' ';
                         this.register = ' ';
-                        //this.sexo = ' ';
-                        //this.fecha = null;
+                        this.sexo = ' ';
+                        this.fecha = null;
                         this.menu = false;
-                        this.actual = this.$route.params.estado.ID;
+                        this.actual = ' ';
                         this.cambio = ' ';
-                        //document.location.reload();
-                    }).catch(error => {
-                        console.log("Error");
-                        this.errorRegistro = true;
-                    });
+                    //}).catch(error => {
+                        //console.log("Error");
+                        //this.errorRegistro = true;
+                    //});
                 }
                 else{
                     this.errorFaltanDatos = true;
