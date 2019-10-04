@@ -10,29 +10,30 @@ class HemodialisisController extends Controller
     public function store(Request $request){
         $Hemodialisis = new Hemodialisis;
         $Hemodialisis->idPaciente = $request->idPaciente;
-        $Hemodialisis->fecha = $request->fecha;
-        $Hemodialisis->NoHemodialisis = $request->NoHemodialisis;
-        $Hemodialisis->LugarDeProcedencia = $request->LugarDeProcedencia;
-        $Hemodialisis->TipoDeHemodialisis = $request->TipoDeHemodialisis;
+        $Hemodialisis->FechaHemodialisis = $request->todaysDate;
+        $Hemodialisis->NoHemodialisis = $request->Numero;
+        $Hemodialisis->LugarDeProcedencia = $request->Procedencia;
+        $Hemodialisis->TipoDeHemodialisis = $request->Hemodialisis;
         //$Via = $request->Via;
         //$Hemodialisis['Via'] = json_encode($Via);
         $Hemodialisis->Via = $request->Via;
-        $Hemodialisis->LineasPediatrica = $request->LineasPediatrica;
+        $Hemodialisis->LineasPediatrica = $request->Lineas_pediatricas;
         $Hemodialisis->Filtro = $request->Filtro;
-        $Hemodialisis->FlujoDeSangre = $request->FlujoDeSangre;
-        $Hemodialisis->FlujoDializante = $request->FlujoDializante;
+        $Hemodialisis->FlujoDeSangre = $request->Flujo_sangre;
+        $Hemodialisis->FlujoDializante = $request->Flujo_dializante;
         $Hemodialisis->UF = $request->UF;
-        $Hemodialisis->Heparinizacion_de_cebado = $request->Heparinizacion_de_cebado;
-        $Hemodialisis->Heparinizacion_TransDialisis = $request->Heparinizacion_TransDialisis;
+        //$Hemodialisis->Heparinizacion_de_cebado = $request->Heparinizacion;
+        //$Hemodialisis->Heparinizacion_TransDialisis = $request->Heparinizacion_TransDialisis;
+        $Hemodialisis->Heparinizacion = $request->Heparinizacion;
         $Hemodialisis->TiempoH = $request->TiempoH;
         $Hemodialisis->TiempoM = $request->TiempoM;
         $Hemodialisis->Conductividad_Na = $request->Conductividad_Na;
         $Hemodialisis->Conductividad_K = $request->Conductividad_K;
         $Hemodialisis->Conductividad_HCO3 = $request->Conductividad_HCO3;
-        $Hemodialisis->PesoPre = $request->PesoPre;
-        $Hemodialisis->PesoPost = $request->PesoPost;
+        $Hemodialisis->PesoPre = $request->Peso_pre;
+        $Hemodialisis->PesoPost = $request->Peso_post;
         $Hemodialisis->Talla = $request->Talla;
-        $Hemodialisis->PesoDelta = $request->PesoDelta;
+        $Hemodialisis->PesoDelta = $request->Peso_delta;
         $Hemodialisis->Especiales = $request->Especiales;
         $Hemodialisis->Fecha_col_cat = $request->Fecha_col_cat;
 
@@ -50,14 +51,16 @@ class HemodialisisController extends Controller
         //fin tabla 1
         
         $Hemodialisis->Observaciones = $request->Observaciones;
-        $Hemodialisis->Tecnico = $request->Tecnico;
-        $Hemodialisis->PA = $request->PA;
-        $data_table2 = $request->Tabla2;
-        $fechaT2 = $request->fechaT2;
-        $Hemodialisis['fechaT2'] = json_decode($fechaT2);
-        $Hemodialisis['Pre'] = json_encode($request->Pre);
-        $Hemodialisis['Post'] = json_encode($request->Post);
-        $Hemodialisis['Urr'] = json_encode($request->Urr);
+        /*$Hemodialisis->Tecnico = $request->Tecnico;
+        $Hemodialisis->PA = $request->PA;*/
+        $Hemodialisis['T2Fecha'] = json_decode($request->Fecha);
+        $Hemodialisis['T2Pre'] = json_encode($request->Pre);
+        $Hemodialisis['T2Post'] = json_encode($request->Post);
+        $Hemodialisis['T2Urr'] = json_encode($request->Urr);
         $Hemodialisis->save();
+
+        return response()->json([
+            'success' => true
+        ], 200);
     }
 }

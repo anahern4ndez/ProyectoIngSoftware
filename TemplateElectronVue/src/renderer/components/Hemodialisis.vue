@@ -4,12 +4,12 @@
         <br>
         <h1 class ="headers">Hemodiálisis</h1>  
         <br>
-        <!--b-tabs-title> Pacientes agendados para hoy: {{todaysDate}}</b-tabs-title-->
+        <!--b-tabs-title> Pacientes agendados para hoy: {{todaysDateFormatted}}</b-tabs-title-->
         <v-card>
             <v-toolbar flat color="primary" dark>
-                <v-toolbar-title style="text-align: center">Pacientes agendados para hoy: {{todaysDate}}</v-toolbar-title>
+                <v-toolbar-title style="text-align: center">Pacientes agendados para hoy: {{todaysDateFormatted}}</v-toolbar-title>
             </v-toolbar>
-            <v-tabs centered fixed-tabs vertical dark>
+            <v-tabs centered fixed-tabs vertical dark v-model="activeTab">
                 <v-tab v-for="paciente in this.pacientes" :key="paciente.nombre" :title="paciente.Nombre">
                     {{paciente.Nombre}} {{paciente.Apellido}}
                 </v-tab>
@@ -355,14 +355,14 @@
                                                 <h4 class="headers">9. Tiempo</h4>
                                                 <br>
                                                 <v-text-field
-                                                    :v-model="tabs[pacientes.indexOf(paciente)].Tiempo"
+                                                    :v-model="tabs[pacientes.indexOf(paciente)].TiempoH"
                                                     label="Horas"
                                                     outline
                                                     class="mitad"
                                                     :rules="expedienteRules"
                                                 ></v-text-field>
                                                 <v-text-field
-                                                    :v-model="tabs[pacientes.indexOf(paciente)].Tiempo"
+                                                    :v-model="tabs[pacientes.indexOf(paciente)].TiempoM"
                                                     label="Minutos"
                                                     outline
                                                     class="mitad"
@@ -372,9 +372,9 @@
                                             <ul>
                                                 <h4 class="headers">10. Conductividad</h4>
                                                 <v-container row align-center justify-space-around fill-height>
-                                                    <v-checkbox :rules="radioRules" v-model="tabs[pacientes.indexOf(paciente)].Conductividad" label="Na+" value="0" color="green"></v-checkbox>
-                                                    <v-checkbox :rules="radioRules" v-model="tabs[pacientes.indexOf(paciente)].Conductividad" label="K+" value="1" color="green"></v-checkbox>
-                                                    <v-checkbox :rules="radioRules" v-model="tabs[pacientes.indexOf(paciente)].Conductividad" label="HCO3" value="2" color="green"></v-checkbox>
+                                                    <v-checkbox :rules="radioRules" v-model="tabs[pacientes.indexOf(paciente)].Conductividad_Na" label="Na+" color="green"></v-checkbox>
+                                                    <v-checkbox :rules="radioRules" v-model="tabs[pacientes.indexOf(paciente)].Conductividad_K" label="K+" color="green"></v-checkbox>
+                                                    <v-checkbox :rules="radioRules" v-model="tabs[pacientes.indexOf(paciente)].Conductividad_HCO3" label="HCO3" color="green"></v-checkbox>
                                                 </v-container>
                                             </ul>
                                             <ul>
@@ -441,7 +441,7 @@
                                             </v-menu>
                                             </v-flex>
                                         </div>
-                                        <table class="table table-bordered">
+                                        <table id="table2" class="table table-bordered">
                                             <tbody>
                                                 <tr>
                                                     <th scope="row" style="width:10%;">Labs.</th>
@@ -452,102 +452,94 @@
                                                 </tr>
                                                 <tr>
                                                     <th scope="row" style="width:10%;">BUN</th>
-                                                    <td contenteditable='true' style="text-align: left;" >
-                                                        <input :v-model="tabs[pacientes.indexOf(paciente)].Fecha.BUN"/>
-                                                    </td>
-                                                    <td contenteditable='true' style="text-align: left;" >
-                                                        <input :v-model="tabs[pacientes.indexOf(paciente)].Pre.BUN"/>
-                                                    </td>
-                                                    <td contenteditable='true' style="text-align: left;" >
-                                                        <input :v-model="tabs[pacientes.indexOf(paciente)].Post.BUN"/>
-                                                    </td>
-                                                    <td contenteditable='true' style="text-align: left;" >
-                                                        <input :v-model="tabs[pacientes.indexOf(paciente)].Urr.BUN"/>
-                                                    </td>
+                                                    <td style="text-align: left;" contenteditable='true'></td>
+                                                    <td style="text-align: left;" contenteditable='true'></td>
+                                                    <td style="text-align: left;" contenteditable='true'></td>
+                                                    <td style="text-align: left;" contenteditable='true'></td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row" style="width:10%;">CREAT</th>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Fecha.CREAT"></td>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Pre.CREAT"  ></td>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Post.CREAT" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Urr.CREAT"  ></td>
+                                                    <td contenteditable='true' style="text-align: left;" ></td>
+                                                    <td contenteditable='true' style="text-align: left;" ></td>
+                                                    <td contenteditable='true' style="text-align: left;" ></td>
+                                                    <td contenteditable='true' style="text-align: left;" ></td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row" style="width:10%;">NA</th>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Fecha.NA"></td>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Pre.NA"  ></td>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Post.NA" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Urr.NA"  ></td>
+                                                    <td contenteditable='true' style="text-align: left;"></td>
+                                                    <td contenteditable='true' style="text-align: left;"  ></td>
+                                                    <td contenteditable='true' style="text-align: left;" ></td>
+                                                    <td contenteditable='true' style="text-align: left;"  ></td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row" style="width:10%;">K</th>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Fecha.K"></td>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Pre.K"  ></td>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Post.K" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Urr.K"  ></td>
+                                                    <td contenteditable='true' style="text-align: left;" ></td>
+                                                    <td contenteditable='true' style="text-align: left;" ></td>
+                                                    <td contenteditable='true' style="text-align: left;" ></td>
+                                                    <td contenteditable='true' style="text-align: left;" ></td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row" style="width:10%;">C</th>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Fecha.C"></td>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Pre.C"  ></td>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Post.C" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Urr.C"  ></td>
+                                                    <td contenteditable='true' style="text-align: left;" ></td>
+                                                    <td contenteditable='true' style="text-align: left;" ></td>
+                                                    <td contenteditable='true' style="text-align: left;" ></td>
+                                                    <td contenteditable='true' style="text-align: left;" ></td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row" style="width:10%;">P</th>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Fecha.P"></td>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Pre.P"  ></td>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Post.P" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Urr.P"  ></td>
+                                                    <td contenteditable='true' style="text-align: left;"></td>
+                                                    <td contenteditable='true' style="text-align: left;"></td>
+                                                    <td contenteditable='true' style="text-align: left;"></td>
+                                                    <td contenteditable='true' style="text-align: left;"></td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row" style="width:10%;">CL</th>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Fecha.CL"></td>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Pre.CL"  ></td>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Post.CL" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Urr.CL"  ></td>
+                                                    <td contenteditable='true' style="text-align: left;" ></td>
+                                                    <td contenteditable='true' style="text-align: left;" ></td>
+                                                    <td contenteditable='true' style="text-align: left;" ></td>
+                                                    <td contenteditable='true' style="text-align: left;" ></td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row" style="width:10%;">ALB</th>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Fecha.ALB"></td>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Pre.ALB"  ></td>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Post.ALB" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Urr.ALB"  ></td>
+                                                    <td contenteditable='true' style="text-align: left;" ></td>
+                                                    <td contenteditable='true' style="text-align: left;" ></td>
+                                                    <td contenteditable='true' style="text-align: left;" ></td>
+                                                    <td contenteditable='true' style="text-align: left;" ></td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row" style="width:10%;">GB</th>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Fecha.GB"></td>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Pre.GB"  ></td>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Post.GB" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Urr.GB"  ></td>
+                                                    <td contenteditable='true' style="text-align: left;" ></td>
+                                                    <td contenteditable='true' style="text-align: left;"  ></td>
+                                                    <td contenteditable='true' style="text-align: left;" ></td>
+                                                    <td contenteditable='true' style="text-align: left;"  ></td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row" style="width:10%;">HB</th>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Fecha.HB"></td>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Pre.HB"  ></td>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Post.HB" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Urr.HB"  ></td>
+                                                    <td contenteditable='true' style="text-align: left;" ></td>
+                                                    <td contenteditable='true' style="text-align: left;" ></td>
+                                                    <td contenteditable='true' style="text-align: left;" ></td>
+                                                    <td contenteditable='true' style="text-align: left;" ></td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row" style="width:10%;">PLAQ</th>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Fecha.PLAQ"></td>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Pre.PLAQ"  ></td>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Post.PLAQ" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Urr.PLAQ"  ></td>
+                                                    <td contenteditable='true' style="text-align: left;" ></td>
+                                                    <td contenteditable='true' style="text-align: left;"   ></td>
+                                                    <td contenteditable='true' style="text-align: left;"  ></td>
+                                                    <td contenteditable='true' style="text-align: left;"   ></td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row" style="width:10%;">PTH</th>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Fecha.PTH"></td>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Pre.PTH"  ></td>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Post.PTH" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Urr.PTH"  ></td>
+                                                    <td contenteditable='true' style="text-align: left;" ></td>
+                                                    <td contenteditable='true' style="text-align: left;" ></td>
+                                                    <td contenteditable='true' style="text-align: left;" ></td>
+                                                    <td contenteditable='true' style="text-align: left;" ></td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row" style="width:10%;">FERRI</th>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Fecha.FERRI"></td>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Pre.FERRI"  ></td>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Post.FERRI" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" :v-model="tabs[pacientes.indexOf(paciente)].Urr.FERRI"  ></td>
+                                                    <td contenteditable='true' style="text-align: left;" ></td>
+                                                    <td contenteditable='true' style="text-align: left;" ></td>
+                                                    <td contenteditable='true' style="text-align: left;" ></td>
+                                                    <td contenteditable='true' style="text-align: left;" ></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -602,8 +594,11 @@ export default {
                     Flujo_sangre: '',
                     UF: '',
                     Heparinizacion: '',
-                    Tiempo: '',
-                    Conductividad: '',
+                    TiempoH: '',
+                    TiempoM: '',
+                    Conductividad_Na: '',
+                    Conductividad_K: '',
+                    Conductividad_HCO3: '',
                     Peso_pre: '',
                     Peso_post: '',
                     Peso_delta: '',
@@ -617,8 +612,9 @@ export default {
                     Observaciones: '',
                     idPaciente: response.data.Pacientes[index].id,
                     //tabla 1
+                    //tabla 2
                     Fecha: {
-                        BUN: "hola",
+                        BUN: "",
                         CREAT: "",
                         NA: "",
                         K: "",
@@ -681,18 +677,20 @@ export default {
                         PTH: "",
                         FERRI: ""
                     }
-                    //tabla 2
                 }
             )
         }
         });
-        this.getTodaysDate();
+        this.todaysDate = new Date();
+        this.gettodaysDateFormatted();
     },
     data(){
         return{
             pacientes: [],
             tabs: [],
+            todaysDateFormatted: null,
             todaysDate: null,
+            activeTab: 0,
             expedienteRules: [
                 (v) => !!v || 'Se requiere este campo', 
                 (v) => v && this.isANumber(v) || 'Verifique que el dato ingresado sea un número.'
@@ -705,18 +703,34 @@ export default {
         }
     },
     methods: {
-        getTodaysDate(){
+        gettodaysDateFormatted(){
             const daysOfWeek = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
             const months = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre','octubre', 'noviembre', 'diciembre']
             const engDateMonth = new Date().getUTCMonth();
             const engDateDay = new Date().getDay();
             const engDateYear = new Date().getFullYear();
             const engDateDate = new Date().getDate();
-            this.todaysDate = ''.concat(daysOfWeek[engDateDay], ', ', engDateDate, ' de ',  months[engDateMonth], ' del ', engDateYear);
+            this.todaysDateFormatted = ''.concat(daysOfWeek[engDateDay], ', ', engDateDate, ' de ',  months[engDateMonth], ' del ', engDateYear);
         },
         guardar(){
             var pass = true;
-            console.log(this.$data);
+            
+            const table2 = document.getElementById("table2");
+            //asignacion de valores de cada celda de la tabla a variables 
+            let rowKeys = ["BUN", "CREAT", "NA", "K", "C", "P", "CL", "ALB", "GB", "HB", "PLAQ", "PTH", "FERRI"]
+            for (let m = 1; m < table2.rows.length; m++) {
+                this.tabs[this.activeTab].Fecha[rowKeys[m-1]] = table2.rows[m].cells[1].innerHTML;
+                this.tabs[this.activeTab].Pre[rowKeys[m-1]] = table2.rows[m].cells[2].innerHTML;
+                this.tabs[this.activeTab].Post[rowKeys[m-1]] = table2.rows[m].cells[3].innerHTML;
+                this.tabs[this.activeTab].Urr[rowKeys[m-1]] = table2.rows[m].cells[4].innerHTML;
+            }
+            console.log(this.tabs[this.activeTab])
+            let info = this.tabs[this.activeTab]
+            info['todaysDate'] = this.todaysDate
+            this.$http.post('http://localhost:8000/hemodialisis', info).then(response => {
+                console.log(response.success)
+            })
+
 
         },
         computeAge(date){
@@ -801,7 +815,8 @@ ol > ul{
   -webkit-column-break-inside: avoid;
 }
 td > input {
+    position: relative;
     width: 100%;
-    height: 100%;
+    word-wrap: break-word;
 }
 </style>
