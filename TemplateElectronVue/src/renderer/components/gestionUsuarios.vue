@@ -20,7 +20,7 @@
                 placeholder="Nombre de usuario a editar permisos"
               >
               <div class="input-group-append">
-                <button class="btn btn-warning" type="button" v-on:click="getSomeUser">Buscar</button>
+                <v-btn color="yellow darken-3" type="button" v-on:click="getSomeUser">Buscar</v-btn>
               </div>
             </div>
             <br>
@@ -39,7 +39,7 @@
             </v-data-table>
           </b-col>
           <b-col order="1" cols="4">
-            <form>
+            <v-form>
               <div v-if="errorName">
                 <v-alert :value="true" type="error" id="alert">
                   Ingrese un nombre, por favor
@@ -143,11 +143,11 @@
                 <label for="levelInput">Foto de usuario</label>
               <div>
               
-              <v-button class="btn btn-lg btn-warning btn-block" id="botonimagen" @click="imgClick"> Seleccionar Imagen </v-button>
+              <v-btn class="boton1" color="yellow darken-3" id="botonimagen" @click="imgClick"> Seleccionar Imagen </v-btn>
               <input type="file" class="hide_file" style="height:auto; width:auto; visibility:hidden" v-on:change="changeImg" ref="changeImg"/>
               </div>
               </div>
-            </form>
+            </v-form>
           </b-col>
         </b-row>
       </b-container>
@@ -156,13 +156,13 @@
       <b-container class="bv-example-row2">
         <b-row class="justify-content-md-center">
           <b-col>
-            <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="crear">Crear</button>
+            <v-btn color="yellow darken-3" type="button" class="btn btn-lg btn-warning btn-block" v-on:click="crear">Crear</v-btn>
           </b-col>
           <b-col>
-            <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="modificar">Modificar</button>
+            <v-btn color="yellow darken-3" type="button" class="btn btn-lg btn-warning btn-block" v-on:click="modificar">Modificar</v-btn>
           </b-col>
           <b-col>
-            <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="eliminar">Eliminar</button>
+            <v-btn color="yellow darken-3" type="button" class="btn btn-lg btn-warning btn-block" v-on:click="eliminar">Eliminar</v-btn>
           </b-col>
         </b-row>
       </b-container>
@@ -579,5 +579,9 @@ export default {
 div#Tabla {
   float: right;
   align-items: center;
+}
+.boton1 {
+  height: 50px;
+  width: auto;
 }
 </style>
