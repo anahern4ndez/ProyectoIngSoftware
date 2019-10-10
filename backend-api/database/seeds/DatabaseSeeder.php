@@ -23,7 +23,8 @@ class DatabaseSeeder extends Seeder {
             DxAsociadoSeeder::class,
             percentilPesoSeeder::class,
             percentilTallaSeeder::class,
-            percentilPesoAlturaSeeder::class
+            percentilPesoAlturaSeeder::class,
+            PermissionSeeder::class,
         ]);
         
     }
