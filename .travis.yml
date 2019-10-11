@@ -28,9 +28,3 @@ jobs:
     - stage: stage
       script: skip
     
-    - stage: stage2
-      before_script:
-      - git checkout PruebaStage
-      - git merge master
-      - git push origin PruebaStage
-      script: skip
