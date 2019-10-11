@@ -30,7 +30,7 @@ jobs:
     
     - stage: stage2
       before_script:
-      - "git checkout PruebaStage"
-      - "git merge master"
-      - "git push origin PruebaStage"
+      - git checkout PruebaStage
+      - git merge master
+      - git push origin PruebaStage
       script: skip
