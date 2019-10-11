@@ -46,6 +46,7 @@ class FormulariosController extends Controller
         $hemodialisis->resultado_cultivo = $request->resultado_cultivo;
         $hemodialisis->microorganizmo_aislado = $request->microorganizmo_aislado;
         $hemodialisis->medico_reporta_evento = $request->medico_reporta_evento;
+        // prueba
         $hemodialisis->save();
         return response()->json([
             'success' => true,
