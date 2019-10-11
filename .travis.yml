@@ -28,10 +28,9 @@ jobs:
     - stage: stage
       script: skip
     
-    # - stage: stage2
-    #   before_script:
-    #   - "git checkout stage"
-    #   - "git merge master"
-    #   - "git push origin stage"
-    #   script: skip
-    # hola
+    - stage: stage2
+      before_script:
+      - "git checkout PruebaStage"
+      - "git merge master"
+      - "git push origin PruebaStage"
+      script: skip
