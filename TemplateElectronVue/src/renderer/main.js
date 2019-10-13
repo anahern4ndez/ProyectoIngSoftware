@@ -181,6 +181,13 @@ const routes = [
       'ColocacionCateter',
       require('./components/ColocacionCateter.vue').default
     )
+  },
+  {
+    path: '/gestionFormularios',
+    component: Vue.component(
+      'gestionFormularios',
+      require('./components/gestionFormularios.vue').default
+    )
   }
 ];
 
