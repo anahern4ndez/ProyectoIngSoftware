@@ -120,3 +120,6 @@ $router->post('/percentilPesoTalla', 'percentilPesoAlturaController@getPesoAltur
 
 $router->post('/forms/mortalidad', 'FormulariosController@storeMortalidad');
 $router->post('/forms/hemodialisis', 'FormulariosController@storeHemodialisis');
+
+// tipo de citas
+$router->get('/tipos-citas', 'tipoCitasController@getAll');

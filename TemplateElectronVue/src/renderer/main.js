@@ -198,12 +198,14 @@ const router = new VueRouter({
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
-  id: 0
+  id: 0,
+  pacientes: []
 });
 
 /* eslint-disable no-new */
 new Vue({
   router,
+  store,
   render: h => h(App),
   mounted() {
     this.$router.push('/login');
