@@ -149,38 +149,33 @@
                         >
                             <v-card>
                                 <v-card-title 
-                                    class="headline grey lighten-2"
+                                    class="headline orange lighten-2"
+                                    :sticky="sticky"
                                     primary-title
                                 >
                                     {{this.paciente.nombre}} {{this.paciente.apellido}}
                                 </v-card-title>
 
-                                <v-card-title>
-                                    <ul>
-                                        <li v-for="com in this.showComments">
-                                            <span class="grey--text subtitle-1 font-weight-regular">{{com.hora}} 
-                                                <span class="font-weight-black subtitle-1 black--text">{{com.doctor}}: </span>
-                                                <span class="font-weight-regular subtitle-1 black--text">{{com.comentario}}</span>
-                                                <br />
-                                            </span>
-                                        </li>
-                                    </ul>
-                                </v-card-title>
+                                <br />
 
                                 <v-card
                                     color="#385F73"
-                                    dark
                                     width="90%"
-                                    raised
-                                    outlined
+                                    elevation="8"
                                     class="mx-auto"
-                                    v-for="com in this.showComments"
+                                    dark
+                                    v-for="com in this.cardComments"
                                 >
-                                    <span class="grey--text subtitle-1 font-weight-regular">{{com.hora}} 
-                                        <span class="font-weight-black subtitle-1 black--text">{{com.doctor}}: </span>
-                                        <span class="font-weight-regular subtitle-1 black--text">{{com.comentario}}</span>
-                                        <hr>
-                                    </span>
+                                    <h1>{{com.fecha}}</h1>
+                                    <ul>
+                                        <li v-for="com2 in com.data">
+                                            <span class="grey--text subtitle-1 font-weight-regular">{{com2.hora}} 
+                                                <span class="font-weight-black subtitle-1 black--text">{{com2.doctor}}: </span>
+                                                <span class="font-weight-regular subtitle-1 black--text">{{com2.comentario}}</span>
+                                                <hr>
+                                            </span>
+                                        </li>
+                                    </ul>
                                 </v-card>
 
                                 <v-card-actions>
@@ -2357,7 +2352,8 @@ export default {
         verComentarios: false,
 
         update: false,
-
+        hasClickedVerMas: false,
+        sticky: false,
         
         fisico: ["Peso", "Talla", "IMC"],
         vital: ["Presión arterial", "Pulso cardíaco"],
@@ -2602,6 +2598,7 @@ export default {
         hasComments: false,
         allComments: [],
         showComments: [],
+        cardComments: [],
 
         tabs: ["Consulta", "Detalles físicos", "Signos vitales", "Mapa médico"],
 
@@ -2802,7 +2799,74 @@ export default {
             })
         },
 
+        beautyComments () {
+
+            this.showComments.forEach(element => {
+                if(this.checkExistence(this.cardComments, element.hora)){
+                    const pos = this.foundPosition(this.cardComments, element.hora)
+                    
+                    const f = element.hora.split(" ")
+                    const datos = {
+                        doctor: element.doctor,
+                        hora: f[1],
+                        comentario: element.comentario
+                    }
+
+                    this.cardComments[pos].data.push(datos)
+                }else{
+                    const fechas = {
+                        fecha: "",
+                        data: []
+                    }
+
+                    const f = element.hora.split(" ")
+                    const datos = {
+                        doctor: element.doctor,
+                        hora: f[1],
+                        comentario: element.comentario
+                    }
+
+                    fechas.fecha = f[0]
+                    fechas.data.push(datos)
+
+                    this.cardComments.push(fechas)
+                }
+            });
+        },
+
+        checkExistence (lista, fecha) {
+            const f = new Date(fecha)
+            let found = false
+
+            lista.forEach(element => {
+                const newF = new Date(element.fecha)
+                if(newF.getMonth() === f.getMonth() && newF.getDate() === f.getDate() && newF.getFullYear() === f.getFullYear()){
+                    found = true
+                }
+            });
+            return found
+        },
+
+        foundPosition (lista, fecha) {
+            const f = new Date(fecha)
+            let pos = 0
+
+            for(let i = 0; i < lista.length; i++) {
+                const newF = new Date(lista[i].fecha)
+                if(newF.getMonth() === f.getMonth() && newF.getDay() === f.getDay() && newF.getFullYear() === f.getFullYear()){
+                    pos = i
+                    break
+                }
+            }
+
+            return pos
+        },
+
         verMas () {
+            if(!this.hasClickedVerMas){
+                this.beautyComments()
+                this.hasClickedVerMas = true
+            }
             this.verComentarios = true
         },
         
@@ -2810,14 +2874,12 @@ export default {
             
             if(this.comentario != ""){
                 const d = new Date()
-                this.horaActual = d.getMonth() + "/" + d.getDate() + "/" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds()
-
+                this.horaActual = d.getMonth()+1 + "/" + d.getDate() + "/" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds()
+                console.log(this.horaActual)
                 this.nuevoComentario = true
             }else{
                 this.nuevoComentario = false
             }
-
-            console.log("comentarios? " + this.nuevoComentario)
         },        
 
         agregarEnfermedad(){
