@@ -12,7 +12,7 @@
                     label="Elija el formulario que desea abrir para llenar">
                     </v-combobox>
                     <br>
-                    <v-btn text large color="yellow">Abrir formulario</v-btn>
+                    <v-btn text large color="yellow" type="button" v-on:click="startWord('C:\\Users\\Ulises\\Desktop\\CHOL.docx')">Abrir formulario</v-btn>
                 </b-col>
                 <b-col cols="1" class="titulo1">
 
@@ -52,7 +52,15 @@
             };
         },
         methods:{
-            
+            startWord(strFile){
+                //var myApp = new ActiveXObject("Word.Application");
+                var myApp
+                if (myApp != null)
+                {
+                myApp.Visible = true;
+                myApp.Documents.Open(strFile);
+                }
+            }
         }
     };
 
