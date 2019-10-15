@@ -159,19 +159,20 @@
                                 <br />
 
                                 <v-card
-                                    color="#385F73"
                                     width="90%"
                                     elevation="8"
                                     class="mx-auto"
                                     dark
+                                    shaped=true
                                     v-for="com in this.cardComments"
                                 >
+                                    <br>
                                     <h1>{{com.fecha}}</h1>
                                     <ul>
-                                        <li v-for="com2 in com.data">
+                                        <li v-for="com2 in com.data" style="list-style-type:none;">
                                             <span class="grey--text subtitle-1 font-weight-regular">{{com2.hora}} 
-                                                <span class="font-weight-black subtitle-1 black--text">{{com2.doctor}}: </span>
-                                                <span class="font-weight-regular subtitle-1 black--text">{{com2.comentario}}</span>
+                                                <span class="font-weight-black subtitle-1 white--text">{{com2.doctor}} <br> </span>
+                                                <span class="font-weight-regular subtitle-1 white--text">{{com2.comentario}}</span>
                                                 <hr>
                                             </span>
                                         </li>
@@ -182,7 +183,7 @@
                                 <div class="flex-grow-1"></div>
 
                                 <v-btn
-                                    color="green darken-1"
+                                    color="primary"
                                     text
                                     @click="verComentarios = false"
                                 >
@@ -2354,6 +2355,7 @@ export default {
         update: false,
         hasClickedVerMas: false,
         sticky: false,
+        doctorNames: {},
         
         fisico: ["Peso", "Talla", "IMC"],
         vital: ["Presión arterial", "Pulso cardíaco"],
@@ -2741,6 +2743,8 @@ export default {
                         this.hasComments = false
                     }
                 }).then(() => {
+                    this.getDoctorNames()
+                }).then(() => {
                     this.dialog = false;
                 })
             })
@@ -2788,26 +2792,41 @@ export default {
                 return new Date(d1.hora) - new Date(d2.hora)
             })
 
+            // this.showComments.map(array => {
+            //     const data = {
+            //         ID: array.doctor
+            //     }
+
+            //     this.$http.post(`http://localhost:8000/ExampleController/findById`, data).then(response => {
+            //         array.doctor = response.data.User
+            //     })
+            // })
+        },
+
+        getDoctorNames () {
+            let name = ""
+
             this.showComments.map(array => {
                 const data = {
                     ID: array.doctor
                 }
 
                 this.$http.post(`http://localhost:8000/ExampleController/findById`, data).then(response => {
-                    array.doctor = response.data.User
+                    name = response.data.User
+                }).then(() => {
+                    this.doctorNames[array.doctor] = name
                 })
             })
         },
 
         beautyComments () {
-
             this.showComments.forEach(element => {
                 if(this.checkExistence(this.cardComments, element.hora)){
                     const pos = this.foundPosition(this.cardComments, element.hora)
                     
                     const f = element.hora.split(" ")
                     const datos = {
-                        doctor: element.doctor,
+                        doctor: this.doctorNames[element.doctor],
                         hora: f[1],
                         comentario: element.comentario
                     }
@@ -2821,7 +2840,7 @@ export default {
 
                     const f = element.hora.split(" ")
                     const datos = {
-                        doctor: element.doctor,
+                        doctor: this.doctorNames[element.doctor],
                         hora: f[1],
                         comentario: element.comentario
                     }
@@ -3538,6 +3557,7 @@ export default {
     h1, h2, h3, h4 {
         font-family: Nunito;
         font-weight: bolder;
+        text-align: center;
     }
 
     .headers{
