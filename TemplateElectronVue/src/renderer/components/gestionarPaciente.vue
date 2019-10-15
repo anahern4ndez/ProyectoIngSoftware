@@ -195,7 +195,7 @@
                                             <button type="button" class="btn btn-lg btn-warning btn-block ml-4" v-on:click="consulta">Dar Consulta</button>
                                         </b-col>
                                         <b-col>
-                                            <button type="button" class="btn btn-lg btn-warning btn-block">Historial</button>
+                                            <button type="button" class="btn btn-lg btn-warning btn-block"  v-on:click="history">Historial</button>
                                         </b-col>
                                         <b-col> </b-col>
                                         <b-col> </b-col>
@@ -268,6 +268,9 @@ export default {
     },
     consulta() {
       this.$router.push("/Consulta");
+    },
+    history() {
+      this.$router.push("/History");
     }
   }
 };

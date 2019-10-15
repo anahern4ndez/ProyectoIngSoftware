@@ -28,7 +28,6 @@
 							<v-btn outline color="#303841" v-on:click="gestionarPaciente">Gestionar Paciente</v-btn>
 							<v-btn outline color="#303841" v-on:click="darConsulta">Generar Reporte</v-btn>
 							<v-btn outline color="#303841" v-on:click="InformesEstaditicos">Informes Estadísticos</v-btn>
-							<v-btn outline color="#303841" v-on:click="datosGenerales">Datos Generales</v-btn>
 						</div>
 					</template>
 					</b-col>

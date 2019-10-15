@@ -101,6 +101,11 @@ export default {
           name: "Colocacion Cateter",
           route: "/ColocacionCateter",
           icon: "fa-flag"
+        },
+        {
+          name: "Gestionar Formularios",
+          route: "/gestionFormularios",
+          icon: "fa-flag"
         }
       ]
     };
