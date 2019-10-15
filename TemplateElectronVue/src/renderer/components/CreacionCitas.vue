@@ -357,6 +357,7 @@ export default {
               appointmentType: i.tipoCitaID
             };
           });
+
           e.forEach(i => {
             this.events.push(i);
           });
@@ -365,9 +366,29 @@ export default {
           console.log(err);
         });
     },
-    createAppointment() {
-      this.dialogOpen = false;
+    validateAppointmentHour(data) {
+      let d0 = new Date(`${data.fecha} ${data.hora}`);
+      console.log(`d0 ${d0.toString()}`);
+      for (let i = 0; i < this.events.length; i++) {
+        let d1 = new Date(`${this.events[i].date} ${this.events[i].time}`);
+        console.log(`vrs d1 ${d1.toString()}`);
+        if (d0.valueOf() < d1.valueOf()) {
+          if (d0.valueOf() + data.duracionCita * 60 * 1000 > d1.valueOf()) {
+            return false;
+          }
+        } else {
+          if (
+            d1.valueOf() + this.events[i].duration * 60 * 1000 >
+            d0.valueOf()
+          ) {
+            return false;
+          }
+        }
+      }
 
+      return true;
+    },
+    createAppointment() {
       // validacion de hora de cita
       const time = Number(this.selectedTime.substring(0, 2));
       if (time < this.minAppointmentHour || time > this.maxAppointmentHour) {
@@ -385,6 +406,16 @@ export default {
         estado: 1,
         tipoCitaID: this.selectedAppointmentType
       };
+
+      if (!this.validateAppointmentHour(data)) {
+        this.infoMessage =
+          "La cita se traslapa con otra cita, por favor revisa los datos.";
+        this.infoDialog = true;
+        return;
+      }
+
+      // cerrar dialogo de creacion de cita
+      this.dialogOpen = false;
 
       this.$http
         .post("http://localhost:8000/citas", data)
