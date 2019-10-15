@@ -167,6 +167,22 @@
                                     </ul>
                                 </v-card-title>
 
+                                <v-card
+                                    color="#385F73"
+                                    dark
+                                    width="90%"
+                                    raised
+                                    outlined
+                                    class="mx-auto"
+                                    v-for="com in this.showComments"
+                                >
+                                    <span class="grey--text subtitle-1 font-weight-regular">{{com.hora}} 
+                                        <span class="font-weight-black subtitle-1 black--text">{{com.doctor}}: </span>
+                                        <span class="font-weight-regular subtitle-1 black--text">{{com.comentario}}</span>
+                                        <hr>
+                                    </span>
+                                </v-card>
+
                                 <v-card-actions>
                                 <div class="flex-grow-1"></div>
 
