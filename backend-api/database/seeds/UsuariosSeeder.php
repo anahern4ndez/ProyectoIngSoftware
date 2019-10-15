@@ -18,5 +18,7 @@ class UsuariosSeeder extends Seeder {
             'imagen' => null,
         ];
         User::insert($user);
-    }
+
+    }   
+    
 }
