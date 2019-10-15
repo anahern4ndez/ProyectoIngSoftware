@@ -195,7 +195,7 @@
         <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="darConsulta"> Dar consulta </button>
       </div>
       <div id="boton">
-        <router-link :to="{name: 'cambioEstado', params: { cui: this.selectedPatients.CUI }}" class="btn btn-lg btn-warning btn-block">Editar estado de paciente seleccionado</router-link>
+        <router-link :to="{name: 'cambioEstado', params: { cui: this.selectedPatients.CUI, nombre: this.selectedPatients.Nombre, edad: this.selectedPatients.Edad, sexo: this.selectedPatients.Sexo, estado: this.selectedPatients.estado_actual }}" class="btn btn-lg btn-warning btn-block">Editar estado de paciente seleccionado</router-link>
       </div>
       <div id="boton">
         <button type="button" class="btn btn-lg btn-warning btn-block"> Archivos </button>

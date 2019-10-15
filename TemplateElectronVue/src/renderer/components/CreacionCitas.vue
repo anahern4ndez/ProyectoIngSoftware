@@ -40,7 +40,12 @@
             <!-- template para renderear vista mensual -->
             <template v-slot:day="{ date }">
               <template v-for="event in eventsMap[date]">
-                <div :key="event.id" v-ripple class="my-event" v-html="event.title"></div>
+                <div
+                  :key="event.id"
+                  v-ripple
+                  v-bind:class="`event-${event.appointmentType}`"
+                  v-html="event.title"
+                ></div>
               </template>
             </template>
 
@@ -69,7 +74,7 @@
                   v-if="event.time"
                   :key="event.id"
                   :style="{ top: timeToY(event.time) + 'px', height: minutesToPixels(event.duration) + 'px' }"
-                  class="my-event with-time"
+                  v-bind:class="`event-${event.appointmentType} with-time`"
                   v-html="event.title"
                 ></div>
               </template>
@@ -89,7 +94,14 @@
             <v-container grid-list-md>
               <v-layout wrap>
                 <v-flex xs12>
-                  <v-autocomplete :items="patients" label="Paciente" required></v-autocomplete>
+                  <v-autocomplete
+                    v-model="selectedPatient"
+                    :items="patients"
+                    label="Paciente"
+                    required
+                    item-text="name"
+                    item-value="id"
+                  ></v-autocomplete>
                 </v-flex>
                 <v-flex xs12>
                   <v-select
@@ -99,6 +111,16 @@
                     required
                     :rules="textboxRules"
                   ></v-select>
+                </v-flex>
+                <v-flex xs12>
+                  <v-autocomplete
+                    v-model="selectedAppointmentType"
+                    :items="appointmentTypes"
+                    label="Tipo de Cita"
+                    required
+                    item-text="tipoCita"
+                    item-value="id"
+                  ></v-autocomplete>
                 </v-flex>
                 <v-flex xs12 sm12>
                   <v-menu
@@ -223,13 +245,21 @@
   </b-container>
 </template>
 
-<style scoped>
-.my-event {
+<style scoped lang="scss">
+%my-event {
   margin-top: 2px;
-  padding: 1px;
-  background-color: rgb(211, 88, 35);
   color: white;
-  border-radius: 5%;
+  width: 100%;
+}
+
+.event-1 {
+  @extend %my-event;
+  background-color: rgb(211, 88, 35);
+}
+
+.event-2 {
+  @extend %my-event;
+  background-color: rgb(35, 88, 200);
 }
 
 .daily-invalid-hour {
@@ -283,7 +313,9 @@ export default {
     updatingAppointment: false,
     appointmentDialogTitle: "Crear Nueva Cita",
     selectedAppointment: "",
-    deletingAppointment: ""
+    deletingAppointment: "",
+    selectedAppointmentType: "",
+    appointmentTypes: []
   }),
   mounted() {
     this.todayDate = new Date();
@@ -292,6 +324,7 @@ export default {
     this.year = this.todayDate.getFullYear();
     this.obtenerPacientes();
     this.getAppointments();
+    this.obtenerTipoCitas();
   },
   computed: {
     // convert the list of events into a map of lists keyed by date
@@ -320,7 +353,8 @@ export default {
               details: `Paciente: ${i.idPaciente}`,
               date: i.fecha,
               time: i.hora,
-              duration: i.duracionCita
+              duration: i.duracionCita,
+              appointmentType: i.tipoCitaID
             };
           });
           e.forEach(i => {
@@ -343,13 +377,13 @@ export default {
       }
 
       const data = {
-        idUsuario: 1,
-        idPaciente: 1,
+        idUsuario: this.$store.id,
+        idPaciente: this.selectedPatient,
         fecha: this.selectedDate,
         hora: this.selectedTime,
         duracionCita: this.selectedDuration,
         estado: 1,
-        tipoCitaID: 1
+        tipoCitaID: this.selectedAppointmentType
       };
 
       this.$http
@@ -376,11 +410,6 @@ export default {
         })
         .catch(error => {
           this.infoMessage = "Ocurrió un error al crear cita.";
-          // Object.keys(error.response.data).forEach(key => {
-          //   if (key != "success") {
-          //     this.infoMessage += error.response.data[key];
-          //   }
-          // });
           this.infoDialog = true;
           this.selectedDoctor = "";
           this.selectedPatient = "";
@@ -392,13 +421,13 @@ export default {
       this.dialogOpen = false;
 
       const data = {
-        idUsuario: 1,
-        idPaciente: 1,
+        idUsuario: this.$store.id,
+        idPaciente: this.selectedPatient,
         fecha: this.selectedDate,
         hora: this.selectedTime,
         duracionCita: this.selectedDuration,
         estado: 1,
-        tipoCitaID: 1
+        tipoCitaID: this.selectedAppointmentType
       };
 
       this.$http
@@ -460,9 +489,24 @@ export default {
       this.$http
         .get("http://localhost:8000/PacienteController/findAll")
         .then(response => {
-          this.patients = response.data.Pacientes.map(
-            i => i.Apellido + ", " + i.Nombre + " - " + i.CUI
-          );
+          this.patients = response.data.Pacientes.map(i => {
+            return {
+              id: i.id,
+              name: `${i.Apellido}, ${i.Nombre}, ${i.CUI}`
+            };
+          });
+        });
+    },
+    obtenerTipoCitas() {
+      this.$http
+        .get("http://localhost:8000/tipos-citas")
+        .then(({ data }) => {
+          if (data.success) {
+            this.appointmentTypes = data.data;
+          }
+        })
+        .catch(error => {
+          console.log(error);
         });
     },
     interactuar(type) {

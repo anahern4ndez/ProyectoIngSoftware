@@ -11,6 +11,7 @@
                           outline
                           :rules="nameRules"
                           required
+                          readonly
                         ></v-text-field>
                         <v-text-field
                           v-model="age"
@@ -18,6 +19,7 @@
                           outline
                           :rules="ageRules"
                           required
+                          readonly
                         ></v-text-field>
                         <div style="float:left; width:50%">
                             <v-flex xs12 sm6 md4>
@@ -51,9 +53,9 @@
                     <b-col order="2" cols="5">
                         <label style="font-family: Nunito;" for="nameInput" class="subir">Sexo del paciente</label>
                         <div class="subir2">
-                            <v-radio-group v-model="sexo" row :rules="radioRules" required>
-                                <v-radio label="Femenino" value="1" color="black"></v-radio>
-                                <v-radio label="Masculino" value="2" color="black"></v-radio>
+                            <v-radio-group v-model="sexo" row :rules="radioRules" required readonly>
+                                <v-radio name='sexo' label="Femenino" :value="1" color="black"></v-radio>
+                                <v-radio name='sexo' label="Masculino" :value="2" color="black"></v-radio>
                             </v-radio-group>
                         </div>
                         <div class="subir3">
@@ -89,11 +91,11 @@
             <b-container class="bv-example-row1" >
                 <b-row align-h="around" align-v="center">  
                     <div>
-                        <v-radio-group v-model="actual" row :rules="radioRules" required>
-                            <v-radio label="Pre diálisis" value="1" color="black"></v-radio>
-                            <v-radio label="Diálisis peritoneal" value="2" color="black"></v-radio>
-                            <v-radio label="Hemodiálisis" value="3" color="black"></v-radio>
-                            <v-radio label="Transplante renal" value="4" color="black"></v-radio>
+                        <v-radio-group v-model="actual" row :rules="radioRules" required readonly>
+                            <v-radio name='actual' label="Pre diálisis" :value="1" color="black"></v-radio>
+                            <v-radio name='actual' label="Diálisis peritoneal" :value="2" color="black"></v-radio>
+                            <v-radio name='actual' label="Hemodiálisis" :value="3" color="black"></v-radio>
+                            <v-radio name='actual' label="Transplante renal" :value="4" color="black"></v-radio>
                         </v-radio-group>
                     </div>             
                 </b-row>
@@ -145,13 +147,13 @@
         data() {
             return {
                 cui: this.$route.params.cui,
-                name:'',
-                age: '',
+                name:this.$route.params.nombre,
+                age: this.$route.params.edad,
                 register: '',
-                sexo: '',
-                fecha: null,
+                sexo: this.$route.params.sexo,
+                fecha: new Date().toISOString().slice(0,10),
                 menu: false,
-                actual: '',
+                actual: this.$route.params.estado.ID,
                 cambio: '',
                 errorFaltanDatos: false,
                 errorRegistro: false,
@@ -166,10 +168,10 @@
                 ],
                 ageRules: [
                     (v) => !!v || 'Se requiere la edad del paciente',
-                    (v) => v && v.length <= 3 || 'Verifique que la edad tenga como maximo 3 digitos.',
-                    (v) => v && isNaN(v) == false || 'La edad debe ser un numero',
-                    (v) => v && v>=0 || 'La edad debe estar entre 0 años a 200 años',
-                    (v) => v && v<=200 || 'La edad debe estar entre 0 años a 200 años'
+                    //(v) => v && v.length <= 3 || 'Verifique que la edad tenga como maximo 3 digitos.',
+                    //(v) => v && isNaN(v) == false || 'La edad debe ser un numero',
+                    //(v) => v && v>=0 || 'La edad debe estar entre 0 años a 200 años',
+                    //(v) => v && v<=200 || 'La edad debe estar entre 0 años a 200 años'
                 ],
                 registerRules: [
                     (v) => !!v || 'Se requiere el número de registro del paciente',
@@ -183,19 +185,19 @@
         },
         methods:{
             ingresarNuevoEstado(){
-                if(this.name != '' && this.age != '' && this.register != '' && this.sexo != '' && this.fecha != null && this.actual != '' && this.cambio != '' && isNaN(this.age) === false && (this.age.length <= 3) === true && (this.name.length < 60) === true && (this.register.length < 60) === true && isNaN(this.register) === false && (this.age <= 200 && this.age >= 0) === true){
+                if(this.name != '' && this.age != '' && this.register != '' && this.sexo != '' && this.fecha != null && this.actual != '' && this.cambio != '' && (this.name.length < 60) === true && (this.register.length < 60) === true && isNaN(this.register) === false){
                     this.$http.post(`http://localhost:8000/cambioEstadoController/save?name=${this.name}&age=${this.age}&register=${this.register}&sexo=${this.sexo}&fecha=${this.fecha}&actual=${this.actual}&cambio=${this.cambio}&cui=${this.cui}`).then(
                         this.$http.put(`http://localhost:8000/cambioEstadoController/updateEstadoPaciente?cui=${this.cui}&cambio=${this.cambio}`)  
                     ).then(response=>{
                         this.errorFaltanDatos = false;
                         this.errorRegistro = false;
-                        this.name = ' ';
-                        this.age = ' ';
+                        //this.name = ' ';
+                        //this.age = ' ';
                         this.register = ' ';
-                        this.sexo = ' ';
-                        this.fecha = null;
+                        //this.sexo = ' ';
+                        //this.fecha = null;
                         this.menu = false;
-                        this.actual = ' ';
+                        this.actual = this.$route.params.estado.ID;
                         this.cambio = ' ';
                         //document.location.reload();
                     }).catch(error => {
