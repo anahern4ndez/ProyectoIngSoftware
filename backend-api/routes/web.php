@@ -101,8 +101,9 @@ $router->post('/citas', 'CitasController@store');
 $router->put('/citas/{id}', 'CitasController@update');
 $router->delete('/citas/{id}', 'CitasController@destroy');
 
-// Hemodialisis
+// HEMODIALISIS
 $router->post('/hemodialisis', 'HemodialisisController@store');
+$router->post('/hemodialisis/storeTable', 'HemodialisisController@storeTable');
 
 //
 // Enfermedades CIE 10
