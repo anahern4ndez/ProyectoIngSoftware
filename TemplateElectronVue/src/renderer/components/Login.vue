@@ -1,71 +1,73 @@
 <template lang="">
-    <div>
-        <div class="body">
-            <form class="form-signin form form--login">
-                <img src="../assets/imagenLogo.png" alt="" width="500" height="200">
+    <scroll-lock>
+        <div>
+            <div class="body">
+                <form class="form-signin form form--login">
+                    <img src="../assets/imagenLogo.png" alt="" width="500" height="200">
 
-                <br>
+                    <br>
 
-                <div class="text-center texto">
-                    Por favor, ingrese sus credenciales
-                </div>
+                    <div class="text-center texto">
+                        Por favor, ingrese sus credenciales
+                    </div>
 
-                <div v-if="error">
-                    <v-alert :value="true" type="error" id="alert">
-                        Email o contraseña incorrecta.
-                    </v-alert>
-                </div>
+                    <div v-if="error">
+                        <v-alert :value="true" type="error" id="alert">
+                            Email o contraseña incorrecta.
+                        </v-alert>
+                    </div>
 
-                <div v-if="errorEmail">
-                    <v-alert :value="true" type="error" id="alert">
-                        Ingrese su email, por favor.
-                    </v-alert>
-                </div>
-                <div class="form-block">
-                    <label for="inputEmail" class="sr-only">Usuario</label>
-                    <input v-model.trim="email"
-                        class="field form-control"
-                        name="email"
-                        placeholder="Email"
-                        autofocus=""
-                        id="email" 
-                        oninvalid="setCustomValidity('Ingrese su usuario')"
-                        oninput="setCustomValidity('')" 
-                        required 
-                    >
-                </div>
-                
-                <div v-if="errorPass">
-                    <v-alert :value="true" type="error" id="alert">
-                        Ingrese su contraseña, por favor.
-                    </v-alert>
-                </div>
-                <div class="form-block">
-                    <label for="inputPassword" class="sr-only">Contraseña</label>
-                    <input v-model.trim="password"
-                        class="field form-control"
-                        name="password"
-                        type="password" 
-                        placeholder="Contraseña" 
-                        id="password"  
-                        oninvalid="setCustomValidity('Ingrese su constraseña')"
-                        oninput="setCustomValidity('')" 
-                        @keyup.enter='loginMethod'
-                        required>
-                </div>
-            </form>
+                    <div v-if="errorEmail">
+                        <v-alert :value="true" type="error" id="alert">
+                            Ingrese su email, por favor.
+                        </v-alert>
+                    </div>
+                    <div class="form-block">
+                        <label for="inputEmail" class="sr-only">Usuario</label>
+                        <input v-model.trim="email"
+                            class="field form-control"
+                            name="email"
+                            placeholder="Email"
+                            autofocus=""
+                            id="email" 
+                            oninvalid="setCustomValidity('Ingrese su usuario')"
+                            oninput="setCustomValidity('')" 
+                            required 
+                        >
+                    </div>
+                    
+                    <div v-if="errorPass">
+                        <v-alert :value="true" type="error" id="alert">
+                            Ingrese su contraseña, por favor.
+                        </v-alert>
+                    </div>
+                    <div class="form-block">
+                        <label for="inputPassword" class="sr-only">Contraseña</label>
+                        <input v-model.trim="password"
+                            class="field form-control"
+                            name="password"
+                            type="password" 
+                            placeholder="Contraseña" 
+                            id="password"  
+                            oninvalid="setCustomValidity('Ingrese su constraseña')"
+                            oninput="setCustomValidity('')" 
+                            @keyup.enter='loginMethod'
+                            required>
+                    </div>
+                </form>
+            </div>
+            <br>
+
+            <div class="centerBtn">
+                <VueLoadingButton
+                    class="btn-block success"
+                    @click.native="loginMethod"
+                    :loading="isLoading">
+                    Ingresar
+                </VueLoadingButton>
+            </div>
         </div>
-        <br>
-
-        <div class="centerBtn">
-            <VueLoadingButton
-                class="btn-block success"
-                @click.native="loginMethod"
-                :loading="isLoading">
-                Ingresar
-            </VueLoadingButton>
-        </div>
-    </div>
+    </scroll-lock>
 </template>
 
 <script>

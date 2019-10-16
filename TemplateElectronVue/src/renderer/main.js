@@ -14,6 +14,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
 
+import VueScrollLock from 'vue-scroll-lock';
+
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'));
 Vue.http = Vue.prototype.$http = axios;
 Vue.config.productionTip = false;
@@ -22,6 +24,7 @@ Vue.config.productionTip = false;
 Vue.use(BootstrapVue);
 Vue.use(VueAxios, axios);
 Vue.use(VueRouter);
+Vue.use(VueScrollLock);
 Vue.use(Vuetify, {
   iconfont: 'fa',
   theme: {
@@ -181,6 +184,13 @@ const routes = [
       'ColocacionCateter',
       require('./components/ColocacionCateter.vue').default
     )
+  },
+  {
+    path: '/gestionFormularios',
+    component: Vue.component(
+      'gestionFormularios',
+      require('./components/gestionFormularios.vue').default
+    )
   }
 ];
 
@@ -191,12 +201,14 @@ const router = new VueRouter({
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
-  id: 0
+  id: 0,
+  pacientes: []
 });
 
 /* eslint-disable no-new */
 new Vue({
   router,
+  store,
   render: h => h(App),
   mounted() {
     this.$router.push('/login');
