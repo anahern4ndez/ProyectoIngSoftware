@@ -104,7 +104,7 @@
                   ></v-autocomplete>
                 </v-flex>
                 <v-flex xs12>
-                  <v-select
+                  <v-select v-bind:class="{ disabled: true }"
                     :items="dummyDoctors"
                     label="Doctor"
                     v-model="selectedDoctor"
@@ -252,16 +252,23 @@
   width: 100%;
 }
 
+.disabled {
+      pointer-events:none;
+      color: #bfcbd9;
+      cursor: not-allowed;
+      background-image: none;
+      //background-color: #eef1f6;
+      //border-color: #d1dbe5;   
+}
+
 .event-1 {
   @extend %my-event;
   background-color: rgb(211, 88, 35);
 }
-
 .event-2 {
   @extend %my-event;
   background-color: rgb(35, 88, 200);
 }
-
 .daily-invalid-hour {
   background-color: rgb(255, 163, 163);
   width: 100%;
@@ -303,7 +310,7 @@ export default {
       v => (v && v.length < 5) || "Verifique la duracion en citas.",
       v => /^[0-9]*$/.test(v) || "Ingrese una duración de cita en números."
     ],
-    dummyDoctors: ["Randall Lou", "Cristina Zelaya", "Celeste Espell"],
+    dummyDoctors: ["Randall Lou", "Cristina Zelaya", "Celeste Espell", "Esteban Cabrera"],
     selectedPatient: "",
     selectedDoctor: "",
     infoDialog: false,
@@ -357,7 +364,6 @@ export default {
               appointmentType: i.tipoCitaID
             };
           });
-
           e.forEach(i => {
             this.events.push(i);
           });
@@ -385,7 +391,6 @@ export default {
           }
         }
       }
-
       return true;
     },
     createAppointment() {
@@ -396,7 +401,6 @@ export default {
         this.infoDialog = true;
         return;
       }
-
       const data = {
         idUsuario: this.$store.id,
         idPaciente: this.selectedPatient,
@@ -406,17 +410,14 @@ export default {
         estado: 1,
         tipoCitaID: this.selectedAppointmentType
       };
-
       if (!this.validateAppointmentHour(data)) {
         this.infoMessage =
           "La cita se traslapa con otra cita, por favor revisa los datos.";
         this.infoDialog = true;
         return;
       }
-
       // cerrar dialogo de creacion de cita
       this.dialogOpen = false;
-
       this.$http
         .post("http://localhost:8000/citas", data)
         .then(response => {
@@ -433,7 +434,6 @@ export default {
               patient: this.selectedPatient
             });
           }
-
           // resetear campos de dialogo
           this.selectedDoctor = "";
           this.selectedPatient = "";
@@ -450,7 +450,6 @@ export default {
     updateAppointment() {
       this.updatingAppointment = false;
       this.dialogOpen = false;
-
       const data = {
         idUsuario: this.$store.id,
         idPaciente: this.selectedPatient,
@@ -460,7 +459,6 @@ export default {
         estado: 1,
         tipoCitaID: this.selectedAppointmentType
       };
-
       this.$http
         .put(`http://localhost:8000/citas/${this.selectedAppointment.id}`, data)
         .then(response => {
@@ -482,7 +480,6 @@ export default {
     deleteAppointment() {
       this.updatingAppointment = false;
       this.infoDialog = false;
-
       this.$http
         .delete(`http://localhost:8000/citas/${this.selectedAppointment.id}`)
         .then(response => {
@@ -505,14 +502,12 @@ export default {
     },
     intervalClick(event) {
       if (this.updatingAppointment) return;
-
       this.appointmentDialogTitle = "Crear Nueva Cita";
       const time = Number(event.time.substring(0, 2));
       // no permitir click en horas invalidas
       if (time < this.minAppointmentHour || time > this.maxAppointmentHour) {
         return;
       }
-
       this.selectedTime = event.time;
       this.dialogOpen = true;
     },
@@ -542,7 +537,6 @@ export default {
     },
     interactuar(type) {
       var today = new Date(this.today);
-
       if (!type) {
         var SemAnt = new Date(
           today.getFullYear(),
@@ -556,11 +550,9 @@ export default {
           today.getDate()
         );
       }
-
       var diaSemAnt = SemAnt.getDate();
       var yearSemAnt = SemAnt.getFullYear();
       var mesSemAnt = SemAnt.getMonth() + 1;
-
       var fechaSemAnt = yearSemAnt + "-" + mesSemAnt + "-" + diaSemAnt;
       this.startDate = fechaSemAnt;
       this.today = fechaSemAnt;
