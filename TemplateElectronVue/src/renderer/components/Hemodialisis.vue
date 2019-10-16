@@ -266,7 +266,7 @@
                                         </ol>
                                     </div>
                                     <br><br><br>
-                                    <table class="table table-bordered">
+                                    <table class="table table-bordered" id="table">
                                         <tbody>
                                             <tr>
                                                 <th scope="row" style="width:10%;">No.</th>
@@ -292,104 +292,27 @@
                                                 <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
                                                 <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
                                             </tr>
-                                            <tr>
-                                                <th scope="row" style="width:10%;">2</th>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row" style="width:10%;">3</th>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row" style="width:10%;">4</th>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row" style="width:10%;">5</th>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row" style="width:10%;">6</th>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row" style="width:10%;">7</th>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row" style="width:10%;">8</th>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row" style="width:10%;"></th>
-                                                <td style="text-align: left; max-width: 10%;" ></td>
-                                                <td style="text-align: left; max-width: 10%;" ></td>
-                                                <td style="text-align: left; max-width: 10%;" ></td>
-                                                <td style="text-align: left; max-width: 10%;" ></td>
-                                                <td style="text-align: left; max-width: 10%;" ></td>
-                                                <td style="text-align: left; max-width: 10%;" ></td>
-                                                <td style="text-align: left; max-width: 10%;" ></td>
-                                                <th style="text-align: left; max-width: 10%;" >UF/TOTAL</th>
-                                                <td style="text-align: left; max-width: 10%;" ></td>
-                                            </tr>
                                         </tbody>
                                     </table>
+                                    <button float="left" type="button" class="btn btn-lg btn-warning btn-block" v-on:click="activateTableDialog">Comenzar hemodiálisis</button> 
+                                    <!-- cuadro de dialogo de aviso para el autosave de tabla -->
+                                    <v-dialog v-model="tabs[pacientes.indexOf(paciente)].tableDialog" persistent max-width="40%">
+                                        <v-card>
+                                            <v-card-title class="headline">Aviso de autoguardado</v-card-title>
+                                            <v-card-text>
+                                                Los datos ingresados en la última fila de la tabla serán guardados en este momento. Una vez guardada no se podrá cambiar. 
+                                                <br><br>
+                                                En caso que desee volver a revisar la tabla, haga clic en "cancelar", este aviso volverá a aparecer en 5 minutos. 
+                                                <br><br>
+                                                ¿Es toda la información ingresada correcta?
+                                            </v-card-text>
+                                            <v-card-actions>
+                                            <v-spacer></v-spacer>
+                                            <v-btn color="primary darken-1" text @click="recheckTableData()">No, revisar</v-btn>
+                                            <v-btn color="primary darken-1" text @click="saveTableData()">Sí, guardar</v-btn>
+                                            </v-card-actions>
+                                        </v-card>
+                                        </v-dialog>
                                     <br><br><br>
                                     <h3 id="headers" class="text-xs-center">Especiales</h3>
                                     <v-textarea
@@ -430,6 +353,7 @@ export default {
             //const element = array[index];
             this.tabs.push(
                 {
+                    tableDialog: false,
                     tabid: index,
                     pass: true,
                     Hemodialisis: '',
@@ -457,72 +381,6 @@ export default {
                     Especiales: '',
                     Observaciones: '',
                     idPaciente: response.data.Pacientes[index].id,
-                    //tabla 1
-                    //tabla 2
-                    Fecha: {
-                        BUN: "",
-                        CREAT: "",
-                        NA: "",
-                        K: "",
-                        C: "",
-                        P: "",
-                        CL: "",
-                        ALB: "",
-                        GB: "",
-                        BUN: "",
-                        HB: "",
-                        PLAQ: "",
-                        PTH: "",
-                        FERRI: ""
-                    },
-                    Pre: {
-                        BUN: "",
-                        CREAT: "",
-                        NA: "",
-                        K: "",
-                        C: "",
-                        P: "",
-                        CL: "",
-                        ALB: "",
-                        GB: "",
-                        BUN: "",
-                        HB: "",
-                        PLAQ: "",
-                        PTH: "",
-                        FERRI: ""
-                    },
-                    Post: {
-                        BUN: "",
-                        CREAT: "",
-                        NA: "",
-                        K: "",
-                        C: "",
-                        P: "",
-                        CL: "",
-                        ALB: "",
-                        GB: "",
-                        BUN: "",
-                        HB: "",
-                        PLAQ: "",
-                        PTH: "",
-                        FERRI: ""
-                    },
-                    Urr: {
-                        BUN: "",
-                        CREAT: "",
-                        NA: "",
-                        K: "",
-                        C: "",
-                        P: "",
-                        CL: "",
-                        ALB: "",
-                        GB: "",
-                        BUN: "",
-                        HB: "",
-                        PLAQ: "",
-                        PTH: "",
-                        FERRI: ""
-                    }
                 }
             )
         }
@@ -587,6 +445,72 @@ export default {
             isNumber = true;
           }
           return isNumber;
+        },
+        /* Al comenzar el proceso de hemodiálisis, se espera 30min antes de guardar los datos, pero antes de poder hacerlo, 
+            se activa un cuadro de diálogo para verificar que los datos ingresados fueron correctos (porque no se pueden cambiar 
+            una vez se haya guardado */
+        activateTableDialog(){
+            var loop = setInterval(() => {
+                this.tabs[this.activeTab].tableDialog = true
+                clearInterval(loop)
+            }, 5000); //5seg
+        },
+        /* En el caso que el usuario desee volver a verificar los datos, se esperarán 5 minutos antes de volver a intentar guardar los datos */
+        recheckTableData(){
+            this.tabs[this.activeTab].tableDialog = false
+            var loop = setInterval(() => {
+                this.activateTableDialog()
+                clearInterval(loop)
+            }, 5000); //5seg
+        },
+        /* En caso que el usuario indique que todos los datos están correctos, se procede a guardar lo ingresado en la última fila */
+        saveTableData(){
+            this.tabs[this.activeTab].tableDialog = false
+            const table = document.getElementById("table")
+            let currentRow = table.rows.length -1
+            /* guardar datos de table row actuales */
+            const time = new Date() 
+            this.T1Hora = time.getHours() + ':' + ((time.getMinutes() < 10)?"0":"") + time.getMinutes() + ':' + ((time.getSeconds() < 10)?"0":"") + time.getSeconds()
+            //setear la hora en la tabla (para que el usuario la pueda ver)
+            table.rows[currentRow].cells[1].innerHTML = this.T1Hora
+            const info = {
+                P_A: table.rows[currentRow].cells[2].innerHTML,
+                Pulso: table.rows[currentRow].cells[3].innerHTML,
+                Temp: table.rows[currentRow].cells[4].innerHTML,
+                QB: table.rows[currentRow].cells[5].innerHTML,
+                PV: table.rows[currentRow].cells[6].innerHTML,
+                PA: table.rows[currentRow].cells[7].innerHTML,
+                UFH: table.rows[currentRow].cells[8].innerHTML,
+                Medicamentos: table.rows[currentRow].cells[9].innerHTML
+            }
+            this.$http.post('http://localhost:8000/hemodialisis/storeTable', info).then(response => {
+
+                /* deshabilitar modificacion de texto para celdas ya guardadas */ 
+                for (let m = 1; m < 10; m++) {
+                    table.rows[currentRow].cells[m].contentEditable = false
+                }
+                /* agregar otra table row */
+                currentRow++
+                const tr = document.createElement("tr")
+                const th = document.createElement("th")
+                th.scope = "row"
+                th.style = "width: 10%; border: 3px solid #a9a9a9;"
+                th.innerHTML = currentRow
+                tr.append(th)
+                for (let i = 0; i < 9; i++) {
+                    const td = document.createElement("td")
+                    td.style = ' text-align: left; max-width: 10%; border: 3px solid #a9a9a9;'
+                    td.contentEditable = true
+                    tr.append(td)
+                }
+                table.append(tr)
+                if(table.rows.length -1 < 8){
+                    var loop = setInterval(() => {
+                        this.activateTableDialog()
+                        clearInterval(loop)
+                    }, 5000); //5seg
+                }
+            })
         }
     }
 }
@@ -634,7 +558,7 @@ table.table-bordered {
 table.table-bordered > tbody > tr > th {
     border: 3px solid #a9a9a9;
 }
-table.table-bordered > tbody > tr > td {
+.tableRow, table.table-bordered > tbody > tr > td{
     border: 3px solid #a9a9a9;
     width: 10%;
     word-wrap: break-word;

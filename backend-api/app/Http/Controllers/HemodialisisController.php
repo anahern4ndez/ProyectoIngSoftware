@@ -35,32 +35,17 @@ class HemodialisisController extends Controller
         $Hemodialisis->Talla = $request->Talla;
         $Hemodialisis->PesoDelta = $request->Peso_delta;
         $Hemodialisis->Especiales = $request->Especiales;
-        $Hemodialisis->Fecha_col_cat = $request->Fecha_col_cat;
-
-
-        //tabla 1
-        /*$Hemodialisis->PAstr = $request->PAstr;
-        $Hemodialisis->Pulso = $request->Pulso;
-        $Hemodialisis->Temp = $request->Temp;
-        $Hemodialisis->QB = $request->QB;
-        $Hemodialisis->PV = $request->PV;
-        $Hemodialisis->PA_table = $request->PA_table;
-        $Hemodialisis->UFH = $request->UFH;
-        $Hemodialisis->Medicamentos = $request->Medicamentos;
-        $Hemodialisis->UFTotal = $request->UFTotal;*/
-        //fin tabla 1
         
         $Hemodialisis->Observaciones = $request->Observaciones;
         /*$Hemodialisis->Tecnico = $request->Tecnico;
         $Hemodialisis->PA = $request->PA;*/
-        $Hemodialisis['T2Fecha'] = json_decode($request->Fecha);
-        $Hemodialisis['T2Pre'] = json_encode($request->Pre);
-        $Hemodialisis['T2Post'] = json_encode($request->Post);
-        $Hemodialisis['T2Urr'] = json_encode($request->Urr);
         $Hemodialisis->save();
 
         return response()->json([
             'success' => true
         ], 200);
+    }
+    public function storeTable(Request $request){
+        // incluir mongo????
     }
 }
