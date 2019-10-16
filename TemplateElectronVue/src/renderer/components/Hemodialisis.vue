@@ -453,7 +453,7 @@ export default {
             var loop = setInterval(() => {
                 this.tabs[this.activeTab].tableDialog = true
                 clearInterval(loop)
-            }, 5000); //5seg
+            }, 5000); //30min
         },
         /* En el caso que el usuario desee volver a verificar los datos, se esperarán 5 minutos antes de volver a intentar guardar los datos */
         recheckTableData(){
@@ -461,7 +461,7 @@ export default {
             var loop = setInterval(() => {
                 this.activateTableDialog()
                 clearInterval(loop)
-            }, 5000); //5seg
+            }, 5000); //5min
         },
         /* En caso que el usuario indique que todos los datos están correctos, se procede a guardar lo ingresado en la última fila */
         saveTableData(){
@@ -504,11 +504,11 @@ export default {
                     tr.append(td)
                 }
                 table.append(tr)
-                if(table.rows.length -1 < 8){
+                if(table.rows.length -1 < 8){ //el formulario dice que se tienen hasta 8 entradas en la tabla
                     var loop = setInterval(() => {
                         this.activateTableDialog()
                         clearInterval(loop)
-                    }, 5000); //5seg
+                    }, 5000); //30min
                 }
             })
         }
@@ -558,7 +558,7 @@ table.table-bordered {
 table.table-bordered > tbody > tr > th {
     border: 3px solid #a9a9a9;
 }
-.tableRow, table.table-bordered > tbody > tr > td{
+table.table-bordered > tbody > tr > td{
     border: 3px solid #a9a9a9;
     width: 10%;
     word-wrap: break-word;
