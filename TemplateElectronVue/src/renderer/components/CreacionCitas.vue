@@ -104,7 +104,8 @@
                   ></v-autocomplete>
                 </v-flex>
                 <v-flex xs12>
-                  <v-select v-bind:class="{ disabled: true }"
+                  <!--v-bind:class="{ disabled: true }"-->
+                  <v-select 
                     :items="dummyDoctors"
                     label="Doctor"
                     v-model="selectedDoctor"
@@ -252,14 +253,14 @@
   width: 100%;
 }
 
-.disabled {
+/*.disabled {
       pointer-events:none;
       color: #bfcbd9;
       cursor: not-allowed;
       background-image: none;
       //background-color: #eef1f6;
       //border-color: #d1dbe5;   
-}
+}*/
 
 .event-1 {
   @extend %my-event;
@@ -310,7 +311,7 @@ export default {
       v => (v && v.length < 5) || "Verifique la duracion en citas.",
       v => /^[0-9]*$/.test(v) || "Ingrese una duración de cita en números."
     ],
-    dummyDoctors: ["Randall Lou", "Cristina Zelaya", "Celeste Espell", "Esteban Cabrera"],
+    dummyDoctors: ["Randall Lou", "Cristina Zelaya", "Celeste Espell"],
     selectedPatient: "",
     selectedDoctor: "",
     infoDialog: false,
