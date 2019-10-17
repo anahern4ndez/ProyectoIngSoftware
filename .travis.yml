@@ -24,7 +24,8 @@ jobs:
 
       script:
         - vendor/bin/phpunit --testdox
-        
+        - vendor/bin/behat
+
     - stage: stage
       script: skip
-    
+
