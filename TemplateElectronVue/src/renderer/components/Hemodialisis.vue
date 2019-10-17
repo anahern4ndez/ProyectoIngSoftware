@@ -297,22 +297,22 @@
                                     <button float="left" type="button" class="btn btn-lg btn-warning btn-block" v-on:click="activateTableDialog">Comenzar hemodiálisis</button> 
                                     <!-- cuadro de dialogo de aviso para el autosave de tabla -->
                                     <v-dialog v-model="tabs[pacientes.indexOf(paciente)].tableDialog" persistent max-width="40%">
-                                        <v-card>
+                                        <v-card class="dialogText">
                                             <v-card-title class="headline">Aviso de autoguardado</v-card-title>
                                             <v-card-text>
                                                 Los datos ingresados en la última fila de la tabla serán guardados en este momento. Una vez guardada no se podrá cambiar. 
                                                 <br><br>
-                                                En caso que desee volver a revisar la tabla, haga clic en "cancelar", este aviso volverá a aparecer en 5 minutos. 
+                                                En caso que desee volver a revisar la tabla, haga clic en "Revisar", este aviso volverá a aparecer en 5 minutos. 
                                                 <br><br>
                                                 ¿Es toda la información ingresada correcta?
                                             </v-card-text>
                                             <v-card-actions>
                                             <v-spacer></v-spacer>
-                                            <v-btn color="primary darken-1" text @click="recheckTableData()">No, revisar</v-btn>
-                                            <v-btn color="primary darken-1" text @click="saveTableData()">Sí, guardar</v-btn>
+                                            <v-btn class="v-btn" color="primary darken-1" text @click="recheckTableData()">Revisar</v-btn>
+                                            <v-btn class="v-btn" color="primary darken-1" text @click="saveTableData()">Guardar</v-btn>
                                             </v-card-actions>
                                         </v-card>
-                                        </v-dialog>
+                                    </v-dialog>
                                     <br><br><br>
                                     <h3 id="headers" class="text-xs-center">Especiales</h3>
                                     <v-textarea
@@ -594,5 +594,19 @@ td > input {
     vertical-align: middle; /* center checkbox vertically */
     align-items: center;
     justify-content: center;
+}
+.dialogText {
+    font-size: 1.5rem;
+    padding: 5%;
+}
+.headline {
+    font-weight: bolder;
+    font-family: Nunito;
+}
+.v-btn {
+    font-size: 1.3rem;
+    margin: 3%;
+    padding: 3%;
+    height: fit-content;
 }
 </style>
