@@ -12,6 +12,7 @@
                     label="Elija el formulario que desea abrir para llenar">
                     </v-combobox>
                     <br>
+                    <!-- <v-btn text large color="yellow" type="button" href='ms-word:ofv|u|file:./CHOL.docx' >Abrir formulario</v-btn> -->
                     <v-btn text large color="yellow" type="button" href='ms-word:ofv|u|file:///C:/Users/Ulises/Desktop/CHOL.docx' >Abrir formulario</v-btn>
                 </b-col>
                 <b-col cols="1" class="titulo1">
