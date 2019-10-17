@@ -17,6 +17,7 @@ jobs:
       - psql -c 'SET session_replication_role = 'replica';'
       - cd backend-api/
       - composer self-update
+      - composer update
       - composer install --no-interaction
       - cp .env.travis .env
       - php artisan migrate --force
