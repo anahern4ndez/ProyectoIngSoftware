@@ -21,8 +21,7 @@
 				</b-row>
 
 				<!-- FILA 2, SET DE BOTONES-->
-				<b-row align-h="around" align-v="center" class="pb-2">
-					<b-col order="1" cols="9">
+				<b-row align-h="center">
 						<template>
 						<div>
 							<v-btn outline color="#303841" v-on:click="gestionarPaciente">Gestionar Paciente</v-btn>
@@ -30,7 +29,6 @@
 							<v-btn outline color="#303841" v-on:click="InformesEstaditicos">Informes Estadísticos</v-btn>
 						</div>
 					</template>
-					</b-col>
 				</b-row>
 
         <hr>
