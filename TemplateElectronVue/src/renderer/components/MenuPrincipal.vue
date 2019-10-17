@@ -6,7 +6,7 @@
 				<b-row align-h="around" align-v="center">
 
 					<b-col order="1" cols="1">
-						<img src="src\temp\prfl.jpeg" alt="" width="120" height="120">
+						<img src="src\temp\prfl.jpeg" alt="" width="120" height="120" v-if="$can('create', 'Post')">
 					</b-col>
 
 					<b-col order="1" cols="6">
