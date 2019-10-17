@@ -1,4 +1,5 @@
 <template>
+  
   <v-app style="background-color: #EEEEEE; font-family: Cabin">
     <v-navigation-drawer
       :clipped="clipped"
@@ -51,6 +52,23 @@
       </v-toolbar-items>
     </v-toolbar>
 
+    <v-dialog v-model="completeDialog" max-width="500px">
+      <v-card>
+        <v-card-title>
+            <span class="headline">Error: Conexion inexistente con el servidor</span>
+        </v-card-title>
+
+        <v-card-text>
+          <p>No hay conexion con el servidor, contacte al administrador del sistema</p>
+        </v-card-text>
+                
+        <v-card-actions>
+          <v-spacer></v-spacer>
+            <v-btn color="blue darken-1" flat @click="completeDialog=false">OK</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
     <v-content>
       <v-container fluid color="secondary">
         <router-view></router-view>
@@ -68,6 +86,7 @@ export default {
   data() {
     return {
       clipped: false,
+      completeDialog: false,
       drawer: true,
       items: [{ title: "Title 1", icon: "fa-home" }],
       activeRoute: "",
@@ -114,6 +133,8 @@ export default {
     logout() {
       this.$http.post("http://localhost:8000/logout").then(response => {
         this.$router.push("/login");
+      }).catch(error =>{
+        this.completeDialog = true
       });
     },
     setActiveRoute(name) {
