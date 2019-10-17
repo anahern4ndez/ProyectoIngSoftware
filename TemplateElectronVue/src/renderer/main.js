@@ -205,7 +205,12 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   id: 0,
-  pacientes: []
+  pacientes: [],
+  user: {
+    id: 1,
+    name: 'rAnDaLL lOu',
+    role: 1
+  }
 });
 
 /* eslint-disable no-new */
