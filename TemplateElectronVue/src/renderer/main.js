@@ -5,6 +5,8 @@ import VueAxios from 'vue-axios';
 import VueRouter from 'vue-router';
 import Vuetify from 'vuetify';
 import BootstrapVue from 'bootstrap-vue';
+import ability from '../config/ability';
+import { abilitiesPlugin } from '@casl/vue';
 
 import App from './App';
 import 'vuetify/dist/vuetify.min.css';
@@ -25,6 +27,7 @@ Vue.use(BootstrapVue);
 Vue.use(VueAxios, axios);
 Vue.use(VueRouter);
 Vue.use(VueScrollLock);
+Vue.use(abilitiesPlugin, ability);
 Vue.use(Vuetify, {
   iconfont: 'fa',
   theme: {
