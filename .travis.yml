@@ -21,7 +21,7 @@ jobs:
       - cp .env.travis .env
       - php artisan migrate --force
       - php artisan db:seed
-      - php artisan serve
+      - php artisan serve &
 
       script:
         - vendor/bin/phpunit --testdox
