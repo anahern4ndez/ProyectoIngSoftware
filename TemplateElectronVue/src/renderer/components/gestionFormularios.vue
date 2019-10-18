@@ -26,7 +26,8 @@
                     label="Elija el formulario que desea subir">
                     </v-combobox>
                     <br>
-                    <v-btn text large color="yellow">Subir formulario</v-btn>
+                    <v-btn text large color="yellow" @click="imgClick">Subir formulario</v-btn>
+                    <input type="file" class="hide_file" style="height:auto; width:auto; visibility:hidden" v-on:change="changeImg" ref="changeImg"/>
                 </b-col>
             </b-row>
         </b-container>
@@ -50,6 +51,7 @@
                 'Mortalidad',
                 'Hemodialisis',
                 ],
+                path: '',
             };
         },
         methods:{
@@ -61,7 +63,41 @@
                 myApp.Visible = true;
                 myApp.Documents.Open(strFile);
                 }
-            }
+            },
+            imgClick: function(event){ // on a click on the button with id 'one'
+                const btn = this.$refs.changeImg
+                btn.click(); // trigger the click on second, and go on 
+            },
+            changeImg: function(event) {
+                var input = event.target;
+                //console.log(input.files)
+                //Este es el path del documento
+                this.path = input.files[0].path;
+                console.log(this.path);
+                input.value = '';
+
+                /* try 
+                {
+
+                    var shell = require('shelljs');
+                    let nodePath = (shell.which('node').toString());
+                    shell.config.execPath = nodePath;
+
+                    const ipServer = '192.168.0.156';
+                    const serverPassword = 'perritoUVG';
+                    const pcPath = this.path;
+                    const serverUser = 'adminlocal';
+                    const serverPath = '/home/adminlocal/Dowloads';
+
+                    var string =`pscp -pw ${serverPassword} "${pcPath}" ${serverUser}@${ipServer}:${serverPath}`;        
+
+                    shell.exec(string);
+
+                } catch (error) 
+                {
+                    console.log("Error al subir imagen al servidor");
+                }*/
+            },
         }
     };
 
