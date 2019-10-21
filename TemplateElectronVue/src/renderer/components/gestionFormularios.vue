@@ -9,13 +9,13 @@
                     <br>
                     <v-combobox
                     :items="items"
-                    v-on:change="changeDisable"
-                    v-model="select"
+                    v-on:change="changeDisableAbrir"
+                    v-model="selectAbrir"
                     label="Elija el formulario que desea abrir para llenar">
                     </v-combobox>
                     <br>
                     <!-- <v-btn text large color="yellow" type="button" href='ms-word:ofv|u|file:./CHOL.docx' >Abrir formulario</v-btn> -->
-                    <v-btn text large color="yellow" type="button" :href='referencia' :disabled='isDisabled'>Abrir formulario</v-btn>
+                    <v-btn text large color="yellow" type="button" :href='referencia' :disabled='isDisabledAbrir'>Abrir formulario</v-btn>
                 </b-col>
                 <b-col cols="1" class="titulo1">
 
@@ -25,11 +25,14 @@
                     <br>
                     <v-combobox
                     :items="items"
+                    v-on:change="changeDisableSubir"
+                    v-model="selectSubir"
                     label="Elija el formulario que desea subir">
                     </v-combobox>
                     <br>
-                    <v-btn text large color="yellow" @click="imgClick">Subir formulario</v-btn>
-                    <input type="file" class="hide_file" style="height:auto; width:auto; visibility:hidden" v-on:change="changeImg" ref="changeImg"/>
+                    <v-btn text large color="yellow" @click="formClick" :disabled='isDisabledSubir'>Elegir formulario</v-btn>
+                    <input type="file" class="hide_file" style="height:auto; width:auto; visibility:hidden" v-on:change="changeForm" ref="changeForm"/>
+                    <v-btn text large color="yellow" @click="subirFormulario" ref="path" :disabled='isDisabledSubirForm'>Subir formulario</v-btn>
                 </b-col>
             </b-row>
         </b-container>
@@ -44,7 +47,8 @@
         data() {
             return {
                 formulario: null,
-                select: ' ',
+                selectAbrir: ' ',
+                selectSubir: ' ',
                 items: [
                 'Peritonitis',
                 'Transplante renal',
@@ -52,9 +56,11 @@
                 'Hemodialisis',
                 'Mortalidad',
                 ],
-                path: '',
+                path: ' ',
                 referencia: 'ms-word:ofv|u|file:///C:/Users/Ulises/Desktop/CHOL.docx',
-                isDisabled: true,
+                isDisabledAbrir: true,
+                isDisabledSubir: true,
+                isDisabledSubirForm: true,
             };
         },
         methods:{
@@ -67,16 +73,33 @@
                 myApp.Documents.Open(strFile);
                 }
             },
-            changeDisable(event){
-                if(this.select !== ' '){
-                    this.isDisabled = false
+            changeDisableAbrir(event){
+                if(this.selectAbrir !== ' '){
+                    this.isDisabledAbrir = false
                 }
             },
-            imgClick: function(event){ // on a click on the button with id 'one'
-                const btn = this.$refs.changeImg
+            changeDisableSubir(event){
+                if(this.selectSubir !== ' '){
+                    this.isDisabledSubir = false,
+                    this.isDisabledSubirForm = false
+                }
+            },
+            subirFormulario(){
+                if(this.path === ' '){
+                    // Mostrar Alerta
+                    console.log("No se pudo subir Formulario")
+                }
+                else{
+                    // Subir Documento al servidor
+                    // Mostrar mensaje de subida con exito
+                   console.log("Se subio el Formulario: "+this.path) 
+                }
+            },
+            formClick: function(event){ // on a click on the button with id 'one'
+                const btn = this.$refs.changeForm
                 btn.click(); // trigger the click on second, and go on 
             },
-            changeImg: function(event) {
+            changeForm: function(event) {
                 var input = event.target;
                 //console.log(input.files)
                 //Este es el path del documento
