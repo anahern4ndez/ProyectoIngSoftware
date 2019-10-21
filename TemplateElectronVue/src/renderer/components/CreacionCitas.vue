@@ -105,7 +105,7 @@
                 </v-flex>
                 <v-flex xs12>
                   <!--v-bind:class="{ disabled: true }"-->
-                  <v-select 
+                  <v-select
                     :items="dummyDoctors"
                     label="Doctor"
                     v-model="selectedDoctor"
@@ -373,6 +373,10 @@ export default {
           console.log(err);
         });
     },
+    /**
+     * Valida que la nueva cita que se desea ingresar nose traslape con
+     * niguna de las citas ya existentes.
+     */
     validateAppointmentHour(data) {
       let d0 = new Date(`${data.fecha} ${data.hora}`);
       console.log(`d0 ${d0.toString()}`);
