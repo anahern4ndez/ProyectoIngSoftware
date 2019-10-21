@@ -9,6 +9,8 @@
                     <br>
                     <v-combobox
                     :items="items"
+                    v-on:change="changeDisable"
+                    v-model="select"
                     label="Elija el formulario que desea abrir para llenar">
                     </v-combobox>
                     <br>
@@ -42,18 +44,17 @@
         data() {
             return {
                 formulario: null,
-                select: 'Peritonitis',
+                select: ' ',
                 items: [
                 'Peritonitis',
                 'Transplante renal',
-                'Transfusion',
+                'Transfusión',
                 'Hemodialisis',
                 'Mortalidad',
-                'Hemodialisis',
                 ],
                 path: '',
                 referencia: 'ms-word:ofv|u|file:///C:/Users/Ulises/Desktop/CHOL.docx',
-                isDisabled: false,
+                isDisabled: true,
             };
         },
         methods:{
@@ -64,6 +65,11 @@
                 {
                 myApp.Visible = true;
                 myApp.Documents.Open(strFile);
+                }
+            },
+            changeDisable(event){
+                if(this.select !== ' '){
+                    this.isDisabled = false
                 }
             },
             imgClick: function(event){ // on a click on the button with id 'one'
