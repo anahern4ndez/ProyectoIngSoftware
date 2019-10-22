@@ -1,37 +1,31 @@
 os:
-  - linux
-
+- linux
 language: php
-
 php:
-  - '7.1'
-
+- '7.1'
 services:
-  - postgresql
-
+- postgresql
 jobs:
   include:
-    - stage: test
-      before_script:
-      - psql -c 'create database travis_ci_test;' -U postgres
-      - psql -c 'SET session_replication_role = 'replica';'
-      - cd backend-api/
-      - composer self-update
-      - composer install --no-interaction
-      - cp .env.travis .env
-      - php artisan migrate --force
-      - php artisan db:seed
-      - php artisan serve &
-
-      script:
-        - vendor/bin/phpunit --testdox
-        # - vendor/bin/behat
-
-      after_success:
-        - cd ../
-        - chmod +x push.sh
-        - ./push.sh
-
-    - stage: stage
-      script: skip
-
+  - stage: test
+    before_script:
+    - psql -c 'create database travis_ci_test;' -U postgres
+    - psql -c 'SET session_replication_role = 'replica';'
+    - cd backend-api/
+    - composer self-update
+    - composer install --no-interaction
+    - cp .env.travis .env
+    - php artisan migrate --force
+    - php artisan db:seed
+    - php artisan serve &
+    script:
+    - vendor/bin/phpunit --testdox
+    after_success:
+    - cd ../
+    - chmod +x push.sh
+    - "./push.sh"
+  - stage: stage
+    script: skip
+env:
+  global:
+    secure: VOVggmg26zLT2iqUjgZN31aDDbpJGBJMoM+PG3uqTIN1/e1pbLyWrdyrDahXI6isCgSGK98vLUY/N02HzUYgc253CwD5nSTmaXzee9SUhVDHNOVUy90PqDNrdwpcjEMbM+issXdTGxRMiREQHDxxBpti3O2xvVCL+YtAIcZoSK8mFaaC5bScXlRot7qKGsK2b/LElJe22/MgguaYLfUFTOMJ/3pBMXh3nXePXiCMBtuMcZlk+xFgzRw3KFIDmbek03GLYNXvW9UiKIZz7gvs0qKLQTMIxekVWZjIU4STGaO/AdJvSgrJxxexYnfTSOCPOLSYBv57DSXNrZJB/6z1NOjBrDY4F2bU4a6Op4gfysG5IcsUOxz0xEOH96f5WcsFMl6Vb2Pnh8sULfpvLHFbV0wz5mZDm33q425/mDI06O3C7h+FEys+1nT4nfmq+xiK8e89cwyMKBoIqvWKdvDS7SFZH6Bl51eFgjMjQ/WO253J8RDnZRJYDLRCYJYHIqbw0Yfez8+TY0jeZ/4PC/cwWyRVUslfaZjuyqxNjvFYnNxtkLq1vS6uNoR046gkU992Li9ABmFalG64yj+xvetW1MZ6rCV+tmURVtp0Z13Q10HS2kcpr1UX8wPBcsF8dgbv8oh/iUkvQZe8488Pj4KvzNrQqnrEWINiY90TpSUe2ws=
