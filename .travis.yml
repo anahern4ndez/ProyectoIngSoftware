@@ -20,6 +20,7 @@ jobs:
     - php artisan serve &
     script:
     - vendor/bin/phpunit --testdox
+    - vendor/bin/behat
     after_success:
     - cd ../
     - chmod +x push.sh
