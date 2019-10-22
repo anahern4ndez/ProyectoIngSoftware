@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\tiposCitas;
+use App\tipoCitas;
 use DB;
 
 class tipoCitasController extends Controller
@@ -22,6 +22,14 @@ class tipoCitasController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'creado'
+        ], 200);
+    }
+
+    public function getAll() {
+        
+        return response()->json([
+            'success' => true,
+            'data' => tipoCitas::all()
         ], 200);
     }
 }

@@ -21,10 +21,17 @@ jobs:
       - cp .env.travis .env
       - php artisan migrate --force
       - php artisan db:seed
+      - php artisan serve &
 
       script:
         - vendor/bin/phpunit --testdox
-        
+        # - vendor/bin/behat
+
+      after_success:
+        - cd ../
+        - chmod +x push.sh
+        - ./push.sh
+
     - stage: stage
       script: skip
-    
+
