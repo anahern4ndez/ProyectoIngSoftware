@@ -25,7 +25,10 @@ jobs:
 
       script:
         - vendor/bin/phpunit --testdox
-        - vendor/bin/behat
+        # - vendor/bin/behat
+
+      after_success:
+        - .travis/push.sh
 
     - stage: stage
       script: skip
