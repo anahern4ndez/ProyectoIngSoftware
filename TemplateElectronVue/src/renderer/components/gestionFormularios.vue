@@ -68,11 +68,19 @@
             startWord(strFile){
                 //var myApp = new ActiveXObject("Word.Application");
                 const {shell} = require('electron');
+                var fs = require('fs');
+
                 var dir = process.cwd();
                 dir += '\\CHOL.docx'
 
                 console.log(dir);
                 shell.openItem(dir);
+
+                // Se sacara una copia del archivo original y se pondra en uno NUEVO
+                fs.copyFile('CHOL.docx', 'Nuevo.docx', (err) => {
+                    if (err) throw err;
+                    console.log('Archivo copiado con Exito');
+                });
             },
             changeDisableAbrir(event){
                 if(this.selectAbrir !== ' '){
