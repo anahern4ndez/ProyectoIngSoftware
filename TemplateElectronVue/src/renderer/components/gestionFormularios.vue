@@ -15,7 +15,7 @@
                     </v-combobox>
                     <br>
                     <!-- <v-btn text large color="yellow" type="button" href='ms-word:ofv|u|file:./CHOL.docx' >Abrir formulario</v-btn> -->
-                    <v-btn text large color="yellow" type="button" :href='referencia' :disabled='isDisabledAbrir'>Abrir formulario</v-btn>
+                    <v-btn text large color="yellow" type="button" v-on:click="startWord" :disabled='isDisabledAbrir'>Abrir formulario</v-btn>
                 </b-col>
                 <b-col cols="1" class="titulo1">
 
@@ -57,7 +57,8 @@
                 'Mortalidad',
                 ],
                 path: ' ',
-                referencia: 'ms-word:ofv|u|file:///C:/Users/Ulises/Desktop/CHOL.docx',
+                // referencia: 'ms-word:ofv|u|file:///C:/Users/Ulises/Desktop/CHOL.docx',
+                referencia: 'ms-word:ofv|u|file:../TemplateElectronVue/CHOL.docx',
                 isDisabledAbrir: true,
                 isDisabledSubir: true,
                 isDisabledSubirForm: true,
@@ -66,12 +67,12 @@
         methods:{
             startWord(strFile){
                 //var myApp = new ActiveXObject("Word.Application");
-                var myApp
-                if (myApp != null)
-                {
-                myApp.Visible = true;
-                myApp.Documents.Open(strFile);
-                }
+                const {shell} = require('electron');
+                var dir = process.cwd();
+                dir += '\\CHOL.docx'
+
+                console.log(dir);
+                shell.openItem(dir);
             },
             changeDisableAbrir(event){
                 if(this.selectAbrir !== ' '){
@@ -92,7 +93,7 @@
                 else{
                     // Subir Documento al servidor
                     // Mostrar mensaje de subida con exito
-                   console.log("Se subio el Formulario: "+this.path) 
+                   console.log("Se subio el Formulario: "+this.path)
                 }
             },
             formClick: function(event){ // on a click on the button with id 'one'
@@ -107,7 +108,7 @@
                 console.log(this.path);
                 input.value = '';
 
-                /* try 
+                /* try
                 {
 
                     var shell = require('shelljs');
@@ -120,11 +121,11 @@
                     const serverUser = 'adminlocal';
                     const serverPath = '/home/adminlocal/Dowloads';
 
-                    var string =`pscp -pw ${serverPassword} "${pcPath}" ${serverUser}@${ipServer}:${serverPath}`;        
+                    var string =`pscp -pw ${serverPassword} "${pcPath}" ${serverUser}@${ipServer}:${serverPath}`;
 
                     shell.exec(string);
 
-                } catch (error) 
+                } catch (error)
                 {
                     console.log("Error al subir imagen al servidor");
                 }*/
