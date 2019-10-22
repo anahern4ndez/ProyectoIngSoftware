@@ -28,7 +28,7 @@ jobs:
         # - vendor/bin/behat
 
       after_success:
-        - .travis/push.sh
+        - ./push.sh
 
     - stage: stage
       script: skip
