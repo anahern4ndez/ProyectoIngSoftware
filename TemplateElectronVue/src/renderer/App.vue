@@ -106,6 +106,11 @@ export default {
           name: "Gestionar Formularios",
           route: "/gestionFormularios",
           icon: "fa-flag"
+        },
+        {
+          name: "Estadísticas",
+          route: "/EstadisticaGeneral",
+          icon: "fa-flag"
         }
       ]
     };
