@@ -28,6 +28,7 @@ jobs:
         # - vendor/bin/behat
 
       after_success:
+        - cd ../
         - ./push.sh
 
     - stage: stage
