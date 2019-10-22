@@ -10,6 +10,7 @@ setup_git() {
 
 commit_website_files() {
   git checkout -b PruebaStage
+  git pull
   git add .
   git commit --message "Travis build: $TRAVIS_BUILD_NUMBER"
 }
