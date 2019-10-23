@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder {
             percentilTallaSeeder::class,
             percentilPesoAlturaSeeder::class,
             PermissionSeeder::class,
+            CodigoCitasSeeder::class
         ]);
         
     }
