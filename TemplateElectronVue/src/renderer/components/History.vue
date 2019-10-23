@@ -13,84 +13,24 @@
               medium
             >
               <template v-slot:icon>
-                <span>JL</span>
+                <span>KR</span>
               </template>
               
             </v-timeline-item>
-      
-            <v-timeline-item
-              class="mb-4"
-              small
-            >
-              <v-row justify="space-between">
-                <v-col cols="7">
-                  
-                  Ingreso
-                </v-col>
-                <v-col class="text-right" cols="5">1/07/19</v-col>
-              </v-row>
-            </v-timeline-item>
-      
-            <v-timeline-item
-              class="mb-4"
-              color="grey"
-              small
-            >
-              <v-row justify="space-between">
-                <v-col cols="7">
-                  Consulta
-                </v-col>
-                <v-col class="text-right" cols="5">2/01/19</v-col>
-              </v-row>
-            </v-timeline-item>
-      
-            <v-timeline-item
-              class="mb-4"
-              color="grey"
-              small
-            >
-              <v-row justify="space-between">
-                <v-col cols="7">
-                  Consulta
-                </v-col>
-                <v-col class="text-right" cols="5">20/01/19</v-col>
-              </v-row>
-            </v-timeline-item>
-            <v-timeline-item
-              class="mb-4"
-              color="grey"
-              small
-            >
-              <v-row justify="space-between">
-                <v-col cols="7">
-                  Transplante
-                </v-col>
-                <v-col class="text-right" cols="5">10/03/19</v-col>
-              </v-row>
-            </v-timeline-item>
+           
             <v-timeline-item
               class="mb-4"
               color="red"
               small
-            >
+              v-for="(fecha,index) in fechas">
+            <v-container v-on:click="saludar(index)">  
               <v-row justify="space-between">
-                <v-col cols="7">
-                  Taller1
-                </v-col>
-                <v-col class="text-right" cols="5">24/03/19</v-col>
+                  <v-col cols="7">
+                    Consulta
+                  </v-col>
+                  <v-col class="text-right" cols="5">{{fecha}}</v-col>
               </v-row>
-            </v-timeline-item>
-            <v-timeline-item
-              class="mb-4"
-              color="red"
-              small
-            >
-            <v-row justify="space-between">
-                <v-col cols="7">
-                  Consulta
-                </v-col>
-                <v-col class="text-right" cols="5">28/03/19</v-col>
-              </v-row>
+            </v-container>
             </v-timeline-item>
             
     
@@ -99,9 +39,10 @@
       </div>
       <div class = "Display">
         <h3 style="font-weight: bold;">Fecha:</h3>
-        <h3>{{this.fecha}}</h3> 
+        <h3>{{this.fechas[this.number]}}</h3> 
         <div>
-          <img style="margin-left: 5%; margin-top: 5%" src="../assets/consulta.png" alt="" width="520" height="450">
+          <!--<img style="margin-left: 5%; margin-top: 5%" src="../assets/consulta.png" alt="" width="520" height="450">-->
+          <HistoryConsulta :text="this.consulta"></HistoryConsulta>
         </div>
       </div>
     </div>
@@ -126,14 +67,52 @@
 
 </style>
 <script>
+  import { store } from '../main';
+  import HistoryConsulta from "./HistoryConsulta";
   export default {
+    components: {HistoryConsulta},
     data: () => ({
+        consultas: [],
+        consulta: null,
         paciente: {
             nombre: 'Karlie',
-            apellido: 'Rath'
+            apellido: 'Rath',
+            CUI: ''
         },
-        fecha: "2019-10-1"
-  })
+        fechas: [],
+        number: 0
+    }),
+    mounted() {
+      const data = {
+            ID: store.idPaciente // Aqui va el ID del paciente
+        };
+
+      this.$http.post(`http://localhost:8000/PacienteController/findById`, data).then(response => {            
+
+            if(response.data.Paciente[0] == null){
+                
+            }else{
+                this.paciente.nombre = response.data.Paciente[0].Nombre;
+                this.paciente.apellido = response.data.Paciente[0].Apellido;
+                this.paciente.CUI = response.data.Paciente[0].CUI;
+            }
+      }).then(() => {
+      this.$http.post("http://localhost:8000/ConsultaController/findAllUser", this.paciente.CUI).then(response => {
+        this.consultas = response.data.Consulta
+        for (let i =0; i < this.consultas.length; i++){
+          this.fechas.push(this.consultas[i].fecha)
+        }
+          this.consulta=this.consultas[0]
+        });
+      })
+    },
+    methods: {
+      saludar: function (n) {
+        this.number=n
+        this.consulta=this.consultas[n]
+        
+      }   
+    },
   }
 </script>
 

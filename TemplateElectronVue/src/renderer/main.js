@@ -58,6 +58,13 @@ const routes = [
     )
   },
   {
+    path: '/History',
+    component: Vue.component(
+      'History',
+      require('./components/History.vue').default
+    )
+  },
+  {
     path: '/gestionUsuarios',
     component: Vue.component(
       'gestionUsuarios',

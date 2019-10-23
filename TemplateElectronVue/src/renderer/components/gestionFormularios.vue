@@ -12,10 +12,9 @@
                     label="Elija el formulario que desea abrir para llenar">
                     </v-combobox>
                     <br>
-                    <v-btn text large color="yellow" type="button" href='ms-word:ofv|u|file:///C:/Users/Ulises/Desktop/CHOL.docx' >Abrir formulario</v-btn>
                 </b-col>
                 <b-col cols="1" class="titulo1">
-
+                    <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="">Prueb</button> 
                 </b-col>
                 <b-col class="titulo1">
                     <div>Guardar y subir formulario</div>
@@ -60,6 +59,10 @@
                 myApp.Visible = true;
                 myApp.Documents.Open(strFile);
                 }
+            },
+            load(){
+                let routeData = this.$router.resolve({name: '/Consulta'});
+                window.open(routeData.href, '_blank');
             }
         }
     };

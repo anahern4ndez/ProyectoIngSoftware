@@ -51,7 +51,7 @@ $router->put('/ConsultaController/update', 'ConsultaController@updateAll');
 $router->post('/ConsultaController/findOne', 'ConsultaController@findOne');
 $router->post('/ConsultaController/findAll', 'ConsultaController@findAll');
 $router->post('/ConsultaController/getID', 'ConsultaController@getIDConsulta');
-
+$router->post('/ConsultaController/findAllUser', 'ConsultaController@findAllUser');
 //Locations
 $router->get('/ProcedenciaController/getAllLocation', 'ProcedenciaController@getAllLocation');
 

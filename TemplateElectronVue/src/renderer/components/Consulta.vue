@@ -400,7 +400,7 @@
                                 </b-container>
                         </div>
 
-                        <div>
+                        <div id="capture">
 
                         <!-- Form Name -->
                         <h2 class="headers" style="text-align: left;">Dar Consulta</h2>
@@ -1583,7 +1583,7 @@
                                 <b-row class="justify-content-md-center">
                                 
                                     <b-col>
-                                        <button type="button" class="btn btn-lg btn-warning btn-block" >Agregar imagen</button>
+                                        <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="take">Agregar imagen</button>
                                     </b-col>
                                 
                                 </b-row>
@@ -2245,7 +2245,6 @@
                                 <td contenteditable='true' style="text-align: left;" ></td>
                                 <td contenteditable='true' style="text-align: left;" ></td>
                             </tr>
-
                             <tr>
                                 <th scope="row" style="width:10%;">PET</th>
                                 <th scope="row" style="width:10%;"></th>
@@ -2338,6 +2337,7 @@ function check(a){
 }
 
 import { store } from '../main';
+
 export default {
     data: () => ({
         enfermedad: '',
@@ -2873,7 +2873,11 @@ export default {
 
             return pos
         },
-
+        take() {
+            html2canvas(document.querySelector("#capture")).then(canvas => {
+            document.body.appendChild(canvas)
+            });
+        },
         verMas () {
             if(!this.hasClickedVerMas){
                 this.beautyComments()
@@ -2907,7 +2911,7 @@ export default {
             this.Dx_Asociado = this.Dx_Asociado + s +"\n"
         
         },
-        pesoPercentil(){
+         pesoPercentil(){
             const data = {
                 year : parseInt(this.paciente.years),
                 meses : parseInt(this.paciente.meses),
