@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use Spatie\Permission\Models\Permission;
 
 class ExampleController extends Controller
 {
@@ -66,18 +67,50 @@ class ExampleController extends Controller
             'email' => 'email|unique:users,email',
             'password' => 'min:6|max:255'
         ]);
-        
+        $prueba = $request->id;
         $user = new User;
-        //$user->id = $request->id;
+        if($prueba=='1003'){
+            $user->id = $request->id;
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = hash::make($request->password);
+            $user->puesto = $request->puesto;
+            //$user->imagen = $request->img;
+            $user->save();
+        }else{
+            //$user->id = $request->id;
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = hash::make($request->password);
+            $user->puesto = $request->puesto;
+            //$user->imagen = $request->img;
+            $user->save();
+        }
+        
+        //Comente esto
+        //return $request;
+
+        return response()->json([
+            'success' => true,
+            'message' => 'creado'
+        ], 200);
+    }
+
+    public function storeWithRole(Request $request){
+        $this->validate($request, [
+            'email' => 'email|unique:users,email',
+            'password' => 'min:6|max:255'
+        ]);
+
+        $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = hash::make($request->password);
         $user->puesto = $request->puesto;
         $user->imagen = $request->img;
         $user->save();
-        //Comente esto
-        //return $request;
-
+        
+        $user->assignRole(DB::table('roles')->select('name')->get());
         return response()->json([
             'success' => true,
             'message' => 'creado'
@@ -106,7 +139,7 @@ class ExampleController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'creado'
+            'message' => 'actualizado'
         ], 200);
     }
     public function getOneUser(Request $request)

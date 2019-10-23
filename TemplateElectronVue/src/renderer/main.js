@@ -5,6 +5,8 @@ import VueAxios from 'vue-axios';
 import VueRouter from 'vue-router';
 import Vuetify from 'vuetify';
 import BootstrapVue from 'bootstrap-vue';
+//import ability from '../store';
+//import { abilitiesPlugin } from '@casl/vue';
 
 import App from './App';
 import 'vuetify/dist/vuetify.min.css';
@@ -25,6 +27,7 @@ Vue.use(BootstrapVue);
 Vue.use(VueAxios, axios);
 Vue.use(VueRouter);
 Vue.use(VueScrollLock);
+//Vue.use(abilitiesPlugin, ability);
 Vue.use(Vuetify, {
   iconfont: 'fa',
   theme: {
@@ -69,27 +72,6 @@ const routes = [
     component: Vue.component(
       'gestionUsuarios',
       require('./components/gestionUsuarios.vue').default
-    )
-  },
-  {
-    path: '/FormularioMortalidad',
-    component: Vue.component(
-      'FormularioMortalidad',
-      require('./components/FormularioMortalidad.vue').default
-    )
-  },
-  {
-    path: '/FormularioHemodialisis',
-    component: Vue.component(
-      'FormularioHemodialisis',
-      require('./components/FormularioHemodialisis.vue').default
-    )
-  },
-  {
-    path: '/FormularioTransfusiones',
-    component: Vue.component(
-      'FormularioTransfusiones',
-      require('./components/FormularioTransfusiones.vue').default
     )
   },
   {
@@ -172,27 +154,6 @@ const routes = [
     )
   },
   {
-    path: '/Peritonitis',
-    component: Vue.component(
-      'Peritonitis',
-      require('./components/FormularioPeritonitis.vue').default
-    )
-  },
-  {
-    path: '/TransplanteRenal',
-    component: Vue.component(
-      'TransplanteRenal',
-      require('./components/FormularioTransplanteRenal.vue').default
-    )
-  },
-  {
-    path: '/ColocacionCateter',
-    component: Vue.component(
-      'ColocacionCateter',
-      require('./components/ColocacionCateter.vue').default
-    )
-  },
-  {
     path: '/gestionFormularios',
     component: Vue.component(
       'gestionFormularios',
@@ -209,7 +170,12 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   id: 0,
-  pacientes: []
+  pacientes: [],
+  user: {
+    id: 1,
+    name: 'rAnDaLL lOu',
+    role: 1
+  }
 });
 
 /* eslint-disable no-new */

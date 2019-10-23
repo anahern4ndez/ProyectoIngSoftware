@@ -21,7 +21,7 @@
                         :items="posiblesVariables"
                         :search-input.sync="search"
                         :hide-selected="hideSelected"
-                        label="Seleccione las variables a estudiar."
+                        label="Seleccione la data a estudiar."
                         :multiple="multiple"
                         persistent-hint
                         :small-chips="chips"
@@ -42,14 +42,14 @@
 
                 <!-- COLUMNA 2, CONDICIONES -->
                 <b-col>
-                    <h3>Ingrese las condiciones:</h3>
+                    <h3>Ingrese el tiempo del estudio:</h3>
                     <br>
                     <v-combobox
                         v-model="condiciones"
-                        :items="posiblesVariables"
+                        :items="posiblesTiempos"
                         :search-input.sync="search"
                         :hide-selected="hideSelected"
-                        label="Seleccione las variables a estudiar."
+                        label="Seleccione el tiempo de las muestras"
                         :multiple="multiple"
                         persistent-hint
                         :small-chips="chips"
@@ -64,28 +64,6 @@
                                 </v-list-item-title>
                             </v-list-item-content>
                             </v-list-item>
-                        </template>
-                    </v-combobox>
-                </b-col>
-
-                <!-- COLUMNA 3, AGRUPACION -->
-                <b-col>
-                    <h3>Ingrese la variable de agrupacion:</h3>
-                    <br>
-                    <v-combobox
-                        v-model="agrupacion"
-                        :items="posiblesVariables"
-                        label="Seleccione las variables de agrupacion."
-                         v-on:click=""
-                    >
-                        <template v-if="noData" v-slot:no-data>
-                            <!-- <v-list-item>
-                            <v-list-item-content>
-                                <v-list-item-title>
-                                No se encontró "<strong>{{ search }}</strong>".
-                                </v-list-item-title>
-                            </v-list-item-content>
-                            </v-list-item> -->
                         </template>
                     </v-combobox>
                 </b-col>
@@ -126,34 +104,10 @@
             <!-- FILA 3, BOTON DE ACEPTAR/CANCELAR -->
             <b-row align-v="center" class="text-center">
                 <b-col order="4">
-                    <v-btn outline color="#303841" v-on:click="concatenar">Aceptar</v-btn>
+                    <v-btn outline color="#303841" v-on:click="concatenar">Abrir Documento</v-btn>
                     <v-btn outline color="#303841" v-on:click="clearData">Cancelar</v-btn>
                 </b-col>
             </b-row>
-
-            <br><hr><br>
-
-            <!-- Tabla-->
-            <b-row align-h="center">
-                <table v-if="this.showTable">
-                    <thead>
-                        <tr>
-                            <th class="text-left">Variables</th>
-                            <th class="text-left">Condiciones</th>
-                            <th class="text-left">Agrupación</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{{variablesEstudio}}</td>
-                            <td>{{variablesCondiciones}}</td>
-                            <td>{{agrupacion}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </b-row>
-
-
         </b-container>
 	</div>
 </template>
@@ -166,7 +120,8 @@ var fecha = new Date();
 export default {
 
   data: () => ({
-      posiblesVariables: ['Presion Arterial', 'Tipo de sangre', 'Edad', 'Peso'],
+      posiblesVariables: ['Acciones', 'Consultas', 'Datos generales', 'Pacientes', 'Citas'],
+      posiblesTiempos: ['Mes pasado', '3 meses', '6 meses', '1 año', '2 años', 'Toda la data'],
       search: null,
       chips: true,
       multiple: true,

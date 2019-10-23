@@ -3,7 +3,6 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use App\User;
-
 class UsuariosSeeder extends Seeder {
     /**
      * Run the database seeds.
@@ -19,5 +18,7 @@ class UsuariosSeeder extends Seeder {
             'imagen' => null,
         ];
         User::insert($user);
-    }
+
+    }   
+    
 }
