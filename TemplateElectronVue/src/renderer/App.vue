@@ -88,20 +88,15 @@ export default {
           route: "/Citas",
           icon: "fa-calendar-check"
         },
-        { name: "Datos paciente", route: "/Datos", icon: "fa-user-injured" },
-        { name: "Cambio Estado", route: "/cambioEstado", icon: "fa-flag" },
-        { name: "Hemodialisis", route: "/Hemodialisis", icon: "fa-flag" },
-        { name: "Peritonitis", route: "/Peritonitis", icon: "fa-flag" },
-        {
-          name: "Transplante Renal",
-          route: "/TransplanteRenal",
-          icon: "fa-flag"
+        { 
+          name: "Datos paciente", route: "/Datos", icon: "fa-user-injured" 
         },
-        {
-          name: "Colocacion Cateter",
-          route: "/ColocacionCateter",
-          icon: "fa-flag"
+        { 
+          name: "Cambio Estado", route: "/cambioEstado", icon: "fa-flag" 
         },
+        { 
+          name: "Hemodialisis", route: "/Hemodialisis", icon: "fa-flag" 
+          },
         {
           name: "Gestionar Formularios",
           route: "/gestionFormularios",

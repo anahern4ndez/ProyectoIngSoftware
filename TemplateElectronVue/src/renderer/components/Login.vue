@@ -139,7 +139,7 @@ export default {
                 this.$http.post('http://localhost:8000/login', data).then(response => {
                     
                     this.id = response.data.id;
-                    store.id = this.id;
+                    this.$store.id = this.id;
                     console.log('Store: ' + store.id);
 
                     try {
