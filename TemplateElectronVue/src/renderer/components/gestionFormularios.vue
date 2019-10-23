@@ -15,7 +15,7 @@
                     </v-combobox>
                     <br>
                     <!-- <v-btn text large color="yellow" type="button" href='ms-word:ofv|u|file:./CHOL.docx' >Abrir formulario</v-btn> -->
-                    <v-btn text large color="yellow" type="button" v-on:click="startWord" :disabled='isDisabledAbrir'>Abrir formulario</v-btn>
+                    <!--<v-btn text large color="yellow" type="button" v-on:click="startWord" :disabled='isDisabledAbrir'>Abrir formulario</v-btn>-->
                 </b-col>
                 <b-col cols="1" class="titulo1">
                     <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="">Prueb</button> 
@@ -121,12 +121,6 @@
                     this.isDisabledAbrir = false
                 }
             },
-<<<<<<< HEAD
-            load(){
-                let routeData = this.$router.resolve({name: '/Consulta'});
-                window.open(routeData.href, '_blank');
-            }
-=======
             changeDisableSubir(event){
                 if(this.selectSubir !== ' '){
                     this.isDisabledSubir = false,
@@ -178,7 +172,6 @@
                     console.log("Error al subir imagen al servidor");
                 }*/
             },
->>>>>>> 69471dbdc63a2cd1c75a719c0e386a57dc1fb4f2
         }
     };
 
