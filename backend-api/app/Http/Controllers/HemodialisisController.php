@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Hemodialisis;
+use App\singleTableHemodialisis;
 class HemodialisisController extends Controller
 {
-    //
     public function store(Request $request){
         $Hemodialisis = new Hemodialisis;
         $Hemodialisis->idPaciente = $request->idPaciente;
@@ -46,7 +46,20 @@ class HemodialisisController extends Controller
         ], 200);
     }
     public function storeTable(Request $request){
-        // incluir mongo????
+        $register = new singleTableHemodialisis;
+        $register->idPaciente = $request->idPaciente;
+        $register->P_A = $request->P_A;
+        $register->Pulso = $request->Pulso;
+        $register->Temp = $request->Temp;
+        $register->QB = $request->QB;
+        $register->PV = $request->PV;
+        $register->PA = $request->PA;
+        $register->UFH = $request->UFH;
+        $register->Medicamentos = $request->Medicamentos;
+        $register->save();
+        return response()->json([
+            'success' => true
+        ], 200);
     }
 
     public function lookHemo(Request $request){
