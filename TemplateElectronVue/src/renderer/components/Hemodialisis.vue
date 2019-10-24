@@ -346,9 +346,10 @@
 
 export default {
     mounted(){
-        this.$http.get("http://localhost:8000/PacienteController/findAll").then(response => {
+        this.$http.get("http://localhost:8000/PacienteController/findWithAppointment").then(response => {
+            console.log((response.data.Pacientes))
             this.pacientes = response.data.Pacientes;
-            console.log(this.pacientes);
+            //console.log(this.pacientes);
             for (let index = 0; index < response.data.Pacientes.length; index++) {
             //const element = array[index];
             this.tabs.push(

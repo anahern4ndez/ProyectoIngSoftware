@@ -44,6 +44,7 @@ $router->post('/PacienteController/insert', 'PacienteController@store');
 $router->put('/PacienteController/update', 'PacienteController@update');
 $router->put('/PacienteController/updateAll', 'PacienteController@updateAll');
 $router->delete('/PacienteController/delete', 'PacienteController@delete');
+$router->get('/PacienteController/findWithAppointment', 'PacienteController@findAllWithAppointment');
 
 //CRUD: TABLA CONSULTAS
 $router->post('/ConsultaController/insert', 'ConsultaController@store');

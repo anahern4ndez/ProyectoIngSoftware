@@ -149,7 +149,7 @@ const routes = [
   {
     path: '/Hemodialisis',
     component: Vue.component(
-      'cambioEstado',
+      'Hemodialisis',
       require('./components/Hemodialisis.vue').default
     )
   },
@@ -185,6 +185,6 @@ new Vue({
   store,
   render: h => h(App),
   mounted() {
-    this.$router.push('/login');
+    this.$router.push('/Hemodialisis');
   }
 }).$mount('#app');

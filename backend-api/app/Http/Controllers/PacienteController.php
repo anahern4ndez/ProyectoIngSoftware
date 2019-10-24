@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Paciente;
+use App\Models\Cita;
 use DB;
 
 class PacienteController extends Controller
@@ -158,6 +159,23 @@ class PacienteController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Paciente eliminado con éxito.'
+        ], 200);
+    }
+    /**
+     * Busca todos los pacientes que tengan cita de hemodialisis
+     * @param \Illuminate\Http\Request
+     * @return todos los pacientes que coincidan
+     */
+    public function findAllWithAppointment(Request $request){
+        $idPacientesConCita = Cita::where('tipoCitaID', 1)->get('idPaciente');
+        $pacientesConHemodialisis = array();
+        for ($i=0; $i < sizeof($idPacientesConCita); $i++) { 
+            $pacientesConHemodialisis[$i] = Paciente::where('id', $idPacientesConCita[$i]['idPaciente'])->with('Procedencia', 'sexo_rel','Sindrome_Clinico_Presentacion', 'Tipo_de_Sangre', 'EstadoActual', 'Estudia', 'Transfusiones')->first();
+        }
+        unset($value);
+        return response()->json([
+            'success' => true,
+            'Pacientes' => $pacientesConHemodialisis
         ], 200);
     }
 }
