@@ -48,4 +48,10 @@ class HemodialisisController extends Controller
     public function storeTable(Request $request){
         // incluir mongo????
     }
+
+    public function lookHemo(Request $request){
+        $received-> $request->idPaciente;
+        $received-> $request->fecha;
+        
+    }
 }
