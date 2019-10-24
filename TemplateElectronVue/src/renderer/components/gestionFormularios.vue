@@ -57,7 +57,7 @@
                 'Mortalidad',
                 ],
                 path: ' ',
-                // referencia: 'ms-word:ofv|u|file:///C:/Users/Ulises/Desktop/CHOL.docx',
+                // referencia: 'ms-word:ofv|u|file:///C:/Users/Ulises/Desktop/CHOL.docx hola',
                 referencia: 'ms-word:ofv|u|file:../TemplateElectronVue/CHOL.docx',
                 isDisabledAbrir: true,
                 isDisabledSubir: true,
