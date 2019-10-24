@@ -184,6 +184,6 @@ new Vue({
   store,
   render: h => h(App),
   mounted() {
-    this.$router.push('/Hemodialisis');
+    this.$router.push('/login');
   }
 }).$mount('#app');
