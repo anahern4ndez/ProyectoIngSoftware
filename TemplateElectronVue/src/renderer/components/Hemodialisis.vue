@@ -454,7 +454,7 @@ export default {
             var loop = setInterval(() => {
                 this.tabs[this.activeTab].tableDialog = true
                 clearInterval(loop)
-            }, 5000); //30min
+            }, 10000); //30min
         },
         /* En el caso que el usuario desee volver a verificar los datos, se esperarán 5 minutos antes de volver a intentar guardar los datos */
         recheckTableData(){
@@ -462,7 +462,7 @@ export default {
             var loop = setInterval(() => {
                 this.activateTableDialog()
                 clearInterval(loop)
-            }, 5000); //5min
+            }, 10000); //5min
         },
         /* En caso que el usuario indique que todos los datos están correctos, se procede a guardar lo ingresado en la última fila */
         saveTableData(){
@@ -475,6 +475,7 @@ export default {
             //setear la hora en la tabla (para que el usuario la pueda ver)
             table.rows[currentRow].cells[1].innerHTML = this.T1Hora
             const info = {
+                idPaciente: this.tabs[this.activeTab].idPaciente,
                 P_A: table.rows[currentRow].cells[2].innerHTML,
                 Pulso: table.rows[currentRow].cells[3].innerHTML,
                 Temp: table.rows[currentRow].cells[4].innerHTML,
@@ -509,7 +510,7 @@ export default {
                     var loop = setInterval(() => {
                         this.activateTableDialog()
                         clearInterval(loop)
-                    }, 5000); //30min
+                    }, 10000); //30min
                 }
             })
         }

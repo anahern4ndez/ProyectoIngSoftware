@@ -172,7 +172,6 @@ class PacienteController extends Controller
         for ($i=0; $i < sizeof($idPacientesConCita); $i++) { 
             $pacientesConHemodialisis[$i] = Paciente::where('id', $idPacientesConCita[$i]['idPaciente'])->with('Procedencia', 'sexo_rel','Sindrome_Clinico_Presentacion', 'Tipo_de_Sangre', 'EstadoActual', 'Estudia', 'Transfusiones')->first();
         }
-        unset($value);
         return response()->json([
             'success' => true,
             'Pacientes' => $pacientesConHemodialisis
