@@ -154,7 +154,8 @@ const routes = [
     )
   },
   {
-    path: '/gestionFormularios',
+    path: '/gestionFormularios/:cui/:nombre/:apellido',
+    name: 'gestionFormularios',
     component: Vue.component(
       'gestionFormularios',
       require('./components/gestionFormularios.vue').default
