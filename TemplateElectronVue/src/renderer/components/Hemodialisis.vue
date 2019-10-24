@@ -87,14 +87,14 @@
                                 <div class="encapsulado">
                                     <br><br>
                                     <v-text-field
-                                        :v-model="tabs[pacientes.indexOf(paciente)].Registro"
+                                        v-model="tabs[pacientes.indexOf(paciente)].Registro"
                                         label="Registro"
                                         outline
                                         class="mitad"
                                          :rules="expedienteRules"
                                     ></v-text-field>
                                     <v-text-field
-                                        :v-model="tabs[pacientes.indexOf(paciente)].Numero"
+                                        v-model="tabs[pacientes.indexOf(paciente)].Numero"
                                         label="No. de Hemodiálisis"
                                         outline
                                         class="mitad"
@@ -136,8 +136,8 @@
                                             <ul>
                                                 <h4 class="headers">3. Líneas pediátricas:</h4>
                                                 <v-container row>
-                                                    <v-checkbox class="align-center justify-center" :v-model="tabs[pacientes.indexOf(paciente)].Lineas_pediatricas" label="6.5 Mm" value="1" color="green"></v-checkbox>
-                                                    <v-checkbox class="align-center justify-center" :v-model="tabs[pacientes.indexOf(paciente)].Lineas_pediatricas" label="8.0 Mm" value="2" color="green"></v-checkbox>
+                                                    <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Lineas_pediatricas" label="6.5 Mm" value="6.5" color="green"></v-checkbox>
+                                                    <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Lineas_pediatricas" label="8.0 Mm" value="8" color="green"></v-checkbox>
                                                 </v-container>
                                             </ul>
                                             <ul>
@@ -148,7 +148,7 @@
                                                     <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Filtro" label="0.11 m2" value="0.11" color="green"></v-checkbox>
                                                     <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Filtro" label="1.5 m2" value="1.5" color="green"></v-checkbox>
                                                     <v-text-field
-                                                    :v-model="tabs[pacientes.indexOf(paciente)].Filtro"
+                                                    v-model="tabs[pacientes.indexOf(paciente)].Filtro"
                                                     label="Otros"
                                                     outline
                                                     :rules="expedienteRules"
@@ -161,7 +161,7 @@
                                                     <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Flujo_dializante" label="300 ml/min" value="300" color="green"></v-checkbox>
                                                     <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Flujo_dializante" label="400 ml/min" value="400" color="green"></v-checkbox>
                                                     <v-text-field
-                                                    :v-model="tabs[pacientes.indexOf(paciente)].Flujo_dializante"
+                                                    v-model="tabs[pacientes.indexOf(paciente)].Flujo_dializante"
                                                     label="Otros (ml/min)"
                                                     outline
                                                     :rules="expedienteRules"
@@ -172,7 +172,7 @@
                                                 <h4 class="headers">6. Flujo de sangre</h4>
                                                 <br>
                                                 <v-text-field
-                                                    :v-model="tabs[pacientes.indexOf(paciente)].Flujo_sangre"
+                                                    v-model="tabs[pacientes.indexOf(paciente)].Flujo_sangre"
                                                     label="QB (ml/min)"
                                                     outline
                                                     :rules="expedienteRules"
@@ -181,7 +181,7 @@
                                             <ul>
                                                 <h4 class="headers">7. UF</h4>
                                                 <v-text-field
-                                                    :v-model="tabs[pacientes.indexOf(paciente)].UF"
+                                                    v-model="tabs[pacientes.indexOf(paciente)].UF"
                                                     label="(ml total)"
                                                     outline
                                                     :rules="expedienteRules"
@@ -191,14 +191,14 @@
                                                 <h4 class="headers">8. Heparinización</h4>
                                                 <br>
                                                 <v-text-field
-                                                    :v-model="tabs[pacientes.indexOf(paciente)].Heparinizacion"
+                                                    v-model="tabs[pacientes.indexOf(paciente)].Heparinizacion"
                                                     label="Cebado (UL)"
                                                     outline
                                                     class="mitad"
                                                     :rules="expedienteRules"
                                                 ></v-text-field>
                                                 <v-text-field
-                                                    :v-model="tabs[pacientes.indexOf(paciente)].Heparinizacion"
+                                                    v-model="tabs[pacientes.indexOf(paciente)].Heparinizacion"
                                                     label="Trans-Diálisis (UL/hora)"
                                                     outline
                                                     class="mitad"
@@ -209,14 +209,14 @@
                                                 <h4 class="headers">9. Tiempo</h4>
                                                 <br>
                                                 <v-text-field
-                                                    :v-model="tabs[pacientes.indexOf(paciente)].TiempoH"
+                                                    v-model="tabs[pacientes.indexOf(paciente)].TiempoH"
                                                     label="Horas"
                                                     outline
                                                     class="mitad"
                                                     :rules="expedienteRules"
                                                 ></v-text-field>
                                                 <v-text-field
-                                                    :v-model="tabs[pacientes.indexOf(paciente)].TiempoM"
+                                                    v-model="tabs[pacientes.indexOf(paciente)].TiempoM"
                                                     label="Minutos"
                                                     outline
                                                     class="mitad"
@@ -235,28 +235,28 @@
                                                 <h4 class="headers">11. Peso/Talla</h4>
                                                 <br>
                                                 <v-text-field
-                                                    :v-model="tabs[pacientes.indexOf(paciente)].Peso_pre"
+                                                    v-model="tabs[pacientes.indexOf(paciente)].Peso_pre"
                                                     label="Peso Pre-Hemodiálisis (kg)"
                                                     outline
                                                     class="mitad"
                                                     :rules="expedienteRules"
                                                 ></v-text-field>
                                                 <v-text-field
-                                                    :v-model="tabs[pacientes.indexOf(paciente)].Peso_post"
+                                                    v-model="tabs[pacientes.indexOf(paciente)].Peso_post"
                                                     label="Peso Post-Hemodiálisis (kg)"
                                                     outline
                                                     class="mitad"
                                                     :rules="expedienteRules"
                                                 ></v-text-field>
                                                 <v-text-field
-                                                    :v-model="tabs[pacientes.indexOf(paciente)].Talla"
+                                                    v-model="tabs[pacientes.indexOf(paciente)].Talla"
                                                     label="Talla (m)"
                                                     outline
                                                     class="mitad"
                                                     :rules="expedienteRules"
                                                 ></v-text-field>
                                                 <v-text-field
-                                                    :v-model="tabs[pacientes.indexOf(paciente)].Peso_delta"
+                                                    v-model="tabs[pacientes.indexOf(paciente)].Peso_delta"
                                                     label="Peso delta"
                                                     outline
                                                     class="mitad"
@@ -358,7 +358,7 @@ export default {
                     tabid: index,
                     pass: true,
                     Hemodialisis: '',
-                    Via: '',
+                    Via: '1',
                     Lineas_pediatricas: '',
                     Filtro: '',
                     Flujo_dializante: '',
@@ -367,9 +367,9 @@ export default {
                     Heparinizacion: '',
                     TiempoH: '',
                     TiempoM: '',
-                    Conductividad_Na: '',
-                    Conductividad_K: '',
-                    Conductividad_HCO3: '',
+                    Conductividad_Na: '0',
+                    Conductividad_K: '0',
+                    Conductividad_HCO3: '0',
                     Peso_pre: '',
                     Peso_post: '',
                     Peso_delta: '',
@@ -418,18 +418,8 @@ export default {
         },
         guardar(){
             var pass = true;
-            
-            const table2 = document.getElementById("table2");
-            //asignacion de valores de cada celda de la tabla a variables 
-            let rowKeys = ["BUN", "CREAT", "NA", "K", "C", "P", "CL", "ALB", "GB", "HB", "PLAQ", "PTH", "FERRI"]
-            for (let m = 1; m < table2.rows.length; m++) {
-                this.tabs[this.activeTab].Fecha[rowKeys[m-1]] = table2.rows[m].cells[1].innerHTML;
-                this.tabs[this.activeTab].Pre[rowKeys[m-1]] = table2.rows[m].cells[2].innerHTML;
-                this.tabs[this.activeTab].Post[rowKeys[m-1]] = table2.rows[m].cells[3].innerHTML;
-                this.tabs[this.activeTab].Urr[rowKeys[m-1]] = table2.rows[m].cells[4].innerHTML;
-            }
-            console.log(this.tabs[this.activeTab])
             let info = this.tabs[this.activeTab]
+            console.log(this.tabs[this.activeTab]);
             info['todaysDate'] = this.todaysDate
             this.$http.post('http://localhost:8000/hemodialisis', info).then(response => {
                 console.log(response.success)
