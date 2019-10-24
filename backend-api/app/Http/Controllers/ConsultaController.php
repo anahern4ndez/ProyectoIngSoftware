@@ -129,6 +129,18 @@ class ConsultaController extends Controller
         
     }
 
+    function findAllUser(Request $request){
+        
+        $cui = $request;
+
+        $consulta = Consulta::all();
+        return response()->json([
+            'success' => true,
+            'Consulta' => $consulta,
+        ], 200);
+        
+    }
+
     /**
      * elimina objeto en busqueda bajo id del elemento.
      * @param id parametro de busqueda para borrar

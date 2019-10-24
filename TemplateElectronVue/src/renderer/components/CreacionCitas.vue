@@ -374,8 +374,8 @@ export default {
         });
     },
     /**
-     * Valida que la nueva cita que se desea ingresar nose traslape con
-     * niguna de las citas ya existentes.
+     * Valida que la nueva cita que se desea ingresar no se traslape con
+     * ninguna de las citas ya existentes.
      */
     validateAppointmentHour(data) {
       let d0 = new Date(`${data.fecha} ${data.hora}`);

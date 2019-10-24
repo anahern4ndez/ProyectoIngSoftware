@@ -61,31 +61,17 @@ const routes = [
     )
   },
   {
+    path: '/History',
+    component: Vue.component(
+      'History',
+      require('./components/History.vue').default
+    )
+  },
+  {
     path: '/gestionUsuarios',
     component: Vue.component(
       'gestionUsuarios',
       require('./components/gestionUsuarios.vue').default
-    )
-  },
-  {
-    path: '/FormularioMortalidad',
-    component: Vue.component(
-      'FormularioMortalidad',
-      require('./components/FormularioMortalidad.vue').default
-    )
-  },
-  {
-    path: '/FormularioHemodialisis',
-    component: Vue.component(
-      'FormularioHemodialisis',
-      require('./components/FormularioHemodialisis.vue').default
-    )
-  },
-  {
-    path: '/FormularioTransfusiones',
-    component: Vue.component(
-      'FormularioTransfusiones',
-      require('./components/FormularioTransfusiones.vue').default
     )
   },
   {
@@ -165,27 +151,6 @@ const routes = [
     component: Vue.component(
       'cambioEstado',
       require('./components/Hemodialisis.vue').default
-    )
-  },
-  {
-    path: '/Peritonitis',
-    component: Vue.component(
-      'Peritonitis',
-      require('./components/FormularioPeritonitis.vue').default
-    )
-  },
-  {
-    path: '/TransplanteRenal',
-    component: Vue.component(
-      'TransplanteRenal',
-      require('./components/FormularioTransplanteRenal.vue').default
-    )
-  },
-  {
-    path: '/ColocacionCateter',
-    component: Vue.component(
-      'ColocacionCateter',
-      require('./components/ColocacionCateter.vue').default
     )
   },
   {

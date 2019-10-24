@@ -420,7 +420,7 @@ export default {
             this.ProcedenciaTxt =  dep.concat(', '.concat(muni));
           });
         },
-        checkType(expediente){
+        isANumber(expediente){
           let isNumber = false;
           if(!isNaN(parseInt(expediente))){
             isNumber = true;

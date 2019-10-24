@@ -42,14 +42,14 @@
 
                 <!-- COLUMNA 2, CONDICIONES -->
                 <b-col>
-                    <h3>Ingrese el tiempo</h3>
+                    <h3>Ingrese el tiempo del estudio:</h3>
                     <br>
                     <v-combobox
                         v-model="condiciones"
                         :items="posiblesTiempos"
                         :search-input.sync="search"
                         :hide-selected="hideSelected"
-                        label="Seleccione las variables a estudiar."
+                        label="Seleccione el tiempo de las muestras"
                         :multiple="multiple"
                         persistent-hint
                         :small-chips="chips"

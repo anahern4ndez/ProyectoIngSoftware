@@ -15,10 +15,10 @@
                     </v-combobox>
                     <br>
                     <!-- <v-btn text large color="yellow" type="button" href='ms-word:ofv|u|file:./CHOL.docx' >Abrir formulario</v-btn> -->
-                    <v-btn text large color="yellow" type="button" v-on:click="startWord" :disabled='isDisabledAbrir'>Abrir formulario</v-btn>
+                    <!--<v-btn text large color="yellow" type="button" v-on:click="startWord" :disabled='isDisabledAbrir'>Abrir formulario</v-btn>-->
                 </b-col>
                 <b-col cols="1" class="titulo1">
-
+                    <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="">Prueb</button> 
                 </b-col>
                 <b-col class="titulo1">
                     <div>Guardar y subir formulario</div>
@@ -62,6 +62,18 @@
                 isDisabledAbrir: true,
                 isDisabledSubir: true,
                 isDisabledSubirForm: true,
+                direccionCHOL: '\\CHOL.docx',
+                dirCHOL: 'CHOL.docx',
+                direccionPeritonitis: '\\Peritonitis.docx',
+                dirPeritonitis: 'Peritonitis.docx',
+                direccionTransplanteRenal: '\\TransplanteRenal.docx',
+                dirTransplanteRenal: 'TransplanteRenal.docx',
+                direccionTransfusion: '\\Transfusion.docx',
+                dirTransfusion: 'Transfusion.docx',
+                direccionHemodialisis: '\\Hemodialisis.docx',
+                dirHemodialisis: 'Hemodialisis.docx',
+                direccionMortalidad: '\\Mortalidad.docx',
+                dirMortalidad: 'Mortalidad.docx', 
             };
         },
         methods:{
@@ -71,15 +83,37 @@
                 var fs = require('fs');
 
                 var dir = process.cwd();
-                dir += '\\CHOL.docx'
+                dir += this.direccionCHOL;
 
-                console.log(dir);
-                shell.openItem(dir);
+                var dirCopy;
+
+                if(this.selectAbrir === 'Peritonitis'){
+                    dir += this.direccionPeritonitis;
+                    dirCopy = this.dirPeritonitis;
+                }
+                else if(this.selectAbrir === 'Transplante renal'){
+                    dir += this.direccionTransplanteRenal;
+                    dirCopy = this.dirTransplanteRenal;
+                }
+                else if(this.selectAbrir === 'Transfusión'){
+                    dir += this.direccionTransfusion;
+                    dirCopy = this.dirTransfusion;
+                }
+                else if(this.selectAbrir === 'Hemodialisis'){
+                    dir += this.direccionHemodialisis;
+                    dirCopy = this.dirHemodialisis;
+                }
+                else if(this.selectAbrir === 'Mortalidad'){
+                    dir += this.direccionMortalidad;
+                    dirCopy = this.dirMortalidad;
+                }
 
                 // Se sacara una copia del archivo original y se pondra en uno NUEVO
-                fs.copyFile('CHOL.docx', 'Nuevo.docx', (err) => {
+                fs.copyFile(dirCopy, 'CopiaFormulario.docx', (err) => {
                     if (err) throw err;
                     console.log('Archivo copiado con Exito');
+                    console.log(dirCopy);
+                    shell.openItem('CopiaFormulario.docx');
                 });
             },
             changeDisableAbrir(event){
