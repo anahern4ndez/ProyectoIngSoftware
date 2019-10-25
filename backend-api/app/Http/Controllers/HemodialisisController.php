@@ -61,4 +61,10 @@ class HemodialisisController extends Controller
             'success' => true
         ], 200);
     }
+
+    public function lookHemo(Request $request){
+        $received-> $request->idPaciente;
+        $received-> $request->fecha;
+        
+    }
 }
