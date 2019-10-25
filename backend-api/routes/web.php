@@ -105,6 +105,7 @@ $router->delete('/citas/{id}', 'CitasController@destroy');
 // HEMODIALISIS
 $router->post('/hemodialisis', 'HemodialisisController@store');
 $router->post('/hemodialisis/storeTable', 'HemodialisisController@storeTable');
+$router->post('/hemodialisis/checkHemo', 'HemodialisisController@lookHemo');
 
 // Enfermedades CIE 10
 $router->get('/dxs', 'DxController@getDxs');

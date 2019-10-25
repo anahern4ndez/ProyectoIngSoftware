@@ -55,5 +55,4 @@ class Paciente extends Model
         return $this->hasOne('App\sexo','ID', 'Sexo');
     }
 
-
 }
