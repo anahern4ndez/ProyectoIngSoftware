@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class UserController extends Controller {
     
@@ -13,14 +14,14 @@ class UserController extends Controller {
         $users = User::all();
 
         if (!$users) {
-            return $request->response()->json([
+            return response()->json([
                 'success' => true,
                 'message' => 'No se encontró el recurso especificado.',
                 'data' => '',
             ], 404);
         }
 
-        return $request->response()->json([
+        return response()->json([
             'success' => true,
             'message' => 'Petición exitosa.',
             'data' => $users,

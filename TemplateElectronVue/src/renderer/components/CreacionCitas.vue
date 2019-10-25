@@ -304,6 +304,7 @@ export default {
     doctors: {
       1: "Randall Lou"
     },
+    users: [],
     patients: [],
     textboxRules: [v => !!v || "Seleccione una persona"],
     duracionRules: [
@@ -330,6 +331,7 @@ export default {
     this.today = this.todayDate.toISOString().substring(0, 10);
     this.month = this.getMes(this.todayDate.getMonth());
     this.year = this.todayDate.getFullYear();
+    this.obtenerUsuarios();
     this.obtenerPacientes();
     this.getAppointments();
     this.obtenerTipoCitas();
@@ -515,6 +517,16 @@ export default {
       }
       this.selectedTime = event.time;
       this.dialogOpen = true;
+    },
+    obtenerUsuarios() {
+      this.$http.get("http://localhost:8000/users").then(response => {
+        this.users = response.data.data.map(i => {
+          return {
+            id: i.id,
+            name: i.name
+          };
+        });
+      });
     },
     obtenerPacientes() {
       this.$http

@@ -24,7 +24,7 @@ $router->get('/', function () use ($router) {
 // y el segundo parametro es el controlador y el nombre del metodo que
 // responde a esa ruta: NombreControlador@nombreMetodo
 $router->get('/test', 'ExampleController@index');
-$router->get('/users', 'ExampleController@getUsers');
+// $router->get('/users', 'ExampleController@getUsers');
 $router->get('/users/look', 'ExampleController@getOneUser');
 $router->get('/users/some', 'ExampleController@getSomeUser');
 $router->post('/message', 'ExampleController@postExample');
