@@ -106,9 +106,11 @@
                 <v-flex xs12>
                   <!--v-bind:class="{ disabled: true }"-->
                   <v-select
-                    :items="dummyDoctors"
+                    :items="users"
                     label="Doctor"
                     v-model="selectedDoctor"
+                    item-text="name"
+                    item-value="id"
                     required
                     :rules="textboxRules"
                   ></v-select>
@@ -409,7 +411,7 @@ export default {
         return;
       }
       const data = {
-        idUsuario: this.$store.id,
+        idUsuario: this.selectedDoctor,
         idPaciente: this.selectedPatient,
         fecha: this.selectedDate,
         hora: this.selectedTime,
@@ -458,7 +460,7 @@ export default {
       this.updatingAppointment = false;
       this.dialogOpen = false;
       const data = {
-        idUsuario: this.$store.id,
+        idUsuario: this.selectedDoctor,
         idPaciente: this.selectedPatient,
         fecha: this.selectedDate,
         hora: this.selectedTime,
