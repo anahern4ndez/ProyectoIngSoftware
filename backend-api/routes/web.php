@@ -30,6 +30,9 @@ $router->get('/users/some', 'ExampleController@getSomeUser');
 $router->post('/message', 'ExampleController@postExample');
 $router->post('/ExampleController/findById', 'ExampleController@findById');
 
+// Usuarios
+$router->get('/users', 'UserController@getUsers');
+
 //CRUD: TABLA ESTADOS DB
 $router->get('/EstadoController/find', 'EstadoController@find');
 $router->get('/EstadoController/getEstado', 'EstadoController@getEstado');

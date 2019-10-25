@@ -11,8 +11,17 @@ class UsuariosSeeder extends Seeder {
      */
     public function run() {
         $user = [
-            'name' => 'Usuario Prueba',
+            'name' => 'Randall Lou',
             'email' => 'prueba@dom.com',
+            'password' => Hash::make('password123'),
+            'puesto' => 1,
+            'imagen' => null,
+        ];
+        User::insert($user);
+
+        $user = [
+            'name' => 'Celeste Espel',
+            'email' => 'celesteespel@dom.com',
             'password' => Hash::make('password123'),
             'puesto' => 1,
             'imagen' => null,
