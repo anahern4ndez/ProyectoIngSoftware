@@ -389,6 +389,11 @@ export default {
     validateAppointmentHour(data) {
       let d0 = new Date(`${data.fecha} ${data.hora}`);
       for (let i = 0; i < this.events.length; i++) {
+        // no comparar cita con ella misma
+        if (data.id == this.events[i].id) {
+          continue;
+        }
+
         let d1 = new Date(`${this.events[i].date} ${this.events[i].time}`);
         if (d0.valueOf() < d1.valueOf()) {
           if (d0.valueOf() + data.duracionCita * 60 * 1000 > d1.valueOf()) {
@@ -481,6 +486,7 @@ export default {
 
       // data for request
       const data = {
+        id: this.selectedAppointment.id,
         idUsuario: this.selectedDoctor,
         idPaciente: this.selectedPatient,
         fecha: this.selectedDate,
@@ -626,6 +632,7 @@ export default {
       this.selectedDoctor = appointment.doctor;
       this.selectedPatient = appointment.patient;
       this.selectedDuration = appointment.duration;
+      this.selectedAppointmentType = appointment.appointmentType;
       this.dialogOpen = true;
     },
     closeAppointmentDialog() {
