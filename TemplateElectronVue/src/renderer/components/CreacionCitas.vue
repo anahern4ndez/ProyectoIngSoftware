@@ -468,6 +468,16 @@ export default {
     updateAppointment() {
       this.updatingAppointment = false;
       this.dialogOpen = false;
+
+      // validacion de hora de cita
+      const time = Number(this.selectedTime.substring(0, 2));
+      if (time < this.minAppointmentHour || time > this.maxAppointmentHour) {
+        this.infoMessage = "Por favor escoge una hora disponible.";
+        this.infoDialog = true;
+        return;
+      }
+
+      // data for request
       const data = {
         idUsuario: this.selectedDoctor,
         idPaciente: this.selectedPatient,
@@ -477,6 +487,15 @@ export default {
         estado: 1,
         tipoCitaID: this.selectedAppointmentType
       };
+
+      if (!this.validateAppointmentHour(data)) {
+        this.infoMessage =
+          "La cita se traslapa con otra cita, por favor revisa los datos.";
+        this.infoDialog = true;
+        return;
+      }
+
+      // make http request
       this.$http
         .put(`http://localhost:8000/citas/${this.selectedAppointment.id}`, data)
         .then(response => {
