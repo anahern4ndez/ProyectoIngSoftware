@@ -364,6 +364,8 @@ export default {
 
             return {
               id: i.id,
+              doctor: i.idUsuario,
+              patient: i.idPaciente,
               title: `Doctor: ${userName}`,
               details: `Paciente: ${i.idPaciente}`,
               date: i.fecha,
