@@ -411,6 +411,8 @@ export default {
         this.infoDialog = true;
         return;
       }
+
+      // data para request
       const data = {
         idUsuario: this.selectedDoctor,
         idPaciente: this.selectedPatient,
@@ -420,12 +422,14 @@ export default {
         estado: 1,
         tipoCitaID: this.selectedAppointmentType
       };
+
       if (!this.validateAppointmentHour(data)) {
         this.infoMessage =
           "La cita se traslapa con otra cita, por favor revisa los datos.";
         this.infoDialog = true;
         return;
       }
+
       // cerrar dialogo de creacion de cita
       this.dialogOpen = false;
       this.$http
@@ -433,15 +437,19 @@ export default {
         .then(response => {
           if (response.data.success) {
             // empujar nuevo evento a array local de eventos
+            const userName = this.users.filter(
+              u => u.id == this.selectedDoctor
+            )[0].name;
             this.events.push({
               id: response.data.data.id,
-              title: `Doctor: ${this.selectedDoctor}`,
+              title: `Doctor: ${userName}`,
               details: `Paciente: ${this.selectedPatient}`,
               date: this.selectedDate,
               time: this.selectedTime,
               duration: this.selectedDuration,
               doctor: this.selectedDoctor,
-              patient: this.selectedPatient
+              patient: this.selectedPatient,
+              appointmentType: this.selectedAppointmentType
             });
           }
           // resetear campos de dialogo
