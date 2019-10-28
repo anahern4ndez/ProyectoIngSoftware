@@ -359,9 +359,12 @@ export default {
         .get("http://localhost:8000/citas")
         .then(response => {
           const e = response.data.data.map(i => {
+            const userName = this.users.filter(u => u.id == i.idUsuario)[0]
+              .name;
+
             return {
               id: i.id,
-              title: `Doctor: ${this.doctors[i.idUsuario]}`,
+              title: `Doctor: ${userName}`,
               details: `Paciente: ${i.idPaciente}`,
               date: i.fecha,
               time: i.hora,
@@ -383,10 +386,8 @@ export default {
      */
     validateAppointmentHour(data) {
       let d0 = new Date(`${data.fecha} ${data.hora}`);
-      console.log(`d0 ${d0.toString()}`);
       for (let i = 0; i < this.events.length; i++) {
         let d1 = new Date(`${this.events[i].date} ${this.events[i].time}`);
-        console.log(`vrs d1 ${d1.toString()}`);
         if (d0.valueOf() < d1.valueOf()) {
           if (d0.valueOf() + data.duracionCita * 60 * 1000 > d1.valueOf()) {
             return false;
