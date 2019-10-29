@@ -44,7 +44,7 @@
                   :key="event.id"
                   v-ripple
                   v-bind:class="`event-${event.appointmentType}`"
-                  v-html="event.title"
+                  v-html="event.userName"
                 ></div>
               </template>
             </template>
@@ -75,7 +75,7 @@
                   :key="event.id"
                   :style="{ top: timeToY(event.time) + 'px', height: minutesToPixels(event.duration) + 'px' }"
                   v-bind:class="`event-${event.appointmentType} with-time`"
-                  v-html="event.title"
+                  v-html="`${event.userName} - ${event.patientName}`"
                 ></div>
               </template>
             </template>
@@ -362,11 +362,16 @@ export default {
             const userName = this.users.filter(u => u.id == i.idUsuario)[0]
               .name;
 
+            const patientName = this.patients.filter(
+              p => p.id == i.idPaciente
+            )[0].name;
+
             return {
               id: i.id,
               doctor: i.idUsuario,
+              userName: userName,
               patient: i.idPaciente,
-              title: `Doctor: ${userName}`,
+              patientName: patientName,
               details: `Paciente: ${i.idPaciente}`,
               date: i.fecha,
               time: i.hora,
