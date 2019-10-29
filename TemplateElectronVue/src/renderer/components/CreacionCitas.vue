@@ -333,6 +333,7 @@ export default {
     this.today = this.todayDate.toISOString().substring(0, 10);
     this.month = this.getMes(this.todayDate.getMonth());
     this.year = this.todayDate.getFullYear();
+    // obterner datos de BD
     this.obtenerUsuarios();
     this.obtenerPacientes();
     this.getAppointments();
