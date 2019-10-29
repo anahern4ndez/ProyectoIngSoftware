@@ -63,8 +63,15 @@ class HemodialisisController extends Controller
     }
 
     public function lookHemo(Request $request){
-        $received-> $request->idPaciente;
-        $received-> $request->fecha;
-        
+        $receivedID = $request['idPaciente'];
+        $receivedDate = $request['fecha'];
+        $bodyContent= $request->getContent();
+        $register = singleTableHemodialisis::all();
+
+        return response()->json([
+            'success' => true,
+            'hemodialisis' => $register
+        ], 200);
     }
+        
 }

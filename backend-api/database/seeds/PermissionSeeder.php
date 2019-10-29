@@ -16,16 +16,36 @@ class PermissionSeeder extends Seeder {
         Permission::create(['name' => 'agendar citas']);
         Permission::create(['name' => 'crear usuarios']);
         Permission::create(['name' => 'editar pacientes']);
+        Permission::create(['name' => 'realizar hemodialisis']);
 
         // create roles and assign created permissions
 
         // this can be done as separate statements
-        $role = Role::create(['name' => 'secretaria']);
-        $role->givePermissionTo('ver pacientes');
-        $role->givePermissionTo('agendar citas');
 
-        $role = Role::create(['name' => 'super-admin']);
-        $role->givePermissionTo(Permission::all());
+        $roleAdmin = Role::create(['name' => 'superAdmin']);
+        $roleAdmin->givePermissionTo(Permission::all());
+
+
+
+        $roleTec = Role::create(['name' => 'tecnico']);
+        $roleTec->givePermissionTo('realizar hemodialisis');
+        $roleTec->givePermissionTo('ver pacientes');
+
+
+
+        $roleDr = Role::create(['name' => 'doctor']);
+        $roleDr->givePermissionTo('ver pacientes');
+        $roleDr->givePermissionTo('editar pacientes');
+        $roleDr->givePermissionTo('agendar citas');
+
+
+        $role = Role::create(['name' => 'secretaria']);
+        $role->givePermissionTo('agendar citas');
+        $role->givePermissionTo('editar pacientes');
+        $role->givePermissionTo('ver pacientes');
+
+        
+        
 
     }
 }
