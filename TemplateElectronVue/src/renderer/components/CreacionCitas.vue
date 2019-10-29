@@ -360,6 +360,7 @@ export default {
         .get("http://localhost:8000/citas")
         .then(response => {
           const e = response.data.data.map(i => {
+            console.log(i);
             const userName = this.users.filter(u => u.id == i.idUsuario)[0]
               .name;
 
@@ -380,6 +381,7 @@ export default {
               appointmentType: i.tipoCitaID
             };
           });
+
           e.forEach(i => {
             this.events.push(i);
           });
@@ -450,19 +452,26 @@ export default {
         .then(response => {
           if (response.data.success) {
             // empujar nuevo evento a array local de eventos
+            // conseguir nombre de doctor
             const userName = this.users.filter(
               u => u.id == this.selectedDoctor
             )[0].name;
+            // conseguir nombre de paciente
+            const patientName = this.patients.filter(
+              p => p.id == this.selectedPatient
+            )[0].name;
+
             this.events.push({
               id: response.data.data.id,
-              title: `Doctor: ${userName}`,
               details: `Paciente: ${this.selectedPatient}`,
               date: this.selectedDate,
               time: this.selectedTime,
               duration: this.selectedDuration,
               doctor: this.selectedDoctor,
               patient: this.selectedPatient,
-              appointmentType: this.selectedAppointmentType
+              appointmentType: this.selectedAppointmentType,
+              userName: userName,
+              patientName: patientName
             });
           }
           // resetear campos de dialogo
