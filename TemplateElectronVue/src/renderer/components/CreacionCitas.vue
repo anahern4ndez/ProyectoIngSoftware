@@ -44,7 +44,7 @@
                   :key="event.id"
                   v-ripple
                   v-bind:class="`event-${event.appointmentType}`"
-                  v-html="event.title"
+                  v-html="event.userName"
                 ></div>
               </template>
             </template>
@@ -75,7 +75,7 @@
                   :key="event.id"
                   :style="{ top: timeToY(event.time) + 'px', height: minutesToPixels(event.duration) + 'px' }"
                   v-bind:class="`event-${event.appointmentType} with-time`"
-                  v-html="event.title"
+                  v-html="`${event.userName} - ${event.patientName}`"
                 ></div>
               </template>
             </template>
@@ -104,10 +104,13 @@
                   ></v-autocomplete>
                 </v-flex>
                 <v-flex xs12>
+                  <!--v-bind:class="{ disabled: true }"-->
                   <v-select
-                    :items="dummyDoctors"
+                    :items="users"
                     label="Doctor"
                     v-model="selectedDoctor"
+                    item-text="name"
+                    item-value="id"
                     required
                     :rules="textboxRules"
                   ></v-select>
@@ -252,16 +255,23 @@
   width: 100%;
 }
 
+/*.disabled {
+      pointer-events:none;
+      color: #bfcbd9;
+      cursor: not-allowed;
+      background-image: none;
+      //background-color: #eef1f6;
+      //border-color: #d1dbe5;   
+}*/
+
 .event-1 {
   @extend %my-event;
   background-color: rgb(211, 88, 35);
 }
-
 .event-2 {
   @extend %my-event;
   background-color: rgb(35, 88, 200);
 }
-
 .daily-invalid-hour {
   background-color: rgb(255, 163, 163);
   width: 100%;
@@ -296,6 +306,7 @@ export default {
     doctors: {
       1: "Randall Lou"
     },
+    users: [],
     patients: [],
     textboxRules: [v => !!v || "Seleccione una persona"],
     duracionRules: [
@@ -322,6 +333,7 @@ export default {
     this.today = this.todayDate.toISOString().substring(0, 10);
     this.month = this.getMes(this.todayDate.getMonth());
     this.year = this.todayDate.getFullYear();
+    this.obtenerUsuarios();
     this.obtenerPacientes();
     this.getAppointments();
     this.obtenerTipoCitas();
@@ -347,9 +359,19 @@ export default {
         .get("http://localhost:8000/citas")
         .then(response => {
           const e = response.data.data.map(i => {
+            const userName = this.users.filter(u => u.id == i.idUsuario)[0]
+              .name;
+
+            const patientName = this.patients.filter(
+              p => p.id == i.idPaciente
+            )[0].name;
+
             return {
               id: i.id,
-              title: `Doctor: ${this.doctors[i.idUsuario]}`,
+              doctor: i.idUsuario,
+              userName: userName,
+              patient: i.idPaciente,
+              patientName: patientName,
               details: `Paciente: ${i.idPaciente}`,
               date: i.fecha,
               time: i.hora,
@@ -357,7 +379,6 @@ export default {
               appointmentType: i.tipoCitaID
             };
           });
-
           e.forEach(i => {
             this.events.push(i);
           });
@@ -366,12 +387,19 @@ export default {
           console.log(err);
         });
     },
+    /**
+     * Valida que la nueva cita que se desea ingresar no se traslape con
+     * ninguna de las citas ya existentes.
+     */
     validateAppointmentHour(data) {
       let d0 = new Date(`${data.fecha} ${data.hora}`);
-      console.log(`d0 ${d0.toString()}`);
       for (let i = 0; i < this.events.length; i++) {
+        // no comparar cita con ella misma
+        if (data.id == this.events[i].id) {
+          continue;
+        }
+
         let d1 = new Date(`${this.events[i].date} ${this.events[i].time}`);
-        console.log(`vrs d1 ${d1.toString()}`);
         if (d0.valueOf() < d1.valueOf()) {
           if (d0.valueOf() + data.duracionCita * 60 * 1000 > d1.valueOf()) {
             return false;
@@ -385,7 +413,6 @@ export default {
           }
         }
       }
-
       return true;
     },
     createAppointment() {
@@ -397,8 +424,9 @@ export default {
         return;
       }
 
+      // data para request
       const data = {
-        idUsuario: this.$store.id,
+        idUsuario: this.selectedDoctor,
         idPaciente: this.selectedPatient,
         fecha: this.selectedDate,
         hora: this.selectedTime,
@@ -416,24 +444,26 @@ export default {
 
       // cerrar dialogo de creacion de cita
       this.dialogOpen = false;
-
       this.$http
         .post("http://localhost:8000/citas", data)
         .then(response => {
           if (response.data.success) {
             // empujar nuevo evento a array local de eventos
+            const userName = this.users.filter(
+              u => u.id == this.selectedDoctor
+            )[0].name;
             this.events.push({
               id: response.data.data.id,
-              title: `Doctor: ${this.selectedDoctor}`,
+              title: `Doctor: ${userName}`,
               details: `Paciente: ${this.selectedPatient}`,
               date: this.selectedDate,
               time: this.selectedTime,
               duration: this.selectedDuration,
               doctor: this.selectedDoctor,
-              patient: this.selectedPatient
+              patient: this.selectedPatient,
+              appointmentType: this.selectedAppointmentType
             });
           }
-
           // resetear campos de dialogo
           this.selectedDoctor = "";
           this.selectedPatient = "";
@@ -451,8 +481,18 @@ export default {
       this.updatingAppointment = false;
       this.dialogOpen = false;
 
+      // validacion de hora de cita
+      const time = Number(this.selectedTime.substring(0, 2));
+      if (time < this.minAppointmentHour || time > this.maxAppointmentHour) {
+        this.infoMessage = "Por favor escoge una hora disponible.";
+        this.infoDialog = true;
+        return;
+      }
+
+      // data for request
       const data = {
-        idUsuario: this.$store.id,
+        id: this.selectedAppointment.id,
+        idUsuario: this.selectedDoctor,
         idPaciente: this.selectedPatient,
         fecha: this.selectedDate,
         hora: this.selectedTime,
@@ -461,6 +501,14 @@ export default {
         tipoCitaID: this.selectedAppointmentType
       };
 
+      if (!this.validateAppointmentHour(data)) {
+        this.infoMessage =
+          "La cita se traslapa con otra cita, por favor revisa los datos.";
+        this.infoDialog = true;
+        return;
+      }
+
+      // make http request
       this.$http
         .put(`http://localhost:8000/citas/${this.selectedAppointment.id}`, data)
         .then(response => {
@@ -482,7 +530,6 @@ export default {
     deleteAppointment() {
       this.updatingAppointment = false;
       this.infoDialog = false;
-
       this.$http
         .delete(`http://localhost:8000/citas/${this.selectedAppointment.id}`)
         .then(response => {
@@ -505,16 +552,24 @@ export default {
     },
     intervalClick(event) {
       if (this.updatingAppointment) return;
-
       this.appointmentDialogTitle = "Crear Nueva Cita";
       const time = Number(event.time.substring(0, 2));
       // no permitir click en horas invalidas
       if (time < this.minAppointmentHour || time > this.maxAppointmentHour) {
         return;
       }
-
       this.selectedTime = event.time;
       this.dialogOpen = true;
+    },
+    obtenerUsuarios() {
+      this.$http.get("http://localhost:8000/users").then(response => {
+        this.users = response.data.data.map(i => {
+          return {
+            id: i.id,
+            name: i.name
+          };
+        });
+      });
     },
     obtenerPacientes() {
       this.$http
@@ -542,7 +597,6 @@ export default {
     },
     interactuar(type) {
       var today = new Date(this.today);
-
       if (!type) {
         var SemAnt = new Date(
           today.getFullYear(),
@@ -556,11 +610,9 @@ export default {
           today.getDate()
         );
       }
-
       var diaSemAnt = SemAnt.getDate();
       var yearSemAnt = SemAnt.getFullYear();
       var mesSemAnt = SemAnt.getMonth() + 1;
-
       var fechaSemAnt = yearSemAnt + "-" + mesSemAnt + "-" + diaSemAnt;
       this.startDate = fechaSemAnt;
       this.today = fechaSemAnt;
@@ -585,6 +637,7 @@ export default {
       this.selectedDoctor = appointment.doctor;
       this.selectedPatient = appointment.patient;
       this.selectedDuration = appointment.duration;
+      this.selectedAppointmentType = appointment.appointmentType;
       this.dialogOpen = true;
     },
     closeAppointmentDialog() {

@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Hemodialisis extends Model
 {
     protected $fillable = [ 
-        'IdPaciente',
-        'Fecha',
+        'idPaciente',
+        'FechaHemodialisis',
         'NoHemodialisis',
         'LugarDeProcedencia',
         'TipoDeHemodialisis',
@@ -18,8 +18,9 @@ class Hemodialisis extends Model
         'FlujoDializante',
         'FlujoDeSangre',
         'UF',
-        'Heparinizacion_cebado',
-        'Heparinizacion_TransDialisis',
+        //'Heparinizacion_cebado',
+        //'Heparinizacion_TransDialisis',
+        'Heparinizacion',
         'TiempoH',
         'TiempoM',
         'Conductividad_Na',
@@ -30,25 +31,16 @@ class Hemodialisis extends Model
         'Talla',
         'PesoDelta',
         'Especiales',
-        'PAstr',
-        'Pulso',
-        'Temp',
-        'QB',
-        'PV',
-        'PA_table',
-        'UFH',
-        'Medicamentos',
-        'UFTotal',
         'Observacion',
-        'Tecnico',
-        'PA',
-        'Tabla2'
     ];
     public $timestamps = false;
-    protected $casts =[
+    /*protected $casts =[
         'Via' => 'array',
-        'Tabla2' => 'array'
-    ];
+        'T2Fecha' => 'array',
+        'T2Pre' => 'array',
+        'T2Post' => 'array',
+        'T2Urr' => 'array'
+    ];*/
 
     /**
      * Relaciones de la tabla de hemodialisis

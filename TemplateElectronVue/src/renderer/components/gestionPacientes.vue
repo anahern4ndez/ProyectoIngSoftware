@@ -188,23 +188,18 @@
     </div>
     <div id="botones">
       <br>
-      <div id="boton">
+      <div class="boton">
         <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="ingresarNuevo">Ingresar nuevo paciente</button>
       </div>
-      <div id="boton">
+      <div class="boton">
         <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="darConsulta"> Dar consulta </button>
       </div>
-      <div id="boton">
+      <div class="boton">
         <router-link :to="{name: 'cambioEstado', params: { cui: this.selectedPatients.CUI, nombre: this.selectedPatients.Nombre, edad: this.selectedPatients.Edad, sexo: this.selectedPatients.Sexo, estado: this.selectedPatients.estado_actual }}" class="btn btn-lg btn-warning btn-block">Editar estado de paciente seleccionado</router-link>
       </div>
-      <div id="boton">
-        <button type="button" class="btn btn-lg btn-warning btn-block"> Archivos </button>
-      </div>
-      <div id="boton">
-        <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="reportes"> Reporte</button>
-      </div>
-      <div id="boton">
-        <button type="button" class="btn btn-lg btn-warning btn-block"> Estadísticas </button>
+      <br>
+      <div class="boton" style="width: 94%;">
+        <router-link :to="{name: 'gestionFormularios', params: { cui: this.selectedPatients.CUI, nombre: this.selectedPatients.Nombre, apellido: this.selectedPatients.Apellido }}" class="btn btn-lg btn-warning btn-block"> Ingresar formulario de este paciente </router-link>
       </div>
     </div>
   </div>
@@ -326,15 +321,6 @@ export default {
           this.editedIndex = this.pacientes.indexOf(received)
           this.editedItem = Object.assign({}, received)
           this.$router.push({name: 'EditarPaciente', params: { cui: this.editedItem.CUI }})
-          
-        },
-        archivos(){
-          
-        },
-        reportes(){
-          
-        },
-        estadisticas(){
           
         },
         close () {
@@ -465,7 +451,7 @@ h2#headers{
   font-family: Nunito;
   font-weight: bolder;
 }
-div#boton {
+.boton {
   width: 30%;
   margin-top: 1%;
   margin-left: 1%;

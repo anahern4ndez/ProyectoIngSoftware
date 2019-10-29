@@ -4,12 +4,12 @@
         <br>
         <h1 class ="headers">Hemodiálisis</h1>  
         <br>
-        <!--b-tabs-title> Pacientes agendados para hoy: {{todaysDate}}</b-tabs-title-->
+        <!--b-tabs-title> Pacientes agendados para hoy: {{todaysDateFormatted}}</b-tabs-title-->
         <v-card>
             <v-toolbar flat color="primary" dark>
-                <v-toolbar-title style="text-align: center">Pacientes agendados para hoy: {{todaysDate}}</v-toolbar-title>
+                <v-toolbar-title style="text-align: center">Pacientes agendados para hoy: {{todaysDateFormatted}}</v-toolbar-title>
             </v-toolbar>
-            <v-tabs centered fixed-tabs vertical dark>
+            <v-tabs centered fixed-tabs vertical dark v-model="activeTab">
                 <v-tab v-for="paciente in this.pacientes" :key="paciente.nombre" :title="paciente.Nombre">
                     {{paciente.Nombre}} {{paciente.Apellido}}
                 </v-tab>
@@ -51,7 +51,7 @@
                                                 disabled
                                             ></v-text-field>
                                             <v-text-field
-                                                :value="paciente.EstadoActual"
+                                                :value="paciente.estado_actual.significado"
                                                 label="Estado"
                                                 filled
                                                 disabled
@@ -65,7 +65,7 @@
                                                 disabled
                                             ></v-text-field>
                                             <v-text-field
-                                                :value="paciente.Sexo"
+                                                :value="paciente.sexo_rel.significado"
                                                 label="Género"
                                                 filled
                                                 disabled
@@ -87,224 +87,84 @@
                                 <div class="encapsulado">
                                     <br><br>
                                     <v-text-field
-                                        :v-model="tabs[pacientes.indexOf(paciente)].Registro"
+                                        v-model="tabs[pacientes.indexOf(paciente)].Registro"
                                         label="Registro"
                                         outline
                                         class="mitad"
+                                         :rules="expedienteRules"
                                     ></v-text-field>
                                     <v-text-field
-                                        :v-model="tabs[pacientes.indexOf(paciente)].Numero"
-                                        label="No."
+                                        v-model="tabs[pacientes.indexOf(paciente)].Numero"
+                                        label="No. de Hemodiálisis"
                                         outline
                                         class="mitad"
+                                        :rules="expedienteRules"
                                     ></v-text-field>
                                     <v-layout align-center justify-end style="width: 100%">
                                         <v-container fluid row align-center justify-space-around fill-height>
                                             <h4 class="headers" style="margin-right: 10%">Lugar de procedencia:</h4>
-                                            <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Procedencia" label="Hospitalizado" value="1" color="green"></v-checkbox>
-                                            <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Procedencia" label="Ambulatorio" value="2" color="green"></v-checkbox>
+                                            <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Procedencia" label="Hospitalizado" value="1" color="green"></v-checkbox>
+                                            <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Procedencia" label="Ambulatorio" value="2" color="green"></v-checkbox>
                                         </v-container>
                                     </v-layout>
                                 </div>
-                                <br><br><br>
-                                <table class="table table-bordered">
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row" style="width:10%;">No.</th>
-                                            <th scope="row" style="width:10%;">Hora</th>
-                                            <th scope="row" style="width:10%;">P/A</th>
-                                            <th scope="row" style="width:10%;">PULSO</th>
-                                            <th scope="row" style="width:10%;">TEMP</th>
-                                            <th scope="row" style="width:10%;">QB</th>
-                                            <th scope="row" style="width:10%;">PV</th>
-                                            <th scope="row" style="width:10%;">PA</th>
-                                            <th scope="row" style="width:10%;">UF/H</th>
-                                            <th scope="row" style="width:10%;">MEDICAMENTOS</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" style="width:10%;">1</th>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" style="width:10%;">2</th>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" style="width:10%;">3</th>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" style="width:10%;">4</th>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" style="width:10%;">5</th>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" style="width:10%;">6</th>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" style="width:10%;">7</th>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" style="width:10%;">8</th>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                            <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" style="width:10%;"></th>
-                                            <td style="text-align: left; max-width: 10%;" ></td>
-                                            <td style="text-align: left; max-width: 10%;" ></td>
-                                            <td style="text-align: left; max-width: 10%;" ></td>
-                                            <td style="text-align: left; max-width: 10%;" ></td>
-                                            <td style="text-align: left; max-width: 10%;" ></td>
-                                            <td style="text-align: left; max-width: 10%;" ></td>
-                                            <td style="text-align: left; max-width: 10%;" ></td>
-                                            <th style="text-align: left; max-width: 10%;" >UF/TOTAL</th>
-                                            <td style="text-align: left; max-width: 10%;" ></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <div class="encapsulado">
-                                    <h2 class="headers">...</h2>
-                                    <br><br><br>
                                     <div>
                                         <ol>
                                             <ul>
                                                 <h4 class="headers">1. Hemodiálisis:</h4>
                                                 <v-layout align-center justify-end>
                                                     <v-container fluid row align-center justify-space-around fill-height>
-                                                        <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Hemodialisis" label="Aguda" value="1" color="green"></v-checkbox>
-                                                        <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Hemodialisis" label="Crónica" value="2" color="green"></v-checkbox>
+                                                        <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Hemodialisis" label="Aguda" value="1" color="green"></v-checkbox>
+                                                        <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Hemodialisis" label="Crónica" value="2" color="green"></v-checkbox>
                                                     </v-container>
                                                 </v-layout>
                                             </ul>
                                             <ul id="via">
                                                 <h4 class="headers">2. Vía:</h4>
-                                                <v-layout align-center justify-end>
-                                                    <v-container fluid row align-center justify-space-around>
-                                                        <v-checkbox :rules="radioRules" v-model="tabs[pacientes.indexOf(paciente)].Via" label="Femoral" value="1" color="green"></v-checkbox>
-                                                        <v-checkbox :rules="radioRules" v-model="tabs[pacientes.indexOf(paciente)].Via" label="Subclavio" value="2" color="green"></v-checkbox>
-                                                        <v-checkbox :rules="radioRules" v-model="tabs[pacientes.indexOf(paciente)].Via" label="Yugular" value="3" color="green"></v-checkbox>
-                                                        <v-checkbox :rules="radioRules" v-model="tabs[pacientes.indexOf(paciente)].Via" label="Derecho" value="4" color="green"></v-checkbox>
-                                                        <v-checkbox :rules="radioRules" v-model="tabs[pacientes.indexOf(paciente)].Via" label="Izquierdo" value="5" color="green"></v-checkbox>
-                                                        <v-checkbox :rules="radioRules" v-model="tabs[pacientes.indexOf(paciente)].Via" label="Invertido" value="6" color="green"></v-checkbox>
-                                                        <v-checkbox :rules="radioRules" v-model="tabs[pacientes.indexOf(paciente)].Via" label="Normal" value="7" color="green"></v-checkbox>
-                                                        <!--v-text-field
-                                                        :v-model="Via"
-                                                        value="8"
-                                                        label="Otros"
-                                                        outline
-                                                        ></v-text-field-->
-                                                    </v-container>
-                                                </v-layout>
+                                                <v-container row>
+                                                        <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Via" label="Femoral" value="1" color="green"></v-checkbox>
+                                                        <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Via" label="Subclavio" value="2" color="green"></v-checkbox>
+                                                        <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Via" label="Yugular" value="3" color="green"></v-checkbox>
+                                                        <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Via" label="Derecho" value="4" color="green"></v-checkbox>
+                                                        <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Via" label="Izquierdo" value="5" color="green"></v-checkbox>
+                                                </v-container>
+                                                <v-container row>
+                                                    <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Via" label="Invertido" value="6" color="green"></v-checkbox>
+                                                    <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Via" label="Normal" value="7" color="green"></v-checkbox>
+                                                </v-container>
                                             </ul>
                                             <ul>
                                                 <h4 class="headers">3. Líneas pediátricas:</h4>
-                                                <br>
-                                                <v-text-field
-                                                    :v-model="tabs[pacientes.indexOf(paciente)].Lineas_pediatricas"
-                                                    placeholder="6.5 Mm."
-                                                    outline
-                                                    class="mitad"
-                                                    ></v-text-field>
-
-                                                <v-text-field
-                                                    :v-model="tabs[pacientes.indexOf(paciente)].Lineas_pediatricas"
-                                                    placeholder="8.0 Mm."
-                                                    outline
-                                                    class="mitad"
-                                                    ></v-text-field>
+                                                <v-container row>
+                                                    <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Lineas_pediatricas" label="6.5 Mm" value="6.5" color="green"></v-checkbox>
+                                                    <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Lineas_pediatricas" label="8.0 Mm" value="8" color="green"></v-checkbox>
+                                                </v-container>
                                             </ul>
                                             <ul>
                                                 <h4 class="headers">4. Filtro #:</h4>
                                                 <v-container fluid row align-center justify-space-around>
-                                                    <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Filtro" label="0.7 m2" value="0.7" color="green"></v-checkbox>
-                                                    <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Filtro" label="0.9 m2" value="0.9" color="green"></v-checkbox>
-                                                    <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Filtro" label="0.11 m2" value="0.11" color="green"></v-checkbox>
-                                                    <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Filtro" label="1.5 m2" value="1.5" color="green"></v-checkbox>
+                                                    <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Filtro" label="0.7 m2" value="0.7" color="green"></v-checkbox>
+                                                    <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Filtro" label="0.9 m2" value="0.9" color="green"></v-checkbox>
+                                                    <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Filtro" label="0.11 m2" value="0.11" color="green"></v-checkbox>
+                                                    <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Filtro" label="1.5 m2" value="1.5" color="green"></v-checkbox>
                                                     <v-text-field
-                                                    :v-model="tabs[pacientes.indexOf(paciente)].Filtro"
+                                                    v-model="tabs[pacientes.indexOf(paciente)].Filtro"
                                                     label="Otros"
                                                     outline
+                                                    :rules="expedienteRules"
                                                     ></v-text-field>
                                                 </v-container>
                                             </ul>
                                             <ul>
                                                 <h4 class="headers">5. Flujo de dializante:</h4>
                                                 <v-container fluid row align-center justify-space-around>
-                                                    <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Flujo_dializante" label="300 ml/min" value="300" color="green"></v-checkbox>
-                                                    <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Flujo_dializante" label="400 ml/min" value="400" color="green"></v-checkbox>
+                                                    <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Flujo_dializante" label="300 ml/min" value="300" color="green"></v-checkbox>
+                                                    <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Flujo_dializante" label="400 ml/min" value="400" color="green"></v-checkbox>
                                                     <v-text-field
-                                                    :v-model="tabs[pacientes.indexOf(paciente)].Flujo_dializante"
+                                                    v-model="tabs[pacientes.indexOf(paciente)].Flujo_dializante"
                                                     label="Otros (ml/min)"
                                                     outline
+                                                    :rules="expedienteRules"
                                                     ></v-text-field>
                                                 </v-container>
                                             </ul>
@@ -312,222 +172,147 @@
                                                 <h4 class="headers">6. Flujo de sangre</h4>
                                                 <br>
                                                 <v-text-field
-                                                    :v-model="tabs[pacientes.indexOf(paciente)].Flujo_sangre"
+                                                    v-model="tabs[pacientes.indexOf(paciente)].Flujo_sangre"
                                                     label="QB (ml/min)"
                                                     outline
+                                                    :rules="expedienteRules"
                                                 ></v-text-field>
                                             </ul>
                                             <ul>
                                                 <h4 class="headers">7. UF</h4>
                                                 <v-text-field
-                                                    :v-model="tabs[pacientes.indexOf(paciente)].UF"
+                                                    v-model="tabs[pacientes.indexOf(paciente)].UF"
                                                     label="(ml total)"
                                                     outline
+                                                    :rules="expedienteRules"
                                                 ></v-text-field>
                                             </ul>
                                             <ul>
                                                 <h4 class="headers">8. Heparinización</h4>
                                                 <br>
                                                 <v-text-field
-                                                    :v-model="tabs[pacientes.indexOf(paciente)].Heparinizacion"
+                                                    v-model="tabs[pacientes.indexOf(paciente)].Heparinizacion"
                                                     label="Cebado (UL)"
                                                     outline
                                                     class="mitad"
+                                                    :rules="expedienteRules"
                                                 ></v-text-field>
                                                 <v-text-field
-                                                    :v-model="tabs[pacientes.indexOf(paciente)].Heparinizacion"
+                                                    v-model="tabs[pacientes.indexOf(paciente)].Heparinizacion"
                                                     label="Trans-Diálisis (UL/hora)"
                                                     outline
                                                     class="mitad"
+                                                    :rules="expedienteRules"
                                                 ></v-text-field>
                                             </ul>
                                             <ul>
                                                 <h4 class="headers">9. Tiempo</h4>
                                                 <br>
                                                 <v-text-field
-                                                    :v-model="tabs[pacientes.indexOf(paciente)].Tiempo"
+                                                    v-model="tabs[pacientes.indexOf(paciente)].TiempoH"
                                                     label="Horas"
                                                     outline
                                                     class="mitad"
+                                                    :rules="expedienteRules"
                                                 ></v-text-field>
                                                 <v-text-field
-                                                    :v-model="tabs[pacientes.indexOf(paciente)].Tiempo"
+                                                    v-model="tabs[pacientes.indexOf(paciente)].TiempoM"
                                                     label="Minutos"
                                                     outline
                                                     class="mitad"
+                                                    :rules="expedienteRules"
                                                 ></v-text-field>
                                             </ul>
                                             <ul>
                                                 <h4 class="headers">10. Conductividad</h4>
                                                 <v-container row align-center justify-space-around fill-height>
-                                                    <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Conductividad" label="Na+" value="0" color="green"></v-checkbox>
-                                                    <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Conductividad" label="K+" value="1" color="green"></v-checkbox>
-                                                    <v-checkbox v-model="tabs[pacientes.indexOf(paciente)].Conductividad" label="HCO3" value="2" color="green"></v-checkbox>
+                                                    <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Conductividad_Na" label="Na+" color="green"></v-checkbox>
+                                                    <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Conductividad_K" label="K+" color="green"></v-checkbox>
+                                                    <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Conductividad_HCO3" label="HCO3" color="green"></v-checkbox>
                                                 </v-container>
                                             </ul>
                                             <ul>
-                                                <h4 class="headers">10. Peso/Talla</h4>
+                                                <h4 class="headers">11. Peso/Talla</h4>
                                                 <br>
                                                 <v-text-field
-                                                    :v-model="tabs[pacientes.indexOf(paciente)].Peso_pre"
+                                                    v-model="tabs[pacientes.indexOf(paciente)].Peso_pre"
                                                     label="Peso Pre-Hemodiálisis (kg)"
                                                     outline
                                                     class="mitad"
+                                                    :rules="expedienteRules"
                                                 ></v-text-field>
                                                 <v-text-field
-                                                    :v-model="tabs[pacientes.indexOf(paciente)].Peso_post"
+                                                    v-model="tabs[pacientes.indexOf(paciente)].Peso_post"
                                                     label="Peso Post-Hemodiálisis (kg)"
                                                     outline
                                                     class="mitad"
+                                                    :rules="expedienteRules"
                                                 ></v-text-field>
                                                 <v-text-field
-                                                    :v-model="tabs[pacientes.indexOf(paciente)].Talla"
+                                                    v-model="tabs[pacientes.indexOf(paciente)].Talla"
                                                     label="Talla (m)"
                                                     outline
                                                     class="mitad"
+                                                    :rules="expedienteRules"
                                                 ></v-text-field>
                                                 <v-text-field
-                                                    :v-model="tabs[pacientes.indexOf(paciente)].Peso_delta"
+                                                    v-model="tabs[pacientes.indexOf(paciente)].Peso_delta"
                                                     label="Peso delta"
                                                     outline
                                                     class="mitad"
+                                                    :rules="expedienteRules"
                                                 ></v-text-field>
                                             </ul>
                                         </ol>
                                     </div>
-                                    <br><br>
-                                    <div>
-                                        <div style="float:left; width:50%">
-                                            <v-flex xs12 sm6 md4>
-                                                <v-menu
-                                                    v-model="tabs[pacientes.indexOf(paciente)].menu_col_cat"
-                                                    :close-on-content-click="false"
-                                                    lazy
-                                                    transition="scale-transition"
-                                                    offset-y
-                                                    full-width
-                                                    min-width="200px"
-                                                >
-                                                    <template v-slot:activator="{ on }">
-                                                    
-                                                    <v-text-field
-                                                        v-model="tabs[pacientes.indexOf(paciente)].Fecha_col_cat"
-                                                        label="Fecha de colocación de catéter"
-                                                        prepend-icon="event"
-                                                        readonly
-                                                        v-on="on"
-                                                        style="width:250%"
-                                                        
-                                                    ></v-text-field>
-                                                    
-                                                    </template>
-                                                <v-date-picker v-model="tabs[pacientes.indexOf(paciente)].Fecha_col_cat" @input="tabs[pacientes.indexOf(paciente)].menu_col_cat = false" color="#3A4750" locale='es-ES'></v-date-picker>
-                                            </v-menu>
-                                            </v-flex>
-                                        </div>
-                                        <table class="table table-bordered">
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row" style="width:10%;">Labs.</th>
-                                                    <th scope="row" style="width:10%;">Fecha</th>
-                                                    <th scope="row" style="width:10%;">Pre</th>
-                                                    <th scope="row" style="width:10%;">Post</th>
-                                                    <th scope="row" style="width:10%;">Urr</th>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row" style="width:10%;">BUN</th>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row" style="width:10%;">CREAT</th>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row" style="width:10%;">NA</th>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row" style="width:10%;">K</th>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row" style="width:10%;">C</th>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row" style="width:10%;">P</th>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row" style="width:10%;">CL</th>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row" style="width:10%;">ALB</th>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row" style="width:10%;">GB</th>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row" style="width:10%;">HB</th>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row" style="width:10%;">PLAQ</th>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row" style="width:10%;">PTH</th>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row" style="width:10%;">FERRI</th>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                    <td contenteditable='true' style="text-align: left;" ></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                    <br><br><br>
+                                    <table class="table table-bordered" id="table">
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row" style="width:10%;">No.</th>
+                                                <th scope="row" style="width:10%;">Hora</th>
+                                                <th scope="row" style="width:10%;">P/A</th>
+                                                <th scope="row" style="width:10%;">PULSO</th>
+                                                <th scope="row" style="width:10%;">TEMP</th>
+                                                <th scope="row" style="width:10%;">QB</th>
+                                                <th scope="row" style="width:10%;">PV</th>
+                                                <th scope="row" style="width:10%;">PA</th>
+                                                <th scope="row" style="width:10%;">UF/H</th>
+                                                <th scope="row" style="width:10%;">MEDICAMENTOS</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" style="width:10%;">1</th>
+                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                                <td contenteditable='true' style="text-align: left; max-width: 10%;" ></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <button float="left" type="button" class="btn btn-lg btn-warning btn-block" v-on:click="activateTableDialog">Comenzar hemodiálisis</button> 
+                                    <!-- cuadro de dialogo de aviso para el autosave de tabla -->
+                                    <v-dialog v-model="tabs[pacientes.indexOf(paciente)].tableDialog" persistent max-width="40%">
+                                        <v-card class="dialogText">
+                                            <v-card-title class="headline">Aviso de autoguardado</v-card-title>
+                                            <v-card-text>
+                                                Los datos ingresados en la última fila de la tabla serán guardados en este momento. Una vez guardada no se podrá cambiar. 
+                                                <br><br>
+                                                En caso que desee volver a revisar la tabla, haga clic en "Revisar", este aviso volverá a aparecer en 5 minutos. 
+                                                <br><br>
+                                                ¿Es toda la información ingresada correcta?
+                                            </v-card-text>
+                                            <v-card-actions>
+                                            <v-spacer></v-spacer>
+                                            <v-btn class="v-btn" color="primary darken-1" text @click="recheckTableData()">Revisar</v-btn>
+                                            <v-btn class="v-btn" color="primary darken-1" text @click="saveTableData()">Guardar</v-btn>
+                                            </v-card-actions>
+                                        </v-card>
+                                    </v-dialog>
                                     <br><br><br>
                                     <h3 id="headers" class="text-xs-center">Especiales</h3>
                                     <v-textarea
@@ -546,7 +331,6 @@
                                         value=""
                                         rows=10
                                     ></v-textarea>
-                                </div>
                                 <button float="left" type="button" class="btn btn-lg btn-warning btn-block" v-on:click="guardar" :disabled="!tabs[pacientes.indexOf(paciente)].pass">Guardar información</button> 
                             </fieldset>
                         </form>
@@ -562,82 +346,163 @@
 
 export default {
     mounted(){
-        this.$http.get("http://localhost:8000/PacienteController/findAll").then(response => {
+        this.$http.get("http://localhost:8000/PacienteController/findWithAppointment").then(response => {
+            console.log((response.data.Pacientes))
             this.pacientes = response.data.Pacientes;
+            //console.log(this.pacientes);
             for (let index = 0; index < response.data.Pacientes.length; index++) {
             //const element = array[index];
             this.tabs.push(
                 {
+                    tableDialog: false,
                     tabid: index,
-                    pass: false,
+                    pass: true,
                     Hemodialisis: '',
-                    Via: '',
+                    Via: '1',
                     Lineas_pediatricas: '',
                     Filtro: '',
                     Flujo_dializante: '',
                     Flujo_sangre: '',
                     UF: '',
                     Heparinizacion: '',
-                    Tiempo: '',
-                    Conductividad: '',
+                    TiempoH: '',
+                    TiempoM: '',
+                    Conductividad_Na: '0',
+                    Conductividad_K: '0',
+                    Conductividad_HCO3: '0',
                     Peso_pre: '',
                     Peso_post: '',
                     Peso_delta: '',
                     Talla: '',
                     Fecha_col_cat: null,
                     menu_col_cat: false,
-                    Especiales: '',
                     Procedencia: '',
                     Registro: '',
                     Numero: '',
+                    Especiales: '',
                     Observaciones: '',
+                    idPaciente: response.data.Pacientes[index].id,
                 }
             )
         }
         });
-        this.getTodaysDate();
-        //this.Fecha_col_cat = new Date()
-        
-        console.log(this.pacientes);
+        this.todaysDate = new Date();
+        this.gettodaysDateFormatted();
     },
     data(){
         return{
             pacientes: [],
             tabs: [],
+            todaysDateFormatted: null,
             todaysDate: null,
+            activeTab: 0,
             expedienteRules: [
                 (v) => !!v || 'Se requiere este campo', 
-                (v) => v && this.isANumber(v) || 'Verifique que el número de expediente sean números.'
+                (v) => v && this.isANumber(v) || 'Verifique que el dato ingresado sea un número.'
             ],
             nombreRules: [
                 (v) => !!v || 'Se requiere este campo',
                 (v) => v && v.length < 60 || 'Se permite como maximo 60 caracteres'
             ],
-            radioRules:[v => !!v || 'Debe seleccionar una opción'],
         }
     },
     methods: {
-        getTodaysDate(){
+        gettodaysDateFormatted(){
             const daysOfWeek = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
             const months = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre','octubre', 'noviembre', 'diciembre']
             const engDateMonth = new Date().getUTCMonth();
             const engDateDay = new Date().getDay();
             const engDateYear = new Date().getFullYear();
             const engDateDate = new Date().getDate();
-            this.todaysDate = ''.concat(daysOfWeek[engDateDay], ', ', engDateDate, ' de ',  months[engDateMonth], ' del ', engDateYear);
+            this.todaysDateFormatted = ''.concat(daysOfWeek[engDateDay], ', ', engDateDate, ' de ',  months[engDateMonth], ' del ', engDateYear);
         },
         guardar(){
             var pass = true;
+            let info = this.tabs[this.activeTab]
+            console.log(this.tabs[this.activeTab]);
+            info['todaysDate'] = this.todaysDate
+            this.$http.post('http://localhost:8000/hemodialisis', info).then(response => {
+                console.log(response.success)
+            })
+
+
         },
         computeAge(date){
             console.log(date);
         },
-        checkType(expediente){
+        isANumber(expediente){
           let isNumber = false;
           if(!isNaN(parseInt(expediente))){
             isNumber = true;
           }
           return isNumber;
+        },
+        /* Al comenzar el proceso de hemodiálisis, se espera 30min antes de guardar los datos, pero antes de poder hacerlo, 
+            se activa un cuadro de diálogo para verificar que los datos ingresados fueron correctos (porque no se pueden cambiar 
+            una vez se haya guardado */
+        activateTableDialog(){
+            var loop = setInterval(() => {
+                this.tabs[this.activeTab].tableDialog = true
+                clearInterval(loop)
+            }, 10000); //30min
+        },
+        /* En el caso que el usuario desee volver a verificar los datos, se esperarán 5 minutos antes de volver a intentar guardar los datos */
+        recheckTableData(){
+            this.tabs[this.activeTab].tableDialog = false
+            var loop = setInterval(() => {
+                this.activateTableDialog()
+                clearInterval(loop)
+            }, 10000); //5min
+        },
+        /* En caso que el usuario indique que todos los datos están correctos, se procede a guardar lo ingresado en la última fila */
+        saveTableData(){
+            this.tabs[this.activeTab].tableDialog = false
+            const table = document.getElementById("table")
+            let currentRow = table.rows.length -1
+            /* guardar datos de table row actuales */
+            const time = new Date() 
+            this.T1Hora = time.getHours() + ':' + ((time.getMinutes() < 10)?"0":"") + time.getMinutes() + ':' + ((time.getSeconds() < 10)?"0":"") + time.getSeconds()
+            //setear la hora en la tabla (para que el usuario la pueda ver)
+            table.rows[currentRow].cells[1].innerHTML = this.T1Hora
+            const info = {
+                idPaciente: this.tabs[this.activeTab].idPaciente,
+                P_A: table.rows[currentRow].cells[2].innerHTML,
+                Pulso: table.rows[currentRow].cells[3].innerHTML,
+                Temp: table.rows[currentRow].cells[4].innerHTML,
+                QB: table.rows[currentRow].cells[5].innerHTML,
+                PV: table.rows[currentRow].cells[6].innerHTML,
+                PA: table.rows[currentRow].cells[7].innerHTML,
+                UFH: table.rows[currentRow].cells[8].innerHTML,
+                Medicamentos: table.rows[currentRow].cells[9].innerHTML
+            }
+            this.$http.post('http://localhost:8000/hemodialisis/storeTable', info).then(response => {
+
+                /* deshabilitar modificacion de texto para celdas ya guardadas */ 
+                for (let m = 1; m < 10; m++) {
+                    table.rows[currentRow].cells[m].contentEditable = false
+                }
+                /* agregar otra table row */
+                currentRow++
+                const tr = document.createElement("tr")
+                const th = document.createElement("th")
+                th.scope = "row"
+                th.style = "width: 10%; border: 3px solid #a9a9a9;"
+                th.innerHTML = currentRow
+                tr.append(th)
+                for (let i = 0; i < 9; i++) {
+                    const td = document.createElement("td")
+                    td.style = ' text-align: left; max-width: 10%; border: 3px solid #a9a9a9;'
+                    td.contentEditable = true
+                    tr.append(td)
+                }
+                table.append(tr)
+                if(table.rows.length -1 < 8){ //el formulario dice que se tienen hasta 8 entradas en la tabla
+                    var loop = setInterval(() => {
+                        this.activateTableDialog()
+                        clearInterval(loop)
+                    }, 10000); //30min
+                }
+            })
         }
     }
 }
@@ -685,7 +550,7 @@ table.table-bordered {
 table.table-bordered > tbody > tr > th {
     border: 3px solid #a9a9a9;
 }
-table.table-bordered > tbody > tr > td {
+table.table-bordered > tbody > tr > td{
     border: 3px solid #a9a9a9;
     width: 10%;
     word-wrap: break-word;
@@ -709,5 +574,31 @@ ol {
 ol > ul{
   break-inside: avoid-column;
   -webkit-column-break-inside: avoid;
+}
+td > input {
+    position: relative;
+    width: 100%;
+    word-wrap: break-word;
+}
+.v-container {
+    background: aquamarine;
+    text-align: center; /* center checkbox horizontally */
+    vertical-align: middle; /* center checkbox vertically */
+    align-items: center;
+    justify-content: center;
+}
+.dialogText {
+    font-size: 1.5rem;
+    padding: 5%;
+}
+.headline {
+    font-weight: bolder;
+    font-family: Nunito;
+}
+.v-btn {
+    font-size: 1.3rem;
+    margin: 3%;
+    padding: 3%;
+    height: fit-content;
 }
 </style>

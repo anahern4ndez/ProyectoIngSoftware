@@ -17,18 +17,19 @@ class CreateHemodialisesTable extends Migration
             $table->bigIncrements('id');
             
             $table->integer('idPaciente');
-            $table->date('fecha');
+            $table->date('FechaHemodialisis');
             $table->integer('NoHemodialisis');
             $table->integer('LugarDeProcedencia');
             $table->integer('TipoDeHemodialisis');
-            $table->jsonb("Via");
-            $table->integer('LineasPediatrica');
-            $table->integer('Filtro');
+            $table->integer("Via");
+            $table->float('LineasPediatrica');
+            $table->float('Filtro');
             $table->integer('FlujoDializante');
             $table->float('FlujoDeSangre');
             $table->float('UF');
-            $table->float('Heparinizacion_de_cebado');
-            $table->float('Heparinizacion_TransDialisis');
+            //$table->float('Heparinizacion_de_cebado');
+            //$table->float('Heparinizacion_TransDialisis');
+            $table->integer('Heparinizacion');
             $table->integer('TiempoH');
             $table->integer('TiempoM');
             $table->float('Conductividad_Na');
@@ -39,21 +40,7 @@ class CreateHemodialisesTable extends Migration
             $table->float('Talla');
             $table->float('PesoDelta');
             $table->string('Especiales');
-            //tabla 1
-            $table->string("PA_str");
-            $table->string("Pulso");
-            $table->string("Temp");
-            $table->string("QB");
-            $table->string("PV");
-            $table->string("PA_table");
-            $table->string("UFH");
-            $table->string("Medicamentos");
-            $table->string("UFTotal")->nullable();
-            //fin tabla 1
             $table->string('Observaciones');
-            $table->integer('Tecnico');
-            $table->integer('PA');
-            $table->jsonb('Tabla2');
         });
     }
 

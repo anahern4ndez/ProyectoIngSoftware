@@ -400,7 +400,7 @@
                                 </b-container>
                         </div>
 
-                        <div>
+                        <div id="capture">
 
                         <!-- Form Name -->
                         <h2 class="headers" style="text-align: left;">Dar Consulta</h2>
@@ -436,9 +436,9 @@
                                     <!-- Center-->
                                     <div style="margin-left: 2%"class="form-group encapsulado">
                                             <v-layout align-center justify-end />
-                                            <h3 class="headers text-xs-center">Dx. Definitivo</h3>
+                                            <h3 class="headers text-xs-center">Dx. Asociado</h3>
                                         <v-textarea
-                                            v-model="Dx_Definitivo"
+                                            v-model="Dx_Asociado"
                                             outline
                                             rows=18.5
                                             :auto-grow=true
@@ -449,7 +449,7 @@
                                     <!-- Right-->
                                     <div style="margin-left: 2%"class="form-group encapsulado">
                                         <v-layout align-center justify-end />
-                                            <h3 class="headers text-xs-center">Dx. Asociado</h3>
+                                            <h3 class="headers text-xs-center">Dx. Definitivo</h3>
                                         <v-select
                                             v-if="dxs"
                                             v-bind:items="dxs"
@@ -476,7 +476,7 @@
 
                                         <br/>
                                         <v-textarea
-                                            v-model="Dx_Asociado"
+                                            v-model="Dx_Definitivo"
                                             outline
                                             rows=14
                                             :auto-grow=true
@@ -1583,7 +1583,7 @@
                                 <b-row class="justify-content-md-center">
                                 
                                     <b-col>
-                                        <button type="button" class="btn btn-lg btn-warning btn-block" >Agregar imagen</button>
+                                        <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="take">Agregar imagen</button>
                                     </b-col>
                                 
                                 </b-row>
@@ -1780,8 +1780,20 @@
                                 <td style="text-align: left;" ></td>
                             </tr>
                             <tr>
-                                <th scope="row" style="width:10%;">Cl</th>
+                                <th scope="row" style="width:10%;">K</th>
                                 <th scope="row" style="width:10%;">3.3-5</th>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                                <td style="text-align: left;" ></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:10%;">Cl</th>
+                                <th scope="row" style="width:10%;">98-107</th>
                                 <td style="text-align: left;" ></td>
                                 <td style="text-align: left;" ></td>
                                 <td style="text-align: left;" ></td>
@@ -1874,26 +1886,7 @@
                                 <td style="text-align: left;" ></td>
                                 <td style="text-align: left;" ></td>
                                 <td style="text-align: left;" ></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="encapsulado">
-                        <h3 class="headers text-xs-center">Química Sanguínea</h3>
-                        <table class="table table-bordered table-ligth">
-                        <tbody>           
-                            <tr>
-                                <th scope="row" style="width:10%;">Fecha</th>
-                                <th scope="row" style="width:10%;"></th>
-                                <td ></td>
-                                <td ></td>
-                                <td ></td>
-                                <td ></td>
-                                <td ></td>
-                                <td ></td>
-                                <td ></td>
-                                <td ></td>
-                            </tr>
+                            </tr>          
                             <tr>
                                 <th scope="row" style="width:10%;">Ácido Úrico</th>
                                 <th scope="row" style="width:10%;">3.4-9</th>
@@ -2252,7 +2245,6 @@
                                 <td contenteditable='true' style="text-align: left;" ></td>
                                 <td contenteditable='true' style="text-align: left;" ></td>
                             </tr>
-
                             <tr>
                                 <th scope="row" style="width:10%;">PET</th>
                                 <th scope="row" style="width:10%;"></th>
@@ -2345,6 +2337,7 @@ function check(a){
 }
 
 import { store } from '../main';
+
 export default {
     data: () => ({
         enfermedad: '',
@@ -2883,7 +2876,11 @@ export default {
 
             return pos
         },
-
+        take() {
+            html2canvas(document.querySelector("#capture")).then(canvas => {
+            document.body.appendChild(canvas)
+            });
+        },
         verMas () {
             if(!this.hasClickedVerMas){
                 this.beautyComments()
@@ -2917,7 +2914,7 @@ export default {
             this.Dx_Asociado = this.Dx_Asociado + s +"\n"
         
         },
-        pesoPercentil(){
+         pesoPercentil(){
             const data = {
                 year : parseInt(this.paciente.years),
                 meses : parseInt(this.paciente.meses),
