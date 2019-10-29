@@ -2396,34 +2396,37 @@ export default {
         bcg2: false,
         bcg3: false,
         bcgRef: false,
+        poliovirus: 0,
         poliovirus1: false,
         poliovirus2: false,
         poliovirus3: false,
         poliovirusRef: false,
+        hepatitisA: 0,
         hepatitisA1: false,
         hepatitisA2: false,
         hepatitisA3: false,
         hepatitisARef: false,
+        hepatitisB: 0,
         hepatitisB1: false,
         hepatitisB2: false,
         hepatitisB3: false,
         hepatitisBRef: false,
-        hepatitisC1: false,
-        hepatitisC2: false,
-        hepatitisC3: false,
-        hepatitisCRef: false,
+        neumococo: 0,
         neumococo1: false,
         neumococo2: false,
         neumococo3: false,
         neumococoRef: false,
+        influenza: 0,
         influenza1: false,
         influenza2: false,
         influenza3: false,
         influenzaRef: false,
+        DPT: 0,
         DPT1: false,
         DPT2: false,
         DPT3: false,
         DPTRef: false,
+        SPR: 0,
         SPR1: false,
         SPR2: false,
         SPR3: false,
@@ -2983,7 +2986,120 @@ export default {
                 });
             }
         },
+
+        getVacunaData () {
+            if (this.bcgRef) {
+                this.bcg = 4
+            } else if (this.bcg3) {
+                this.bcg = 3
+            } else if (this.bcg2) {
+                this.bcg = 2
+            } else if (this.bcg1) {
+                this.bcg = 1
+            } else {
+                this.bcg = 0
+            }
+
+            if (this.poliovirusRef) {
+                this.poliovirus = 4
+            } else if (this.poliovirus3) {
+                this.poliovirus = 3
+            } else if (this.poliovirus2) {
+                this.poliovirus = 2
+            } else if (this.poliovirus1) {
+                this.poliovirus = 1
+            } else {
+                this.poliovirus = 0
+            }
+
+            if (this.hepatitisARef) {
+                this.hepatitisA = 4
+            } else if (this.hepatitisA3) {
+                this.hepatitisA = 3
+            } else if (this.hepatitisA2) {
+                this.hepatitisA = 2
+            } else if (this.hepatitisA1) {
+                this.hepatitisA = 1
+            } else {
+                this.hepatitisA = 0
+            }
+
+            if (this.hepatitisBRef) {
+                this.hepatitisB = 4
+            } else if (this.hepatitisB3) {
+                this.hepatitisB = 3
+            } else if (this.hepatitisB2) {
+                this.hepatitisB = 2
+            } else if (this.hepatitisB1) {
+                this.hepatitisB = 1
+            } else {
+                this.hepatitisB = 0
+            }
+
+            if (this.neumococoRef) {
+                this.neumococo = 4
+            } else if (this.neumococo3) {
+                this.neumococo = 3
+            } else if (this.neumococo2) {
+                this.neumococo = 2
+            } else if (this.neumococo1) {
+                this.neumococo = 1
+            } else {
+                this.neumococo = 0
+            }
+
+            if (this.influenzaRef) {
+                this.influenza = 4
+            } else if (this.influenza3) {
+                this.influenza = 3
+            } else if (this.influenza2) {
+                this.influenza = 2
+            } else if (this.influenza1) {
+                this.influenza = 1
+            } else {
+                this.influenza = 0
+            }
+
+            if (this.DPTRef) {
+                this.DPT = 4
+            } else if (this.DPT3) {
+                this.DPT = 3
+            } else if (this.DPT2) {
+                this.DPT = 2
+            } else if (this.DPT1) {
+                this.DPT = 1
+            } else {
+                this.DPT = 0
+            }
+
+            if (this.SPRRef) {
+                this.SPR = 4
+            } else if (this.SPR3) {
+                this.SPR = 3
+            } else if (this.SPR2) {
+                this.SPR = 2
+            } else if (this.SPR1) {
+                this.SPR = 1
+            } else {
+                this.SPR = 0
+            }
+        },
+
         guardar() {
+
+            this.getVacunaData()
+
+            // console.log(this.bcg)
+            // console.log(this.poliovirus)
+            // console.log(this.hepatitisA)
+            // console.log(this.hepatitisB)
+            // console.log(this.neumococo)
+            // console.log(this.influenza)
+            // console.log(this.DPT)
+            // console.log(this.SPR)
+            // console.log(store.idPaciente)
+
+
             this.guardando = true
             let medicamento = {}
             
@@ -3386,7 +3502,6 @@ export default {
                     console.log("Ocurrio un error")
                 })
             }
-            
         },
         fillBCG: function() {
             
