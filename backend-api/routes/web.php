@@ -61,6 +61,7 @@ $router->get('/ProcedenciaController/getAllLocation', 'ProcedenciaController@get
 
 // CRUD: TABLA VACUNAS
 $router->post('/vacunaController/insert', 'vacunaController@store');
+$router->put('/vacunaController/update', 'vacunaController@updateAll');
 
 //CRUD: TABLA COMENTARIO
 $router->post('/ComentarioController/insert', 'ComentarioController@store');

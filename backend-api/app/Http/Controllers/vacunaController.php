@@ -16,6 +16,7 @@ class vacunaController extends Controller
         
         $vacuna = new Vacuna;
 
+        $vacuna->fecha = $request->fecha;
         $vacuna->idPaciente = $request->idPaciente;
         $vacuna->BCG = $request->BCG;
         $vacuna->Poliovirus = $request->Poliovirus;
@@ -38,28 +39,17 @@ class vacunaController extends Controller
         $cui = $request->idPaciente;
         $fecha = $request->fecha;
 
-        $toUpdate = Consulta::where([['cui', '=', $cui], ['fecha', '=', $fecha]])->first();
+        $toUpdate = Vacuna::where([['idPaciente', '=', $cui], ['fecha', '=', $fecha]])->first();
 
-        $toUpdate->peso = $request->peso;
-        $toUpdate->talla = $request->talla;
-        $toUpdate->pa = $request->pa;
-        $toUpdate->sindrome_clinico = $request->sindrome_clinico;
-        $toUpdate->Dx_Definitivo = $request->Dx_Definitivo;
-        $toUpdate->Dx_Asociados = $request->Dx_Asociados;
-        $toUpdate->historia = $request->historia;
-        $toUpdate->medicamento = $request->medicamento;
-        $toUpdate->resultados_laboratorio = $request->resultados_laboratorio;
-        $toUpdate->examen_fisico = $request->examen_fisico;
-        $toUpdate->evaluacion_medica = $request->evaluacion_medica;
-        $toUpdate->plan_medico = $request->plan_medico;
-        $toUpdate->evaluacion_psicologica = $request->evaluacion_psicologica;
-        $toUpdate->plan_psicologico = $request->plan_psicologico;
-        $toUpdate->evaluacion_trabajo_social = $request->evaluacion_trabajo_social;
-        $toUpdate->plan_trabajo_social = $request->plan_trabajo_social;
-        $toUpdate->evaluacion_nutricional = $request->evaluacion_nutricional;
-        $toUpdate->plan_nutricional = $request->plan_nutricional;
-        $toUpdate->evaluacion_farmacologica = $request->evaluacion_farmacologica;
-        $toUpdate->plan_farmacologico = $request->plan_farmacologico;
+        $toUpdate->idPaciente = $request->idPaciente;
+        $toUpdate->BCG = $request->BCG;
+        $toUpdate->Poliovirus = $request->Poliovirus;
+        $toUpdate->HepatitisA = $request->HepatitisA;
+        $toUpdate->HepatitisB = $request->HepatitisB;
+        $toUpdate->Neumococo = $request->Neumococo;
+        $toUpdate->Influenza = $request->Influenza;
+        $toUpdate->DPT = $request->DPT;
+        $toUpdate->SPR = $request->SPR;
 
         $toUpdate->save();
     }

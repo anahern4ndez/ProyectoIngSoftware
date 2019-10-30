@@ -3086,16 +3086,18 @@ export default {
 
             this.getVacunaData()
 
-            // console.log(this.bcg)
-            // console.log(this.poliovirus)
-            // console.log(this.hepatitisA)
-            // console.log(this.hepatitisB)
-            // console.log(this.neumococo)
-            // console.log(this.influenza)
-            // console.log(this.DPT)
-            // console.log(this.SPR)
-            // console.log(store.idPaciente)
-
+            const vacunm = {
+                fecha: this.fecha,
+                idPaciente: store.idPaciente,
+                BCG: this.bcg,
+                Poliovirus: this.poliovirus,
+                HepatitisA: this.hepatitisA,
+                HepatitisB: this.hepatitisB,
+                Neumococo: this.neumococo,
+                Influenza: this.influenza,
+                DPT: this.DPT,
+                SPR: this.SPR
+            }
 
             this.guardando = true
             let medicamento = {}
@@ -3400,6 +3402,8 @@ export default {
                         })
                     }
                 }).then(() => {
+                    this.$http.put('http://localhost:8000/vacunaController/update', vacunm).then(response => {})
+                }).then(() => {
                     this.guardando = false
                 })
                 .then(() => {
@@ -3492,6 +3496,8 @@ export default {
                         })
                     }
                     
+                }).then(() => {
+                    this.$http.post('http://localhost:8000/vacunaController/insert', vacunm).then(response => {})
                 }).then(() => {
                     this.$router.push("/menu-principal");
                 })
