@@ -61,15 +61,14 @@ class vacunaController extends Controller
      * @return obj asignado a variable con info de query.
     */
     function findOne(Request $request){
-        $cuir = $request->cui;
+        $idPaciente = $request->idPaciente;
         $fecha = $request->fecha;
         
-        $consulta = Consulta::where([['cui', '=', $cuir], ['fecha', '=', $fecha]])->get();
+        $vacuna = Vacuna::where([['idPaciente', '=', $idPaciente], ['fecha', '=', $fecha]])->get();
         
-        if(count($consulta) > 0){
+        if(count($vacuna) > 0){
             return response()->json([
-                'success' => true,
-                'Consulta' => $consulta
+                'Consulta' => $vacuna[0]
             ], 200);
         }else{
             return response()->json([
