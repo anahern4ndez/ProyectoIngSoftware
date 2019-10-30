@@ -1,4 +1,4 @@
-# forked from simulated_greg
+# forked from Sistema_Electronico_Fundanier
 
 > An electron-vue project
 

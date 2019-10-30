@@ -229,7 +229,7 @@ export default {
         for (let index = 0; index < response.data.Pacientes.length; index++) {
           const edadPaciente = response.data.Pacientes[index].Edad;
           if (edadPaciente < 1){
-            response.data.Pacientes[index].Edad = (edadPaciente*12.0) + ' meses';
+            response.data.Pacientes[index].Edad = Math.round(edadPaciente*12.0) + ' meses';
           }
           else{
             response.data.Pacientes[index].Edad = edadPaciente + ' años';

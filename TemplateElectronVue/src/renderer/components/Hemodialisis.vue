@@ -347,7 +347,16 @@
 export default {
     mounted(){
         this.$http.get("http://localhost:8000/PacienteController/findWithAppointment").then(response => {
-            console.log((response.data.Pacientes))
+            for (let index = 0; index < response.data.Pacientes.length; index++) {
+                const edadPaciente = response.data.Pacientes[index].Edad;
+                if (edadPaciente < 1){
+                    response.data.Pacientes[index].Edad = Math.round(edadPaciente*12.0) + ' meses';
+                }
+                else{
+                    response.data.Pacientes[index].Edad = edadPaciente + ' años';
+                } 
+            }
+
             this.pacientes = response.data.Pacientes;
             //console.log(this.pacientes);
             for (let index = 0; index < response.data.Pacientes.length; index++) {
@@ -358,7 +367,7 @@ export default {
                     tabid: index,
                     pass: true,
                     Hemodialisis: '',
-                    Via: '1',
+                    Via: '',
                     Lineas_pediatricas: '',
                     Filtro: '',
                     Flujo_dializante: '',
@@ -367,9 +376,9 @@ export default {
                     Heparinizacion: '',
                     TiempoH: '',
                     TiempoM: '',
-                    Conductividad_Na: '0',
-                    Conductividad_K: '0',
-                    Conductividad_HCO3: '0',
+                    Conductividad_Na: '',
+                    Conductividad_K: '',
+                    Conductividad_HCO3: '',
                     Peso_pre: '',
                     Peso_post: '',
                     Peso_delta: '',
@@ -444,7 +453,7 @@ export default {
             var loop = setInterval(() => {
                 this.tabs[this.activeTab].tableDialog = true
                 clearInterval(loop)
-            }, 10000); //30min
+            }, (900*1000)); //15min
         },
         /* En el caso que el usuario desee volver a verificar los datos, se esperarán 5 minutos antes de volver a intentar guardar los datos */
         recheckTableData(){
@@ -452,7 +461,7 @@ export default {
             var loop = setInterval(() => {
                 this.activateTableDialog()
                 clearInterval(loop)
-            }, 10000); //5min
+            }, 300*1000); //5min
         },
         /* En caso que el usuario indique que todos los datos están correctos, se procede a guardar lo ingresado en la última fila */
         saveTableData(){
@@ -500,7 +509,7 @@ export default {
                     var loop = setInterval(() => {
                         this.activateTableDialog()
                         clearInterval(loop)
-                    }, 10000); //30min
+                    }, (900*1000)); //15min
                 }
             })
         }
