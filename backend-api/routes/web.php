@@ -59,6 +59,9 @@ $router->post('/ConsultaController/findAllUser', 'ConsultaController@findAllUser
 //Locations
 $router->get('/ProcedenciaController/getAllLocation', 'ProcedenciaController@getAllLocation');
 
+// CRUD: TABLA VACUNAS
+$router->post('/vacunaController/insert', 'vacunaController@store');
+
 //CRUD: TABLA COMENTARIO
 $router->post('/ComentarioController/insert', 'ComentarioController@store');
 $router->post('/ComentarioController/findAll', 'ComentarioController@findAll');
