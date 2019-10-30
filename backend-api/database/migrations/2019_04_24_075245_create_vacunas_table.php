@@ -17,6 +17,7 @@ class CreateVacunasTable extends Migration
 
         Schema::create('vacunas', function (Blueprint $table) {
             $table->increments('id');
+            $table->date('fecha');
             
             $table->string('idPaciente', 20);
             
