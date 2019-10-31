@@ -238,8 +238,9 @@
                 color="primary"
                 flat
                 v-if="deletingAppointment"
-                @click="deleteAppointment"
-              >Eliminar</v-btn>
+                @click="closeInfoDialog"
+              >Cancelar</v-btn>
+              <v-btn color="red" flat v-if="deletingAppointment" @click="deleteAppointment">Eliminar</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -653,7 +654,6 @@ export default {
     closeAppointmentDialog() {
       this.dialogOpen = false;
       this.updatingAppointment = false;
-      this.selectedDate = "";
       this.selectedTime = "";
       this.selectedDoctor = "";
       this.selectedPatient = "";
@@ -664,6 +664,11 @@ export default {
       this.deletingAppointment = true;
       this.infoMessage = "¿Estás seguro?";
       this.infoDialog = true;
+    },
+    closeInfoDialog() {
+      this.infoDialog = false;
+      this.updatingAppointment = false;
+      this.deletingAppointment = false;
     }
   }
 };
