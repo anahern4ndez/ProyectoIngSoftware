@@ -2,9 +2,10 @@
   export default {
     methods: {
       $can(permissionName) {
-        // return Permissions.indexOf(permissionName) !== -1;
-        if (!permissionName) return false;
-
+        if (!permissionName) return true;
+        const permission = this.$store.state.user.permissions.filter(p => p.name == permissionName)[0];
+        if (!permission) return false;
+        return true;
       },
     },
   };
