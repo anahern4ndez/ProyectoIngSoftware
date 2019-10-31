@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder {
             CodigoVacunaTableSeeder::class,
             TipoDeRespuestaTableSeeder::class,
             EstadosTableSeeder::class,
-            UsuariosSeeder::class,
             PacienteSeeder::class,
             tipoCitasSeeder::class,
             DxAsociadoSeeder::class,
@@ -25,7 +24,8 @@ class DatabaseSeeder extends Seeder {
             percentilTallaSeeder::class,
             percentilPesoAlturaSeeder::class,
             PermissionSeeder::class,
-            CodigoCitasSeeder::class
+            CodigoCitasSeeder::class,
+            UsuariosSeeder::class,
         ]);
         
     }
