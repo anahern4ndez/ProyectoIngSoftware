@@ -170,12 +170,23 @@ const router = new VueRouter({
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
-  id: 0,
-  pacientes: [],
-  user: {
-    id: 1,
-    name: 'rAnDaLL lOu',
-    role: 1
+  state: {
+    id: 0,
+    pacientes: [],
+    user: {
+      id: 0,
+      role: 0,
+    }
+  },
+  mutations: {
+    saveUserData(state, data) {
+      state.user.id = data.id;
+      state.user.role = data.role;
+    },
+    logout(state) {
+      state.user.id = 0;
+      state.user.role = 0;
+    }
   }
 });
 
