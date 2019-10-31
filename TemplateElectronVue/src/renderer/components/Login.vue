@@ -142,7 +142,8 @@ export default {
             // Vuex store mutation to save user data
             const userData = {
               id: response.data.id,
-              role: response.data.role
+              role: response.data.role,
+              permissions: response.data.permissions
             };
             this.$store.commit("saveUserData", userData);
 

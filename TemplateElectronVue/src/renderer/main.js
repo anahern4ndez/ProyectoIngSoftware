@@ -176,16 +176,19 @@ export const store = new Vuex.Store({
     user: {
       id: 0,
       role: 0,
+      permissions: []
     }
   },
   mutations: {
     saveUserData(state, data) {
       state.user.id = data.id;
       state.user.role = data.role;
+      state.user.permissions = data.permissions;
     },
     logout(state) {
       state.user.id = 0;
       state.user.role = 0;
+      state.user.permissions = [];
     }
   }
 });

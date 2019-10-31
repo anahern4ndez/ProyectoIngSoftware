@@ -27,7 +27,7 @@ class loginController extends Controller
                 'status' => 'success',
                 'id' => $user->id,
                 'role' => $user->puesto,
-                'permisos' => $user->getAllPermissions()
+                'permissions' => $user->getAllPermissions()
             ]);
         } else {
             return response()->json(['status' => 'fail'], 401);
