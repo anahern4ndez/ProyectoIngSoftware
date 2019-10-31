@@ -26,6 +26,7 @@
           v-for="r in routes"
           v-bind:key="r.name"
           v-on:click="setActiveRoute(r.name)"
+          v-if="$can(r.permission)"
         >
           <v-list-tile-action>
             <v-icon class="grey--text text--darken-3">{{r.icon}}</v-icon>
@@ -104,7 +105,8 @@ export default {
         {
           name: "Gestión de Citas",
           route: "/Citas",
-          icon: "fa-calendar-check"
+          icon: "fa-calendar-check",
+          permission: 'agendar citas'
         },
         {
           name: "Datos paciente",

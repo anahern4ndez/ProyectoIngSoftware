@@ -5,8 +5,7 @@ import VueAxios from 'vue-axios';
 import VueRouter from 'vue-router';
 import Vuetify from 'vuetify';
 import BootstrapVue from 'bootstrap-vue';
-//import ability from '../store';
-//import { abilitiesPlugin } from '@casl/vue';
+import Permissions from './mixins/Permissions';
 
 import App from './App';
 import 'vuetify/dist/vuetify.min.css';
@@ -192,6 +191,9 @@ export const store = new Vuex.Store({
     }
   }
 });
+
+// global permissions mixin
+Vue.mixin(Permissions);
 
 /* eslint-disable no-new */
 new Vue({
