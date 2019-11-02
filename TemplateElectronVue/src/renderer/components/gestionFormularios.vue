@@ -15,10 +15,10 @@
                     </v-combobox>
                     <br>
                     <!-- <v-btn text large color="yellow" type="button" href='ms-word:ofv|u|file:./CHOL.docx' >Abrir formulario</v-btn> -->
-                    <!--<v-btn text large color="yellow" type="button" v-on:click="startWord" :disabled='isDisabledAbrir'>Abrir formulario</v-btn>-->
+                    <v-btn text large color="yellow" type="button" v-on:click="startWord" :disabled='isDisabledAbrir'>Abrir formulario</v-btn>
+                    <v-btn text large color="yellow" @click="subirFormulario" ref="path" :disabled='isDisabledSubirForm'>Subir formulario</v-btn>
                 </b-col>
-                <b-col cols="1" class="titulo1">
-                    <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="">Prueb</button> 
+                <!-- <b-col cols="1" class="titulo1">
                 </b-col>
                 <b-col class="titulo1">
                     <div>Guardar y subir formulario</div>
@@ -33,16 +33,14 @@
                     <v-btn text large color="yellow" @click="formClick" :disabled='isDisabledSubir'>Elegir formulario</v-btn>
                     <input type="file" class="hide_file" style="height:auto; width:auto; visibility:hidden" v-on:change="changeForm" ref="changeForm"/>
                     <v-btn text large color="yellow" @click="subirFormulario" ref="path" :disabled='isDisabledSubirForm'>Subir formulario</v-btn>
-                </b-col>
+                </b-col> -->
             </b-row>
         </b-container>
     </div>
 </template>
-
 <script>
     export default {
         mounted() {
-
         },
         data() {
             return {
@@ -51,69 +49,84 @@
                 selectSubir: ' ',
                 items: [
                 'Peritonitis',
-                'Transplante renal',
+                'Trasplante renal',
                 'Transfusión',
                 'Hemodialisis',
                 'Mortalidad',
                 ],
                 path: ' ',
-                // referencia: 'ms-word:ofv|u|file:///C:/Users/Ulises/Desktop/CHOL.docx hola',
+                // referencia: 'ms-word:ofv|u|file:///C:/Users/Ulises/Desktop/CHOL.docx',
                 referencia: 'ms-word:ofv|u|file:../TemplateElectronVue/CHOL.docx',
                 isDisabledAbrir: true,
                 isDisabledSubir: true,
                 isDisabledSubirForm: true,
                 direccionCHOL: '\\CHOL.docx',
                 dirCHOL: 'CHOL.docx',
-                direccionPeritonitis: '\\Peritonitis.docx',
+                direccionPeritonitis: 'Peritonitis',
                 dirPeritonitis: 'Peritonitis.docx',
-                direccionTransplanteRenal: '\\TransplanteRenal.docx',
-                dirTransplanteRenal: 'TransplanteRenal.docx',
-                direccionTransfusion: '\\Transfusion.docx',
+                direccionTransplanteRenal: 'TrasplanteRenal',
+                dirTransplanteRenal: 'TrasplanteRenal.docx',
+                direccionTransfusion: 'Transfusion',
                 dirTransfusion: 'Transfusion.docx',
-                direccionHemodialisis: '\\Hemodialisis.docx',
+                direccionHemodialisis: 'Hemodialisis',
                 dirHemodialisis: 'Hemodialisis.docx',
-                direccionMortalidad: '\\Mortalidad.docx',
-                dirMortalidad: 'Mortalidad.docx', 
+                direccionMortalidad: 'Mortalidad',
+                dirMortalidad: 'Mortalidad.docx',
+                exit: true,
+                cui: this.$route.params.cui,
+                name: this.$route.params.nombre,
+                apellido: this.$route.params.apellido,
+                fecha: new Date().toISOString().slice(0,10),
+                nombreNuevoFormulario: ' ',
             };
         },
         methods:{
             startWord(strFile){
-                //var myApp = new ActiveXObject("Word.Application");
+                this.isDisabledSubir = false;
+                this.isDisabledSubirForm = false;
+                this.exit = false;
+
                 const {shell} = require('electron');
                 var fs = require('fs');
-
                 var dir = process.cwd();
-                dir += this.direccionCHOL;
+
+                //dir += this.direccionCHOL;
 
                 var dirCopy;
-
                 if(this.selectAbrir === 'Peritonitis'){
-                    dir += this.direccionPeritonitis;
+                    //dir += this.direccionPeritonitis;
+                    this.nombreNuevoFormulario = this.direccionPeritonitis.concat('_',this.name,'_',this.apellido,'_',this.fecha,'.docx');
                     dirCopy = this.dirPeritonitis;
                 }
-                else if(this.selectAbrir === 'Transplante renal'){
-                    dir += this.direccionTransplanteRenal;
+                else if(this.selectAbrir === 'Trasplante renal'){
+                    //dir += this.direccionTransplanteRenal;
+                    this.nombreNuevoFormulario = this.direccionTransplanteRenal.concat('_',this.name,'_',this.apellido,'_',this.fecha,'.docx');
                     dirCopy = this.dirTransplanteRenal;
                 }
                 else if(this.selectAbrir === 'Transfusión'){
-                    dir += this.direccionTransfusion;
+                    //dir += this.direccionTransfusion;
+                    this.nombreNuevoFormulario = this.direccionTransfusion.concat('_',this.name,'_',this.apellido,'_',this.fecha,'.docx');
                     dirCopy = this.dirTransfusion;
                 }
                 else if(this.selectAbrir === 'Hemodialisis'){
-                    dir += this.direccionHemodialisis;
+                    //dir += this.direccionHemodialisis;
+                    this.nombreNuevoFormulario = this.direccionHemodialisis.concat('_',this.name,'_',this.apellido,'_',this.fecha,'.docx');
                     dirCopy = this.dirHemodialisis;
                 }
                 else if(this.selectAbrir === 'Mortalidad'){
-                    dir += this.direccionMortalidad;
+                    //dir += this.direccionMortalidad;
+                    this.nombreNuevoFormulario = this.direccionMortalidad.concat('_',this.name,'_',this.apellido,'_',this.fecha,'.docx');
                     dirCopy = this.dirMortalidad;
                 }
-
                 // Se sacara una copia del archivo original y se pondra en uno NUEVO
-                fs.copyFile(dirCopy, 'CopiaFormulario.docx', (err) => {
+                fs.copyFile(dirCopy, this.nombreNuevoFormulario, (err) => {
                     if (err) throw err;
                     console.log('Archivo copiado con Exito');
-                    console.log(dirCopy);
-                    shell.openItem('CopiaFormulario.docx');
+                    //console.log(dirCopy);
+                    //console.log(dir);
+                    this.path = dir.concat('\\',this.nombreNuevoFormulario);
+                    //console.log(this.path)
+                    shell.openItem(this.nombreNuevoFormulario);
                 });
             },
             changeDisableAbrir(event){
@@ -121,12 +134,12 @@
                     this.isDisabledAbrir = false
                 }
             },
-            changeDisableSubir(event){
-                if(this.selectSubir !== ' '){
-                    this.isDisabledSubir = false,
-                    this.isDisabledSubirForm = false
-                }
-            },
+            //changeDisableSubir(event){
+                //if(this.selectSubir !== ' '){
+                    //this.isDisabledSubir = false,
+                    //this.isDisabledSubirForm = false
+                //}
+            //},
             subirFormulario(){
                 if(this.path === ' '){
                     // Mostrar Alerta
@@ -136,6 +149,8 @@
                     // Subir Documento al servidor
                     // Mostrar mensaje de subida con exito
                    console.log("Se subio el Formulario: "+this.path)
+                   this.exit = true;
+                   this.isDisabledSubirForm = true;
                 }
             },
             formClick: function(event){ // on a click on the button with id 'one'
@@ -149,24 +164,18 @@
                 this.path = input.files[0].path;
                 console.log(this.path);
                 input.value = '';
-
                 /* try
                 {
-
                     var shell = require('shelljs');
                     let nodePath = (shell.which('node').toString());
                     shell.config.execPath = nodePath;
-
                     const ipServer = '192.168.0.156';
                     const serverPassword = 'perritoUVG';
                     const pcPath = this.path;
                     const serverUser = 'adminlocal';
                     const serverPath = '/home/adminlocal/Dowloads';
-
                     var string =`pscp -pw ${serverPassword} "${pcPath}" ${serverUser}@${ipServer}:${serverPath}`;
-
                     shell.exec(string);
-
                 } catch (error)
                 {
                     console.log("Error al subir imagen al servidor");
@@ -174,10 +183,7 @@
             },
         }
     };
-
 </script>
-
-
 <style>
 .titulo1{
     font-size: 20px;
