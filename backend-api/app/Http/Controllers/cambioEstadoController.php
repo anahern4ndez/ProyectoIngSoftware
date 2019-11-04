@@ -26,9 +26,9 @@ class cambioEstadoController extends Controller
         $registroestado->idregistroestado = $request->register;
         if($request->cui == ''){
             $cui = Paciente::query()->first();
-            $registroestado->cui = $cui->CUI;
+            $registroestado->cui = $cui->CUI;  
         }else{
-            $registroestado->cui = $request->cui;            
+            $registroestado->cui = $request->cui;           
         }
         $registroestado->fecha = $request->fecha;
         $registroestado->estadoinicial = $request->actual;
