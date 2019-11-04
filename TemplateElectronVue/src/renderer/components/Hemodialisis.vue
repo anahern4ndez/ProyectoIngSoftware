@@ -87,11 +87,11 @@
                                 <div class="encapsulado">
                                     <br><br>
                                     <v-text-field
-                                        v-model="tabs[pacientes.indexOf(paciente)].Registro"
+                                        :value="tabs[pacientes.indexOf(paciente)].Registro"
                                         label="Registro"
                                         outline
                                         class="mitad"
-                                         :rules="expedienteRules"
+                                        disabled
                                     ></v-text-field>
                                     <v-text-field
                                         v-model="tabs[pacientes.indexOf(paciente)].Numero"
@@ -386,7 +386,7 @@ export default {
                     Fecha_col_cat: null,
                     menu_col_cat: false,
                     Procedencia: '',
-                    Registro: '',
+                    Registro: this.pacientes[index].Numero_expediente,
                     Numero: '',
                     Especiales: '',
                     Observaciones: '',
