@@ -15,7 +15,7 @@
                     </v-combobox>
                     <br>
                     <!-- <v-btn text large color="yellow" type="button" href='ms-word:ofv|u|file:./CHOL.docx' >Abrir formulario</v-btn> -->
-                    <!--<v-btn text large color="yellow" type="button" v-on:click="startWord" :disabled='isDisabledAbrir'>Abrir formulario</v-btn>-->
+                    <v-btn text large color="yellow" type="button" v-on:click="startWord" :disabled='isDisabledAbrir'>Abrir formulario</v-btn>
                 </b-col>
                 <b-col cols="1" class="titulo1">
                     <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="">Prueb</button> 
