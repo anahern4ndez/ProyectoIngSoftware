@@ -5,8 +5,7 @@ import VueAxios from 'vue-axios';
 import VueRouter from 'vue-router';
 import Vuetify from 'vuetify';
 import BootstrapVue from 'bootstrap-vue';
-//import ability from '../store';
-//import { abilitiesPlugin } from '@casl/vue';
+import Permissions from './mixins/Permissions';
 
 import App from './App';
 import 'vuetify/dist/vuetify.min.css';
@@ -97,7 +96,8 @@ const routes = [
     )
   },
   {
-    path: '/Consulta',
+    path: '/Consulta/:idPaciente/:cui',
+    name: '/Consulta',
     component: Vue.component(
       'Consulta',
       require('./components/Consulta.vue').default
@@ -149,12 +149,13 @@ const routes = [
   {
     path: '/Hemodialisis',
     component: Vue.component(
-      'cambioEstado',
+      'Hemodialisis',
       require('./components/Hemodialisis.vue').default
     )
   },
   {
-    path: '/gestionFormularios',
+    path: '/gestionFormularios/:cui/:nombre/:apellido',
+    name: 'gestionFormularios',
     component: Vue.component(
       'gestionFormularios',
       require('./components/gestionFormularios.vue').default
@@ -169,14 +170,31 @@ const router = new VueRouter({
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
-  id: 0,
-  pacientes: [],
-  user: {
-    id: 1,
-    name: 'rAnDaLL lOu',
-    role: 1
+  state: {
+    id: 0,
+    pacientes: [],
+    user: {
+      id: 0,
+      role: 0,
+      permissions: []
+    }
+  },
+  mutations: {
+    saveUserData(state, data) {
+      state.user.id = data.id;
+      state.user.role = data.role;
+      state.user.permissions = data.permissions;
+    },
+    logout(state) {
+      state.user.id = 0;
+      state.user.role = 0;
+      state.user.permissions = [];
+    }
   }
 });
+
+// global permissions mixin
+Vue.mixin(Permissions);
 
 /* eslint-disable no-new */
 new Vue({

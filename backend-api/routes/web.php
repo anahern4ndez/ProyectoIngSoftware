@@ -24,11 +24,14 @@ $router->get('/', function () use ($router) {
 // y el segundo parametro es el controlador y el nombre del metodo que
 // responde a esa ruta: NombreControlador@nombreMetodo
 $router->get('/test', 'ExampleController@index');
-$router->get('/users', 'ExampleController@getUsers');
+// $router->get('/users', 'ExampleController@getUsers');
 $router->get('/users/look', 'ExampleController@getOneUser');
 $router->get('/users/some', 'ExampleController@getSomeUser');
 $router->post('/message', 'ExampleController@postExample');
 $router->post('/ExampleController/findById', 'ExampleController@findById');
+
+// Usuarios
+$router->get('/users', 'UserController@getUsers');
 
 //CRUD: TABLA ESTADOS DB
 $router->get('/EstadoController/find', 'EstadoController@find');
@@ -44,6 +47,7 @@ $router->post('/PacienteController/insert', 'PacienteController@store');
 $router->put('/PacienteController/update', 'PacienteController@update');
 $router->put('/PacienteController/updateAll', 'PacienteController@updateAll');
 $router->delete('/PacienteController/delete', 'PacienteController@delete');
+$router->get('/PacienteController/findWithAppointment', 'PacienteController@findAllWithAppointment');
 
 //CRUD: TABLA CONSULTAS
 $router->post('/ConsultaController/insert', 'ConsultaController@store');
@@ -54,6 +58,11 @@ $router->post('/ConsultaController/getID', 'ConsultaController@getIDConsulta');
 $router->post('/ConsultaController/findAllUser', 'ConsultaController@findAllUser');
 //Locations
 $router->get('/ProcedenciaController/getAllLocation', 'ProcedenciaController@getAllLocation');
+
+// CRUD: TABLA VACUNAS
+$router->post('/vacunaController/insert', 'vacunaController@store');
+$router->put('/vacunaController/update', 'vacunaController@updateAll');
+$router->post('/vacunaController/findOne', 'vacunaController@findOne');
 
 //CRUD: TABLA COMENTARIO
 $router->post('/ComentarioController/insert', 'ComentarioController@store');
@@ -104,8 +113,8 @@ $router->delete('/citas/{id}', 'CitasController@destroy');
 // HEMODIALISIS
 $router->post('/hemodialisis', 'HemodialisisController@store');
 $router->post('/hemodialisis/storeTable', 'HemodialisisController@storeTable');
+$router->post('/hemodialisis/checkHemo', 'HemodialisisController@lookHemo');
 
-//
 // Enfermedades CIE 10
 $router->get('/dxs', 'DxController@getDxs');
 

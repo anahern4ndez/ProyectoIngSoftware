@@ -32,6 +32,7 @@
                                     offset-y
                                     full-width
                                     min-width="200px"
+                                    readonly
                                 >
                                     <template v-slot:activator="{ on }">
                                     
@@ -45,32 +46,38 @@
                                         ></v-text-field>
                                     
                                     </template>
-                                    <v-date-picker v-model="fecha" @input="menu = false" color="#3A4750" locale='es-ES'></v-date-picker>
+                                    <!-- <v-date-picker v-model="fecha" @input="menu = false" color="#3A4750" locale='es-ES' readonly></v-date-picker> -->
                                 </v-menu>
                             </v-flex>
                         </div>                    
                     </b-col>
                     <b-col order="2" cols="5">
-                        <label style="font-family: Nunito;" for="nameInput" class="subir">Sexo del paciente</label>
-                        <div class="subir2">
+                        <label style="font-family: Nunito;" for="nameInput" class="bajar">Sexo del paciente</label>
+                        <div>
                             <v-radio-group v-model="sexo" row :rules="radioRules" required readonly>
                                 <v-radio name='sexo' label="Femenino" :value="1" color="black"></v-radio>
                                 <v-radio name='sexo' label="Masculino" :value="2" color="black"></v-radio>
                             </v-radio-group>
                         </div>
-                        <div class="subir3">
+                        <div>
                         <v-text-field
                             v-model="register"
                             label="Número de registro"
                             outline
                             :rules="registerRules"
                             required
+                            readonly
                         ></v-text-field>
                         </div>
-                            <div v-if="errorRegistro" class="subir3">
-                            <v-alert :value="true" type="error" id="alert">
-                            Por favor, ingrese un número de registro que aun no haya sido ingresado
-                            </v-alert>
+                        <div>
+                        <v-text-field
+                            v-model="cui"
+                            label="Número de CUI"
+                            outline
+                            :rules="registerRules"
+                            required
+                            readonly
+                        ></v-text-field>
                         </div>
                     </b-col>
                 </b-row>
@@ -149,14 +156,15 @@
                 cui: this.$route.params.cui,
                 name:this.$route.params.nombre,
                 age: this.$route.params.edad,
-                register: '',
+                //register: '',
+                register: this.$route.params.cui,
                 sexo: this.$route.params.sexo,
                 fecha: new Date().toISOString().slice(0,10),
                 menu: false,
                 actual: this.$route.params.estado.ID,
                 cambio: '',
                 errorFaltanDatos: false,
-                errorRegistro: false,
+                
                 //Hacer las reglas
                 radioRules:[
                     v => !!v || 'Debe seleccionar una opción'
@@ -190,10 +198,10 @@
                         this.$http.put(`http://localhost:8000/cambioEstadoController/updateEstadoPaciente?cui=${this.cui}&cambio=${this.cambio}`)  
                     ).then(response=>{
                         this.errorFaltanDatos = false;
-                        this.errorRegistro = false;
+                        this.savingSuccessful = true;
                         //this.name = ' ';
                         //this.age = ' ';
-                        this.register = ' ';
+                        //this.register = ' ';
                         //this.sexo = ' ';
                         //this.fecha = null;
                         this.menu = false;
@@ -202,7 +210,6 @@
                         //document.location.reload();
                     }).catch(error => {
                         console.log("Error");
-                        this.errorRegistro = true;
                     });
                 }
                 else{

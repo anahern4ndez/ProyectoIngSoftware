@@ -20,4 +20,7 @@ class Cita extends Model {
     public function tipodeCita(){
         return $this->hasOne('App\tipo_citas', 'id', 'tipoCitaID');
     }
+    public function idPaciente(){
+        return $this->hasOne('App\Paciente', 'id', 'idPaciente');
+    }
 }

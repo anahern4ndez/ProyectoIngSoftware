@@ -140,11 +140,11 @@ export default {
     colors: ["#FF9D14", "#BF760F", "#804F0A", "#402705", "#E68E12"]
   }),
   watch: {
-      switch1(newValue){
-        //called whenever switch1 changes
-        this.vistaGeneral(newValue);
-      }
-    },
+    switch1(newValue) {
+      //called whenever switch1 changes
+      this.vistaGeneral(newValue);
+    }
+  },
 
   computed: {
     // convert the list of events into a map of lists keyed by date
@@ -214,12 +214,10 @@ export default {
       this.$router.push("/EstadisticaGeneral");
     },
     darConsulta(id) {
-      if(!this.switch1)
-      { 
+      if (!this.switch1) {
         store.idPaciente = id;
         this.$router.push("/gestionarPaciente");
       }
-      
     },
     datosGenerales() {
       this.$router.push("/Datos");
@@ -233,7 +231,7 @@ export default {
 
     obtenerNombre() {
       this.$http
-        .get(`http://localhost:8000/get_nombre?id=${store.id}`)
+        .get(`http://localhost:8000/get_nombre?id=${store.state.user.id}`)
         .then(response => {
           this.name = response.data.user.name;
         });
@@ -268,15 +266,9 @@ export default {
 
     vistaGeneral(valor) {
       this.events = [];
-      
-      if (!valor) 
-      this.get_citas(1);      
+
+      if (!valor) this.get_citas(1);
       else this.get_citas(0);
-
-
-      
-
-      
     },
 
     getMes(mes) {

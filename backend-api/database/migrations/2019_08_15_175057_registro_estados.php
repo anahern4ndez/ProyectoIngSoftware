@@ -18,7 +18,8 @@ class RegistroEstados extends Migration
         Schema::create('registroestados', function (Blueprint $table) {
             //$table->increments('idRegistroEstado');
 
-            $table->integer('idregistroestado')-> unique();
+            //$table->integer('idregistroestado')-> unique();
+            $table->string('idregistroestado', 20);
 
             $table->string('cui', 20);
             $table->foreign('cui')

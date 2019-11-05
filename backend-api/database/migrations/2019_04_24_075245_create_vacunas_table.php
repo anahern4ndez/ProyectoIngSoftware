@@ -13,21 +13,22 @@ class CreateVacunasTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('vacunas');
+
         Schema::create('vacunas', function (Blueprint $table) {
-            $table->string('idPaciente');
+            $table->increments('id');
+            $table->date('fecha');
+            
+            $table->string('idPaciente', 20);
             
             $table->integer('BCG');
             $table->integer('Poliovirus');
-            $table->integer('Hepatitis A');
-            $table->integer('Hepatitis B');
+            $table->integer('HepatitisA');
+            $table->integer('HepatitisB');
             $table->integer('Neumococo');
             $table->integer('Influenza');
             $table->integer('DPT');
             $table->integer('SPR');
-
-            $table->foreign('idPaciente')
-            ->references('CUI')
-            ->on('pacientes');
         });
     }
 

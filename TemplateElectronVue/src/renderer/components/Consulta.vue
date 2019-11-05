@@ -2389,34 +2389,37 @@ export default {
         bcg2: false,
         bcg3: false,
         bcgRef: false,
+        poliovirus: 0,
         poliovirus1: false,
         poliovirus2: false,
         poliovirus3: false,
         poliovirusRef: false,
+        hepatitisA: 0,
         hepatitisA1: false,
         hepatitisA2: false,
         hepatitisA3: false,
         hepatitisARef: false,
+        hepatitisB: 0,
         hepatitisB1: false,
         hepatitisB2: false,
         hepatitisB3: false,
         hepatitisBRef: false,
-        hepatitisC1: false,
-        hepatitisC2: false,
-        hepatitisC3: false,
-        hepatitisCRef: false,
+        neumococo: 0,
         neumococo1: false,
         neumococo2: false,
         neumococo3: false,
         neumococoRef: false,
+        influenza: 0,
         influenza1: false,
         influenza2: false,
         influenza3: false,
         influenzaRef: false,
+        DPT: 0,
         DPT1: false,
         DPT2: false,
         DPT3: false,
         DPTRef: false,
+        SPR: 0,
         SPR1: false,
         SPR2: false,
         SPR3: false,
@@ -2610,9 +2613,6 @@ export default {
         ]
         
     }),
-    created() {
-        
-    },
 
     mounted() {
         this.dialog = true
@@ -2627,9 +2627,29 @@ export default {
         };
         this.$http.get("http://localhost:8000/dxs").then(response => {
             this.dxs = response.data.dxs;
-            
-            });
-        this.$http.post(`http://localhost:8000/PacienteController/findById`, data).then(response => {            
+        });
+
+        const vacunm = {
+            idPaciente: store.idPaciente,
+            fecha: this.fecha
+        }
+
+        this.$http.post(`http://localhost:8000/vacunaController/findOne`, vacunm).then(response => {
+            console.table(response.data.Consulta)
+
+            this.bcg = response.data.Consulta.BCG
+            this.poliovirus = response.data.Consulta.Poliovirus
+            this.hepatitisA = response.data.Consulta.HepatitisA
+            this.hepatitisB = response.data.Consulta.HepatitisB
+            this.neumococo = response.data.Consulta.Neumococo
+            this.influenza = response.data.Consulta.Influenza
+            this.DPT = response.data.Consulta.DPT
+            this.SPR = response.data.Consulta.SPR
+        }).then(() => {
+            this.setVacunaData()
+        })
+
+        this.$http.post(`http://localhost:8000/PacienteController/findById`, data).then(response => {
 
             if(response.data.Paciente[0] == null){
                 
@@ -2784,16 +2804,6 @@ export default {
             this.showComments.sort(function (d1, d2) {
                 return new Date(d1.hora) - new Date(d2.hora)
             })
-
-            // this.showComments.map(array => {
-            //     const data = {
-            //         ID: array.doctor
-            //     }
-
-            //     this.$http.post(`http://localhost:8000/ExampleController/findById`, data).then(response => {
-            //         array.doctor = response.data.User
-            //     })
-            // })
         },
 
         getDoctorNames () {
@@ -2980,7 +2990,341 @@ export default {
                 });
             }
         },
+
+        setVacunaData() {
+
+            if (this.bcg === 4) {
+                this.bcgRef = true
+                this.bcg3 = true
+                this.bcg2 = true
+                this.bcg1 = true
+            } else if (this.bcg === 3) {
+                this.bcgRef = false
+                this.bcg3 = true
+                this.bcg2 = true
+                this.bcg1 = true
+            } else if (this.bcg === 2) {
+                this.bcgRef = false
+                this.bcg3 = false
+                this.bcg2 = true
+                this.bcg1 = true
+            } else if (this.bcg === 1) {
+                this.bcgRef = false
+                this.bcg3 = false
+                this.bcg2 = false
+                this.bcg1 = true
+            } else if (this.bcg === 0) {
+                this.bcgRef = false
+                this.bcg3 = false
+                this.bcg2 = false
+                this.bcg1 = false
+            }
+
+            if (this.poliovirus === 4) {
+                this.poliovirusRef = true
+                this.poliovirus3 = true
+                this.poliovirus2 = true
+                this.poliovirus1 = true
+            } else if (this.poliovirus === 3) {
+                this.poliovirusRef = false
+                this.poliovirus3 = true
+                this.poliovirus2 = true
+                this.poliovirus1 = true
+            } else if (this.poliovirus === 2) {
+                this.poliovirusRef = false
+                this.poliovirus3 = false
+                this.poliovirus2 = true
+                this.poliovirus1 = true
+            } else if (this.poliovirus === 1) {
+                this.poliovirusRef = false
+                this.poliovirus3 = false
+                this.poliovirus2 = false
+                this.poliovirus1 = true
+            } else if (this.poliovirus === 0) {
+                this.poliovirusRef = false
+                this.poliovirus3 = false
+                this.poliovirus2 = false
+                this.poliovirus1 = false
+            }
+
+            if (this.hepatitisA === 4) {
+                this.hepatitisARef = true
+                this.hepatitisA3 = true
+                this.hepatitisA2 = true
+                this.hepatitisA1 = true
+            } else if (this.hepatitisA === 3) {
+                this.hepatitisARef = false
+                this.hepatitisA3 = true
+                this.hepatitisA2 = true
+                this.hepatitisA1 = true
+            } else if (this.hepatitisA === 2) {
+                this.hepatitisARef = false
+                this.hepatitisA3 = false
+                this.hepatitisA2 = true
+                this.hepatitisA1 = true
+            } else if (this.hepatitisA === 1) {
+                this.hepatitisARef = false
+                this.hepatitisA3 = false
+                this.hepatitisA2 = false
+                this.hepatitisA1 = true
+            } else if (this.hepatitisA === 0) {
+                this.hepatitisARef = false
+                this.hepatitisA3 = false
+                this.hepatitisA2 = false
+                this.hepatitisA1 = false
+            }
+
+            if (this.hepatitisB === 4) {
+                this.hepatitisBRef = true
+                this.hepatitisB3 = true
+                this.hepatitisB2 = true
+                this.hepatitisB1 = true
+            } else if (this.hepatitisB === 3) {
+                this.hepatitisBRef = false
+                this.hepatitisB3 = true
+                this.hepatitisB2 = true
+                this.hepatitisB1 = true
+            } else if (this.hepatitisB === 2) {
+                this.hepatitisBRef = false
+                this.hepatitisB3 = false
+                this.hepatitisB2 = true
+                this.hepatitisB1 = true
+            } else if (this.hepatitisB === 1) {
+                this.hepatitisBRef = false
+                this.hepatitisB3 = false
+                this.hepatitisB2 = false
+                this.hepatitisB1 = true
+            } else if (this.hepatitisB === 0) {
+                this.hepatitisBRef = false
+                this.hepatitisB3 = false
+                this.hepatitisB2 = false
+                this.hepatitisB1 = false
+            }
+
+            if (this.neumococo === 4) {
+                this.neumococoRef = true
+                this.neumococo3 = true
+                this.neumococo2 = true
+                this.neumococo1 = true
+            } else if (this.neumococo === 3) {
+                this.neumococoRef = false
+                this.neumococo3 = true
+                this.neumococo2 = true
+                this.neumococo1 = true
+            } else if (this.neumococo === 2) {
+                this.neumococoRef = false
+                this.neumococo3 = false
+                this.neumococo2 = true
+                this.neumococo1 = true
+            } else if (this.neumococo === 1) {
+                this.neumococoRef = false
+                this.neumococo3 = false
+                this.neumococo2 = false
+                this.neumococo1 = true
+            } else if (this.neumococo === 0) {
+                this.neumococoRef = false
+                this.neumococo3 = false
+                this.neumococo2 = false
+                this.neumococo1 = false
+            }
+            
+            if (this.influenza === 4) {
+                this.influenzaRef = true
+                this.influenza3 = true
+                this.influenza2 = true
+                this.influenza1 = true
+            } else if (this.influenza === 3) {
+                this.influenzaRef = false
+                this.influenza3 = true
+                this.influenza2 = true
+                this.influenza1 = true
+            } else if (this.influenza === 2) {
+                this.influenzaRef = false
+                this.influenza3 = false
+                this.influenza2 = true
+                this.influenza1 = true
+            } else if (this.influenza === 1) {
+                this.influenzaRef = false
+                this.influenza3 = false
+                this.influenza2 = false
+                this.influenza1 = true
+            } else if (this.influenza === 0) {
+                this.influenzaRef = false
+                this.influenza3 = false
+                this.influenza2 = false
+                this.influenza1 = false
+            }
+            
+            if (this.DPT === 4) {
+                this.DPTRef = true
+                this.DPT3 = true
+                this.DPT2 = true
+                this.DPT1 = true
+            } else if (this.DPT === 3) {
+                this.DPTRef = false
+                this.DPT3 = true
+                this.DPT2 = true
+                this.DPT1 = true
+            } else if (this.DPT === 2) {
+                this.DPTRef = false
+                this.DPT3 = false
+                this.DPT2 = true
+                this.DPT1 = true
+            } else if (this.DPT === 1) {
+                this.DPTRef = false
+                this.DPT3 = false
+                this.DPT2 = false
+                this.DPT1 = true
+            } else if (this.DPT === 0) {
+                this.DPTRef = false
+                this.DPT3 = false
+                this.DPT2 = false
+                this.DPT1 = false
+            }
+
+            if (this.SPR === 4) {
+                this.SPRRef = true
+                this.SPR3 = true
+                this.SPR2 = true
+                this.SPR1 = true
+            } else if (this.SPR === 3) {
+                this.SPRRef = false
+                this.SPR3 = true
+                this.SPR2 = true
+                this.SPR1 = true
+            } else if (this.SPR === 2) {
+                this.SPRRef = false
+                this.SPR3 = false
+                this.SPR2 = true
+                this.SPR1 = true
+            } else if (this.SPR === 1) {
+                this.SPRRef = false
+                this.SPR3 = false
+                this.SPR2 = false
+                this.SPR1 = true
+            } else if (this.SPR === 0) {
+                this.SPRRef = false
+                this.SPR3 = false
+                this.SPR2 = false
+                this.SPR1 = false
+            }
+        },
+
+        getVacunaData () {
+            if (this.bcgRef) {
+                this.bcg = 4
+            } else if (this.bcg3) {
+                this.bcg = 3
+            } else if (this.bcg2) {
+                this.bcg = 2
+            } else if (this.bcg1) {
+                this.bcg = 1
+            } else {
+                this.bcg = 0
+            }
+
+            if (this.poliovirusRef) {
+                this.poliovirus = 4
+            } else if (this.poliovirus3) {
+                this.poliovirus = 3
+            } else if (this.poliovirus2) {
+                this.poliovirus = 2
+            } else if (this.poliovirus1) {
+                this.poliovirus = 1
+            } else {
+                this.poliovirus = 0
+            }
+
+            if (this.hepatitisARef) {
+                this.hepatitisA = 4
+            } else if (this.hepatitisA3) {
+                this.hepatitisA = 3
+            } else if (this.hepatitisA2) {
+                this.hepatitisA = 2
+            } else if (this.hepatitisA1) {
+                this.hepatitisA = 1
+            } else {
+                this.hepatitisA = 0
+            }
+
+            if (this.hepatitisBRef) {
+                this.hepatitisB = 4
+            } else if (this.hepatitisB3) {
+                this.hepatitisB = 3
+            } else if (this.hepatitisB2) {
+                this.hepatitisB = 2
+            } else if (this.hepatitisB1) {
+                this.hepatitisB = 1
+            } else {
+                this.hepatitisB = 0
+            }
+
+            if (this.neumococoRef) {
+                this.neumococo = 4
+            } else if (this.neumococo3) {
+                this.neumococo = 3
+            } else if (this.neumococo2) {
+                this.neumococo = 2
+            } else if (this.neumococo1) {
+                this.neumococo = 1
+            } else {
+                this.neumococo = 0
+            }
+
+            if (this.influenzaRef) {
+                this.influenza = 4
+            } else if (this.influenza3) {
+                this.influenza = 3
+            } else if (this.influenza2) {
+                this.influenza = 2
+            } else if (this.influenza1) {
+                this.influenza = 1
+            } else {
+                this.influenza = 0
+            }
+
+            if (this.DPTRef) {
+                this.DPT = 4
+            } else if (this.DPT3) {
+                this.DPT = 3
+            } else if (this.DPT2) {
+                this.DPT = 2
+            } else if (this.DPT1) {
+                this.DPT = 1
+            } else {
+                this.DPT = 0
+            }
+
+            if (this.SPRRef) {
+                this.SPR = 4
+            } else if (this.SPR3) {
+                this.SPR = 3
+            } else if (this.SPR2) {
+                this.SPR = 2
+            } else if (this.SPR1) {
+                this.SPR = 1
+            } else {
+                this.SPR = 0
+            }
+        },
+
         guardar() {
+
+            this.getVacunaData()
+
+            const vacunm = {
+                fecha: this.fecha,
+                idPaciente: store.idPaciente,
+                BCG: this.bcg,
+                Poliovirus: this.poliovirus,
+                HepatitisA: this.hepatitisA,
+                HepatitisB: this.hepatitisB,
+                Neumococo: this.neumococo,
+                Influenza: this.influenza,
+                DPT: this.DPT,
+                SPR: this.SPR
+            }
+
             this.guardando = true
             let medicamento = {}
             
@@ -3284,6 +3628,8 @@ export default {
                         })
                     }
                 }).then(() => {
+                    this.$http.put('http://localhost:8000/vacunaController/update', vacunm).then(response => {})
+                }).then(() => {
                     this.guardando = false
                 })
                 .then(() => {
@@ -3377,13 +3723,14 @@ export default {
                     }
                     
                 }).then(() => {
+                    this.$http.post('http://localhost:8000/vacunaController/insert', vacunm).then(response => {})
+                }).then(() => {
                     this.$router.push("/menu-principal");
                 })
                 .catch(error => {
                     console.log("Ocurrio un error")
                 })
             }
-            
         },
         fillBCG: function() {
             

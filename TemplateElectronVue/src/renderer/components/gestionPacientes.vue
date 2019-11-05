@@ -188,14 +188,18 @@
     </div>
     <div id="botones">
       <br>
-      <div id="boton">
+      <div class="boton">
         <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="ingresarNuevo">Ingresar nuevo paciente</button>
       </div>
-      <div id="boton">
-        <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="darConsulta"> Dar consulta </button>
+      <div class="boton">
+        <router-link :to="{name: 'Consulta', params: { idPaciente: this.selectedPatients.id, cui: this.selectedPatients.CUI }}" class="btn btn-lg btn-warning btn-block">Dar Consulta</router-link>
       </div>
-      <div id="boton">
+      <div class="boton">
         <router-link :to="{name: 'cambioEstado', params: { cui: this.selectedPatients.CUI, nombre: this.selectedPatients.Nombre, edad: this.selectedPatients.Edad, sexo: this.selectedPatients.Sexo, estado: this.selectedPatients.estado_actual }}" class="btn btn-lg btn-warning btn-block">Editar estado de paciente seleccionado</router-link>
+      </div>
+      <br>
+      <div class="boton" style="width: 94%;">
+        <router-link :to="{name: 'gestionFormularios', params: { cui: this.selectedPatients.CUI, nombre: this.selectedPatients.Nombre, apellido: this.selectedPatients.Apellido }}" class="btn btn-lg btn-warning btn-block"> Ingresar formulario de este paciente </router-link>
       </div>
     </div>
   </div>
@@ -225,7 +229,7 @@ export default {
         for (let index = 0; index < response.data.Pacientes.length; index++) {
           const edadPaciente = response.data.Pacientes[index].Edad;
           if (edadPaciente < 1){
-            response.data.Pacientes[index].Edad = (edadPaciente*12.0) + ' meses';
+            response.data.Pacientes[index].Edad = Math.round(edadPaciente*12.0) + ' meses';
           }
           else{
             response.data.Pacientes[index].Edad = edadPaciente + ' años';
@@ -447,7 +451,7 @@ h2#headers{
   font-family: Nunito;
   font-weight: bolder;
 }
-div#boton {
+.boton {
   width: 30%;
   margin-top: 1%;
   margin-left: 1%;

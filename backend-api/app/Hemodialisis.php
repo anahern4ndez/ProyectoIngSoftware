@@ -31,23 +31,7 @@ class Hemodialisis extends Model
         'Talla',
         'PesoDelta',
         'Especiales',
-        /*'PAstr',
-        'Pulso',
-        'Temp',
-        'QB',
-        'PV',
-        'PA_table',
-        'UFH',
-        'Medicamentos',
-        'UFTotal',*/
         'Observacion',
-        //'Tecnico',
-        //'PA',
-        'Fecha_col_cat',
-        'T2Fecha',
-        'T2Pre',
-        'T2Post',
-        'T2Urr',
     ];
     public $timestamps = false;
     /*protected $casts =[

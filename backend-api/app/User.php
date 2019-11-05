@@ -33,6 +33,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'password',
     ];
 
+    protected $guard_name = 'api';
+
     public function getAllPermissionsAttribute() {
         $permissions = [];
           foreach (Permission::all() as $permission) {

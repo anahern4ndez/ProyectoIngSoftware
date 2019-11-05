@@ -9,12 +9,12 @@ class Vacuna extends Model
     //
     public $timestamps = false;
     protected $fillable=[
-        'id',
+        'fecha',
         'idPaciente',
         'BCG',
         'Poliovirus',
-        'Hepatitis A',
-        'Hepatitis B',
+        'HepatitisA',
+        'HepatitisB',
         'Neumococo',
         'Influenza',
         'DPT',
