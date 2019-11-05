@@ -2322,11 +2322,7 @@
                 "sftp",
                 "storage"
             ],
-<<<<<<< HEAD
             "time": "2019-10-16T21:01:05+00:00"
-=======
-            "time": "2018-08-22T07:45:22+00:00"
->>>>>>> 5d2a8b65ff920b2fc6e5b54029cca2fec8af0a9f
         },
         {
             "name": "league/oauth2-server",
