@@ -240,12 +240,14 @@
                                                     outline
                                                     class="mitad"
                                                     :rules="expedienteRules"
+                                                    :onChange="getDeltaWeight()"
                                                 ></v-text-field>
                                                 <v-text-field
                                                     v-model="tabs[pacientes.indexOf(paciente)].Peso_post"
                                                     label="Peso Post-Hemodiálisis (kg)"
                                                     outline
                                                     class="mitad"
+                                                    :onChange="getDeltaWeight()"
                                                     :rules="expedienteRules"
                                                 ></v-text-field>
                                                 <v-text-field
@@ -257,6 +259,7 @@
                                                 ></v-text-field>
                                                 <v-text-field
                                                     v-model="tabs[pacientes.indexOf(paciente)].Peso_delta"
+                                                    disabled
                                                     label="Peso delta"
                                                     outline
                                                     class="mitad"
@@ -428,7 +431,6 @@ export default {
         guardar(){
             var pass = true;
             let info = this.tabs[this.activeTab]
-            console.log(this.tabs[this.activeTab]);
             info['todaysDate'] = this.todaysDate
             this.$http.post('http://localhost:8000/hemodialisis', info).then(response => {
                 console.log(response.success)
@@ -436,15 +438,17 @@ export default {
 
 
         },
-        computeAge(date){
-            console.log(date);
-        },
         isANumber(expediente){
-          let isNumber = false;
+          let isNumber = false
           if(!isNaN(parseInt(expediente))){
-            isNumber = true;
+            isNumber = true
           }
-          return isNumber;
+          return isNumber
+        },
+        getDeltaWeight(){
+            let weightPre = this.tabs[this.activeTab].Peso_pre
+            let weightPost = this.tabs[this.activeTab].Peso_post
+            this.tabs[this.activeTab].Peso_delta = Math.abs(weightPre - weightPost)
         },
         /* Al comenzar el proceso de hemodiálisis, se espera 30min antes de guardar los datos, pero antes de poder hacerlo, 
             se activa un cuadro de diálogo para verificar que los datos ingresados fueron correctos (porque no se pueden cambiar 

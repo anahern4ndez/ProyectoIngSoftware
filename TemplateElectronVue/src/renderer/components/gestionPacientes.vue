@@ -308,14 +308,6 @@ export default {
           this.selectedPatients.EstadoActual = this.pacientes[this.pacientes.indexOf(received)].estado_actual.significado
           this.imageData = this.selectedPatients.Imagen;
         },
-        /* metodos de redirección de botones */
-        // falta vista para dar una consulta
-        darConsulta(){
-          this.$router.push('/Consulta');
-        },
-        eliminar(){
-          this.$router.push('/IngresarPaciente');
-        },
         editarDatos(received){
           //this.dialog=true;
           this.editedIndex = this.pacientes.indexOf(received)

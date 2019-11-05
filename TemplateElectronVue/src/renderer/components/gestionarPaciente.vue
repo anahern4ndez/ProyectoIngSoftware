@@ -297,7 +297,7 @@ export default {
       alert(event.title);
     },
     consulta() {
-      this.$router.push("/Consulta");
+      this.$router.push({name: "Consulta"});
     },
     history() {
       this.$router.push("/History");
