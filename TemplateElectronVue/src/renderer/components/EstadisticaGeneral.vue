@@ -1,115 +1,38 @@
 <template lang="">
-	<div>
-        <b-container class="containerMenu">
-
-            <!-- FILA 1, TÍTULO-->
-            <b-row align-h="around" align-v="center">
-                <b-col>
-                    <h2 class="text-center">INFORMES ESTADÍSTICOS</h2>
-                </b-col>
-            </b-row>
-
-            <br><hr><br>
-
-            <!-- COLUMNA1, VARIABLES A ESTUDIAR -->
-            <b-row align-h="around" align-v="center">
-                <b-col>
-                    <h3>Ingrese la variable a estudiar:</h3>
+    <div class="grey--text text--darken-2">
+        <h1 class="text-center" style="font-weight: bolder; font-family: Nunito;">Estadísticas Generales</h1>
+        <br>
+        <b-container class="text-center" fluid>
+            <b-row>
+                <b-col class="titulo1">
+                    <div>Variable de estudio</div>
                     <br>
                     <v-combobox
-                        v-model="varEstudio"
-                        :items="posiblesVariables"
-                        :search-input.sync="search"
-                        :hide-selected="hideSelected"
-                        label="Seleccione la data a estudiar."
-                        :multiple="multiple"
-                        persistent-hint
-                        :small-chips="chips"
-                        :clearable="clearable"
-                        v-on:click=""
-                    >
-                        <template v-if="noData" v-slot:no-data>
-                            <v-list-item>
-                            <v-list-item-content>
-                                <v-list-item-title>
-                                No se encontró "<strong>{{ search }}</strong>".
-                                </v-list-item-title>
-                            </v-list-item-content>
-                            </v-list-item>
-                        </template>
+                    :items="posiblesVariables"
+                    v-on:change="changeDisableVariable"
+                    v-model="selectVariable"
+                    label="Elija la variable a estudiar">
                     </v-combobox>
+                    <br>
                 </b-col>
-
-                <!-- COLUMNA 2, CONDICIONES -->
-                <b-col>
-                    <h3>Ingrese el tiempo del estudio:</h3>
+                <b-col cols="1" class="titulo1">
+                </b-col>
+                <b-col class="titulo1">
+                    <div>Tiempo de recolección de datos</div>
                     <br>
                     <v-combobox
-                        v-model="condiciones"
-                        :items="posiblesTiempos"
-                        :search-input.sync="search"
-                        :hide-selected="hideSelected"
-                        label="Seleccione el tiempo de las muestras"
-                        :multiple="multiple"
-                        persistent-hint
-                        :small-chips="chips"
-                        :clearable="clearable"
-                         v-on:click=""
-                    >
-                        <template v-if="noData" v-slot:no-data>
-                            <v-list-item>
-                            <v-list-item-content>
-                                <v-list-item-title>
-                                No se encontró "<strong>{{ search }}</strong>".
-                                </v-list-item-title>
-                            </v-list-item-content>
-                            </v-list-item>
-                        </template>
+                    :items="posiblesTiempos"
+                    v-on:change="changeDisableTiempo"
+                    v-model="selectTiempo"
+                    label="Elija el formulario que desea subir">
                     </v-combobox>
+                    <br>
+                    <input type="file" class="hide_file" style="height:auto; width:auto; visibility:hidden" v-on:change="changeForm" ref="changeForm"/>
                 </b-col>
             </b-row>
-
-            <br>
-
-            <!-- ESPECIFICACIÓN DE LAS CONDICIONES -->
-            <h4 v-if="this.condiciones.length > 0">Por favor, especifique las condiciones seleccionadas:</h4>
-            <b-row v-for="(a,index) in condiciones" :key="index">
-                <b-col>
-                    {{a}}
-                    {{index}}
-                </b-col>
-
-                <b-col>
-                    <v-select
-                    :items="simbolosCondiciones"
-                    label="Seleccione uno: "
-                    v-model="simboloAgrupacion[index]"
-                    ></v-select>
-                </b-col>
-
-                <b-col>
-                    <v-text-field
-                        label="Solo"
-                        v-model="textoAgrupacion[index]"
-                        placeholder="Ingrese titulo"
-                        solo
-                    >
-                    </v-text-field>
-                </b-col>
-
-            </b-row>
-
-            <br>
-
-            <!-- FILA 3, BOTON DE ACEPTAR/CANCELAR -->
-            <b-row align-v="center" class="text-center">
-                <b-col order="4">
-                    <v-btn outline color="#303841" v-on:click="concatenar">Abrir Documento</v-btn>
-                    <v-btn outline color="#303841" v-on:click="clearData">Cancelar</v-btn>
-                </b-col>
-            </b-row>
+            <v-btn text large color="yellow" type="button" v-on:click="startWord" :disabled='isDisabledButton'>Abrir formulario</v-btn>
         </b-container>
-	</div>
+    </div>
 </template>
 
 
@@ -122,146 +45,100 @@ export default {
   data: () => ({
       posiblesVariables: ['Acciones', 'Consultas', 'Datos generales', 'Pacientes', 'Citas'],
       posiblesTiempos: ['Mes pasado', '3 meses', '6 meses', '1 año', '2 años', 'Toda la data'],
-      search: null,
-      chips: true,
-      multiple: true,
-      hideSelected: true,
-      noData: true,
       clearable: false,
-      varEstudio: [],
-      condiciones: [],
-      agrupacion: "",
-      simboloAgrupacion:[],
-      textoAgrupacion:[],
-      simbolosCondiciones: ["=",">",">=","<","<=","diferente"],
-      variablesEstudio: "",
-      variablesCondiciones: "",
-
-    //   Variable solo para hacer pruebas
-      showTable: false,
-
-    // Ejemplo de un array de objetos
-      rows: [
-      { id: 1, name: "Chandler Bing", phone: '305-917-1301', profession: 'IT Manager' },
-      { id: 2, name: "Ross Geller", phone: '210-684-8953', profession: 'Paleontologist' },
-      { id: 3, name: "Rachel Green", phone: '765-338-0312', profession: 'Waitress'},
-      { id: 4, name: "Monica Geller", phone: '714-541-3336', profession: 'Head Chef' },
-      { id: 5, name: "Joey Tribbiani", phone: '972-297-6037', profession: 'Actor' },
-      { id: 6, name: "Phoebe Buffay", phone: '760-318-8376', profession: 'Masseuse' }
-    ]
+      selectVariable: ' ',
+      selectTiempo: ' ',
+      isDisabledAbrir: true,
+      isDisabledTiempo: true,
+      isDisabledButton: true,
   }),
 
-  watch: {
-      switch1(newValue){
-        //called whenever switch1 changes
-        this.vistaGeneral(newValue);
-      }
-    },
+  methods:{
+    startWord(strFile){
+        this.isDisabledSubir = false;
+        this.isDisabledSubirForm = false;
+        this.exit = false;
 
-  computed: {
+        const {shell} = require('electron');
+        var fs = require('fs');
+        var dir = process.cwd();
 
-    //   Método útil en caso de que se usen objetos!
-       "columns": function columns() {
-            if (this.varEstudio.length == 0) {
-                return [];
-            }
-            return Object.keys(this.varEstudio[0])
+        var dirCopy;
+        if(this.selectVariable === 'Peritonitis'){
+            //dir += this.direccionPeritonitis;
+            this.nombreNuevoFormulario = this.direccionPeritonitis.concat('_',this.name,'_',this.apellido,'_',this.fecha,'.docx');
+            dirCopy = this.dirPeritonitis;
         }
-  },
-
-  methods: {
-      prueba()
-      {
-          console.log(this.varEstudio);
-          console.log(this.agrupacion);
-          console.log(this.condiciones);
-
-          console.log(this.simboloAgrupacion[0]);
-          console.log(this.textoAgrupacion[1]);
-      },
-
-      concatenar()
-      {
-            this.variablesEstudio = "";
-            this.variablesCondiciones = "";
-
-            if (this.varEstudio.length > 0)
-            {
-                for (let i = 0; i < this.varEstudio.length; i++) {
-                    if (i == this.varEstudio.length - 1)
-                        this.variablesEstudio += this.varEstudio[i];
-                    else
-                        this.variablesEstudio += this.varEstudio[i] + "; ";
-                }
-            }
-
-            if (this.condiciones.length > 0)
-            {
-                for (let i = 0; i < this.condiciones.length; i++) {
-                    if (i == this.condiciones.length - 1)
-                        this.variablesCondiciones += this.condiciones[i] + " " + this.simboloAgrupacion[i] + " " + this.textoAgrupacion[i];
-                    else
-                        this.variablesCondiciones += this.condiciones[i] + " " + this.simboloAgrupacion[i] + " " + this.textoAgrupacion[i] + "; ";
-                }
-            }
-
-            this.guardarDatos();
-      },
-
-    // En esta función iría todo el backend para insertar en array de objetos y extraer de bd.
-      guardarDatos()
-      {
-          this.showTable = true;
-      },
-
-      clearData()
-      {
-          this.varEstudio = [];
-          this.condiciones = [];
-          this.agrupacion = "";
-          this.variablesEstudio = "";
-          this.variablesCondiciones = "";
-          this.showTable = false;
-
-          this.concatenar();
-      }
-
+        else if(this.selectVariable === 'Trasplante renal'){
+            //dir += this.direccionTransplanteRenal;
+            this.nombreNuevoFormulario = this.direccionTransplanteRenal.concat('_',this.name,'_',this.apellido,'_',this.fecha,'.docx');
+            dirCopy = this.dirTransplanteRenal;
+        }
+        else if(this.selectVariable === 'Transfusión'){
+            //dir += this.direccionTransfusion;
+            this.nombreNuevoFormulario = this.direccionTransfusion.concat('_',this.name,'_',this.apellido,'_',this.fecha,'.docx');
+            dirCopy = this.dirTransfusion;
+        }
+        else if(this.selectVariable === 'Hemodialisis'){
+            //dir += this.direccionHemodialisis;
+            this.nombreNuevoFormulario = this.direccionHemodialisis.concat('_',this.name,'_',this.apellido,'_',this.fecha,'.docx');
+            dirCopy = this.dirHemodialisis;
+        }
+        else if(this.selectVariable === 'Mortalidad'){
+            //dir += this.direccionMortalidad;
+            this.nombreNuevoFormulario = this.direccionMortalidad.concat('_',this.name,'_',this.apellido,'_',this.fecha,'.docx');
+            dirCopy = this.dirMortalidad;
+        }
+        // Se sacara una copia del archivo original y se pondra en uno NUEVO
+        fs.copyFile(dirCopy, this.nombreNuevoFormulario, (err) => {
+            if (err) throw err;
+            console.log('Archivo copiado con Exito');
+            this.path = dir.concat('\\',this.nombreNuevoFormulario);
+            shell.openItem(this.nombreNuevoFormulario);
+        });
     },
+    changeDisableVariable(event){
+        if(this.selectVariable !== ' '){
+            this.isDisabledAbrir = false
+        }
+        else{
+            this.isDisabledAbrir = false
+        }
+        this.enableButton()
+    },
+    changeDisableTiempo(event){
+        if(this.selectTiempo !== ' '){
+            this.isDisabledTiempo = false
+        }
+        else{
+            this.isDisabledTiempo = true
+        }
+        this.enableButton()
+    },
+    enableButton(){
+        if (!this.isDisabledAbrir && !this.isDisabledTiempo)
+            this.isDisabledButton = false
+    },
+
+    formClick: function(event){ // on a click on the button with id 'one'
+        const btn = this.$refs.changeForm
+        btn.click(); // trigger the click on second, and go on 
+    },
+    changeForm: function(event) {
+        var input = event.target;
+
+        this.path = input.files[0].path;
+        console.log(this.path);
+        input.value = '';
+    },
+}
 
 };
 </script>
 
 
 <style scoped>
-    table {
-    font-family: 'Open Sans', sans-serif;
-    min-width: 900px;
-    border-collapse: collapse;
-    border: 3px solid #44475C;
-    margin: 10px 10px 0 10px;
-    }
-
-    table th {
-    text-transform: uppercase;
-    text-align: left;
-    background: #44475C;
-    color: #FFF;
-    padding: 8px;
-    min-width: 30px;
-    }
-
-    table td {
-    max-width: 100px;
-    text-align: left;
-    padding: 8px;
-    border-right: 2px solid #7D82A8;
-    }
-    table td:last-child {
-    border-right: none;
-    }
-    table tbody tr:nth-child(2n) td {
-    background: #D4D8F9;
+.titulo1{
+    font-size: 20px;
 }
-
-
 </style>
