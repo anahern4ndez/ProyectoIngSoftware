@@ -17,22 +17,33 @@ class UsuariosSeeder extends Seeder {
         $user->password = Hash::make('password123');
         $user->puesto = 1;
         $user->imagen = null;
-        $user->save();
-        $user->givePermissionTo('ver pacientes');
-        $user->givePermissionTo('agendar citas');
-        $user->givePermissionTo('crear usuarios');
-        $user->givePermissionTo('editar pacientes');
-        $user->givePermissionTo('realizar hemodialisis');
+        $this->givePermission($user);
 
         // Creacion de usuario Celeste Espel
         $user = new User;
         $user->name = "Celeste Espel";
         $user->email = "celesteespel@dom.com";
         $user->password = Hash::make('password123');
-        $user->puesto = 1;
+        $user->puesto = 2;
         $user->imagen = null;
-        $user->save();
-        $user->givePermissionTo('ver pacientes');
+        $this->givePermission($user);
     }   
     
+    function givePermission($user){
+        switch($user->puesto) {
+            case 1:
+                $user->givePermissionTo('ver pacientes');
+                $user->givePermissionTo('agendar citas');
+                $user->givePermissionTo('crear usuarios');
+                $user->givePermissionTo('editar pacientes');
+                $user->givePermissionTo('realizar hemodialisis');    
+                $user->save();
+                break;
+            case 2:
+                $user->givePermissionTo('ver pacientes');
+                $user->save();
+                break;
+        }
+    }
+
 }
