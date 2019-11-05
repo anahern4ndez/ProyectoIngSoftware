@@ -115,7 +115,7 @@ export default {
         },
         {
           name: "Cambio Estado",
-          route: "/cambioEstado",
+          route: "/cambioEstado/:cui",
           icon: "fa-flag"
         },
         {
