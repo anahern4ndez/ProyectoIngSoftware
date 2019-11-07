@@ -122,15 +122,15 @@
                                             <ul id="via">
                                                 <h4 class="headers">2. Vía:</h4>
                                                 <v-container row>
-                                                        <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Via" label="Femoral" value="1" color="green"></v-checkbox>
-                                                        <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Via" label="Subclavio" value="2" color="green"></v-checkbox>
-                                                        <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Via" label="Yugular" value="3" color="green"></v-checkbox>
-                                                        <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Via" label="Derecho" value="4" color="green"></v-checkbox>
-                                                        <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Via" label="Izquierdo" value="5" color="green"></v-checkbox>
+                                                        <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Via.Lugar" label="Femoral" value="Femoral" color="green"></v-checkbox>
+                                                        <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Via.Lugar" label="Subclavio" value="Subclavio" color="green"></v-checkbox>
+                                                        <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Via.Lugar" label="Yugular" value="Yugular" color="green"></v-checkbox>
+                                                        <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Via.Lugar" label="Derecho" value="Derecho" color="green"></v-checkbox>
+                                                        <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Via.Lugar" label="Izquierdo" value="Izquierdo" color="green"></v-checkbox>
                                                 </v-container>
                                                 <v-container row>
-                                                    <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Via" label="Invertido" value="6" color="green"></v-checkbox>
-                                                    <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Via" label="Normal" value="7" color="green"></v-checkbox>
+                                                    <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Via.Direccion" label="Invertido" value="Invertido" color="green"></v-checkbox>
+                                                    <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Via.Direccion" label="Normal" value="Normal" color="green"></v-checkbox>
                                                 </v-container>
                                             </ul>
                                             <ul>
@@ -191,14 +191,14 @@
                                                 <h4 class="headers">8. Heparinización</h4>
                                                 <br>
                                                 <v-text-field
-                                                    v-model="tabs[pacientes.indexOf(paciente)].Heparinizacion"
+                                                    v-model="tabs[pacientes.indexOf(paciente)].Heparinizacion.Cebado"
                                                     label="Cebado (UL)"
                                                     outline
                                                     class="mitad"
                                                     :rules="expedienteRules"
                                                 ></v-text-field>
                                                 <v-text-field
-                                                    v-model="tabs[pacientes.indexOf(paciente)].Heparinizacion"
+                                                    v-model="tabs[pacientes.indexOf(paciente)].Heparinizacion.Transdialisis"
                                                     label="Trans-Diálisis (UL/hora)"
                                                     outline
                                                     class="mitad"
@@ -209,14 +209,14 @@
                                                 <h4 class="headers">9. Tiempo</h4>
                                                 <br>
                                                 <v-text-field
-                                                    v-model="tabs[pacientes.indexOf(paciente)].TiempoH"
+                                                    v-model="tabs[pacientes.indexOf(paciente)].Tiempo.Horas"
                                                     label="Horas"
                                                     outline
                                                     class="mitad"
                                                     :rules="expedienteRules"
                                                 ></v-text-field>
                                                 <v-text-field
-                                                    v-model="tabs[pacientes.indexOf(paciente)].TiempoM"
+                                                    v-model="tabs[pacientes.indexOf(paciente)].Tiempo.Minutos"
                                                     label="Minutos"
                                                     outline
                                                     class="mitad"
@@ -226,9 +226,9 @@
                                             <ul>
                                                 <h4 class="headers">10. Conductividad</h4>
                                                 <v-container row align-center justify-space-around fill-height>
-                                                    <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Conductividad_Na" label="Na+" color="green"></v-checkbox>
-                                                    <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Conductividad_K" label="K+" color="green"></v-checkbox>
-                                                    <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Conductividad_HCO3" label="HCO3" color="green"></v-checkbox>
+                                                    <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Conductividad.Na" label="Na+" color="green"></v-checkbox>
+                                                    <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Conductividad.K" label="K+" color="green"></v-checkbox>
+                                                    <v-checkbox class="align-center justify-center" v-model="tabs[pacientes.indexOf(paciente)].Conductividad.HCO3" label="HCO3" color="green"></v-checkbox>
                                                 </v-container>
                                             </ul>
                                             <ul>
@@ -263,7 +263,6 @@
                                                     label="Peso delta"
                                                     outline
                                                     class="mitad"
-                                                    :rules="expedienteRules"
                                                 ></v-text-field>
                                             </ul>
                                         </ol>
@@ -370,24 +369,32 @@ export default {
                     tabid: index,
                     pass: true,
                     Hemodialisis: '',
-                    Via: '',
+                    Via: {
+                        Lugar: '',
+                        Direccion: '',
+                    },
                     Lineas_pediatricas: '',
                     Filtro: '',
                     Flujo_dializante: '',
                     Flujo_sangre: '',
                     UF: '',
-                    Heparinizacion: '',
-                    TiempoH: '',
-                    TiempoM: '',
-                    Conductividad_Na: '',
-                    Conductividad_K: '',
-                    Conductividad_HCO3: '',
+                    Heparinizacion: {
+                        Cebado: '',
+                        Transdialisis: '',
+                    },
+                    Tiempo: {
+                        Horas: '',
+                        Minutos: '',
+                    },
+                    Conductividad: {
+                        Na: '',
+                        K:'',
+                        HCO3: '',
+                    },
                     Peso_pre: '',
                     Peso_post: '',
                     Peso_delta: '',
                     Talla: '',
-                    Fecha_col_cat: null,
-                    menu_col_cat: false,
                     Procedencia: '',
                     Registro: this.pacientes[index].Numero_expediente,
                     Numero: '',
@@ -397,6 +404,10 @@ export default {
                 }
             )
         }
+        });
+        const id = this.this.tabs[this.activeTab].idPaciente
+        this.$http.get("http://localhost:8000/hemodialisis/getHemoNumber", id).then(response => {
+            this.tabs[this.activeTab].Hemodialisis = response.count + 1;
         });
         this.todaysDate = new Date();
         this.gettodaysDateFormatted();
@@ -450,7 +461,7 @@ export default {
             let weightPost = this.tabs[this.activeTab].Peso_post
             this.tabs[this.activeTab].Peso_delta = Math.abs(weightPre - weightPost)
         },
-        /* Al comenzar el proceso de hemodiálisis, se espera 30min antes de guardar los datos, pero antes de poder hacerlo, 
+        /* Al comenzar el proceso de hemodiálisis, se espera 15-30min antes de guardar los datos, pero antes de poder hacerlo, 
             se activa un cuadro de diálogo para verificar que los datos ingresados fueron correctos (porque no se pueden cambiar 
             una vez se haya guardado */
         activateTableDialog(){
