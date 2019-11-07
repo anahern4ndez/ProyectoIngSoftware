@@ -97,7 +97,7 @@ const routes = [
   },
   {
     path: '/Consulta/:idPaciente/:cui',
-    name: '/Consulta',
+    name: 'Consulta',
     component: Vue.component(
       'Consulta',
       require('./components/Consulta.vue').default

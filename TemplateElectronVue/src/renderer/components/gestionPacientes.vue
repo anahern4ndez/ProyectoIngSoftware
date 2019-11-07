@@ -195,7 +195,7 @@
         <router-link :to="{name: 'Consulta', params: { idPaciente: this.selectedPatients.id, cui: this.selectedPatients.CUI }}" class="btn btn-lg btn-warning btn-block">Dar Consulta</router-link>
       </div>
       <div class="boton">
-        <router-link :to="{name: 'cambioEstado', params: { cui: this.selectedPatients.CUI, nombre: this.selectedPatients.Nombre, edad: this.selectedPatients.Edad, sexo: this.selectedPatients.Sexo, estado: this.selectedPatients.estado_actual }}" class="btn btn-lg btn-warning btn-block">Editar estado de paciente seleccionado</router-link>
+        <router-link :to="{name: 'cambioEstado', params: { cui: this.selectedPatients.CUI, nombre: this.selectedPatients.Nombre, edad: this.selectedPatients.Edad, sexo: this.selectedPatients.Sexo, estado: this.selectedPatients.estado_actual, registro: this.selectedPatients.Numero_expediente }}" class="btn btn-lg btn-warning btn-block">Editar estado de paciente seleccionado</router-link>
       </div>
       <br>
       <div class="boton" style="width: 94%;">
@@ -307,14 +307,6 @@ export default {
           this.selectedPatients = this.pacientes[this.pacientes.indexOf(received)];
           this.selectedPatients.EstadoActual = this.pacientes[this.pacientes.indexOf(received)].estado_actual.significado
           this.imageData = this.selectedPatients.Imagen;
-        },
-        /* metodos de redirección de botones */
-        // falta vista para dar una consulta
-        darConsulta(){
-          this.$router.push('/Consulta');
-        },
-        eliminar(){
-          this.$router.push('/IngresarPaciente');
         },
         editarDatos(received){
           //this.dialog=true;
