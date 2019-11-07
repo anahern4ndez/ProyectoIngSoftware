@@ -212,10 +212,12 @@ export default {
       //esto deberia ser un arrray de pacientes que contengan todos sus atributos...
       
       this.pacientes = response.data.Pacientes;
+      
       //objeto utilizado para los labels..
       if (response.data.Pacientes[0] == null){
         console.log('No se han recibido pacientes. ');
       } else {
+        this.selectedPatients.id = response.data.Pacientes[0].id;
         this.selectedPatients.Nombre = response.data.Pacientes[0].Nombre;
         this.selectedPatients.Apellido = response.data.Pacientes[0].Apellido;
         this.selectedPatients.EstadoActual = response.data.Pacientes[0].estado_actual.significado;
@@ -237,10 +239,9 @@ export default {
         }
         this.selectedPatients.Edad = response.data.Pacientes[0].Edad;
       }
-          });
+    });
     this.$http.get(`http://localhost:8000/EstadoController/getAllEstado`).then(response =>{
       this.estados_response = response.data.Estados;
-
     });
   },
     data () {
@@ -266,6 +267,7 @@ export default {
         editedIndex: -1,
         pacientes: [],
         selectedPatients:{
+          id: '',
           Nombre: '',
           Apellido: '',
           EstadoActual: '',

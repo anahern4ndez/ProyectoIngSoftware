@@ -2623,7 +2623,7 @@ export default {
         this.todaysDate = date.getDate() + "-" +   + (date.getMonth() + 1) + "-" + date.getFullYear()
 
         // store.idPaciente = this.$params.idPaciente
-        console.log("ID PACIENTE: " + this.$route.params.idPaciente)        
+        console.log(this.$route.params.idPaciente) // ya jala :)
 
         const data = {
             ID: store.idPaciente // Aqui va el ID del paciente
