@@ -2616,11 +2616,14 @@ export default {
 
     mounted() {
         this.dialog = true
-        console.log("Id de paciente es: " + store.idPaciente);
+        // console.log("Id de paciente es: " + store.idPaciente);
 
         const date = new Date()
         this.fecha = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
         this.todaysDate = date.getDate() + "-" +   + (date.getMonth() + 1) + "-" + date.getFullYear()
+
+        // store.idPaciente = this.$params.idPaciente
+        console.log("ID PACIENTE: " + this.$route.params.idPaciente)        
 
         const data = {
             ID: store.idPaciente // Aqui va el ID del paciente
