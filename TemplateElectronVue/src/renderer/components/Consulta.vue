@@ -2631,7 +2631,6 @@ export default {
 
         const vacunm = {
             idPaciente: store.idPaciente,
-            fecha: this.fecha
         }
 
         this.$http.post(`http://localhost:8000/vacunaController/findOne`, vacunm).then(response => {
