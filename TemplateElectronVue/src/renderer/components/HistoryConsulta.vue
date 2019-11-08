@@ -38,7 +38,19 @@
             </b-row>
         </b-container>
 
-
+        <!-- Textarea -->
+        <div class="form-group encapsulado">
+            <div class="form-group">
+                <v-layout align-center justify-end />
+                <h3 class="headers text-xs-center">Historia</h3>
+                <v-textarea
+                    v-model="text.historia"
+                    outline
+                    rows=8
+                    :auto-grow=true
+                ></v-textarea>
+            </div>
+        </div>
 
 
 

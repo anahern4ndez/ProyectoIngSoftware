@@ -73,5 +73,5 @@ class HemodialisisController extends Controller
             'hemodialisis' => $register
         ], 200);
     }
-        
+      
 }

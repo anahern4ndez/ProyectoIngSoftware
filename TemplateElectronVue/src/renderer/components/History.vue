@@ -19,16 +19,16 @@
             </v-timeline-item>
            
             <v-timeline-item
+              v-for="(generalHistorial,index) in generalHistorial"
               class="mb-4"
-              color="red"
-              small
-              v-for="(fecha,index) in fechas">
+              v-bind:color="generalHistorial.color"
+              small>
             <v-container v-on:click="saludar(index)">  
               <v-row justify="space-between">
                   <v-col cols="7">
-                    Consulta
+                    {{generalHistorial.tipoDeFormulario}}
                   </v-col>
-                  <v-col class="text-right" cols="5">{{fecha}}</v-col>
+                  <v-col class="text-right" cols="5">{{generalHistorial.fecha}}</v-col>
               </v-row>
             </v-container>
             </v-timeline-item>
@@ -39,10 +39,10 @@
       </div>
       <div class = "Display">
         <h3 style="font-weight: bold;">Fecha:</h3>
-        <h3>{{this.fechas[this.number]}}</h3> 
+        <h3>{{this.generalHistorial[this.number].fecha}}</h3> 
         <div>
           <!--<img style="margin-left: 5%; margin-top: 5%" src="../assets/consulta.png" alt="" width="520" height="450">-->
-          <HistoryConsulta :text="this.consulta"></HistoryConsulta>
+          <HistoryConsulta :text="this.actual" v-if="actual.tipoDeFormulario==='Consulta'"></HistoryConsulta>
         </div>
       </div>
     </div>
@@ -69,11 +69,16 @@
 <script>
   import { store } from '../main';
   import HistoryConsulta from "./HistoryConsulta";
+import { Cookies } from 'electron';
   export default {
     components: {HistoryConsulta},
     data: () => ({
         consultas: [],
+        cEstados:[],
         consulta: null,
+        actual: {tipoDeFormulario: null},
+        generalHistorial: [],
+        cEstado: null,
         paciente: {
             nombre: 'Karlie',
             apellido: 'Rath',
@@ -86,7 +91,6 @@
       const data = {
             ID: store.idPaciente // Aqui va el ID del paciente
         };
-
       this.$http.post(`http://localhost:8000/PacienteController/findById`, data).then(response => {            
 
             if(response.data.Paciente[0] == null){
@@ -94,22 +98,49 @@
             }else{
                 this.paciente.nombre = response.data.Paciente[0].Nombre;
                 this.paciente.apellido = response.data.Paciente[0].Apellido;
-                this.paciente.CUI = response.data.Paciente[0].CUI;
+                this.paciente.cui =62701571610;
             }
       }).then(() => {
-      this.$http.post("http://localhost:8000/ConsultaController/findAllUser", this.paciente.CUI).then(response => {
-        this.consultas = response.data.Consulta
-        for (let i =0; i < this.consultas.length; i++){
-          this.fechas.push(this.consultas[i].fecha)
-        }
-          this.consulta=this.consultas[0]
-        });
+        this.$http.post("http://localhost:8000/ConsultaController/findAllUser", this.paciente).then(response => {
+          this.consultas = response.data.Consulta
+          for (let i =0; i < this.consultas.length; i++){
+            this.consulta=this.consultas[i]
+            this.consulta.tipoDeFormulario = "Consulta"
+            this.consulta.color = "red"
+            this.generalHistorial.push(this.consulta)
+          }
+        }).then(() => {
+          this.$http.post("http://localhost:8000/cambioEstadoController/findAllUser", this.paciente).then(response => {
+            this.consultas = response.data.Consulta
+            for (let i =0; i < this.consultas.length; i++){
+              this.consulta=this.consultas[i]
+              this.consulta.tipoDeFormulario = "Cambio de estado"
+              this.consulta.color = "blue"
+              this.generalHistorial.push(this.consulta)
+            }
+          }).then(() => {
+            
+            this.generalHistorial.sort(function (d1, d2) {
+                return new Date(d1.fecha) - new Date(d2.fecha)
+            })
+
+            console.log(this.generalHistorial)
+            /*
+            const prueba = fechas
+            for (let i =0; i < prueba.length; i++){
+              -console.log(prueba[i])*/
+            //}
+          });
+        }) ;
+      
+      //consgole.log(this.fechas)
       })
     },
     methods: {
       saludar: function (n) {
         this.number=n
-        this.consulta=this.consultas[n]
+        this.actual=this.generalHistorial[n]
+        console.log(this.actual)
         
       }   
     },
