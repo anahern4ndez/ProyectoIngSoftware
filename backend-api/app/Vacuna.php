@@ -9,7 +9,6 @@ class Vacuna extends Model
     //
     public $timestamps = false;
     protected $fillable=[
-        'fecha',
         'idPaciente',
         'BCG',
         'Poliovirus',

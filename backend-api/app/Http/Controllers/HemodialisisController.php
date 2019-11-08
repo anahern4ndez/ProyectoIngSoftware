@@ -14,22 +14,16 @@ class HemodialisisController extends Controller
         $Hemodialisis->NoHemodialisis = $request->Numero;
         $Hemodialisis->LugarDeProcedencia = $request->Procedencia;
         $Hemodialisis->TipoDeHemodialisis = $request->Hemodialisis;
-        //$Via = $request->Via;
-        //$Hemodialisis['Via'] = json_encode($Via);
         $Hemodialisis->Via = $request->Via;
         $Hemodialisis->LineasPediatrica = $request->Lineas_pediatricas;
         $Hemodialisis->Filtro = $request->Filtro;
         $Hemodialisis->FlujoDeSangre = $request->Flujo_sangre;
         $Hemodialisis->FlujoDializante = $request->Flujo_dializante;
         $Hemodialisis->UF = $request->UF;
-        //$Hemodialisis->Heparinizacion_de_cebado = $request->Heparinizacion;
-        //$Hemodialisis->Heparinizacion_TransDialisis = $request->Heparinizacion_TransDialisis;
-        $Hemodialisis->Heparinizacion = $request->Heparinizacion;
-        $Hemodialisis->TiempoH = $request->TiempoH;
-        $Hemodialisis->TiempoM = $request->TiempoM;
-        $Hemodialisis->Conductividad_Na = $request->Conductividad_Na;
-        $Hemodialisis->Conductividad_K = $request->Conductividad_K;
-        $Hemodialisis->Conductividad_HCO3 = $request->Conductividad_HCO3;
+        $Hemodialisis['Via'] = json_encode($request->Via);
+        $Hemodialisis['Heparinizacion'] = json_encode($request-> Heparinizacion);
+        $Hemodialisis['Tiempo'] = json_encode($request->Tiempo);
+        $Hemodialisis['Conductividad'] = json_encode($request->Conductividad);
         $Hemodialisis->PesoPre = $request->Peso_pre;
         $Hemodialisis->PesoPost = $request->Peso_post;
         $Hemodialisis->Talla = $request->Talla;
@@ -37,8 +31,7 @@ class HemodialisisController extends Controller
         $Hemodialisis->Especiales = $request->Especiales;
         
         $Hemodialisis->Observaciones = $request->Observaciones;
-        /*$Hemodialisis->Tecnico = $request->Tecnico;
-        $Hemodialisis->PA = $request->PA;*/
+        /*$Hemodialisis->Tecnico = $request->Tecnico;*/
         $Hemodialisis->save();
 
         return response()->json([
@@ -73,5 +66,12 @@ class HemodialisisController extends Controller
             'hemodialisis' => $register
         ], 200);
     }
-      
+    
+    public function getHemoNumber(Request $request){
+        $numberOfHemos = Hemodialisis::where('idPaciente', $request->idPaciente)->count();
+        return response()->json([
+            'success' => true,
+            'count' => $numberOfHemos
+        ], 200);
+    }
 }

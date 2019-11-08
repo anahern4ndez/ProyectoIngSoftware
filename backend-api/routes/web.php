@@ -112,6 +112,7 @@ $router->delete('/citas/{id}', 'CitasController@destroy');
 
 // HEMODIALISIS
 $router->post('/hemodialisis', 'HemodialisisController@store');
+$router->get('/hemodialisis/getHemoNumber', 'HemodialisisController@getHemoNumber');
 $router->post('/hemodialisis/storeTable', 'HemodialisisController@storeTable');
 $router->post('/hemodialisis/checkHemo', 'HemodialisisController@lookHemo');
 
