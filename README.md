@@ -6,7 +6,7 @@ Curso Ingeniería de Software, 2019. <br />
 [![Build Status](https://travis-ci.org/her17138/ProyectoIngSoftware.svg?branch=master)](https://travis-ci.org/her17138/ProyectoIngSoftware)
 
 
-## Description 
+## Descripción
 
 Este proyecto consiste en la automatización de la clínica de la unidad de Nefrología Infantil del Hospital Roosevelt de Guatemala, en conjunto con la Fundación para el Niño Enfermo Renal (Fundanier). Se incluyen funcionalidades como:
   - Realización de consultas
