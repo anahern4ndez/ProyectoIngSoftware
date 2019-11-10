@@ -403,11 +403,11 @@ export default {
                     idPaciente: response.data.Pacientes[index].id,
                 }
             )
+            /*const id = response.data.Pacientes[index].id
+            this.$http.get("http://localhost:8000/hemodialisis/getHemoNumber", id).then(response => {
+                this.tabs[index].Hemodialisis = response.count + 1;
+            });*/
         }
-        });
-        const id = this.this.tabs[this.activeTab].idPaciente
-        this.$http.get("http://localhost:8000/hemodialisis/getHemoNumber", id).then(response => {
-            this.tabs[this.activeTab].Hemodialisis = response.count + 1;
         });
         this.todaysDate = new Date();
         this.gettodaysDateFormatted();
