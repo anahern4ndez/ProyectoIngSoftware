@@ -97,6 +97,7 @@
                                         v-model="tabs[pacientes.indexOf(paciente)].Numero"
                                         label="No. de Hemodiálisis"
                                         outline
+                                        disabled
                                         class="mitad"
                                         :rules="expedienteRules"
                                     ></v-text-field>
@@ -360,7 +361,7 @@ export default {
             }
 
             this.pacientes = response.data.Pacientes;
-            //console.log(this.pacientes);
+            console.log(response.data.Pacientes);
             for (let index = 0; index < response.data.Pacientes.length; index++) {
             //const element = array[index];
             this.tabs.push(
@@ -397,7 +398,7 @@ export default {
                     Talla: '',
                     Procedencia: '',
                     Registro: this.pacientes[index].Numero_expediente,
-                    Numero: '',
+                    Numero: response.data.Pacientes[index].NoHemodialisis +1 ,
                     Especiales: '',
                     Observaciones: '',
                     idPaciente: response.data.Pacientes[index].id,
