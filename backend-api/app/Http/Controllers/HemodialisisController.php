@@ -66,12 +66,5 @@ class HemodialisisController extends Controller
             'hemodialisis' => $register
         ], 200);
     }
-    
-    public function getHemoNumber(Request $request){
-        $numberOfHemos = Hemodialisis::where('idPaciente', $request->idPaciente)->count();
-        return response()->json([
-            'success' => true,
-            'count' => $numberOfHemos
-        ], 200);
-    }
+
 }

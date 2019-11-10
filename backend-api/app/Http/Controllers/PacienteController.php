@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Paciente;
 use App\Models\Cita;
+use App\Hemodialisis;
 use DB;
 
 class PacienteController extends Controller
@@ -171,6 +172,7 @@ class PacienteController extends Controller
         $pacientesConHemodialisis = array();
         for ($i=0; $i < sizeof($idPacientesConCita); $i++) { 
             $pacientesConHemodialisis[$i] = Paciente::where('id', $idPacientesConCita[$i]['idPaciente'])->with('Procedencia', 'sexo_rel','Sindrome_Clinico_Presentacion', 'Tipo_de_Sangre', 'EstadoActual', 'Estudia', 'Transfusiones')->first();
+            $pacientesConHemodialisis[$i]['NoHemodialisis'] = Hemodialisis::where('idPaciente', $idPacientesConCita[$i]['idPaciente'])->count();
         }
         return response()->json([
             'success' => true,
