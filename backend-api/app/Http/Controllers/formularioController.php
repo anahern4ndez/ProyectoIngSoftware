@@ -37,4 +37,17 @@ class formularioController extends Controller
            'message' => 'guardado'
        ], 200);
    }
+   function findAllUser(Request $request){
+        
+        $cui = $request->cui;
+
+        $consulta = historiales::where([['CUI', '=', $cui],])->get();
+
+        return response()->json([
+            'cui'=> $cui,
+            'success' => true,
+            'Consulta' => $consulta,
+        ], 200);
+    
+    }
 }

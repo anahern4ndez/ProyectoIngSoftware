@@ -85,6 +85,10 @@ $router->post('/cambioEstadoController/findAllUser', 'cambioEstadoController@fin
 
 //save formularios
 $router->post('/formularioController/save', 'formularioController@save');
+<<<<<<< HEAD
+$router->post('/formularioController/findAllUser', 'formularioController@findAllUser');
+=======
+>>>>>>> 52bde08d7d788a2a9f6b46bbfef14eafe5a33388
 
 $router->delete('/users/destroy','ExampleController@destroy');
 $router->post('/users/create', 'ExampleController@store');
