@@ -52,4 +52,18 @@ class cambioEstadoController extends Controller
             'success' => true,
         ], 200);
     }
+
+    function findAllUser(Request $request){
+        
+        $cui = $request->cui;
+
+        $consulta = registroestado::where([['cui', '=', $cui],])->get();
+
+        return response()->json([
+            'cui'=> $cui,
+            'success' => true,
+            'Consulta' => $consulta,
+        ], 200);
+        
+    }
 }
