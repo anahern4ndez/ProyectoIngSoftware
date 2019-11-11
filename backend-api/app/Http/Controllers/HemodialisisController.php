@@ -67,4 +67,17 @@ class HemodialisisController extends Controller
         ], 200);
     }
 
+    public function findAllUser(Request $request){
+        
+        $id = $request->id;
+
+        $consulta = Hemodialisis::where([['idPaciente', '=', $id],])->get();
+
+        return response()->json([
+            'id'=> $id,
+            'success' => true,
+            'Consulta' => $consulta
+        ], 200);
+        
+    }
 }

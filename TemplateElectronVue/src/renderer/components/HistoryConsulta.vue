@@ -6,8 +6,6 @@
         <b-container class="bv-example-row2">
             <b-row class="justify-content-md-center">
                 <b-col>
-                </b-col>
-                <b-col>
                     <!-- Center-->
                     <div style="margin-left: 2%" class="form-group encapsulado">
                         <v-layout align-center justify-end />
@@ -178,7 +176,7 @@
                             <v-textarea
                                 outline
                                 rows=8
-                                v-model="text.evaluacion_psicologica"
+                                v-model="text.evaluacion_farmacologica"
                             ></v-textarea>
                         </div>
                     </b-col>
@@ -190,7 +188,7 @@
                             <v-textarea
                                 outline
                                 rows=8
-                                v-model="text.plan_psicologico"
+                                v-model="text.plan_farmacologico"
                             ></v-textarea>
                         </div>
                     </b-col>
@@ -203,6 +201,8 @@
 <script>
     export default {
         name: "HistoryConsulta",
+
+
         props:{
             text:{
                 //Suejto a cambio

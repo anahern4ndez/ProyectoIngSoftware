@@ -40,9 +40,11 @@
       <div class = "Display">
         <h3 style="font-weight: bold;">Fecha:</h3>
         <h3>{{this.generalHistorial[this.number].fecha}}</h3> 
-        <div>
+        <div class = "DisplayBox">
           <!--<img style="margin-left: 5%; margin-top: 5%" src="../assets/consulta.png" alt="" width="520" height="450">-->
           <HistoryConsulta :text="this.actual" v-if="actual.tipoDeFormulario==='Consulta'"></HistoryConsulta>
+          <cambioEstadoHistory :text="this.actual" v-if="actual.tipoDeFormulario==='Cambio de estado'"></cambioEstadoHistory>
+          <HemodialisisHistory :text="this.actual" v-if="actual.tipoDeFormulario==='Hemodiálisis'"></HemodialisisHistory> 
         </div>
       </div>
     </div>
@@ -64,14 +66,21 @@
    .Display{
      margin-left:20px;
    }
+   .DisplayBox{
+    height: 650px;
+    overflow: scroll;
+   }
 
 </style>
 <script>
   import { store } from '../main';
   import HistoryConsulta from "./HistoryConsulta";
+  import cambioEstadoHistory from "./cambioEstadoHistory";
+  import HemodialisisHistory from "./HemodialisisHistory";
 import { Cookies } from 'electron';
+import { log } from 'util';
   export default {
-    components: {HistoryConsulta},
+    components: {HistoryConsulta, cambioEstadoHistory, HemodialisisHistory},
     data: () => ({
         consultas: [],
         cEstados:[],
@@ -98,7 +107,8 @@ import { Cookies } from 'electron';
             }else{
                 this.paciente.nombre = response.data.Paciente[0].Nombre;
                 this.paciente.apellido = response.data.Paciente[0].Apellido;
-                this.paciente.cui =62701571610;
+                this.paciente.cui =1131671408;
+                this.paciente.id = 1;
             }
       }).then(() => {
         this.$http.post("http://localhost:8000/ConsultaController/findAllUser", this.paciente).then(response => {
@@ -110,6 +120,7 @@ import { Cookies } from 'electron';
             this.generalHistorial.push(this.consulta)
           }
         }).then(() => {
+          
           this.$http.post("http://localhost:8000/cambioEstadoController/findAllUser", this.paciente).then(response => {
             this.consultas = response.data.Consulta
             for (let i =0; i < this.consultas.length; i++){
@@ -118,22 +129,45 @@ import { Cookies } from 'electron';
               this.consulta.color = "blue"
               this.generalHistorial.push(this.consulta)
             }
+        
           }).then(() => {
             
+           this.$http.post("http://localhost:8000//hemodialisis/findAllUser", this.paciente).then(response => {
+            this.consultas = response.data.Consulta
+            for (let i =0; i < this.consultas.length; i++){
+              this.consulta=this.consultas[i]
+              this.consulta.tipoDeFormulario = "Hemodiálisis"
+              this.consulta.color = "green"
+              this.consulta.fecha = this.consulta.FechaHemodialisis
+      
+              this.consulta.HeparinizacionCebado = JSON.parse(this.consulta.Heparinizacion)['Cebado']
+              this.consulta.HeparinizacionTransdialisis = JSON.parse(this.consulta.Heparinizacion)['Transdialisis']
+              
+              this.consulta.ConductividadNa = JSON.parse(this.consulta.Conductividad)['Na']
+              this.consulta.ConductividadK = JSON.parse(this.consulta.Conductividad)['K']
+              this.consulta.ConductividadHCO3 = JSON.parse(this.consulta.Conductividad)['HCO3']
+              
+              this.consulta.TiempoHoras = JSON.parse(this.consulta.Tiempo)['Horas']
+              this.consulta.TiempoMinutos = JSON.parse(this.consulta.Tiempo)['Minutos']
+              
+              this.consulta.ViaLugar = JSON.parse(this.consulta.Via)['Lugar']
+              this.consulta.ViaDireccion = JSON.parse(this.consulta.Via)['Direccion']
+              
+              this.consulta.LugarDeProcedencia = this.consulta.LugarDeProcedencia === 1 ? "1" : "2";
+
+              this.consulta.FlujoDializante = String(this.consulta.FlujoDializante);
+
+              this.generalHistorial.push(this.consulta)
+            }
+
+          }).then(() => {
             this.generalHistorial.sort(function (d1, d2) {
                 return new Date(d1.fecha) - new Date(d2.fecha)
             })
-
             console.log(this.generalHistorial)
-            /*
-            const prueba = fechas
-            for (let i =0; i < prueba.length; i++){
-              -console.log(prueba[i])*/
-            //}
-          });
-        }) ;
-      
-      //consgole.log(this.fechas)
+            })
+          })
+        }) 
       })
     },
     methods: {
