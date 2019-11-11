@@ -26,7 +26,8 @@ jobs:
     - npm install
     - npm install -g snyk
     - snyk auth $SNYK_TOKEN
-    - snyk test
+    - snyk test --file=package-lock.json
+    - snyk test --file=package.json
     after_success:
     - cd ../
     - chmod +x push.sh
