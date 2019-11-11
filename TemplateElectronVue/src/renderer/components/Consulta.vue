@@ -2923,14 +2923,14 @@ export default {
             this.Dx_Asociado = this.Dx_Asociado + s +"\n"
         
         },
-         pesoPercentil(){
+        pesoPercentil(){
             const data = {
                 year : parseInt(this.paciente.years),
                 meses : parseInt(this.paciente.meses),
                 sexo : parseInt(this.paciente.sexo),
                 peso : parseFloat(this.datos_generales.Peso)
-            
             };
+
             this.$http.post("http://localhost:8000/percentilPeso", data).then(response => {
                 if (response.data.encontrado){
                     this.datos_generales.kg_perc = response.data.percentil.percentil;
@@ -2938,26 +2938,8 @@ export default {
                     this.datos_generales.kg_perc = "No aplica";
                 }
             });
-            if (this.datos_generales.Talla > 0){
-                const data = {
-                talla : parseFloat(this.datos_generales.Talla),
-                sexo : parseInt(this.paciente.sexo),
-                peso : parseFloat(this.datos_generales.Peso)
-                }
-
-                this.datos_generales.PA = this.datos_generales.Peso / this.datos_generales.Talla
-
-                this.$http.post("http://localhost:8000/percentilPesoTalla", data).then(response => {
-                
-                if (response.data.encontrado){
-                    this.datos_generales.Percentil = response.data.percentil.percentil;
-                } else {
-                    this.datos_generales.Percentil = "No aplica";
-                }
-                });
-            }
-            
         },
+
         tallaPercentil(){
             const data = {
                 year : parseInt(this.paciente.years),
@@ -2973,24 +2955,6 @@ export default {
                     this.datos_generales.cms_perc = "No aplica";
                 }
             });
-            if (this.datos_generales.Peso > 0){
-                const data = {
-                talla : parseFloat(this.datos_generales.Talla),
-                sexo : parseInt(this.paciente.sexo),
-                peso : parseFloat(this.datos_generales.Peso)
-                }
-
-                this.datos_generales.PA = this.datos_generales.Peso / this.datos_generales.Talla
-
-                this.$http.post("http://localhost:8000/percentilPesoTalla", data).then(response => {
-                
-                if (response.data.encontrado){
-                    this.datos_generales.Percentil = response.data.percentil.percentil;
-                } else {
-                    this.datos_generales.Percentil = "No aplica";
-                }
-                });
-            }
         },
 
         setVacunaData() {
