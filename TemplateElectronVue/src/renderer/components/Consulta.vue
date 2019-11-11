@@ -2826,14 +2826,14 @@ export default {
             this.Dx_Asociado = this.Dx_Asociado + s +"\n"
         
         },
-         pesoPercentil(){
+        pesoPercentil(){
             const data = {
                 year : parseInt(this.paciente.years),
                 meses : parseInt(this.paciente.meses),
                 sexo : parseInt(this.paciente.sexo),
                 peso : parseFloat(this.datos_generales.Peso)
-            
             };
+
             this.$http.post("http://localhost:8000/percentilPeso", data).then(response => {
                 if (response.data.encontrado){
                     this.datos_generales.kg_perc = response.data.percentil.percentil;
@@ -2861,6 +2861,7 @@ export default {
             }
             
         },
+
         tallaPercentil(){
             const data = {
                 year : parseInt(this.paciente.years),
