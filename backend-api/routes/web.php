@@ -81,13 +81,11 @@ $router->get('/EstadoController/getAllEstado', 'EstadoController@getAllEstado');
 //change status
 $router->post('/cambioEstadoController/save', 'cambioEstadoController@save');
 $router->put('/cambioEstadoController/updateEstadoPaciente', 'cambioEstadoController@updateEstadoPaciente');
-<<<<<<< HEAD
 $router->post('/cambioEstadoController/findAllUser', 'cambioEstadoController@findAllUser');
-=======
 
 //save formularios
 $router->post('/formularioController/save', 'formularioController@save');
->>>>>>> 7b1d1f197e8065370bb2c59c90dbe500a5b8c13a
+$router->post('/formularioController/findAllUser', 'formularioController@findAllUser');
 
 $router->delete('/users/destroy','ExampleController@destroy');
 $router->post('/users/create', 'ExampleController@store');
