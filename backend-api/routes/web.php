@@ -82,6 +82,8 @@ $router->get('/EstadoController/getAllEstado', 'EstadoController@getAllEstado');
 $router->post('/cambioEstadoController/save', 'cambioEstadoController@save');
 $router->put('/cambioEstadoController/updateEstadoPaciente', 'cambioEstadoController@updateEstadoPaciente');
 
+//save formularios
+$router->post('/formularioController/save', 'formularioController@save');
 
 $router->delete('/users/destroy','ExampleController@destroy');
 $router->post('/users/create', 'ExampleController@store');

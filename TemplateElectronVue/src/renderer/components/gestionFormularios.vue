@@ -76,6 +76,7 @@
                 cui: this.$route.params.cui,
                 name: this.$route.params.nombre,
                 apellido: this.$route.params.apellido,
+                nombrecompleto: this.$route.params.nombre + ' ' + this.$route.params.apellido,
                 fecha: new Date().toISOString().slice(0,10),
                 nombreNuevoFormulario: ' ',
             };
@@ -148,9 +149,17 @@
                 else{
                     // Subir Documento al servidor
                     // Mostrar mensaje de subida con exito
-                   console.log("Se subio el Formulario: "+this.path)
-                   this.exit = true;
-                   this.isDisabledSubirForm = true;
+
+                    // Subir formulario a base de datos
+                    this.$http.post(`http://localhost:8000/formularioController/save?NombreDoctor=${this.name}&NombrePaciente=${this.nombrecompleto}&cui=${this.cui}&fecha=${this.fecha}&TipoFormulario=${this.selectAbrir}&Path=${this.path}`
+                    ).then(response=>{
+                        console.log("Se subio el Formulario: "+this.path)
+                        this.exit = true;
+                        this.isDisabledSubirForm = true;
+                    }).catch(error => {
+                        console.log("Error");
+                    });
+
                 }
             },
             formClick: function(event){ // on a click on the button with id 'one'
