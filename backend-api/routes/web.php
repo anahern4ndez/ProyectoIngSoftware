@@ -81,7 +81,10 @@ $router->get('/EstadoController/getAllEstado', 'EstadoController@getAllEstado');
 //change status
 $router->post('/cambioEstadoController/save', 'cambioEstadoController@save');
 $router->put('/cambioEstadoController/updateEstadoPaciente', 'cambioEstadoController@updateEstadoPaciente');
+$router->post('/cambioEstadoController/findAllUser', 'cambioEstadoController@findAllUser');
 
+//save formularios
+$router->post('/formularioController/save', 'formularioController@save');
 
 $router->delete('/users/destroy','ExampleController@destroy');
 $router->post('/users/create', 'ExampleController@store');
@@ -112,9 +115,10 @@ $router->delete('/citas/{id}', 'CitasController@destroy');
 
 // HEMODIALISIS
 $router->post('/hemodialisis', 'HemodialisisController@store');
+$router->get('/hemodialisis/getHemoNumber', 'HemodialisisController@getHemoNumber');
 $router->post('/hemodialisis/storeTable', 'HemodialisisController@storeTable');
 $router->post('/hemodialisis/checkHemo', 'HemodialisisController@lookHemo');
-
+$router->post('/hemodialisis/findAllUser', 'HemodialisisController@findAllUser');
 // Enfermedades CIE 10
 $router->get('/dxs', 'DxController@getDxs');
 

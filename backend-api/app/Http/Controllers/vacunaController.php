@@ -16,7 +16,6 @@ class vacunaController extends Controller
         
         $vacuna = new Vacuna;
 
-        $vacuna->fecha = $request->fecha;
         $vacuna->idPaciente = $request->idPaciente;
         $vacuna->BCG = $request->BCG;
         $vacuna->Poliovirus = $request->Poliovirus;
@@ -37,9 +36,8 @@ class vacunaController extends Controller
 
     function updateAll(Request $request){
         $cui = $request->idPaciente;
-        $fecha = $request->fecha;
 
-        $toUpdate = Vacuna::where([['idPaciente', '=', $cui], ['fecha', '=', $fecha]])->first();
+        $toUpdate = Vacuna::where([['idPaciente', '=', $cui]])->first();
 
         $toUpdate->idPaciente = $request->idPaciente;
         $toUpdate->BCG = $request->BCG;
@@ -64,7 +62,7 @@ class vacunaController extends Controller
         $idPaciente = $request->idPaciente;
         $fecha = $request->fecha;
         
-        $vacuna = Vacuna::where([['idPaciente', '=', $idPaciente], ['fecha', '=', $fecha]])->get();
+        $vacuna = Vacuna::where([['idPaciente', '=', $idPaciente]])->get();
         
         if(count($vacuna) > 0){
             return response()->json([

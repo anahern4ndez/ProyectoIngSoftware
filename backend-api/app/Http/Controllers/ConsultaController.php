@@ -131,10 +131,12 @@ class ConsultaController extends Controller
 
     function findAllUser(Request $request){
         
-        $cui = $request;
+        $cui = $request->cui;
 
-        $consulta = Consulta::all();
+        $consulta = Consulta::where([['cui', '=', $cui],])->get();
+
         return response()->json([
+            'cui'=> $cui,
             'success' => true,
             'Consulta' => $consulta,
         ], 200);
