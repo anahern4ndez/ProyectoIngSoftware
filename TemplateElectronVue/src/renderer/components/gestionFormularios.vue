@@ -16,7 +16,19 @@
                     <br>
                     <!-- <v-btn text large color="yellow" type="button" href='ms-word:ofv|u|file:./CHOL.docx' >Abrir formulario</v-btn> -->
                     <v-btn text large color="yellow" type="button" v-on:click="startWord" :disabled='isDisabledAbrir'>Abrir formulario</v-btn>
-                    <v-btn text large color="yellow" @click="subirFormulario" ref="path" :disabled='isDisabledSubirForm'>Subir formulario</v-btn>
+                    <v-dialog v-model="dialog" persistent max-width="290">
+                        <template v-slot:activator="{ on }">
+                            <v-btn text large color="yellow" v-on="on" @click="subirFormulario" ref="path" :disabled='isDisabledSubirForm'>Subir formulario</v-btn>
+                        </template>
+                        <v-card>
+                            <v-card-title class="headline">Formulario guardado</v-card-title>
+                            <v-card-text>Se ha guardado el formulario del paciente exitosamente.</v-card-text>
+                            <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="yellow darken-1" text @click="dialog = false; regresarGestionPacientesView()">Seguir</v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-dialog>                   
                 </b-col>
                 <!-- <b-col cols="1" class="titulo1">
                 </b-col>
@@ -80,6 +92,7 @@
                 nombrecompleto: this.$route.params.nombre + ' ' + this.$route.params.apellido,
                 fecha: new Date().toISOString().slice(0,10),
                 nombreNuevoFormulario: ' ',
+                dialog: false,
             };
         },
         methods:{
@@ -190,6 +203,9 @@
                 {
                     console.log("Error al subir imagen al servidor");
                 }*/
+            },
+            regresarGestionPacientesView(){
+                this.$router.push('/gestionPacientes');
             },
         }
     };
