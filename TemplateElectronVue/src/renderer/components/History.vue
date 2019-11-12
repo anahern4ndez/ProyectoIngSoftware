@@ -88,7 +88,7 @@
         cEstados:[],
         consulta: null,
         actual: {tipoDeFormulario: null},
-        generalHistorial: [{fecha:""}],
+        generalHistorial: [{fecha:"", }],
         cEstado: null,
         paciente: {
             nombre: 'Karlie',
@@ -106,12 +106,14 @@
             if(response.data.Paciente[0] == null){
                 
             }else{
+                console.log(response.data)
                 this.paciente.nombre = response.data.Paciente[0].Nombre;
                 this.paciente.apellido = response.data.Paciente[0].Apellido;
-                this.paciente.cui =1131671408;
-                this.paciente.id = 1;
+                this.paciente.cui = response.data.Paciente[0].CUI;
+                this.paciente.id = response.data.Paciente[0].id;
             }
       }).then(() => {
+        this.generalHistorial = []
         this.$http.post("http://localhost:8000/ConsultaController/findAllUser", this.paciente).then(response => {
           this.consultas = response.data.Consulta
           this.generalHistorial = []
@@ -165,6 +167,7 @@
           }).then(() => {
               this.$http.post("http://localhost:8000/formularioController/findAllUser", this.paciente).then(response => {
               this.consultas = response.data.Consulta
+              console.log(this.consultas)
               for (let i =0; i < this.consultas.length; i++){
                 this.consulta=this.consultas[i]
                 this.consulta.tipoDeFormulario = "Formulario"

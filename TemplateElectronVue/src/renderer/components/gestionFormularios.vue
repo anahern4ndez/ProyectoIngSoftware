@@ -39,6 +39,7 @@
     </div>
 </template>
 <script>
+    import {store} from '../main'
     export default {
         mounted() {
         },
@@ -151,7 +152,7 @@
                     // Mostrar mensaje de subida con exito
 
                     // Subir formulario a base de datos
-                    this.$http.post(`http://localhost:8000/formularioController/save?NombreDoctor=${this.name}&NombrePaciente=${this.nombrecompleto}&cui=${this.cui}&fecha=${this.fecha}&TipoFormulario=${this.selectAbrir}&Path=${this.path}`
+                    this.$http.post(`http://localhost:8000/formularioController/save?NombreDoctor=${store.id}&cui=${this.cui}&fecha=${this.fecha}&TipoFormulario=${this.selectAbrir}&Path=${this.path}`
                     ).then(response=>{
                         console.log("Se subio el Formulario: "+this.path)
                         this.exit = true;
