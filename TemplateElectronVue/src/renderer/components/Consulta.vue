@@ -2525,7 +2525,7 @@ export default {
         this.fecha = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
         this.todaysDate = date.getDate() + "-" +   + (date.getMonth() + 1) + "-" + date.getFullYear()
 
-        // store.idPaciente = this.$params.idPaciente
+        store.idPaciente = this.$route.params.idPaciente
         console.log(this.$route.params.idPaciente) // ya jala :)
 
         const data = {
