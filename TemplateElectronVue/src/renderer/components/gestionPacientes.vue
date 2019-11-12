@@ -192,7 +192,7 @@
         <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="ingresarNuevo">Ingresar nuevo paciente</button>
       </div>
       <div class="boton">
-        <router-link :to="{name: 'Consulta', params: { idPaciente: this.selectedPatients.id, cui: this.selectedPatients.CUI }}" class="btn btn-lg btn-warning btn-block">Dar Consulta</router-link>
+        <router-link :to="{name: 'gestionarPaciente', params: { idPaciente: this.selectedPatients.id, cui: this.selectedPatients.CUI }}" class="btn btn-lg btn-warning btn-block">Dar Consulta</router-link>
       </div>
       <div class="boton">
         <router-link :to="{name: 'cambioEstado', params: { cui: this.selectedPatients.CUI, nombre: this.selectedPatients.Nombre, edad: this.selectedPatients.Edad, sexo: this.selectedPatients.Sexo, estado: this.selectedPatients.estado_actual, registro: this.selectedPatients.Numero_expediente }}" class="btn btn-lg btn-warning btn-block">Editar estado de paciente seleccionado</router-link>
