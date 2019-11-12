@@ -314,16 +314,10 @@
                                             outline
                                             type =number
                                             min=0
-                                            :disabled="true"
                                         ></v-text-field>
                                         </b-col>
                                         <b-col>
-                                        <v-text-field
-                                            v-model="datos_generales.Percentil"
-                                            label="Percentil"
-                                            outline
-                                            :disabled="true"
-                                        ></v-text-field>
+                                       
                                         </b-col>
                                     </b-row>
 
@@ -1620,97 +1614,6 @@
                 </div>
 
             </v-tab-item>
-
-            <v-tab-item>
-                <div class="cuerpo">
-                    <h1 style="text-align: center;">Detalles físicos</h1>
-
-                    <div class="encapsulado">
-                        <b-container>
-                            <b-row >
-                                <b-col cols="2">
-                                    <h3 style="font-weight: bold;">Paciente: </h3>  
-                                </b-col>
-                                <b-col cols="10">
-                                    <h3 style="text-align: left;">Juan García</h3>  
-                                </b-col>
-                                <b-col></b-col>
-                            </b-row>
-
-                            <br>
-
-                            <b-row >
-                                <b-col>
-                                    <v-select
-                                        :items="fisico"
-                                        label="Variable"
-                                        outline
-                                        height = 0.5
-                                    ></v-select>
-                                </b-col>
-                                <b-col>
-                                    <v-select
-                                        :items="tiempo"
-                                        label="Tiempo"
-                                        outline
-                                        height = 0.5
-                                    ></v-select>
-                                </b-col>
-                                <b-col>
-                                    <button type="button" class="btn btn-lg btn-warning btn-block centrado">Generar gráfica</button> 
-                                </b-col>
-                            </b-row >
-                        </b-container>
-                    </div>
-                </div>
-            </v-tab-item>
-
-            <v-tab-item>
-                <div class="cuerpo">
-                    <h1 style="text-align: center;">Signos vitales</h1>
-
-                    <div class="encapsulado">
-                        <b-container>
-                            <b-row >
-                                <b-col>
-                                    <h3 class="headers" style="font-weight: bold;">Paciente: </h3>  
-                                </b-col>
-                                <b-col>
-                                    <h3>Juan García</h3>  
-                                </b-col>
-                                <b-col></b-col>
-                                <b-col></b-col>
-                                <b-col></b-col>
-                                <b-col></b-col>
-                            </b-row>
-
-                            <br>
-
-                            <b-row >
-                                <b-col>
-                                    <v-select
-                                        :items="vital"
-                                        label="Variable"
-                                        outline
-                                        height = 0.5
-                                    ></v-select>
-                                </b-col>
-                                <b-col>
-                                    <v-select
-                                        :items="tiempo"
-                                        label="Tiempo"
-                                        outline
-                                        height = 0.5
-                                    ></v-select>
-                                </b-col>
-                                <b-col>
-                                    <button type="button" class="btn btn-lg btn-warning btn-block centrado">Generar gráfica</button> 
-                                </b-col>
-                            </b-row >
-                        </b-container>
-                    </div>
-                </div>
-            </v-tab-item>
             
             <v-tab-item>
                 <div class="cuerpo">
@@ -2598,7 +2501,7 @@ export default {
         showComments: [],
         cardComments: [],
 
-        tabs: ["Consulta", "Detalles físicos", "Signos vitales", "Mapa médico"],
+        tabs: ["Consulta", "Mapa médico"],
 
         datos: [],
         sindromes: [],
@@ -2622,7 +2525,7 @@ export default {
         this.fecha = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
         this.todaysDate = date.getDate() + "-" +   + (date.getMonth() + 1) + "-" + date.getFullYear()
 
-        // store.idPaciente = this.$params.idPaciente
+        store.idPaciente = this.$route.params.idPaciente
         console.log(this.$route.params.idPaciente) // ya jala :)
 
         const data = {
@@ -2938,6 +2841,25 @@ export default {
                     this.datos_generales.kg_perc = "No aplica";
                 }
             });
+            if (this.datos_generales.Talla > 0){
+                const data = {
+                talla : parseFloat(this.datos_generales.Talla),
+                sexo : parseInt(this.paciente.sexo),
+                peso : parseFloat(this.datos_generales.Peso)
+                }
+
+                
+
+                this.$http.post("http://localhost:8000/percentilPesoTalla", data).then(response => {
+                
+                if (response.data.encontrado){
+                    this.datos_generales.Percentil = response.data.percentil.percentil;
+                } else {
+                    this.datos_generales.Percentil = "No aplica";
+                }
+                });
+            }
+            
         },
 
         tallaPercentil(){
@@ -2955,6 +2877,24 @@ export default {
                     this.datos_generales.cms_perc = "No aplica";
                 }
             });
+            if (this.datos_generales.Peso > 0){
+                const data = {
+                talla : parseFloat(this.datos_generales.Talla),
+                sexo : parseInt(this.paciente.sexo),
+                peso : parseFloat(this.datos_generales.Peso)
+                }
+
+                
+
+                this.$http.post("http://localhost:8000/percentilPesoTalla", data).then(response => {
+                
+                if (response.data.encontrado){
+                    this.datos_generales.Percentil = response.data.percentil.percentil;
+                } else {
+                    this.datos_generales.Percentil = "No aplica";
+                }
+                });
+            }
         },
 
         setVacunaData() {
