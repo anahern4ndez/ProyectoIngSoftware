@@ -466,11 +466,20 @@ export default {
         const serverUser = 'adminlocal';
         const serverPath = '/home/adminlocal/Dowloads';
 
-        var string =`pscp -pw ${serverPassword} "${pcPath}" ${serverUser}@${ipServer}:${serverPath}`;        
+        const idUsr = '1';
+        const dir = process.cwd() + `\\temp\\usrs\\${idUsr}\\`;
+        const nombreFoto = 'limbo.jpg';
 
-        shell.exec(string);
+        console.log(dir);
 
-      } catch (error) 
+        const string =`xcopy "${pcPath}" "${dir}" /i`;
+        const rename = `cd ${dir} & ren ${nombreFoto} prfl.jpg`;
+
+
+        console.log(shell.exec(string));
+        console.log(shell.exec(rename));
+
+      } catch (error)
       {
 
         console.log("Error al subir imagen al servidor");
