@@ -157,6 +157,7 @@ export default {
 
   mounted() {
     this.$refs.calendar.scrollToTime("07:50");
+    store.id = store.state.user.id
     this.id = store.id;
   },
 

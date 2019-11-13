@@ -13,7 +13,7 @@ class historiales extends Model
      * @var array
      */
     protected $fillable = [
-        'NombreDelDoctor', 'NombreDelPaciente', 'CUI', 'fecha', 'TipoFormulario', 'Path'
+        'IdDoctor', 'CUI', 'fecha', 'TipoFormulario', 'Path'
     ];
     public $timestamps =false;
     protected $primaryKey  = 'Path';

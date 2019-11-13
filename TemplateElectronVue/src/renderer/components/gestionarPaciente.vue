@@ -238,6 +238,10 @@ export default {
     mounted() {
         const date = new Date()
         this.fecha = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+
+        store.idPaciente = this.$route.params.idPaciente
+        console.log("Gestionar paciente: " + store.id)
+        // store.id = this.$route.params.cui
         
         const data = {
             ID: store.idPaciente // Aqui va el ID del paciente

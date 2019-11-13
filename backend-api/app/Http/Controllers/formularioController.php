@@ -23,8 +23,7 @@ class formularioController extends Controller
    public function save(Request $request)
    {   
        $formularios = new historiales;
-       $formularios->NombreDelDoctor = $request->NombreDoctor;
-       $formularios->NombreDelPaciente = $request->NombrePaciente;
+       $formularios->IdDoctor= $request->NombreDoctor;
        $formularios->CUI = $request->cui;
        $formularios->fecha = $request->fecha;
        $formularios->TipoFormulario = $request->TipoFormulario;

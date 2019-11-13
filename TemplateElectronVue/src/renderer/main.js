@@ -53,10 +53,11 @@ const routes = [
     )
   },
   {
-    path: '/gestionarPaciente',
+    path: '/gestionarPaciente/:idPaciente/:cui',
+    name: 'gestionarPaciente',
     component: Vue.component(
-      'page-one',
-      require('./components//gestionarPaciente.vue').default
+      'gestionarPaciente',
+      require('./components/gestionarPaciente.vue').default
     )
   },
   {
@@ -96,7 +97,7 @@ const routes = [
     )
   },
   {
-    path: '/Consulta/:idPaciente/:cui',
+    path: '/Consulta',
     name: 'Consulta',
     component: Vue.component(
       'Consulta',
