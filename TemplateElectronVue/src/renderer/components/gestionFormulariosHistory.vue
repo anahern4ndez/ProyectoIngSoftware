@@ -11,7 +11,7 @@
                         label="Tipo de formulario"
                         outline
                         disabled
-                        class="mitad"                    
+                        class="mitad"
                     ></v-text-field>
 
                     <br>

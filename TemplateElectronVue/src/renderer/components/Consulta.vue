@@ -22,7 +22,7 @@
             <v-tab-item>
                 <div class="cuerpo">
                     <form class="form-horizontal" >
-                        <fieldset>                       
+                        <fieldset>
 
                         <!-- Text input-->
                         <div class="form-group ">
@@ -46,7 +46,7 @@
                                                 </b-row>
                                             </b-container>
                                         </div>
-                                    </b-col>                       
+                                    </b-col>
                                     <b-col>
                                         <!-- Right-->
                                         <div style="margin-left: 2%">

@@ -133,29 +133,41 @@
                     this.nombreNuevoFormulario = this.direccionMortalidad.concat('_',this.name,'_',this.apellido,'_',this.fecha,'.docx');
                     dirCopy = this.dirMortalidad;
                 }
+
+                const idPaciente = 0;
+                const pathNuevo = process.cwd() + `\\temp\\pcnts\\${idPaciente}\\${this.selectAbrir}\\${this.fecha}\\` + this.nombreNuevoFormulario
+                this.nombreNuevoFormulario = `.\\temp\\pcnts\\${idPaciente}\\${this.selectAbrir}\\${this.fecha}\\` + this.nombreNuevoFormulario;
                 // Se sacara una copia del archivo original y se pondra en uno NUEVO
+
                 fs.copyFile(dirCopy, this.nombreNuevoFormulario, (err) => {
-                    if (err) throw err;
-                    console.log('Archivo copiado con Exito');
-                    //console.log(dirCopy);
-                    //console.log(dir);
-                    this.path = dir.concat('\\',this.nombreNuevoFormulario);
-                    //console.log(this.path)
-                    shell.openItem(this.nombreNuevoFormulario);
-                });
+                    if (err)
+                    {
+                        var shelljs = require('shelljs');
+                        let nodePath = (shelljs.which('node').toString());
+                        shelljs.config.execPath = nodePath;
+                        const string =`mkdir ".\\temp\\pcnts\\${idPaciente}\\${this.selectAbrir}\\${this.fecha}\\"`;
+                        shelljs.exec(string);
+
+                        fs.copyFile(dirCopy, this.nombreNuevoFormulario, (err) => {
+                            if (err) throw err;
+                            shell.openItem(pathNuevo);
+                        });
+                    }
+
+                })
+
+                this.path = pathNuevo;
+                shell.openItem(pathNuevo);
             },
+
             changeDisableAbrir(event){
                 if(this.selectAbrir !== ' '){
                     this.isDisabledAbrir = false
                 }
             },
-            //changeDisableSubir(event){
-                //if(this.selectSubir !== ' '){
-                    //this.isDisabledSubir = false,
-                    //this.isDisabledSubirForm = false
-                //}
-            //},
+
             subirFormulario(){
+                console.log(this.path);
                 if(this.path === ' '){
                     // Mostrar Alerta
                     console.log("No se pudo subir Formulario")
@@ -165,6 +177,8 @@
                     // Mostrar mensaje de subida con exito
 
                     // Subir formulario a base de datos
+                    console.log(this.cui);
+                    console.log(store.id);
                     this.$http.post(`http://localhost:8000/formularioController/save?NombreDoctor=${store.id}&cui=${this.cui}&fecha=${this.fecha}&TipoFormulario=${this.selectAbrir}&Path=${this.path}`
                     ).then(response=>{
                         console.log("Se subio el Formulario: "+this.path)
