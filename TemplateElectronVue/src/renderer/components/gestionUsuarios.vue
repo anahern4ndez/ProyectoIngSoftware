@@ -452,46 +452,47 @@ export default {
       //Este el el path de la imagen
       this.path = input.files[0].path;
       console.log(this.path);
+      
 
-      try 
-      {
+      this.$http.get(`http://localhost:8000/users/getID`).then(response=>{
+        //console.log(response.data.idersia.id)
+        try 
+        {
 
-        var shell = require('shelljs');
-        let nodePath = (shell.which('node').toString());
-        shell.config.execPath = nodePath;
+          var shell = require('shelljs');
+          let nodePath = (shell.which('node').toString());
+          shell.config.execPath = nodePath;
 
-        const ipServer = '192.168.0.156';
-        const serverPassword = 'perritoUVG';
-        const pcPath = this.path;
-        const serverUser = 'adminlocal';
-        const serverPath = '/home/adminlocal/Dowloads';
+          const ipServer = '192.168.0.156';
+          const serverPassword = 'perritoUVG';
+          const pcPath = this.path;
+          const serverUser = 'adminlocal';
+          const serverPath = '/home/adminlocal/Dowloads';
+          //console.log(parseInt(response.data.idersia.id) + 1);
 
-        const idUsr = '1';
-        const dir = process.cwd() + `\\temp\\usrs\\${idUsr}\\`;
-        const nombreFoto = 'limbo.jpg';
+          const idUsr = parseInt(response.data.idersia.id) + 1;
+          const dir = process.cwd() + `\\temp\\usrs\\${idUsr}\\`;
 
-        console.log(dir);
+          //console.log(this.path.split("\\").pop());
+          const nombreFoto = this.path.split("\\").pop();
 
-        const string =`xcopy "${pcPath}" "${dir}" /i`;
-        const rename = `cd ${dir} & ren ${nombreFoto} prfl.jpg`;
+          console.log(dir);
 
-
-        console.log(shell.exec(string));
-        console.log(shell.exec(rename));
-
-      } catch (error)
-      {
-
-        console.log("Error al subir imagen al servidor");
-      }
+          const string =`xcopy "${pcPath}" "${dir}" /i`;
+          const rename = `cd ${dir} & ren ${nombreFoto} prfl.jpg`;
 
 
+          console.log(shell.exec(string));
+          console.log(shell.exec(rename));
 
+        } catch (error)
+        {
 
-
-
-
-
+          console.log("Error al subir imagen al servidor");
+        }
+      });
+      input.value = '';
+       
     },
     modificar(){
       this.errorName = false;
