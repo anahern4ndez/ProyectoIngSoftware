@@ -17,11 +17,11 @@ class formularioController extends Controller
     */
    public function __construct()
    {
-       
+
    }
 
    public function save(Request $request)
-   {   
+   {
        $formularios = new historiales;
        $formularios->IdDoctor= $request->NombreDoctor;
        $formularios->CUI = $request->cui;
@@ -37,7 +37,7 @@ class formularioController extends Controller
        ], 200);
    }
    function findAllUser(Request $request){
-        
+
         $cui = $request->cui;
 
         $consulta = historiales::where([['CUI', '=', $cui],])->get();
@@ -47,6 +47,6 @@ class formularioController extends Controller
             'success' => true,
             'Consulta' => $consulta,
         ], 200);
-    
+
     }
 }

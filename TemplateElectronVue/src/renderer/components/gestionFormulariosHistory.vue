@@ -16,7 +16,7 @@
 
                     <br>
                     <!-- <v-btn text large color="yellow" type="button" href='ms-word:ofv|u|file:./CHOL.docx' >Abrir formulario</v-btn> -->
-                    <v-btn text large color="yellow" type="button">Abrir formulario</v-btn>
+                    <v-btn text large color="yellow" type="button" @click="abrirFormulario">Abrir formulario</v-btn>
                 </b-col>
    
             </b-row>
@@ -42,7 +42,15 @@
             }
         },
         mounted(){
-        }
+        },
+        methods:{
+            abrirFormulario(){
+                console.log("Abriendo " + this.consulta.path);
+                const {shell} = require('electron');
+                // Obtener path del formulario e ingresarlo como parámetro
+                shell.openItem(this.consulta.path);
+            }
+        },
     }
 </script>
 <style>

@@ -28,7 +28,7 @@
                             <v-btn color="yellow darken-1" text @click="dialog = false; regresarGestionPacientesView()">Seguir</v-btn>
                             </v-card-actions>
                         </v-card>
-                    </v-dialog>                   
+                    </v-dialog>
                 </b-col>
                 <!-- <b-col cols="1" class="titulo1">
                 </b-col>
@@ -175,10 +175,7 @@
                 else{
                     // Subir Documento al servidor
                     // Mostrar mensaje de subida con exito
-
                     // Subir formulario a base de datos
-                    console.log(this.cui);
-                    console.log(store.id);
                     this.$http.post(`http://localhost:8000/formularioController/save?NombreDoctor=${store.id}&cui=${this.cui}&fecha=${this.fecha}&TipoFormulario=${this.selectAbrir}&Path=${this.path}`
                     ).then(response=>{
                         console.log("Se subio el Formulario: "+this.path)
@@ -201,22 +198,7 @@
                 this.path = input.files[0].path;
                 console.log(this.path);
                 input.value = '';
-                /* try
-                {
-                    var shell = require('shelljs');
-                    let nodePath = (shell.which('node').toString());
-                    shell.config.execPath = nodePath;
-                    const ipServer = '192.168.0.156';
-                    const serverPassword = 'perritoUVG';
-                    const pcPath = this.path;
-                    const serverUser = 'adminlocal';
-                    const serverPath = '/home/adminlocal/Dowloads';
-                    var string =`pscp -pw ${serverPassword} "${pcPath}" ${serverUser}@${ipServer}:${serverPath}`;
-                    shell.exec(string);
-                } catch (error)
-                {
-                    console.log("Error al subir imagen al servidor");
-                }*/
+
             },
             regresarGestionPacientesView(){
                 this.$router.push('/gestionPacientes');

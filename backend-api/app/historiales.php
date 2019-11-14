@@ -13,8 +13,8 @@ class historiales extends Model
      * @var array
      */
     protected $fillable = [
-        'IdDoctor', 'CUI', 'fecha', 'TipoFormulario', 'Path'
+        'id','IdDoctor', 'CUI', 'fecha', 'TipoFormulario', 'Path'
     ];
-    public $timestamps =false;
-    protected $primaryKey  = 'Path';
+    public $timestamps = false;
+    protected $primaryKey  = 'id';
 }
