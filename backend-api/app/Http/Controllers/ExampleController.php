@@ -189,4 +189,14 @@ class ExampleController extends Controller
             'message'=>'Funciono',
         ], 200);
     }
+
+    public function getMaxId(Request $request)
+    {
+        $idersia = DB::table('users')->find(\DB::table('users')->max('id'));;
+        return response()->json([
+            'success' => true,
+            'idersia' => $idersia,
+            'message'=>'Funciono',
+        ], 200);
+    }
 }

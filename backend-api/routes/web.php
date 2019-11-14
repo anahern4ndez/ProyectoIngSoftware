@@ -91,6 +91,7 @@ $router->delete('/users/destroy','ExampleController@destroy');
 $router->post('/users/create', 'ExampleController@store');
 $router->put('/users/update', 'ExampleController@update');
 $router->post('/doLogin', 'HomeController@printInfo');
+$router->get('/users/getID', 'ExampleController@getMaxId');
 
 $router->put('/DG/updateDG', 'ExampleController@updateDG');
 
