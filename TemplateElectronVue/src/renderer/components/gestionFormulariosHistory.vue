@@ -45,10 +45,10 @@
         },
         methods:{
             abrirFormulario(){
-                console.log("Abriendo " + this.consulta.path);
+                console.log("Abriendo " + this.text.Path);
                 const {shell} = require('electron');
                 // Obtener path del formulario e ingresarlo como parámetro
-                shell.openItem(this.consulta.path);
+                shell.openItem(this.text.Path);
             }
         },
     }
