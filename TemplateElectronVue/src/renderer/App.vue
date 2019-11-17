@@ -156,6 +156,7 @@ export default {
       this.$http
         .post("http://localhost:8000/logout")
         .then(response => {
+          this.$store.commit("logout");
           this.$router.push("/login");
         })
         .catch(error => {

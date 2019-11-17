@@ -133,7 +133,6 @@ export default {
           email: this.email,
           password: this.password
         };
-        // console.log(data);
         this.$http
           .post("http://localhost:8000/login", data)
           .then(response => {
