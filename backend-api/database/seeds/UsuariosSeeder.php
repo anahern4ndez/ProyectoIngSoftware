@@ -44,6 +44,7 @@ class UsuariosSeeder extends Seeder {
                 break;
             case 2:
                 $user->givePermissionTo('ver pacientes');
+                $user->givePermissionTo('editar pacientes');
                 $user->save();
                 break;
         }
