@@ -20,6 +20,8 @@ class PermissionSeeder extends Seeder {
         Permission::create(['name' => 'crear pacientes']);
         Permission::create(['name' => 'editar citas']);
         Permission::create(['name' => 'borrar citas']);
+        Permission::create(['name' => 'ver estadisticas']);
+        Permission::create(['name' => 'gestionar formularios']);
 
         // create roles and assign created permissions
 

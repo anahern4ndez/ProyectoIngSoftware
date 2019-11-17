@@ -95,43 +95,50 @@ export default {
         {
           name: "Gestionar Usuario",
           route: "/gestionUsuarios",
-          icon: "fa-users"
+          icon: "fa-users",
+          permission: "crear usuarios"
         },
         {
           name: "Gestionar Paciente",
           route: "/gestionPacientes",
-          icon: "fa-user-injured"
+          icon: "fa-user-injured",
+          permission: "ver pacientes"
         },
         {
           name: "Gestión de Citas",
           route: "/Citas",
           icon: "fa-calendar-check",
-          permission: 'agendar citas'
+          permission: "agendar citas"
         },
         {
           name: "Datos paciente",
           route: "/Datos",
-          icon: "fa-user-injured"
+          icon: "fa-user-injured",
+          permission: "ver pacientes"
         },
         {
           name: "Cambio Estado",
           route: "/cambioEstado/:cui",
-          icon: "fa-flag"
+          icon: "fa-flag",
+          permission: "editar pacientes"
         },
         {
           name: "Hemodialisis",
           route: "/Hemodialisis",
-          icon: "fa-flag"
+          icon: "fa-flag",
+          permission: "realizar hemodialisis"
         },
         {
           name: "Gestionar Formularios",
           route: "/gestionFormularios",
-          icon: "fa-flag"
+          icon: "fa-flag",
+          permission: "gestionar formularios"
         },
         {
           name: "Estadísticas",
           route: "/EstadisticaGeneral",
-          icon: "fa-flag"
+          icon: "fa-flag",
+          permission: "ver estadisticas"
         }
       ]
     };
