@@ -1,7 +1,7 @@
-Feature: Citas
+Feature: BDD Security
     As a admin I want to create users.
 
-    Scenario: Store User
+    Scenario: Store User Security
         When I send a POST request to "/users/create" with body:
         """"
         {
@@ -16,7 +16,7 @@ Feature: Citas
         Then the response code should be 200
         And the JSON response should have a "message" containing "creado"
     
-    Scenario: Update User
+    Scenario: Update User Security
         When I send a PUT request to "/users/update" with body:
         """"
         {
@@ -31,7 +31,7 @@ Feature: Citas
         Then the response code should be 200
         And the JSON response should have a "message" containing "actualizado"
 
-    Scenario: Destroy User
+    Scenario: Destroy User Security
         When I send a DELETE request to "/users/destroy" with body:
         """"
         {

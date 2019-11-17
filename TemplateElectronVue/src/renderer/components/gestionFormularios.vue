@@ -66,6 +66,8 @@
                 'Transfusión',
                 'Hemodialisis',
                 'Mortalidad',
+                'Cambio Status',
+                'Biopsia Renal',
                 ],
                 path: ' ',
                 // referencia: 'ms-word:ofv|u|file:///C:/Users/Ulises/Desktop/CHOL.docx',
@@ -85,6 +87,10 @@
                 dirHemodialisis: 'Hemodialisis.docx',
                 direccionMortalidad: 'Mortalidad',
                 dirMortalidad: 'Mortalidad.docx',
+                direccionCambioStatus: 'CambioStatus',
+                dirCambioStatus: 'CambioStatus.docx',
+                direccionBiopsiaRenal: 'BiopsiaRenal',
+                dirBiopsiaRenal: 'BiopsiaRenal.docx',
                 exit: true,
                 cui: this.$route.params.cui,
                 name: this.$route.params.nombre,
@@ -132,6 +138,16 @@
                     //dir += this.direccionMortalidad;
                     this.nombreNuevoFormulario = this.direccionMortalidad.concat('_',this.name,'_',this.apellido,'_',this.fecha,'.docx');
                     dirCopy = this.dirMortalidad;
+                }
+                else if(this.selectAbrir === 'CambioStatus'){
+                    //dir += this.direccionMortalidad;
+                    this.nombreNuevoFormulario = this.direccionCambioStatus.concat('_',this.name,'_',this.apellido,'_',this.fecha,'.docx');
+                    dirCopy = this.dirCambioStatus;
+                }
+                else if(this.selectAbrir === 'BiopsiaRenal'){
+                    //dir += this.direccionMortalidad;
+                    this.nombreNuevoFormulario = this.direccionBiopsiaRenal.concat('_',this.name,'_',this.apellido,'_',this.fecha,'.docx');
+                    dirCopy = this.dirBiopsiaRenal;
                 }
 
                 const idPaciente = 0;
