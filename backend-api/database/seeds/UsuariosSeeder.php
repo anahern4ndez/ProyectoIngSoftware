@@ -36,7 +36,10 @@ class UsuariosSeeder extends Seeder {
                 $user->givePermissionTo('agendar citas');
                 $user->givePermissionTo('crear usuarios');
                 $user->givePermissionTo('editar pacientes');
-                $user->givePermissionTo('realizar hemodialisis');    
+                $user->givePermissionTo('realizar hemodialisis');
+                $user->givePermissionTo('crear pacientes');
+                $user->givePermissionTo('editar citas');
+                $user->givePermissionTo('borrar citas');    
                 $user->save();
                 break;
             case 2:

@@ -17,6 +17,9 @@ class PermissionSeeder extends Seeder {
         Permission::create(['name' => 'crear usuarios']);
         Permission::create(['name' => 'editar pacientes']);
         Permission::create(['name' => 'realizar hemodialisis']);
+        Permission::create(['name' => 'crear pacientes']);
+        Permission::create(['name' => 'editar citas']);
+        Permission::create(['name' => 'borrar citas']);
 
         // create roles and assign created permissions
 
