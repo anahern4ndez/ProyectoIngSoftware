@@ -11,17 +11,27 @@ class PermissionSeeder extends Seeder {
      */
     public function run() {
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
-
-        Permission::create(['name' => 'ver pacientes']);
-        Permission::create(['name' => 'agendar citas']);
-        Permission::create(['name' => 'crear usuarios']);
-        Permission::create(['name' => 'editar pacientes']);
-        Permission::create(['name' => 'realizar hemodialisis']);
+        
         Permission::create(['name' => 'crear pacientes']);
+        Permission::create(['name' => 'ver pacientes']);
+        Permission::create(['name' => 'editar pacientes']);
+        Permission::create(['name' => 'borrar pacientes']);
+        Permission::create(['name' => 'dar consulta']);
+
+        
+        Permission::create(['name' => 'gestionar usuarios']);
+        Permission::create(['name' => 'realizar hemodialisis']);
+
+        Permission::create(['name' => 'agendar citas']);
         Permission::create(['name' => 'editar citas']);
         Permission::create(['name' => 'borrar citas']);
+
         Permission::create(['name' => 'ver estadisticas']);
-        Permission::create(['name' => 'gestionar formularios']);
+        Permission::create(['name' => 'ingresar formularios']);
+        Permission::create(['name' => 'vista general']);
+
+        Permission::create(['name' => 'crear usuarios']);
+
 
         // create roles and assign created permissions
 
@@ -31,26 +41,42 @@ class PermissionSeeder extends Seeder {
         $roleAdmin->givePermissionTo(Permission::all());
 
 
-
-        $roleTec = Role::create(['name' => 'tecnico']);
-        $roleTec->givePermissionTo('realizar hemodialisis');
-        $roleTec->givePermissionTo('ver pacientes');
-
-
-
-        $roleDr = Role::create(['name' => 'doctor']);
-        $roleDr->givePermissionTo('ver pacientes');
-        $roleDr->givePermissionTo('editar pacientes');
-        $roleDr->givePermissionTo('agendar citas');
+        //dr
+        $rolePro = Role::create(['name' => 'profesional']);
+        $rolePro->givePermissionTo('realizar hemodialisis');
+        $rolePro->givePermissionTo('ver pacientes');
+        $rolePro->givePermissionTo('editar pacientes');
+        $rolePro->givePermissionTo('crear pacientes');
+        $rolePro->givePermissionTo('dar consulta');
+        $rolePro->givePermissionTo('agendar citas');
+        $rolePro->givePermissionTo('ingresar formularios');
 
 
         $role = Role::create(['name' => 'secretaria']);
         $role->givePermissionTo('agendar citas');
         $role->givePermissionTo('editar pacientes');
         $role->givePermissionTo('ver pacientes');
-
+        $role->givePermissionTo('crear pacientes');
+        $role->givePermissionTo('borrar pacientes');
+        $role->givePermissionTo('vista general');
         
+
+
+        $roleAssist = Role::create(['name' => 'asistente']);
+        $roleAssist->givePermissionTo('agendar citas');
+        $roleAssist->givePermissionTo('editar pacientes');
+        $roleAssist->givePermissionTo('ver pacientes');
+        $roleAssist->givePermissionTo('crear pacientes');
+        $roleAssist->givePermissionTo('borrar pacientes');
+        $roleAssist->givePermissionTo('realizar hemodialisis');
+
+        $roleTec = Role::create(['name' => 'tecnico']);
+        $roleTec->givePermissionTo('realizar hemodialisis');
+
+        $roleVi =Role::create(['name' => 'visitante']);
+        $roleVi->givePermissionTo('agendar citas');
+        $roleVi->givePermissionTo('ingresar formularios');
         
 
     }
-}
+}   
