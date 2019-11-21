@@ -138,9 +138,19 @@
                     Por favor, revise que haya ingresado los datos requeridos, y que sean válidos
                     </v-alert>
                 </div>
-                <div>
-                    <button float="left" type="button" class="btn btn-lg btn-warning btn-block" v-on:click="ingresarNuevoEstado">Ingresar nuevo estado</button> 
-                </div>
+                <v-dialog v-model="dialog" persistent max-width="290">
+                    <template v-slot:activator="{ on }">
+                        <button float="left" type="button" class="btn btn-lg btn-warning btn-block" v-on:click="ingresarNuevoEstado" v-on="on">Ingresar nuevo estado</button> 
+                    </template>
+                    <v-card>
+                        <v-card-title class="headline">Estado del paciente guardado</v-card-title>
+                        <v-card-text>Se ha guardado el estado del paciente exitosamente.</v-card-text>
+                        <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="yellow darken-1" text @click="dialog = false; regresarGestionPacientesView()">Seguir</v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
             </b-container>
         </div>
     </div>
@@ -156,15 +166,15 @@
                 cui: this.$route.params.cui,
                 name:this.$route.params.nombre,
                 age: this.$route.params.edad,
-                //register: '',
-                register: this.$route.params.cui,
+                register: this.$route.params.registro,
                 sexo: this.$route.params.sexo,
                 fecha: new Date().toISOString().slice(0,10),
                 menu: false,
                 actual: this.$route.params.estado.ID,
                 cambio: '',
                 errorFaltanDatos: false,
-                
+                dialog: false,
+                exit: false,
                 //Hacer las reglas
                 radioRules:[
                     v => !!v || 'Debe seleccionar una opción'
@@ -204,6 +214,7 @@
                         //this.register = ' ';
                         //this.sexo = ' ';
                         //this.fecha = null;
+                        this.exit = true;
                         this.menu = false;
                         this.actual = this.$route.params.estado.ID;
                         this.cambio = ' ';
@@ -214,8 +225,12 @@
                 }
                 else{
                     this.errorFaltanDatos = true;
+                    this.exit = false;
                 }
-            }
+            },
+            regresarGestionPacientesView(){
+                this.$router.push('/gestionPacientes');
+            },
         }
     };
 

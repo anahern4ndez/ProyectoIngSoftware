@@ -16,7 +16,19 @@
                     <br>
                     <!-- <v-btn text large color="yellow" type="button" href='ms-word:ofv|u|file:./CHOL.docx' >Abrir formulario</v-btn> -->
                     <v-btn text large color="yellow" type="button" v-on:click="startWord" :disabled='isDisabledAbrir'>Abrir formulario</v-btn>
-                    <v-btn text large color="yellow" @click="subirFormulario" ref="path" :disabled='isDisabledSubirForm'>Subir formulario</v-btn>
+                    <v-dialog v-model="dialog" persistent max-width="290">
+                        <template v-slot:activator="{ on }">
+                            <v-btn text large color="yellow" v-on="on" @click="subirFormulario" ref="path" :disabled='isDisabledSubirForm'>Subir formulario</v-btn>
+                        </template>
+                        <v-card>
+                            <v-card-title class="headline">Formulario guardado</v-card-title>
+                            <v-card-text>Se ha guardado el formulario del paciente exitosamente.</v-card-text>
+                            <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="yellow darken-1" text @click="dialog = false; regresarGestionPacientesView()">Seguir</v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-dialog>
                 </b-col>
                 <!-- <b-col cols="1" class="titulo1">
                 </b-col>
@@ -39,6 +51,7 @@
     </div>
 </template>
 <script>
+    import {store} from '../main'
     export default {
         mounted() {
         },
@@ -53,6 +66,8 @@
                 'Transfusión',
                 'Hemodialisis',
                 'Mortalidad',
+                'Cambio Status',
+                'Biopsia Renal',
                 ],
                 path: ' ',
                 // referencia: 'ms-word:ofv|u|file:///C:/Users/Ulises/Desktop/CHOL.docx',
@@ -72,6 +87,10 @@
                 dirHemodialisis: 'Hemodialisis.docx',
                 direccionMortalidad: 'Mortalidad',
                 dirMortalidad: 'Mortalidad.docx',
+                direccionCambioStatus: 'CambioStatus',
+                dirCambioStatus: 'CambioStatus.docx',
+                direccionBiopsiaRenal: 'BiopsiaRenal',
+                dirBiopsiaRenal: 'BiopsiaRenal.docx',
                 exit: true,
                 cui: this.$route.params.cui,
                 name: this.$route.params.nombre,
@@ -79,6 +98,7 @@
                 nombrecompleto: this.$route.params.nombre + ' ' + this.$route.params.apellido,
                 fecha: new Date().toISOString().slice(0,10),
                 nombreNuevoFormulario: ' ',
+                dialog: false,
             };
         },
         methods:{
@@ -119,29 +139,51 @@
                     this.nombreNuevoFormulario = this.direccionMortalidad.concat('_',this.name,'_',this.apellido,'_',this.fecha,'.docx');
                     dirCopy = this.dirMortalidad;
                 }
+                else if(this.selectAbrir === 'CambioStatus'){
+                    //dir += this.direccionMortalidad;
+                    this.nombreNuevoFormulario = this.direccionCambioStatus.concat('_',this.name,'_',this.apellido,'_',this.fecha,'.docx');
+                    dirCopy = this.dirCambioStatus;
+                }
+                else if(this.selectAbrir === 'BiopsiaRenal'){
+                    //dir += this.direccionMortalidad;
+                    this.nombreNuevoFormulario = this.direccionBiopsiaRenal.concat('_',this.name,'_',this.apellido,'_',this.fecha,'.docx');
+                    dirCopy = this.dirBiopsiaRenal;
+                }
+
+                const idPaciente = 0;
+                const pathNuevo = process.cwd() + `\\temp\\pcnts\\${idPaciente}\\${this.selectAbrir}\\${this.fecha}\\` + this.nombreNuevoFormulario
+                this.nombreNuevoFormulario = `.\\temp\\pcnts\\${idPaciente}\\${this.selectAbrir}\\${this.fecha}\\` + this.nombreNuevoFormulario;
                 // Se sacara una copia del archivo original y se pondra en uno NUEVO
+
                 fs.copyFile(dirCopy, this.nombreNuevoFormulario, (err) => {
-                    if (err) throw err;
-                    console.log('Archivo copiado con Exito');
-                    //console.log(dirCopy);
-                    //console.log(dir);
-                    this.path = dir.concat('\\',this.nombreNuevoFormulario);
-                    //console.log(this.path)
-                    shell.openItem(this.nombreNuevoFormulario);
-                });
+                    if (err)
+                    {
+                        var shelljs = require('shelljs');
+                        let nodePath = (shelljs.which('node').toString());
+                        shelljs.config.execPath = nodePath;
+                        const string =`mkdir ".\\temp\\pcnts\\${idPaciente}\\${this.selectAbrir}\\${this.fecha}\\"`;
+                        shelljs.exec(string);
+
+                        fs.copyFile(dirCopy, this.nombreNuevoFormulario, (err) => {
+                            if (err) throw err;
+                            shell.openItem(pathNuevo);
+                        });
+                    }
+
+                })
+
+                this.path = pathNuevo;
+                shell.openItem(pathNuevo);
             },
+
             changeDisableAbrir(event){
                 if(this.selectAbrir !== ' '){
                     this.isDisabledAbrir = false
                 }
             },
-            //changeDisableSubir(event){
-                //if(this.selectSubir !== ' '){
-                    //this.isDisabledSubir = false,
-                    //this.isDisabledSubirForm = false
-                //}
-            //},
+
             subirFormulario(){
+                console.log(this.path);
                 if(this.path === ' '){
                     // Mostrar Alerta
                     console.log("No se pudo subir Formulario")
@@ -149,9 +191,8 @@
                 else{
                     // Subir Documento al servidor
                     // Mostrar mensaje de subida con exito
-
                     // Subir formulario a base de datos
-                    this.$http.post(`http://localhost:8000/formularioController/save?NombreDoctor=${this.name}&NombrePaciente=${this.nombrecompleto}&cui=${this.cui}&fecha=${this.fecha}&TipoFormulario=${this.selectAbrir}&Path=${this.path}`
+                    this.$http.post(`http://localhost:8000/formularioController/save?NombreDoctor=${store.id}&cui=${this.cui}&fecha=${this.fecha}&TipoFormulario=${this.selectAbrir}&Path=${this.path}`
                     ).then(response=>{
                         console.log("Se subio el Formulario: "+this.path)
                         this.exit = true;
@@ -173,22 +214,10 @@
                 this.path = input.files[0].path;
                 console.log(this.path);
                 input.value = '';
-                /* try
-                {
-                    var shell = require('shelljs');
-                    let nodePath = (shell.which('node').toString());
-                    shell.config.execPath = nodePath;
-                    const ipServer = '192.168.0.156';
-                    const serverPassword = 'perritoUVG';
-                    const pcPath = this.path;
-                    const serverUser = 'adminlocal';
-                    const serverPath = '/home/adminlocal/Dowloads';
-                    var string =`pscp -pw ${serverPassword} "${pcPath}" ${serverUser}@${ipServer}:${serverPath}`;
-                    shell.exec(string);
-                } catch (error)
-                {
-                    console.log("Error al subir imagen al servidor");
-                }*/
+
+            },
+            regresarGestionPacientesView(){
+                this.$router.push('/gestionPacientes');
             },
         }
     };

@@ -22,7 +22,7 @@
             <v-tab-item>
                 <div class="cuerpo">
                     <form class="form-horizontal" >
-                        <fieldset>                       
+                        <fieldset>
 
                         <!-- Text input-->
                         <div class="form-group ">
@@ -46,7 +46,7 @@
                                                 </b-row>
                                             </b-container>
                                         </div>
-                                    </b-col>                       
+                                    </b-col>
                                     <b-col>
                                         <!-- Right-->
                                         <div style="margin-left: 2%">
@@ -314,16 +314,10 @@
                                             outline
                                             type =number
                                             min=0
-                                            :disabled="true"
                                         ></v-text-field>
                                         </b-col>
                                         <b-col>
-                                        <v-text-field
-                                            v-model="datos_generales.Percentil"
-                                            label="Percentil"
-                                            outline
-                                            :disabled="true"
-                                        ></v-text-field>
+                                       
                                         </b-col>
                                     </b-row>
 
@@ -1620,509 +1614,89 @@
                 </div>
 
             </v-tab-item>
-
-            <v-tab-item>
-                <div class="cuerpo">
-                    <h1 style="text-align: center;">Detalles físicos</h1>
-
-                    <div class="encapsulado">
-                        <b-container>
-                            <b-row >
-                                <b-col cols="2">
-                                    <h3 style="font-weight: bold;">Paciente: </h3>  
-                                </b-col>
-                                <b-col cols="10">
-                                    <h3 style="text-align: left;">Juan García</h3>  
-                                </b-col>
-                                <b-col></b-col>
-                            </b-row>
-
-                            <br>
-
-                            <b-row >
-                                <b-col>
-                                    <v-select
-                                        :items="fisico"
-                                        label="Variable"
-                                        outline
-                                        height = 0.5
-                                    ></v-select>
-                                </b-col>
-                                <b-col>
-                                    <v-select
-                                        :items="tiempo"
-                                        label="Tiempo"
-                                        outline
-                                        height = 0.5
-                                    ></v-select>
-                                </b-col>
-                                <b-col>
-                                    <button type="button" class="btn btn-lg btn-warning btn-block centrado">Generar gráfica</button> 
-                                </b-col>
-                            </b-row >
-                        </b-container>
-                    </div>
-                </div>
-            </v-tab-item>
-
-            <v-tab-item>
-                <div class="cuerpo">
-                    <h1 style="text-align: center;">Signos vitales</h1>
-
-                    <div class="encapsulado">
-                        <b-container>
-                            <b-row >
-                                <b-col>
-                                    <h3 class="headers" style="font-weight: bold;">Paciente: </h3>  
-                                </b-col>
-                                <b-col>
-                                    <h3>Juan García</h3>  
-                                </b-col>
-                                <b-col></b-col>
-                                <b-col></b-col>
-                                <b-col></b-col>
-                                <b-col></b-col>
-                            </b-row>
-
-                            <br>
-
-                            <b-row >
-                                <b-col>
-                                    <v-select
-                                        :items="vital"
-                                        label="Variable"
-                                        outline
-                                        height = 0.5
-                                    ></v-select>
-                                </b-col>
-                                <b-col>
-                                    <v-select
-                                        :items="tiempo"
-                                        label="Tiempo"
-                                        outline
-                                        height = 0.5
-                                    ></v-select>
-                                </b-col>
-                                <b-col>
-                                    <button type="button" class="btn btn-lg btn-warning btn-block centrado">Generar gráfica</button> 
-                                </b-col>
-                            </b-row >
-                        </b-container>
-                    </div>
-                </div>
-            </v-tab-item>
             
             <v-tab-item>
                 <div class="cuerpo">
                     <h1 style="text-align: center;">Mapa</h1>
                     <div class="encapsulado">
                         <h3 class="headers text-xs-center">Sangre</h3>
-                        <table class="table table-bordered table-ligth">
-                        <tbody>
-                            <tr>
-                                <th scope="row" style="width:10%;">Fecha</th>
-                                <th scope="row" style="width:10%;"></th>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="width:10%;">CO</th>
-                                <th scope="row" style="width:10%;"></th>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="width:10%;">C2</th>
-                                <th scope="row" style="width:10%;"></th>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="width:10%;">TAC</th>
-                                <th scope="row" style="width:10%;"></th>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="width:10%;">Na</th>
-                                <th scope="row" style="width:10%;">136-144</th>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="width:10%;">K</th>
-                                <th scope="row" style="width:10%;">3.3-5</th>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="width:10%;">Cl</th>
-                                <th scope="row" style="width:10%;">98-107</th>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="width:10%;">HCO3</th>
-                                <th scope="row" style="width:10%;">18-25</th>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="width:10%;">BUN</th>
-                                <th scope="row" style="width:10%;">7-20</th>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="width:10%;">Creatinina</th>
-                                <th scope="row" style="width:10%;">0.5-1.1</th>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="width:10%;">Glucosa</th>
-                                <th scope="row" style="width:10%;">60-115</th>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="width:10%;">Albumina</th>
-                                <th scope="row" style="width:10%;">3.5-4.6</th>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="width:10%;">Colesterol</th>
-                                <th scope="row" style="width:10%;">100-200</th>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="width:10%;">Trigliceridos</th>
-                                <th scope="row" style="width:10%;">20-175</th>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                                <td style="text-align: left;" ></td>
-                            </tr>          
-                            <tr>
-                                <th scope="row" style="width:10%;">Ácido Úrico</th>
-                                <th scope="row" style="width:10%;">3.4-9</th>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="width:10%;">Calcio</th>
-                                <th scope="row" style="width:10%;">8.8-10.4</th>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="width:10%;">Fósforo</th>
-                                <th scope="row" style="width:10%;">2.4-4.1</th>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="width:10%;">Fosfatosa Alk</th>
-                                <th scope="row" style="width:10%;">75-270</th>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="width:10%;">PTH</th>
-                                <th scope="row" style="width:10%;">11-54</th>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="width:10%;">DHL</th>
-                                <th scope="row" style="width:10%;">405-930</th>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="encapsulado">
+
+                        <v-data-table
+                            :headers="sangreHeaders"
+                            :items="sangreValues"
+                            hide-actions
+                            class="elevation-1"
+                        >
+                            <template slot="items" slot-scope="props">
+                                <td>{{ props.item.Fecha }}</td>
+                                <td >{{ props.item.CO }}</td>
+                                <td >{{ props.item.C2 }}</td>
+                                <td >{{ props.item.TAC }}</td>
+                                <td >{{ props.item.Na }}</td>
+                                <td >{{ props.item.K }}</td>
+                                <td >{{ props.item.Cl }}</td>
+                                <td >{{ props.item.HCO3 }}</td>
+                                <td >{{ props.item.BUN }}</td>
+                                <td >{{ props.item.Creatinina }}</td>
+                                <td >{{ props.item.Glucosa }}</td>
+                                <td >{{ props.item.Albumina }}</td>
+                                <td >{{ props.item.Colesterol }}</td>
+                                <td >{{ props.item.Tigliceridos }}</td>
+                                <td >{{ props.item.AcidoU }}</td>
+                                <td >{{ props.item.Calcio }}</td>
+                                <td >{{ props.item.Fosforo }}</td>
+                                <td >{{ props.item.Fosfato }}</td>
+                                <td >{{ props.item.PTH }}</td>
+                                <td >{{ props.item.DHL }}</td>
+                            </template>
+                        </v-data-table>
+                    </div>
+
+                    <div class="encapsulado">
                         <h3 class="headers text-xs-center">Hematología</h3>
-                        <table class="table table-bordered table-ligth">
-                        <tbody>
-                            <tr>
-                                <th scope="row" style="width:10%;">Fecha</th>
-                                <th scope="row" style="width:10%;"></th>
-                                <td ></td>
-                                <td ></td>
-                                <td ></td>
-                                <td ></td>
-                                <td ></td>
-                                <td ></td>
-                                <td ></td>
-                                <td ></td>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="width:10%;">G. Blancos</th>
-                                <th scope="row" style="width:10%;">3.7-10.1</th>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="width:10%;">Hb</th>
-                                <th scope="row" style="width:10%;">14.1-17.5</th>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="width:10%;">Ht</th>
-                                <th scope="row" style="width:10%;">43.1-51.5</th>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="width:10%;">Plaquetas</th>
-                                <th scope="row" style="width:10%;">140-440</th>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="width:10%;">Reticulocitos</th>
-                                <th scope="row" style="width:10%;"></th>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="encapsulado">
-                        
+
+                        <v-data-table
+                            :headers="hematologiaHeaders"
+                            :items="hematologiaeValues"
+                            hide-actions
+                            class="elevation-1"
+                        >
+                            <template slot="items" slot-scope="props">
+                                <td>{{ props.item.Fecha }}</td>
+                                <td >{{ props.item.GBlancos }}</td>
+                                <td >{{ props.item.Hb }}</td>
+                                <td >{{ props.item.Ht }}</td>
+                                <td >{{ props.item.Plaquetas }}</td>
+                                <td >{{ props.item.Reticulocitos }}</td>
+                            </template>
+                        </v-data-table>
+                    </div>
+
+                    <div class="encapsulado">
+                            
                         <h3 class="headers text-xs-center">Dinámica de Hierro</h3>
-                        <table class="table table-bordered table-ligth">
-                        <tbody>
-                            <tr>
-                                <th scope="row" style="width:10%;">Fecha</th>
-                                <th scope="row" style="width:10%;"></th>
-                                <td ></td>
-                                <td ></td>
-                                <td ></td>
-                                <td ></td>
-                                <td ></td>
-                                <td ></td>
-                                <td ></td>
-                                <td ></td>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="width:10%;">Hierro</th>
-                                <th scope="row" style="width:10%;">20-151</th>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="width:10%;">TIBC</th>
-                                <th scope="row" style="width:10%;">250-400</th>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="width:10%;">% Sal</th>
-                                <th scope="row" style="width:10%;">20-50</th>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="width:10%;">Ferritina</th>
-                                <th scope="row" style="width:10%;">10-60</th>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="width:10%;">Tranferrina</th>
-                                <th scope="row" style="width:10%;">212-360</th>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                                <td contenteditable='true' style="text-align: left;" ></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+
+                        <v-data-table
+                            :headers="hierroHeaders"
+                            :items="hierroValues"
+                            hide-actions
+                            class="elevation-1"
+                        >
+                            <template slot="items" slot-scope="props">
+                                <td>{{ props.item.Hierro }}</td>
+                                <td >{{ props.item.TIBC }}</td>
+                                <td >{{ props.item.sal }}</td>
+                                <td >{{ props.item.Ferritina }}</td>
+                                <td >{{ props.item.Tranferrina }}</td>
+                            </template>
+                        </v-data-table>
+                    </div>
+
                 <div class="encapsulado">
                         <h3 class="headers text-xs-center">Orina</h3>
+
+                
+
                         <table class="table table-bordered table-ligth">
                         <tbody>
                             <tr>
@@ -2337,9 +1911,108 @@ function check(a){
 }
 
 import { store } from '../main';
+import { error } from 'util';
 
 export default {
     data: () => ({
+
+        sangreHeaders: [
+            {
+            text: 'Fecha',
+            align: 'center',
+            value: 'Fecha'
+            },
+            { text: 'CO', value: 'CO', sortable: false, align: 'center' },
+            { text: 'C2', value: 'C2', sortable: false, align: 'center' },
+            { text: 'TAC', value: 'TAC', sortable: false, align: 'center' },
+            { text: 'Na (136 - 144)', value: 'Na', sortable: false, align: 'center' },
+            { text: 'K (3.3 - 5)', value: 'K', sortable: false, align: 'center' },
+            { text: 'Cl (98 - 107)', value: 'Cl', sortable: false, align: 'center' },
+            { text: 'HCO3 (18 - 25)', value: 'HCO3', sortable: false, align: 'center' },
+            { text: 'BUN (7 - 20)', value: 'BUN', sortable: false, align: 'center' },
+            { text: 'Creatinina (0.5 - 1.1)', value: 'Creatinina', sortable: false, align: 'center' },
+            { text: 'Glucosa (60 - 115)', value: 'Glucosa', sortable: false, align: 'center' },
+            { text: 'Albumina (3.5 - 4.6)', value: 'Albumina', sortable: false, align: 'center' },
+            { text: 'Colesterol (100 - 200)', value: 'Colesterol', sortable: false, align: 'center' },
+            { text: 'Tigliceridos (20 - 175)', value: 'Tigliceridos', sortable: false, align: 'center' },
+            { text: 'Ácido Úrico (3.4 - 9)', value: 'AcidoU', sortable: false, align: 'center' },
+            { text: 'Calcio (8.8 - 10.4)', value: 'Calcio', sortable: false, align: 'center' },
+            { text: 'Fósforo (2.4 - 4.1)', value: 'Fosforo', sortable: false, align: 'center' },
+            { text: 'Fosfato Alk (75 - 270)', value: 'Fosfato', sortable: false, align: 'center' },
+            { text: 'PTH (11 - 54)', value: 'PTH', sortable: false, align: 'center' },
+            { text: 'DHL (405 - 930)', value: 'DHL', sortable: false, align: 'center' }
+        ],
+        sangreValues: [
+            {}
+        ],
+
+        hematologiaHeaders: [
+            {
+            text: 'Fecha',
+            align: 'center',
+            value: 'Fecha'
+            },
+            { text: 'G. Blancos (3.7 - 10.1)', value: 'GBlancos', sortable: false, align: 'center' },
+            { text: 'Hb (14.1 - 17.5)', value: 'Hb', sortable: false, align: 'center' },
+            { text: 'Ht (43.1 - 51.5)', value: 'Ht', sortable: false, align: 'center' },
+            { text: 'Plaquetas (140 - 440)', value: 'Plaquetas', sortable: false, align: 'center' },
+            { text: 'Reticulocitos', value: 'Reticulocitos', sortable: false, align: 'center' }
+        ],
+        hematologiaValues: [
+            {}
+        ],
+
+        hierroHeaders: [
+            {
+            text: 'Fecha',
+            align: 'center',
+            value: 'Fecha'
+            },
+            { text: 'Hierro (20 - 151)', value: 'Hierro', sortable: false, align: 'center' },
+            { text: 'TIBC (250 - 400)', value: 'TIBC', sortable: false, align: 'center' },
+            { text: '% sal (20 - 50)', value: 'sal', sortable: false, align: 'center' },
+            { text: 'Ferritina (10 - 60)', value: 'Ferritina', sortable: false, align: 'center' },
+            { text: 'Tranferrina (212 - 360)', value: 'Tranferrina', sortable: false, align: 'center' }
+        ],
+        hierroValues: [
+            {}
+        ],
+
+        orinaHeaders: [
+            {
+            text: 'Fecha',
+            align: 'center',
+            value: 'Fecha'
+            },
+            { text: 'Creatinuria (15 - 20)', value: 'Creatinuria', sortable: false, align: 'center' },
+            { text: 'Proteinuria (0 - 4)', value: 'Proteinuria', sortable: false, align: 'center' },
+            { text: 'Up/Cr (< 0.2)', value: 'Up', sortable: false, align: 'center' },
+            { text: 'Calcicluria (0 - 4)', value: 'Calcicluria', sortable: false, align: 'center' },
+            { text: 'UCa/Cr (< 0.21)', value: 'UCa', sortable: false, align: 'center' },
+            { text: 'UAc. Úrico (< 0.57)', value: 'urico', sortable: false, align: 'center' },
+            { text: 'CCr', value: 'CCr', sortable: false, align: 'center' },
+            { text: '-CCr', value: 'MCCr', sortable: false, align: 'center' },
+            { text: 'KT/V', value: 'KT', sortable: false, align: 'center' },
+            { text: 'PET', value: 'PET', sortable: false, align: 'center' },
+        ],
+        orinaValues: [
+            {}
+        ],
+
+        otrosHeaders: [
+            {
+            text: 'Fecha',
+            align: 'center',
+            value: 'Fecha'
+            },
+            { text: 'Biopsia', value: 'Biopsia', sortable: false, align: 'center' },
+            { text: 'US', value: 'US', sortable: false, align: 'center' },
+            { text: 'Cambio de status', value: 'status', sortable: false, align: 'center' }
+        ],
+        otrosValues: [
+            {}
+        ],
+
         enfermedad: '',
         dialog: false,
         guardando: false,
@@ -2598,7 +2271,7 @@ export default {
         showComments: [],
         cardComments: [],
 
-        tabs: ["Consulta", "Detalles físicos", "Signos vitales", "Mapa médico"],
+        tabs: ["Consulta", "Mapa médico"],
 
         datos: [],
         sindromes: [],
@@ -2616,14 +2289,13 @@ export default {
 
     mounted() {
         this.dialog = true
-        // console.log("Id de paciente es: " + store.idPaciente);
 
         const date = new Date()
         this.fecha = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
         this.todaysDate = date.getDate() + "-" +   + (date.getMonth() + 1) + "-" + date.getFullYear()
 
-        // store.idPaciente = this.$params.idPaciente
-        console.log(this.$route.params.idPaciente) // ya jala :)
+        // store.idPaciente = this.$route.params.idPaciente
+        console.log("Consulta: " + store.id) // ya jala :)
 
         const data = {
             ID: store.idPaciente // Aqui va el ID del paciente
@@ -2923,14 +2595,14 @@ export default {
             this.Dx_Asociado = this.Dx_Asociado + s +"\n"
         
         },
-         pesoPercentil(){
+        pesoPercentil(){
             const data = {
                 year : parseInt(this.paciente.years),
                 meses : parseInt(this.paciente.meses),
                 sexo : parseInt(this.paciente.sexo),
                 peso : parseFloat(this.datos_generales.Peso)
-            
             };
+
             this.$http.post("http://localhost:8000/percentilPeso", data).then(response => {
                 if (response.data.encontrado){
                     this.datos_generales.kg_perc = response.data.percentil.percentil;
@@ -2945,7 +2617,7 @@ export default {
                 peso : parseFloat(this.datos_generales.Peso)
                 }
 
-                this.datos_generales.PA = this.datos_generales.Peso / this.datos_generales.Talla
+                
 
                 this.$http.post("http://localhost:8000/percentilPesoTalla", data).then(response => {
                 
@@ -2958,6 +2630,7 @@ export default {
             }
             
         },
+
         tallaPercentil(){
             const data = {
                 year : parseInt(this.paciente.years),
@@ -2980,7 +2653,7 @@ export default {
                 peso : parseFloat(this.datos_generales.Peso)
                 }
 
-                this.datos_generales.PA = this.datos_generales.Peso / this.datos_generales.Talla
+                
 
                 this.$http.post("http://localhost:8000/percentilPesoTalla", data).then(response => {
                 
@@ -3569,6 +3242,8 @@ export default {
 
                                 this.$http.post('http://localhost:8000/ComentarioController/insert', info).then(response => {
 
+                                }).catch(error => {
+                                    console.log("Error en no tiene comentarios")
                                 })
                             }else{
 
@@ -3592,6 +3267,8 @@ export default {
                                     json[String(a)][String(b)].hora.push(this.horaActual)
                                     json[String(a)][String(b)].comentario.push(this.comentario)
 
+                                    
+
                                     Object.assign(this.allComments[0], json)
                                 }else{
 
@@ -3605,13 +3282,14 @@ export default {
 
                                         var json = JSON.parse(string)
                                     
-                                        json[String(a)][String(b)].hora = []
-                                        json[String(a)][String(b)].comentario = []
+                                        json[String(b)].hora = []
+                                        json[String(b)].comentario = []
 
-                                        json[String(a)][String(b)].hora.push(this.horaActual)
-                                        json[String(a)][String(b)].comentario.push(this.comentario)
+                                        json[String(b)].hora.push(this.horaActual)
+                                        json[String(b)].comentario.push(this.comentario)
 
                                         Object.assign(this.allComments[0][String(a)], json)
+                                        console.log("Si tiene blah blah: " + JSON.stringify(this.allComments[0]))
                                     }else{
                                         console.log("tiene todo")
                                         this.allComments[0][String(a)][String(b)].hora.push(this.horaActual)
@@ -3619,12 +3297,15 @@ export default {
                                         console.log(JSON.stringify(this.allComments[0]))
                                     }
                                 }
+                                // console.log(JSON.stringify(this.allComments[0]))
                                 const info = {
                                     cui: this.paciente.CUI,
                                     comentarios: JSON.stringify(this.allComments[0])
                                 }
                                 this.$http.put('http://localhost:8000/ComentarioController/update', info).then(response => {
                                     
+                                }).catch(error => {
+                                    console.log("Error en si tiene comentarios")
                                 })
                             }
                         })
@@ -3700,11 +3381,11 @@ export default {
 
                                         var json = JSON.parse(string)
                                     
-                                        json[String(a)][String(b)].hora = []
-                                        json[String(a)][String(b)].comentario = []
+                                        json[String(b)].hora = []
+                                        json[String(b)].comentario = []
 
-                                        json[String(a)][String(b)].hora.push(this.horaActual)
-                                        json[String(a)][String(b)].comentario.push(this.comentario)
+                                        json[String(b)].hora.push(this.horaActual)
+                                        json[String(b)].comentario.push(this.comentario)
 
                                         Object.assign(this.allComments[0][String(a)], json)
                                     }else{
@@ -3713,6 +3394,8 @@ export default {
                                     }
                                 }
                             }
+
+                            console.log("segundo: " + JSON.stringify(this.allComments[0]))
 
                             const info = {
                                 cui: this.paciente.CUI,

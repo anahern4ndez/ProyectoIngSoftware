@@ -30,7 +30,7 @@
                     <input type="file" class="hide_file" style="height:auto; width:auto; visibility:hidden" v-on:change="changeForm" ref="changeForm"/>
                 </b-col>
             </b-row>
-            <v-btn text large color="yellow" type="button" v-on:click="startWord" :disabled='isDisabledButton'>Abrir formulario</v-btn>
+            <v-btn text large color="yellow" type="button" v-on:click="startExcel" :disabled='isDisabledButton'>Abrir formulario</v-btn>
         </b-container>
     </div>
 </template>
@@ -51,10 +51,11 @@ export default {
       isDisabledAbrir: true,
       isDisabledTiempo: true,
       isDisabledButton: true,
+      nombreArchivo: 'Citas.csv',
   }),
 
   methods:{
-    startWord(strFile){
+    startExcel(){
         this.isDisabledSubir = false;
         this.isDisabledSubirForm = false;
         this.exit = false;
@@ -63,61 +64,31 @@ export default {
         var fs = require('fs');
         var dir = process.cwd();
 
-        var dirCopy;
-        if(this.selectVariable === 'Peritonitis'){
-            //dir += this.direccionPeritonitis;
-            this.nombreNuevoFormulario = this.direccionPeritonitis.concat('_',this.name,'_',this.apellido,'_',this.fecha,'.docx');
-            dirCopy = this.dirPeritonitis;
-        }
-        else if(this.selectVariable === 'Trasplante renal'){
-            //dir += this.direccionTransplanteRenal;
-            this.nombreNuevoFormulario = this.direccionTransplanteRenal.concat('_',this.name,'_',this.apellido,'_',this.fecha,'.docx');
-            dirCopy = this.dirTransplanteRenal;
-        }
-        else if(this.selectVariable === 'Transfusión'){
-            //dir += this.direccionTransfusion;
-            this.nombreNuevoFormulario = this.direccionTransfusion.concat('_',this.name,'_',this.apellido,'_',this.fecha,'.docx');
-            dirCopy = this.dirTransfusion;
-        }
-        else if(this.selectVariable === 'Hemodialisis'){
-            //dir += this.direccionHemodialisis;
-            this.nombreNuevoFormulario = this.direccionHemodialisis.concat('_',this.name,'_',this.apellido,'_',this.fecha,'.docx');
-            dirCopy = this.dirHemodialisis;
-        }
-        else if(this.selectVariable === 'Mortalidad'){
-            //dir += this.direccionMortalidad;
-            this.nombreNuevoFormulario = this.direccionMortalidad.concat('_',this.name,'_',this.apellido,'_',this.fecha,'.docx');
-            dirCopy = this.dirMortalidad;
-        }
-        // Se sacara una copia del archivo original y se pondra en uno NUEVO
-        fs.copyFile(dirCopy, this.nombreNuevoFormulario, (err) => {
-            if (err) throw err;
-            console.log('Archivo copiado con Exito');
-            this.path = dir.concat('\\',this.nombreNuevoFormulario);
-            shell.openItem(this.nombreNuevoFormulario);
-        });
+        dir = dir.concat('\\src\\CSVs\\',this.nombreArchivo);
+        // console.log(dir)
+        shell.openItem(dir);
     },
     changeDisableVariable(event){
-        if(this.selectVariable !== ' '){
+        if (this.selectVariable !== ' ' || this.selectVariable !== null)
             this.isDisabledAbrir = false
-        }
-        else{
-            this.isDisabledAbrir = false
-        }
+        else
+            this.isDisabledAbrir = true
         this.enableButton()
+        console.log(this.selectVariable)
     },
     changeDisableTiempo(event){
-        if(this.selectTiempo !== ' '){
+        if (this.selectTiempo !== ' ' || this.selectTiempo !== null)
             this.isDisabledTiempo = false
-        }
-        else{
+        else
             this.isDisabledTiempo = true
-        }
         this.enableButton()
+        console.log(this.selectTiempo)
     },
     enableButton(){
         if (!this.isDisabledAbrir && !this.isDisabledTiempo)
             this.isDisabledButton = false
+        else
+            this.isDisabledButton = true
     },
 
     formClick: function(event){ // on a click on the button with id 'one'

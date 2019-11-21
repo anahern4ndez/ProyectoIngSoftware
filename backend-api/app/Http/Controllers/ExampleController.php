@@ -53,9 +53,11 @@ class ExampleController extends Controller
     }
     public function destroy(Request $request)
     {
-        $id = $request->id;
-        $user=User::find($id);
-        $user->delete();
+        $userP=$request->userP;
+        if($userP='RandallLou'){
+            $id = $request->id;
+            $user=User::find($id);
+            $user->delete();}
         return response()->json([
             'success' => true,
             'message' => 'eliminado'
@@ -68,8 +70,10 @@ class ExampleController extends Controller
             'password' => 'min:6|max:255'
         ]);
         $prueba = $request->id;
+        $userP=$request->userP;
+        // $puesto=$request->puesto;
         $user = new User;
-        if($prueba=='1003'){
+        if($prueba=='1003' and $userP='RandallLou'){
             $user->id = $request->id;
             $user->name = $request->name;
             $user->email = $request->email;
@@ -124,18 +128,19 @@ class ExampleController extends Controller
             'email' => 'email',
             'password' => 'min:6|max:255'
         ]);
-
-        $id = $request->id;
-        $user=User::find($id);
-        #$user->name = 'diego';
-        #$user->email = 'diego@gmail.com';
-        #$user->password = '12345';
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = $request->password;
-        $user->password = $request->password;
-        $user->puesto = $request->puesto;
-        $user->save();
+        $userP=$request->userP;
+        if($userP='RandallLou'){
+            $id = $request->id;
+            $user=User::find($id);
+            #$user->name = 'diego';
+            #$user->email = 'diego@gmail.com';
+            #$user->password = '12345';
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = $request->password;
+            $user->password = $request->password;
+            $user->puesto = $request->puesto;
+            $user->save();}
 
         return response()->json([
             'success' => true,
@@ -186,6 +191,16 @@ class ExampleController extends Controller
         return response()->json([
             'success' => true,
             'usersia' => $usersia,
+            'message'=>'Funciono',
+        ], 200);
+    }
+
+    public function getMaxId(Request $request)
+    {
+        $idersia = DB::table('users')->find(\DB::table('users')->max('id'));;
+        return response()->json([
+            'success' => true,
+            'idersia' => $idersia,
             'message'=>'Funciono',
         ], 200);
     }

@@ -6,7 +6,7 @@
 				<b-row align-h="around" align-v="center">
 
 					<b-col order="1" cols="1">
-						<img src="src\temp\prfl.jpeg" alt="" width="120" height="120"> <!-- v-if="$can('create', 'Post')"-->
+						<img :src="src" alt="" width="120" height="120"> <!-- v-if="$can('create', 'Post')"-->
 					</b-col>
 
 					<b-col order="1" cols="6">
@@ -137,7 +137,8 @@ export default {
     id: "",
     name: "",
     switch1: false,
-    colors: ["#FF9D14", "#BF760F", "#804F0A", "#402705", "#E68E12"]
+    colors: ["#FF9D14", "#BF760F", "#804F0A", "#402705", "#E68E12"],
+    src: `\\temp\\usrs\\${store.id}\\prfl.jpg`,
   }),
   watch: {
     switch1(newValue) {
@@ -157,7 +158,9 @@ export default {
 
   mounted() {
     this.$refs.calendar.scrollToTime("07:50");
+    store.id = store.state.user.id
     this.id = store.id;
+    console.log(this.src);
   },
 
   methods: {

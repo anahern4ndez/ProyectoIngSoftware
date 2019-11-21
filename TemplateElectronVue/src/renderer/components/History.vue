@@ -39,12 +39,13 @@
       </div>
       <div class = "Display">
         <h3 style="font-weight: bold;">Fecha:</h3>
-        <h3>{{this.generalHistorial[this.number].fecha}}</h3> 
+        <h3 v-if="this.generalHistorial !== []" >{{this.generalHistorial[this.number].fecha}}</h3>
         <div class = "DisplayBox">
           <!--<img style="margin-left: 5%; margin-top: 5%" src="../assets/consulta.png" alt="" width="520" height="450">-->
           <HistoryConsulta :text="this.actual" v-if="actual.tipoDeFormulario==='Consulta'"></HistoryConsulta>
           <cambioEstadoHistory :text="this.actual" v-if="actual.tipoDeFormulario==='Cambio de estado'"></cambioEstadoHistory>
           <HemodialisisHistory :text="this.actual" v-if="actual.tipoDeFormulario==='Hemodiálisis'"></HemodialisisHistory> 
+          <gestionFormulariosHistory :text="this.actual" v-if="actual.tipoDeFormulario==='Formulario'"></gestionFormulariosHistory>
         </div>
       </div>
     </div>
@@ -77,23 +78,23 @@
   import HistoryConsulta from "./HistoryConsulta";
   import cambioEstadoHistory from "./cambioEstadoHistory";
   import HemodialisisHistory from "./HemodialisisHistory";
-import { Cookies } from 'electron';
-import { log } from 'util';
+  import gestionFormulariosHistory from "./gestionFormulariosHistory";
+  import { Cookies } from 'electron';
+  import { log } from 'util';
   export default {
-    components: {HistoryConsulta, cambioEstadoHistory, HemodialisisHistory},
+    components: {HistoryConsulta, cambioEstadoHistory, HemodialisisHistory, gestionFormulariosHistory},
     data: () => ({
         consultas: [],
         cEstados:[],
         consulta: null,
         actual: {tipoDeFormulario: null},
-        generalHistorial: [],
+        generalHistorial: [{fecha:"", }],
         cEstado: null,
         paciente: {
             nombre: 'Karlie',
             apellido: 'Rath',
             CUI: ''
         },
-        fechas: [],
         number: 0
     }),
     mounted() {
@@ -105,14 +106,17 @@ import { log } from 'util';
             if(response.data.Paciente[0] == null){
                 
             }else{
+                console.log(response.data)
                 this.paciente.nombre = response.data.Paciente[0].Nombre;
                 this.paciente.apellido = response.data.Paciente[0].Apellido;
-                this.paciente.cui =1131671408;
-                this.paciente.id = 1;
+                this.paciente.cui = response.data.Paciente[0].CUI;
+                this.paciente.id = response.data.Paciente[0].id;
             }
       }).then(() => {
+        this.generalHistorial = []
         this.$http.post("http://localhost:8000/ConsultaController/findAllUser", this.paciente).then(response => {
           this.consultas = response.data.Consulta
+          this.generalHistorial = []
           for (let i =0; i < this.consultas.length; i++){
             this.consulta=this.consultas[i]
             this.consulta.tipoDeFormulario = "Consulta"
@@ -161,21 +165,29 @@ import { log } from 'util';
             }
 
           }).then(() => {
-            this.generalHistorial.sort(function (d1, d2) {
-                return new Date(d1.fecha) - new Date(d2.fecha)
-            })
-            console.log(this.generalHistorial)
+              this.$http.post("http://localhost:8000/formularioController/findAllUser", this.paciente).then(response => {
+              this.consultas = response.data.Consulta
+              console.log(this.consultas)
+              for (let i =0; i < this.consultas.length; i++){
+                this.consulta=this.consultas[i]
+                this.consulta.tipoDeFormulario = "Formulario"
+                this.consulta.color = "yellow"
+                this.generalHistorial.push(this.consulta)
+              }
+            }).then(() => {
+              this.generalHistorial.sort(function (d1, d2) {
+                return new Date(d2.fecha) - new Date(d1.fecha)
+              })
             })
           })
         }) 
       })
-    },
+    })
+  },
     methods: {
       saludar: function (n) {
         this.number=n
         this.actual=this.generalHistorial[n]
-        console.log(this.actual)
-        
       }   
     },
   }

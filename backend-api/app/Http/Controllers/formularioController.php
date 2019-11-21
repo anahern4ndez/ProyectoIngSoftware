@@ -17,14 +17,13 @@ class formularioController extends Controller
     */
    public function __construct()
    {
-       
+
    }
 
    public function save(Request $request)
-   {   
+   {
        $formularios = new historiales;
-       $formularios->NombreDelDoctor = $request->NombreDoctor;
-       $formularios->NombreDelPaciente = $request->NombrePaciente;
+       $formularios->IdDoctor= $request->NombreDoctor;
        $formularios->CUI = $request->cui;
        $formularios->fecha = $request->fecha;
        $formularios->TipoFormulario = $request->TipoFormulario;
@@ -37,4 +36,17 @@ class formularioController extends Controller
            'message' => 'guardado'
        ], 200);
    }
+   function findAllUser(Request $request){
+
+        $cui = $request->cui;
+
+        $consulta = historiales::where([['CUI', '=', $cui],])->get();
+
+        return response()->json([
+            'cui'=> $cui,
+            'success' => true,
+            'Consulta' => $consulta,
+        ], 200);
+
+    }
 }

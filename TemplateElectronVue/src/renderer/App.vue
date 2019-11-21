@@ -7,6 +7,7 @@
       v-model="drawer"
       temporary
       class="quinto"
+      v-if="loggedIn"
     >
       <v-list class="pa-3 accent--text">
         <v-list-tile avatar tag="div">
@@ -39,14 +40,21 @@
     </v-navigation-drawer>
 
     <v-toolbar color="quinto" fixed app :clipped-left="clipped">
-      <v-toolbar-side-icon class="grey--text text--darken-3" @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+      <v-toolbar-side-icon
+        v-if="loggedIn"
+        class="grey--text text--darken-3"
+        @click.stop="drawer = !drawer"
+      ></v-toolbar-side-icon>
       <v-toolbar-title class="grey--text text--darken-3">{{ activeRoute }}</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn icon class="grey--text text--darken-3">
-          <v-icon>fa-bell</v-icon>
-        </v-btn>
-        <v-btn icon class="grey--text text--darken-3" to="/login" v-on:click="logout">
+        <v-btn
+          v-if="loggedIn"
+          icon
+          class="grey--text text--darken-3"
+          to="/login"
+          v-on:click="logout"
+        >
           <v-icon>fa-sign-out-alt</v-icon>
         </v-btn>
       </v-toolbar-items>
@@ -95,43 +103,50 @@ export default {
         {
           name: "Gestionar Usuario",
           route: "/gestionUsuarios",
-          icon: "fa-users"
+          icon: "fa-users",
+          permission: "crear usuarios"
         },
         {
           name: "Gestionar Paciente",
           route: "/gestionPacientes",
-          icon: "fa-user-injured"
+          icon: "fa-user-injured",
+          permission: "ver pacientes"
         },
         {
           name: "Gestión de Citas",
           route: "/Citas",
           icon: "fa-calendar-check",
-          permission: 'agendar citas'
+          permission: "agendar citas"
         },
         {
           name: "Datos paciente",
           route: "/Datos",
-          icon: "fa-user-injured"
+          icon: "fa-user-injured",
+          permission: "ver pacientes"
         },
         {
           name: "Cambio Estado",
           route: "/cambioEstado/:cui",
-          icon: "fa-flag"
+          icon: "fa-flag",
+          permission: "editar pacientes"
         },
         {
           name: "Hemodialisis",
           route: "/Hemodialisis",
-          icon: "fa-flag"
+          icon: "fa-flag",
+          permission: "realizar hemodialisis"
         },
         {
           name: "Gestionar Formularios",
           route: "/gestionFormularios",
-          icon: "fa-flag"
+          icon: "fa-flag",
+          permission: "gestionar formularios"
         },
         {
           name: "Estadísticas",
           route: "/EstadisticaGeneral",
-          icon: "fa-flag"
+          icon: "fa-flag",
+          permission: "ver estadisticas"
         }
       ]
     };
@@ -141,6 +156,7 @@ export default {
       this.$http
         .post("http://localhost:8000/logout")
         .then(response => {
+          this.$store.commit("logout");
           this.$router.push("/login");
         })
         .catch(error => {
@@ -149,6 +165,12 @@ export default {
     },
     setActiveRoute(name) {
       this.activeRoute = name;
+    }
+  },
+  computed: {
+    loggedIn() {
+      if (this.$store.state.user && this.$store.state.user.id > 0) return true;
+      return false;
     }
   }
 };
