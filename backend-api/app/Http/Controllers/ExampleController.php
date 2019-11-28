@@ -69,27 +69,13 @@ class ExampleController extends Controller
             'email' => 'email|unique:users,email',
             'password' => 'min:6|max:255'
         ]);
-        $prueba = $request->id;
-        $userP=$request->userP;
-        // $puesto=$request->puesto;
         $user = new User;
-        if($prueba=='1003' and $userP='RandallLou'){
-            $user->id = $request->id;
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->password = hash::make($request->password);
-            $user->puesto = $request->puesto;
-            //$user->imagen = $request->img;
-            $user->save();
-        }else{
-            //$user->id = $request->id;
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->password = hash::make($request->password);
-            $user->puesto = $request->puesto;
-            //$user->imagen = $request->img;
-            $user->save();
-        }
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = hash::make($request->password);
+        $user->puesto = $request->puesto;
+        //$user->imagen = $request->img;
+        $this->givePermission($user);
         
         //Comente esto
         //return $request;
@@ -132,9 +118,6 @@ class ExampleController extends Controller
         if($userP='RandallLou'){
             $id = $request->id;
             $user=User::find($id);
-            #$user->name = 'diego';
-            #$user->email = 'diego@gmail.com';
-            #$user->password = '12345';
             $user->name = $request->name;
             $user->email = $request->email;
             $user->password = $request->password;
@@ -203,5 +186,66 @@ class ExampleController extends Controller
             'idersia' => $idersia,
             'message'=>'Funciono',
         ], 200);
+    }
+
+    
+    public function givePermission($user){
+        switch($user->puesto) {
+            //super admin
+            case 1:
+                $user->givePermissionTo('ver pacientes');
+                $user->givePermissionTo('agendar citas');
+                $user->givePermissionTo('crear usuarios');
+                $user->givePermissionTo('editar pacientes');
+                $user->givePermissionTo('realizar hemodialisis');
+                $user->givePermissionTo('crear pacientes');
+                $user->givePermissionTo('editar citas');
+                $user->givePermissionTo('borrar citas');    
+                $user->givePermissionTo('ver estadisticas');
+                $user->givePermissionTo('vista general');
+                $user->givePermissionTo('dar consulta');
+                break;
+            //profesional
+            case 2:
+                $user->givePermissionTo('realizar hemodialisis');
+                $user->givePermissionTo('ver pacientes');
+                $user->givePermissionTo('editar pacientes');
+                $user->givePermissionTo('crear pacientes');
+                $user->givePermissionTo('dar consulta');
+                $user->givePermissionTo('agendar citas');
+                $user->givePermissionTo('ingresar formularios');
+                break;
+            //secretaria
+            case 3:
+                $user->givePermissionTo('agendar citas');
+                $user->givePermissionTo('editar pacientes');
+                $user->givePermissionTo('ver pacientes');
+                $user->givePermissionTo('crear pacientes');
+                $user->givePermissionTo('borrar pacientes');
+                $user->givePermissionTo('vista general');
+                break;
+            //asistente
+            case 4:
+                $user->givePermissionTo('agendar citas');
+                $user->givePermissionTo('editar pacientes');
+                $user->givePermissionTo('ver pacientes');
+                $user->givePermissionTo('crear pacientes');
+                $user->givePermissionTo('borrar pacientes');
+                $user->givePermissionTo('realizar hemodialisis');
+    
+                break;
+            //tecnico
+            case 5:
+                $user->givePermissionTo('realizar hemodialisis');
+                break;
+            //visitante
+            case 6:
+                $user->givePermissionTo('agendar citas');
+                $user->givePermissionTo('dar consulta');
+                $user->givePermissionTo('ingresar formularios');
+                break;
+        }
+
+        $user->save();
     }
 }

@@ -189,16 +189,16 @@
     <div id="botones">
       <br>
       <div class="boton">
-        <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="ingresarNuevo">Ingresar nuevo paciente</button>
+        <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="ingresarNuevo" v-if="$can('crear pacientes')">Ingresar nuevo paciente</button>
       </div>
-      <div class="boton">
+      <div class="boton" v-if="$can('dar consulta')">
         <router-link :to="{name: 'gestionarPaciente', params: { idPaciente: this.selectedPatients.id, cui: this.selectedPatients.CUI }}" class="btn btn-lg btn-warning btn-block">Dar Consulta</router-link>
       </div>
       <div class="boton">
         <router-link :to="{name: 'cambioEstado', params: { cui: this.selectedPatients.CUI, nombre: this.selectedPatients.Nombre, edad: this.selectedPatients.Edad, sexo: this.selectedPatients.Sexo, estado: this.selectedPatients.estado_actual, registro: this.selectedPatients.Numero_expediente }}" class="btn btn-lg btn-warning btn-block">Editar estado de paciente seleccionado</router-link>
       </div>
       <br>
-      <div class="boton" style="width: 94%;">
+      <div class="boton" style="width: 94%;" v-if="$can('ingresar formularios')">
         <router-link :to="{name: 'gestionFormularios', params: { cui: this.selectedPatients.CUI, nombre: this.selectedPatients.Nombre, apellido: this.selectedPatients.Apellido }}" class="btn btn-lg btn-warning btn-block"> Ingresar formulario de este paciente </router-link>
       </div>
     </div>

@@ -404,10 +404,6 @@ export default {
                     idPaciente: response.data.Pacientes[index].id,
                 }
             )
-            /*const id = response.data.Pacientes[index].id
-            this.$http.get("http://localhost:8000/hemodialisis/getHemoNumber", id).then(response => {
-                this.tabs[index].Hemodialisis = response.count + 1;
-            });*/
         }
         });
         this.todaysDate = new Date();

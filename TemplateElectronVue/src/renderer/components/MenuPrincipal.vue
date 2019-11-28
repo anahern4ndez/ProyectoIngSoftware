@@ -24,9 +24,9 @@
 				<b-row align-h="center">
 						<template>
 						<div>
-							<v-btn outline color="#303841" v-on:click="gestionarPaciente">Gestionar Paciente</v-btn>
+							<v-btn outline color="#303841" v-on:click="gestionarPaciente" v-if="$can('ver pacientes')">Gestionar Paciente</v-btn>
 							<v-btn outline color="#303841" v-on:click="darConsulta">Generar Reporte</v-btn>
-							<v-btn outline color="#303841" v-on:click="InformesEstaditicos">Informes Estadísticos</v-btn>
+							<v-btn outline color="#303841" v-on:click="InformesEstaditicos" v-if="$can('ver estadisticas')">Informes Estadísticos</v-btn>
 						</div>
 					</template>
 				</b-row>
@@ -97,13 +97,13 @@
     <br>
     <b-row>
       <b-col order="2" sm="10" align-v="left">
-        <v-btn outline color="#303841" v-on:click="hacerCita">Hacer cita</v-btn>
-        <v-btn outline color="#303841" v-on:click="gestionarUsuario">Gestionar Usuarios</v-btn>
+        <v-btn outline color="#303841" v-on:click="hacerCita" v-if="$can('agendar citas')">Hacer cita</v-btn>
+        <v-btn outline color="#303841" v-on:click="gestionarUsuario" v-if="$can('crear usuarios')">Gestionar Usuarios</v-btn>
       </b-col>
 
       <b-col order="12" sm="2" align-v="left">
           <div>
-              <v-switch
+              <v-switch v-if="$can('vista general')"
                   v-model="switch1"
                   :label="`Vista General`"
                   color="#ffc107"

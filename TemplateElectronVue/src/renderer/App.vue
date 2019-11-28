@@ -119,12 +119,6 @@ export default {
           permission: "agendar citas"
         },
         {
-          name: "Datos paciente",
-          route: "/Datos",
-          icon: "fa-user-injured",
-          permission: "ver pacientes"
-        },
-        {
           name: "Cambio Estado",
           route: "/cambioEstado/:cui",
           icon: "fa-flag",
