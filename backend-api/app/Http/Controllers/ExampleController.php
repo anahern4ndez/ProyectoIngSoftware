@@ -198,6 +198,8 @@ class ExampleController extends Controller
                 $user->givePermissionTo('crear usuarios');
                 $user->givePermissionTo('editar pacientes');
                 $user->givePermissionTo('realizar hemodialisis');
+                $user->givePermissionTo('tecnico hemodialisis');
+                $user->givePermissionTo('dr hemodialisis');
                 $user->givePermissionTo('crear pacientes');
                 $user->givePermissionTo('editar citas');
                 $user->givePermissionTo('borrar citas');    
@@ -214,6 +216,7 @@ class ExampleController extends Controller
                 $user->givePermissionTo('dar consulta');
                 $user->givePermissionTo('agendar citas');
                 $user->givePermissionTo('ingresar formularios');
+                $user->givePermissionTo('dr hemodialisis');
                 break;
             //secretaria
             case 3:
@@ -232,17 +235,20 @@ class ExampleController extends Controller
                 $user->givePermissionTo('crear pacientes');
                 $user->givePermissionTo('borrar pacientes');
                 $user->givePermissionTo('realizar hemodialisis');
+                $user->givePermissionTo('tecnico hemodialisis');
     
                 break;
             //tecnico
             case 5:
                 $user->givePermissionTo('realizar hemodialisis');
+                $user->givePermissionTo('tecnico hemodialisis');
                 break;
             //visitante
             case 6:
                 $user->givePermissionTo('agendar citas');
                 $user->givePermissionTo('dar consulta');
                 $user->givePermissionTo('ingresar formularios');
+                $user->givePermissionTo('dr hemodialisis');
                 break;
         }
 
