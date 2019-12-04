@@ -31,6 +31,8 @@ class PermissionSeeder extends Seeder {
         Permission::create(['name' => 'vista general']);
 
         Permission::create(['name' => 'crear usuarios']);
+        Permission::create(['name' => 'tecnico hemodialisis']);
+        Permission::create(['name' => 'dr hemodialisis']);
 
 
         // create roles and assign created permissions
@@ -50,6 +52,7 @@ class PermissionSeeder extends Seeder {
         $rolePro->givePermissionTo('dar consulta');
         $rolePro->givePermissionTo('agendar citas');
         $rolePro->givePermissionTo('ingresar formularios');
+        $rolePro->givePermissionTo('dr hemodialisis');
 
 
         $role = Role::create(['name' => 'secretaria']);
@@ -69,13 +72,17 @@ class PermissionSeeder extends Seeder {
         $roleAssist->givePermissionTo('crear pacientes');
         $roleAssist->givePermissionTo('borrar pacientes');
         $roleAssist->givePermissionTo('realizar hemodialisis');
+        $roleAssist->givePermissionTo('tecnico hemodialisis');
 
         $roleTec = Role::create(['name' => 'tecnico']);
         $roleTec->givePermissionTo('realizar hemodialisis');
+        $roleTec->givePermissionTo('tecnico hemodialisis');
 
         $roleVi =Role::create(['name' => 'visitante']);
         $roleVi->givePermissionTo('agendar citas');
         $roleVi->givePermissionTo('ingresar formularios');
+        $roleVi->givePermissionTo('dar consulta');
+        $roleVi->givePermissionTo('dr hemodialisis');
         
 
     }
