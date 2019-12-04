@@ -116,6 +116,17 @@ class ConsultaController extends Controller
         ], 200);
     }
 
+    function getMapaMedico(Request $request) {
+        $cuir = $request->cui;
+
+        $consulta = Consulta::select('fecha', 'medicamento', 'resultados_laboratorio')->where([['cui', '=', $cuir]])->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $consulta
+        ], 200);
+    }
+
     function findAll(Request $request){
         
         $cuir = $request->cui;

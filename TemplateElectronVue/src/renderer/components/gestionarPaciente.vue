@@ -273,16 +273,17 @@ export default {
         }
 
         this.$http.post(`http://localhost:8000/vacunaController/findOne`, vacunm).then(response => {
-            console.table(response.data.Consulta)
 
-            this.bcg = response.data.Consulta.BCG
-            this.poliovirus = response.data.Consulta.Poliovirus
-            this.hepatitisA = response.data.Consulta.HepatitisA
-            this.hepatitisB = response.data.Consulta.HepatitisB
-            this.neumococo = response.data.Consulta.Neumococo
-            this.influenza = response.data.Consulta.Influenza
-            this.DPT = response.data.Consulta.DPT
-            this.SPR = response.data.Consulta.SPR
+            if (response.data.Consulta != undefined) {
+                this.bcg = response.data.Consulta.BCG
+                this.poliovirus = response.data.Consulta.Poliovirus
+                this.hepatitisA = response.data.Consulta.HepatitisA
+                this.hepatitisB = response.data.Consulta.HepatitisB
+                this.neumococo = response.data.Consulta.Neumococo
+                this.influenza = response.data.Consulta.Influenza
+                this.DPT = response.data.Consulta.DPT
+                this.SPR = response.data.Consulta.SPR
+            }
         }).then(() => {
             this.setVacunaData()
         })

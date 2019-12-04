@@ -75,6 +75,75 @@
                             </div>
                         </div>
 
+                        <v-dialog
+                            v-model="errorMessage"
+                            max-width="40%"
+                        >
+                            <v-card>
+                                <v-card-title 
+                                    class="headline red darken-1"
+                                    primary-title
+                                >
+                                    Ha ocurrido un error
+                                </v-card-title>
+
+                                <v-card-text>
+                                    Asegúrese que los campos de talla, peso y presión arterial estén llenos.
+                                </v-card-text>
+
+                                <v-card-actions>
+                                    <v-spacer></v-spacer>
+
+                                    <v-btn
+                                        color="green"
+                                        text
+                                        @click="errorMessage = false"
+                                    >
+                                        Aceptar
+                                    </v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-dialog>
+
+                        <v-dialog
+                            v-model="cancelar"
+                            max-width="40%"
+                        >
+                            <v-card>
+                                <v-card-title 
+                                    class="headline red darken-1"
+                                    primary-title
+                                >
+                                    Cancelar
+                                </v-card-title>
+
+                                <v-card-text>
+                                    Si presiona "Aceptar" se borraran los datos agregados/modificados.
+                                </v-card-text>
+
+                                <v-card-actions>
+                                    <v-spacer></v-spacer>
+                                    <v-btn
+                                        color="red"
+                                        text
+                                        @click="cancelar = false"
+                                    >
+                                        Cancelar
+                                    </v-btn>
+
+                                    <v-btn
+                                        color="green"
+                                        text
+                                        v-on:click="cancelando"
+                                    >
+                                        Aceptar
+                                    </v-btn>
+
+                                    
+                                </v-card-actions>
+                            </v-card>
+                        </v-dialog>
+
                         <!-- Loading -->
 
                         <v-dialog
@@ -1258,12 +1327,6 @@
                                                         ></v-text-field> 
                                                     </b-col>
                                                 </b-row>
-                                                <b-row>
-                                                    <b-col>
-                                                        <button type="button" class="btn btn-lg btn-warning btn-block" style="margin-top:10%;">Imágenes</button>
-                                                    </b-col>
-                                                                                
-                                                </b-row>
                                             </b-container> 
                                         </div>
                                     </div>
@@ -1569,28 +1632,6 @@
                                 </b-row>
                             </b-container>
                         </div>
-                        
-                        <!-- Button -->
-                        <div class="form-inline" style="text-align: center;align-items: center;justify-content: center;">
-                            <div>
-                            <b-container class="bv-example-row2">
-                                <b-row class="justify-content-md-center">
-                                
-                                    <b-col>
-                                        <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="take">Agregar imagen</button>
-                                    </b-col>
-                                
-                                </b-row>
-                            </b-container>
-                            </div>
-                        </div>
-        
-                        <div>
-                            <v-switch
-                                :label="`Solicitar próxima visita`"
-                                color="#ffc107"
-                            ></v-switch>
-                        </div> 
 
                         <div class="form-inline" style="text-align: center;align-items: center;justify-content: center;">
                             <div>
@@ -1600,10 +1641,7 @@
                                     <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="guardar" >Guardar</button>
                                 </b-col>
                                 <b-col>
-                                    <button type="button" class="btn btn-lg btn-warning btn-block" >Cancelar</button>
-                                </b-col>
-                                <b-col>
-                                    <button type="button" class="btn btn-lg btn-warning btn-block" >Imprimir</button>
+                                    <button type="button" class="btn btn-lg btn-warning btn-block" @click="cancelar = true">Cancelar</button>
                                 </b-col>
                                 </b-row>
                             </b-container>
@@ -1624,7 +1662,6 @@
                         <v-data-table
                             :headers="sangreHeaders"
                             :items="sangreValues"
-                            hide-actions
                             class="elevation-1"
                         >
                             <template slot="items" slot-scope="props">
@@ -1639,6 +1676,18 @@
                                 <td >{{ props.item.BUN }}</td>
                                 <td >{{ props.item.Creatinina }}</td>
                                 <td >{{ props.item.Glucosa }}</td>
+                            </template>
+                        </v-data-table>
+
+                        <br />
+
+                        <v-data-table
+                            :headers="sangreHeaders2"
+                            :items="sangreValues2"
+                            class="elevation-1"
+                        >
+                            <template slot="items" slot-scope="props">
+                                <td>{{ props.item.Fecha }}</td>
                                 <td >{{ props.item.Albumina }}</td>
                                 <td >{{ props.item.Colesterol }}</td>
                                 <td >{{ props.item.Tigliceridos }}</td>
@@ -1657,8 +1706,7 @@
 
                         <v-data-table
                             :headers="hematologiaHeaders"
-                            :items="hematologiaeValues"
-                            hide-actions
+                            :items="hematologiaValues"
                             class="elevation-1"
                         >
                             <template slot="items" slot-scope="props">
@@ -1671,15 +1719,15 @@
                             </template>
                         </v-data-table>
                     </div>
+                </div>
 
-                    <div class="encapsulado">
+                    <!-- <div class="encapsulado">
                             
                         <h3 class="headers text-xs-center">Dinámica de Hierro</h3>
 
                         <v-data-table
                             :headers="hierroHeaders"
                             :items="hierroValues"
-                            hide-actions
                             class="elevation-1"
                         >
                             <template slot="items" slot-scope="props">
@@ -1891,7 +1939,7 @@
                         </tbody>
                         </table>
                     </div>
-                </div>
+                </div> -->
             </v-tab-item>
         </v-tabs>
     </v-card>
@@ -1915,13 +1963,12 @@ import { error } from 'util';
 
 export default {
     data: () => ({
+        mapaMedico: [],
+        cancelar: false,
+        errorMessage: false,
 
         sangreHeaders: [
-            {
-            text: 'Fecha',
-            align: 'center',
-            value: 'Fecha'
-            },
+            { text: 'Fecha', align: 'center', value: 'Fecha'},
             { text: 'CO', value: 'CO', sortable: false, align: 'center' },
             { text: 'C2', value: 'C2', sortable: false, align: 'center' },
             { text: 'TAC', value: 'TAC', sortable: false, align: 'center' },
@@ -1931,7 +1978,11 @@ export default {
             { text: 'HCO3 (18 - 25)', value: 'HCO3', sortable: false, align: 'center' },
             { text: 'BUN (7 - 20)', value: 'BUN', sortable: false, align: 'center' },
             { text: 'Creatinina (0.5 - 1.1)', value: 'Creatinina', sortable: false, align: 'center' },
-            { text: 'Glucosa (60 - 115)', value: 'Glucosa', sortable: false, align: 'center' },
+            { text: 'Glucosa (60 - 115)', value: 'Glucosa', sortable: false, align: 'center' }
+        ],
+
+        sangreHeaders2: [
+            { text: 'Fecha', align: 'center', value: 'Fecha' },
             { text: 'Albumina (3.5 - 4.6)', value: 'Albumina', sortable: false, align: 'center' },
             { text: 'Colesterol (100 - 200)', value: 'Colesterol', sortable: false, align: 'center' },
             { text: 'Tigliceridos (20 - 175)', value: 'Tigliceridos', sortable: false, align: 'center' },
@@ -1942,9 +1993,11 @@ export default {
             { text: 'PTH (11 - 54)', value: 'PTH', sortable: false, align: 'center' },
             { text: 'DHL (405 - 930)', value: 'DHL', sortable: false, align: 'center' }
         ],
-        sangreValues: [
-            {}
-        ],
+
+        
+        sangreValues: [],
+
+        sangreValues2: [],
 
         hematologiaHeaders: [
             {
@@ -1958,9 +2011,7 @@ export default {
             { text: 'Plaquetas (140 - 440)', value: 'Plaquetas', sortable: false, align: 'center' },
             { text: 'Reticulocitos', value: 'Reticulocitos', sortable: false, align: 'center' }
         ],
-        hematologiaValues: [
-            {}
-        ],
+        hematologiaValues: [],
 
         hierroHeaders: [
             {
@@ -1974,9 +2025,7 @@ export default {
             { text: 'Ferritina (10 - 60)', value: 'Ferritina', sortable: false, align: 'center' },
             { text: 'Tranferrina (212 - 360)', value: 'Tranferrina', sortable: false, align: 'center' }
         ],
-        hierroValues: [
-            {}
-        ],
+        hierroValues: [],
 
         orinaHeaders: [
             {
@@ -2309,16 +2358,16 @@ export default {
         }
 
         this.$http.post(`http://localhost:8000/vacunaController/findOne`, vacunm).then(response => {
-            console.table(response.data.Consulta)
-
-            this.bcg = response.data.Consulta.BCG
-            this.poliovirus = response.data.Consulta.Poliovirus
-            this.hepatitisA = response.data.Consulta.HepatitisA
-            this.hepatitisB = response.data.Consulta.HepatitisB
-            this.neumococo = response.data.Consulta.Neumococo
-            this.influenza = response.data.Consulta.Influenza
-            this.DPT = response.data.Consulta.DPT
-            this.SPR = response.data.Consulta.SPR
+            if (response.data.Consulta != undefined) {
+                this.bcg = response.data.Consulta.BCG
+                this.poliovirus = response.data.Consulta.Poliovirus
+                this.hepatitisA = response.data.Consulta.HepatitisA
+                this.hepatitisB = response.data.Consulta.HepatitisB
+                this.neumococo = response.data.Consulta.Neumococo
+                this.influenza = response.data.Consulta.Influenza
+                this.DPT = response.data.Consulta.DPT
+                this.SPR = response.data.Consulta.SPR
+            }
         }).then(() => {
             this.setVacunaData()
         })
@@ -2444,12 +2493,68 @@ export default {
                     this.sindromes = response.data.Sindrome;
                 }
             });
+        }).then(() => {
+            const lab = {
+                cui: this.paciente.CUI
+            }
+            this.$http.post(`http://localhost:8000/ConsultaController/getMapaMedico`, lab).then(response => {
+                this.mapaMedico = response.data.data
+            }).then(() => {
+                this.mapaMedico.map(datos => {
+                    // console.log(datos.fecha)
+                    // console.table(JSON.parse(datos.medicamento))
+                    // console.table(JSON.parse(datos.resultados_laboratorio))
+
+                    const mediData = JSON.parse(datos.medicamento)
+                    const labData = JSON.parse(datos.resultados_laboratorio)
+
+                    this.sangreValues.push({
+                        Fecha: datos.fecha,
+                        CO: "-",
+                        C2: "-",
+                        TAC: mediData.tac.mg + " mg",
+                        Na: labData.Na,
+                        K: labData.K,
+                        Cl: labData.Cl,
+                        HCO3: labData.HCO,
+                        BUN: labData.BUN,
+                        Creatinina: labData.Creat,
+                        Glucosa: labData.Glu
+                    })
+
+                    this.sangreValues2.push({
+                        Fecha: datos.fecha,
+                        Albumina: labData.Alb,
+                        Colesterol: labData.Col,
+                        Tigliceridos: "-",
+                        AcidoU: "-",
+                        Calcio: labData.Ca,
+                        Fosforo: labData.P,
+                        Fosfato: "-",
+                        PTH: labData.PTH,
+                        DHL: "-"
+                    })
+
+                    this.hematologiaValues.push({
+                        Fecha: datos.fecha,
+                        GBlancos: labData.GB,
+                        Hb: labData.HB,
+                        Ht: labData.HT,
+                        Plaquetas: labData.PTL,
+                        Reticulocitos: "-"
+                    })
+                })
+            })
         }).catch(error => {
             this.dialog = false;
         });
 
     },
     methods: {
+        cancelando () {
+            this.$router.push("/menu-principal");
+        },
+
         computeAge(datePicked){
             var fechaActual = new Date();
             var aComputar = new Date(datePicked);
@@ -2985,272 +3090,244 @@ export default {
 
         guardar() {
 
-            this.getVacunaData()
+            if (this.datos_generales.Talla === "" || this.datos_generales.Peso === "" || this.datos_generales.PA === "")
+                this.errorMessage = true
+            else {
+                this.errorMessage = false
 
-            const vacunm = {
-                fecha: this.fecha,
-                idPaciente: store.idPaciente,
-                BCG: this.bcg,
-                Poliovirus: this.poliovirus,
-                HepatitisA: this.hepatitisA,
-                HepatitisB: this.hepatitisB,
-                Neumococo: this.neumococo,
-                Influenza: this.influenza,
-                DPT: this.DPT,
-                SPR: this.SPR
-            }
+                this.getVacunaData()
+                const vacunm = {
+                    fecha: this.fecha,
+                    idPaciente: store.idPaciente,
+                    BCG: this.bcg,
+                    Poliovirus: this.poliovirus,
+                    HepatitisA: this.hepatitisA,
+                    HepatitisB: this.hepatitisB,
+                    Neumococo: this.neumococo,
+                    Influenza: this.influenza,
+                    DPT: this.DPT,
+                    SPR: this.SPR
+                }
 
-            this.guardando = true
-            let medicamento = {}
-            
-            if(this.misMedicamentos.prednisona.estado){
-                medicamento = Object.assign(medicamento, {"prednisona": {
-                    "mg": Number( this.misMedicamentos.prednisona.mg),
-                    "frecuencia": Number( this.misMedicamentos.prednisona.frecuencia)
-                }})
-            }
-            if(this.misMedicamentos.cyac.estado){
-                medicamento = Object.assign(medicamento, {"cyac": {
-                    "mg": Number( this.misMedicamentos.cyac.mg),
-                    "frecuencia": Number( this.misMedicamentos.cyac.frecuencia)
-                }})
-            }
-            if(this.misMedicamentos.tac.estado){
-                medicamento = Object.assign(medicamento, {"tac": {
-                    "mg": Number( this.misMedicamentos.tac.mg),
-                    "frecuencia": Number( this.misMedicamentos.tac.frecuencia)
-                }})
-            }
-            if(this.misMedicamentos.mmf.estado){
-                medicamento = Object.assign(medicamento, {"mmf": {
-                    "mg": Number( this.misMedicamentos.mmf.mg),
-                    "frecuencia": Number( this.misMedicamentos.mmf.frecuencia)
-                }})
-            }
-            if(this.misMedicamentos.aza.estado){
-                medicamento = Object.assign(medicamento, {"aza": {
-                    "mg": Number( this.misMedicamentos.aza.mg),
-                    "frecuencia": Number( this.misMedicamentos.aza.frecuencia)
-                }})
-            }
-            if(this.misMedicamentos.cfm.estado){
-                medicamento = Object.assign(medicamento, {"cfm": {
-                    "mg": Number( this.misMedicamentos.cfm.mg),
-                    "frecuencia": Number( this.misMedicamentos.cfm.frecuencia)
-                }})
-            }
-            if(this.misMedicamentos.enalapril.estado){
-                medicamento = Object.assign(medicamento, {"enalapril": {
-                    "mg": Number( this.misMedicamentos.enalapril.mg),
-                    "frecuencia": Number( this.misMedicamentos.enalapril.frecuencia)
-                }})
-            }
-            if(this.misMedicamentos.losartan.estado){
-                medicamento = Object.assign(medicamento, {"losartan": {
-                    "mg": Number( this.misMedicamentos.losartan.mg),
-                    "frecuencia": Number( this.misMedicamentos.losartan.frecuencia)
-                }})
-            }
-            if(this.misMedicamentos.amlodipina.estado){
-                medicamento = Object.assign(medicamento, {"amlodipina": {
-                    "mg": Number( this.misMedicamentos.amlodipina.mg),
-                    "frecuencia": Number( this.misMedicamentos.amlodipina.frecuencia)
-                }})
-            }
-            if(this.misMedicamentos.citratoNa.estado){
-                medicamento = Object.assign(medicamento, {"citratoNa": {
-                    "mg": Number( this.misMedicamentos.citratoNa.mg),
-                    "frecuencia": Number( this.misMedicamentos.citratoNa.frecuencia)
-                }})
-            }
-            if(this.misMedicamentos.citratoK.estado){
-                medicamento = Object.assign(medicamento, {"citratoK": {
-                    "mg": Number( this.misMedicamentos.citratoK.mg),
-                    "frecuencia": Number( this.misMedicamentos.citratoK.frecuencia)
-                }})
-            }
-            if(this.misMedicamentos.furosemida.estado){
-                medicamento = Object.assign(medicamento, {"furosemida": {
-                    "mg": Number( this.misMedicamentos.furosemida.mg),
-                    "frecuencia": Number( this.misMedicamentos.furosemida.frecuencia)
-                }})
-            }
-            if(this.misMedicamentos.alfacalcidol.estado){
-                medicamento = Object.assign(medicamento, {"alfacalcidol": {
-                    "mg": Number( this.misMedicamentos.alfacalcidol.mg),
-                    "frecuencia": Number( this.misMedicamentos.alfacalcidol.frecuencia)
-                }})
-            }
-            if(this.misMedicamentos.CaCO3.estado){
-                medicamento = Object.assign(medicamento, {"CaCO3": {
-                    "mg": Number( this.misMedicamentos.CaCO3.mg),
-                    "frecuencia": Number( this.misMedicamentos.CaCO3.frecuencia)
-                }})
-            }
-            if(this.misMedicamentos.epo.estado){
-                medicamento = Object.assign(medicamento, {"epo": {
-                    "mg": Number( this.misMedicamentos.epo.mg),
-                    "frecuencia": Number( this.misMedicamentos.epo.frecuencia)
-                }})
-            }
-            if(this.misMedicamentos.fe.estado){
-                medicamento = Object.assign(medicamento, {"fe": {
-                    "mg": Number( this.misMedicamentos.fe.mg),
-                    "frecuencia": Number( this.misMedicamentos.fe.frecuencia)
-                }})
-            }
-            if(this.misMedicamentos.cefadroxilo.estado){
-                medicamento = Object.assign(medicamento, {"cefadroxilo": {
-                    "mg": Number( this.misMedicamentos.cefadroxilo.mg),
-                    "frecuencia": Number( this.misMedicamentos.cefadroxilo.frecuencia)
-                }})
-            }
+                this.guardando = true
+                let medicamento = {}
+                
+                if(this.misMedicamentos.prednisona.estado){
+                    medicamento = Object.assign(medicamento, {"prednisona": {
+                        "mg": Number( this.misMedicamentos.prednisona.mg),
+                        "frecuencia": Number( this.misMedicamentos.prednisona.frecuencia)
+                    }})
+                }
+                if(this.misMedicamentos.cyac.estado){
+                    medicamento = Object.assign(medicamento, {"cyac": {
+                        "mg": Number( this.misMedicamentos.cyac.mg),
+                        "frecuencia": Number( this.misMedicamentos.cyac.frecuencia)
+                    }})
+                }
+                if(this.misMedicamentos.tac.estado){
+                    medicamento = Object.assign(medicamento, {"tac": {
+                        "mg": Number( this.misMedicamentos.tac.mg),
+                        "frecuencia": Number( this.misMedicamentos.tac.frecuencia)
+                    }})
+                }
+                if(this.misMedicamentos.mmf.estado){
+                    medicamento = Object.assign(medicamento, {"mmf": {
+                        "mg": Number( this.misMedicamentos.mmf.mg),
+                        "frecuencia": Number( this.misMedicamentos.mmf.frecuencia)
+                    }})
+                }
+                if(this.misMedicamentos.aza.estado){
+                    medicamento = Object.assign(medicamento, {"aza": {
+                        "mg": Number( this.misMedicamentos.aza.mg),
+                        "frecuencia": Number( this.misMedicamentos.aza.frecuencia)
+                    }})
+                }
+                if(this.misMedicamentos.cfm.estado){
+                    medicamento = Object.assign(medicamento, {"cfm": {
+                        "mg": Number( this.misMedicamentos.cfm.mg),
+                        "frecuencia": Number( this.misMedicamentos.cfm.frecuencia)
+                    }})
+                }
+                if(this.misMedicamentos.enalapril.estado){
+                    medicamento = Object.assign(medicamento, {"enalapril": {
+                        "mg": Number( this.misMedicamentos.enalapril.mg),
+                        "frecuencia": Number( this.misMedicamentos.enalapril.frecuencia)
+                    }})
+                }
+                if(this.misMedicamentos.losartan.estado){
+                    medicamento = Object.assign(medicamento, {"losartan": {
+                        "mg": Number( this.misMedicamentos.losartan.mg),
+                        "frecuencia": Number( this.misMedicamentos.losartan.frecuencia)
+                    }})
+                }
+                if(this.misMedicamentos.amlodipina.estado){
+                    medicamento = Object.assign(medicamento, {"amlodipina": {
+                        "mg": Number( this.misMedicamentos.amlodipina.mg),
+                        "frecuencia": Number( this.misMedicamentos.amlodipina.frecuencia)
+                    }})
+                }
+                if(this.misMedicamentos.citratoNa.estado){
+                    medicamento = Object.assign(medicamento, {"citratoNa": {
+                        "mg": Number( this.misMedicamentos.citratoNa.mg),
+                        "frecuencia": Number( this.misMedicamentos.citratoNa.frecuencia)
+                    }})
+                }
+                if(this.misMedicamentos.citratoK.estado){
+                    medicamento = Object.assign(medicamento, {"citratoK": {
+                        "mg": Number( this.misMedicamentos.citratoK.mg),
+                        "frecuencia": Number( this.misMedicamentos.citratoK.frecuencia)
+                    }})
+                }
+                if(this.misMedicamentos.furosemida.estado){
+                    medicamento = Object.assign(medicamento, {"furosemida": {
+                        "mg": Number( this.misMedicamentos.furosemida.mg),
+                        "frecuencia": Number( this.misMedicamentos.furosemida.frecuencia)
+                    }})
+                }
+                if(this.misMedicamentos.alfacalcidol.estado){
+                    medicamento = Object.assign(medicamento, {"alfacalcidol": {
+                        "mg": Number( this.misMedicamentos.alfacalcidol.mg),
+                        "frecuencia": Number( this.misMedicamentos.alfacalcidol.frecuencia)
+                    }})
+                }
+                if(this.misMedicamentos.CaCO3.estado){
+                    medicamento = Object.assign(medicamento, {"CaCO3": {
+                        "mg": Number( this.misMedicamentos.CaCO3.mg),
+                        "frecuencia": Number( this.misMedicamentos.CaCO3.frecuencia)
+                    }})
+                }
+                if(this.misMedicamentos.epo.estado){
+                    medicamento = Object.assign(medicamento, {"epo": {
+                        "mg": Number( this.misMedicamentos.epo.mg),
+                        "frecuencia": Number( this.misMedicamentos.epo.frecuencia)
+                    }})
+                }
+                if(this.misMedicamentos.fe.estado){
+                    medicamento = Object.assign(medicamento, {"fe": {
+                        "mg": Number( this.misMedicamentos.fe.mg),
+                        "frecuencia": Number( this.misMedicamentos.fe.frecuencia)
+                    }})
+                }
+                if(this.misMedicamentos.cefadroxilo.estado){
+                    medicamento = Object.assign(medicamento, {"cefadroxilo": {
+                        "mg": Number( this.misMedicamentos.cefadroxilo.mg),
+                        "frecuencia": Number( this.misMedicamentos.cefadroxilo.frecuencia)
+                    }})
+                }
 
-           let resultado_laboratorio = {}
+            let resultado_laboratorio = {}
 
-            resultado_laboratorio = Object.assign(resultado_laboratorio, {
-                "Na": Number(this.resultados_de_laboratorio.Na),
-                "Cl": Number(this.resultados_de_laboratorio.Cl),
-                "BUN": Number(this.resultados_de_laboratorio.BUN),
-                "Glu": Number(this.resultados_de_laboratorio.Glu),
-                "K": Number(this.resultados_de_laboratorio.K),
-                "HCO": Number(this.resultados_de_laboratorio.HCO),
-                "Creat": Number(this.resultados_de_laboratorio.Creat),
-                "WB": Number(this.resultados_de_laboratorio.WB),
-                "Col": Number(this.resultados_de_laboratorio.Col),
-                "Alb": Number(this.resultados_de_laboratorio.Alb),
-                "HB": Number(this.resultados_de_laboratorio.HB),
-                "HT": Number(this.resultados_de_laboratorio.HT),
-                "Ca": Number(this.resultados_de_laboratorio.Ca),
-                "P": Number(this.resultados_de_laboratorio.P),
-                "MG": Number(this.resultados_de_laboratorio.MG),
-                "PTL": Number(this.resultados_de_laboratorio.PTL),
-                "EGO": Number(this.resultados_de_laboratorio.EGO),
-                "pH": Number(this.resultados_de_laboratorio.pH),
-                "Glu2": Number(this.resultados_de_laboratorio.Glu2),
-                "Prot": Number(this.resultados_de_laboratorio.Prot),
-                "Hem": Number(this.resultados_de_laboratorio.Hem),
-                "Gr": Number(this.resultados_de_laboratorio.Gr),
-                "GB": Number(this.resultados_de_laboratorio.GB),
-                "Cil": Number(this.resultados_de_laboratorio.Cil),
-                "URO": Number(this.resultados_de_laboratorio.URO),
-                "PTH": Number(this.resultados_de_laboratorio.PTH),
-                "Ferritina": Number(this.resultados_de_laboratorio.Ferritina),
-            })
+                resultado_laboratorio = Object.assign(resultado_laboratorio, {
+                    "Na": Number(this.resultados_de_laboratorio.Na),
+                    "Cl": Number(this.resultados_de_laboratorio.Cl),
+                    "BUN": Number(this.resultados_de_laboratorio.BUN),
+                    "Glu": Number(this.resultados_de_laboratorio.Glu),
+                    "K": Number(this.resultados_de_laboratorio.K),
+                    "HCO": Number(this.resultados_de_laboratorio.HCO),
+                    "Creat": Number(this.resultados_de_laboratorio.Creat),
+                    "WB": Number(this.resultados_de_laboratorio.WB),
+                    "Col": Number(this.resultados_de_laboratorio.Col),
+                    "Alb": Number(this.resultados_de_laboratorio.Alb),
+                    "HB": Number(this.resultados_de_laboratorio.HB),
+                    "HT": Number(this.resultados_de_laboratorio.HT),
+                    "Ca": Number(this.resultados_de_laboratorio.Ca),
+                    "P": Number(this.resultados_de_laboratorio.P),
+                    "MG": Number(this.resultados_de_laboratorio.MG),
+                    "PTL": Number(this.resultados_de_laboratorio.PTL),
+                    "EGO": Number(this.resultados_de_laboratorio.EGO),
+                    "pH": Number(this.resultados_de_laboratorio.pH),
+                    "Glu2": Number(this.resultados_de_laboratorio.Glu2),
+                    "Prot": Number(this.resultados_de_laboratorio.Prot),
+                    "Hem": Number(this.resultados_de_laboratorio.Hem),
+                    "Gr": Number(this.resultados_de_laboratorio.Gr),
+                    "GB": Number(this.resultados_de_laboratorio.GB),
+                    "Cil": Number(this.resultados_de_laboratorio.Cil),
+                    "URO": Number(this.resultados_de_laboratorio.URO),
+                    "PTH": Number(this.resultados_de_laboratorio.PTH),
+                    "Ferritina": Number(this.resultados_de_laboratorio.Ferritina),
+                })
 
-            let examenFisico = {}
+                let examenFisico = {}
 
-            examenFisico = Object.assign(examenFisico, {
-                "COONG": this.examen_fisico.COONG
-            })
-            if(this.examen_fisico_check.corazon){
                 examenFisico = Object.assign(examenFisico, {
-                "corazon": this.examen_fisico.corazon
-            })}
-            if(this.examen_fisico_check.pulmones){
-                examenFisico = Object.assign(examenFisico, {
-                "pulmones": this.examen_fisico.pulmones
-            })}
-            if(this.examen_fisico_check.abdomen){
-                examenFisico = Object.assign(examenFisico, {
-                "abdomen": this.examen_fisico.abdomen
-            })}
-            if(this.examen_fisico_check.genitales){
-                examenFisico = Object.assign(examenFisico, {
-                "genitales": this.examen_fisico.genitales
-            })}
-            if(this.examen_fisico_check.extremidades){
-                examenFisico = Object.assign(examenFisico, {
-                "extremidades": this.examen_fisico.extremidades
-            })}
-            if(this.examen_fisico_check.piel){
-                examenFisico = Object.assign(examenFisico, {
-                "piel": this.examen_fisico.piel
-            })}
-            if(this.examen_fisico_check.sn){
-                examenFisico = Object.assign(examenFisico, {
-                "sn": this.examen_fisico.sn
-            })}
-            if(this.examen_fisico_check.otros){
-                examenFisico = Object.assign(examenFisico, {
-                "otros": this.examen_fisico.otros
-            })}
+                    "COONG": this.examen_fisico.COONG
+                })
+                if(this.examen_fisico_check.corazon){
+                    examenFisico = Object.assign(examenFisico, {
+                    "corazon": this.examen_fisico.corazon
+                })}
+                if(this.examen_fisico_check.pulmones){
+                    examenFisico = Object.assign(examenFisico, {
+                    "pulmones": this.examen_fisico.pulmones
+                })}
+                if(this.examen_fisico_check.abdomen){
+                    examenFisico = Object.assign(examenFisico, {
+                    "abdomen": this.examen_fisico.abdomen
+                })}
+                if(this.examen_fisico_check.genitales){
+                    examenFisico = Object.assign(examenFisico, {
+                    "genitales": this.examen_fisico.genitales
+                })}
+                if(this.examen_fisico_check.extremidades){
+                    examenFisico = Object.assign(examenFisico, {
+                    "extremidades": this.examen_fisico.extremidades
+                })}
+                if(this.examen_fisico_check.piel){
+                    examenFisico = Object.assign(examenFisico, {
+                    "piel": this.examen_fisico.piel
+                })}
+                if(this.examen_fisico_check.sn){
+                    examenFisico = Object.assign(examenFisico, {
+                    "sn": this.examen_fisico.sn
+                })}
+                if(this.examen_fisico_check.otros){
+                    examenFisico = Object.assign(examenFisico, {
+                    "otros": this.examen_fisico.otros
+                })}
 
-            const medicamentoJSON = JSON.stringify(medicamento)
-            const resultados_labJSON = JSON.stringify(resultado_laboratorio)
-            const examen_fisicoJSON = JSON.stringify(examenFisico)
+                const medicamentoJSON = JSON.stringify(medicamento)
+                const resultados_labJSON = JSON.stringify(resultado_laboratorio)
+                const examen_fisicoJSON = JSON.stringify(examenFisico)
 
-            const info = {
-                cui: this.paciente.CUI,
-                fecha: this.fecha,
-                peso: this.datos_generales.Peso,
-                talla: this.datos_generales.Talla,
-                pa: this.datos_generales.PA,
-                sindrome_clinico: this.Sindrome_Clinico_Presentacion,
-                Dx_Definitivo: this.Dx_Definitivo,
-                Dx_Asociados: this.Dx_Asociado,
-                historia: this.historia,
-                medicamento: medicamentoJSON,
-                resultados_laboratorio: resultados_labJSON,
-                examen_fisico: examen_fisicoJSON,
-                evaluacion_medica: this.Evaluacion_Medica,
-                plan_medico: this.Plan_Medico,
-                evaluacion_psicologica: this.Evaluacion_Psicologica,
-                plan_psicologico: this.Plan_Psicologica,
-                evaluacion_trabajo_social: this.Evaluacion_Trabajo_Social,
-                plan_trabajo_social: this.Plan_Trabajo_Social,
-                evaluacion_nutricional: this.Evaluacion_Nutricional,
-                plan_nutricional: this.Plan_Nutricional,
-                evaluacion_farmacologica: this.Evaluacion_Farmacologica,
-                plan_farmacologico: this.Plan_Farmacologico
-            }
+                const info = {
+                    cui: this.paciente.CUI,
+                    fecha: this.fecha,
+                    peso: this.datos_generales.Peso,
+                    talla: this.datos_generales.Talla,
+                    pa: this.datos_generales.PA,
+                    sindrome_clinico: this.Sindrome_Clinico_Presentacion,
+                    Dx_Definitivo: this.Dx_Definitivo,
+                    Dx_Asociados: this.Dx_Asociado,
+                    historia: this.historia,
+                    medicamento: medicamentoJSON,
+                    resultados_laboratorio: resultados_labJSON,
+                    examen_fisico: examen_fisicoJSON,
+                    evaluacion_medica: this.Evaluacion_Medica,
+                    plan_medico: this.Plan_Medico,
+                    evaluacion_psicologica: this.Evaluacion_Psicologica,
+                    plan_psicologico: this.Plan_Psicologica,
+                    evaluacion_trabajo_social: this.Evaluacion_Trabajo_Social,
+                    plan_trabajo_social: this.Plan_Trabajo_Social,
+                    evaluacion_nutricional: this.Evaluacion_Nutricional,
+                    plan_nutricional: this.Plan_Nutricional,
+                    evaluacion_farmacologica: this.Evaluacion_Farmacologica,
+                    plan_farmacologico: this.Plan_Farmacologico
+                }
 
 
-            if(this.update){
-                this.$http.put('http://localhost:8000/ConsultaController/update', info).then(response => {
+                if(this.update){
+                    this.$http.put('http://localhost:8000/ConsultaController/update', info).then(response => {
 
-                }).then(() => {
-                    if(this.nuevoComentario){
-                        this.$http.post('http://localhost:8000/ConsultaController/getID', info).then(response => {
-                            var a = response.data.id
-                            var b = store.id
-                            
-                            if(!this.hasComments){
-
-                                console.log("No tiene comentarios")
-
-                                var string = `{
-                                    "` + a + `": ` + `{
-                                        "` + b + `": ` + `{
-                                            
-                                        }` + `
-                                    }` + `
-                                }`
-
-                                var json = JSON.parse(string)
+                    }).then(() => {
+                        if(this.nuevoComentario){
+                            this.$http.post('http://localhost:8000/ConsultaController/getID', info).then(response => {
+                                var a = response.data.id
+                                var b = store.id
                                 
-                                json[String(a)][String(b)].hora = []
-                                json[String(a)][String(b)].comentario = []
+                                if(!this.hasComments){
 
-                                json[String(a)][String(b)].hora.push(this.horaActual)
-                                json[String(a)][String(b)].comentario.push(this.comentario)
+                                    console.log("No tiene comentarios")
 
-                                const info = {
-                                    cui: this.paciente.CUI,
-                                    comentarios: JSON.stringify(json)
-                                }
-
-                                this.$http.post('http://localhost:8000/ComentarioController/insert', info).then(response => {
-
-                                }).catch(error => {
-                                    console.log("Error en no tiene comentarios")
-                                })
-                            }else{
-
-                                console.log("consulta: " + String(a))
-                                
-                                if(this.allComments[0][String(a)] == undefined){
-                                    console.log("Si tiene comentarios pero no consulta")
                                     var string = `{
                                         "` + a + `": ` + `{
                                             "` + b + `": ` + `{
@@ -3267,154 +3344,188 @@ export default {
                                     json[String(a)][String(b)].hora.push(this.horaActual)
                                     json[String(a)][String(b)].comentario.push(this.comentario)
 
-                                    
+                                    const info = {
+                                        cui: this.paciente.CUI,
+                                        comentarios: JSON.stringify(json)
+                                    }
 
-                                    Object.assign(this.allComments[0], json)
+                                    this.$http.post('http://localhost:8000/ComentarioController/insert', info).then(response => {
+
+                                    }).catch(error => {
+                                        console.log("Error en no tiene comentarios")
+                                    })
                                 }else{
 
-                                    if(this.allComments[0][String(a)][String(b)] == undefined){
-                                        console.log("Si tiene comentarios y consulta pero no doctor")
+                                    console.log("consulta: " + String(a))
+                                    
+                                    if(this.allComments[0][String(a)] == undefined){
+                                        console.log("Si tiene comentarios pero no consulta")
                                         var string = `{
-                                            "` + b + `": ` + `{
-                                                
+                                            "` + a + `": ` + `{
+                                                "` + b + `": ` + `{
+                                                    
+                                                }` + `
                                             }` + `
                                         }`
 
                                         var json = JSON.parse(string)
-                                    
-                                        json[String(b)].hora = []
-                                        json[String(b)].comentario = []
+                                        
+                                        json[String(a)][String(b)].hora = []
+                                        json[String(a)][String(b)].comentario = []
 
-                                        json[String(b)].hora.push(this.horaActual)
-                                        json[String(b)].comentario.push(this.comentario)
+                                        json[String(a)][String(b)].hora.push(this.horaActual)
+                                        json[String(a)][String(b)].comentario.push(this.comentario)
 
-                                        Object.assign(this.allComments[0][String(a)], json)
-                                        console.log("Si tiene blah blah: " + JSON.stringify(this.allComments[0]))
+                                        
+
+                                        Object.assign(this.allComments[0], json)
                                     }else{
-                                        console.log("tiene todo")
-                                        this.allComments[0][String(a)][String(b)].hora.push(this.horaActual)
-                                        this.allComments[0][String(a)][String(b)].comentario.push(this.comentario)
-                                        console.log(JSON.stringify(this.allComments[0]))
+
+                                        if(this.allComments[0][String(a)][String(b)] == undefined){
+                                            console.log("Si tiene comentarios y consulta pero no doctor")
+                                            var string = `{
+                                                "` + b + `": ` + `{
+                                                    
+                                                }` + `
+                                            }`
+
+                                            var json = JSON.parse(string)
+                                        
+                                            json[String(b)].hora = []
+                                            json[String(b)].comentario = []
+
+                                            json[String(b)].hora.push(this.horaActual)
+                                            json[String(b)].comentario.push(this.comentario)
+
+                                            Object.assign(this.allComments[0][String(a)], json)
+                                            console.log("Si tiene blah blah: " + JSON.stringify(this.allComments[0]))
+                                        }else{
+                                            console.log("tiene todo")
+                                            this.allComments[0][String(a)][String(b)].hora.push(this.horaActual)
+                                            this.allComments[0][String(a)][String(b)].comentario.push(this.comentario)
+                                            console.log(JSON.stringify(this.allComments[0]))
+                                        }
+                                    }
+                                    // console.log(JSON.stringify(this.allComments[0]))
+                                    const info = {
+                                        cui: this.paciente.CUI,
+                                        comentarios: JSON.stringify(this.allComments[0])
+                                    }
+                                    this.$http.put('http://localhost:8000/ComentarioController/update', info).then(response => {
+                                        
+                                    }).catch(error => {
+                                        console.log("Error en si tiene comentarios")
+                                    })
+                                }
+                            })
+                        }
+                    }).then(() => {
+                        this.$http.put('http://localhost:8000/vacunaController/update', vacunm).then(response => {})
+                    }).then(() => {
+                        this.guardando = false
+                    })
+                    .then(() => {
+                        this.$router.push("/menu-principal");
+                    }).catch(error => {
+
+                    })
+                }else{
+                    this.$http.post('http://localhost:8000/ConsultaController/insert', info).then(response => {
+
+                        if(this.nuevoComentario){
+                            this.$http.post('http://localhost:8000/ConsultaController/getID', info).then(response => {
+                                var a = response.data.id
+                                var b = store.id
+                                
+                                if(!this.hasComments){
+                                    var string = `{
+                                        "` + a + `": ` + `{
+                                            "` + b + `": ` + `{
+                                                
+                                            }` + `
+                                        }` + `
+                                    }`
+
+                                    var json = JSON.parse(string)
+                                    
+                                    json[String(a)][String(b)].hora = []
+                                    json[String(a)][String(b)].comentario = []
+
+                                    json[String(a)][String(b)].hora.push(this.horaActual)
+                                    json[String(a)][String(b)].comentario.push(this.comentario)
+
+                                    const info = {
+                                        cui: this.paciente.CUI,
+                                        comentarios: JSON.stringify(json)
+                                    }
+
+                                    this.$http.post('http://localhost:8000/ComentarioController/insert', info).then(response => {
+                                    })
+                                }else{
+                                    if(this.allComments[0][String(a)] == undefined){
+                                        var string = `{
+                                            "` + a + `": ` + `{
+                                                "` + b + `": ` + `{
+                                                    
+                                                }` + `
+                                            }` + `
+                                        }`
+
+                                        var json = JSON.parse(string)
+                                        
+                                        json[String(a)][String(b)].hora = []
+                                        json[String(a)][String(b)].comentario = []
+
+                                        json[String(a)][String(b)].hora.push(this.horaActual)
+                                        json[String(a)][String(b)].comentario.push(this.comentario)
+
+                                        Object.assign(this.allComments[0], json)
+                                    }else{
+                                        if(this.allComments[0][String(a)][String(b)] == undefined){
+                                            var string = `{
+                                                "` + b + `": ` + `{
+                                                    
+                                                }` + `
+                                            }`
+
+                                            var json = JSON.parse(string)
+                                        
+                                            json[String(b)].hora = []
+                                            json[String(b)].comentario = []
+
+                                            json[String(b)].hora.push(this.horaActual)
+                                            json[String(b)].comentario.push(this.comentario)
+
+                                            Object.assign(this.allComments[0][String(a)], json)
+                                        }else{
+                                            this.allComments[0][String(a)][String(b)].hora.push(this.horaActual)
+                                            this.allComments[0][String(a)][String(b)].comentario.push(this.comentario)
+                                        }
                                     }
                                 }
-                                // console.log(JSON.stringify(this.allComments[0]))
+
+                                console.log("segundo: " + JSON.stringify(this.allComments[0]))
+
                                 const info = {
                                     cui: this.paciente.CUI,
                                     comentarios: JSON.stringify(this.allComments[0])
                                 }
                                 this.$http.put('http://localhost:8000/ComentarioController/update', info).then(response => {
-                                    
-                                }).catch(error => {
-                                    console.log("Error en si tiene comentarios")
                                 })
-                            }
-                        })
-                    }
-                }).then(() => {
-                    this.$http.put('http://localhost:8000/vacunaController/update', vacunm).then(response => {})
-                }).then(() => {
-                    this.guardando = false
-                })
-                .then(() => {
-                    this.$router.push("/menu-principal");
-                }).catch(error => {
-
-                })
-            }else{
-                this.$http.post('http://localhost:8000/ConsultaController/insert', info).then(response => {
-
-                    if(this.nuevoComentario){
-                        this.$http.post('http://localhost:8000/ConsultaController/getID', info).then(response => {
-                            var a = response.data.id
-                            var b = store.id
-                            
-                            if(!this.hasComments){
-                                var string = `{
-                                    "` + a + `": ` + `{
-                                        "` + b + `": ` + `{
-                                            
-                                        }` + `
-                                    }` + `
-                                }`
-
-                                var json = JSON.parse(string)
-                                
-                                json[String(a)][String(b)].hora = []
-                                json[String(a)][String(b)].comentario = []
-
-                                json[String(a)][String(b)].hora.push(this.horaActual)
-                                json[String(a)][String(b)].comentario.push(this.comentario)
-
-                                const info = {
-                                    cui: this.paciente.CUI,
-                                    comentarios: JSON.stringify(json)
-                                }
-
-                                this.$http.post('http://localhost:8000/ComentarioController/insert', info).then(response => {
-                                })
-                            }else{
-                                if(this.allComments[0][String(a)] == undefined){
-                                    var string = `{
-                                        "` + a + `": ` + `{
-                                            "` + b + `": ` + `{
-                                                
-                                            }` + `
-                                        }` + `
-                                    }`
-
-                                    var json = JSON.parse(string)
-                                    
-                                    json[String(a)][String(b)].hora = []
-                                    json[String(a)][String(b)].comentario = []
-
-                                    json[String(a)][String(b)].hora.push(this.horaActual)
-                                    json[String(a)][String(b)].comentario.push(this.comentario)
-
-                                    Object.assign(this.allComments[0], json)
-                                }else{
-                                    if(this.allComments[0][String(a)][String(b)] == undefined){
-                                        var string = `{
-                                            "` + b + `": ` + `{
-                                                
-                                            }` + `
-                                        }`
-
-                                        var json = JSON.parse(string)
-                                    
-                                        json[String(b)].hora = []
-                                        json[String(b)].comentario = []
-
-                                        json[String(b)].hora.push(this.horaActual)
-                                        json[String(b)].comentario.push(this.comentario)
-
-                                        Object.assign(this.allComments[0][String(a)], json)
-                                    }else{
-                                        this.allComments[0][String(a)][String(b)].hora.push(this.horaActual)
-                                        this.allComments[0][String(a)][String(b)].comentario.push(this.comentario)
-                                    }
-                                }
-                            }
-
-                            console.log("segundo: " + JSON.stringify(this.allComments[0]))
-
-                            const info = {
-                                cui: this.paciente.CUI,
-                                comentarios: JSON.stringify(this.allComments[0])
-                            }
-                            this.$http.put('http://localhost:8000/ComentarioController/update', info).then(response => {
                             })
-                            
+                        }
+                        
+                    }).then(() => {
+                        this.$http.post('http://localhost:8000/vacunaController/insert', vacunm).then(response => {}).catch(error => {
+                            console.log("Error en insertar vacuna")
                         })
-                    }
-                    
-                }).then(() => {
-                    this.$http.post('http://localhost:8000/vacunaController/insert', vacunm).then(response => {})
-                }).then(() => {
-                    this.$router.push("/menu-principal");
-                })
-                .catch(error => {
-                    console.log("Ocurrio un error")
-                })
+                    }).then(() => {
+                        this.$router.push("/menu-principal");
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+                }
             }
         },
         fillBCG: function() {
