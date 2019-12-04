@@ -205,6 +205,7 @@ class ExampleController extends Controller
                 $user->givePermissionTo('borrar citas');    
                 $user->givePermissionTo('ver estadisticas');
                 $user->givePermissionTo('vista general');
+                $user->givePermissionTo('ingresar formularios');
                 $user->givePermissionTo('dar consulta');
                 break;
             //profesional
