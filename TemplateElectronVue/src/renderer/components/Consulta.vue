@@ -42,7 +42,12 @@
                                                     </b-col>
                                                 </b-row>
                                                 <b-row>
-                                                <img style="margin-left: 10%; margin-top: 2%" src="../assets/javier.jpg" alt="" width="320" height="220">
+                                                    <div v-if="imageData">
+                                                        <img id="fotoPaciente" :src="imageData" alt="" width="273" height="183">
+                                                    </div>
+                                                    <div v-else> <!-- se utiliza la imagen default si no se ha escogido una  -->
+                                                        <img id="fotoPaciente" src="../assets/default.png" alt="" width="273" height="183">
+                                                    </div>
                                                 </b-row>
                                             </b-container>
                                         </div>
@@ -1967,6 +1972,8 @@ export default {
         cancelar: false,
         errorMessage: false,
 
+        imageData: "",
+
         sangreHeaders: [
             { text: 'Fecha', align: 'center', value: 'Fecha'},
             { text: 'CO', value: 'CO', sortable: false, align: 'center' },
@@ -2393,6 +2400,8 @@ export default {
                 this.computeAge(this.paciente.fechaDeNacimiento);
 
                 this.Sindrome_Clinico_Presentacion = response.data.Paciente[0].Sindrome_Clinico_Presentacion;
+
+                this.imageData = response.data.Paciente[0].Imagen
             }
             
 
