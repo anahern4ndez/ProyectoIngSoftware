@@ -644,6 +644,7 @@
                                                             v-model="misMedicamentos.tac.mg"
                                                             label="mg"
                                                             outline
+                                                            type =number
                                                             min="0"
                                                             :rules="minRules"
                                                             :disabled="!misMedicamentos.tac.estado"
