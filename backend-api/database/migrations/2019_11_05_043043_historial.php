@@ -16,7 +16,7 @@ class Historial extends Migration
         Schema::create('historiales', function (Blueprint $table) {
             $table->increments('id');
             $table->string('IdDoctor');
-            $table->string('CUI', 20) -> unique();
+            $table->string('CUI', 20);
             $table->date('fecha');
             $table->string('TipoFormulario');
             $table->string('Path');

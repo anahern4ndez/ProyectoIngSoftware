@@ -62,7 +62,8 @@
    }
    .History{
      border-right: 5px solid black;
-     height: 100%;
+     height: 650px;
+     overflow: scroll;
    }
    .Display{
      margin-left:20px;

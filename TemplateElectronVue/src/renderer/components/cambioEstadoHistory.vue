@@ -41,7 +41,7 @@
             <b-container class="bv-example-row1" >
                 <b-row align-h="around" align-v="center">  
                         <div>
-                            <v-radio-group v-model="text.estadoinicial" row :rules="radioRules" required readonly>
+                            <v-radio-group v-model="text.estadofinal" row :rules="radioRules" required readonly>
                                 <v-radio name='actual' label="Pre diálisis" :value="1" color="black"></v-radio>
                                 <v-radio name='actual' label="Diálisis peritoneal" :value="2" color="black"></v-radio>
                                 <v-radio name='actual' label="Hemodiálisis" :value="3" color="black"></v-radio>
