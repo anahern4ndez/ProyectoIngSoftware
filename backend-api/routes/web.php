@@ -125,7 +125,7 @@ $router->post('/hemodialisis/findAllUser', 'HemodialisisController@findAllUser')
 // Enfermedades CIE 10
 $router->get('/dxs', 'DxController@getDxs');
 
-// percentil de pesos 
+// percentil de pesos
 $router->post('/percentilPeso', 'percentilPesoController@getPesos');
 
 // percentil de Tallas

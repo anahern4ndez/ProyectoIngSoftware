@@ -181,14 +181,14 @@ export default {
   data() {
     return {
       picked: "",
-      nombre:'',
-      name:'',
-      email:'',
-      password:'',
-      passwordVerification: '',
-      selected: '',
-      puesto:'',
-      idb: '',
+      nombre: "",
+      name: "",
+      email: "",
+      password: "",
+      passwordVerification: "",
+      selected: "",
+      puesto: "",
+      idb: "",
       selected: "Tipo de usuario",
       errorFormato: false,
       errorLargo: false,
@@ -204,7 +204,7 @@ export default {
       errorDPIRepetido: false,
       errorEmailRepetido: false,
       imagen: null,
-      path: '',
+      path: "",
       user: [],
       headers: [
         { text: "Nombre", align: "center", value: "Nombre", sortable: false },
@@ -213,101 +213,105 @@ export default {
       ]
     };
   },
-  methods:{
-    refreshUsers(){
+  methods: {
+    refreshUsers() {
       this.$http.get("http://localhost:8000/users").then(response => {
-      this.user = response.data.users;
-    });
-    },
-    getSomeUser(){
-      if (this.idb=="Administrador") {
-        this.idb=1;
-      }
-      if (this.idb=="Profesional") {
-        this.idb=2;
-      }
-      if (this.idb=="Secretaria") {
-        this.idb=3;
-      }
-      if (this.idb=="Asistente") {
-        this.idb=4;
-      }
-      if (this.idb=="Visitante") {
-        this.idb=5;
-      }    
-      this.$http.get(`http://localhost:8000/users/some?idb=${this.idb}`).then(response => {
-        if(response.data.usersia.length === 0){
-          this.errorBusqueda = true;
-        }else{
-          this.errorBusqueda = false;
-          this.user = response.data.usersia;
-        }
-        this.idb="";
-    });
-    },
-    getOneUser(){
-      this.$http.get(`http://localhost:8000/users/look?idb=${this.idb}`).then(response => {
-        if(response.data.usersi === null){
-          this.errorBusqueda = true;
-        }else{
-          this.name = response.data.usersi.name;
-          this.id = response.data.usersi.id;
-          this.email = response.data.usersi.email;
-          this.idb = '';
-          this.errorBusqueda = false;
-          this.errorName = false;
-          this.errorDPI = false;
-          this.errorEmail = false;
-          this.errorPassword = false;
-          this.errorTipoUsuario = false;
-          this.errorFormato = false;
-          this.errorLargo = false;
-          this.errorPasswordVerification = false;
-          this.errorPasswordVerification2 = false;
-          this.errorDPILargo = false;
-          this.errorDPIRepetido = false;
-          this.errorEmailRepetido = false;
-
-          if (response.data.usersi.puesto === 1){
-            this.selected = 'Administrador'; 
-          }
-          if (response.data.usersi.puesto === 2){
-            this.selected = 'Profesional'; 
-          }
-          if (response.data.usersi.puesto === 3){
-            this.selected = 'Secretaria'; 
-          }
-          if (response.data.usersi.puesto === 4){
-            this.selected = 'Asistente'; 
-          }
-          if (response.data.usersi.puesto === 5){
-            this.selected = 'Visitante'; 
-          }
-        }
+        this.user = response.data.users;
       });
     },
-    selectUser(recibed){
+    getSomeUser() {
+      if (this.idb == "Administrador") {
+        this.idb = 1;
+      }
+      if (this.idb == "Profesional") {
+        this.idb = 2;
+      }
+      if (this.idb == "Secretaria") {
+        this.idb = 3;
+      }
+      if (this.idb == "Asistente") {
+        this.idb = 4;
+      }
+      if (this.idb == "Visitante") {
+        this.idb = 5;
+      }
+      this.$http
+        .get(`http://localhost:8000/users/some?idb=${this.idb}`)
+        .then(response => {
+          if (response.data.usersia.length === 0) {
+            this.errorBusqueda = true;
+          } else {
+            this.errorBusqueda = false;
+            this.user = response.data.usersia;
+          }
+          this.idb = "";
+        });
+    },
+    getOneUser() {
+      this.$http
+        .get(`http://localhost:8000/users/look?idb=${this.idb}`)
+        .then(response => {
+          if (response.data.usersi === null) {
+            this.errorBusqueda = true;
+          } else {
+            this.name = response.data.usersi.name;
+            this.id = response.data.usersi.id;
+            this.email = response.data.usersi.email;
+            this.idb = "";
+            this.errorBusqueda = false;
+            this.errorName = false;
+            this.errorDPI = false;
+            this.errorEmail = false;
+            this.errorPassword = false;
+            this.errorTipoUsuario = false;
+            this.errorFormato = false;
+            this.errorLargo = false;
+            this.errorPasswordVerification = false;
+            this.errorPasswordVerification2 = false;
+            this.errorDPILargo = false;
+            this.errorDPIRepetido = false;
+            this.errorEmailRepetido = false;
+
+            if (response.data.usersi.puesto === 1) {
+              this.selected = "Administrador";
+            }
+            if (response.data.usersi.puesto === 2) {
+              this.selected = "Profesional";
+            }
+            if (response.data.usersi.puesto === 3) {
+              this.selected = "Secretaria";
+            }
+            if (response.data.usersi.puesto === 4) {
+              this.selected = "Asistente";
+            }
+            if (response.data.usersi.puesto === 5) {
+              this.selected = "Visitante";
+            }
+          }
+        });
+    },
+    selectUser(recibed) {
       this.name = recibed.name;
       this.id = recibed.id;
       this.email = recibed.email;
-      this.idb = '';
-      if (recibed.puesto === 1){
-        this.selected = 'Administrador'; 
+      this.idb = "";
+      if (recibed.puesto === 1) {
+        this.selected = "Administrador";
       }
-      if (recibed.puesto === 2){
-        this.selected = 'Profesional'; 
+      if (recibed.puesto === 2) {
+        this.selected = "Profesional";
       }
-      if (recibed.puesto === 3){
-         this.selected = 'Secretaria'; 
+      if (recibed.puesto === 3) {
+        this.selected = "Secretaria";
       }
-      if (recibed.puesto === 4){
-        this.selected = 'Asistente'; 
+      if (recibed.puesto === 4) {
+        this.selected = "Asistente";
       }
-      if (recibed.puesto === 5){
-        this.selected = 'Visitante'; 
-      }    
+      if (recibed.puesto === 5) {
+        this.selected = "Visitante";
+      }
     },
-    eliminar(){
+    eliminar() {
       this.errorName = false;
       this.errorDPI = false;
       this.errorEmail = false;
@@ -320,23 +324,25 @@ export default {
       this.errorDPIRepetido = false;
       this.errorEmailRepetido = false;
 
-      if(this.id === ''){
+      if (this.id === "") {
         this.errorDPI = true;
-      }else{
+      } else {
         this.errorDPI = false;
       }
-      if(this.id != ''){
-      this.$http.delete(`http://localhost:8000/users/destroy?id=${this.id}`).then(response=>{
-        this.refreshUsers();
-        this.name = '';
-        this.id = '';
-        this.email = '';
-        this.password = '';
-        this.selected = "Tipo de usuario";
-      });
+      if (this.id != "") {
+        this.$http
+          .delete(`http://localhost:8000/users/destroy?id=${this.id}`)
+          .then(response => {
+            this.refreshUsers();
+            this.name = "";
+            this.id = "";
+            this.email = "";
+            this.password = "";
+            this.selected = "Tipo de usuario";
+          });
       }
     },
-    crear(){
+    crear() {
       this.errorName = false;
       this.errorEmail = false;
       this.errorPassword = false;
@@ -348,103 +354,120 @@ export default {
       this.errorPasswordVerification2 = false;
       this.errorEmailRepetido = false;
 
-      if(this.name === ''){
+      if (this.name === "") {
         this.errorName = true;
-      }else{
+      } else {
         this.errorName = false;
       }
 
-      if(this.id === ''){
+      if (this.id === "") {
         this.errorDPI = true;
-      }else{
+      } else {
         this.errorDPI = false;
       }
 
-      if(this.email === ''){
+      if (this.email === "") {
         this.errorEmail = true;
-      }else{
+      } else {
         this.errorEmail = false;
       }
 
-      if(this.password === ''){
+      if (this.password === "") {
         this.errorPassword = true;
-      }else{
+      } else {
         this.errorPassword = false;
       }
 
-      if(this.passwordVerification === ''){
+      if (this.passwordVerification === "") {
         this.errorPasswordVerification2 = true;
-      }else{
+      } else {
         this.errorPasswordVerification2 = false;
-        if(this.passwordVerification != this.password){
+        if (this.passwordVerification != this.password) {
           this.errorPasswordVerification = true;
-        }else{
+        } else {
           this.errorPasswordVerification = false;
         }
       }
 
-      if(this.selected == "Tipo de usuario" ){
+      if (this.selected == "Tipo de usuario") {
         this.errorTipoUsuario = true;
-      }else{
+      } else {
         this.errorTipoUsuario = false;
       }
-      if (this.selected=="Administrador") {
-        this.puesto=1;
+      if (this.selected == "Administrador") {
+        this.puesto = 1;
       }
-      if (this.selected=="Profesional") {
-        this.puesto=2;
+      if (this.selected == "Profesional") {
+        this.puesto = 2;
       }
-      if (this.selected=="Secretaria") {
-        this.puesto=3;
+      if (this.selected == "Secretaria") {
+        this.puesto = 3;
       }
-      if (this.selected=="Asistente") {
-        this.puesto=4;
+      if (this.selected == "Asistente") {
+        this.puesto = 4;
       }
-      if (this.selected=="Visitante") {
-        this.puesto=5;
+      if (this.selected == "Visitante") {
+        this.puesto = 5;
       }
-      if(this.name != '' && this.password != '' && this.email != '' && this.selected != null && this.password == this.passwordVerification){
-        this.$http.post(`http://localhost:8000/users/create?name=${this.name}&email=${this.email}&password=${this.password}&puesto=${this.puesto}`, this.imagen).then(response=>{
-          this.refreshUsers();
-          this.name = '';
-          this.id = '';
-          this.email = '';
-          this.password = '';
-          this.passwordVerification = '';
-          this.selected = "Tipo de usuario";
-          this.imagen = null;
-        }).catch(error => {
-
-          if (error.response.data.id === undefined){
-            this.errorDPIRepetido = false;
-          }else{
-            if (error.response.data.id[0] === 'The id has already been taken.'){
-              this.errorDPIRepetido = true;
+      if (
+        this.name != "" &&
+        this.password != "" &&
+        this.email != "" &&
+        this.selected != null &&
+        this.password == this.passwordVerification
+      ) {
+        this.$http
+          .post(
+            `http://localhost:8000/users/create?name=${this.name}&email=${this.email}&password=${this.password}&puesto=${this.puesto}`,
+            this.imagen
+          )
+          .then(response => {
+            this.refreshUsers();
+            this.name = "";
+            this.id = "";
+            this.email = "";
+            this.password = "";
+            this.passwordVerification = "";
+            this.selected = "Tipo de usuario";
+            this.imagen = null;
+          })
+          .catch(error => {
+            if (error.response.data.id === undefined) {
+              this.errorDPIRepetido = false;
+            } else {
+              if (
+                error.response.data.id[0] === "The id has already been taken."
+              ) {
+                this.errorDPIRepetido = true;
+              }
             }
-          }
 
-          if (error.response.data.email === undefined){
-            this.errorFormato = false;
-            this.errorEmailRepetido = false;
-          }else{
-            if (error.response.data.email[0] === 'The email has already been taken.'){
-              this.errorEmailRepetido = true;
-            }else{
-              this.errorFormato = true;
+            if (error.response.data.email === undefined) {
+              this.errorFormato = false;
+              this.errorEmailRepetido = false;
+            } else {
+              if (
+                error.response.data.email[0] ===
+                "The email has already been taken."
+              ) {
+                this.errorEmailRepetido = true;
+              } else {
+                this.errorFormato = true;
+              }
             }
-          }
 
-          if (error.response.data.password === undefined){
-            this.errorLargo = false;
-          }else{
-            this.errorLargo = true;
-          }
-        });
+            if (error.response.data.password === undefined) {
+              this.errorLargo = false;
+            } else {
+              this.errorLargo = true;
+            }
+          });
       }
     },
-    imgClick: function(event){// on a click on the button with id 'one'
-      const btn = this.$refs.changeImg
-      btn.click();// trigger the click on second, and go on 
+    imgClick: function(event) {
+      // on a click on the button with id 'one'
+      const btn = this.$refs.changeImg;
+      btn.click(); // trigger the click on second, and go on
     },
     changeImg: function(event) {
       var input = event.target;
@@ -452,22 +475,19 @@ export default {
       //Este el el path de la imagen
       this.path = input.files[0].path;
       console.log(this.path);
-      
 
-      this.$http.get(`http://localhost:8000/users/getID`).then(response=>{
+      this.$http.get(`http://localhost:8000/users/getID`).then(response => {
         //console.log(response.data.idersia.id)
-        try 
-        {
-
-          var shell = require('shelljs');
-          let nodePath = (shell.which('node').toString());
+        try {
+          var shell = require("shelljs");
+          let nodePath = shell.which("node").toString();
           shell.config.execPath = nodePath;
 
-          const ipServer = '192.168.0.156';
-          const serverPassword = 'perritoUVG';
+          const ipServer = "192.168.0.156";
+          const serverPassword = "perritoUVG";
           const pcPath = this.path;
-          const serverUser = 'adminlocal';
-          const serverPath = '/home/adminlocal/Dowloads';
+          const serverUser = "adminlocal";
+          const serverPath = "/home/adminlocal/Dowloads";
           //console.log(parseInt(response.data.idersia.id) + 1);
 
           const idUsr = parseInt(response.data.idersia.id) + 1;
@@ -478,23 +498,18 @@ export default {
 
           console.log(dir);
 
-          const string =`xcopy "${pcPath}" "${dir}" /i`;
+          const string = `xcopy "${pcPath}" "${dir}" /i`;
           const rename = `cd ${dir} & ren ${nombreFoto} prfl.jpg`;
-
 
           console.log(shell.exec(string));
           console.log(shell.exec(rename));
-
-        } catch (error)
-        {
-
+        } catch (error) {
           console.log("Error al subir imagen al servidor");
         }
       });
-      input.value = '';
-       
+      input.value = "";
     },
-    modificar(){
+    modificar() {
       this.errorName = false;
       this.errorEmail = false;
       this.errorPassword = false;
@@ -507,79 +522,89 @@ export default {
       this.errorDPILargo = false;
       this.errorEmailRepetido = false;
 
-      if(this.name === ''){
+      if (this.name === "") {
         this.errorName = true;
-      }else{
+      } else {
         this.errorName = false;
       }
 
-      if(this.email === ''){
+      if (this.email === "") {
         this.errorEmail = true;
-      }else{
+      } else {
         this.errorEmail = false;
       }
 
-      if(this.password === ''){
+      if (this.password === "") {
         this.errorPassword = true;
-      }else{
+      } else {
         this.errorPassword = false;
       }
 
-      if(this.passwordVerification === ''){
+      if (this.passwordVerification === "") {
         this.errorPasswordVerification2 = true;
-      }else{
+      } else {
         this.errorPasswordVerification2 = false;
-        if(this.passwordVerification != this.password){
+        if (this.passwordVerification != this.password) {
           this.errorPasswordVerification = true;
-        }else{
+        } else {
           this.errorPasswordVerification = false;
         }
       }
 
-      if(this.selected == "Tipo de usuario"){
+      if (this.selected == "Tipo de usuario") {
         this.errorTipoUsuario = true;
-      }else{
+      } else {
         this.errorTipoUsuario = false;
       }
-      if (this.selected=="Administrador") {
-        this.puesto=1;
+      if (this.selected == "Administrador") {
+        this.puesto = 1;
       }
-      if (this.selected=="Profesional") {
-        this.puesto=2;
+      if (this.selected == "Profesional") {
+        this.puesto = 2;
       }
-      if (this.selected=="Secretaria") {
-        this.puesto=3;
+      if (this.selected == "Secretaria") {
+        this.puesto = 3;
       }
-      if (this.selected=="Asistente") {
-        this.puesto=4;
+      if (this.selected == "Asistente") {
+        this.puesto = 4;
       }
-      if (this.selected=="Visitante") {
-        this.puesto=5;
+      if (this.selected == "Visitante") {
+        this.puesto = 5;
       }
-      if(this.name != '' && this.password != '' && this.email != '' && this.selected != null && this.password == this.passwordVerification){
-        this.$http.put(`http://localhost:8000/users/update?id=${this.id}&name=${this.name}&email=${this.email}&password=${this.password}&puesto=${this.puesto}`).then(response=>{
-          this.refreshUsers();
-          this.name = '';
-          this.id = '';
-          this.email = '';
-          this.password = '';
-          this.passwordVerification = '';
-          this.selected ="Tipo de usuario";
-          this.imagen = null;
-        }).catch(error => {
+      if (
+        this.name != "" &&
+        this.password != "" &&
+        this.email != "" &&
+        this.selected != null &&
+        this.password == this.passwordVerification
+      ) {
+        this.$http
+          .put(
+            `http://localhost:8000/users/update?id=${this.id}&name=${this.name}&email=${this.email}&password=${this.password}&puesto=${this.puesto}`
+          )
+          .then(response => {
+            this.refreshUsers();
+            this.name = "";
+            this.id = "";
+            this.email = "";
+            this.password = "";
+            this.passwordVerification = "";
+            this.selected = "Tipo de usuario";
+            this.imagen = null;
+          })
+          .catch(error => {
+            if (error.response.data.email === undefined) {
+              this.errorFormato = false;
+            } else {
+              this.errorFormato = true;
+            }
 
-          if (error.response.data.email === undefined){
-            this.errorFormato = false;
-          }else{
-            this.errorFormato = true;
-          }
-
-          if (error.response.data.password === undefined){
-            this.errorLargo = false;
-          }else{
-            this.errorLargo = true;
-          }
-        });
+            if (error.response.data.password === undefined) {
+              this.errorLargo = false;
+            } else {
+              this.errorLargo = true;
+            }
+          });
       }
     }
   }

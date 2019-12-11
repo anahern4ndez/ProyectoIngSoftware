@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 
 class UserController extends Controller {
-    
+
     /**
      * Retrieves all users from the database.
      */

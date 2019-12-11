@@ -17,13 +17,13 @@ class ExampleController extends Controller
      */
     public function __construct()
     {
-        
+
     }
 
     public function index() {
         // regresa una respuesta con el objeto especificado como json
         // y el segundo parametro es el codigo HTTP.
-        
+
         return response()->json([
             'success' => true,
             'message' => 'Hola amigos!!',
@@ -76,7 +76,7 @@ class ExampleController extends Controller
         $user->puesto = $request->puesto;
         //$user->imagen = $request->img;
         $this->givePermission($user);
-        
+
         //Comente esto
         //return $request;
 
@@ -99,7 +99,7 @@ class ExampleController extends Controller
         $user->puesto = $request->puesto;
         $user->imagen = $request->img;
         $user->save();
-        
+
         $user->assignRole(DB::table('roles')->select('name')->get());
         return response()->json([
             'success' => true,
@@ -110,7 +110,7 @@ class ExampleController extends Controller
     {
         $this->validate($request, [
 
-            
+
             'email' => 'email',
             'password' => 'min:6|max:255'
         ]);
@@ -120,8 +120,7 @@ class ExampleController extends Controller
             $user=User::find($id);
             $user->name = $request->name;
             $user->email = $request->email;
-            $user->password = $request->password;
-            $user->password = $request->password;
+            $user->password = hash::make($request->password);
             $user->puesto = $request->puesto;
             $user->save();}
 
@@ -188,7 +187,7 @@ class ExampleController extends Controller
         ], 200);
     }
 
-    
+
     public function givePermission($user){
         switch($user->puesto) {
             //super admin
@@ -202,7 +201,7 @@ class ExampleController extends Controller
                 $user->givePermissionTo('dr hemodialisis');
                 $user->givePermissionTo('crear pacientes');
                 $user->givePermissionTo('editar citas');
-                $user->givePermissionTo('borrar citas');    
+                $user->givePermissionTo('borrar citas');
                 $user->givePermissionTo('ver estadisticas');
                 $user->givePermissionTo('vista general');
                 $user->givePermissionTo('ingresar formularios');
@@ -237,7 +236,7 @@ class ExampleController extends Controller
                 $user->givePermissionTo('borrar pacientes');
                 $user->givePermissionTo('realizar hemodialisis');
                 $user->givePermissionTo('tecnico hemodialisis');
-    
+
                 break;
             //tecnico
             case 5:
