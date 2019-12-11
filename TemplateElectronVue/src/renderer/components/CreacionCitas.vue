@@ -331,7 +331,7 @@ export default {
   }),
   mounted() {
     this.todayDate = new Date();
-    this.today = this.todayDate.toISOString().substring(0, 10);
+    this.today = this.todayDate.toString();
     this.month = this.getMes(this.todayDate.getMonth());
     this.year = this.todayDate.getFullYear();
     // obtener datos de BD
