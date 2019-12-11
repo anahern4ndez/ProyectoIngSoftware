@@ -25,6 +25,7 @@
                     <div class="form-block">
                         <label for="inputEmail" class="sr-only">Usuario</label>
                         <input v-model.trim="email"
+                            @keyup.enter='loginMethod'
                             class="field form-control"
                             name="email"
                             placeholder="Email"
