@@ -26,7 +26,7 @@ class menuPrincipalController extends Controller
     {
 
         $id = $request->id;
-        
+
         if($id==0)
         {
             $citas = DB::table('citas')->get();
@@ -37,19 +37,22 @@ class menuPrincipalController extends Controller
             $citas = DB::table('citas')->where('idUsuario', $id)->get();
 
         }
-        
+
         $nombres = [];
+        $cuis = [];
 
         foreach ($citas as $valor) {
             $paciente = DB::table('pacientes')->where('id', $valor->idPaciente)->first();
             array_push($nombres, $paciente->Nombre);
+            array_push($cuis, $paciente->CUI);
         }
 
         return response()->json([
             'citas' => $citas,
             'nombres' => $nombres,
+            'cuis' => $cuis,
         ], 200);
-        
-        
+
+
     }
 }

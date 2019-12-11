@@ -25,7 +25,6 @@
 						<template>
 						<div>
 							<v-btn outline color="#303841" v-on:click="gestionarPaciente" v-if="$can('ver pacientes')">Gestionar Paciente</v-btn>
-							<v-btn outline color="#303841" v-on:click="darConsulta">Generar Reporte</v-btn>
 							<v-btn outline color="#303841" v-on:click="InformesEstaditicos" v-if="$can('ver estadisticas')">Informes Estadísticos</v-btn>
 						</div>
 					</template>
@@ -83,7 +82,7 @@
                 class="my-event with-time"
                 :style="{'backgroundColor':colors[event.idUsuario-1],top: timeToY(event.time) + 'px', height: minutesToPixels(event.duration) + 'px' }"
                 :color="red"
-                @click="darConsulta(event.idPaciente)"
+                @click="darConsulta(event.idPaciente,event.cui)"
                 v-html="event.title"
               ></div>
             </template>
@@ -138,7 +137,7 @@ export default {
     name: "",
     switch1: false,
     colors: ["#FF9D14", "#BF760F", "#804F0A", "#402705", "#E68E12"],
-    src: `\\temp\\usrs\\${store.id}\\prfl.jpg`,
+    src: `\\temp\\usrs\\${store.id}\\prfl.jpg`
   }),
   watch: {
     switch1(newValue) {
@@ -158,7 +157,7 @@ export default {
 
   mounted() {
     this.$refs.calendar.scrollToTime("07:50");
-    store.id = store.state.user.id
+    store.id = store.state.user.id;
     this.id = store.id;
     console.log(this.src);
   },
@@ -216,10 +215,12 @@ export default {
     InformesEstaditicos() {
       this.$router.push("/EstadisticaGeneral");
     },
-    darConsulta(id) {
+    darConsulta(id, cui) {
       if (!this.switch1) {
         store.idPaciente = id;
-        this.$router.push("/gestionarPaciente");
+        this.$router.push(
+          "/gestionarPaciente/" + id.toString() + "/" + cui.toString()
+        );
       }
     },
     datosGenerales() {
@@ -248,13 +249,16 @@ export default {
         .then(response => {
           var array = response.data.citas;
           var nombres = response.data.nombres;
+          var cuis = response.data.cuis;
 
           for (let i = 0; i < array.length; i++) {
             const cita = array[i];
             const nombre = nombres[i];
+            const Cui = cuis[i];
 
             const citaN = {
               title: nombre,
+              cui: Cui,
               date: cita["fecha"],
               time: cita["hora"],
               idPaciente: cita["idPaciente"],
