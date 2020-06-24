@@ -474,10 +474,9 @@ export default {
       //console.log(input.files)
       //Este el el path de la imagen
       this.path = input.files[0].path;
-      console.log(this.path);
+      // console.log(this.path);
 
       this.$http.get(`http://localhost:8000/users/getID`).then(response => {
-        //console.log(response.data.idersia.id)
         try {
           var shell = require("shelljs");
           let nodePath = shell.which("node").toString();
@@ -487,22 +486,27 @@ export default {
           const serverPassword = "perritoUVG";
           const pcPath = this.path;
           const serverUser = "adminlocal";
-          const serverPath = "/home/adminlocal/Dowloads";
-          //console.log(parseInt(response.data.idersia.id) + 1);
-
           const idUsr = parseInt(response.data.idersia.id) + 1;
-          const dir = process.cwd() + `\\temp\\usrs\\${idUsr}\\`;
+          const serverPath = "/home/adminlocal/Fundanier/usrs/";
 
-          //console.log(this.path.split("\\").pop());
+          // pathDirectorio es la dirección completa de la imágen, pero sin el nombre de esta
+          let pathDirectorio = process.cwd() + `\\temp\\usrs\\${idUsr}`;
+
           const nombreFoto = this.path.split("\\").pop();
 
-          console.log(dir);
+          // Copiamos la imagen y la renombramos al directorio de fotos
+          const string = `xcopy "${pcPath}" "${pathDirectorio}\\" /i`;
+          const rename = `cd ${pathDirectorio} & ren ${nombreFoto} prfl.jpg`;
 
-          const string = `xcopy "${pcPath}" "${dir}" /i`;
-          const rename = `cd ${dir} & ren ${nombreFoto} prfl.jpg`;
+          // Obtenemos el directorio de la imágen + el nombre de la imágen
+          // NOTE: Deberíamos de usar esta variable para mandar una foto al servidor.
+          pathDirectorio = pathDirectorio.replace(/\\/g, "/");
 
           console.log(shell.exec(string));
           console.log(shell.exec(rename));
+
+          const comando = `pscp -pw ${serverPassword} -p -r -q "${pathDirectorio}" ${serverUser}@${ipServer}:${serverPath}`;
+          console.log(shell.exec(comando));
         } catch (error) {
           console.log("Error al subir imagen al servidor");
         }
