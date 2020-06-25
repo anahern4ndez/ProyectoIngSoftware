@@ -16,7 +16,7 @@
           </v-list-tile-avatar>
 
           <v-list-tile-content>
-            <v-list-tile-title class="grey--text text--darken-3">John Leider</v-list-tile-title>
+            <v-list-tile-title class="grey--text text--darken-3">Sistema Fundanier</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>

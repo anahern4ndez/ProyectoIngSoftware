@@ -1,74 +1,78 @@
 <template lang="">
-    <scroll-lock>
-        <div>
-            <div class="body">
-                <form class="form-signin form form--login">
-                    <img src="../assets/imagenLogo.png" alt="" width="500" height="200">
+  <scroll-lock>
+    <div>
+      <div class="body">
+        <form class="form-signin form form--login">
+          <img src="../assets/imagenLogo.png" alt="" width="500" height="200" />
 
-                    <br>
+          <br />
 
-                    <div class="text-center texto">
-                        Por favor, ingrese sus credenciales
-                    </div>
+          <div class="text-center texto">
+            Por favor, ingrese sus credenciales
+          </div>
 
-                    <div v-if="error">
-                        <v-alert :value="true" type="error" id="alert">
-                            Email o contraseña incorrecta.
-                        </v-alert>
-                    </div>
+          <div v-if="error">
+            <v-alert :value="true" type="error" id="alert">
+              Email o contraseña incorrecta.
+            </v-alert>
+          </div>
 
-                    <div v-if="errorEmail">
-                        <v-alert :value="true" type="error" id="alert">
-                            Ingrese su email, por favor.
-                        </v-alert>
-                    </div>
-                    <div class="form-block">
-                        <label for="inputEmail" class="sr-only">Usuario</label>
-                        <input v-model.trim="email"
-                            @keyup.enter='loginMethod'
-                            class="field form-control"
-                            name="email"
-                            placeholder="Email"
-                            autofocus=""
-                            id="email" 
-                            oninvalid="setCustomValidity('Ingrese su usuario')"
-                            oninput="setCustomValidity('')" 
-                            required 
-                        >
-                    </div>
-                    
-                    <div v-if="errorPass">
-                        <v-alert :value="true" type="error" id="alert">
-                            Ingrese su contraseña, por favor.
-                        </v-alert>
-                    </div>
-                    <div class="form-block">
-                        <label for="inputPassword" class="sr-only">Contraseña</label>
-                        <input v-model.trim="password"
-                            class="field form-control"
-                            name="password"
-                            type="password" 
-                            placeholder="Contraseña" 
-                            id="password"  
-                            oninvalid="setCustomValidity('Ingrese su constraseña')"
-                            oninput="setCustomValidity('')" 
-                            @keyup.enter='loginMethod'
-                            required>
-                    </div>
-                </form>
-            </div>
-            <br>
+          <div v-if="errorEmail">
+            <v-alert :value="true" type="error" id="alert">
+              Ingrese su email, por favor.
+            </v-alert>
+          </div>
+          <div class="form-block">
+            <label for="inputEmail" class="sr-only">Usuario</label>
+            <input
+              v-model.trim="email"
+              @keyup.enter="loginMethod"
+              class="field form-control"
+              name="email"
+              placeholder="Email"
+              autofocus=""
+              id="email"
+              oninvalid="setCustomValidity('Ingrese su usuario')"
+              oninput="setCustomValidity('')"
+              required
+            />
+          </div>
 
-            <div class="centerBtn">
-                <VueLoadingButton
-                    class="btn-block success"
-                    @click.native="loginMethod"
-                    :loading="isLoading">
-                    Ingresar
-                </VueLoadingButton>
-            </div>
-        </div>
-    </scroll-lock>
+          <div v-if="errorPass">
+            <v-alert :value="true" type="error" id="alert">
+              Ingrese su contraseña, por favor.
+            </v-alert>
+          </div>
+          <div class="form-block">
+            <label for="inputPassword" class="sr-only">Contraseña</label>
+            <input
+              v-model.trim="password"
+              class="field form-control"
+              name="password"
+              type="password"
+              placeholder="Contraseña"
+              id="password"
+              oninvalid="setCustomValidity('Ingrese su constraseña')"
+              oninput="setCustomValidity('')"
+              @keyup.enter="loginMethod"
+              required
+            />
+          </div>
+        </form>
+      </div>
+      <br />
+
+      <div class="centerBtn">
+        <VueLoadingButton
+          class="btn-block success"
+          @click.native="loginMethod"
+          :loading="isLoading"
+        >
+          Ingresar
+        </VueLoadingButton>
+      </div>
+    </div>
+  </scroll-lock>
 </template>
 
 <script>
@@ -155,15 +159,18 @@ export default {
 
               const ipServer = "192.168.0.156";
               const serverPassword = "perritoUVG";
-              const relativePath = "./src/temp";
+              // const relativePath = "./src/temp";
+              let relativePath = process.cwd() + `\\temp\\usrs\\${this.id}`;
               const serverUser = "adminlocal";
-              const serverPath = `/home/adminlocal/Fundanier/usrs/${id}/img/prfl.jpeg`;
+              const serverPath = `/home/adminlocal/Fundanier/usrs/${this.id}/prfl.jpg`;
+              ("/home/adminlocal/Fundanier/usrs/");
+              console.log(shell.exec(`mkdir "${relativePath}"`));
+              console.log(relativePath);
 
-              var string = `pscp -pw ${serverPassword} ${serverUser}@${ipServer}:${serverPath} ${relativePath}`;
-
-              shell.exec(string);
+              var string = `pscp -pw ${serverPassword} -p -q ${serverUser}@${ipServer}:${serverPath} "${relativePath}"`;
+              console.log(shell.exec(string));
             } catch (error) {
-              console.log("Error con shelljs");
+              console.log("Error con shelljs", error);
             }
           })
           .then(() => {
