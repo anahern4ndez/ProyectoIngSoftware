@@ -11,15 +11,10 @@
                     <b-col>
                         <div>
                             <b-container>
-                                <b-row class="justify-content-md-center">
-                                    <b-col>
-                                        <h3 style="font-weight: bold;">Paciente: </h3>  
-                                    </b-col>
-                                    <b-col>
-                                        <h3>{{paciente.nombre}} {{paciente.apellido}}</h3> 
-                                    </b-col>
+                                <b-row class="justify-content-md-start">
+                                    <h3 style="font-weight: bold;">Paciente: {{paciente.nombre}} {{paciente.apellido}}</h3>  
                                 </b-row>
-                                <b-row>
+                                <b-row class="justify-content-md-center">
                                     <div v-if="imageData">
                                         <img id="fotoPaciente" :src="imageData" alt="" width="273" height="183">
                                     </div>
@@ -769,11 +764,4 @@ table.table-bordered > tbody > tr > td {
   border: 3px solid #a9a9a9;
 }
 
-.posicion {
-  position: relative;
-}
-
-.centrado {
-  vertical-align: middle;
-}
 </style>

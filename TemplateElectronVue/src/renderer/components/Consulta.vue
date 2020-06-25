@@ -33,15 +33,10 @@
                                     <b-col>
                                         <div>
                                             <b-container>
-                                                <b-row class="justify-content-md-center">
-                                                    <b-col>
-                                                        <h3 class="headers" style="font-weight: bold;">Paciente:</h3>  
-                                                    </b-col>
-                                                    <b-col>
-                                                        <h3 class="headers">{{this.paciente.nombre}} {{this.paciente.apellido}}</h3> 
-                                                    </b-col>
+                                                <b-row class="justify-content-md-start">
+                                                    <h3 style="font-weight: bold;">Paciente: {{paciente.nombre}} {{paciente.apellido}}</h3>  
                                                 </b-row>
-                                                <b-row>
+                                                <b-row class="justify-content-md-center">
                                                     <div v-if="imageData">
                                                         <img id="fotoPaciente" :src="imageData" alt="" width="273" height="183">
                                                     </div>
@@ -65,9 +60,9 @@
                                             </div>
                                             <b-container>
                                                 <b-row class="justify-content-md-center">
-                                                    <b-col>
+                                                    <!-- <b-col>
                                                         <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="agregarComentario">Agregar Comentario</button> 
-                                                    </b-col>
+                                                    </b-col> -->
                                                     <b-col>
                                                         <button type="button" class="btn btn-lg btn-warning btn-block" v-on:click="verMas">Ver más</button>
                                                     </b-col>
@@ -1977,8 +1972,6 @@ export default {
 
         sangreHeaders: [
             { text: 'Fecha', align: 'center', value: 'Fecha'},
-            { text: 'CO', value: 'CO', sortable: false, align: 'center' },
-            { text: 'C2', value: 'C2', sortable: false, align: 'center' },
             { text: 'TAC', value: 'TAC', sortable: false, align: 'center' },
             { text: 'Na (136 - 144)', value: 'Na', sortable: false, align: 'center' },
             { text: 'K (3.3 - 5)', value: 'K', sortable: false, align: 'center' },
@@ -1993,13 +1986,9 @@ export default {
             { text: 'Fecha', align: 'center', value: 'Fecha' },
             { text: 'Albumina (3.5 - 4.6)', value: 'Albumina', sortable: false, align: 'center' },
             { text: 'Colesterol (100 - 200)', value: 'Colesterol', sortable: false, align: 'center' },
-            { text: 'Tigliceridos (20 - 175)', value: 'Tigliceridos', sortable: false, align: 'center' },
-            { text: 'Ácido Úrico (3.4 - 9)', value: 'AcidoU', sortable: false, align: 'center' },
             { text: 'Calcio (8.8 - 10.4)', value: 'Calcio', sortable: false, align: 'center' },
             { text: 'Fósforo (2.4 - 4.1)', value: 'Fosforo', sortable: false, align: 'center' },
-            { text: 'Fosfato Alk (75 - 270)', value: 'Fosfato', sortable: false, align: 'center' },
-            { text: 'PTH (11 - 54)', value: 'PTH', sortable: false, align: 'center' },
-            { text: 'DHL (405 - 930)', value: 'DHL', sortable: false, align: 'center' }
+            { text: 'PTH (11 - 54)', value: 'PTH', sortable: false, align: 'center' }
         ],
 
         
@@ -2017,7 +2006,6 @@ export default {
             { text: 'Hb (14.1 - 17.5)', value: 'Hb', sortable: false, align: 'center' },
             { text: 'Ht (43.1 - 51.5)', value: 'Ht', sortable: false, align: 'center' },
             { text: 'Plaquetas (140 - 440)', value: 'Plaquetas', sortable: false, align: 'center' },
-            { text: 'Reticulocitos', value: 'Reticulocitos', sortable: false, align: 'center' }
         ],
         hematologiaValues: [],
 
@@ -2511,17 +2499,11 @@ export default {
                 this.mapaMedico = response.data.data
             }).then(() => {
                 this.mapaMedico.map(datos => {
-                    // console.log(datos.fecha)
-                    // console.table(JSON.parse(datos.medicamento))
-                    // console.table(JSON.parse(datos.resultados_laboratorio))
-
                     const mediData = JSON.parse(datos.medicamento)
                     const labData = JSON.parse(datos.resultados_laboratorio)
 
                     this.sangreValues.push({
                         Fecha: datos.fecha,
-                        CO: "-",
-                        C2: "-",
                         TAC: mediData.tac.mg + " mg",
                         Na: labData.Na,
                         K: labData.K,
@@ -2536,13 +2518,9 @@ export default {
                         Fecha: datos.fecha,
                         Albumina: labData.Alb,
                         Colesterol: labData.Col,
-                        Tigliceridos: "-",
-                        AcidoU: "-",
                         Calcio: labData.Ca,
                         Fosforo: labData.P,
-                        Fosfato: "-",
                         PTH: labData.PTH,
-                        DHL: "-"
                     })
 
                     this.hematologiaValues.push({
@@ -2551,7 +2529,6 @@ export default {
                         Hb: labData.HB,
                         Ht: labData.HT,
                         Plaquetas: labData.PTL,
-                        Reticulocitos: "-"
                     })
                 })
             })
@@ -2690,7 +2667,7 @@ export default {
             if(this.comentario != ""){
                 const d = new Date()
                 this.horaActual = d.getMonth()+1 + "/" + d.getDate() + "/" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds()
-                console.log(this.horaActual)
+                // console.log(this.horaActual)
                 this.nuevoComentario = true
             }else{
                 this.nuevoComentario = false
@@ -3100,6 +3077,8 @@ export default {
 
         guardar() {
 
+            this.agregarComentario()
+
             if (this.datos_generales.Talla === "" || this.datos_generales.Peso === "" || this.datos_generales.PA === "")
                 this.errorMessage = true
             else {
@@ -3327,15 +3306,14 @@ export default {
 
                 if(this.update){
                     this.$http.put('http://localhost:8000/ConsultaController/update', info).then(response => {
-
                     }).then(() => {
                         if(this.nuevoComentario){
                             this.$http.post('http://localhost:8000/ConsultaController/getID', info).then(response => {
                                 var a = response.data.id
                                 var b = store.id
                                 
+                                console.log('nuevo comentarioooooooo', a, b, this.hasComments)
                                 if(!this.hasComments){
-
                                     console.log("No tiene comentarios")
 
                                     var string = `{
@@ -3365,8 +3343,8 @@ export default {
                                         console.log("Error en no tiene comentarios")
                                     })
                                 }else{
-
                                     console.log("consulta: " + String(a))
+                                    console.log('all comments', this.allComments[0])
                                     
                                     if(this.allComments[0][String(a)] == undefined){
                                         console.log("Si tiene comentarios pero no consulta")
@@ -3385,9 +3363,7 @@ export default {
 
                                         json[String(a)][String(b)].hora.push(this.horaActual)
                                         json[String(a)][String(b)].comentario.push(this.comentario)
-
                                         
-
                                         Object.assign(this.allComments[0], json)
                                     }else{
 
@@ -3441,87 +3417,38 @@ export default {
                     })
                 }else{
                     this.$http.post('http://localhost:8000/ConsultaController/insert', info).then(response => {
-
                         if(this.nuevoComentario){
                             this.$http.post('http://localhost:8000/ConsultaController/getID', info).then(response => {
                                 var a = response.data.id
                                 var b = store.id
                                 
-                                if(!this.hasComments){
-                                    var string = `{
-                                        "` + a + `": ` + `{
-                                            "` + b + `": ` + `{
-                                                
-                                            }` + `
+                                // if(!this.hasComments){
+                                var string = `{
+                                    "` + a + `": ` + `{
+                                        "` + b + `": ` + `{
+                                            
                                         }` + `
-                                    }`
+                                    }` + `
+                                }`
 
-                                    var json = JSON.parse(string)
-                                    
-                                    json[String(a)][String(b)].hora = []
-                                    json[String(a)][String(b)].comentario = []
+                                var json = JSON.parse(string)
+                                
+                                json[String(a)][String(b)].hora = []
+                                json[String(a)][String(b)].comentario = []
 
-                                    json[String(a)][String(b)].hora.push(this.horaActual)
-                                    json[String(a)][String(b)].comentario.push(this.comentario)
-
-                                    const info = {
-                                        cui: this.paciente.CUI,
-                                        comentarios: JSON.stringify(json)
-                                    }
-
-                                    this.$http.post('http://localhost:8000/ComentarioController/insert', info).then(response => {
-                                    })
-                                }else{
-                                    if(this.allComments[0][String(a)] == undefined){
-                                        var string = `{
-                                            "` + a + `": ` + `{
-                                                "` + b + `": ` + `{
-                                                    
-                                                }` + `
-                                            }` + `
-                                        }`
-
-                                        var json = JSON.parse(string)
-                                        
-                                        json[String(a)][String(b)].hora = []
-                                        json[String(a)][String(b)].comentario = []
-
-                                        json[String(a)][String(b)].hora.push(this.horaActual)
-                                        json[String(a)][String(b)].comentario.push(this.comentario)
-
-                                        Object.assign(this.allComments[0], json)
-                                    }else{
-                                        if(this.allComments[0][String(a)][String(b)] == undefined){
-                                            var string = `{
-                                                "` + b + `": ` + `{
-                                                    
-                                                }` + `
-                                            }`
-
-                                            var json = JSON.parse(string)
-                                        
-                                            json[String(b)].hora = []
-                                            json[String(b)].comentario = []
-
-                                            json[String(b)].hora.push(this.horaActual)
-                                            json[String(b)].comentario.push(this.comentario)
-
-                                            Object.assign(this.allComments[0][String(a)], json)
-                                        }else{
-                                            this.allComments[0][String(a)][String(b)].hora.push(this.horaActual)
-                                            this.allComments[0][String(a)][String(b)].comentario.push(this.comentario)
-                                        }
-                                    }
-                                }
-
-                                console.log("segundo: " + JSON.stringify(this.allComments[0]))
+                                json[String(a)][String(b)].hora.push(this.horaActual)
+                                json[String(a)][String(b)].comentario.push(this.comentario)
 
                                 const info = {
                                     cui: this.paciente.CUI,
-                                    comentarios: JSON.stringify(this.allComments[0])
+                                    comentarios: JSON.stringify(json)
                                 }
-                                this.$http.put('http://localhost:8000/ComentarioController/update', info).then(response => {
+
+                                this.$http.post('http://localhost:8000/ComentarioController/insert', info).then(response => {
+                                    console.log('RESPUESTA:', response)
                                 })
+
+                                console.log("segundo: " + JSON.stringify(this.allComments[0]))
                             })
                         }
                         
