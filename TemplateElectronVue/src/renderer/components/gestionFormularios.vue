@@ -51,179 +51,254 @@
     </div>
 </template>
 <script>
-    import {store} from '../main'
-    export default {
-        mounted() {
-        },
-        data() {
-            return {
-                formulario: null,
-                selectAbrir: ' ',
-                selectSubir: ' ',
-                items: [
-                'Peritonitis',
-                'Trasplante renal',
-                'Transfusión',
-                'Hemodialisis',
-                'Mortalidad',
-                'Cambio Status',
-                'Biopsia Renal',
-                ],
-                path: ' ',
-                // referencia: 'ms-word:ofv|u|file:///C:/Users/Ulises/Desktop/CHOL.docx',
-                referencia: 'ms-word:ofv|u|file:../TemplateElectronVue/CHOL.docx',
-                isDisabledAbrir: true,
-                isDisabledSubir: true,
-                isDisabledSubirForm: true,
-                direccionCHOL: '\\CHOL.docx',
-                dirCHOL: 'CHOL.docx',
-                direccionPeritonitis: 'Peritonitis',
-                dirPeritonitis: 'Peritonitis.docx',
-                direccionTransplanteRenal: 'TrasplanteRenal',
-                dirTransplanteRenal: 'TrasplanteRenal.docx',
-                direccionTransfusion: 'Transfusion',
-                dirTransfusion: 'Transfusion.docx',
-                direccionHemodialisis: 'Hemodialisis',
-                dirHemodialisis: 'Hemodialisis.docx',
-                direccionMortalidad: 'Mortalidad',
-                dirMortalidad: 'Mortalidad.docx',
-                direccionCambioStatus: 'CambioStatus',
-                dirCambioStatus: 'CambioStatus.docx',
-                direccionBiopsiaRenal: 'BiopsiaRenal',
-                dirBiopsiaRenal: 'BiopsiaRenal.docx',
-                exit: true,
-                cui: this.$route.params.cui,
-                name: this.$route.params.nombre,
-                apellido: this.$route.params.apellido,
-                nombrecompleto: this.$route.params.nombre + ' ' + this.$route.params.apellido,
-                fecha: new Date().toISOString().slice(0,10),
-                nombreNuevoFormulario: ' ',
-                dialog: false,
-            };
-        },
-        methods:{
-            startWord(strFile){
-                this.isDisabledSubir = false;
-                this.isDisabledSubirForm = false;
-                this.exit = false;
+import { store } from "../main";
+export default {
+  mounted() {},
+  data() {
+    return {
+      formulario: null,
+      selectAbrir: " ",
+      selectSubir: " ",
+      items: [
+        "Peritonitis",
+        "Trasplante renal",
+        "Transfusión",
+        "Hemodialisis",
+        "Mortalidad",
+        "Cambio Status",
+        "Biopsia Renal"
+      ],
+      path: " ",
+      // referencia: 'ms-word:ofv|u|file:///C:/Users/Ulises/Desktop/CHOL.docx',
+      referencia: "ms-word:ofv|u|file:../TemplateElectronVue/CHOL.docx",
+      isDisabledAbrir: true,
+      isDisabledSubir: true,
+      isDisabledSubirForm: true,
+      direccionCHOL: "\\CHOL.docx",
+      dirCHOL: "CHOL.docx",
+      direccionPeritonitis: "Peritonitis",
+      dirPeritonitis: "Peritonitis.docx",
+      direccionTransplanteRenal: "TrasplanteRenal",
+      dirTransplanteRenal: "TrasplanteRenal.docx",
+      direccionTransfusion: "Transfusion",
+      dirTransfusion: "Transfusion.docx",
+      direccionHemodialisis: "Hemodialisis",
+      dirHemodialisis: "Hemodialisis.docx",
+      direccionMortalidad: "Mortalidad",
+      dirMortalidad: "Mortalidad.docx",
+      direccionCambioStatus: "CambioStatus",
+      dirCambioStatus: "CambioStatus.docx",
+      direccionBiopsiaRenal: "BiopsiaRenal",
+      dirBiopsiaRenal: "BiopsiaRenal.docx",
+      exit: true,
+      cui: this.$route.params.cui,
 
-                const {shell} = require('electron');
-                var fs = require('fs');
-                var dir = process.cwd();
+      // TODO: Chino, por favor, obtener el id del paciente al entrar a esta pestaña
+      // idPaciente: this.$route.params.id,
 
-                //dir += this.direccionCHOL;
-
-                var dirCopy;
-                if(this.selectAbrir === 'Peritonitis'){
-                    //dir += this.direccionPeritonitis;
-                    this.nombreNuevoFormulario = this.direccionPeritonitis.concat('_',this.name,'_',this.apellido,'_',this.fecha,'.docx');
-                    dirCopy = this.dirPeritonitis;
-                }
-                else if(this.selectAbrir === 'Trasplante renal'){
-                    //dir += this.direccionTransplanteRenal;
-                    this.nombreNuevoFormulario = this.direccionTransplanteRenal.concat('_',this.name,'_',this.apellido,'_',this.fecha,'.docx');
-                    dirCopy = this.dirTransplanteRenal;
-                }
-                else if(this.selectAbrir === 'Transfusión'){
-                    //dir += this.direccionTransfusion;
-                    this.nombreNuevoFormulario = this.direccionTransfusion.concat('_',this.name,'_',this.apellido,'_',this.fecha,'.docx');
-                    dirCopy = this.dirTransfusion;
-                }
-                else if(this.selectAbrir === 'Hemodialisis'){
-                    //dir += this.direccionHemodialisis;
-                    this.nombreNuevoFormulario = this.direccionHemodialisis.concat('_',this.name,'_',this.apellido,'_',this.fecha,'.docx');
-                    dirCopy = this.dirHemodialisis;
-                }
-                else if(this.selectAbrir === 'Mortalidad'){
-                    //dir += this.direccionMortalidad;
-                    this.nombreNuevoFormulario = this.direccionMortalidad.concat('_',this.name,'_',this.apellido,'_',this.fecha,'.docx');
-                    dirCopy = this.dirMortalidad;
-                }
-                else if(this.selectAbrir === 'CambioStatus'){
-                    //dir += this.direccionMortalidad;
-                    this.nombreNuevoFormulario = this.direccionCambioStatus.concat('_',this.name,'_',this.apellido,'_',this.fecha,'.docx');
-                    dirCopy = this.dirCambioStatus;
-                }
-                else if(this.selectAbrir === 'BiopsiaRenal'){
-                    //dir += this.direccionMortalidad;
-                    this.nombreNuevoFormulario = this.direccionBiopsiaRenal.concat('_',this.name,'_',this.apellido,'_',this.fecha,'.docx');
-                    dirCopy = this.dirBiopsiaRenal;
-                }
-
-                const idPaciente = 0;
-                const pathNuevo = process.cwd() + `\\temp\\pcnts\\${idPaciente}\\${this.selectAbrir}\\${this.fecha}\\` + this.nombreNuevoFormulario
-                this.nombreNuevoFormulario = `.\\temp\\pcnts\\${idPaciente}\\${this.selectAbrir}\\${this.fecha}\\` + this.nombreNuevoFormulario;
-                // Se sacara una copia del archivo original y se pondra en uno NUEVO
-
-                fs.copyFile(dirCopy, this.nombreNuevoFormulario, (err) => {
-                    if (err)
-                    {
-                        var shelljs = require('shelljs');
-                        let nodePath = (shelljs.which('node').toString());
-                        shelljs.config.execPath = nodePath;
-                        const string =`mkdir ".\\temp\\pcnts\\${idPaciente}\\${this.selectAbrir}\\${this.fecha}\\"`;
-                        shelljs.exec(string);
-
-                        fs.copyFile(dirCopy, this.nombreNuevoFormulario, (err) => {
-                            if (err) throw err;
-                            shell.openItem(pathNuevo);
-                        });
-                    }
-
-                })
-
-                this.path = pathNuevo;
-                shell.openItem(pathNuevo);
-            },
-
-            changeDisableAbrir(event){
-                if(this.selectAbrir !== ' '){
-                    this.isDisabledAbrir = false
-                }
-            },
-
-            subirFormulario(){
-                console.log(this.path);
-                if(this.path === ' '){
-                    // Mostrar Alerta
-                    console.log("No se pudo subir Formulario")
-                }
-                else{
-                    // Subir Documento al servidor
-                    // Mostrar mensaje de subida con exito
-                    // Subir formulario a base de datos
-                    this.$http.post(`http://localhost:8000/formularioController/save?NombreDoctor=${store.id}&cui=${this.cui}&fecha=${this.fecha}&TipoFormulario=${this.selectAbrir}&Path=${this.path}`
-                    ).then(response=>{
-                        console.log("Se subio el Formulario: "+this.path)
-                        this.exit = true;
-                        this.isDisabledSubirForm = true;
-                    }).catch(error => {
-                        console.log("Error");
-                    });
-
-                }
-            },
-            formClick: function(event){ // on a click on the button with id 'one'
-                const btn = this.$refs.changeForm
-                btn.click(); // trigger the click on second, and go on 
-            },
-            changeForm: function(event) {
-                var input = event.target;
-                //console.log(input.files)
-                //Este es el path del documento
-                this.path = input.files[0].path;
-                console.log(this.path);
-                input.value = '';
-
-            },
-            regresarGestionPacientesView(){
-                this.$router.push('/gestionPacientes');
-            },
-        }
+      name: this.$route.params.nombre,
+      apellido: this.$route.params.apellido,
+      nombrecompleto:
+        this.$route.params.nombre + " " + this.$route.params.apellido,
+      fecha: new Date().toISOString().slice(0, 10),
+      nombreNuevoFormulario: " ",
+      dialog: false
     };
+  },
+  methods: {
+    startWord(strFile) {
+      this.isDisabledSubir = false;
+      this.isDisabledSubirForm = false;
+      this.exit = false;
+
+      const { shell } = require("electron");
+      var fs = require("fs");
+      var dir = process.cwd();
+
+      //dir += this.direccionCHOL;
+
+      var dirCopy;
+      if (this.selectAbrir === "Peritonitis") {
+        //dir += this.direccionPeritonitis;
+        this.nombreNuevoFormulario = this.direccionPeritonitis.concat(
+          "_",
+          this.name,
+          "_",
+          this.apellido,
+          "_",
+          this.fecha,
+          ".docx"
+        );
+        dirCopy = this.dirPeritonitis;
+      } else if (this.selectAbrir === "Trasplante renal") {
+        //dir += this.direccionTransplanteRenal;
+        this.nombreNuevoFormulario = this.direccionTransplanteRenal.concat(
+          "_",
+          this.name,
+          "_",
+          this.apellido,
+          "_",
+          this.fecha,
+          ".docx"
+        );
+        dirCopy = this.dirTransplanteRenal;
+      } else if (this.selectAbrir === "Transfusión") {
+        //dir += this.direccionTransfusion;
+        this.nombreNuevoFormulario = this.direccionTransfusion.concat(
+          "_",
+          this.name,
+          "_",
+          this.apellido,
+          "_",
+          this.fecha,
+          ".docx"
+        );
+        dirCopy = this.dirTransfusion;
+      } else if (this.selectAbrir === "Hemodialisis") {
+        //dir += this.direccionHemodialisis;
+        this.nombreNuevoFormulario = this.direccionHemodialisis.concat(
+          "_",
+          this.name,
+          "_",
+          this.apellido,
+          "_",
+          this.fecha,
+          ".docx"
+        );
+        dirCopy = this.dirHemodialisis;
+      } else if (this.selectAbrir === "Mortalidad") {
+        //dir += this.direccionMortalidad;
+        this.nombreNuevoFormulario = this.direccionMortalidad.concat(
+          "_",
+          this.name,
+          "_",
+          this.apellido,
+          "_",
+          this.fecha,
+          ".docx"
+        );
+        dirCopy = this.dirMortalidad;
+      } else if (this.selectAbrir === "CambioStatus") {
+        //dir += this.direccionMortalidad;
+        this.nombreNuevoFormulario = this.direccionCambioStatus.concat(
+          "_",
+          this.name,
+          "_",
+          this.apellido,
+          "_",
+          this.fecha,
+          ".docx"
+        );
+        dirCopy = this.dirCambioStatus;
+      } else if (this.selectAbrir === "BiopsiaRenal") {
+        //dir += this.direccionMortalidad;
+        this.nombreNuevoFormulario = this.direccionBiopsiaRenal.concat(
+          "_",
+          this.name,
+          "_",
+          this.apellido,
+          "_",
+          this.fecha,
+          ".docx"
+        );
+        dirCopy = this.dirBiopsiaRenal;
+      }
+
+      const idPaciente = 0;
+      const pathNuevo =
+        process.cwd() +
+        `\\temp\\pcnts\\${idPaciente}\\${this.selectAbrir}\\${this.fecha}\\` +
+        this.nombreNuevoFormulario;
+      this.nombreNuevoFormulario =
+        `.\\temp\\pcnts\\${idPaciente}\\${this.selectAbrir}\\${this.fecha}\\` +
+        this.nombreNuevoFormulario;
+      // Se sacara una copia del archivo original y se pondra en uno NUEVO
+
+      fs.copyFile(dirCopy, this.nombreNuevoFormulario, err => {
+        if (err) {
+          var shelljs = require("shelljs");
+          let nodePath = shelljs.which("node").toString();
+          shelljs.config.execPath = nodePath;
+
+          //Se crea la carpeta pacientes en la carpeta temporal
+          const string = `mkdir ".\\temp\\pcnts\\${idPaciente}\\${this.selectAbrir}\\${this.fecha}\\"`;
+          shelljs.exec(string);
+
+          fs.copyFile(dirCopy, this.nombreNuevoFormulario, err => {
+            if (err) throw err;
+            shell.openItem(pathNuevo);
+          });
+        }
+      });
+
+      this.path = pathNuevo;
+      shell.openItem(pathNuevo);
+    },
+
+    changeDisableAbrir(event) {
+      if (this.selectAbrir !== " ") {
+        this.isDisabledAbrir = false;
+      }
+    },
+
+    subirFormulario() {
+      console.log(this.path);
+      if (this.path === " ") {
+        // Mostrar Alerta
+      } else {
+        var shell = require("shelljs");
+        let nodePath = shell.which("node").toString();
+        shell.config.execPath = nodePath;
+
+        const idPaciente = 0;
+        //se copia el archivo al servidor
+        const ipServer = "192.168.0.156";
+        const serverPassword = "perritoUVG";
+        let relativePath = `${process.cwd()}\\temp\\pcnts\\${idPaciente}`;
+        relativePath = relativePath.replace(/\\/g, "/");
+        const serverUser = "adminlocal";
+        const serverPath = `/home/adminlocal/Fundanier/pcnts/`;
+        const comando = `pscp -pw ${serverPassword} -p -r -q "${relativePath}" "${serverUser}@${ipServer}:${serverPath}"`;
+        console.log(shell.exec(comando));
+
+        // Subir Documento al servidor
+        // Mostrar mensaje de subida con exito
+        // Subir formulario a base de datos
+        this.$http
+          .post(
+            `http://localhost:8000/formularioController/save?NombreDoctor=${store.id}&cui=${this.cui}&fecha=${this.fecha}&TipoFormulario=${this.selectAbrir}&Path=${this.path}`
+          )
+          .then(response => {
+            console.log("Se subio el Formulario: " + this.path);
+            this.exit = true;
+            this.isDisabledSubirForm = true;
+          })
+          .catch(error => {
+            console.log("Error", error);
+          });
+      }
+    },
+    formClick: function(event) {
+      // on a click on the button with id 'one'
+      const btn = this.$refs.changeForm;
+      btn.click(); // trigger the click on second, and go on
+    },
+    changeForm: function(event) {
+      var input = event.target;
+      //console.log(input.files)
+      //Este es el path del documento
+      this.path = input.files[0].path;
+      console.log(this.path);
+      input.value = "";
+    },
+    regresarGestionPacientesView() {
+      this.$router.push("/gestionPacientes");
+    }
+  }
+};
 </script>
 <style>
-.titulo1{
-    font-size: 20px;
+.titulo1 {
+  font-size: 20px;
 }
 </style>
