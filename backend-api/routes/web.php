@@ -55,8 +55,13 @@ $router->put('/ConsultaController/update', 'ConsultaController@updateAll');
 $router->post('/ConsultaController/findOne', 'ConsultaController@findOne');
 $router->post('/ConsultaController/findAll', 'ConsultaController@findAll');
 $router->post('/ConsultaController/getID', 'ConsultaController@getIDConsulta');
-$router->post('/ConsultaController/getMapaMedico', 'ConsultaController@getMapaMedico');
 $router->post('/ConsultaController/findAllUser', 'ConsultaController@findAllUser');
+
+// CRUD: TABLA MAPA MEDICO
+$router->post('/MapaController/getMapaMedico', 'MapaController@getMapaMedico');
+$router->post('/MapaController/setMapaMedico', 'MapaController@setMapaMedico');
+$router->put('/MapaController/updateMapaMedico', 'MapaController@updateMapaMedico');
+
 //Locations
 $router->get('/ProcedenciaController/getAllLocation', 'ProcedenciaController@getAllLocation');
 

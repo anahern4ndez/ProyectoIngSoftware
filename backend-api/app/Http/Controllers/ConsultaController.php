@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Consulta;
+use App\Mapa;
 
 class ConsultaController extends Controller
 {
@@ -113,17 +114,6 @@ class ConsultaController extends Controller
         return response()->json([
             'success' => true,
             'id' => $consulta[0]->id
-        ], 200);
-    }
-
-    function getMapaMedico(Request $request) {
-        $cuir = $request->cui;
-
-        $consulta = Consulta::select('fecha', 'medicamento', 'resultados_laboratorio')->where([['cui', '=', $cuir]])->get();
-
-        return response()->json([
-            'success' => true,
-            'data' => $consulta
         ], 200);
     }
 

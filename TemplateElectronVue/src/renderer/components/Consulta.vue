@@ -1667,9 +1667,6 @@
                         >
                             <template slot="items" slot-scope="props">
                                 <td>{{ props.item.Fecha }}</td>
-                                <td >{{ props.item.CO }}</td>
-                                <td >{{ props.item.C2 }}</td>
-                                <td >{{ props.item.TAC }}</td>
                                 <td >{{ props.item.Na }}</td>
                                 <td >{{ props.item.K }}</td>
                                 <td >{{ props.item.Cl }}</td>
@@ -1691,13 +1688,9 @@
                                 <td>{{ props.item.Fecha }}</td>
                                 <td >{{ props.item.Albumina }}</td>
                                 <td >{{ props.item.Colesterol }}</td>
-                                <td >{{ props.item.Tigliceridos }}</td>
-                                <td >{{ props.item.AcidoU }}</td>
                                 <td >{{ props.item.Calcio }}</td>
                                 <td >{{ props.item.Fosforo }}</td>
-                                <td >{{ props.item.Fosfato }}</td>
                                 <td >{{ props.item.PTH }}</td>
-                                <td >{{ props.item.DHL }}</td>
                             </template>
                         </v-data-table>
                     </div>
@@ -1715,8 +1708,6 @@
                                 <td >{{ props.item.GBlancos }}</td>
                                 <td >{{ props.item.Hb }}</td>
                                 <td >{{ props.item.Ht }}</td>
-                                <td >{{ props.item.Plaquetas }}</td>
-                                <td >{{ props.item.Reticulocitos }}</td>
                             </template>
                         </v-data-table>
                     </div>
@@ -1972,7 +1963,6 @@ export default {
 
         sangreHeaders: [
             { text: 'Fecha', align: 'center', value: 'Fecha'},
-            { text: 'TAC', value: 'TAC', sortable: false, align: 'center' },
             { text: 'Na (136 - 144)', value: 'Na', sortable: false, align: 'center' },
             { text: 'K (3.3 - 5)', value: 'K', sortable: false, align: 'center' },
             { text: 'Cl (98 - 107)', value: 'Cl', sortable: false, align: 'center' },
@@ -2005,7 +1995,6 @@ export default {
             { text: 'G. Blancos (3.7 - 10.1)', value: 'GBlancos', sortable: false, align: 'center' },
             { text: 'Hb (14.1 - 17.5)', value: 'Hb', sortable: false, align: 'center' },
             { text: 'Ht (43.1 - 51.5)', value: 'Ht', sortable: false, align: 'center' },
-            { text: 'Plaquetas (140 - 440)', value: 'Plaquetas', sortable: false, align: 'center' },
         ],
         hematologiaValues: [],
 
@@ -2340,7 +2329,6 @@ export default {
         this.todaysDate = date.getDate() + "-" +   + (date.getMonth() + 1) + "-" + date.getFullYear()
 
         // store.idPaciente = this.$route.params.idPaciente
-        console.log("Consulta: " + store.id) // ya jala :)
 
         const data = {
             ID: store.idPaciente // Aqui va el ID del paciente
@@ -2493,42 +2481,42 @@ export default {
             });
         }).then(() => {
             const lab = {
-                cui: this.paciente.CUI
+                cui: String(this.paciente.CUI)
             }
-            this.$http.post(`http://localhost:8000/ConsultaController/getMapaMedico`, lab).then(response => {
+            this.$http.post(`http://localhost:8000/MapaController/getMapaMedico`, lab).then(response => {
                 this.mapaMedico = response.data.data
+                console.table(this.mapaMedico)
             }).then(() => {
-                this.mapaMedico.map(datos => {
-                    const mediData = JSON.parse(datos.medicamento)
-                    const labData = JSON.parse(datos.resultados_laboratorio)
+                this.mapaMedico.map((datos, index) => {
+                    // console.log(index, datos)
+                    // const mediData = JSON.parse(datos.medicamento)
+                    // const labData = JSON.parse(datos.resultados_laboratorio)
 
                     this.sangreValues.push({
                         Fecha: datos.fecha,
-                        TAC: mediData.tac.mg + " mg",
-                        Na: labData.Na,
-                        K: labData.K,
-                        Cl: labData.Cl,
-                        HCO3: labData.HCO,
-                        BUN: labData.BUN,
-                        Creatinina: labData.Creat,
-                        Glucosa: labData.Glu
+                        Na: datos.na,
+                        K: datos.k,
+                        Cl: datos.cl,
+                        HCO3: datos.hco,
+                        BUN: datos.bun,
+                        Creatinina: datos.creatinina,
+                        Glucosa: datos.glucosa
                     })
 
                     this.sangreValues2.push({
                         Fecha: datos.fecha,
-                        Albumina: labData.Alb,
-                        Colesterol: labData.Col,
-                        Calcio: labData.Ca,
-                        Fosforo: labData.P,
-                        PTH: labData.PTH,
+                        Albumina: datos.albumina,
+                        Colesterol: datos.colesterol,
+                        Calcio: datos.calcio,
+                        Fosforo: datos.fosforo,
+                        PTH: datos.pth
                     })
 
                     this.hematologiaValues.push({
                         Fecha: datos.fecha,
-                        GBlancos: labData.GB,
-                        Hb: labData.HB,
-                        Ht: labData.HT,
-                        Plaquetas: labData.PTL,
+                        GBlancos: datos.globulosBlancos,
+                        Hb: datos.hb,
+                        Ht: datos.ht
                     })
                 })
             })
@@ -3204,7 +3192,7 @@ export default {
                     }})
                 }
 
-            let resultado_laboratorio = {}
+                let resultado_laboratorio = {}
 
                 resultado_laboratorio = Object.assign(resultado_laboratorio, {
                     "Na": Number(this.resultados_de_laboratorio.Na),
@@ -3306,15 +3294,16 @@ export default {
 
                 if(this.update){
                     this.$http.put('http://localhost:8000/ConsultaController/update', info).then(response => {
+
                     }).then(() => {
                         if(this.nuevoComentario){
                             this.$http.post('http://localhost:8000/ConsultaController/getID', info).then(response => {
                                 var a = response.data.id
                                 var b = store.id
                                 
-                                console.log('nuevo comentarioooooooo', a, b, this.hasComments)
+                                // console.log('nuevo comentarioooooooo', a, b, this.hasComments)
                                 if(!this.hasComments){
-                                    console.log("No tiene comentarios")
+                                    // console.log("No tiene comentarios")
 
                                     var string = `{
                                         "` + a + `": ` + `{
@@ -3340,14 +3329,14 @@ export default {
                                     this.$http.post('http://localhost:8000/ComentarioController/insert', info).then(response => {
 
                                     }).catch(error => {
-                                        console.log("Error en no tiene comentarios")
+                                        // console.log("Error en no tiene comentarios")
                                     })
                                 }else{
-                                    console.log("consulta: " + String(a))
-                                    console.log('all comments', this.allComments[0])
+                                    // console.log("consulta: " + String(a))
+                                    // console.log('all comments', this.allComments[0])
                                     
                                     if(this.allComments[0][String(a)] == undefined){
-                                        console.log("Si tiene comentarios pero no consulta")
+                                        // console.log("Si tiene comentarios pero no consulta")
                                         var string = `{
                                             "` + a + `": ` + `{
                                                 "` + b + `": ` + `{
@@ -3368,7 +3357,7 @@ export default {
                                     }else{
 
                                         if(this.allComments[0][String(a)][String(b)] == undefined){
-                                            console.log("Si tiene comentarios y consulta pero no doctor")
+                                            // console.log("Si tiene comentarios y consulta pero no doctor")
                                             var string = `{
                                                 "` + b + `": ` + `{
                                                     
@@ -3384,12 +3373,12 @@ export default {
                                             json[String(b)].comentario.push(this.comentario)
 
                                             Object.assign(this.allComments[0][String(a)], json)
-                                            console.log("Si tiene blah blah: " + JSON.stringify(this.allComments[0]))
+                                            // console.log("Si tiene blah blah: " + JSON.stringify(this.allComments[0]))
                                         }else{
-                                            console.log("tiene todo")
+                                            // console.log("tiene todo")
                                             this.allComments[0][String(a)][String(b)].hora.push(this.horaActual)
                                             this.allComments[0][String(a)][String(b)].comentario.push(this.comentario)
-                                            console.log(JSON.stringify(this.allComments[0]))
+                                            // console.log(JSON.stringify(this.allComments[0]))
                                         }
                                     }
                                     // console.log(JSON.stringify(this.allComments[0]))
@@ -3400,7 +3389,7 @@ export default {
                                     this.$http.put('http://localhost:8000/ComentarioController/update', info).then(response => {
                                         
                                     }).catch(error => {
-                                        console.log("Error en si tiene comentarios")
+                                        // console.log("Error en si tiene comentarios")
                                     })
                                 }
                             })
@@ -3408,9 +3397,34 @@ export default {
                     }).then(() => {
                         this.$http.put('http://localhost:8000/vacunaController/update', vacunm).then(response => {})
                     }).then(() => {
+                        let mapaMed = {}
+                        const hoy = new Date()
+                        mapaMed = Object.assign(mapaMed, {
+                            "cui": this.paciente.CUI,
+                            "fecha": hoy,
+                            "na": Number(this.resultados_de_laboratorio.Na),
+                            "k": Number(this.resultados_de_laboratorio.K),
+                            "cl": Number(this.resultados_de_laboratorio.Cl),
+                            "hco": Number(this.resultados_de_laboratorio.HCO),
+                            "bun": Number(this.resultados_de_laboratorio.BUN),
+                            "creatinina": Number(this.resultados_de_laboratorio.Creat),
+                            "glucosa": Number(this.resultados_de_laboratorio.Glu),
+                            "albumina": Number(this.resultados_de_laboratorio.Alb),
+                            "colesterol": Number(this.resultados_de_laboratorio.Col),
+                            "calcio": Number(this.resultados_de_laboratorio.Ca),
+                            "fosforo": Number(this.resultados_de_laboratorio.P),
+                            "pth": Number(this.resultados_de_laboratorio.PTH),
+                            "globulosBlancos": Number(this.resultados_de_laboratorio.GB),
+                            "hb": Number(this.resultados_de_laboratorio.HB),
+                            "ht": Number(this.resultados_de_laboratorio.HT)
+                        })
+                        
+                        this.$http.put('http://localhost:8000/MapaController/updateMapaMedico', mapaMed).then(response => {
+
+                        })
+                    }).then(() => {
                         this.guardando = false
-                    })
-                    .then(() => {
+                    }).then(() => {
                         this.$router.push("/menu-principal");
                     }).catch(error => {
 
@@ -3445,22 +3459,44 @@ export default {
                                 }
 
                                 this.$http.post('http://localhost:8000/ComentarioController/insert', info).then(response => {
-                                    console.log('RESPUESTA:', response)
                                 })
-
-                                console.log("segundo: " + JSON.stringify(this.allComments[0]))
                             })
                         }
                         
                     }).then(() => {
                         this.$http.post('http://localhost:8000/vacunaController/insert', vacunm).then(response => {}).catch(error => {
-                            console.log("Error en insertar vacuna")
                         })
+                    }).then(() => {
+                        let mapaMed = {}
+                        const hoy = new Date()
+                        mapaMed = Object.assign(mapaMed, {
+                            "cui": this.paciente.CUI,
+                            "fecha": hoy,
+                            "na": Number(this.resultados_de_laboratorio.Na),
+                            "k": Number(this.resultados_de_laboratorio.K),
+                            "cl": Number(this.resultados_de_laboratorio.Cl),
+                            "hco": Number(this.resultados_de_laboratorio.HCO),
+                            "bun": Number(this.resultados_de_laboratorio.BUN),
+                            "creatinina": Number(this.resultados_de_laboratorio.Creat),
+                            "glucosa": Number(this.resultados_de_laboratorio.Glu),
+                            "albumina": Number(this.resultados_de_laboratorio.Alb),
+                            "colesterol": Number(this.resultados_de_laboratorio.Col),
+                            "calcio": Number(this.resultados_de_laboratorio.Ca),
+                            "fosforo": Number(this.resultados_de_laboratorio.P),
+                            "pth": Number(this.resultados_de_laboratorio.PTH),
+                            "globulosBlancos": Number(this.resultados_de_laboratorio.GB),
+                            "hb": Number(this.resultados_de_laboratorio.HB),
+                            "ht": Number(this.resultados_de_laboratorio.HT)
+                        })
+
+                        this.$http.post('http://localhost:8000/MapaController/setMapaMedico', mapaMed).then(response => {
+                        })
+                    }).then(() => {
+                        this.guardando = false
                     }).then(() => {
                         this.$router.push("/menu-principal");
                     })
                     .catch(error => {
-                        console.log(error)
                     })
                 }
             }
