@@ -207,10 +207,15 @@ export default {
       const idPaciente = 0;
       const pathNuevo =
         process.cwd() +
-        `\\temp\\pcnts\\${idPaciente}\\${this.selectAbrir}\\${this.fecha}\\` +
+        `\\temp\\pcnts\\${this.cui}\\${this.selectAbrir}\\${this.fecha}\\` +
         this.nombreNuevoFormulario;
+
+      const pathGuardar =
+        `\\temp\\pcnts\\${this.cui}\\${this.selectAbrir}\\${this.fecha}\\` +
+        this.nombreNuevoFormulario;
+
       this.nombreNuevoFormulario =
-        `.\\temp\\pcnts\\${idPaciente}\\${this.selectAbrir}\\${this.fecha}\\` +
+        `.\\temp\\pcnts\\${this.cui}\\${this.selectAbrir}\\${this.fecha}\\` +
         this.nombreNuevoFormulario;
       // Se sacara una copia del archivo original y se pondra en uno NUEVO
 
@@ -221,7 +226,7 @@ export default {
           shelljs.config.execPath = nodePath;
 
           //Se crea la carpeta pacientes en la carpeta temporal
-          const string = `mkdir ".\\temp\\pcnts\\${idPaciente}\\${this.selectAbrir}\\${this.fecha}\\"`;
+          const string = `mkdir ".\\temp\\pcnts\\${this.cui}\\${this.selectAbrir}\\${this.fecha}\\"`;
           shelljs.exec(string);
 
           fs.copyFile(dirCopy, this.nombreNuevoFormulario, err => {
@@ -231,7 +236,7 @@ export default {
         }
       });
 
-      this.path = pathNuevo;
+      this.path = pathGuardar;
       shell.openItem(pathNuevo);
     },
 
@@ -254,12 +259,16 @@ export default {
         //se copia el archivo al servidor
         const ipServer = "192.168.0.156";
         const serverPassword = "perritoUVG";
-        let relativePath = `${process.cwd()}\\temp\\pcnts\\${idPaciente}`;
+        let relativePath = `${process.cwd()}\\temp\\pcnts\\${this.cui}`;
         relativePath = relativePath.replace(/\\/g, "/");
         const serverUser = "adminlocal";
         const serverPath = `/home/adminlocal/Fundanier/pcnts/`;
         const comando = `pscp -pw ${serverPassword} -p -r -q "${relativePath}" "${serverUser}@${ipServer}:${serverPath}"`;
         console.log(shell.exec(comando));
+
+        console.log(
+          `http://localhost:8000/formularioController/save?NombreDoctor=${store.id}&cui=${this.cui}&fecha=${this.fecha}&TipoFormulario=${this.selectAbrir}&Path=${this.path}`
+        );
 
         // Subir Documento al servidor
         // Mostrar mensaje de subida con exito

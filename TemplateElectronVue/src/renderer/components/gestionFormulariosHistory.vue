@@ -24,37 +24,35 @@
     </div>
 </template>
 <script>
-    export default {
-
-        name: "HemodialisisHistory",
-        props:{
-            text:{
-                //Suejto a cambio
-                required:true,
-            }
-        },
-        data(){
-            return{
-                paciente: {
-                    nombre: '',
-                    apellido: '',
-                },
-            }
-        },
-        mounted(){
-        },
-        methods:{
-            abrirFormulario(){
-                console.log("Abriendo " + this.text.Path);
-                const {shell} = require('electron');
-                // Obtener path del formulario e ingresarlo como parámetro
-                shell.openItem(this.text.Path);
-            }
-        },
+export default {
+  name: "HemodialisisHistory",
+  props: {
+    text: {
+      //Suejto a cambio
+      required: true
     }
+  },
+  data() {
+    return {
+      paciente: {
+        nombre: "",
+        apellido: ""
+      }
+    };
+  },
+  mounted() {},
+  methods: {
+    abrirFormulario() {
+      console.log("Abriendo " + this.text.Path);
+      const { shell } = require("electron");
+      // Obtener path del formulario e ingresarlo como parámetro
+      shell.openItem(process.cwd() + this.text.Path);
+    }
+  }
+};
 </script>
 <style>
-.titulo1{
-    font-size: 20px;
+.titulo1 {
+  font-size: 20px;
 }
 </style>
