@@ -137,12 +137,12 @@ export default {
         const serverPath = `/home/adminlocal/Fundanier/pcnts/${this.paciente.cui}/`;
         const comando = `pscp -pw ${serverPassword} -p -r -q "${serverUser}@${ipServer}:${serverPath}" "${relativePath}"`;
 
-        console.log(`rd /s /q "${relativePath}"`);
+        //console.log(`rd /s /q "${relativePath}"`);
         //Se elimina la carpeta antes de ser actualizada
-        console.log(shell.exec(`del /s "${relativePath}"`));
-        console.log("Vamos bien");
 
-        console.log(shell.exec(comando));
+        console.log("Vamos bien");
+        console.log(comando);
+        console.log(shell.exec(`rd /s /q "${relativePath}" &` + comando));
 
         this.generalHistorial = [];
         this.$http

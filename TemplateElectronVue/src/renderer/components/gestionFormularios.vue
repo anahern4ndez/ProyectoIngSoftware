@@ -144,6 +144,7 @@ export default {
         dirCopy = this.dirTransplanteRenal;
       } else if (this.selectAbrir === "Transfusión") {
         //dir += this.direccionTransfusion;
+        this.selectAbrir = "Transfusion";
         this.nombreNuevoFormulario = this.direccionTransfusion.concat(
           "_",
           this.name,
