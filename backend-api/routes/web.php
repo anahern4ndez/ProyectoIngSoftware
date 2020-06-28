@@ -31,7 +31,7 @@ $router->post('/message', 'ExampleController@postExample');
 $router->post('/ExampleController/findById', 'ExampleController@findById');
 
 // Usuarios
-$router->get('/users', 'UserController@getUsers');
+$router->get('/users', 'ExampleController@getUsers');
 
 //CRUD: TABLA ESTADOS DB
 $router->get('/EstadoController/find', 'EstadoController@find');
