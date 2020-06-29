@@ -20,7 +20,7 @@
                                         outline
                                         disabled
                                         class="mitad"
-                                        
+                                        disabled=True 
                                     ></v-text-field>
                                     <v-layout align-center justify-end style="width: 100%">
                                         <v-container fluid row align-center justify-space-around fill-height>
@@ -73,7 +73,7 @@
                                                     v-model="text.Filtro" 
                                                     label="Otros"
                                                     outline
-                                                    
+                                                    disabled=True 
                                                     ></v-text-field>
                                                 </v-container>
                                             </ul>
@@ -86,7 +86,7 @@
                                                     v-model="text.FlujoDializante"
                                                     label="Otros (ml/min)"
                                                     outline
-                                                    
+                                                    disabled=True 
                                                     ></v-text-field>
                                                 </v-container>
                                             </ul>
@@ -97,6 +97,7 @@
                                                     v-model="text.FlujoDeSangre"
                                                     label="QB (ml/min)"
                                                     outline
+                                                    disabled=True 
                                                 ></v-text-field>
                                             </ul>
                                             <ul>
@@ -105,6 +106,7 @@
                                                     v-model="text.UF"
                                                     label="(ml total)"
                                                     outline
+                                                    disabled=True 
                                                 ></v-text-field>
                                             </ul>
                                             <ul>
@@ -115,12 +117,14 @@
                                                     label="Cebado (UL)"
                                                     outline
                                                     class="mitad"
+                                                    disabled=True 
                                                 ></v-text-field>
                                                 <v-text-field
                                                     v-model="text.HeparinizacionTransdialisis"
                                                     label="Trans-Diálisis (UL/hora)"
                                                     outline
                                                     class="mitad"
+                                                    disabled=True 
                                                 ></v-text-field>
                                             </ul>
                                             <ul>
@@ -131,14 +135,14 @@
                                                     label="Horas"
                                                     outline
                                                     class="mitad"
-                                                    
+                                                    disabled=True 
                                                 ></v-text-field>
                                                 <v-text-field
                                                     v-model="text.TiempoMinutos"
                                                     label="Minutos"
                                                     outline
                                                     class="mitad"
-                                                    
+                                                    disabled=True 
                                                 ></v-text-field>
                                             </ul>
                                             <ul>
@@ -157,21 +161,21 @@
                                                     label="Peso Pre-Hemodiálisis (kg)"
                                                     outline
                                                     class="mitad"
-                                                    
+                                                    disabled=True 
                                                 ></v-text-field>
                                                 <v-text-field
                                                     v-model="text.PesoPost"
                                                     label="Peso Post-Hemodiálisis (kg)"
                                                     outline
                                                     class="mitad"
-                                                    
+                                                    disabled=True 
                                                 ></v-text-field>
                                                 <v-text-field
                                                     v-model="text.Talla"
                                                     label="Talla (m)"
                                                     outline
                                                     class="mitad"
-                                                    
+                                                    disabled=True 
                                                 ></v-text-field>
                                                 <v-text-field
                                                     disabled
@@ -190,6 +194,7 @@
                                         name="Especiales"
                                         value=""
                                         rows=10
+                                        disabled=True 
                                     ></v-textarea>
                                     <br><br>
                                     <h4 class="headers">Observaciones</h4>
@@ -199,6 +204,7 @@
                                         name="Observaciones"
                                         value=""
                                         rows=10
+                                        disabled=True 
                                     ></v-textarea>
                                
                             </fieldset>

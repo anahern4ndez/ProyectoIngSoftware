@@ -16,6 +16,7 @@
                             rows=14
                             :auto-grow=true
                             v-model="text.Dx_Asociados"      
+                            disabled=True
                         ></v-textarea>
                     </div>  
                 </b-col>
@@ -29,7 +30,8 @@
                             outline
                             rows=14
                             :auto-grow=true 
-                            v-model="text.Dx_Definitivo"     
+                            v-model="text.Dx_Definitivo" 
+                            disabled=True    
                         ></v-textarea>
                     </div>  
                 </b-col>                   
@@ -46,6 +48,7 @@
                     outline
                     rows=8
                     :auto-grow=true
+                    disabled=True
                 ></v-textarea>
             </div>
         </div>
@@ -64,7 +67,8 @@
                             <v-textarea
                                 outline
                                 rows=8
-                                v-model="text.evalucion_medica"
+                                v-model="text.evaluacion_medica"
+                                disabled=True
                             ></v-textarea>
                         </div>
                     </b-col>
@@ -77,6 +81,7 @@
                                 outline
                                 rows=8
                                 v-model="text.plan_medico"
+                                disabled=True
                             ></v-textarea>
                         </div>
                     </b-col>
@@ -93,6 +98,7 @@
                                 outline
                                 rows=8
                                 v-model="text.evaluacion_psicologica"
+                                disabled=True
                             ></v-textarea>
                         </div>
                     </b-col>
@@ -105,6 +111,7 @@
                                 outline
                                 rows=8
                                 v-model="text.plan_psicologico"
+                                disabled=True
                             ></v-textarea>
                         </div>
                     </b-col>
@@ -121,6 +128,7 @@
                                 outline
                                 rows=8
                                 v-model="text.evaluacion_trabajo_social"
+                                disabled=True
                             ></v-textarea>
                         </div>
                     </b-col>
@@ -133,6 +141,7 @@
                                 outline
                                 rows=8
                                 v-model="text.plan_trabajo_social"
+                                disabled=True
                             ></v-textarea>
                         </div>
                     </b-col>
@@ -149,6 +158,7 @@
                                 outline
                                 rows=8
                                 v-model="text.evaluacion_nutricional"
+                                disabled=True
                             ></v-textarea>
                         </div>
                     </b-col>
@@ -161,6 +171,7 @@
                                 outline
                                 rows=8
                                 v-model="text.plan_nutricional"
+                                disabled=True
                             ></v-textarea>
                         </div>
                     </b-col>
@@ -177,6 +188,7 @@
                                 outline
                                 rows=8
                                 v-model="text.evaluacion_farmacologica"
+                                disabled=True
                             ></v-textarea>
                         </div>
                     </b-col>
@@ -189,6 +201,7 @@
                                 outline
                                 rows=8
                                 v-model="text.plan_farmacologico"
+                                disabled=True
                             ></v-textarea>
                         </div>
                     </b-col>

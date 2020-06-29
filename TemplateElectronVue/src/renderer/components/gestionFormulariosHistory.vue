@@ -10,7 +10,7 @@
                         v-model="text.TipoFormulario"
                         label="Tipo de formulario"
                         outline
-                        disabled
+                        disabled=True 
                         class="mitad"
                     ></v-text-field>
 

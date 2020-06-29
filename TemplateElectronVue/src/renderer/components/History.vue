@@ -1,23 +1,34 @@
 <template lang="">
-    <div class = "Main">
-      <div class = "History">
+    <div class = "Main ">
+
+        <v-card>
+          <v-card-title
+            class="headline grey lighten-2"
+            primary-title
+          >
+            Este paciente no cuenta con un historial
+          </v-card-title>
+  
+          <v-divider></v-divider>
+  
+            <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+              color="primary"
+              text
+              @click="salir"
+            >
+              Regresar
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+
+
+      <div class = "History" v-if="this.generalHistorial.length != 0">
         <h3 style="font-weight: bold;">Paciente:</h3>
         <h3>{{this.paciente.nombre}} {{this.paciente.apellido}}</h3> 
-            <div class="TimelineContainer">
-            <v-timeline dense clipped>
-            
-            <v-timeline-item
-              fill-dot
-              class="white--text mb-12"
-              color="orange"
-              medium
-            >
-              <template v-slot:icon>
-                <span>KR</span>
-              </template>
-              
-            </v-timeline-item>
-           
+        <div class="TimelineContainer" v-if="this.generalHistorial.length != 0">
+          <v-timeline dense clipped>
             <v-timeline-item
               v-for="(generalHistorial,index) in generalHistorial"
               class="mb-4"
@@ -32,13 +43,12 @@
               </v-row>
             </v-container>
             </v-timeline-item>
-            
-    
           </v-timeline>
         </div>
       </div>
-      <div class = "Display">
-        <h3 style="font-weight: bold;">Fecha:</h3>
+      
+      <div class = "Display" v-if="this.generalHistorial.length != 0">
+        <h3 v-if="this.generalHistorial.length != 0" style="font-weight: bold;">Fecha:</h3>
         <h3 v-if="this.generalHistorial !== []" >{{this.generalHistorial[this.number].fecha}}</h3>
         <div class = "DisplayBox">
           <!--<img style="margin-left: 5%; margin-top: 5%" src="../assets/consulta.png" alt="" width="520" height="450">-->
@@ -47,7 +57,7 @@
           <HemodialisisHistory :text="this.actual" v-if="actual.tipoDeFormulario==='Hemodiálisis'"></HemodialisisHistory> 
           <gestionFormulariosHistory :text="this.actual" v-if="actual.tipoDeFormulario==='Formulario'"></gestionFormulariosHistory>
         </div>
-      </div>
+      </div> 
     </div>
 </template>
 <style scoped>
@@ -93,16 +103,17 @@ export default {
     cEstados: [],
     consulta: null,
     actual: { tipoDeFormulario: null },
-    generalHistorial: [{ fecha: "" }],
+    generalHistorial: [],
     cEstado: null,
     paciente: {
       nombre: "Karlie",
       apellido: "Rath",
       CUI: ""
     },
-    number: 0
+    number: 0,
+    vacio: true
   }),
-  mounted() {
+  beforeMount() {
     const data = {
       ID: store.idPaciente // Aqui va el ID del paciente
     };
@@ -112,7 +123,6 @@ export default {
       .then(response => {
         if (response.data.Paciente[0] == null) {
         } else {
-          console.log(response.data);
           this.paciente.nombre = response.data.Paciente[0].Nombre;
           this.paciente.apellido = response.data.Paciente[0].Apellido;
           this.paciente.cui = response.data.Paciente[0].CUI;
@@ -120,9 +130,10 @@ export default {
         }
       })
       .then(() => {
-        console.log("El CUI es: " + this.paciente.cui);
+        //console.log("El CUI es: " + this.paciente.cui);
 
         //se copia el archivo al servidor
+        
         var shell = require("shelljs");
         let nodePath = shell.which("node").toString();
         shell.config.execPath = nodePath;
@@ -137,13 +148,7 @@ export default {
         const serverPath = `/home/adminlocal/Fundanier/pcnts/${this.paciente.cui}/`;
         const comando = `pscp -pw ${serverPassword} -p -r -q "${serverUser}@${ipServer}:${serverPath}" "${relativePath}"`;
 
-        console.log(`rd /s /q "${relativePath}"`);
-        //Se elimina la carpeta antes de ser actualizada
-        console.log(shell.exec(`del /s "${relativePath}"`));
-        console.log("Vamos bien");
-
-        console.log(shell.exec(comando));
-
+        
         this.generalHistorial = [];
         this.$http
           .post(
@@ -151,15 +156,14 @@ export default {
             this.paciente
           )
           .then(response => {
-            this.consultas = response.data.Consulta;
-            this.generalHistorial = [];
-            for (let i = 0; i < this.consultas.length; i++) {
-              this.consulta = this.consultas[i];
-              this.consulta.tipoDeFormulario = "Consulta";
-              this.consulta.color = "red";
-              this.generalHistorial.push(this.consulta);
-            }
-          })
+              this.consultas = response.data.Consulta;
+              for (let i = 0; i < this.consultas.length; i++) {
+                this.consulta = this.consultas[i];
+                this.consulta.tipoDeFormulario = "Consulta";
+                this.consulta.color = "red";
+                this.generalHistorial.push(this.consulta);
+              }
+          }) 
           .then(() => {
             this.$http
               .post(
@@ -174,7 +178,7 @@ export default {
                   this.consulta.color = "blue";
                   this.generalHistorial.push(this.consulta);
                 }
-              })
+              }) //Separar
               .then(() => {
                 this.$http
                   .post(
@@ -229,7 +233,7 @@ export default {
 
                       this.generalHistorial.push(this.consulta);
                     }
-                  })
+                  }) //Separar
                   .then(() => {
                     this.$http
                       .post(
@@ -238,7 +242,6 @@ export default {
                       )
                       .then(response => {
                         this.consultas = response.data.Consulta;
-                        console.log(this.consultas);
                         for (let i = 0; i < this.consultas.length; i++) {
                           this.consulta = this.consultas[i];
                           this.consulta.tipoDeFormulario = "Formulario";
@@ -260,7 +263,10 @@ export default {
     saludar: function(n) {
       this.number = n;
       this.actual = this.generalHistorial[n];
-    }
+    },
+    salir: function(n) {
+      this.$router.push("/menu-principal");
+    },
   }
 };
 </script>
