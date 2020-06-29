@@ -64,11 +64,11 @@ class CitasController extends Controller {
        );
 
        // validar que la fecha enviada en Request sea hoy o al futuro
-       if (Carbon::parse($request->fecha)->isPast()) {
+       if (Carbon::parse($request->fecha)->addDays(1)->isPast()) {
 
             return response()->json([
                 'success' => false,
-                'message' => 'La fecha de la cita no puede ser en el pasado.'
+                'message' => 'La fecha de la cita no puede ser en el pasado.',
             ], 422);
        }
 
