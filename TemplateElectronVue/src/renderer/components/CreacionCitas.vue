@@ -3,7 +3,7 @@
     <v-layout>
       <v-flex>
         <!-- SUBTITULO, FECHA Y BOTONES DE CALENDARIO -->
-        <h1 class="pt-2">Gestion de Citas</h1>
+        <h1 class="pt-2">Gestión de Citas</h1>
         <div v-if="calendarType == 'month'">
           <v-layout wrap>
             <v-flex sm4 xs12 class="text-sm-left text-xs-center">
@@ -222,7 +222,7 @@
             <v-card-title
               class="headline lighten-2 info-dialog-title-background"
               primary-title
-            >Información</v-card-title>
+            >{{ infoDialogTitle }}</v-card-title>
             <v-card-text>{{ this.infoMessage }}</v-card-text>
             <v-divider></v-divider>
             <v-card-actions>
@@ -318,6 +318,7 @@ export default {
     selectedPatient: "",
     selectedDoctor: "",
     infoDialog: false,
+    infoDialogTitle: "Información",
     infoMessage: "",
     minAppointmentHour: 6,
     maxAppointmentHour: 20,
@@ -348,6 +349,16 @@ export default {
     }
   },
   methods: {
+    async getAllDataFromDb() {
+      await this.obtenerUsuarios();
+      console.log("usuarios");
+      await this.obtenerPacientes();
+      console.log("pacientes");
+      this.obtenerTipoCitas();
+      console.log("tipo de citas");
+      await this.getAppointments();
+      console.log("citas");
+    },
     showAppointmentDialog() {
       this.appointmentDialogTitle = "Crear Nueva Cita";
       this.dialogOpen = true;
@@ -359,29 +370,27 @@ export default {
       this.$http
         .get("http://localhost:8000/citas")
         .then(response => {
-          // console.log(response.data.data)
-          const e = response.data.data.map(i => {
-            // console.log('getapps')
-            // console.log(this.users);
-            // console.log(this.patients);
-            // console.log(i);
-            const userName = this.users.filter(u => u.id == i.idUsuario)[0].name;
-
-            const patientName = this.patients.filter(
-              p => p.id == i.idPaciente
-            )[0].name;
+          const e = response.data.data.map(appointment => {
+            const user = this.users.find(
+              user => user.id == appointment.idUsuario
+            );
+            const userName = !!user ? user.name : "Usuario Desconocido";
+            const patient = this.patients.find(
+              patient => patient.id == appointment.idPaciente
+            );
+            const patientName = !!patient ? patient.name : "Error";
 
             return {
-              id: i.id,
-              doctor: i.idUsuario,
+              id: appointment.id,
+              doctor: appointment.idUsuario,
               userName: userName,
-              patient: i.idPaciente,
+              patient: appointment.idPaciente,
               patientName: patientName,
-              details: `Paciente: ${i.idPaciente}`,
-              date: i.fecha,
-              time: i.hora,
-              duration: i.duracionCita,
-              appointmentType: i.tipoCitaID
+              details: `Paciente: ${appointment.idPaciente}`,
+              date: appointment.fecha,
+              time: appointment.hora,
+              duration: appointment.duracionCita,
+              appointmentType: appointment.tipoCitaID
             };
           });
 
@@ -447,13 +456,13 @@ export default {
         this.infoDialog = true;
         return;
       }
-      console.log(data)
+      console.log(data);
       // cerrar dialogo de creacion de cita
       this.dialogOpen = false;
       this.$http
         .post("http://localhost:8000/citas", data)
         .then(response => {
-          console.log(response)
+          console.log(response);
           if (response.data.success) {
             // empujar nuevo evento a array local de eventos
             // conseguir nombre de doctor
@@ -477,19 +486,26 @@ export default {
               userName: userName,
               patientName: patientName
             });
+
+            this.infoDialogTitle = "¡Éxito!";
+            this.infoMessage = "Cita creada con éxito.";
+            this.infoDialog = true;
+            return;
           }
           // resetear campos de dialogo
           this.selectedDoctor = "";
           this.selectedPatient = "";
           this.selectedDuration = "";
         })
-        .catch(error => {
-          console.log(error.success)
-          this.infoMessage = "Ocurrió un error al crear cita.";
+        .catch(err => {
+          let message = "";
+          Object.keys(err.response.data).forEach(key => {
+            message += ` ${err.response.data[key]}`;
+          });
+
+          this.infoMessage = message;
+          this.infoDialogTitle = "Error";
           this.infoDialog = true;
-          this.selectedDoctor = "";
-          this.selectedPatient = "";
-          this.selectedDuration = "";
         });
     },
     updateAppointment() {
@@ -578,12 +594,15 @@ export default {
     },
     obtenerUsuarios() {
       this.$http.get("http://localhost:8000/users").then(response => {
-        const receivedUsers = response.data.users
+        const receivedUsers = response.data.users;
         // obtener solo los doctores y no todos los usuarios
-        var x
+        var x;
         for (x in receivedUsers) {
-          if (receivedUsers[x].puesto == 2){
-            this.users.push({id: receivedUsers[x].id, name: receivedUsers[x].name})
+          if (receivedUsers[x].puesto == 2) {
+            this.users.push({
+              id: receivedUsers[x].id,
+              name: receivedUsers[x].name
+            });
           }
         }
       });
@@ -668,6 +687,7 @@ export default {
     confirmDeleteAppointment() {
       this.dialogOpen = false;
       this.deletingAppointment = true;
+      this.infoDialogTitle = "Eliminar Cita";
       this.infoMessage = "¿Estás seguro?";
       this.infoDialog = true;
     },

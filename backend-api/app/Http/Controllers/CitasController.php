@@ -69,7 +69,7 @@ class CitasController extends Controller {
 
             return response()->json([
                 'success' => false,
-                'message' => 'La fecha de la cita no puede ser en el pasado.'
+                'message' => 'La fecha de la cita no puede ser en el pasado.',
             ], 422);
        }
 
