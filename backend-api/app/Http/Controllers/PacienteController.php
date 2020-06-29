@@ -168,7 +168,8 @@ class PacienteController extends Controller
      * @return todos los pacientes que coincidan
      */
     public function findAllWithAppointment(Request $request){
-        $idPacientesConCita = Cita::where('tipoCitaID', 1)->get('idPaciente');
+        // Carbon::parse($request->fechahoy)->format('Y-m-d')->toDateString()
+        $idPacientesConCita = Cita::whereDate('fecha', $request->fecha)->where('tipoCitaID', 1)->get('idPaciente');
         $pacientesConHemodialisis = array();
         for ($i=0; $i < sizeof($idPacientesConCita); $i++) { 
             $pacientesConHemodialisis[$i] = Paciente::where('id', $idPacientesConCita[$i]['idPaciente'])->with('Procedencia', 'sexo_rel','Sindrome_Clinico_Presentacion', 'Tipo_de_Sangre', 'EstadoActual', 'Estudia', 'Transfusiones')->first();
@@ -176,7 +177,8 @@ class PacienteController extends Controller
         }
         return response()->json([
             'success' => true,
-            'Pacientes' => $pacientesConHemodialisis
+            'Pacientes' => $pacientesConHemodialisis,
+            'idPacientesConCita' => $idPacientesConCita
         ], 200);
     }
 }
