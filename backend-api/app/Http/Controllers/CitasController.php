@@ -64,7 +64,8 @@ class CitasController extends Controller {
        );
 
        // validar que la fecha enviada en Request sea hoy o al futuro
-       if (Carbon::parse($request->fecha)->isPast()) {
+       $apptime = $request->fecha." ".$request->hora.":00";
+       if (Carbon::parse($apptime)->lessThan(Carbon::now())) {
 
             return response()->json([
                 'success' => false,
@@ -142,8 +143,10 @@ class CitasController extends Controller {
             ]
         );
 
+        $apptime = $request->fecha." ".$request->hora.":00";
+        echo $apptime;
         // validar que la fecha enviada en Request sea hoy o al futuro
-       if (Carbon::parse($request->fecha)->isPast()) {
+       if (Carbon::parse($apptime)->isPast()) {
 
             return response()->json([
                 'success' => false,

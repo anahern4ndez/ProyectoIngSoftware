@@ -31,7 +31,6 @@
             v-model="startDate"
             :type="calendarType"
             locale="es"
-            :now="today"
             :value="today"
             color="primary"
             @click:day="dayClick"
@@ -329,14 +328,14 @@ export default {
     selectedAppointmentType: "",
     appointmentTypes: []
   }),
-  mounted() {
+  async mounted() {
     this.todayDate = new Date();
     this.today = this.todayDate.toString();
     this.month = this.getMes(this.todayDate.getMonth());
     this.year = this.todayDate.getFullYear();
     // obtener datos de BD
-    this.obtenerUsuarios();
-    this.obtenerPacientes();
+    await this.obtenerPacientes();
+    await this.obtenerUsuarios();
     this.getAppointments();
     this.obtenerTipoCitas();
   },
@@ -360,10 +359,13 @@ export default {
       this.$http
         .get("http://localhost:8000/citas")
         .then(response => {
+          // console.log(response.data.data)
           const e = response.data.data.map(i => {
-            console.log(i);
-            const userName = this.users.filter(u => u.id == i.idUsuario)[0]
-              .name;
+            // console.log('getapps')
+            // console.log(this.users);
+            // console.log(this.patients);
+            // console.log(i);
+            const userName = this.users.filter(u => u.id == i.idUsuario)[0].name;
 
             const patientName = this.patients.filter(
               p => p.id == i.idPaciente
@@ -445,12 +447,13 @@ export default {
         this.infoDialog = true;
         return;
       }
-
+      console.log(data)
       // cerrar dialogo de creacion de cita
       this.dialogOpen = false;
       this.$http
         .post("http://localhost:8000/citas", data)
         .then(response => {
+          console.log(response)
           if (response.data.success) {
             // empujar nuevo evento a array local de eventos
             // conseguir nombre de doctor
@@ -481,6 +484,7 @@ export default {
           this.selectedDuration = "";
         })
         .catch(error => {
+          console.log(error.success)
           this.infoMessage = "Ocurrió un error al crear cita.";
           this.infoDialog = true;
           this.selectedDoctor = "";
@@ -574,12 +578,14 @@ export default {
     },
     obtenerUsuarios() {
       this.$http.get("http://localhost:8000/users").then(response => {
-        this.users = response.data.data.map(i => {
-          return {
-            id: i.id,
-            name: i.name
-          };
-        });
+        const receivedUsers = response.data.users
+        // obtener solo los doctores y no todos los usuarios
+        var x
+        for (x in receivedUsers) {
+          if (receivedUsers[x].puesto == 2){
+            this.users.push({id: receivedUsers[x].id, name: receivedUsers[x].name})
+          }
+        }
       });
     },
     obtenerPacientes() {

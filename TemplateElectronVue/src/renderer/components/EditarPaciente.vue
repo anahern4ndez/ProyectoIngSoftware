@@ -240,6 +240,27 @@
     <div>
       <button float="left" type="button" class="btn btn-lg btn-warning btn-block" v-on:click="save" :disabled="!pass">Guardar cambios</button> 
     </div>
+    <!-- dialogo para mostrar mensajes a usuario -->
+      <div class="text-xs-center">
+        <v-dialog v-model="infoDialog" width="500">
+          <v-card>
+            <v-card-title
+              class="headline lighten-2 info-dialog-title-background"
+              primary-title
+            >Información</v-card-title>
+            <v-card-text>{{ this.infoMessage }}</v-card-text>
+            <v-divider></v-divider>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn
+                color="primary"
+                flat
+                @click="infoDialog = false"
+              >Aceptar</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </div>
     </v-form>
   </div>
 </template>
@@ -310,6 +331,9 @@ export default {
         procedenciasOpc: undefined,
         pass: false,
         residencia:'',
+        infoDialog: false,
+        infoMessage: "",
+
         //reglas de FORM
         cuiRules: [
           (v) => !!v || 'Se requiere este campo',
@@ -321,8 +345,11 @@ export default {
 
         ],
         phoneRules: [
-          (v) => !!v || 'Se requiere este campo'
-        ]
+          (v) => !!v || 'Se requiere este campo',
+          (v) => v && v.length <= 8 || 'Verifique que teléfono tenga como máximo 8 dígitos.',
+          (v) => v && this.isANumber(v) || 'Verifique dato ingresado sean números.'
+        ],
+        radioRules:[v => !!v || 'Debe seleccionar una opción'],
       }
   },
     methods: {
@@ -362,11 +389,15 @@ export default {
           this.$http.put('http://localhost:8000/PacienteController/updateAll', info).then(response => {
               this.error = false;
               this.resetValidation();
+              this.infoMessage = "Los datos del paciente fueron actualizados exitosamente.";
+              this.infoDialog = true;
           }).
           catch(error => {
               this.error = true;
               console.log(error.response.data.status);
               console.log("Error");
+              this.infoMessage = "Ocurrió un error al actualizar los datos del paciente.";
+              this.infoDialog = true;
           });
 
         },
@@ -378,11 +409,6 @@ export default {
 
             var diffAnio = fechaActual.getFullYear() - aComputar.getFullYear();
             var meses = fechaActual.getMonth() - aComputar.getMonth();
-
-            /*if (meses<0 || (meses == 0 && fechaActual.getDate() < aComputar.getDate())){
-              --diffAnio;
-            }*/
-            //console.log(diffAnio);
             if (diffAnio>0){
               return this.Edad = diffAnio + ' años';
             } else{
@@ -416,6 +442,13 @@ export default {
             var muni = response.data.locations[0].Municipio;
             this.ProcedenciaTxt =  dep.concat(', '.concat(muni));
           });
+        },
+        isANumber(expediente){
+          let isNumber = false;
+          if(!isNaN(parseInt(expediente))){
+            isNumber = true;
+          }
+          return isNumber;
         }
     },
     beforeMount(){

@@ -20,7 +20,7 @@
                   outline
                   :rules="expedienteRules"
                   required
-                  @change="checkType(Numero_expediente)"
+                  @change="isANumber(Numero_expediente)"
               ></v-text-field>
           </v-flex>
         </v-card-title>
@@ -47,7 +47,7 @@
                         ></v-text-field>
 
                       </div>
-                      <v-radio-group v-model="Sexo" row :rules="radioRules" required >
+                      <v-radio-group v-model="Sexo" row required >
                           <v-radio label="Mujer" value="1" color="black"></v-radio>
                           <v-radio label="Hombre" value="2" color="black"></v-radio>
                         </v-radio-group>
@@ -158,7 +158,8 @@
                               label="Teléfonos"
                               outline
                               required
-                              :rules="nombreRules"
+                              :rules="phoneRules"
+                              @change="isANumber(Telefono)"
                           ></v-text-field>
                   </v-flex>
                 </v-card-title>
@@ -241,6 +242,27 @@
     <div>
       <button float="left" type="button" class="btn btn-lg btn-warning btn-block" v-on:click="ingresarNuevo" :disabled="!pass">Ingresar nuevo paciente</button> 
     </div>
+    <!-- dialogo para mostrar mensajes a usuario -->
+      <div class="text-xs-center">
+        <v-dialog v-model="infoDialog" width="500">
+          <v-card>
+            <v-card-title
+              class="headline lighten-2 info-dialog-title-background"
+              primary-title
+            >Información</v-card-title>
+            <v-card-text>{{ this.infoMessage }}</v-card-text>
+            <v-divider></v-divider>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn
+                color="primary"
+                flat
+                @click="infoDialog = false"
+              >Aceptar</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </div>
     </v-form>
   </div>
 </template>
@@ -294,6 +316,8 @@ export default {
         pacientes: [],
         pass: false,
         procedenciasOpc: undefined,
+        infoDialog: false,
+        infoMessage: "",
 
         //reglas de FORM
         cuiRules: [
@@ -301,9 +325,14 @@ export default {
           (v) => v && v.length <= 13 || 'Verifique que el CUI sea de 13 digitos.',
           (v) => v && this.isANumber(v) || 'Verifique que el CUI sean números.'
         ],
+        phoneRules: [
+          (v) => !!v || 'Se requiere este campo',
+          (v) => v && v.length <= 8 || 'Verifique que teléfono tenga como máximo 8 dígitos.',
+          (v) => v && this.isANumber(v) || 'Verifique dato ingresado sean números.'
+        ],
         expedienteRules: [
           (v) => !!v || 'Se requiere este campo',
-          (v) => v && this.isANumber(v) || 'Verifique que el número de expediente sean números.'
+          (v) => v && this.isANumber(v) || 'Verifique que el dato ingresado sean números.'
         ],
         nombreRules: [
           (v) => !!v || 'Se requiere este campo',
@@ -364,13 +393,15 @@ export default {
             this.Historia='';
             this.Dx_Definitivo='';
             this.Dx_Asociados='';
+            this.infoMessage = "Paciente ingresado exitosamente.";
+            this.infoDialog = true;
             this.reset();
             this.resetValidation();
-          }).
-          catch(error => {
+          })
+          .catch(error => {
               this.error = true;
-              console.log(error.response.data.status);
-              console.log("Error");
+              this.infoMessage = "Ocurrió un error al ingresar el paciente.";
+              this.infoDialog = true;
           });
           
 

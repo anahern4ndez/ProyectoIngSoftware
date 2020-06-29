@@ -349,7 +349,13 @@
 
 export default {
     mounted(){
-        this.$http.get("http://localhost:8000/PacienteController/findWithAppointment").then(response => {
+
+        this.todaysDate = new Date();
+        const month = this.todaysDate.getUTCMonth()+1 < 10 ? '0'+(this.todaysDate.getUTCMonth()+1) : this.todaysDate.getUTCMonth()+1
+        const fechahoy = this.todaysDate.getFullYear() + '-' + month + '-' + this.todaysDate.getDate()
+        console.log(fechahoy)
+        this.$http.get(`http://localhost:8000/PacienteController/findWithAppointment?fecha=${fechahoy}`).then(response => {
+            console.log(response.data)
             for (let index = 0; index < response.data.Pacientes.length; index++) {
                 const edadPaciente = response.data.Pacientes[index].Edad;
                 if (edadPaciente < 1){
@@ -359,9 +365,9 @@ export default {
                     response.data.Pacientes[index].Edad = edadPaciente + ' años';
                 } 
             }
-
+            console.log(response.data);
             this.pacientes = response.data.Pacientes;
-            console.log(response.data.Pacientes);
+            // console.log(response.data.Pacientes);
             for (let index = 0; index < response.data.Pacientes.length; index++) {
             //const element = array[index];
             this.tabs.push(
@@ -406,7 +412,6 @@ export default {
             )
         }
         });
-        this.todaysDate = new Date();
         this.gettodaysDateFormatted();
     },
     data(){
