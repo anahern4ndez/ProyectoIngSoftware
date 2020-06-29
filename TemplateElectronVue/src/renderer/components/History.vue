@@ -1,7 +1,7 @@
 <template lang="">
     <div class = "Main ">
 
-        <v-card>
+        <v-card v-if="this.generalHistorial.length == 0">
           <v-card-title
             class="headline grey lighten-2"
             primary-title
@@ -103,7 +103,7 @@ export default {
     cEstados: [],
     consulta: null,
     actual: { tipoDeFormulario: null },
-    generalHistorial: [],
+    generalHistorial: ["."],
     cEstado: null,
     paciente: {
       nombre: "Karlie",
