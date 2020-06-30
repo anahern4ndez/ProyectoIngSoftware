@@ -126,7 +126,8 @@ $router->post('/hemodialisis', 'HemodialisisController@store');
 $router->get('/hemodialisis/getHemoNumber', 'HemodialisisController@getHemoNumber');
 $router->post('/hemodialisis/storeTable', 'HemodialisisController@storeTable');
 $router->post('/hemodialisis/checkHemo', 'HemodialisisController@lookHemo');
-$router->post('/hemodialisis/findAllUser', 'HemodialisisController@findAllUser');
+$router->get('/hemodialisis/findAllUser', 'HemodialisisController@findAllUser');
+$router->get('/hemodialisis/getHemoData', 'HemodialisisController@getHemoData');
 // Enfermedades CIE 10
 $router->get('/dxs', 'DxController@getDxs');
 

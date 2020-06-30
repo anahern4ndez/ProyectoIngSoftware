@@ -21,7 +21,7 @@ class HemodialisisController extends Controller
         $Hemodialisis->FlujoDializante = $request->Flujo_dializante;
         $Hemodialisis->UF = $request->UF;
         $Hemodialisis['Via'] = json_encode($request->Via);
-        $Hemodialisis['Heparinizacion'] = json_encode($request-> Heparinizacion);
+        $Hemodialisis['Heparinizacion'] = json_encode($request->Heparinizacion);
         $Hemodialisis['Tiempo'] = json_encode($request->Tiempo);
         $Hemodialisis['Conductividad'] = json_encode($request->Conductividad);
         $Hemodialisis->PesoPre = $request->Peso_pre;
@@ -35,7 +35,8 @@ class HemodialisisController extends Controller
         $Hemodialisis->save();
 
         return response()->json([
-            'success' => true
+            'success' => true,
+            'message' => 'La información ingresada sobre la cita de hemodiálisis ha sido guardada exitosamente.'
         ], 200);
     }
     public function storeTable(Request $request){
@@ -51,7 +52,8 @@ class HemodialisisController extends Controller
         $register->Medicamentos = $request->Medicamentos;
         $register->save();
         return response()->json([
-            'success' => true
+            'success' => true,
+            'message' => 'La información parcial sobre la sesión de hemodiálisis ha sido guardada exitosamente.'
         ], 200);
     }
 
@@ -77,6 +79,19 @@ class HemodialisisController extends Controller
             'id'=> $id,
             'success' => true,
             'Consulta' => $consulta
+        ], 200);
+        
+    }
+    public function getHemoData(Request $request){
+        $id = $request->id;
+        $number = $request->NoHemodialisis;
+        $consulta = Hemodialisis::where('idPaciente', $id)->where('NoHemodialisis', $number)->get();
+
+        return response()->json([
+            'id'=> $id,
+            'nohemo'=> $number,
+            'success' => true,
+            'consulta' => $consulta
         ], 200);
         
     }

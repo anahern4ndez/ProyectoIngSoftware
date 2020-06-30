@@ -336,6 +336,27 @@
                                     ></v-textarea>
                                 <button float="left" type="button" class="btn btn-lg btn-warning btn-block" v-on:click="guardar" :disabled="!tabs[pacientes.indexOf(paciente)].pass">Guardar información</button> 
                             </fieldset>
+                            <!-- dialogo para mostrar mensajes a usuario -->
+                            <div class="text-xs-center">
+                                <v-dialog v-model="tabs[pacientes.indexOf(paciente)].infoDialog" width="500">
+                                <v-card>
+                                    <v-card-title
+                                    class="headline lighten-2 info-dialog-title-background"
+                                    primary-title
+                                    >Información</v-card-title>
+                                    <v-card-text>{{ tabs[pacientes.indexOf(paciente)].infoMessage }}</v-card-text>
+                                    <v-divider></v-divider>
+                                    <v-card-actions>
+                                    <v-spacer></v-spacer>
+                                    <v-btn
+                                        color="primary"
+                                        flat
+                                        @click="tabs[pacientes.indexOf(paciente)].infoDialog = false"
+                                    >Aceptar</v-btn>
+                                    </v-card-actions>
+                                </v-card>
+                                </v-dialog>
+                            </div>
                         </form>
                     </div>
                     <br>
@@ -353,9 +374,8 @@ export default {
         this.todaysDate = new Date();
         const month = this.todaysDate.getUTCMonth()+1 < 10 ? '0'+(this.todaysDate.getUTCMonth()+1) : this.todaysDate.getUTCMonth()+1
         const fechahoy = this.todaysDate.getFullYear() + '-' + month + '-' + this.todaysDate.getDate()
-        console.log(fechahoy)
         this.$http.get(`http://localhost:8000/PacienteController/findWithAppointment?fecha=${fechahoy}`).then(response => {
-            console.log(response.data)
+            // console.log(response.data)
             for (let index = 0; index < response.data.Pacientes.length; index++) {
                 const edadPaciente = response.data.Pacientes[index].Edad;
                 if (edadPaciente < 1){
@@ -365,51 +385,92 @@ export default {
                     response.data.Pacientes[index].Edad = edadPaciente + ' años';
                 } 
             }
-            console.log(response.data);
             this.pacientes = response.data.Pacientes;
             // console.log(response.data.Pacientes);
             for (let index = 0; index < response.data.Pacientes.length; index++) {
             //const element = array[index];
             this.tabs.push(
-                {
-                    tableDialog: false,
-                    tabid: index,
-                    pass: true,
-                    Hemodialisis: '',
-                    Via: {
-                        Lugar: '',
-                        Direccion: '',
-                    },
-                    Lineas_pediatricas: '',
-                    Filtro: '',
-                    Flujo_dializante: '',
-                    Flujo_sangre: '',
-                    UF: '',
-                    Heparinizacion: {
-                        Cebado: '',
-                        Transdialisis: '',
-                    },
-                    Tiempo: {
-                        Horas: '',
-                        Minutos: '',
-                    },
-                    Conductividad: {
-                        Na: '',
-                        K:'',
-                        HCO3: '',
-                    },
-                    Peso_pre: '',
-                    Peso_post: '',
-                    Peso_delta: '',
-                    Talla: '',
-                    Procedencia: '',
-                    Registro: this.pacientes[index].Numero_expediente,
-                    Numero: response.data.Pacientes[index].NoHemodialisis +1 ,
-                    Especiales: '',
-                    Observaciones: '',
-                    idPaciente: response.data.Pacientes[index].id,
+            {
+                tableDialog: false,
+                infoDialog: false,
+                infoMessage: "",
+                tabid: index,
+                pass: true,
+                Hemodialisis: '',
+                Via: {
+                    Lugar: '',
+                    Direccion: '',
+                },
+                Lineas_pediatricas: '',
+                Filtro: '',
+                Flujo_dializante: '',
+                Flujo_sangre: '',
+                UF: '',
+                Heparinizacion: {
+                    Cebado: '',
+                    Transdialisis: '',
+                },
+                Tiempo: {
+                    Horas: '',
+                    Minutos: '',
+                },
+                Conductividad: {
+                    Na: '',
+                    K:'',
+                    HCO3: '',
+                },
+                Peso_pre: '',
+                Peso_post: '',
+                Peso_delta: '',
+                Talla: '',
+                Procedencia: '',
+                Registro: this.pacientes[index].Numero_expediente,
+                Numero: response.data.Pacientes[index].NoHemodialisis +1 ,
+                Especiales: '',
+                Observaciones: '',
+                idPaciente: response.data.Pacientes[index].id,
+            })
+            // request para obtener información de cita de hemodiálisis (si ya se ha guardado una)
+            const data = {
+                id: response.data.Pacientes[index].id,
+                NoHemodialisis: response.data.Pacientes[index].NoHemodialisis
+            }
+            const pacienteid = response.data.Pacientes[index].id
+            const nohemo = response.data.Pacientes[index].NoHemodialisis
+            console.log(data)
+            // this.$http.get(`http://localhost:8000/hemodialisis/getHemoData?id=${pacienteid}?NoHemodialisis=${nohemo}`).then(response => {
+            this.$http.get(`http://localhost:8000/hemodialisis/getHemoData?id=${pacienteid}&NoHemodialisis=${nohemo}`).then(response => {
+                const consulta = response.data.consulta
+                let current_tab = this.tabs[index]
+                console.log(response.data)
+                if(consulta.length !== 0){
+                    current_tab["Hemodialisis"] = consulta[0].TipoDeHemodialisis
+                    current_tab["Via"] = JSON.parse(consulta[0].Via)
+                    current_tab["Lineas_pediatricas"] = consulta[0].LineasPediatrica
+                    current_tab["Filtro"] = consulta[0].Filtro
+                    current_tab["Flujo_dializante"] = consulta[0].FlujoDializante
+                    current_tab["Flujo_sangre"] = consulta[0].FlujoDeSangre
+                    current_tab["UF"] = consulta[0].UF
+                    current_tab["Heparinizacion"] = JSON.parse(String(consulta[0].Heparinizacion))
+                    current_tab["Tiempo"] = JSON.parse(consulta[0].Tiempo)
+                    current_tab["Conductividad"] = JSON.parse(consulta[0].Conductividad)
+                    current_tab["Peso_pre"] = consulta[0].PesoPre
+                    current_tab["Peso_post"] = consulta[0].PesoPost
+                    current_tab["Peso_delta"] = consulta[0].PesoDelta
+                    current_tab["Talla"] = consulta[0].Talla
+                    current_tab["Procedencia"] = consulta[0].LugarDeProcedencia
+                    current_tab["Especiales"] = consulta[0].Especiales
+                    current_tab["Observaciones"] = consulta[0].Observaciones
                 }
-            )
+
+                console.log(current_tab["Hemodialisis"])
+                console.log(current_tab["Procedencia"])
+            })
+            .catch(error => {
+                this.tabs[index].infoMessage = "Ocurrió un error al obtener los datos de esta cita.";
+                this.tabs[index].infoDialog = true;
+                console.log(error)
+            })
         }
         });
         this.gettodaysDateFormatted();
@@ -445,9 +506,16 @@ export default {
             var pass = true;
             let info = this.tabs[this.activeTab]
             info['todaysDate'] = this.todaysDate
-            this.$http.post('http://localhost:8000/hemodialisis', info).then(response => {
-                console.log(response.success)
+            this.$http.post('http://localhost:8000/hemodialisis', info)
+            .then(response => {
+                console.log(response)
+                this.tabs[this.activeTab].infoMessage = "La información ingresada sobre la cita de hemodiálisis ha sido guardada exitosamente.";
+                this.tabs[this.activeTab].infoDialog = true;
             })
+            .catch(error => {
+                this.tabs[this.activeTab].infoMessage = "Ocurrió un error al ingresar los datos de la cita.";
+                this.tabs[this.activeTab].infoDialog = true;
+            });
 
 
         },
