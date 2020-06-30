@@ -500,7 +500,12 @@ export default {
         .catch(err => {
           let message = "";
           Object.keys(err.response.data).forEach(key => {
-            message += ` ${err.response.data[key]}`;
+            // TODO: imprimir solo mensajes de tipo string
+            if (
+              err.response.data[key] != "false" ||
+              err.response.data[key] != "true"
+            )
+              message += ` ${err.response.data[key]}`;
           });
 
           this.infoMessage = message;
