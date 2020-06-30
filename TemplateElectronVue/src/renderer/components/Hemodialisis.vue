@@ -431,20 +431,15 @@ export default {
                 idPaciente: response.data.Pacientes[index].id,
             })
             // request para obtener información de cita de hemodiálisis (si ya se ha guardado una)
-            const data = {
-                id: response.data.Pacientes[index].id,
-                NoHemodialisis: response.data.Pacientes[index].NoHemodialisis
-            }
             const pacienteid = response.data.Pacientes[index].id
             const nohemo = response.data.Pacientes[index].NoHemodialisis
-            console.log(data)
             // this.$http.get(`http://localhost:8000/hemodialisis/getHemoData?id=${pacienteid}?NoHemodialisis=${nohemo}`).then(response => {
             this.$http.get(`http://localhost:8000/hemodialisis/getHemoData?id=${pacienteid}&NoHemodialisis=${nohemo}`).then(response => {
                 const consulta = response.data.consulta
                 let current_tab = this.tabs[index]
                 console.log(response.data)
                 if(consulta.length !== 0){
-                    current_tab["Hemodialisis"] = consulta[0].TipoDeHemodialisis
+                    current_tab["Hemodialisis"] = String(consulta[0].TipoDeHemodialisis)
                     current_tab["Via"] = JSON.parse(consulta[0].Via)
                     current_tab["Lineas_pediatricas"] = consulta[0].LineasPediatrica
                     current_tab["Filtro"] = consulta[0].Filtro
@@ -458,13 +453,10 @@ export default {
                     current_tab["Peso_post"] = consulta[0].PesoPost
                     current_tab["Peso_delta"] = consulta[0].PesoDelta
                     current_tab["Talla"] = consulta[0].Talla
-                    current_tab["Procedencia"] = consulta[0].LugarDeProcedencia
+                    current_tab["Procedencia"] = String(consulta[0].LugarDeProcedencia)
                     current_tab["Especiales"] = consulta[0].Especiales
                     current_tab["Observaciones"] = consulta[0].Observaciones
                 }
-
-                console.log(current_tab["Hemodialisis"])
-                console.log(current_tab["Procedencia"])
             })
             .catch(error => {
                 this.tabs[index].infoMessage = "Ocurrió un error al obtener los datos de esta cita.";
