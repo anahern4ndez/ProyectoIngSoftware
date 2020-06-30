@@ -38,78 +38,127 @@
 
 <script>
 import { store } from "../main";
+import { log } from "util";
 var fecha = new Date();
 
 export default {
-
   data: () => ({
-      posiblesVariables: ['Acciones', 'Consultas', 'Datos generales', 'Pacientes', 'Citas'],
-      posiblesTiempos: ['Mes pasado', '3 meses', '6 meses', '1 año', '2 años', 'Toda la data'],
-      clearable: false,
-      selectVariable: ' ',
-      selectTiempo: ' ',
-      isDisabledAbrir: true,
-      isDisabledTiempo: true,
-      isDisabledButton: true,
-      nombreArchivo: 'Citas.csv',
+    posiblesVariables: [
+      "Acciones",
+      "Consultas",
+      "Datos generales",
+      "Pacientes",
+      "Citas"
+    ],
+    posiblesTiempos: [
+      "Mes pasado",
+      "3 meses",
+      "6 meses",
+      "1 año",
+      "2 años",
+      "Toda la data"
+    ],
+    clearable: false,
+    selectVariable: " ",
+    selectTiempo: " ",
+    isDisabledAbrir: true,
+    isDisabledTiempo: true,
+    isDisabledButton: true,
+    nombreArchivo: "Citas.csv"
   }),
 
-  methods:{
-    startExcel(){
-        this.isDisabledSubir = false;
-        this.isDisabledSubirForm = false;
-        this.exit = false;
+  methods: {
+    startExcel() {
+      this.crearCSVEnServer(this.nombreArchivo);
 
-        const {shell} = require('electron');
-        var fs = require('fs');
-        var dir = process.cwd();
+      this.isDisabledSubir = false;
+      this.isDisabledSubirForm = false;
+      this.exit = false;
 
-        dir = dir.concat('\\src\\CSVs\\',this.nombreArchivo);
-        // console.log(dir)
-        shell.openItem(dir);
-    },
-    changeDisableVariable(event){
-        if (this.selectVariable !== ' ' || this.selectVariable !== null)
-            this.isDisabledAbrir = false
-        else
-            this.isDisabledAbrir = true
-        this.enableButton()
-        console.log(this.selectVariable)
-    },
-    changeDisableTiempo(event){
-        if (this.selectTiempo !== ' ' || this.selectTiempo !== null)
-            this.isDisabledTiempo = false
-        else
-            this.isDisabledTiempo = true
-        this.enableButton()
-        console.log(this.selectTiempo)
-    },
-    enableButton(){
-        if (!this.isDisabledAbrir && !this.isDisabledTiempo)
-            this.isDisabledButton = false
-        else
-            this.isDisabledButton = true
+      const { shell } = require("electron");
+      var fs = require("fs");
+      var dir = process.cwd();
+
+      dir = dir.concat("\\src\\CSVs\\", this.nombreArchivo);
+      // console.log(dir)
+      shell.openItem(dir);
     },
 
-    formClick: function(event){ // on a click on the button with id 'one'
-        const btn = this.$refs.changeForm
-        btn.click(); // trigger the click on second, and go on 
+    crearCSVEnServer(nombreArchivo) {
+      // Constantes útiles
+      const { Pool, Client } = require("pg");
+      const fastcsv = require("fast-csv");
+      const fs = require("fs");
+      const ws = fs.createWriteStream(nombreArchivo);
+
+      // Se crea el cliente con configuración del servidor
+      const client = new Client({
+        user: "postgres",
+        host: "192.168.0.156",
+        database: "fundanier",
+        password: "perritoUVG",
+        port: 5432
+      });
+
+      // Conexión a servidor
+      client.connect();
+
+      const query = "SELECT * FROM users";
+
+      client.query(query, (err, res) => {
+        const jsonData = JSON.parse(JSON.stringify(res.rows));
+
+        // Escribir el csv
+        fastcsv
+          .write(jsonData, { headers: true })
+          .on("finish", function() {
+            console.log("CSV fue creado con éxito usando datos del servidor");
+          })
+          .pipe(ws);
+
+        // Terminar conexión con el servidor
+        client.end();
+      });
+    },
+    changeDisableVariable(event) {
+      if (this.selectVariable !== " " || this.selectVariable !== null)
+        this.isDisabledAbrir = false;
+      else this.isDisabledAbrir = true;
+      this.enableButton();
+      console.log(this.selectVariable);
+    },
+    changeDisableTiempo(event) {
+      if (this.selectTiempo !== " " || this.selectTiempo !== null)
+        this.isDisabledTiempo = false;
+      else this.isDisabledTiempo = true;
+      this.enableButton();
+      console.log(this.selectTiempo);
+    },
+    enableButton() {
+      if (!this.isDisabledAbrir && !this.isDisabledTiempo)
+        this.isDisabledButton = false;
+      else this.isDisabledButton = true;
+    },
+
+    formClick: function(event) {
+      // on a click on the button with id 'one'
+      const btn = this.$refs.changeForm;
+      btn.click(); // trigger the click on second, and go on
     },
     changeForm: function(event) {
-        var input = event.target;
+      var input = event.target;
 
-        this.path = input.files[0].path;
-        console.log(this.path);
-        input.value = '';
-    },
-}
-
+      this.path = input.files[0].path;
+      console.log(this.path);
+      input.value = "";
+    }
+  }
 };
 </script>
 
 
 <style scoped>
-.titulo1{
-    font-size: 20px;
+.titulo1 {
+  font-size: 20px;
 }
 </style>
