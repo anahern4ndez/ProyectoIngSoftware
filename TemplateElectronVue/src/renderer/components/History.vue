@@ -182,7 +182,7 @@ export default {
               .then(() => {
                 this.$http
                   .post(
-                    "http://localhost:8000//hemodialisis/findAllUser",
+                    "http://localhost:8000/hemodialisis/findAllUser",
                     this.paciente
                   )
                   .then(response => {
