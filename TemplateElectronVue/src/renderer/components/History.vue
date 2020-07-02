@@ -133,7 +133,7 @@ export default {
         //console.log("El CUI es: " + this.paciente.cui);
 
         //se copia el archivo al servidor
-        
+
         var shell = require("shelljs");
         let nodePath = shell.which("node").toString();
         shell.config.execPath = nodePath;
@@ -148,7 +148,8 @@ export default {
         const serverPath = `/home/adminlocal/Fundanier/pcnts/${this.paciente.cui}/`;
         const comando = `pscp -pw ${serverPassword} -p -r -q "${serverUser}@${ipServer}:${serverPath}" "${relativePath}"`;
 
-        
+        console.log(shell.exec(`rd /s /q "${relativePath}" &` + comando));
+
         this.generalHistorial = [];
         this.$http
           .post(
@@ -156,14 +157,14 @@ export default {
             this.paciente
           )
           .then(response => {
-              this.consultas = response.data.Consulta;
-              for (let i = 0; i < this.consultas.length; i++) {
-                this.consulta = this.consultas[i];
-                this.consulta.tipoDeFormulario = "Consulta";
-                this.consulta.color = "red";
-                this.generalHistorial.push(this.consulta);
-              }
-          }) 
+            this.consultas = response.data.Consulta;
+            for (let i = 0; i < this.consultas.length; i++) {
+              this.consulta = this.consultas[i];
+              this.consulta.tipoDeFormulario = "Consulta";
+              this.consulta.color = "red";
+              this.generalHistorial.push(this.consulta);
+            }
+          })
           .then(() => {
             this.$http
               .post(
@@ -181,7 +182,7 @@ export default {
               }) //Separar
               .then(() => {
                 this.$http
-                  .post(
+                  .get(
                     "http://localhost:8000/hemodialisis/findAllUser",
                     this.paciente
                   )
@@ -266,7 +267,7 @@ export default {
     },
     salir: function(n) {
       this.$router.push("/menu-principal");
-    },
+    }
   }
 };
 </script>
