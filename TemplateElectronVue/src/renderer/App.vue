@@ -12,7 +12,7 @@
       <v-list class="pa-3 accent--text">
         <v-list-tile avatar tag="div">
           <v-list-tile-avatar>
-            <img src="https://randomuser.me/api/portraits/men/85.jpg" />
+            <img style="background-color:#fafafa" src="./assets/mariposaFundanier.png" />
           </v-list-tile-avatar>
 
           <v-list-tile-content>
@@ -107,34 +107,16 @@ export default {
           permission: "crear usuarios"
         },
         {
-          name: "Gestionar Paciente",
-          route: "/gestionPacientes",
-          icon: "fa-user-injured",
-          permission: "ver pacientes"
-        },
-        {
           name: "Gestión de Citas",
           route: "/Citas",
           icon: "fa-calendar-check",
           permission: "agendar citas"
         },
         {
-          name: "Cambio Estado",
-          route: "/cambioEstado/:cui",
-          icon: "fa-flag",
-          permission: "editar pacientes"
-        },
-        {
           name: "Hemodialisis",
           route: "/Hemodialisis",
           icon: "fa-flag",
           permission: "realizar hemodialisis"
-        },
-        {
-          name: "Gestionar Formularios",
-          route: "/gestionFormularios",
-          icon: "fa-flag",
-          permission: "gestionar formularios"
         },
         {
           name: "Estadísticas",
