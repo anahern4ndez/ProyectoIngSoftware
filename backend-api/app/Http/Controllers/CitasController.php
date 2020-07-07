@@ -7,14 +7,16 @@ use App\Models\Cita;
 use Carbon\Carbon;
 use DB;
 
-class CitasController extends Controller {
+class CitasController extends Controller
+{
     const MIN_HOUR = 7;
     const MAX_HOUR = 18;
-    
+
     /**
      * Retorna todas las citas que existen en la BD.
      */
-    public function getCitas() {
+    public function getCitas()
+    {
         return response()->json([
             'success' => true,
             'message' => 'Consulta de citas realizada con éxito.',
@@ -22,66 +24,68 @@ class CitasController extends Controller {
         ], 200);
     }
 
-    /* 
+    /*
      *Encuentra citas segun el tipo de cita.
     */
-    public function getCitasByTipo(Request $request){
-        (int)$tipo = $request->tipoCitaID;
-        $citas = Cita::where('tipoCitaID',$tipo)->with('tipodeCita')->get();
+    public function getCitasByTipo(Request $request)
+    {
+        (int) $tipo = $request->tipoCitaID;
+        $citas = Cita::where('tipoCitaID', $tipo)->with('tipodeCita')->get();
 
         return response()->json([
             'success' => true,
             'Citas' => $citas
         ], 200);
-
     }
 
     /**
      * Guarda una cita en la base de datos, siempre y cuando
      * la informacion proveida sea correcta.
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         /* Validacion de datos de request. Si la validacion falla, se envia
            una respuesta con codigo 422 que contiene el mensaje de error. */
-        $this->validate($request, 
-           [
-               'idUsuario' => 'required',
-               'idPaciente' => 'required',
-               'fecha' => 'required',
-               'hora' => 'required',
-               'duracionCita' => 'required',
-               'estado' => 'required',
-               'tipoCitaID' => 'required'
-           ], 
-           [
-               'idUsuario.required' => 'El ID del usuario es requerido.',
-               'idPaciente.required' => 'El ID del paciente es requerido.',
-               'fecha.required' => 'La fecha es requerida.',
-               'hora.required' => 'La hora es requerida.',
-               'duracionCita.required' => 'La duración de la cita es requerida.',
-               'tipoCitaID.required' => 'El tipo de cita es requerido.'
-           ]
-       );
+        $this->validate(
+            $request,
+            [
+                'idUsuario' => 'required',
+                'idPaciente' => 'required',
+                'fecha' => 'required',
+                'hora' => 'required',
+                'duracionCita' => 'required',
+                'estado' => 'required',
+                'tipoCitaID' => 'required'
+            ],
+            [
+                'idUsuario.required' => 'El ID del usuario es requerido.',
+                'idPaciente.required' => 'El ID del paciente es requerido.',
+                'fecha.required' => 'La fecha es requerida.',
+                'hora.required' => 'La hora es requerida.',
+                'duracionCita.required' => 'La duración de la cita es requerida.',
+                'tipoCitaID.required' => 'El tipo de cita es requerido.'
+            ]
+        );
 
-       // validar que la fecha enviada en Request sea hoy o al futuro
-       $apptime = $request->fecha." ".$request->hora.":00";
-       if (Carbon::parse($apptime)->lessThan(Carbon::now())) {
+        // validar que la fecha enviada en Request sea hoy o al futuro
+        $apptime = Carbon::parse($request->fecha . " " . $request->hora . ":00");
+        if ($apptime->lessThan(Carbon::now()->subDay())) {
 
             return response()->json([
                 'success' => false,
                 'message' => 'La fecha de la cita no puede ser en el pasado.',
             ], 422);
-       }
+        }
 
-       // validar que la hora de la cita sea entre horas laborales (7 AM - 6 PM)
-       if (!$this->validateAppointmentHour($request->hora)) {
+        // validar que la hora de la cita sea entre horas laborales (7 AM - 6 PM)
+        if (!$this->validateAppointmentHour($request->hora)) {
 
             return response()->json([
                 'success' => false,
                 'message' => 'La hora de la cita debe estar entre 07:00 y 18:00.'
             ], 422);
-       }
-        
+        }
+
         // Crear nueva cita, asignarle los datos necesarios y guardarla en DB.
         $cita = new Cita;
         $cita->idUsuario = $request->idUsuario;
@@ -92,7 +96,7 @@ class CitasController extends Controller {
         $cita->duracionCita = $request->duracionCita;
         $cita->tipoCitaID = $request->tipoCitaID;
         $cita->save();
-        
+
         // Cita creada con exito, se retorna un codigo 200.
         return response()->json([
             'success' => true,
@@ -104,7 +108,8 @@ class CitasController extends Controller {
     /**
      * Actualiza una cita ya existente.
      */
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
         // validar que el id venga en el request
         if (!$id) {
             return response()->json([
@@ -125,7 +130,8 @@ class CitasController extends Controller {
 
         /* Validacion de datos de request. Si la validacion falla, se envia
            una respuesta con codigo 422 que contiene el mensaje de error. */
-        $this->validate($request, 
+        $this->validate(
+            $request,
             [
                 'idUsuario' => 'required',
                 'idPaciente' => 'required',
@@ -133,7 +139,7 @@ class CitasController extends Controller {
                 'hora' => 'required',
                 'duracionCita' => 'required',
                 'estado' => 'required'
-            ], 
+            ],
             [
                 'idUsuario.required' => 'El ID del usuario es requerido.',
                 'idPaciente.required' => 'El ID del paciente es requerido.',
@@ -143,10 +149,10 @@ class CitasController extends Controller {
             ]
         );
 
-        $apptime = $request->fecha." ".$request->hora.":00";
+        $apptime = $request->fecha . " " . $request->hora . ":00";
         echo $apptime;
         // validar que la fecha enviada en Request sea hoy o al futuro
-       if (Carbon::parse($apptime)->isPast()) {
+        if (Carbon::parse($apptime)->isPast()) {
 
             return response()->json([
                 'success' => false,
@@ -184,7 +190,8 @@ class CitasController extends Controller {
     /**
      * Borra una cita de la DB.
      */
-    public function destroy(Request $request, $id) {
+    public function destroy(Request $request, $id)
+    {
         $cita = Cita::find($id);
 
         if (!$cita) {
@@ -205,7 +212,8 @@ class CitasController extends Controller {
     /**
      * Valida que la hora este entre MIN_HOUR y MAX_HOUR.
      */
-    private function validateAppointmentHour($hour) {
+    private function validateAppointmentHour($hour)
+    {
         $hourPart = substr($hour, 0, 2);
         if ($hourPart < self::MIN_HOUR || $hourPart > self::MAX_HOUR) {
             return false;
