@@ -33,11 +33,11 @@ function createWindow() {
         height: height,
         width: width,
         useContentSize: true,
-        frame: false,
+        frame: true,
     })
 
     mainWindow.loadURL(winURL)
-
+    mainWindow.webContents.openDevTools();
     mainWindow.on('closed', () => {
         mainWindow = null;
 

@@ -153,9 +153,7 @@ export default {
             this.$store.commit("saveUserData", userData);
 
             try {
-              var shell = require("shelljs");
-              let nodePath = shell.which("node").toString();
-              shell.config.execPath = nodePath;
+              const { exec } = require("child_process");
 
               const ipServer = "192.168.0.156";
               const serverPassword = "perritoUVG";
@@ -163,12 +161,35 @@ export default {
               let relativePath = process.cwd() + `\\temp\\usrs\\${this.id}`;
               const serverUser = "adminlocal";
               const serverPath = `/home/adminlocal/Fundanier/usrs/${this.id}/prfl.jpg`;
-              ("/home/adminlocal/Fundanier/usrs/");
-              console.log(shell.exec(`mkdir "${relativePath}"`));
+
+              let directorio = `mkdir .\\temp\\usrs\\${this.id}`;
               console.log(relativePath);
 
+              exec(directorio, (error, stdout, stderr) => {
+                if (error) {
+                  console.log(`error: ${error.message}`);
+                  return;
+                }
+                if (stderr) {
+                  console.log(`stderr: ${stderr}`);
+                  return;
+                }
+                console.log(`stdout: ${stdout}`);
+              });
+
               var string = `pscp -pw ${serverPassword} -p -q ${serverUser}@${ipServer}:${serverPath} "${relativePath}"`;
-              console.log(shell.exec(string));
+
+              exec(string, (error, stdout, stderr) => {
+                if (error) {
+                  console.log(`error: ${error.message}`);
+                  return;
+                }
+                if (stderr) {
+                  console.log(`stderr: ${stderr}`);
+                  return;
+                }
+                console.log(`stdout: ${stdout}`);
+              });
             } catch (error) {
               console.log("Error con shelljs", error);
             }

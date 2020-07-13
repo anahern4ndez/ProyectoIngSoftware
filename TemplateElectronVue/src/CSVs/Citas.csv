@@ -1,1 +1,3 @@
-Nombre de doctor,Nombre de paciente,CUI de paciente,Fecha de cita
+Nombre del usuario,Fecha de la cita,Hora Inicio,Duración de la cita,Nombre del paciente,Apellido del paciente
+Jose,2020-07-10T06:00:00.000Z,10:55:00,12,Lacey,Stamm
+Jose,2020-07-10T06:00:00.000Z,12:45:00,50,Lacey,Stamm
