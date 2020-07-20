@@ -252,21 +252,27 @@ export default {
       if (this.path === " ") {
         // Mostrar Alerta
       } else {
-        var shell = require("shelljs");
-        let nodePath = shell.which("node").toString();
-        shell.config.execPath = nodePath;
-
         const idPaciente = 0;
         //se copia el archivo al servidor
         const ipServer = "192.168.0.156";
         const serverPassword = "perritoUVG";
         let relativePath = `${process.cwd()}\\temp\\pcnts\\${this.cui}`;
-        relativePath = relativePath.replace(/\\/g, "/");
+        // relativePath = relativePath.replace(/\\/g, "/");
         const serverUser = "adminlocal";
         const serverPath = `/home/adminlocal/Fundanier/pcnts/`;
         const comando = `pscp -pw ${serverPassword} -p -r -q "${relativePath}" "${serverUser}@${ipServer}:${serverPath}"`;
-        console.log(shell.exec(comando));
 
+        exec(comando, (error, stdout, stderr) => {
+          if (error) {
+            console.log(`error: ${error.message}`);
+            return;
+          }
+          if (stderr) {
+            console.log(`stderr: ${stderr}`);
+            return;
+          }
+          console.log(`stdout: ${stdout}`);
+        });
         console.log(
           `http://localhost:8000/formularioController/save?NombreDoctor=${store.id}&cui=${this.cui}&fecha=${this.fecha}&TipoFormulario=${this.selectAbrir}&Path=${this.path}`
         );
