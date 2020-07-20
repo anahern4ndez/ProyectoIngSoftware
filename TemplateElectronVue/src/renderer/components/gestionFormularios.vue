@@ -115,6 +115,8 @@ export default {
       var fs = require("fs");
       var dir = process.cwd();
 
+      console.log(dir);
+
       //dir += this.direccionCHOL;
 
       var dirCopy;
@@ -207,12 +209,11 @@ export default {
 
       const idPaciente = 0;
       const pathNuevo =
-        process.cwd() +
-        `\\temp\\pcnts\\${this.cui}\\${this.selectAbrir}\\${this.fecha}\\` +
+        `.\\temp\\pcnts\\${this.cui}\\${this.selectAbrir}\\${this.fecha}\\` +
         this.nombreNuevoFormulario;
 
       const pathGuardar =
-        `\\temp\\pcnts\\${this.cui}\\${this.selectAbrir}\\${this.fecha}\\` +
+        `.\\temp\\pcnts\\${this.cui}\\${this.selectAbrir}\\${this.fecha}\\` +
         this.nombreNuevoFormulario;
 
       this.nombreNuevoFormulario =

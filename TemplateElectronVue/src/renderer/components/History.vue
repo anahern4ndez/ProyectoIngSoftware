@@ -134,21 +134,30 @@ export default {
 
         //se copia el archivo al servidor
 
-        var shell = require("shelljs");
-        let nodePath = shell.which("node").toString();
-        shell.config.execPath = nodePath;
+        const { exec } = require("child_process");
 
         const ipServer = "192.168.0.156";
         const serverPassword = "perritoUVG";
-        let relativePath = `${process.cwd()}\\temp\\pcnts\\${
-          this.paciente.cui
-        }`;
+        let relativePath = `.\\temp\\pcnts\\${this.paciente.cui}`;
         relativePath = relativePath.replace(/\\/g, "/");
         const serverUser = "adminlocal";
         const serverPath = `/home/adminlocal/Fundanier/pcnts/${this.paciente.cui}/`;
         const comando = `pscp -pw ${serverPassword} -p -r -q "${serverUser}@${ipServer}:${serverPath}" "${relativePath}"`;
 
-        console.log(shell.exec(`rd /s /q "${relativePath}" &` + comando));
+        exec(
+          `rd /s /q "${relativePath}" &` + comando,
+          (error, stdout, stderr) => {
+            if (error) {
+              console.log(`error: ${error.message}`);
+              return;
+            }
+            if (stderr) {
+              console.log(`stderr: ${stderr}`);
+              return;
+            }
+            console.log(`stdout: ${stdout}`);
+          }
+        );
 
         this.generalHistorial = [];
         this.$http
