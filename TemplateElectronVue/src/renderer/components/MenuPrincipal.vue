@@ -137,7 +137,7 @@ export default {
     name: "",
     switch1: false,
     colors: ["#FF9D14", "#BF760F", "#804F0A", "#402705", "#E68E12"],
-    src: `\\temp\\usrs\\${store.id}\\prfl.jpg`
+    src: `.\\temp\\usrs\\${store.id}\\prfl.jpg`
   }),
   watch: {
     switch1(newValue) {

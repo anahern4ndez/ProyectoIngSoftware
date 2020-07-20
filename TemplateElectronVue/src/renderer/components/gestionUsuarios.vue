@@ -478,9 +478,7 @@ export default {
 
       this.$http.get(`http://localhost:8000/users/getID`).then(response => {
         try {
-          var shell = require("shelljs");
-          let nodePath = shell.which("node").toString();
-          shell.config.execPath = nodePath;
+          const { exec } = require("child_process");
 
           const ipServer = "192.168.0.156";
           const serverPassword = "perritoUVG";
@@ -490,23 +488,58 @@ export default {
           const serverPath = "/home/adminlocal/Fundanier/usrs/";
 
           // pathDirectorio es la dirección completa de la imágen, pero sin el nombre de esta
-          let pathDirectorio = process.cwd() + `\\temp\\usrs\\${idUsr}`;
+          let pathDirectorio = `.\\temp\\usrs\\${idUsr}`;
+          let pathDirectorio2 = `temp/usrs/${idUsr}`;
 
           const nombreFoto = this.path.split("\\").pop();
+          console.log(nombreFoto);
 
           // Copiamos la imagen y la renombramos al directorio de fotos
           const string = `xcopy "${pcPath}" "${pathDirectorio}\\" /i`;
-          const rename = `cd ${pathDirectorio} & ren ${nombreFoto} prfl.jpg`;
+          //const rename = `cd ${pathDirectorio2} & ren ${nombreFoto} prfl.jpg`;
+          const rename = `cd ${pathDirectorio2} && dir`;
 
           // Obtenemos el directorio de la imágen + el nombre de la imágen
           // NOTE: Deberíamos de usar esta variable para mandar una foto al servidor.
           pathDirectorio = pathDirectorio.replace(/\\/g, "/");
 
-          console.log(shell.exec(string));
-          console.log(shell.exec(rename));
+          exec(string, (error, stdout, stderr) => {
+            if (error) {
+              console.log(`error: ${error.message}`);
+              return;
+            }
+            if (stderr) {
+              console.log(`stderr: ${stderr}`);
+              return;
+            }
+            console.log(`stdout: ${stdout}`);
+          }).then(response => {
+            exec(rename, (error, stdout, stderr) => {
+              if (error) {
+                console.log(`error: ${error.message}`);
+                return;
+              }
+              if (stderr) {
+                console.log(`stderr: ${stderr}`);
+                return;
+              }
+              console.log(`stdout: ${stdout}`);
+            });
+          });
 
           const comando = `pscp -pw ${serverPassword} -p -r -q "${pathDirectorio}" ${serverUser}@${ipServer}:${serverPath}`;
-          console.log(shell.exec(comando));
+
+          exec(comando, (error, stdout, stderr) => {
+            if (error) {
+              console.log(`error: ${error.message}`);
+              return;
+            }
+            if (stderr) {
+              console.log(`stderr: ${stderr}`);
+              return;
+            }
+            console.log(`stdout: ${stdout}`);
+          });
         } catch (error) {
           console.log("Error al subir imagen al servidor");
         }

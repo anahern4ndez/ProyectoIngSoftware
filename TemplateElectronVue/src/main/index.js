@@ -43,8 +43,8 @@ function createWindow() {
 
         try {
 
-            string = 'cd ./src/temp & rmdir /s /q .';
-            // shell.exec(string);
+            string = 'cd ./temp & rmdir /s /q .';
+            shell.exec(string);
 
         } catch (error) {
             console.log("Ocurrió un error al eliminar la imagen...");
