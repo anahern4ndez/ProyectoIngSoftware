@@ -496,13 +496,15 @@ export default {
 
           // Copiamos la imagen y la renombramos al directorio de fotos
           const string = `xcopy "${pcPath}" "${pathDirectorio}\\" /i`;
-          //const rename = `cd ${pathDirectorio2} & ren ${nombreFoto} prfl.jpg`;
-          const rename = `cd ${pathDirectorio2} && dir`;
+          const rename = `cd ${pathDirectorio2} & ren ${nombreFoto} prfl.jpg`;
 
           // Obtenemos el directorio de la imágen + el nombre de la imágen
           // NOTE: Deberíamos de usar esta variable para mandar una foto al servidor.
           pathDirectorio = pathDirectorio.replace(/\\/g, "/");
 
+          const comando = `pscp -pw ${serverPassword} -p -r -q "${pathDirectorio}" ${serverUser}@${ipServer}:${serverPath}`;
+
+          //se copia la imagen
           exec(string, (error, stdout, stderr) => {
             if (error) {
               console.log(`error: ${error.message}`);
@@ -513,7 +515,8 @@ export default {
               return;
             }
             console.log(`stdout: ${stdout}`);
-          }).then(response => {
+
+            //se cambia el nombre a la imagen
             exec(rename, (error, stdout, stderr) => {
               if (error) {
                 console.log(`error: ${error.message}`);
@@ -524,21 +527,20 @@ export default {
                 return;
               }
               console.log(`stdout: ${stdout}`);
+
+              //Se sube la imagen al server
+              exec(comando, (error, stdout, stderr) => {
+                if (error) {
+                  console.log(`error: ${error.message}`);
+                  return;
+                }
+                if (stderr) {
+                  console.log(`stderr: ${stderr}`);
+                  return;
+                }
+                console.log(`stdout: ${stdout}`);
+              });
             });
-          });
-
-          const comando = `pscp -pw ${serverPassword} -p -r -q "${pathDirectorio}" ${serverUser}@${ipServer}:${serverPath}`;
-
-          exec(comando, (error, stdout, stderr) => {
-            if (error) {
-              console.log(`error: ${error.message}`);
-              return;
-            }
-            if (stderr) {
-              console.log(`stderr: ${stderr}`);
-              return;
-            }
-            console.log(`stdout: ${stdout}`);
           });
         } catch (error) {
           console.log("Error al subir imagen al servidor");
