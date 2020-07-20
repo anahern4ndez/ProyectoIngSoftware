@@ -62,6 +62,22 @@ export default {
     isDisabledButton: true,
     nombreArchivo: " "
   }),
+  beforeMount() {
+    const { exec } = require("child_process");
+    const creacionCSVs =
+      "cd ./temp && mkdir CSVs && cd CSVs && type nul > Acciones.csv && type nul > Citas.csv && type nul > Consultas.csv && type nul > GestionUsuario.csv && type nul > Historial.csv && type nul > Pacientes.csv";
+    exec(creacionCSVs, (error, stdout, stderr) => {
+      if (error) {
+        console.log(`error: ${error.message}`);
+        return;
+      }
+      if (stderr) {
+        console.log(`stderr: ${stderr}`);
+        return;
+      }
+      console.log(`stdout: ${stdout}`);
+    });
+  },
 
   methods: {
     startExcel() {
@@ -77,7 +93,7 @@ export default {
           var fs = require("fs");
           var dir = process.cwd();
 
-          dir = dir.concat("\\src\\CSVs\\", this.nombreArchivo);
+          dir = dir.concat(".\\temp\\CSVs\\", this.nombreArchivo);
           // console.log(dir)
           shell.openItem(dir);
         })
@@ -91,7 +107,8 @@ export default {
       const { Pool, Client } = require("pg");
       const fastcsv = require("fast-csv");
       const fs = require("fs");
-      const pathArchivo = `src/CSVs/${this.nombreArchivo}`;
+      //const pathArchivo = `src/CSVs/${this.nombreArchivo}`;
+      const pathArchivo = `./temp/CSVs/${this.nombreArchivo}`;
       const ws = fs.createWriteStream(pathArchivo);
 
       // Se crea el cliente con configuración del servidor
