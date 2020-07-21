@@ -52,6 +52,7 @@
 </template>
 <script>
 import { store } from "../main";
+import { log } from "util";
 export default {
   mounted() {},
   data() {
@@ -94,7 +95,6 @@ export default {
       cui: this.$route.params.cui,
 
       // TODO: Chino, por favor, obtener el id del paciente al entrar a esta pestaña
-      // idPaciente: this.$route.params.id,
 
       name: this.$route.params.nombre,
       apellido: this.$route.params.apellido,
@@ -114,10 +114,6 @@ export default {
       const { shell } = require("electron");
       var fs = require("fs");
       var dir = process.cwd();
-
-      console.log(dir);
-
-      //dir += this.direccionCHOL;
 
       var dirCopy;
       if (this.selectAbrir === "Peritonitis") {
@@ -181,7 +177,7 @@ export default {
           ".docx"
         );
         dirCopy = this.dirMortalidad;
-      } else if (this.selectAbrir === "CambioStatus") {
+      } else if (this.selectAbrir === "Cambio Status") {
         //dir += this.direccionMortalidad;
         this.nombreNuevoFormulario = this.direccionCambioStatus.concat(
           "_",
@@ -207,7 +203,6 @@ export default {
         dirCopy = this.dirBiopsiaRenal;
       }
 
-      const idPaciente = 0;
       const pathNuevo =
         `.\\temp\\pcnts\\${this.cui}\\${this.selectAbrir}\\${this.fecha}\\` +
         this.nombreNuevoFormulario;
@@ -216,30 +211,36 @@ export default {
         `.\\temp\\pcnts\\${this.cui}\\${this.selectAbrir}\\${this.fecha}\\` +
         this.nombreNuevoFormulario;
 
-      this.nombreNuevoFormulario =
-        `.\\temp\\pcnts\\${this.cui}\\${this.selectAbrir}\\${this.fecha}\\` +
-        this.nombreNuevoFormulario;
+      const rutaNuevoForm = `"${dir}\\temp\\pcnts\\${this.cui}\\${this.selectAbrir}\\${this.fecha}\\${this.nombreNuevoFormulario}"`;
+      const rutaCopiaForm = `temp\\pcnts\\${this.cui}\\${this.selectAbrir}\\${this.fecha}\\${this.nombreNuevoFormulario}`;
+
       // Se sacara una copia del archivo original y se pondra en uno NUEVO
-
-      fs.copyFile(dirCopy, this.nombreNuevoFormulario, err => {
+      fs.copyFile(dirCopy, rutaCopiaForm, err => {
         if (err) {
-          var shelljs = require("shelljs");
-          let nodePath = shelljs.which("node").toString();
-          shelljs.config.execPath = nodePath;
+          console.log("ERROR DE PARTE DE FS:", err);
 
+          const { exec } = require("child_process");
           //Se crea la carpeta pacientes en la carpeta temporal
-          const string = `mkdir ".\\temp\\pcnts\\${this.cui}\\${this.selectAbrir}\\${this.fecha}\\"`;
-          shelljs.exec(string);
+          const string = `mkdir "${dir}\\temp\\pcnts\\${this.cui}\\${this.selectAbrir}\\${this.fecha}"`;
+          exec(string, (error, stdout, stderr) => {
+            if (error) {
+              console.log(`error: ${error.message}`);
+              return;
+            }
+            if (stderr) {
+              console.log(`stderr ${stderr}`);
+              return;
+            }
 
-          fs.copyFile(dirCopy, this.nombreNuevoFormulario, err => {
-            if (err) throw err;
-            shell.openItem(pathNuevo);
+            fs.copyFile(dirCopy, rutaCopiaForm, err => {
+              if (err) throw err;
+              shell.openItem(rutaNuevoForm);
+            });
           });
         }
+        this.path = rutaNuevoForm;
+        shell.openItem(rutaNuevoForm);
       });
-
-      this.path = pathGuardar;
-      shell.openItem(pathNuevo);
     },
 
     changeDisableAbrir(event) {
@@ -249,11 +250,11 @@ export default {
     },
 
     subirFormulario() {
+      const { exec } = require("child_process");
       console.log(this.path);
       if (this.path === " ") {
         // Mostrar Alerta
       } else {
-        const idPaciente = 0;
         //se copia el archivo al servidor
         const ipServer = "192.168.0.156";
         const serverPassword = "perritoUVG";
