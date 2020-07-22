@@ -114,9 +114,9 @@ export default {
       // Se crea el cliente con configuración del servidor
       const client = new Client({
         user: "postgres",
-        host: "192.168.0.156",
+        host: process.env.SERVER_IP,
         database: "fundanier",
-        password: "perritoUVG",
+        password: process.env.SERVER_PASSWORD,
         port: 5432
       });
 

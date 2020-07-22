@@ -83,6 +83,10 @@ import { store } from "../main";
 export default {
   name: "login",
 
+  mounted() {
+    // store.id = store.state.user.id;
+    // console.log(store.state.server_ip);
+  },
   data() {
     return {
       loader: false,
@@ -108,9 +112,6 @@ export default {
       this.errorEmail = false;
       this.errorPass = false;
       this.error = false;
-
-      // console.log("User: " + this.email);
-      // console.log("Pass: " + this.password);
 
       if (this.email === "") {
         //this.loader = false;
@@ -155,11 +156,11 @@ export default {
             try {
               const { exec } = require("child_process");
 
-              const ipServer = "192.168.0.156";
-              const serverPassword = "perritoUVG";
+              const ipServer = process.env.SERVER_IP;
+              const serverPassword = process.env.SERVER_PASSWORD;
               // const relativePath = "./src/temp";
               let relativePath = process.cwd() + `\\temp\\usrs\\${this.id}`;
-              const serverUser = "adminlocal";
+              const serverUser = process.env.SERVER_USER;
               const serverPath = `/home/adminlocal/Fundanier/usrs/${this.id}/prfl.jpg`;
 
               let directorio = `mkdir .\\temp\\usrs\\${this.id}`;

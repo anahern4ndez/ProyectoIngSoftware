@@ -480,10 +480,10 @@ export default {
         try {
           const { exec } = require("child_process");
 
-          const ipServer = "192.168.0.156";
-          const serverPassword = "perritoUVG";
+          const ipServer = process.env.SERVER_IP;
+          const serverPassword = process.env.SERVER_PASSWORD;
           const pcPath = this.path;
-          const serverUser = "adminlocal";
+          const serverUser = process.env.SERVER_USER;
           const idUsr = parseInt(response.data.idersia.id) + 1;
           const serverPath = "/home/adminlocal/Fundanier/usrs/";
 

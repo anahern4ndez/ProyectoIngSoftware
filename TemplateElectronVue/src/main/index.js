@@ -4,9 +4,11 @@ const {
     BrowserWindow
 } = electron;
 
+require('dotenv').config();
 var shell = require('shelljs');
 let nodePath = (shell.which('node').toString());
 shell.config.execPath = nodePath;
+
 
 /**
  * Set `__static` path to static files in production

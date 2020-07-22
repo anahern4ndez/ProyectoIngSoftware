@@ -4,7 +4,7 @@ var shell = require('shelljs');
 let nodePath = (shell.which('node').toString());
 shell.config.execPath = nodePath;
 
-const ipServer = '193.168.168.112';
+const ipServer = "192.168.0.156";
 const serverPassword = 'perritoUVG';
 // Path en donde se desea que se guarde la imagen
 const relativePath = '.\\images';
@@ -14,4 +14,6 @@ const serverUser = 'adminLocal';
 const serverPath = '/home/adminlocal/desktop/agent2.jpg';
 
 // Ejecución del comando con pscp
-shell.exec(`pscp -pw ${serverPassword} ${serverUser}@${ipServer}:${serverPath} ${relativePath}`, { async: true });
+shell.exec(`pscp -pw ${serverPassword} ${serverUser}@${ipServer}:${serverPath} ${relativePath}`, {
+    async: true
+});

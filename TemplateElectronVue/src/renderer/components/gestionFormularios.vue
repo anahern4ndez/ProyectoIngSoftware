@@ -256,11 +256,11 @@ export default {
         // Mostrar Alerta
       } else {
         //se copia el archivo al servidor
-        const ipServer = "192.168.0.156";
-        const serverPassword = "perritoUVG";
+        const ipServer = process.env.SERVER_IP;
+        const serverPassword = process.env.SERVER_PASSWORD;
         let relativePath = `${process.cwd()}\\temp\\pcnts\\${this.cui}`;
         // relativePath = relativePath.replace(/\\/g, "/");
-        const serverUser = "adminlocal";
+        const serverUser = process.env.SERVER_USER;
         const serverPath = `/home/adminlocal/Fundanier/pcnts/`;
         const comando = `pscp -pw ${serverPassword} -p -r -q "${relativePath}" "${serverUser}@${ipServer}:${serverPath}"`;
 

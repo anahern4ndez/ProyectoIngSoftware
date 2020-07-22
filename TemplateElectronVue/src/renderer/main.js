@@ -40,8 +40,7 @@ Vue.use(Vuetify, {
   }
 });
 
-const routes = [
-  {
+const routes = [{
     path: '/login',
     component: Vue.component('login', require('./components/Login.vue').default)
   },
@@ -178,7 +177,7 @@ export const store = new Vuex.Store({
       id: 0,
       role: 0,
       permissions: []
-    }
+    },
   },
   mutations: {
     saveUserData(state, data) {

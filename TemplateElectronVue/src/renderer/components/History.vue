@@ -136,11 +136,11 @@ export default {
 
         const { exec } = require("child_process");
 
-        const ipServer = "192.168.0.156";
-        const serverPassword = "perritoUVG";
+        const ipServer = process.env.SERVER_IP;
+        const serverPassword = process.env.SERVER_PASSWORD;
         let relativePath = `.\\temp\\pcnts\\${this.paciente.cui}`;
         relativePath = relativePath.replace(/\\/g, "/");
-        const serverUser = "adminlocal";
+        const serverUser = process.env.SERVER_USER;
         const serverPath = `/home/adminlocal/Fundanier/pcnts/${this.paciente.cui}/`;
         const comando = `pscp -pw ${serverPassword} -p -r -q "${serverUser}@${ipServer}:${serverPath}" "${relativePath}"`;
 
