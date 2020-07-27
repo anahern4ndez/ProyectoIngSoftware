@@ -174,9 +174,11 @@
 <script>
 export default {
   mounted() {
-    this.$http.get("http://localhost:8000/users").then(response => {
-      this.user = response.data.users;
-    });
+    this.$http
+      .get(`http://${process.env.SERVER_IP}:8000/users`)
+      .then((response) => {
+        this.user = response.data.users;
+      });
   },
   data() {
     return {
@@ -209,15 +211,17 @@ export default {
       headers: [
         { text: "Nombre", align: "center", value: "Nombre", sortable: false },
         { text: "Correo", align: "center", value: "Correo", sortable: false },
-        { text: "Puesto", align: "center", value: "PUESTO", sortable: false }
-      ]
+        { text: "Puesto", align: "center", value: "PUESTO", sortable: false },
+      ],
     };
   },
   methods: {
     refreshUsers() {
-      this.$http.get("http://localhost:8000/users").then(response => {
-        this.user = response.data.users;
-      });
+      this.$http
+        .get(`http://${process.env.SERVER_IP}:8000/users`)
+        .then((response) => {
+          this.user = response.data.users;
+        });
     },
     getSomeUser() {
       if (this.idb == "Administrador") {
@@ -236,8 +240,8 @@ export default {
         this.idb = 5;
       }
       this.$http
-        .get(`http://localhost:8000/users/some?idb=${this.idb}`)
-        .then(response => {
+        .get(`http://${process.env.SERVER_IP}:8000/users/some?idb=${this.idb}`)
+        .then((response) => {
           if (response.data.usersia.length === 0) {
             this.errorBusqueda = true;
           } else {
@@ -249,8 +253,8 @@ export default {
     },
     getOneUser() {
       this.$http
-        .get(`http://localhost:8000/users/look?idb=${this.idb}`)
-        .then(response => {
+        .get(`http://${process.env.SERVER_IP}:8000/users/look?idb=${this.idb}`)
+        .then((response) => {
           if (response.data.usersi === null) {
             this.errorBusqueda = true;
           } else {
@@ -331,8 +335,10 @@ export default {
       }
       if (this.id != "") {
         this.$http
-          .delete(`http://localhost:8000/users/destroy?id=${this.id}`)
-          .then(response => {
+          .delete(
+            `http://${process.env.SERVER_IP}:8000/users/destroy?id=${this.id}`
+          )
+          .then((response) => {
             this.refreshUsers();
             this.name = "";
             this.id = "";
@@ -418,10 +424,10 @@ export default {
       ) {
         this.$http
           .post(
-            `http://localhost:8000/users/create?name=${this.name}&email=${this.email}&password=${this.password}&puesto=${this.puesto}`,
+            `http://${process.env.SERVER_IP}:8000/users/create?name=${this.name}&email=${this.email}&password=${this.password}&puesto=${this.puesto}`,
             this.imagen
           )
-          .then(response => {
+          .then((response) => {
             this.refreshUsers();
             this.name = "";
             this.id = "";
@@ -431,7 +437,7 @@ export default {
             this.selected = "Tipo de usuario";
             this.imagen = null;
           })
-          .catch(error => {
+          .catch((error) => {
             if (error.response.data.id === undefined) {
               this.errorDPIRepetido = false;
             } else {
@@ -464,60 +470,50 @@ export default {
           });
       }
     },
-    imgClick: function(event) {
+    imgClick: function (event) {
       // on a click on the button with id 'one'
       const btn = this.$refs.changeImg;
       btn.click(); // trigger the click on second, and go on
     },
-    changeImg: function(event) {
+    changeImg: function (event) {
       var input = event.target;
       //console.log(input.files)
       //Este el el path de la imagen
       this.path = input.files[0].path;
       // console.log(this.path);
 
-      this.$http.get(`http://localhost:8000/users/getID`).then(response => {
-        try {
-          const { exec } = require("child_process");
+      this.$http
+        .get(`http://${process.env.SERVER_IP}:8000/users/getID`)
+        .then((response) => {
+          try {
+            const { exec } = require("child_process");
 
-          const ipServer = process.env.SERVER_IP;
-          const serverPassword = process.env.SERVER_PASSWORD;
-          const pcPath = this.path;
-          const serverUser = process.env.SERVER_USER;
-          const idUsr = parseInt(response.data.idersia.id) + 1;
-          const serverPath = "/home/adminlocal/Fundanier/usrs/";
+            const ipServer = process.env.SERVER_IP;
+            const serverPassword = process.env.SERVER_PASSWORD;
+            const pcPath = this.path;
+            const serverUser = process.env.SERVER_USER;
+            const idUsr = parseInt(response.data.idersia.id) + 1;
+            const serverPath = "/home/adminlocal/Fundanier/usrs/";
 
-          // pathDirectorio es la dirección completa de la imágen, pero sin el nombre de esta
-          let pathDirectorio = `.\\temp\\usrs\\${idUsr}`;
-          let pathDirectorio2 = `temp/usrs/${idUsr}`;
+            // pathDirectorio es la dirección completa de la imágen, pero sin el nombre de esta
+            let pathDirectorio = `.\\temp\\usrs\\${idUsr}`;
+            let pathDirectorio2 = `temp/usrs/${idUsr}`;
 
-          const nombreFoto = this.path.split("\\").pop();
-          console.log(nombreFoto);
+            const nombreFoto = this.path.split("\\").pop();
+            console.log(nombreFoto);
 
-          // Copiamos la imagen y la renombramos al directorio de fotos
-          const string = `xcopy "${pcPath}" "${pathDirectorio}\\" /i`;
-          const rename = `cd ${pathDirectorio2} & ren ${nombreFoto} prfl.jpg`;
+            // Copiamos la imagen y la renombramos al directorio de fotos
+            const string = `xcopy "${pcPath}" "${pathDirectorio}\\" /i`;
+            const rename = `cd ${pathDirectorio2} & ren ${nombreFoto} prfl.jpg`;
 
-          // Obtenemos el directorio de la imágen + el nombre de la imágen
-          // NOTE: Deberíamos de usar esta variable para mandar una foto al servidor.
-          pathDirectorio = pathDirectorio.replace(/\\/g, "/");
+            // Obtenemos el directorio de la imágen + el nombre de la imágen
+            // NOTE: Deberíamos de usar esta variable para mandar una foto al servidor.
+            pathDirectorio = pathDirectorio.replace(/\\/g, "/");
 
-          const comando = `pscp -pw ${serverPassword} -p -r -q "${pathDirectorio}" ${serverUser}@${ipServer}:${serverPath}`;
+            const comando = `pscp -pw ${serverPassword} -p -r -q "${pathDirectorio}" ${serverUser}@${ipServer}:${serverPath}`;
 
-          //se copia la imagen
-          exec(string, (error, stdout, stderr) => {
-            if (error) {
-              console.log(`error: ${error.message}`);
-              return;
-            }
-            if (stderr) {
-              console.log(`stderr: ${stderr}`);
-              return;
-            }
-            console.log(`stdout: ${stdout}`);
-
-            //se cambia el nombre a la imagen
-            exec(rename, (error, stdout, stderr) => {
+            //se copia la imagen
+            exec(string, (error, stdout, stderr) => {
               if (error) {
                 console.log(`error: ${error.message}`);
                 return;
@@ -528,8 +524,8 @@ export default {
               }
               console.log(`stdout: ${stdout}`);
 
-              //Se sube la imagen al server
-              exec(comando, (error, stdout, stderr) => {
+              //se cambia el nombre a la imagen
+              exec(rename, (error, stdout, stderr) => {
                 if (error) {
                   console.log(`error: ${error.message}`);
                   return;
@@ -539,13 +535,25 @@ export default {
                   return;
                 }
                 console.log(`stdout: ${stdout}`);
+
+                //Se sube la imagen al server
+                exec(comando, (error, stdout, stderr) => {
+                  if (error) {
+                    console.log(`error: ${error.message}`);
+                    return;
+                  }
+                  if (stderr) {
+                    console.log(`stderr: ${stderr}`);
+                    return;
+                  }
+                  console.log(`stdout: ${stdout}`);
+                });
               });
             });
-          });
-        } catch (error) {
-          console.log("Error al subir imagen al servidor");
-        }
-      });
+          } catch (error) {
+            console.log("Error al subir imagen al servidor");
+          }
+        });
       input.value = "";
     },
     modificar() {
@@ -619,9 +627,9 @@ export default {
       ) {
         this.$http
           .put(
-            `http://localhost:8000/users/update?id=${this.id}&name=${this.name}&email=${this.email}&password=${this.password}&puesto=${this.puesto}`
+            `http://${process.env.SERVER_IP}:8000/users/update?id=${this.id}&name=${this.name}&email=${this.email}&password=${this.password}&puesto=${this.puesto}`
           )
-          .then(response => {
+          .then((response) => {
             this.refreshUsers();
             this.name = "";
             this.id = "";
@@ -631,7 +639,7 @@ export default {
             this.selected = "Tipo de usuario";
             this.imagen = null;
           })
-          .catch(error => {
+          .catch((error) => {
             if (error.response.data.email === undefined) {
               this.errorFormato = false;
             } else {
@@ -645,8 +653,8 @@ export default {
             }
           });
       }
-    }
-  }
+    },
+  },
 };
 </script>
 <style>

@@ -39,26 +39,29 @@
 
 
 <script>
-import { store } from '../main';
+import { store } from "../main";
 export default {
   mounted() {
-    this.id=store.CUI
+    this.id = store.CUI;
   },
   data() {
     return {
-      peso:'',
-      id:'',
-      telefono:'',
-      talla:'',
-      pa:''
+      peso: "",
+      id: "",
+      telefono: "",
+      talla: "",
+      pa: "",
     };
   },
-  methods:{
-    agregar(){
-        this.$http.put(`http://localhost:8000/DG/updateDG?id=${this.id}&Telefono=${this.telefono}&Peso=${this.peso}&Talla=${this.talla}&PA=${this.pa}`).then(response=>{
-      })
-    }
-  }  
+  methods: {
+    agregar() {
+      this.$http
+        .put(
+          `http://${process.env.SERVER_IP}:8000/DG/updateDG?id=${this.id}&Telefono=${this.telefono}&Peso=${this.peso}&Talla=${this.talla}&PA=${this.pa}`
+        )
+        .then((response) => {});
+    },
+  },
 };
 </script>
 <style>

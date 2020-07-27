@@ -96,7 +96,7 @@ export default {
     HistoryConsulta,
     cambioEstadoHistory,
     HemodialisisHistory,
-    gestionFormulariosHistory
+    gestionFormulariosHistory,
   },
   data: () => ({
     consultas: [],
@@ -108,19 +108,22 @@ export default {
     paciente: {
       nombre: "Karlie",
       apellido: "Rath",
-      CUI: ""
+      CUI: "",
     },
     number: 0,
-    vacio: true
+    vacio: true,
   }),
   beforeMount() {
     const data = {
-      ID: store.idPaciente // Aqui va el ID del paciente
+      ID: store.idPaciente, // Aqui va el ID del paciente
     };
 
     this.$http
-      .post(`http://localhost:8000/PacienteController/findById`, data)
-      .then(response => {
+      .post(
+        `http://${process.env.SERVER_IP}:8000/PacienteController/findById`,
+        data
+      )
+      .then((response) => {
         if (response.data.Paciente[0] == null) {
         } else {
           this.paciente.nombre = response.data.Paciente[0].Nombre;
@@ -145,7 +148,7 @@ export default {
         const comando = `pscp -pw ${serverPassword} -p -r -q "${serverUser}@${ipServer}:${serverPath}" "${relativePath}"`;
 
         exec(
-          `rd /s /q "${relativePath}" &` + comando,
+          `rd /s /q "${relativePath}" & mkdir ./temp/pcnts & ` + comando,
           (error, stdout, stderr) => {
             if (error) {
               console.log(`error: ${error.message}`);
@@ -162,10 +165,10 @@ export default {
         this.generalHistorial = [];
         this.$http
           .post(
-            "http://localhost:8000/ConsultaController/findAllUser",
+            `http://${process.env.SERVER_IP}:8000/ConsultaController/findAllUser`,
             this.paciente
           )
-          .then(response => {
+          .then((response) => {
             this.consultas = response.data.Consulta;
             for (let i = 0; i < this.consultas.length; i++) {
               this.consulta = this.consultas[i];
@@ -177,10 +180,10 @@ export default {
           .then(() => {
             this.$http
               .post(
-                "http://localhost:8000/cambioEstadoController/findAllUser",
+                `http://${process.env.SERVER_IP}:8000/cambioEstadoController/findAllUser`,
                 this.paciente
               )
-              .then(response => {
+              .then((response) => {
                 this.consultas = response.data.Consulta;
                 for (let i = 0; i < this.consultas.length; i++) {
                   this.consulta = this.consultas[i];
@@ -192,10 +195,10 @@ export default {
               .then(() => {
                 this.$http
                   .get(
-                    "http://localhost:8000/hemodialisis/findAllUser",
+                    `http://${process.env.SERVER_IP}:8000/hemodialisis/findAllUser`,
                     this.paciente
                   )
-                  .then(response => {
+                  .then((response) => {
                     this.consultas = response.data.Consulta;
                     for (let i = 0; i < this.consultas.length; i++) {
                       this.consulta = this.consultas[i];
@@ -247,10 +250,10 @@ export default {
                   .then(() => {
                     this.$http
                       .post(
-                        "http://localhost:8000/formularioController/findAllUser",
+                        `http://${process.env.SERVER_IP}:8000/formularioController/findAllUser`,
                         this.paciente
                       )
-                      .then(response => {
+                      .then((response) => {
                         this.consultas = response.data.Consulta;
                         for (let i = 0; i < this.consultas.length; i++) {
                           this.consulta = this.consultas[i];
@@ -260,7 +263,7 @@ export default {
                         }
                       })
                       .then(() => {
-                        this.generalHistorial.sort(function(d1, d2) {
+                        this.generalHistorial.sort(function (d1, d2) {
                           return new Date(d2.fecha) - new Date(d1.fecha);
                         });
                       });
@@ -270,14 +273,14 @@ export default {
       });
   },
   methods: {
-    saludar: function(n) {
+    saludar: function (n) {
       this.number = n;
       this.actual = this.generalHistorial[n];
     },
-    salir: function(n) {
+    salir: function (n) {
       this.$router.push("/menu-principal");
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -67,7 +67,7 @@ export default {
         "Hemodialisis",
         "Mortalidad",
         "Cambio Status",
-        "Biopsia Renal"
+        "Biopsia Renal",
       ],
       path: " ",
       // referencia: 'ms-word:ofv|u|file:///C:/Users/Ulises/Desktop/CHOL.docx',
@@ -102,7 +102,7 @@ export default {
         this.$route.params.nombre + " " + this.$route.params.apellido,
       fecha: new Date().toISOString().slice(0, 10),
       nombreNuevoFormulario: " ",
-      dialog: false
+      dialog: false,
     };
   },
   methods: {
@@ -215,7 +215,7 @@ export default {
       const rutaCopiaForm = `temp\\pcnts\\${this.cui}\\${this.selectAbrir}\\${this.fecha}\\${this.nombreNuevoFormulario}`;
 
       // Se sacara una copia del archivo original y se pondra en uno NUEVO
-      fs.copyFile(dirCopy, rutaCopiaForm, err => {
+      fs.copyFile(dirCopy, rutaCopiaForm, (err) => {
         if (err) {
           console.log("ERROR DE PARTE DE FS:", err);
 
@@ -232,13 +232,13 @@ export default {
               return;
             }
 
-            fs.copyFile(dirCopy, rutaCopiaForm, err => {
+            fs.copyFile(dirCopy, rutaCopiaForm, (err) => {
               if (err) throw err;
               shell.openItem(rutaNuevoForm);
             });
           });
         }
-        this.path = rutaNuevoForm;
+        this.path = pathGuardar;
         shell.openItem(rutaNuevoForm);
       });
     },
@@ -276,7 +276,7 @@ export default {
           console.log(`stdout: ${stdout}`);
         });
         console.log(
-          `http://localhost:8000/formularioController/save?NombreDoctor=${store.id}&cui=${this.cui}&fecha=${this.fecha}&TipoFormulario=${this.selectAbrir}&Path=${this.path}`
+          `http://${process.env.SERVER_IP}:8000/formularioController/save?NombreDoctor=${store.id}&cui=${this.cui}&fecha=${this.fecha}&TipoFormulario=${this.selectAbrir}&Path=${this.path}`
         );
 
         // Subir Documento al servidor
@@ -284,24 +284,24 @@ export default {
         // Subir formulario a base de datos
         this.$http
           .post(
-            `http://localhost:8000/formularioController/save?NombreDoctor=${store.id}&cui=${this.cui}&fecha=${this.fecha}&TipoFormulario=${this.selectAbrir}&Path=${this.path}`
+            `http://${process.env.SERVER_IP}:8000/formularioController/save?NombreDoctor=${store.id}&cui=${this.cui}&fecha=${this.fecha}&TipoFormulario=${this.selectAbrir}&Path=${this.path}`
           )
-          .then(response => {
+          .then((response) => {
             console.log("Se subio el Formulario: " + this.path);
             this.exit = true;
             this.isDisabledSubirForm = true;
           })
-          .catch(error => {
+          .catch((error) => {
             console.log("Error", error);
           });
       }
     },
-    formClick: function(event) {
+    formClick: function (event) {
       // on a click on the button with id 'one'
       const btn = this.$refs.changeForm;
       btn.click(); // trigger the click on second, and go on
     },
-    changeForm: function(event) {
+    changeForm: function (event) {
       var input = event.target;
       //console.log(input.files)
       //Este es el path del documento
@@ -311,8 +311,8 @@ export default {
     },
     regresarGestionPacientesView() {
       this.$router.push("/gestionPacientes");
-    }
-  }
+    },
+  },
 };
 </script>
 <style>

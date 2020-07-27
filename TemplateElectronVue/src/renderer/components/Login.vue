@@ -96,12 +96,12 @@ export default {
       isLoading: false,
       email: "",
       password: "",
-      id: 0
+      id: 0,
     };
   },
 
   components: {
-    VueLoadingButton
+    VueLoadingButton,
   },
 
   methods: {
@@ -137,11 +137,11 @@ export default {
         this.isLoading = true;
         const data = {
           email: this.email,
-          password: this.password
+          password: this.password,
         };
         this.$http
-          .post("http://localhost:8000/login", data)
-          .then(response => {
+          .post(`http://${process.env.SERVER_IP}:8000/login`, data)
+          .then((response) => {
             this.id = response.data.id;
             store.id = this.id;
 
@@ -149,7 +149,7 @@ export default {
             const userData = {
               id: response.data.id,
               role: response.data.role,
-              permissions: response.data.permissions
+              permissions: response.data.permissions,
             };
             this.$store.commit("saveUserData", userData);
 
@@ -183,13 +183,17 @@ export default {
               exec(string, (error, stdout, stderr) => {
                 if (error) {
                   console.log(`error: ${error.message}`);
+                  this.$router.push("/menu-principal");
                   return;
                 }
                 if (stderr) {
                   console.log(`stderr: ${stderr}`);
+                  this.$router.push("/menu-principal");
                   return;
                 }
                 console.log(`stdout: ${stdout}`);
+
+                this.$router.push("/menu-principal");
               });
             } catch (error) {
               console.log("Error con shelljs", error);
@@ -198,10 +202,7 @@ export default {
           .then(() => {
             this.isLoading = false;
           })
-          .then(() => {
-            this.$router.push("/menu-principal");
-          })
-          .catch(error => {
+          .catch((error) => {
             this.isLoading = false;
             this.error = true;
             this.success = false;
@@ -212,7 +213,7 @@ export default {
       } else {
         this.isLoading = false;
       }
-    }
-  }
+    },
+  },
 };
 </script>

@@ -82,10 +82,11 @@
                 </template>
               <!-- cuando la busqueda no tenga resultados -->
               <template v-slot:no-results>
-                  <v-alert :value="true" color="error">
-                  No se ha encontrado un paciente que tenga "{{ search }}" en su información.
-                  </v-alert>
-              </template>
+  <v-alert
+    :value="true"
+    color="error"
+  >No se ha encontrado un paciente que tenga "{{ search }}" en su información.</v-alert>
+</template>
           </v-data-table>
         </v-card>
         <br><br>
@@ -134,98 +135,114 @@
 
 
 <script>
-import { store } from '../main';
+import { store } from "../main";
 export default {
   mounted() {
-    this.$http.get("http://localhost:8000/PacienteController/findAll").then(response => {
-      //esto deberia ser un arrray de pacientes que contengan todos sus atributos...
-      
-      this.pacientes = response.data.Pacientes;
-      //objeto utilizado para los labels..
-      if (response.data.Pacientes[0] == null){
-        console.log('Nothing to do here..');
-      } else {
-        this.selectedPatients.Nombre = response.data.Pacientes[0].Nombre;
-        this.selectedPatients.Apellido = response.data.Pacientes[0].Apellido;
-        this.selectedPatients.EstadoActual = response.data.Pacientes[0].estado_actual.significado;
-        this.selectedPatients.Edad = response.data.Pacientes[0].Edad;
-        this.selectedPatients.CUI = response.data.Pacientes[0].CUI;
-        this.selectedPatients.Telefono = response.data.Pacientes[0].Telefono;
-        this.selectedPatients.Nombre_de_madre = response.data.Pacientes[0].Nombre_de_madre;
-        this.selectedPatients.Nombre_de_padre = response.data.Pacientes[0].Nombre_de_padre;
-        //this.Nombre = response.data.Pacientes[0].Nombre;
-        //this.Apellido = response.data.Pacientes[0].Apellido;
-        this.imageData = response.data.Pacientes[0].Imagen;
-        this.estadoNuevo = response.data.Pacientes[0].estado_actual;
-      }
-          });
-    this.$http.get(`http://localhost:8000/EstadoController/getAllEstado`).then(response =>{
-      this.estados_response = response.data.Estados;
+    this.$http
+      .get(`http://${process.env.SERVER_IP}:8000/PacienteController/findAll`)
+      .then((response) => {
+        //esto deberia ser un arrray de pacientes que contengan todos sus atributos...
 
-    });
+        this.pacientes = response.data.Pacientes;
+        //objeto utilizado para los labels..
+        if (response.data.Pacientes[0] == null) {
+          console.log("Nothing to do here..");
+        } else {
+          this.selectedPatients.Nombre = response.data.Pacientes[0].Nombre;
+          this.selectedPatients.Apellido = response.data.Pacientes[0].Apellido;
+          this.selectedPatients.EstadoActual =
+            response.data.Pacientes[0].estado_actual.significado;
+          this.selectedPatients.Edad = response.data.Pacientes[0].Edad;
+          this.selectedPatients.CUI = response.data.Pacientes[0].CUI;
+          this.selectedPatients.Telefono = response.data.Pacientes[0].Telefono;
+          this.selectedPatients.Nombre_de_madre =
+            response.data.Pacientes[0].Nombre_de_madre;
+          this.selectedPatients.Nombre_de_padre =
+            response.data.Pacientes[0].Nombre_de_padre;
+          //this.Nombre = response.data.Pacientes[0].Nombre;
+          //this.Apellido = response.data.Pacientes[0].Apellido;
+          this.imageData = response.data.Pacientes[0].Imagen;
+          this.estadoNuevo = response.data.Pacientes[0].estado_actual;
+        }
+      });
+    this.$http
+      .get(`http://${process.env.SERVER_IP}:8000/EstadoController/getAllEstado`)
+      .then((response) => {
+        this.estados_response = response.data.Estados;
+      });
   },
   data() {
     return {
       rowsText: "Filas por página: ",
-        search:'',
-        prueba:'',
-        selected: [],
-        selected2: null,
-        estados_response: '',
-        estadoNuevo: null,
-        dialog: false,
-        radioGroup:1,
-        headers: [
-          { text: 'CUI (ID)', align: 'center',value: 'CUI'},
-          { text: 'Nombre', align: 'center', value: 'Nombre' },
-          { text: 'Apellido', align: 'center', value: 'Apellido' }, 
-          { text: 'Procedencia', align: 'center', value: 'procedencia.Departamento' },
-          { text: 'Fecha de nacimiento', align: 'center', value: 'Fecha_de_nacimiento' },
-          { text: 'Estado', align: 'center', value: 'estado_actual.significado' },
-        ],
-        editedIndex: -1,
-        pacientes: [],
-        selectedPatients:{
-          Nombre: '',
-          Apellido: '',
-          EstadoActual: '',
-          Edad: '',
-          Telefono: '',
-          Nombre_de_padre: '',
-          Nombre_de_madre: '',
-          CUI: ''
+      search: "",
+      prueba: "",
+      selected: [],
+      selected2: null,
+      estados_response: "",
+      estadoNuevo: null,
+      dialog: false,
+      radioGroup: 1,
+      headers: [
+        { text: "CUI (ID)", align: "center", value: "CUI" },
+        { text: "Nombre", align: "center", value: "Nombre" },
+        { text: "Apellido", align: "center", value: "Apellido" },
+        {
+          text: "Procedencia",
+          align: "center",
+          value: "procedencia.Departamento",
         },
-        selectedIndex: 0,
-        deletedCUI: '',
-        editedItem:{
-          Nombre: '',
-          Apellido: '',
-          EstadoActual: '',
-          Edad: '',
-          Telefono: '',
-          Nombre_de_padre: '',
-          Nombre_de_madre: '',
-          CUI: '',
-          Procedencia: '',
-          Fecha_de_nacimiento: ''
+        {
+          text: "Fecha de nacimiento",
+          align: "center",
+          value: "Fecha_de_nacimiento",
         },
-        imageData : ""
-      }
+        { text: "Estado", align: "center", value: "estado_actual.significado" },
+      ],
+      editedIndex: -1,
+      pacientes: [],
+      selectedPatients: {
+        Nombre: "",
+        Apellido: "",
+        EstadoActual: "",
+        Edad: "",
+        Telefono: "",
+        Nombre_de_padre: "",
+        Nombre_de_madre: "",
+        CUI: "",
+      },
+      selectedIndex: 0,
+      deletedCUI: "",
+      editedItem: {
+        Nombre: "",
+        Apellido: "",
+        EstadoActual: "",
+        Edad: "",
+        Telefono: "",
+        Nombre_de_padre: "",
+        Nombre_de_madre: "",
+        CUI: "",
+        Procedencia: "",
+        Fecha_de_nacimiento: "",
+      },
+      imageData: "",
+    };
   },
-  methods:{
-    refreshUsers(){
-      this.$http.get("http://localhost:8000/users").then(response => {
-      this.user = response.data.users;
-    });
+  methods: {
+    refreshUsers() {
+      this.$http
+        .get(`http://${process.env.SERVER_IP}:8000/users`)
+        .then((response) => {
+          this.user = response.data.users;
+        });
     },
-    selectUser(recibed){
+    selectUser(recibed) {
       this.prueba = recibed.id;
-      store.CUI=this.prueba   
+      store.CUI = this.prueba;
     },
     dgenerales() {
       this.$router.push("/FormularioMortalidad");
-    }
-  }
+    },
+  },
 };
 </script>
 <style>
@@ -247,16 +264,16 @@ div#DatosPaciente {
 /*
     configuracion para los headers
 */
-h3#headers{
+h3#headers {
   font-family: Nunito;
   font-weight: bolder;
   font-size: x-large;
 }
-h1#headers{
+h1#headers {
   font-family: Nunito;
   font-weight: bolder;
 }
-h2#headers{
+h2#headers {
   font-family: Nunito;
   font-weight: bolder;
 }

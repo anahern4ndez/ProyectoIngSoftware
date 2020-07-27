@@ -137,22 +137,22 @@ export default {
     name: "",
     switch1: false,
     colors: ["#FF9D14", "#BF760F", "#804F0A", "#402705", "#E68E12"],
-    src: `.\\temp\\usrs\\${store.id}\\prfl.jpg`
+    src: `..\\..\\..\\..\\temp\\usrs\\${store.id}\\prfl.jpg`,
   }),
   watch: {
     switch1(newValue) {
       //called whenever switch1 changes
       this.vistaGeneral(newValue);
-    }
+    },
   },
 
   computed: {
     // convert the list of events into a map of lists keyed by date
     eventsMap() {
       const map = {};
-      this.events.forEach(e => (map[e.date] = map[e.date] || []).push(e));
+      this.events.forEach((e) => (map[e.date] = map[e.date] || []).push(e));
       return map;
-    }
+    },
   },
 
   mounted() {
@@ -235,8 +235,10 @@ export default {
 
     obtenerNombre() {
       this.$http
-        .get(`http://localhost:8000/get_nombre?id=${store.state.user.id}`)
-        .then(response => {
+        .get(
+          `http://${process.env.SERVER_IP}:8000/get_nombre?id=${store.state.user.id}`
+        )
+        .then((response) => {
           this.name = response.data.user.name;
         });
     },
@@ -245,8 +247,8 @@ export default {
       if (!parametro == 0) parametro = store.id;
 
       this.$http
-        .get(`http://localhost:8000/get_citas?id=${parametro}`)
-        .then(response => {
+        .get(`http://${process.env.SERVER_IP}:8000/get_citas?id=${parametro}`)
+        .then((response) => {
           var array = response.data.citas;
           var nombres = response.data.nombres;
           var cuis = response.data.cuis;
@@ -263,7 +265,7 @@ export default {
               time: cita["hora"],
               idPaciente: cita["idPaciente"],
               idUsuario: cita["idUsuario"],
-              duration: 35
+              duration: 35,
             };
 
             this.events.push(citaN);
@@ -292,7 +294,7 @@ export default {
       else if (mes == 10) return "Noviembre";
       else if (mes == 11) return "Diciembre";
       else return "Error en mes";
-    }
+    },
   },
 
   beforeMount() {
@@ -300,7 +302,7 @@ export default {
     this.get_citas(1);
     this.mes = this.getMes(fecha.getMonth());
     this.year = fecha.getFullYear();
-  }
+  },
 };
 </script>
 

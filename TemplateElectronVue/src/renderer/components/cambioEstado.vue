@@ -204,8 +204,8 @@
         methods:{
             ingresarNuevoEstado(){
                 if(this.name != '' && this.age != '' && this.register != '' && this.sexo != '' && this.fecha != null && this.actual != '' && this.cambio != '' && (this.name.length < 60) === true && (this.register.length < 60) === true && isNaN(this.register) === false){
-                    this.$http.post(`http://localhost:8000/cambioEstadoController/save?name=${this.name}&age=${this.age}&register=${this.register}&sexo=${this.sexo}&fecha=${this.fecha}&actual=${this.actual}&cambio=${this.cambio}&cui=${this.cui}`).then(
-                        this.$http.put(`http://localhost:8000/cambioEstadoController/updateEstadoPaciente?cui=${this.cui}&cambio=${this.cambio}`)  
+                    this.$http.post(`http://${process.env.SERVER_IP}:8000/cambioEstadoController/save?name=${this.name}&age=${this.age}&register=${this.register}&sexo=${this.sexo}&fecha=${this.fecha}&actual=${this.actual}&cambio=${this.cambio}&cui=${this.cui}`).then(
+                        this.$http.put(`http://${process.env.SERVER_IP}:8000/cambioEstadoController/updateEstadoPaciente?cui=${this.cui}&cambio=${this.cambio}`)  
                     ).then(response=>{
                         this.errorFaltanDatos = false;
                         this.savingSuccessful = true;

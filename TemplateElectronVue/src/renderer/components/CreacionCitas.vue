@@ -300,19 +300,19 @@ export default {
     typeOptions: [
       { text: "Diario", value: "day" },
       { text: "Semanal", value: "week" },
-      { text: "Mensual", value: "month" }
+      { text: "Mensual", value: "month" },
     ],
     events: [],
     doctors: {
-      1: "Randall Lou"
+      1: "Randall Lou",
     },
     users: [],
     patients: [],
-    textboxRules: [v => !!v || "Seleccione una persona"],
+    textboxRules: [(v) => !!v || "Seleccione una persona"],
     duracionRules: [
-      v => !!v || "Escriba una duración de cita en minutos.",
-      v => (v && v.length < 5) || "Verifique la duracion en citas.",
-      v => /^[0-9]*$/.test(v) || "Ingrese una duración de cita en números."
+      (v) => !!v || "Escriba una duración de cita en minutos.",
+      (v) => (v && v.length < 5) || "Verifique la duracion en citas.",
+      (v) => /^[0-9]*$/.test(v) || "Ingrese una duración de cita en números.",
     ],
     dummyDoctors: ["Randall Lou", "Cristina Zelaya", "Celeste Espell"],
     selectedPatient: "",
@@ -327,7 +327,7 @@ export default {
     selectedAppointment: "",
     deletingAppointment: "",
     selectedAppointmentType: "",
-    appointmentTypes: []
+    appointmentTypes: [],
   }),
   async mounted() {
     this.todayDate = new Date();
@@ -344,9 +344,9 @@ export default {
     // convert the list of events into a map of lists keyed by date
     eventsMap() {
       const map = {};
-      this.events.forEach(e => (map[e.date] = map[e.date] || []).push(e));
+      this.events.forEach((e) => (map[e.date] = map[e.date] || []).push(e));
       return map;
-    }
+    },
   },
   methods: {
     async getAllDataFromDb() {
@@ -368,15 +368,15 @@ export default {
     },
     getAppointments() {
       this.$http
-        .get("http://localhost:8000/citas")
-        .then(response => {
-          const e = response.data.data.map(appointment => {
+        .get(`http://${process.env.SERVER_IP}:8000/citas`)
+        .then((response) => {
+          const e = response.data.data.map((appointment) => {
             const user = this.users.find(
-              user => user.id == appointment.idUsuario
+              (user) => user.id == appointment.idUsuario
             );
             const userName = !!user ? user.name : "Usuario Desconocido";
             const patient = this.patients.find(
-              patient => patient.id == appointment.idPaciente
+              (patient) => patient.id == appointment.idPaciente
             );
             const patientName = !!patient ? patient.name : "Error";
 
@@ -390,15 +390,15 @@ export default {
               date: appointment.fecha,
               time: appointment.hora,
               duration: appointment.duracionCita,
-              appointmentType: appointment.tipoCitaID
+              appointmentType: appointment.tipoCitaID,
             };
           });
 
-          e.forEach(i => {
+          e.forEach((i) => {
             this.events.push(i);
           });
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
     },
@@ -447,7 +447,7 @@ export default {
         hora: this.selectedTime,
         duracionCita: this.selectedDuration,
         estado: 1,
-        tipoCitaID: this.selectedAppointmentType
+        tipoCitaID: this.selectedAppointmentType,
       };
 
       if (!this.validateAppointmentHour(data)) {
@@ -460,18 +460,18 @@ export default {
       // cerrar dialogo de creacion de cita
       this.dialogOpen = false;
       this.$http
-        .post("http://localhost:8000/citas", data)
-        .then(response => {
+        .post(`http://${process.env.SERVER_IP}:8000/citas`, data)
+        .then((response) => {
           console.log(response);
           if (response.data.success) {
             // empujar nuevo evento a array local de eventos
             // conseguir nombre de doctor
             const userName = this.users.filter(
-              u => u.id == this.selectedDoctor
+              (u) => u.id == this.selectedDoctor
             )[0].name;
             // conseguir nombre de paciente
             const patientName = this.patients.filter(
-              p => p.id == this.selectedPatient
+              (p) => p.id == this.selectedPatient
             )[0].name;
 
             this.events.push({
@@ -484,7 +484,7 @@ export default {
               patient: this.selectedPatient,
               appointmentType: this.selectedAppointmentType,
               userName: userName,
-              patientName: patientName
+              patientName: patientName,
             });
 
             this.infoDialogTitle = "¡Éxito!";
@@ -497,9 +497,9 @@ export default {
           this.selectedPatient = "";
           this.selectedDuration = "";
         })
-        .catch(err => {
+        .catch((err) => {
           let message = "";
-          Object.keys(err.response.data).forEach(key => {
+          Object.keys(err.response.data).forEach((key) => {
             // TODO: imprimir solo mensajes de tipo string
             if (key != "success") message += ` ${err.response.data[key]}`;
           });
@@ -530,7 +530,7 @@ export default {
         hora: this.selectedTime,
         duracionCita: this.selectedDuration,
         estado: 1,
-        tipoCitaID: this.selectedAppointmentType
+        tipoCitaID: this.selectedAppointmentType,
       };
 
       if (!this.validateAppointmentHour(data)) {
@@ -542,8 +542,11 @@ export default {
 
       // make http request
       this.$http
-        .put(`http://localhost:8000/citas/${this.selectedAppointment.id}`, data)
-        .then(response => {
+        .put(
+          `http://${process.env.SERVER_IP}:8000/citas/${this.selectedAppointment.id}`,
+          data
+        )
+        .then((response) => {
           if (response.data.success) {
             this.infoMessage = "Cita actualizada";
             this.infoDialog = true;
@@ -555,7 +558,7 @@ export default {
             this.selectedAppointment.patient = a.idPaciente;
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
     },
@@ -563,15 +566,17 @@ export default {
       this.updatingAppointment = false;
       this.infoDialog = false;
       this.$http
-        .delete(`http://localhost:8000/citas/${this.selectedAppointment.id}`)
-        .then(response => {
+        .delete(
+          `http://${process.env.SERVER_IP}:8000/citas/${this.selectedAppointment.id}`
+        )
+        .then((response) => {
           if (response.data.success) {
-            this.events = this.events.filter(i => {
+            this.events = this.events.filter((i) => {
               return i.id != this.selectedAppointment.id;
             });
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
     },
@@ -594,41 +599,43 @@ export default {
       this.dialogOpen = true;
     },
     obtenerUsuarios() {
-      this.$http.get("http://localhost:8000/users").then(response => {
-        const receivedUsers = response.data.users;
-        // obtener solo los doctores y no todos los usuarios
-        var x;
-        for (x in receivedUsers) {
-          if (receivedUsers[x].puesto == 2) {
-            this.users.push({
-              id: receivedUsers[x].id,
-              name: receivedUsers[x].name
-            });
+      this.$http
+        .get(`http://${process.env.SERVER_IP}:8000/users`)
+        .then((response) => {
+          const receivedUsers = response.data.users;
+          // obtener solo los doctores y no todos los usuarios
+          var x;
+          for (x in receivedUsers) {
+            if (receivedUsers[x].puesto == 2) {
+              this.users.push({
+                id: receivedUsers[x].id,
+                name: receivedUsers[x].name,
+              });
+            }
           }
-        }
-      });
+        });
     },
     obtenerPacientes() {
       this.$http
-        .get("http://localhost:8000/PacienteController/findAll")
-        .then(response => {
-          this.patients = response.data.Pacientes.map(i => {
+        .get(`http://${process.env.SERVER_IP}:8000/PacienteController/findAll`)
+        .then((response) => {
+          this.patients = response.data.Pacientes.map((i) => {
             return {
               id: i.id,
-              name: `${i.Apellido}, ${i.Nombre}, ${i.CUI}`
+              name: `${i.Apellido}, ${i.Nombre}, ${i.CUI}`,
             };
           });
         });
     },
     obtenerTipoCitas() {
       this.$http
-        .get("http://localhost:8000/tipos-citas")
+        .get(`http://${process.env.SERVER_IP}:8000/tipos-citas`)
         .then(({ data }) => {
           if (data.success) {
             this.appointmentTypes = data.data;
           }
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -696,7 +703,7 @@ export default {
       this.infoDialog = false;
       this.updatingAppointment = false;
       this.deletingAppointment = false;
-    }
-  }
+    },
+  },
 };
 </script>

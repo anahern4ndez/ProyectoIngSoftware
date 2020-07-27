@@ -529,11 +529,12 @@
                                         </template>
 
                                         <template slot="item" slot-scope="data">
-                                        <v-list-tile-content>
-                                            <v-list-tile-title v-html="` ${data.item.letra} ${data.item.entero} ${data.item.decimal} ${data.item.significado}`">
-                                            </v-list-tile-title>
-                                        </v-list-tile-content>
-                                        </template>
+  <v-list-tile-content>
+    <v-list-tile-title
+      v-html="` ${data.item.letra} ${data.item.entero} ${data.item.decimal} ${data.item.significado}`"
+    ></v-list-tile-title>
+  </v-list-tile-content>
+</template>
                                         
                                         </v-select>
 
@@ -1666,15 +1667,15 @@
                             class="elevation-1"
                         >
                             <template slot="items" slot-scope="props">
-                                <td>{{ props.item.Fecha }}</td>
-                                <td >{{ props.item.Na }}</td>
-                                <td >{{ props.item.K }}</td>
-                                <td >{{ props.item.Cl }}</td>
-                                <td >{{ props.item.HCO3 }}</td>
-                                <td >{{ props.item.BUN }}</td>
-                                <td >{{ props.item.Creatinina }}</td>
-                                <td >{{ props.item.Glucosa }}</td>
-                            </template>
+  <td>{{ props.item.Fecha }}</td>
+  <td>{{ props.item.Na }}</td>
+  <td>{{ props.item.K }}</td>
+  <td>{{ props.item.Cl }}</td>
+  <td>{{ props.item.HCO3 }}</td>
+  <td>{{ props.item.BUN }}</td>
+  <td>{{ props.item.Creatinina }}</td>
+  <td>{{ props.item.Glucosa }}</td>
+</template>
                         </v-data-table>
 
                         <br />
@@ -1685,13 +1686,13 @@
                             class="elevation-1"
                         >
                             <template slot="items" slot-scope="props">
-                                <td>{{ props.item.Fecha }}</td>
-                                <td >{{ props.item.Albumina }}</td>
-                                <td >{{ props.item.Colesterol }}</td>
-                                <td >{{ props.item.Calcio }}</td>
-                                <td >{{ props.item.Fosforo }}</td>
-                                <td >{{ props.item.PTH }}</td>
-                            </template>
+  <td>{{ props.item.Fecha }}</td>
+  <td>{{ props.item.Albumina }}</td>
+  <td>{{ props.item.Colesterol }}</td>
+  <td>{{ props.item.Calcio }}</td>
+  <td>{{ props.item.Fosforo }}</td>
+  <td>{{ props.item.PTH }}</td>
+</template>
                         </v-data-table>
                     </div>
 
@@ -1704,11 +1705,11 @@
                             class="elevation-1"
                         >
                             <template slot="items" slot-scope="props">
-                                <td>{{ props.item.Fecha }}</td>
-                                <td >{{ props.item.GBlancos }}</td>
-                                <td >{{ props.item.Hb }}</td>
-                                <td >{{ props.item.Ht }}</td>
-                            </template>
+  <td>{{ props.item.Fecha }}</td>
+  <td>{{ props.item.GBlancos }}</td>
+  <td>{{ props.item.Hb }}</td>
+  <td>{{ props.item.Ht }}</td>
+</template>
                         </v-data-table>
                     </div>
                 </div>
@@ -1941,1740 +1942,2052 @@
 </template>
 
 <script>
-
-function check(a){
-    if (a === -1){
-        return ""
-    } else {
-        return a
-    }
+function check(a) {
+  if (a === -1) {
+    return "";
+  } else {
+    return a;
+  }
 }
 
-import { store } from '../main';
-import { error } from 'util';
+import { store } from "../main";
+import { error } from "util";
 
 export default {
-    data: () => ({
-        mapaMedico: [],
-        cancelar: false,
-        errorMessage: false,
+  data: () => ({
+    mapaMedico: [],
+    cancelar: false,
+    errorMessage: false,
 
-        imageData: "",
+    imageData: "",
 
-        sangreHeaders: [
-            { text: 'Fecha', align: 'center', value: 'Fecha'},
-            { text: 'Na (136 - 144)', value: 'Na', sortable: false, align: 'center' },
-            { text: 'K (3.3 - 5)', value: 'K', sortable: false, align: 'center' },
-            { text: 'Cl (98 - 107)', value: 'Cl', sortable: false, align: 'center' },
-            { text: 'HCO3 (18 - 25)', value: 'HCO3', sortable: false, align: 'center' },
-            { text: 'BUN (7 - 20)', value: 'BUN', sortable: false, align: 'center' },
-            { text: 'Creatinina (0.5 - 1.1)', value: 'Creatinina', sortable: false, align: 'center' },
-            { text: 'Glucosa (60 - 115)', value: 'Glucosa', sortable: false, align: 'center' }
-        ],
+    sangreHeaders: [
+      { text: "Fecha", align: "center", value: "Fecha" },
+      { text: "Na (136 - 144)", value: "Na", sortable: false, align: "center" },
+      { text: "K (3.3 - 5)", value: "K", sortable: false, align: "center" },
+      { text: "Cl (98 - 107)", value: "Cl", sortable: false, align: "center" },
+      {
+        text: "HCO3 (18 - 25)",
+        value: "HCO3",
+        sortable: false,
+        align: "center",
+      },
+      { text: "BUN (7 - 20)", value: "BUN", sortable: false, align: "center" },
+      {
+        text: "Creatinina (0.5 - 1.1)",
+        value: "Creatinina",
+        sortable: false,
+        align: "center",
+      },
+      {
+        text: "Glucosa (60 - 115)",
+        value: "Glucosa",
+        sortable: false,
+        align: "center",
+      },
+    ],
 
-        sangreHeaders2: [
-            { text: 'Fecha', align: 'center', value: 'Fecha' },
-            { text: 'Albumina (3.5 - 4.6)', value: 'Albumina', sortable: false, align: 'center' },
-            { text: 'Colesterol (100 - 200)', value: 'Colesterol', sortable: false, align: 'center' },
-            { text: 'Calcio (8.8 - 10.4)', value: 'Calcio', sortable: false, align: 'center' },
-            { text: 'Fósforo (2.4 - 4.1)', value: 'Fosforo', sortable: false, align: 'center' },
-            { text: 'PTH (11 - 54)', value: 'PTH', sortable: false, align: 'center' }
-        ],
+    sangreHeaders2: [
+      { text: "Fecha", align: "center", value: "Fecha" },
+      {
+        text: "Albumina (3.5 - 4.6)",
+        value: "Albumina",
+        sortable: false,
+        align: "center",
+      },
+      {
+        text: "Colesterol (100 - 200)",
+        value: "Colesterol",
+        sortable: false,
+        align: "center",
+      },
+      {
+        text: "Calcio (8.8 - 10.4)",
+        value: "Calcio",
+        sortable: false,
+        align: "center",
+      },
+      {
+        text: "Fósforo (2.4 - 4.1)",
+        value: "Fosforo",
+        sortable: false,
+        align: "center",
+      },
+      { text: "PTH (11 - 54)", value: "PTH", sortable: false, align: "center" },
+    ],
 
-        
-        sangreValues: [],
+    sangreValues: [],
 
-        sangreValues2: [],
+    sangreValues2: [],
 
-        hematologiaHeaders: [
-            {
-            text: 'Fecha',
-            align: 'center',
-            value: 'Fecha'
-            },
-            { text: 'G. Blancos (3.7 - 10.1)', value: 'GBlancos', sortable: false, align: 'center' },
-            { text: 'Hb (14.1 - 17.5)', value: 'Hb', sortable: false, align: 'center' },
-            { text: 'Ht (43.1 - 51.5)', value: 'Ht', sortable: false, align: 'center' },
-        ],
-        hematologiaValues: [],
+    hematologiaHeaders: [
+      {
+        text: "Fecha",
+        align: "center",
+        value: "Fecha",
+      },
+      {
+        text: "G. Blancos (3.7 - 10.1)",
+        value: "GBlancos",
+        sortable: false,
+        align: "center",
+      },
+      {
+        text: "Hb (14.1 - 17.5)",
+        value: "Hb",
+        sortable: false,
+        align: "center",
+      },
+      {
+        text: "Ht (43.1 - 51.5)",
+        value: "Ht",
+        sortable: false,
+        align: "center",
+      },
+    ],
+    hematologiaValues: [],
 
-        hierroHeaders: [
-            {
-            text: 'Fecha',
-            align: 'center',
-            value: 'Fecha'
-            },
-            { text: 'Hierro (20 - 151)', value: 'Hierro', sortable: false, align: 'center' },
-            { text: 'TIBC (250 - 400)', value: 'TIBC', sortable: false, align: 'center' },
-            { text: '% sal (20 - 50)', value: 'sal', sortable: false, align: 'center' },
-            { text: 'Ferritina (10 - 60)', value: 'Ferritina', sortable: false, align: 'center' },
-            { text: 'Tranferrina (212 - 360)', value: 'Tranferrina', sortable: false, align: 'center' }
-        ],
-        hierroValues: [],
+    hierroHeaders: [
+      {
+        text: "Fecha",
+        align: "center",
+        value: "Fecha",
+      },
+      {
+        text: "Hierro (20 - 151)",
+        value: "Hierro",
+        sortable: false,
+        align: "center",
+      },
+      {
+        text: "TIBC (250 - 400)",
+        value: "TIBC",
+        sortable: false,
+        align: "center",
+      },
+      {
+        text: "% sal (20 - 50)",
+        value: "sal",
+        sortable: false,
+        align: "center",
+      },
+      {
+        text: "Ferritina (10 - 60)",
+        value: "Ferritina",
+        sortable: false,
+        align: "center",
+      },
+      {
+        text: "Tranferrina (212 - 360)",
+        value: "Tranferrina",
+        sortable: false,
+        align: "center",
+      },
+    ],
+    hierroValues: [],
 
-        orinaHeaders: [
-            {
-            text: 'Fecha',
-            align: 'center',
-            value: 'Fecha'
-            },
-            { text: 'Creatinuria (15 - 20)', value: 'Creatinuria', sortable: false, align: 'center' },
-            { text: 'Proteinuria (0 - 4)', value: 'Proteinuria', sortable: false, align: 'center' },
-            { text: 'Up/Cr (< 0.2)', value: 'Up', sortable: false, align: 'center' },
-            { text: 'Calcicluria (0 - 4)', value: 'Calcicluria', sortable: false, align: 'center' },
-            { text: 'UCa/Cr (< 0.21)', value: 'UCa', sortable: false, align: 'center' },
-            { text: 'UAc. Úrico (< 0.57)', value: 'urico', sortable: false, align: 'center' },
-            { text: 'CCr', value: 'CCr', sortable: false, align: 'center' },
-            { text: '-CCr', value: 'MCCr', sortable: false, align: 'center' },
-            { text: 'KT/V', value: 'KT', sortable: false, align: 'center' },
-            { text: 'PET', value: 'PET', sortable: false, align: 'center' },
-        ],
-        orinaValues: [
-            {}
-        ],
+    orinaHeaders: [
+      {
+        text: "Fecha",
+        align: "center",
+        value: "Fecha",
+      },
+      {
+        text: "Creatinuria (15 - 20)",
+        value: "Creatinuria",
+        sortable: false,
+        align: "center",
+      },
+      {
+        text: "Proteinuria (0 - 4)",
+        value: "Proteinuria",
+        sortable: false,
+        align: "center",
+      },
+      { text: "Up/Cr (< 0.2)", value: "Up", sortable: false, align: "center" },
+      {
+        text: "Calcicluria (0 - 4)",
+        value: "Calcicluria",
+        sortable: false,
+        align: "center",
+      },
+      {
+        text: "UCa/Cr (< 0.21)",
+        value: "UCa",
+        sortable: false,
+        align: "center",
+      },
+      {
+        text: "UAc. Úrico (< 0.57)",
+        value: "urico",
+        sortable: false,
+        align: "center",
+      },
+      { text: "CCr", value: "CCr", sortable: false, align: "center" },
+      { text: "-CCr", value: "MCCr", sortable: false, align: "center" },
+      { text: "KT/V", value: "KT", sortable: false, align: "center" },
+      { text: "PET", value: "PET", sortable: false, align: "center" },
+    ],
+    orinaValues: [{}],
 
-        otrosHeaders: [
-            {
-            text: 'Fecha',
-            align: 'center',
-            value: 'Fecha'
-            },
-            { text: 'Biopsia', value: 'Biopsia', sortable: false, align: 'center' },
-            { text: 'US', value: 'US', sortable: false, align: 'center' },
-            { text: 'Cambio de status', value: 'status', sortable: false, align: 'center' }
-        ],
-        otrosValues: [
-            {}
-        ],
+    otrosHeaders: [
+      {
+        text: "Fecha",
+        align: "center",
+        value: "Fecha",
+      },
+      { text: "Biopsia", value: "Biopsia", sortable: false, align: "center" },
+      { text: "US", value: "US", sortable: false, align: "center" },
+      {
+        text: "Cambio de status",
+        value: "status",
+        sortable: false,
+        align: "center",
+      },
+    ],
+    otrosValues: [{}],
 
-        enfermedad: '',
-        dialog: false,
-        guardando: false,
-        verComentarios: false,
+    enfermedad: "",
+    dialog: false,
+    guardando: false,
+    verComentarios: false,
 
-        update: false,
-        hasClickedVerMas: false,
-        sticky: false,
-        doctorNames: {},
-        
-        fisico: ["Peso", "Talla", "IMC"],
-        vital: ["Presión arterial", "Pulso cardíaco"],
-        tiempo: ["1 mes", "2 meses", "6 meses", "1 año"],
+    update: false,
+    hasClickedVerMas: false,
+    sticky: false,
+    doctorNames: {},
 
-        paciente: {
-            nombre: '',
-            apellido: '',
-            CUI: 0,
-            Nombre_de_padre: "",
-            Nombre_de_madre: "",
-            Procedencia: "",
-            Telefono: "",
-            Grupo_De_Sangre: "",
-            Estudia: "",
-            Transfusiones: "",
-            fechaDeNacimiento: null,
-            sexo:0,
-            meses:0,
-            years:0
-        },
+    fisico: ["Peso", "Talla", "IMC"],
+    vital: ["Presión arterial", "Pulso cardíaco"],
+    tiempo: ["1 mes", "2 meses", "6 meses", "1 año"],
 
-        datos_generales: {
-            Peso: "",
-            kg_perc: "",
-            Talla: "",
-            cms_perc: "",
-            PA: "",
-            Percentil: ""
-        },
-
-        //paciente: "Juan Garcia",
-        //Variables para inputs
-        comentario: "",
-        
-        bcg: 0,
-        bcg1: false,
-        bcg2: false,
-        bcg3: false,
-        bcgRef: false,
-        poliovirus: 0,
-        poliovirus1: false,
-        poliovirus2: false,
-        poliovirus3: false,
-        poliovirusRef: false,
-        hepatitisA: 0,
-        hepatitisA1: false,
-        hepatitisA2: false,
-        hepatitisA3: false,
-        hepatitisARef: false,
-        hepatitisB: 0,
-        hepatitisB1: false,
-        hepatitisB2: false,
-        hepatitisB3: false,
-        hepatitisBRef: false,
-        neumococo: 0,
-        neumococo1: false,
-        neumococo2: false,
-        neumococo3: false,
-        neumococoRef: false,
-        influenza: 0,
-        influenza1: false,
-        influenza2: false,
-        influenza3: false,
-        influenzaRef: false,
-        DPT: 0,
-        DPT1: false,
-        DPT2: false,
-        DPT3: false,
-        DPTRef: false,
-        SPR: 0,
-        SPR1: false,
-        SPR2: false,
-        SPR3: false,
-        SPRRef: false,
-        Sindrome_Clinico_Presentacion: 1,
-        Dx_Definitivo: "",
-        Dx_Asociado: "",
-        dxs: undefined,
-        historia: "",
-
-        //Medicamentos
-
-        misMedicamentos: {
-            prednisona: {
-                estado: false,
-                mg: "",
-                frecuencia: ""
-            },
-            cyac: {
-                estado: false,
-                mg: "",
-                frecuencia: ""
-            },
-            tac: {
-                estado: false,
-                mg: "",
-                frecuencia: ""
-            },
-            mmf: {
-                estado: false,
-                mg: "",
-                frecuencia: ""
-            },
-            aza: {
-                estado: false,
-                mg: "",
-                frecuencia: ""
-            },
-            cfm: {
-                estado: false,
-                mg: "",
-                frecuencia: ""
-            },
-            enalapril: {
-                estado: false,
-                mg: "",
-                frecuencia: ""
-            },
-            losartan: {
-                estado: false,
-                mg: "",
-                frecuencia: ""
-            },
-            amlodipina: {
-                estado: false,
-                mg: "",
-                frecuencia: ""
-            },
-            citratoNa: {
-                estado: false,
-                mg: "",
-                frecuencia: ""
-            },
-            citratoK: {
-                estado: false,
-                mg: "",
-                frecuencia: ""
-            },
-            furosemida: {
-                estado: false,
-                mg: "",
-                frecuencia: ""
-            },
-            alfacalcidol: {
-                estado: false,
-                mg: "",
-                frecuencia: ""
-            },
-            CaCO3: {
-                estado: false,
-                mg: "",
-                frecuencia: ""
-            },
-            epo: {
-                estado: false,
-                mg: "",
-                frecuencia: ""
-            },
-            fe: {
-                estado: false,
-                mg: "",
-                frecuencia: ""
-            },
-            cefadroxilo: {
-                estado: false,
-                mg: "",
-                frecuencia: ""
-            }
-        },
-
-        //Laboratorios
-        resultados_de_laboratorio: {
-            Na: "",
-            Cl: "",
-            BUN: "",
-            Glu: "",
-            K: "",
-            HCO: "",
-            Creat: "",
-            WB: "",
-            Col: "",
-            Alb: "",
-            HB: "",
-            HT: "",
-            Ca: "",
-            P: "",
-            MG: "",
-            PTL: "",
-            EGO: "",
-            pH: "",
-            Glu2: "",
-            Prot: "",
-            Hem: "",
-            Gr: "",
-            GB: "",
-            Cil: "",
-            URO: "",
-            PTH: "",
-            Ferritina: ""
-        },        
-
-        includeFiles: "",
-
-        Evaluacion_Medica: "",
-        Evaluacion_Psicologica: "",
-        Evaluacion_Trabajo_Social: "",
-        Evaluacion_Nutricional: "",
-        Evaluacion_Farmacologica: "",
-
-        Plan_Medico: "",
-        Plan_Psicologica: "",
-        Plan_Trabajo_Social: "",
-        Plan_Nutricional: "",
-        Plan_Farmacologico: "",
-
-        examen_fisico: {
-            COONG: "",
-            corazon: "",
-            pulmones: "",
-            abdomen: "",
-            genitales: "",
-            extremidades: "",
-            piel: "",
-            sn: "",
-            otros: ""
-        },
-
-        examen_fisico_check: {
-            corazon: false,
-            pulmones: false,
-            abdomen: false,
-            genitales: false,
-            extremidades: false,
-            piel: false,
-            sn: false,
-            otros: false
-        },
-
-        todaysDate: "",
-        fecha: "",
-        nuevoComentario: false,
-        horaActual: "",
-        idConsulta: 0,
-        hasComments: false,
-        allComments: [],
-        showComments: [],
-        cardComments: [],
-
-        tabs: ["Consulta", "Mapa médico"],
-
-        datos: [],
-        sindromes: [],
-        inputRules: [
-          (v) => !!v || 'Se requiere el campo',
-        ],
-        minRules:[
-            (v) => !!v && parseInt(v) > 0   || 'El número debe de ser mayor a 0'
-        ],
-        neRules:[
-            (v) => !!v && parseInt(v) >= 0   || 'El número debe de ser positivo'
-        ]
-        
-    }),
-
-    mounted() {
-        this.dialog = true
-
-        const date = new Date()
-        this.fecha = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
-        this.todaysDate = date.getDate() + "-" +   + (date.getMonth() + 1) + "-" + date.getFullYear()
-
-        // store.idPaciente = this.$route.params.idPaciente
-
-        const data = {
-            ID: store.idPaciente // Aqui va el ID del paciente
-        };
-        this.$http.get("http://localhost:8000/dxs").then(response => {
-            this.dxs = response.data.dxs;
-        });
-
-        const vacunm = {
-            idPaciente: store.idPaciente,
-        }
-
-        this.$http.post(`http://localhost:8000/vacunaController/findOne`, vacunm).then(response => {
-            if (response.data.Consulta != undefined) {
-                this.bcg = response.data.Consulta.BCG
-                this.poliovirus = response.data.Consulta.Poliovirus
-                this.hepatitisA = response.data.Consulta.HepatitisA
-                this.hepatitisB = response.data.Consulta.HepatitisB
-                this.neumococo = response.data.Consulta.Neumococo
-                this.influenza = response.data.Consulta.Influenza
-                this.DPT = response.data.Consulta.DPT
-                this.SPR = response.data.Consulta.SPR
-            }
-        }).then(() => {
-            this.setVacunaData()
-        })
-
-        this.$http.post(`http://localhost:8000/PacienteController/findById`, data).then(response => {
-
-            if(response.data.Paciente[0] == null){
-                
-            }else{
-                this.paciente.nombre = response.data.Paciente[0].Nombre;
-                this.paciente.apellido = response.data.Paciente[0].Apellido;
-                this.paciente.CUI = response.data.Paciente[0].CUI;
-                this.paciente.Nombre_de_padre = response.data.Paciente[0].Nombre_de_padre;
-                this.paciente.Nombre_de_madre = response.data.Paciente[0].Nombre_de_madre;
-                this.paciente.Procedencia = response.data.Paciente[0].procedencia.Departamento;
-                this.paciente.Telefono = response.data.Paciente[0].Telefono;
-                this.paciente.Grupo_De_Sangre = response.data.Paciente[0].tipo_de__sangre.significado;
-                this.paciente.Estudia = response.data.Paciente[0].estudia.significado;
-                this.paciente.Transfusiones = response.data.Paciente[0].transfusiones.significado;
-
-                this.paciente.sexo = response.data.Paciente[0].Sexo;
-                this.paciente.fechaDeNacimiento = response.data.Paciente[0].Fecha_de_nacimiento;
-                this.computeAge(this.paciente.fechaDeNacimiento);
-
-                this.Sindrome_Clinico_Presentacion = response.data.Paciente[0].Sindrome_Clinico_Presentacion;
-
-                this.imageData = response.data.Paciente[0].Imagen
-            }
-            
-
-        }).then(() => {
-            const data2 = {
-                cui: this.paciente.CUI,
-                fecha: this.fecha
-            }
-            this.$http.post(`http://localhost:8000/ConsultaController/findOne`, data2).then(response => {
-                this.update = response.data.success
-                
-            }).then(() => {
-                if(this.update){
-
-                    this.$http.post(`http://localhost:8000/ConsultaController/findAll`, data2).then(response => {
-                        this.datos_generales.Peso = response.data.Consulta[0].peso
-                        this.datos_generales.Talla = response.data.Consulta[0].talla
-                        this.datos_generales.PA = response.data.Consulta[0].pa
-                        
-                        this.Dx_Definitivo = response.data.Consulta[0].Dx_Definitivo
-                        this.Dx_Asociado = response.data.Consulta[0].Dx_Asociados
-                        this.historia = response.data.Consulta[0].historia
-
-                        this.Evaluacion_Medica = response.data.Consulta[0].evaluacion_medica
-                        this.Plan_Medico = response.data.Consulta[0].plan_medico
-                        this.Evaluacion_Psicologica = response.data.Consulta[0].evaluacion_psicologica
-                        this.Plan_Psicologica = response.data.Consulta[0].plan_psicologico
-                        this.Evaluacion_Trabajo_Social = response.data.Consulta[0].evaluacion_trabajo_social
-                        this.Plan_Trabajo_Social = response.data.Consulta[0].plan_trabajo_social
-                        this.Evaluacion_Nutricional = response.data.Consulta[0].evaluacion_nutricional
-                        this.Plan_Nutricional = response.data.Consulta[0].plan_nutricional
-                        this.Evaluacion_Farmacologica = response.data.Consulta[0].evaluacion_farmacologica
-                        this.Plan_Farmacologico = response.data.Consulta[0].plan_farmacologico
-
-                        this.resultados_de_laboratorio = JSON.parse(response.data.Consulta[0].resultados_laboratorio)
-                        for(var key in this.resultados_de_laboratorio){
-                            if(this.resultados_de_laboratorio[key] == 0){
-                                this.resultados_de_laboratorio[key] = ""
-                            }
-                        }
-
-                        const jsonTemp = JSON.parse(response.data.Consulta[0].examen_fisico)
-                        
-                        for(var key in this.examen_fisico){
-
-                            if(jsonTemp.hasOwnProperty(key)){
-                                this.examen_fisico[key] = jsonTemp[key]
-                                
-                                if(key != "coong"){
-                                    this.examen_fisico_check[key] = true
-                                }
-                            }else{
-                                this.examen_fisico[key] = ""
-                                this.examen_fisico_check[key] = false
-                            }
-                        }
-
-                        const jsonTemp2 = JSON.parse(response.data.Consulta[0].medicamento)
-                        for(var key in this.misMedicamentos){
-                            if(jsonTemp2.hasOwnProperty(key)){
-                                this.misMedicamentos[key].mg = jsonTemp2[key].mg
-                                this.misMedicamentos[key].frecuencia = jsonTemp2[key].frecuencia
-                                this.misMedicamentos[key].estado = true
-                            }else{
-                                this.misMedicamentos[key].mg = ""
-                                this.misMedicamentos[key].frecuencia = ""
-                                this.misMedicamentos[key].estado = false
-                            }
-                        }
-                    })
-                }
-            }).then(() => {
-                const data3 = {
-                    CUI: this.paciente.CUI
-                }
-
-                this.$http.post(`http://localhost:8000/ComentarioController/findAll`, data3).then(response => {
-                    if(response.data.Comentarios.length > 0){
-                        this.hasComments = true
-                        this.allComments.push(JSON.parse(response.data.Comentarios[0].comentarios))
-
-                        this.orderComments(this.allComments)
-                    }else{
-                        this.hasComments = false
-                    }
-                }).then(() => {
-                    this.getDoctorNames()
-                }).then(() => {
-                    this.dialog = false;
-                })
-            })
-        }).then(() => {
-            this.$http.get(`http://localhost:8000/sindromeController/getAll`).then(response => {
-                if(response.data.Sindrome[0] == null){
-                    
-                }else{
-                    
-                    this.sindromes = response.data.Sindrome;
-                }
-            });
-        }).then(() => {
-            const lab = {
-                cui: String(this.paciente.CUI)
-            }
-            this.$http.post(`http://localhost:8000/MapaController/getMapaMedico`, lab).then(response => {
-                this.mapaMedico = response.data.data
-                console.table(this.mapaMedico)
-            }).then(() => {
-                this.mapaMedico.map((datos, index) => {
-                    // console.log(index, datos)
-                    // const mediData = JSON.parse(datos.medicamento)
-                    // const labData = JSON.parse(datos.resultados_laboratorio)
-
-                    this.sangreValues.push({
-                        Fecha: datos.fecha,
-                        Na: datos.na,
-                        K: datos.k,
-                        Cl: datos.cl,
-                        HCO3: datos.hco,
-                        BUN: datos.bun,
-                        Creatinina: datos.creatinina,
-                        Glucosa: datos.glucosa
-                    })
-
-                    this.sangreValues2.push({
-                        Fecha: datos.fecha,
-                        Albumina: datos.albumina,
-                        Colesterol: datos.colesterol,
-                        Calcio: datos.calcio,
-                        Fosforo: datos.fosforo,
-                        PTH: datos.pth
-                    })
-
-                    this.hematologiaValues.push({
-                        Fecha: datos.fecha,
-                        GBlancos: datos.globulosBlancos,
-                        Hb: datos.hb,
-                        Ht: datos.ht
-                    })
-                })
-            })
-        }).catch(error => {
-            this.dialog = false;
-        });
-
+    paciente: {
+      nombre: "",
+      apellido: "",
+      CUI: 0,
+      Nombre_de_padre: "",
+      Nombre_de_madre: "",
+      Procedencia: "",
+      Telefono: "",
+      Grupo_De_Sangre: "",
+      Estudia: "",
+      Transfusiones: "",
+      fechaDeNacimiento: null,
+      sexo: 0,
+      meses: 0,
+      years: 0,
     },
-    methods: {
-        cancelando () {
-            this.$router.push("/menu-principal");
-        },
 
-        computeAge(datePicked){
-            var fechaActual = new Date();
-            var aComputar = new Date(datePicked);
-            this.paciente.years = fechaActual.getFullYear() - aComputar.getFullYear();
-            this.paciente.meses = fechaActual.getMonth() - aComputar.getMonth();
-        },
-
-        orderComments (comments) {
-            var datos = []
-            comments.map(obj => {
-                for(var key in obj){
-                    for(var key2 in obj[key]){
-                        for(var i = 0; i<obj[key][key2].hora.length; i++){
-
-                            var temp = {}
-                            
-                            temp["doctor"] = key2
-                            temp["hora"] = obj[key][key2].hora[i]
-                            temp["comentario"] = obj[key][key2].comentario[i]
-                            this.showComments.push(temp)
-                        }
-                    }
-                }
-            })
-
-            this.showComments.sort(function (d1, d2) {
-                return new Date(d1.hora) - new Date(d2.hora)
-            })
-        },
-
-        getDoctorNames () {
-            let name = ""
-
-            this.showComments.map(array => {
-                const data = {
-                    ID: array.doctor
-                }
-
-                this.$http.post(`http://localhost:8000/ExampleController/findById`, data).then(response => {
-                    name = response.data.User
-                }).then(() => {
-                    this.doctorNames[array.doctor] = name
-                })
-            })
-        },
-
-        beautyComments () {
-            this.showComments.forEach(element => {
-                if(this.checkExistence(this.cardComments, element.hora)){
-                    const pos = this.foundPosition(this.cardComments, element.hora)
-                    
-                    const f = element.hora.split(" ")
-                    const datos = {
-                        doctor: this.doctorNames[element.doctor],
-                        hora: f[1],
-                        comentario: element.comentario
-                    }
-
-                    this.cardComments[pos].data.push(datos)
-                }else{
-                    const fechas = {
-                        fecha: "",
-                        data: []
-                    }
-
-                    const f = element.hora.split(" ")
-                    const datos = {
-                        doctor: this.doctorNames[element.doctor],
-                        hora: f[1],
-                        comentario: element.comentario
-                    }
-
-                    fechas.fecha = f[0]
-                    fechas.data.push(datos)
-
-                    this.cardComments.push(fechas)
-                }
-            });
-        },
-
-        checkExistence (lista, fecha) {
-            const f = new Date(fecha)
-            let found = false
-
-            lista.forEach(element => {
-                const newF = new Date(element.fecha)
-                if(newF.getMonth() === f.getMonth() && newF.getDate() === f.getDate() && newF.getFullYear() === f.getFullYear()){
-                    found = true
-                }
-            });
-            return found
-        },
-
-        foundPosition (lista, fecha) {
-            const f = new Date(fecha)
-            let pos = 0
-
-            for(let i = 0; i < lista.length; i++) {
-                const newF = new Date(lista[i].fecha)
-                if(newF.getMonth() === f.getMonth() && newF.getDay() === f.getDay() && newF.getFullYear() === f.getFullYear()){
-                    pos = i
-                    break
-                }
-            }
-
-            return pos
-        },
-        take() {
-            html2canvas(document.querySelector("#capture")).then(canvas => {
-            document.body.appendChild(canvas)
-            });
-        },
-        verMas () {
-            if(!this.hasClickedVerMas){
-                this.beautyComments()
-                this.hasClickedVerMas = true
-            }
-            this.verComentarios = true
-        },
-        
-        agregarComentario(){
-            
-            if(this.comentario != ""){
-                const d = new Date()
-                this.horaActual = d.getMonth()+1 + "/" + d.getDate() + "/" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds()
-                // console.log(this.horaActual)
-                this.nuevoComentario = true
-            }else{
-                this.nuevoComentario = false
-            }
-        },        
-
-        agregarEnfermedad(){
-            let s =  this.enfermedad.letra + " "
-            s = s + this.enfermedad.entero
-            if (this.enfermedad.decimal != '' && this.enfermedad.entero != '.')
-                s = s +"."
-            if (this.enfermedad.decimal === 0 && this.enfermedad.entero != '.')
-                s = s +"."
-            s = s + this.enfermedad.decimal
-            s = s + " " + this.enfermedad.significado
-
-            this.Dx_Asociado = this.Dx_Asociado + s +"\n"
-        
-        },
-        pesoPercentil(){
-            const data = {
-                year : parseInt(this.paciente.years),
-                meses : parseInt(this.paciente.meses),
-                sexo : parseInt(this.paciente.sexo),
-                peso : parseFloat(this.datos_generales.Peso)
-            };
-
-            this.$http.post("http://localhost:8000/percentilPeso", data).then(response => {
-                if (response.data.encontrado){
-                    this.datos_generales.kg_perc = response.data.percentil.percentil;
-                } else {
-                    this.datos_generales.kg_perc = "No aplica";
-                }
-            });
-            if (this.datos_generales.Talla > 0){
-                const data = {
-                talla : parseFloat(this.datos_generales.Talla),
-                sexo : parseInt(this.paciente.sexo),
-                peso : parseFloat(this.datos_generales.Peso)
-                }
-
-                
-
-                this.$http.post("http://localhost:8000/percentilPesoTalla", data).then(response => {
-                
-                if (response.data.encontrado){
-                    this.datos_generales.Percentil = response.data.percentil.percentil;
-                } else {
-                    this.datos_generales.Percentil = "No aplica";
-                }
-                });
-            }
-            
-        },
-
-        tallaPercentil(){
-            const data = {
-                year : parseInt(this.paciente.years),
-                meses : parseInt(this.paciente.meses),
-                sexo : parseInt(this.paciente.sexo),
-                talla : parseFloat(this.datos_generales.Talla)
-            
-            };
-            this.$http.post("http://localhost:8000/percentilTalla", data).then(response => {
-                if (response.data.encontrado){
-                    this.datos_generales.cms_perc = response.data.percentil.percentil;
-                } else {
-                    this.datos_generales.cms_perc = "No aplica";
-                }
-            });
-            if (this.datos_generales.Peso > 0){
-                const data = {
-                talla : parseFloat(this.datos_generales.Talla),
-                sexo : parseInt(this.paciente.sexo),
-                peso : parseFloat(this.datos_generales.Peso)
-                }
-
-                
-
-                this.$http.post("http://localhost:8000/percentilPesoTalla", data).then(response => {
-                
-                if (response.data.encontrado){
-                    this.datos_generales.Percentil = response.data.percentil.percentil;
-                } else {
-                    this.datos_generales.Percentil = "No aplica";
-                }
-                });
-            }
-        },
-
-        setVacunaData() {
-
-            if (this.bcg === 4) {
-                this.bcgRef = true
-                this.bcg3 = true
-                this.bcg2 = true
-                this.bcg1 = true
-            } else if (this.bcg === 3) {
-                this.bcgRef = false
-                this.bcg3 = true
-                this.bcg2 = true
-                this.bcg1 = true
-            } else if (this.bcg === 2) {
-                this.bcgRef = false
-                this.bcg3 = false
-                this.bcg2 = true
-                this.bcg1 = true
-            } else if (this.bcg === 1) {
-                this.bcgRef = false
-                this.bcg3 = false
-                this.bcg2 = false
-                this.bcg1 = true
-            } else if (this.bcg === 0) {
-                this.bcgRef = false
-                this.bcg3 = false
-                this.bcg2 = false
-                this.bcg1 = false
-            }
-
-            if (this.poliovirus === 4) {
-                this.poliovirusRef = true
-                this.poliovirus3 = true
-                this.poliovirus2 = true
-                this.poliovirus1 = true
-            } else if (this.poliovirus === 3) {
-                this.poliovirusRef = false
-                this.poliovirus3 = true
-                this.poliovirus2 = true
-                this.poliovirus1 = true
-            } else if (this.poliovirus === 2) {
-                this.poliovirusRef = false
-                this.poliovirus3 = false
-                this.poliovirus2 = true
-                this.poliovirus1 = true
-            } else if (this.poliovirus === 1) {
-                this.poliovirusRef = false
-                this.poliovirus3 = false
-                this.poliovirus2 = false
-                this.poliovirus1 = true
-            } else if (this.poliovirus === 0) {
-                this.poliovirusRef = false
-                this.poliovirus3 = false
-                this.poliovirus2 = false
-                this.poliovirus1 = false
-            }
-
-            if (this.hepatitisA === 4) {
-                this.hepatitisARef = true
-                this.hepatitisA3 = true
-                this.hepatitisA2 = true
-                this.hepatitisA1 = true
-            } else if (this.hepatitisA === 3) {
-                this.hepatitisARef = false
-                this.hepatitisA3 = true
-                this.hepatitisA2 = true
-                this.hepatitisA1 = true
-            } else if (this.hepatitisA === 2) {
-                this.hepatitisARef = false
-                this.hepatitisA3 = false
-                this.hepatitisA2 = true
-                this.hepatitisA1 = true
-            } else if (this.hepatitisA === 1) {
-                this.hepatitisARef = false
-                this.hepatitisA3 = false
-                this.hepatitisA2 = false
-                this.hepatitisA1 = true
-            } else if (this.hepatitisA === 0) {
-                this.hepatitisARef = false
-                this.hepatitisA3 = false
-                this.hepatitisA2 = false
-                this.hepatitisA1 = false
-            }
-
-            if (this.hepatitisB === 4) {
-                this.hepatitisBRef = true
-                this.hepatitisB3 = true
-                this.hepatitisB2 = true
-                this.hepatitisB1 = true
-            } else if (this.hepatitisB === 3) {
-                this.hepatitisBRef = false
-                this.hepatitisB3 = true
-                this.hepatitisB2 = true
-                this.hepatitisB1 = true
-            } else if (this.hepatitisB === 2) {
-                this.hepatitisBRef = false
-                this.hepatitisB3 = false
-                this.hepatitisB2 = true
-                this.hepatitisB1 = true
-            } else if (this.hepatitisB === 1) {
-                this.hepatitisBRef = false
-                this.hepatitisB3 = false
-                this.hepatitisB2 = false
-                this.hepatitisB1 = true
-            } else if (this.hepatitisB === 0) {
-                this.hepatitisBRef = false
-                this.hepatitisB3 = false
-                this.hepatitisB2 = false
-                this.hepatitisB1 = false
-            }
-
-            if (this.neumococo === 4) {
-                this.neumococoRef = true
-                this.neumococo3 = true
-                this.neumococo2 = true
-                this.neumococo1 = true
-            } else if (this.neumococo === 3) {
-                this.neumococoRef = false
-                this.neumococo3 = true
-                this.neumococo2 = true
-                this.neumococo1 = true
-            } else if (this.neumococo === 2) {
-                this.neumococoRef = false
-                this.neumococo3 = false
-                this.neumococo2 = true
-                this.neumococo1 = true
-            } else if (this.neumococo === 1) {
-                this.neumococoRef = false
-                this.neumococo3 = false
-                this.neumococo2 = false
-                this.neumococo1 = true
-            } else if (this.neumococo === 0) {
-                this.neumococoRef = false
-                this.neumococo3 = false
-                this.neumococo2 = false
-                this.neumococo1 = false
-            }
-            
-            if (this.influenza === 4) {
-                this.influenzaRef = true
-                this.influenza3 = true
-                this.influenza2 = true
-                this.influenza1 = true
-            } else if (this.influenza === 3) {
-                this.influenzaRef = false
-                this.influenza3 = true
-                this.influenza2 = true
-                this.influenza1 = true
-            } else if (this.influenza === 2) {
-                this.influenzaRef = false
-                this.influenza3 = false
-                this.influenza2 = true
-                this.influenza1 = true
-            } else if (this.influenza === 1) {
-                this.influenzaRef = false
-                this.influenza3 = false
-                this.influenza2 = false
-                this.influenza1 = true
-            } else if (this.influenza === 0) {
-                this.influenzaRef = false
-                this.influenza3 = false
-                this.influenza2 = false
-                this.influenza1 = false
-            }
-            
-            if (this.DPT === 4) {
-                this.DPTRef = true
-                this.DPT3 = true
-                this.DPT2 = true
-                this.DPT1 = true
-            } else if (this.DPT === 3) {
-                this.DPTRef = false
-                this.DPT3 = true
-                this.DPT2 = true
-                this.DPT1 = true
-            } else if (this.DPT === 2) {
-                this.DPTRef = false
-                this.DPT3 = false
-                this.DPT2 = true
-                this.DPT1 = true
-            } else if (this.DPT === 1) {
-                this.DPTRef = false
-                this.DPT3 = false
-                this.DPT2 = false
-                this.DPT1 = true
-            } else if (this.DPT === 0) {
-                this.DPTRef = false
-                this.DPT3 = false
-                this.DPT2 = false
-                this.DPT1 = false
-            }
-
-            if (this.SPR === 4) {
-                this.SPRRef = true
-                this.SPR3 = true
-                this.SPR2 = true
-                this.SPR1 = true
-            } else if (this.SPR === 3) {
-                this.SPRRef = false
-                this.SPR3 = true
-                this.SPR2 = true
-                this.SPR1 = true
-            } else if (this.SPR === 2) {
-                this.SPRRef = false
-                this.SPR3 = false
-                this.SPR2 = true
-                this.SPR1 = true
-            } else if (this.SPR === 1) {
-                this.SPRRef = false
-                this.SPR3 = false
-                this.SPR2 = false
-                this.SPR1 = true
-            } else if (this.SPR === 0) {
-                this.SPRRef = false
-                this.SPR3 = false
-                this.SPR2 = false
-                this.SPR1 = false
-            }
-        },
-
-        getVacunaData () {
-            if (this.bcgRef) {
-                this.bcg = 4
-            } else if (this.bcg3) {
-                this.bcg = 3
-            } else if (this.bcg2) {
-                this.bcg = 2
-            } else if (this.bcg1) {
-                this.bcg = 1
-            } else {
-                this.bcg = 0
-            }
-
-            if (this.poliovirusRef) {
-                this.poliovirus = 4
-            } else if (this.poliovirus3) {
-                this.poliovirus = 3
-            } else if (this.poliovirus2) {
-                this.poliovirus = 2
-            } else if (this.poliovirus1) {
-                this.poliovirus = 1
-            } else {
-                this.poliovirus = 0
-            }
-
-            if (this.hepatitisARef) {
-                this.hepatitisA = 4
-            } else if (this.hepatitisA3) {
-                this.hepatitisA = 3
-            } else if (this.hepatitisA2) {
-                this.hepatitisA = 2
-            } else if (this.hepatitisA1) {
-                this.hepatitisA = 1
-            } else {
-                this.hepatitisA = 0
-            }
-
-            if (this.hepatitisBRef) {
-                this.hepatitisB = 4
-            } else if (this.hepatitisB3) {
-                this.hepatitisB = 3
-            } else if (this.hepatitisB2) {
-                this.hepatitisB = 2
-            } else if (this.hepatitisB1) {
-                this.hepatitisB = 1
-            } else {
-                this.hepatitisB = 0
-            }
-
-            if (this.neumococoRef) {
-                this.neumococo = 4
-            } else if (this.neumococo3) {
-                this.neumococo = 3
-            } else if (this.neumococo2) {
-                this.neumococo = 2
-            } else if (this.neumococo1) {
-                this.neumococo = 1
-            } else {
-                this.neumococo = 0
-            }
-
-            if (this.influenzaRef) {
-                this.influenza = 4
-            } else if (this.influenza3) {
-                this.influenza = 3
-            } else if (this.influenza2) {
-                this.influenza = 2
-            } else if (this.influenza1) {
-                this.influenza = 1
-            } else {
-                this.influenza = 0
-            }
-
-            if (this.DPTRef) {
-                this.DPT = 4
-            } else if (this.DPT3) {
-                this.DPT = 3
-            } else if (this.DPT2) {
-                this.DPT = 2
-            } else if (this.DPT1) {
-                this.DPT = 1
-            } else {
-                this.DPT = 0
-            }
-
-            if (this.SPRRef) {
-                this.SPR = 4
-            } else if (this.SPR3) {
-                this.SPR = 3
-            } else if (this.SPR2) {
-                this.SPR = 2
-            } else if (this.SPR1) {
-                this.SPR = 1
-            } else {
-                this.SPR = 0
-            }
-        },
-
-        guardar() {
-
-            this.agregarComentario()
-
-            if (this.datos_generales.Talla === "" || this.datos_generales.Peso === "" || this.datos_generales.PA === "")
-                this.errorMessage = true
-            else {
-                this.errorMessage = false
-
-                this.getVacunaData()
-                const vacunm = {
-                    fecha: this.fecha,
-                    idPaciente: store.idPaciente,
-                    BCG: this.bcg,
-                    Poliovirus: this.poliovirus,
-                    HepatitisA: this.hepatitisA,
-                    HepatitisB: this.hepatitisB,
-                    Neumococo: this.neumococo,
-                    Influenza: this.influenza,
-                    DPT: this.DPT,
-                    SPR: this.SPR
-                }
-
-                this.guardando = true
-                let medicamento = {}
-                
-                if(this.misMedicamentos.prednisona.estado){
-                    medicamento = Object.assign(medicamento, {"prednisona": {
-                        "mg": Number( this.misMedicamentos.prednisona.mg),
-                        "frecuencia": Number( this.misMedicamentos.prednisona.frecuencia)
-                    }})
-                }
-                if(this.misMedicamentos.cyac.estado){
-                    medicamento = Object.assign(medicamento, {"cyac": {
-                        "mg": Number( this.misMedicamentos.cyac.mg),
-                        "frecuencia": Number( this.misMedicamentos.cyac.frecuencia)
-                    }})
-                }
-                if(this.misMedicamentos.tac.estado){
-                    medicamento = Object.assign(medicamento, {"tac": {
-                        "mg": Number( this.misMedicamentos.tac.mg),
-                        "frecuencia": Number( this.misMedicamentos.tac.frecuencia)
-                    }})
-                }
-                if(this.misMedicamentos.mmf.estado){
-                    medicamento = Object.assign(medicamento, {"mmf": {
-                        "mg": Number( this.misMedicamentos.mmf.mg),
-                        "frecuencia": Number( this.misMedicamentos.mmf.frecuencia)
-                    }})
-                }
-                if(this.misMedicamentos.aza.estado){
-                    medicamento = Object.assign(medicamento, {"aza": {
-                        "mg": Number( this.misMedicamentos.aza.mg),
-                        "frecuencia": Number( this.misMedicamentos.aza.frecuencia)
-                    }})
-                }
-                if(this.misMedicamentos.cfm.estado){
-                    medicamento = Object.assign(medicamento, {"cfm": {
-                        "mg": Number( this.misMedicamentos.cfm.mg),
-                        "frecuencia": Number( this.misMedicamentos.cfm.frecuencia)
-                    }})
-                }
-                if(this.misMedicamentos.enalapril.estado){
-                    medicamento = Object.assign(medicamento, {"enalapril": {
-                        "mg": Number( this.misMedicamentos.enalapril.mg),
-                        "frecuencia": Number( this.misMedicamentos.enalapril.frecuencia)
-                    }})
-                }
-                if(this.misMedicamentos.losartan.estado){
-                    medicamento = Object.assign(medicamento, {"losartan": {
-                        "mg": Number( this.misMedicamentos.losartan.mg),
-                        "frecuencia": Number( this.misMedicamentos.losartan.frecuencia)
-                    }})
-                }
-                if(this.misMedicamentos.amlodipina.estado){
-                    medicamento = Object.assign(medicamento, {"amlodipina": {
-                        "mg": Number( this.misMedicamentos.amlodipina.mg),
-                        "frecuencia": Number( this.misMedicamentos.amlodipina.frecuencia)
-                    }})
-                }
-                if(this.misMedicamentos.citratoNa.estado){
-                    medicamento = Object.assign(medicamento, {"citratoNa": {
-                        "mg": Number( this.misMedicamentos.citratoNa.mg),
-                        "frecuencia": Number( this.misMedicamentos.citratoNa.frecuencia)
-                    }})
-                }
-                if(this.misMedicamentos.citratoK.estado){
-                    medicamento = Object.assign(medicamento, {"citratoK": {
-                        "mg": Number( this.misMedicamentos.citratoK.mg),
-                        "frecuencia": Number( this.misMedicamentos.citratoK.frecuencia)
-                    }})
-                }
-                if(this.misMedicamentos.furosemida.estado){
-                    medicamento = Object.assign(medicamento, {"furosemida": {
-                        "mg": Number( this.misMedicamentos.furosemida.mg),
-                        "frecuencia": Number( this.misMedicamentos.furosemida.frecuencia)
-                    }})
-                }
-                if(this.misMedicamentos.alfacalcidol.estado){
-                    medicamento = Object.assign(medicamento, {"alfacalcidol": {
-                        "mg": Number( this.misMedicamentos.alfacalcidol.mg),
-                        "frecuencia": Number( this.misMedicamentos.alfacalcidol.frecuencia)
-                    }})
-                }
-                if(this.misMedicamentos.CaCO3.estado){
-                    medicamento = Object.assign(medicamento, {"CaCO3": {
-                        "mg": Number( this.misMedicamentos.CaCO3.mg),
-                        "frecuencia": Number( this.misMedicamentos.CaCO3.frecuencia)
-                    }})
-                }
-                if(this.misMedicamentos.epo.estado){
-                    medicamento = Object.assign(medicamento, {"epo": {
-                        "mg": Number( this.misMedicamentos.epo.mg),
-                        "frecuencia": Number( this.misMedicamentos.epo.frecuencia)
-                    }})
-                }
-                if(this.misMedicamentos.fe.estado){
-                    medicamento = Object.assign(medicamento, {"fe": {
-                        "mg": Number( this.misMedicamentos.fe.mg),
-                        "frecuencia": Number( this.misMedicamentos.fe.frecuencia)
-                    }})
-                }
-                if(this.misMedicamentos.cefadroxilo.estado){
-                    medicamento = Object.assign(medicamento, {"cefadroxilo": {
-                        "mg": Number( this.misMedicamentos.cefadroxilo.mg),
-                        "frecuencia": Number( this.misMedicamentos.cefadroxilo.frecuencia)
-                    }})
-                }
-
-                let resultado_laboratorio = {}
-
-                resultado_laboratorio = Object.assign(resultado_laboratorio, {
-                    "Na": Number(this.resultados_de_laboratorio.Na),
-                    "Cl": Number(this.resultados_de_laboratorio.Cl),
-                    "BUN": Number(this.resultados_de_laboratorio.BUN),
-                    "Glu": Number(this.resultados_de_laboratorio.Glu),
-                    "K": Number(this.resultados_de_laboratorio.K),
-                    "HCO": Number(this.resultados_de_laboratorio.HCO),
-                    "Creat": Number(this.resultados_de_laboratorio.Creat),
-                    "WB": Number(this.resultados_de_laboratorio.WB),
-                    "Col": Number(this.resultados_de_laboratorio.Col),
-                    "Alb": Number(this.resultados_de_laboratorio.Alb),
-                    "HB": Number(this.resultados_de_laboratorio.HB),
-                    "HT": Number(this.resultados_de_laboratorio.HT),
-                    "Ca": Number(this.resultados_de_laboratorio.Ca),
-                    "P": Number(this.resultados_de_laboratorio.P),
-                    "MG": Number(this.resultados_de_laboratorio.MG),
-                    "PTL": Number(this.resultados_de_laboratorio.PTL),
-                    "EGO": Number(this.resultados_de_laboratorio.EGO),
-                    "pH": Number(this.resultados_de_laboratorio.pH),
-                    "Glu2": Number(this.resultados_de_laboratorio.Glu2),
-                    "Prot": Number(this.resultados_de_laboratorio.Prot),
-                    "Hem": Number(this.resultados_de_laboratorio.Hem),
-                    "Gr": Number(this.resultados_de_laboratorio.Gr),
-                    "GB": Number(this.resultados_de_laboratorio.GB),
-                    "Cil": Number(this.resultados_de_laboratorio.Cil),
-                    "URO": Number(this.resultados_de_laboratorio.URO),
-                    "PTH": Number(this.resultados_de_laboratorio.PTH),
-                    "Ferritina": Number(this.resultados_de_laboratorio.Ferritina),
-                })
-
-                let examenFisico = {}
-
-                examenFisico = Object.assign(examenFisico, {
-                    "COONG": this.examen_fisico.COONG
-                })
-                if(this.examen_fisico_check.corazon){
-                    examenFisico = Object.assign(examenFisico, {
-                    "corazon": this.examen_fisico.corazon
-                })}
-                if(this.examen_fisico_check.pulmones){
-                    examenFisico = Object.assign(examenFisico, {
-                    "pulmones": this.examen_fisico.pulmones
-                })}
-                if(this.examen_fisico_check.abdomen){
-                    examenFisico = Object.assign(examenFisico, {
-                    "abdomen": this.examen_fisico.abdomen
-                })}
-                if(this.examen_fisico_check.genitales){
-                    examenFisico = Object.assign(examenFisico, {
-                    "genitales": this.examen_fisico.genitales
-                })}
-                if(this.examen_fisico_check.extremidades){
-                    examenFisico = Object.assign(examenFisico, {
-                    "extremidades": this.examen_fisico.extremidades
-                })}
-                if(this.examen_fisico_check.piel){
-                    examenFisico = Object.assign(examenFisico, {
-                    "piel": this.examen_fisico.piel
-                })}
-                if(this.examen_fisico_check.sn){
-                    examenFisico = Object.assign(examenFisico, {
-                    "sn": this.examen_fisico.sn
-                })}
-                if(this.examen_fisico_check.otros){
-                    examenFisico = Object.assign(examenFisico, {
-                    "otros": this.examen_fisico.otros
-                })}
-
-                const medicamentoJSON = JSON.stringify(medicamento)
-                const resultados_labJSON = JSON.stringify(resultado_laboratorio)
-                const examen_fisicoJSON = JSON.stringify(examenFisico)
-
-                const info = {
-                    cui: this.paciente.CUI,
-                    fecha: this.fecha,
-                    peso: this.datos_generales.Peso,
-                    talla: this.datos_generales.Talla,
-                    pa: this.datos_generales.PA,
-                    sindrome_clinico: this.Sindrome_Clinico_Presentacion,
-                    Dx_Definitivo: this.Dx_Definitivo,
-                    Dx_Asociados: this.Dx_Asociado,
-                    historia: this.historia,
-                    medicamento: medicamentoJSON,
-                    resultados_laboratorio: resultados_labJSON,
-                    examen_fisico: examen_fisicoJSON,
-                    evaluacion_medica: this.Evaluacion_Medica,
-                    plan_medico: this.Plan_Medico,
-                    evaluacion_psicologica: this.Evaluacion_Psicologica,
-                    plan_psicologico: this.Plan_Psicologica,
-                    evaluacion_trabajo_social: this.Evaluacion_Trabajo_Social,
-                    plan_trabajo_social: this.Plan_Trabajo_Social,
-                    evaluacion_nutricional: this.Evaluacion_Nutricional,
-                    plan_nutricional: this.Plan_Nutricional,
-                    evaluacion_farmacologica: this.Evaluacion_Farmacologica,
-                    plan_farmacologico: this.Plan_Farmacologico
-                }
-
-
-                if(this.update){
-                    this.$http.put('http://localhost:8000/ConsultaController/update', info).then(response => {
-
-                    }).then(() => {
-                        if(this.nuevoComentario){
-                            this.$http.post('http://localhost:8000/ConsultaController/getID', info).then(response => {
-                                var a = response.data.id
-                                var b = store.id
-                                
-                                // console.log('nuevo comentarioooooooo', a, b, this.hasComments)
-                                if(!this.hasComments){
-                                    // console.log("No tiene comentarios")
-
-                                    var string = `{
-                                        "` + a + `": ` + `{
-                                            "` + b + `": ` + `{
-                                                
-                                            }` + `
-                                        }` + `
-                                    }`
-
-                                    var json = JSON.parse(string)
-                                    
-                                    json[String(a)][String(b)].hora = []
-                                    json[String(a)][String(b)].comentario = []
-
-                                    json[String(a)][String(b)].hora.push(this.horaActual)
-                                    json[String(a)][String(b)].comentario.push(this.comentario)
-
-                                    const info = {
-                                        cui: this.paciente.CUI,
-                                        comentarios: JSON.stringify(json)
-                                    }
-
-                                    this.$http.post('http://localhost:8000/ComentarioController/insert', info).then(response => {
-
-                                    }).catch(error => {
-                                        // console.log("Error en no tiene comentarios")
-                                    })
-                                }else{
-                                    // console.log("consulta: " + String(a))
-                                    // console.log('all comments', this.allComments[0])
-                                    
-                                    if(this.allComments[0][String(a)] == undefined){
-                                        // console.log("Si tiene comentarios pero no consulta")
-                                        var string = `{
-                                            "` + a + `": ` + `{
-                                                "` + b + `": ` + `{
-                                                    
-                                                }` + `
-                                            }` + `
-                                        }`
-
-                                        var json = JSON.parse(string)
-                                        
-                                        json[String(a)][String(b)].hora = []
-                                        json[String(a)][String(b)].comentario = []
-
-                                        json[String(a)][String(b)].hora.push(this.horaActual)
-                                        json[String(a)][String(b)].comentario.push(this.comentario)
-                                        
-                                        Object.assign(this.allComments[0], json)
-                                    }else{
-
-                                        if(this.allComments[0][String(a)][String(b)] == undefined){
-                                            // console.log("Si tiene comentarios y consulta pero no doctor")
-                                            var string = `{
-                                                "` + b + `": ` + `{
-                                                    
-                                                }` + `
-                                            }`
-
-                                            var json = JSON.parse(string)
-                                        
-                                            json[String(b)].hora = []
-                                            json[String(b)].comentario = []
-
-                                            json[String(b)].hora.push(this.horaActual)
-                                            json[String(b)].comentario.push(this.comentario)
-
-                                            Object.assign(this.allComments[0][String(a)], json)
-                                            // console.log("Si tiene blah blah: " + JSON.stringify(this.allComments[0]))
-                                        }else{
-                                            // console.log("tiene todo")
-                                            this.allComments[0][String(a)][String(b)].hora.push(this.horaActual)
-                                            this.allComments[0][String(a)][String(b)].comentario.push(this.comentario)
-                                            // console.log(JSON.stringify(this.allComments[0]))
-                                        }
-                                    }
-                                    // console.log(JSON.stringify(this.allComments[0]))
-                                    const info = {
-                                        cui: this.paciente.CUI,
-                                        comentarios: JSON.stringify(this.allComments[0])
-                                    }
-                                    this.$http.put('http://localhost:8000/ComentarioController/update', info).then(response => {
-                                        
-                                    }).catch(error => {
-                                        // console.log("Error en si tiene comentarios")
-                                    })
-                                }
-                            })
-                        }
-                    }).then(() => {
-                        this.$http.put('http://localhost:8000/vacunaController/update', vacunm).then(response => {})
-                    }).then(() => {
-                        let mapaMed = {}
-                        const hoy = new Date()
-                        mapaMed = Object.assign(mapaMed, {
-                            "cui": this.paciente.CUI,
-                            "fecha": hoy,
-                            "na": Number(this.resultados_de_laboratorio.Na),
-                            "k": Number(this.resultados_de_laboratorio.K),
-                            "cl": Number(this.resultados_de_laboratorio.Cl),
-                            "hco": Number(this.resultados_de_laboratorio.HCO),
-                            "bun": Number(this.resultados_de_laboratorio.BUN),
-                            "creatinina": Number(this.resultados_de_laboratorio.Creat),
-                            "glucosa": Number(this.resultados_de_laboratorio.Glu),
-                            "albumina": Number(this.resultados_de_laboratorio.Alb),
-                            "colesterol": Number(this.resultados_de_laboratorio.Col),
-                            "calcio": Number(this.resultados_de_laboratorio.Ca),
-                            "fosforo": Number(this.resultados_de_laboratorio.P),
-                            "pth": Number(this.resultados_de_laboratorio.PTH),
-                            "globulosBlancos": Number(this.resultados_de_laboratorio.GB),
-                            "hb": Number(this.resultados_de_laboratorio.HB),
-                            "ht": Number(this.resultados_de_laboratorio.HT)
-                        })
-                        
-                        this.$http.put('http://localhost:8000/MapaController/updateMapaMedico', mapaMed).then(response => {
-
-                        })
-                    }).then(() => {
-                        this.guardando = false
-                    }).then(() => {
-                        this.$router.push("/menu-principal");
-                    }).catch(error => {
-
-                    })
-                }else{
-                    this.$http.post('http://localhost:8000/ConsultaController/insert', info).then(response => {
-                        if(this.nuevoComentario){
-                            this.$http.post('http://localhost:8000/ConsultaController/getID', info).then(response => {
-                                var a = response.data.id
-                                var b = store.id
-                                
-                                // if(!this.hasComments){
-                                var string = `{
-                                    "` + a + `": ` + `{
-                                        "` + b + `": ` + `{
-                                            
-                                        }` + `
-                                    }` + `
-                                }`
-
-                                var json = JSON.parse(string)
-                                
-                                json[String(a)][String(b)].hora = []
-                                json[String(a)][String(b)].comentario = []
-
-                                json[String(a)][String(b)].hora.push(this.horaActual)
-                                json[String(a)][String(b)].comentario.push(this.comentario)
-
-                                const info = {
-                                    cui: this.paciente.CUI,
-                                    comentarios: JSON.stringify(json)
-                                }
-
-                                this.$http.post('http://localhost:8000/ComentarioController/insert', info).then(response => {
-                                })
-                            })
-                        }
-                        
-                    }).then(() => {
-                        this.$http.post('http://localhost:8000/vacunaController/insert', vacunm).then(response => {}).catch(error => {
-                        })
-                    }).then(() => {
-                        let mapaMed = {}
-                        const hoy = new Date()
-                        mapaMed = Object.assign(mapaMed, {
-                            "cui": this.paciente.CUI,
-                            "fecha": hoy,
-                            "na": Number(this.resultados_de_laboratorio.Na),
-                            "k": Number(this.resultados_de_laboratorio.K),
-                            "cl": Number(this.resultados_de_laboratorio.Cl),
-                            "hco": Number(this.resultados_de_laboratorio.HCO),
-                            "bun": Number(this.resultados_de_laboratorio.BUN),
-                            "creatinina": Number(this.resultados_de_laboratorio.Creat),
-                            "glucosa": Number(this.resultados_de_laboratorio.Glu),
-                            "albumina": Number(this.resultados_de_laboratorio.Alb),
-                            "colesterol": Number(this.resultados_de_laboratorio.Col),
-                            "calcio": Number(this.resultados_de_laboratorio.Ca),
-                            "fosforo": Number(this.resultados_de_laboratorio.P),
-                            "pth": Number(this.resultados_de_laboratorio.PTH),
-                            "globulosBlancos": Number(this.resultados_de_laboratorio.GB),
-                            "hb": Number(this.resultados_de_laboratorio.HB),
-                            "ht": Number(this.resultados_de_laboratorio.HT)
-                        })
-
-                        this.$http.post('http://localhost:8000/MapaController/setMapaMedico', mapaMed).then(response => {
-                        })
-                    }).then(() => {
-                        this.guardando = false
-                    }).then(() => {
-                        this.$router.push("/menu-principal");
-                    })
-                    .catch(error => {
-                    })
-                }
-            }
-        },
-        fillBCG: function() {
-            
-            if(!this.bcg1){
-                this.bcg2 = false;
-                this.bcg3 = false;
-                this.bcgRef = false;
-            }
-            if(!this.bcg2){
-                this.bcg3 = false;
-                this.bcgRef = false;
-            }
-            if(!this.bcg3){
-                this.bcgRef = false;
-            }
-        },
-        fillPoliovirus: function() {
-            
-            if(!this.poliovirus1){
-                this.poliovirus2 = false;
-                this.poliovirus3 = false;
-                this.poliovirusRef = false;
-            }
-            if(!this.poliovirus2){
-                this.poliovirus3 = false;
-                this.poliovirusRef = false;
-            }
-            if(!this.poliovirus3){
-                this.poliovirusRef = false;
-            }
-        },
-        fillHepatitisA: function(){
-
-            if(!this.hepatitisA1){
-                this.hepatitisA2 = false;
-                this.hepatitisA3 = false;
-                this.hepatitisARef = false;
-            }
-            if(!this.hepatitisA2){
-                this.hepatitisA3 = false;
-                this.hepatitisARef = false;
-            }
-            if(!this.hepatitisA3){
-                this.hepatitisARef = false;
-            }
-        },
-        fillHepatitisB: function(){
-
-            if(!this.hepatitisB1){
-                this.hepatitisB2 = false;
-                this.hepatitisB3 = false;
-                this.hepatitisBRef = false;
-            }
-            if(!this.hepatitisB2){
-                this.hepatitisB3 = false;
-                this.hepatitisBRef = false;
-            }
-            if(!this.hepatitisB3){
-                this.hepatitisBRef = false;
-            }
-        },
-        fillNeumococo: function(){
-
-            if(!this.neumococo1){
-                this.neumococo2 = false;
-                this.neumococo3 = false;
-                this.neumococoRef = false;
-            }
-            if(!this.neumococo2){
-                this.neumococo3 = false;
-                this.neumococoRef = false;
-            }
-            if(!this.neumococo3){
-                this.neumococoRef = false;
-            }
-        },
-        fillInflueza: function(){
-            
-            if(!this.influenza1){
-                this.influenza2 = false;
-                this.influenza3 = false;
-                this.influenzaRef = false;
-            }
-            if(!this.influenza2){
-                this.influenza3 = false;
-                this.influenzaRef = false;
-            }
-            if(!this.influenza3){
-                this.influenzaRef = false;
-            }
-        },
-        fillDPT: function(){
-
-            if(!this.DPT1){
-                this.DPT2 = false;
-                this.DPT3 = false;
-                this.DPTRef = false;
-            }
-            if(!this.DPT2){
-                this.DPT3 = false;
-                this.DPTRef = false;
-            }
-            if(!this.DPT3){
-                this.DPTRef = false;
-            }
-        },
-        fillSPR: function(){
-
-            if(!this.SPR1){
-                this.SPR2 = false;
-                this.SPR3 = false;
-                this.SPRRef = false;
-            }
-            if(!this.SPR2){
-                this.SPR3 = false;
-                this.SPRRef = false;
-            }
-            if(!this.SPR3){
-                this.SPRRef = false;
-            }
-        },
-        sindromeValue: function(id, significado){
-            this.Sindrome_Clinico_Presentacion = parseInt(id);
+    datos_generales: {
+      Peso: "",
+      kg_perc: "",
+      Talla: "",
+      cms_perc: "",
+      PA: "",
+      Percentil: "",
+    },
+
+    //paciente: "Juan Garcia",
+    //Variables para inputs
+    comentario: "",
+
+    bcg: 0,
+    bcg1: false,
+    bcg2: false,
+    bcg3: false,
+    bcgRef: false,
+    poliovirus: 0,
+    poliovirus1: false,
+    poliovirus2: false,
+    poliovirus3: false,
+    poliovirusRef: false,
+    hepatitisA: 0,
+    hepatitisA1: false,
+    hepatitisA2: false,
+    hepatitisA3: false,
+    hepatitisARef: false,
+    hepatitisB: 0,
+    hepatitisB1: false,
+    hepatitisB2: false,
+    hepatitisB3: false,
+    hepatitisBRef: false,
+    neumococo: 0,
+    neumococo1: false,
+    neumococo2: false,
+    neumococo3: false,
+    neumococoRef: false,
+    influenza: 0,
+    influenza1: false,
+    influenza2: false,
+    influenza3: false,
+    influenzaRef: false,
+    DPT: 0,
+    DPT1: false,
+    DPT2: false,
+    DPT3: false,
+    DPTRef: false,
+    SPR: 0,
+    SPR1: false,
+    SPR2: false,
+    SPR3: false,
+    SPRRef: false,
+    Sindrome_Clinico_Presentacion: 1,
+    Dx_Definitivo: "",
+    Dx_Asociado: "",
+    dxs: undefined,
+    historia: "",
+
+    //Medicamentos
+
+    misMedicamentos: {
+      prednisona: {
+        estado: false,
+        mg: "",
+        frecuencia: "",
+      },
+      cyac: {
+        estado: false,
+        mg: "",
+        frecuencia: "",
+      },
+      tac: {
+        estado: false,
+        mg: "",
+        frecuencia: "",
+      },
+      mmf: {
+        estado: false,
+        mg: "",
+        frecuencia: "",
+      },
+      aza: {
+        estado: false,
+        mg: "",
+        frecuencia: "",
+      },
+      cfm: {
+        estado: false,
+        mg: "",
+        frecuencia: "",
+      },
+      enalapril: {
+        estado: false,
+        mg: "",
+        frecuencia: "",
+      },
+      losartan: {
+        estado: false,
+        mg: "",
+        frecuencia: "",
+      },
+      amlodipina: {
+        estado: false,
+        mg: "",
+        frecuencia: "",
+      },
+      citratoNa: {
+        estado: false,
+        mg: "",
+        frecuencia: "",
+      },
+      citratoK: {
+        estado: false,
+        mg: "",
+        frecuencia: "",
+      },
+      furosemida: {
+        estado: false,
+        mg: "",
+        frecuencia: "",
+      },
+      alfacalcidol: {
+        estado: false,
+        mg: "",
+        frecuencia: "",
+      },
+      CaCO3: {
+        estado: false,
+        mg: "",
+        frecuencia: "",
+      },
+      epo: {
+        estado: false,
+        mg: "",
+        frecuencia: "",
+      },
+      fe: {
+        estado: false,
+        mg: "",
+        frecuencia: "",
+      },
+      cefadroxilo: {
+        estado: false,
+        mg: "",
+        frecuencia: "",
+      },
+    },
+
+    //Laboratorios
+    resultados_de_laboratorio: {
+      Na: "",
+      Cl: "",
+      BUN: "",
+      Glu: "",
+      K: "",
+      HCO: "",
+      Creat: "",
+      WB: "",
+      Col: "",
+      Alb: "",
+      HB: "",
+      HT: "",
+      Ca: "",
+      P: "",
+      MG: "",
+      PTL: "",
+      EGO: "",
+      pH: "",
+      Glu2: "",
+      Prot: "",
+      Hem: "",
+      Gr: "",
+      GB: "",
+      Cil: "",
+      URO: "",
+      PTH: "",
+      Ferritina: "",
+    },
+
+    includeFiles: "",
+
+    Evaluacion_Medica: "",
+    Evaluacion_Psicologica: "",
+    Evaluacion_Trabajo_Social: "",
+    Evaluacion_Nutricional: "",
+    Evaluacion_Farmacologica: "",
+
+    Plan_Medico: "",
+    Plan_Psicologica: "",
+    Plan_Trabajo_Social: "",
+    Plan_Nutricional: "",
+    Plan_Farmacologico: "",
+
+    examen_fisico: {
+      COONG: "",
+      corazon: "",
+      pulmones: "",
+      abdomen: "",
+      genitales: "",
+      extremidades: "",
+      piel: "",
+      sn: "",
+      otros: "",
+    },
+
+    examen_fisico_check: {
+      corazon: false,
+      pulmones: false,
+      abdomen: false,
+      genitales: false,
+      extremidades: false,
+      piel: false,
+      sn: false,
+      otros: false,
+    },
+
+    todaysDate: "",
+    fecha: "",
+    nuevoComentario: false,
+    horaActual: "",
+    idConsulta: 0,
+    hasComments: false,
+    allComments: [],
+    showComments: [],
+    cardComments: [],
+
+    tabs: ["Consulta", "Mapa médico"],
+
+    datos: [],
+    sindromes: [],
+    inputRules: [(v) => !!v || "Se requiere el campo"],
+    minRules: [
+      (v) => (!!v && parseInt(v) > 0) || "El número debe de ser mayor a 0",
+    ],
+    neRules: [
+      (v) => (!!v && parseInt(v) >= 0) || "El número debe de ser positivo",
+    ],
+  }),
+
+  mounted() {
+    this.dialog = true;
+
+    const date = new Date();
+    this.fecha =
+      date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+    this.todaysDate =
+      date.getDate() + "-" + +(date.getMonth() + 1) + "-" + date.getFullYear();
+
+    // store.idPaciente = this.$route.params.idPaciente
+
+    const data = {
+      ID: store.idPaciente, // Aqui va el ID del paciente
+    };
+    this.$http
+      .get(`http://${process.env.SERVER_IP}:8000/dxs`)
+      .then((response) => {
+        this.dxs = response.data.dxs;
+      });
+
+    const vacunm = {
+      idPaciente: store.idPaciente,
+    };
+
+    this.$http
+      .post(
+        `http://${process.env.SERVER_IP}:8000/vacunaController/findOne`,
+        vacunm
+      )
+      .then((response) => {
+        if (response.data.Consulta != undefined) {
+          this.bcg = response.data.Consulta.BCG;
+          this.poliovirus = response.data.Consulta.Poliovirus;
+          this.hepatitisA = response.data.Consulta.HepatitisA;
+          this.hepatitisB = response.data.Consulta.HepatitisB;
+          this.neumococo = response.data.Consulta.Neumococo;
+          this.influenza = response.data.Consulta.Influenza;
+          this.DPT = response.data.Consulta.DPT;
+          this.SPR = response.data.Consulta.SPR;
         }
-    }
+      })
+      .then(() => {
+        this.setVacunaData();
+      });
+
+    this.$http
+      .post(
+        `http://${process.env.SERVER_IP}:8000/PacienteController/findById`,
+        data
+      )
+      .then((response) => {
+        if (response.data.Paciente[0] == null) {
+        } else {
+          this.paciente.nombre = response.data.Paciente[0].Nombre;
+          this.paciente.apellido = response.data.Paciente[0].Apellido;
+          this.paciente.CUI = response.data.Paciente[0].CUI;
+          this.paciente.Nombre_de_padre =
+            response.data.Paciente[0].Nombre_de_padre;
+          this.paciente.Nombre_de_madre =
+            response.data.Paciente[0].Nombre_de_madre;
+          this.paciente.Procedencia =
+            response.data.Paciente[0].procedencia.Departamento;
+          this.paciente.Telefono = response.data.Paciente[0].Telefono;
+          this.paciente.Grupo_De_Sangre =
+            response.data.Paciente[0].tipo_de__sangre.significado;
+          this.paciente.Estudia = response.data.Paciente[0].estudia.significado;
+          this.paciente.Transfusiones =
+            response.data.Paciente[0].transfusiones.significado;
+
+          this.paciente.sexo = response.data.Paciente[0].Sexo;
+          this.paciente.fechaDeNacimiento =
+            response.data.Paciente[0].Fecha_de_nacimiento;
+          this.computeAge(this.paciente.fechaDeNacimiento);
+
+          this.Sindrome_Clinico_Presentacion =
+            response.data.Paciente[0].Sindrome_Clinico_Presentacion;
+
+          this.imageData = response.data.Paciente[0].Imagen;
+        }
+      })
+      .then(() => {
+        const data2 = {
+          cui: this.paciente.CUI,
+          fecha: this.fecha,
+        };
+        this.$http
+          .post(
+            `http://${process.env.SERVER_IP}:8000/ConsultaController/findOne`,
+            data2
+          )
+          .then((response) => {
+            this.update = response.data.success;
+          })
+          .then(() => {
+            if (this.update) {
+              this.$http
+                .post(
+                  `http://${process.env.SERVER_IP}:8000/ConsultaController/findAll`,
+                  data2
+                )
+                .then((response) => {
+                  this.datos_generales.Peso = response.data.Consulta[0].peso;
+                  this.datos_generales.Talla = response.data.Consulta[0].talla;
+                  this.datos_generales.PA = response.data.Consulta[0].pa;
+
+                  this.Dx_Definitivo = response.data.Consulta[0].Dx_Definitivo;
+                  this.Dx_Asociado = response.data.Consulta[0].Dx_Asociados;
+                  this.historia = response.data.Consulta[0].historia;
+
+                  this.Evaluacion_Medica =
+                    response.data.Consulta[0].evaluacion_medica;
+                  this.Plan_Medico = response.data.Consulta[0].plan_medico;
+                  this.Evaluacion_Psicologica =
+                    response.data.Consulta[0].evaluacion_psicologica;
+                  this.Plan_Psicologica =
+                    response.data.Consulta[0].plan_psicologico;
+                  this.Evaluacion_Trabajo_Social =
+                    response.data.Consulta[0].evaluacion_trabajo_social;
+                  this.Plan_Trabajo_Social =
+                    response.data.Consulta[0].plan_trabajo_social;
+                  this.Evaluacion_Nutricional =
+                    response.data.Consulta[0].evaluacion_nutricional;
+                  this.Plan_Nutricional =
+                    response.data.Consulta[0].plan_nutricional;
+                  this.Evaluacion_Farmacologica =
+                    response.data.Consulta[0].evaluacion_farmacologica;
+                  this.Plan_Farmacologico =
+                    response.data.Consulta[0].plan_farmacologico;
+
+                  this.resultados_de_laboratorio = JSON.parse(
+                    response.data.Consulta[0].resultados_laboratorio
+                  );
+                  for (var key in this.resultados_de_laboratorio) {
+                    if (this.resultados_de_laboratorio[key] == 0) {
+                      this.resultados_de_laboratorio[key] = "";
+                    }
+                  }
+
+                  const jsonTemp = JSON.parse(
+                    response.data.Consulta[0].examen_fisico
+                  );
+
+                  for (var key in this.examen_fisico) {
+                    if (jsonTemp.hasOwnProperty(key)) {
+                      this.examen_fisico[key] = jsonTemp[key];
+
+                      if (key != "coong") {
+                        this.examen_fisico_check[key] = true;
+                      }
+                    } else {
+                      this.examen_fisico[key] = "";
+                      this.examen_fisico_check[key] = false;
+                    }
+                  }
+
+                  const jsonTemp2 = JSON.parse(
+                    response.data.Consulta[0].medicamento
+                  );
+                  for (var key in this.misMedicamentos) {
+                    if (jsonTemp2.hasOwnProperty(key)) {
+                      this.misMedicamentos[key].mg = jsonTemp2[key].mg;
+                      this.misMedicamentos[key].frecuencia =
+                        jsonTemp2[key].frecuencia;
+                      this.misMedicamentos[key].estado = true;
+                    } else {
+                      this.misMedicamentos[key].mg = "";
+                      this.misMedicamentos[key].frecuencia = "";
+                      this.misMedicamentos[key].estado = false;
+                    }
+                  }
+                });
+            }
+          })
+          .then(() => {
+            const data3 = {
+              CUI: this.paciente.CUI,
+            };
+
+            this.$http
+              .post(
+                `http://${process.env.SERVER_IP}:8000/ComentarioController/findAll`,
+                data3
+              )
+              .then((response) => {
+                if (response.data.Comentarios.length > 0) {
+                  this.hasComments = true;
+                  this.allComments.push(
+                    JSON.parse(response.data.Comentarios[0].comentarios)
+                  );
+
+                  this.orderComments(this.allComments);
+                } else {
+                  this.hasComments = false;
+                }
+              })
+              .then(() => {
+                this.getDoctorNames();
+              })
+              .then(() => {
+                this.dialog = false;
+              });
+          });
+      })
+      .then(() => {
+        this.$http
+          .get(`http://${process.env.SERVER_IP}:8000/sindromeController/getAll`)
+          .then((response) => {
+            if (response.data.Sindrome[0] == null) {
+            } else {
+              this.sindromes = response.data.Sindrome;
+            }
+          });
+      })
+      .then(() => {
+        const lab = {
+          cui: String(this.paciente.CUI),
+        };
+        this.$http
+          .post(
+            `http://${process.env.SERVER_IP}:8000/MapaController/getMapaMedico`,
+            lab
+          )
+          .then((response) => {
+            this.mapaMedico = response.data.data;
+            console.table(this.mapaMedico);
+          })
+          .then(() => {
+            this.mapaMedico.map((datos, index) => {
+              // console.log(index, datos)
+              // const mediData = JSON.parse(datos.medicamento)
+              // const labData = JSON.parse(datos.resultados_laboratorio)
+
+              this.sangreValues.push({
+                Fecha: datos.fecha,
+                Na: datos.na,
+                K: datos.k,
+                Cl: datos.cl,
+                HCO3: datos.hco,
+                BUN: datos.bun,
+                Creatinina: datos.creatinina,
+                Glucosa: datos.glucosa,
+              });
+
+              this.sangreValues2.push({
+                Fecha: datos.fecha,
+                Albumina: datos.albumina,
+                Colesterol: datos.colesterol,
+                Calcio: datos.calcio,
+                Fosforo: datos.fosforo,
+                PTH: datos.pth,
+              });
+
+              this.hematologiaValues.push({
+                Fecha: datos.fecha,
+                GBlancos: datos.globulosBlancos,
+                Hb: datos.hb,
+                Ht: datos.ht,
+              });
+            });
+          });
+      })
+      .catch((error) => {
+        this.dialog = false;
+      });
+  },
+  methods: {
+    cancelando() {
+      this.$router.push("/menu-principal");
+    },
+
+    computeAge(datePicked) {
+      var fechaActual = new Date();
+      var aComputar = new Date(datePicked);
+      this.paciente.years = fechaActual.getFullYear() - aComputar.getFullYear();
+      this.paciente.meses = fechaActual.getMonth() - aComputar.getMonth();
+    },
+
+    orderComments(comments) {
+      var datos = [];
+      comments.map((obj) => {
+        for (var key in obj) {
+          for (var key2 in obj[key]) {
+            for (var i = 0; i < obj[key][key2].hora.length; i++) {
+              var temp = {};
+
+              temp["doctor"] = key2;
+              temp["hora"] = obj[key][key2].hora[i];
+              temp["comentario"] = obj[key][key2].comentario[i];
+              this.showComments.push(temp);
+            }
+          }
+        }
+      });
+
+      this.showComments.sort(function (d1, d2) {
+        return new Date(d1.hora) - new Date(d2.hora);
+      });
+    },
+
+    getDoctorNames() {
+      let name = "";
+
+      this.showComments.map((array) => {
+        const data = {
+          ID: array.doctor,
+        };
+
+        this.$http
+          .post(
+            `http://${process.env.SERVER_IP}:8000/ExampleController/findById`,
+            data
+          )
+          .then((response) => {
+            name = response.data.User;
+          })
+          .then(() => {
+            this.doctorNames[array.doctor] = name;
+          });
+      });
+    },
+
+    beautyComments() {
+      this.showComments.forEach((element) => {
+        if (this.checkExistence(this.cardComments, element.hora)) {
+          const pos = this.foundPosition(this.cardComments, element.hora);
+
+          const f = element.hora.split(" ");
+          const datos = {
+            doctor: this.doctorNames[element.doctor],
+            hora: f[1],
+            comentario: element.comentario,
+          };
+
+          this.cardComments[pos].data.push(datos);
+        } else {
+          const fechas = {
+            fecha: "",
+            data: [],
+          };
+
+          const f = element.hora.split(" ");
+          const datos = {
+            doctor: this.doctorNames[element.doctor],
+            hora: f[1],
+            comentario: element.comentario,
+          };
+
+          fechas.fecha = f[0];
+          fechas.data.push(datos);
+
+          this.cardComments.push(fechas);
+        }
+      });
+    },
+
+    checkExistence(lista, fecha) {
+      const f = new Date(fecha);
+      let found = false;
+
+      lista.forEach((element) => {
+        const newF = new Date(element.fecha);
+        if (
+          newF.getMonth() === f.getMonth() &&
+          newF.getDate() === f.getDate() &&
+          newF.getFullYear() === f.getFullYear()
+        ) {
+          found = true;
+        }
+      });
+      return found;
+    },
+
+    foundPosition(lista, fecha) {
+      const f = new Date(fecha);
+      let pos = 0;
+
+      for (let i = 0; i < lista.length; i++) {
+        const newF = new Date(lista[i].fecha);
+        if (
+          newF.getMonth() === f.getMonth() &&
+          newF.getDay() === f.getDay() &&
+          newF.getFullYear() === f.getFullYear()
+        ) {
+          pos = i;
+          break;
+        }
+      }
+
+      return pos;
+    },
+    take() {
+      html2canvas(document.querySelector("#capture")).then((canvas) => {
+        document.body.appendChild(canvas);
+      });
+    },
+    verMas() {
+      if (!this.hasClickedVerMas) {
+        this.beautyComments();
+        this.hasClickedVerMas = true;
+      }
+      this.verComentarios = true;
+    },
+
+    agregarComentario() {
+      if (this.comentario != "") {
+        const d = new Date();
+        this.horaActual =
+          d.getMonth() +
+          1 +
+          "/" +
+          d.getDate() +
+          "/" +
+          d.getFullYear() +
+          " " +
+          d.getHours() +
+          ":" +
+          d.getMinutes() +
+          ":" +
+          d.getSeconds();
+        // console.log(this.horaActual)
+        this.nuevoComentario = true;
+      } else {
+        this.nuevoComentario = false;
+      }
+    },
+
+    agregarEnfermedad() {
+      let s = this.enfermedad.letra + " ";
+      s = s + this.enfermedad.entero;
+      if (this.enfermedad.decimal != "" && this.enfermedad.entero != ".")
+        s = s + ".";
+      if (this.enfermedad.decimal === 0 && this.enfermedad.entero != ".")
+        s = s + ".";
+      s = s + this.enfermedad.decimal;
+      s = s + " " + this.enfermedad.significado;
+
+      this.Dx_Asociado = this.Dx_Asociado + s + "\n";
+    },
+    pesoPercentil() {
+      const data = {
+        year: parseInt(this.paciente.years),
+        meses: parseInt(this.paciente.meses),
+        sexo: parseInt(this.paciente.sexo),
+        peso: parseFloat(this.datos_generales.Peso),
+      };
+
+      this.$http
+        .post(`http://${process.env.SERVER_IP}:8000/percentilPeso`, data)
+        .then((response) => {
+          if (response.data.encontrado) {
+            this.datos_generales.kg_perc = response.data.percentil.percentil;
+          } else {
+            this.datos_generales.kg_perc = "No aplica";
+          }
+        });
+      if (this.datos_generales.Talla > 0) {
+        const data = {
+          talla: parseFloat(this.datos_generales.Talla),
+          sexo: parseInt(this.paciente.sexo),
+          peso: parseFloat(this.datos_generales.Peso),
+        };
+
+        this.$http
+          .post(`http://${process.env.SERVER_IP}:8000/percentilPesoTalla`, data)
+          .then((response) => {
+            if (response.data.encontrado) {
+              this.datos_generales.Percentil =
+                response.data.percentil.percentil;
+            } else {
+              this.datos_generales.Percentil = "No aplica";
+            }
+          });
+      }
+    },
+
+    tallaPercentil() {
+      const data = {
+        year: parseInt(this.paciente.years),
+        meses: parseInt(this.paciente.meses),
+        sexo: parseInt(this.paciente.sexo),
+        talla: parseFloat(this.datos_generales.Talla),
+      };
+      this.$http
+        .post(`http://${process.env.SERVER_IP}:8000/percentilTalla`, data)
+        .then((response) => {
+          if (response.data.encontrado) {
+            this.datos_generales.cms_perc = response.data.percentil.percentil;
+          } else {
+            this.datos_generales.cms_perc = "No aplica";
+          }
+        });
+      if (this.datos_generales.Peso > 0) {
+        const data = {
+          talla: parseFloat(this.datos_generales.Talla),
+          sexo: parseInt(this.paciente.sexo),
+          peso: parseFloat(this.datos_generales.Peso),
+        };
+
+        this.$http
+          .post(`http://${process.env.SERVER_IP}:8000/percentilPesoTalla`, data)
+          .then((response) => {
+            if (response.data.encontrado) {
+              this.datos_generales.Percentil =
+                response.data.percentil.percentil;
+            } else {
+              this.datos_generales.Percentil = "No aplica";
+            }
+          });
+      }
+    },
+
+    setVacunaData() {
+      if (this.bcg === 4) {
+        this.bcgRef = true;
+        this.bcg3 = true;
+        this.bcg2 = true;
+        this.bcg1 = true;
+      } else if (this.bcg === 3) {
+        this.bcgRef = false;
+        this.bcg3 = true;
+        this.bcg2 = true;
+        this.bcg1 = true;
+      } else if (this.bcg === 2) {
+        this.bcgRef = false;
+        this.bcg3 = false;
+        this.bcg2 = true;
+        this.bcg1 = true;
+      } else if (this.bcg === 1) {
+        this.bcgRef = false;
+        this.bcg3 = false;
+        this.bcg2 = false;
+        this.bcg1 = true;
+      } else if (this.bcg === 0) {
+        this.bcgRef = false;
+        this.bcg3 = false;
+        this.bcg2 = false;
+        this.bcg1 = false;
+      }
+
+      if (this.poliovirus === 4) {
+        this.poliovirusRef = true;
+        this.poliovirus3 = true;
+        this.poliovirus2 = true;
+        this.poliovirus1 = true;
+      } else if (this.poliovirus === 3) {
+        this.poliovirusRef = false;
+        this.poliovirus3 = true;
+        this.poliovirus2 = true;
+        this.poliovirus1 = true;
+      } else if (this.poliovirus === 2) {
+        this.poliovirusRef = false;
+        this.poliovirus3 = false;
+        this.poliovirus2 = true;
+        this.poliovirus1 = true;
+      } else if (this.poliovirus === 1) {
+        this.poliovirusRef = false;
+        this.poliovirus3 = false;
+        this.poliovirus2 = false;
+        this.poliovirus1 = true;
+      } else if (this.poliovirus === 0) {
+        this.poliovirusRef = false;
+        this.poliovirus3 = false;
+        this.poliovirus2 = false;
+        this.poliovirus1 = false;
+      }
+
+      if (this.hepatitisA === 4) {
+        this.hepatitisARef = true;
+        this.hepatitisA3 = true;
+        this.hepatitisA2 = true;
+        this.hepatitisA1 = true;
+      } else if (this.hepatitisA === 3) {
+        this.hepatitisARef = false;
+        this.hepatitisA3 = true;
+        this.hepatitisA2 = true;
+        this.hepatitisA1 = true;
+      } else if (this.hepatitisA === 2) {
+        this.hepatitisARef = false;
+        this.hepatitisA3 = false;
+        this.hepatitisA2 = true;
+        this.hepatitisA1 = true;
+      } else if (this.hepatitisA === 1) {
+        this.hepatitisARef = false;
+        this.hepatitisA3 = false;
+        this.hepatitisA2 = false;
+        this.hepatitisA1 = true;
+      } else if (this.hepatitisA === 0) {
+        this.hepatitisARef = false;
+        this.hepatitisA3 = false;
+        this.hepatitisA2 = false;
+        this.hepatitisA1 = false;
+      }
+
+      if (this.hepatitisB === 4) {
+        this.hepatitisBRef = true;
+        this.hepatitisB3 = true;
+        this.hepatitisB2 = true;
+        this.hepatitisB1 = true;
+      } else if (this.hepatitisB === 3) {
+        this.hepatitisBRef = false;
+        this.hepatitisB3 = true;
+        this.hepatitisB2 = true;
+        this.hepatitisB1 = true;
+      } else if (this.hepatitisB === 2) {
+        this.hepatitisBRef = false;
+        this.hepatitisB3 = false;
+        this.hepatitisB2 = true;
+        this.hepatitisB1 = true;
+      } else if (this.hepatitisB === 1) {
+        this.hepatitisBRef = false;
+        this.hepatitisB3 = false;
+        this.hepatitisB2 = false;
+        this.hepatitisB1 = true;
+      } else if (this.hepatitisB === 0) {
+        this.hepatitisBRef = false;
+        this.hepatitisB3 = false;
+        this.hepatitisB2 = false;
+        this.hepatitisB1 = false;
+      }
+
+      if (this.neumococo === 4) {
+        this.neumococoRef = true;
+        this.neumococo3 = true;
+        this.neumococo2 = true;
+        this.neumococo1 = true;
+      } else if (this.neumococo === 3) {
+        this.neumococoRef = false;
+        this.neumococo3 = true;
+        this.neumococo2 = true;
+        this.neumococo1 = true;
+      } else if (this.neumococo === 2) {
+        this.neumococoRef = false;
+        this.neumococo3 = false;
+        this.neumococo2 = true;
+        this.neumococo1 = true;
+      } else if (this.neumococo === 1) {
+        this.neumococoRef = false;
+        this.neumococo3 = false;
+        this.neumococo2 = false;
+        this.neumococo1 = true;
+      } else if (this.neumococo === 0) {
+        this.neumococoRef = false;
+        this.neumococo3 = false;
+        this.neumococo2 = false;
+        this.neumococo1 = false;
+      }
+
+      if (this.influenza === 4) {
+        this.influenzaRef = true;
+        this.influenza3 = true;
+        this.influenza2 = true;
+        this.influenza1 = true;
+      } else if (this.influenza === 3) {
+        this.influenzaRef = false;
+        this.influenza3 = true;
+        this.influenza2 = true;
+        this.influenza1 = true;
+      } else if (this.influenza === 2) {
+        this.influenzaRef = false;
+        this.influenza3 = false;
+        this.influenza2 = true;
+        this.influenza1 = true;
+      } else if (this.influenza === 1) {
+        this.influenzaRef = false;
+        this.influenza3 = false;
+        this.influenza2 = false;
+        this.influenza1 = true;
+      } else if (this.influenza === 0) {
+        this.influenzaRef = false;
+        this.influenza3 = false;
+        this.influenza2 = false;
+        this.influenza1 = false;
+      }
+
+      if (this.DPT === 4) {
+        this.DPTRef = true;
+        this.DPT3 = true;
+        this.DPT2 = true;
+        this.DPT1 = true;
+      } else if (this.DPT === 3) {
+        this.DPTRef = false;
+        this.DPT3 = true;
+        this.DPT2 = true;
+        this.DPT1 = true;
+      } else if (this.DPT === 2) {
+        this.DPTRef = false;
+        this.DPT3 = false;
+        this.DPT2 = true;
+        this.DPT1 = true;
+      } else if (this.DPT === 1) {
+        this.DPTRef = false;
+        this.DPT3 = false;
+        this.DPT2 = false;
+        this.DPT1 = true;
+      } else if (this.DPT === 0) {
+        this.DPTRef = false;
+        this.DPT3 = false;
+        this.DPT2 = false;
+        this.DPT1 = false;
+      }
+
+      if (this.SPR === 4) {
+        this.SPRRef = true;
+        this.SPR3 = true;
+        this.SPR2 = true;
+        this.SPR1 = true;
+      } else if (this.SPR === 3) {
+        this.SPRRef = false;
+        this.SPR3 = true;
+        this.SPR2 = true;
+        this.SPR1 = true;
+      } else if (this.SPR === 2) {
+        this.SPRRef = false;
+        this.SPR3 = false;
+        this.SPR2 = true;
+        this.SPR1 = true;
+      } else if (this.SPR === 1) {
+        this.SPRRef = false;
+        this.SPR3 = false;
+        this.SPR2 = false;
+        this.SPR1 = true;
+      } else if (this.SPR === 0) {
+        this.SPRRef = false;
+        this.SPR3 = false;
+        this.SPR2 = false;
+        this.SPR1 = false;
+      }
+    },
+
+    getVacunaData() {
+      if (this.bcgRef) {
+        this.bcg = 4;
+      } else if (this.bcg3) {
+        this.bcg = 3;
+      } else if (this.bcg2) {
+        this.bcg = 2;
+      } else if (this.bcg1) {
+        this.bcg = 1;
+      } else {
+        this.bcg = 0;
+      }
+
+      if (this.poliovirusRef) {
+        this.poliovirus = 4;
+      } else if (this.poliovirus3) {
+        this.poliovirus = 3;
+      } else if (this.poliovirus2) {
+        this.poliovirus = 2;
+      } else if (this.poliovirus1) {
+        this.poliovirus = 1;
+      } else {
+        this.poliovirus = 0;
+      }
+
+      if (this.hepatitisARef) {
+        this.hepatitisA = 4;
+      } else if (this.hepatitisA3) {
+        this.hepatitisA = 3;
+      } else if (this.hepatitisA2) {
+        this.hepatitisA = 2;
+      } else if (this.hepatitisA1) {
+        this.hepatitisA = 1;
+      } else {
+        this.hepatitisA = 0;
+      }
+
+      if (this.hepatitisBRef) {
+        this.hepatitisB = 4;
+      } else if (this.hepatitisB3) {
+        this.hepatitisB = 3;
+      } else if (this.hepatitisB2) {
+        this.hepatitisB = 2;
+      } else if (this.hepatitisB1) {
+        this.hepatitisB = 1;
+      } else {
+        this.hepatitisB = 0;
+      }
+
+      if (this.neumococoRef) {
+        this.neumococo = 4;
+      } else if (this.neumococo3) {
+        this.neumococo = 3;
+      } else if (this.neumococo2) {
+        this.neumococo = 2;
+      } else if (this.neumococo1) {
+        this.neumococo = 1;
+      } else {
+        this.neumococo = 0;
+      }
+
+      if (this.influenzaRef) {
+        this.influenza = 4;
+      } else if (this.influenza3) {
+        this.influenza = 3;
+      } else if (this.influenza2) {
+        this.influenza = 2;
+      } else if (this.influenza1) {
+        this.influenza = 1;
+      } else {
+        this.influenza = 0;
+      }
+
+      if (this.DPTRef) {
+        this.DPT = 4;
+      } else if (this.DPT3) {
+        this.DPT = 3;
+      } else if (this.DPT2) {
+        this.DPT = 2;
+      } else if (this.DPT1) {
+        this.DPT = 1;
+      } else {
+        this.DPT = 0;
+      }
+
+      if (this.SPRRef) {
+        this.SPR = 4;
+      } else if (this.SPR3) {
+        this.SPR = 3;
+      } else if (this.SPR2) {
+        this.SPR = 2;
+      } else if (this.SPR1) {
+        this.SPR = 1;
+      } else {
+        this.SPR = 0;
+      }
+    },
+
+    guardar() {
+      this.agregarComentario();
+
+      if (
+        this.datos_generales.Talla === "" ||
+        this.datos_generales.Peso === "" ||
+        this.datos_generales.PA === ""
+      )
+        this.errorMessage = true;
+      else {
+        this.errorMessage = false;
+
+        this.getVacunaData();
+        const vacunm = {
+          fecha: this.fecha,
+          idPaciente: store.idPaciente,
+          BCG: this.bcg,
+          Poliovirus: this.poliovirus,
+          HepatitisA: this.hepatitisA,
+          HepatitisB: this.hepatitisB,
+          Neumococo: this.neumococo,
+          Influenza: this.influenza,
+          DPT: this.DPT,
+          SPR: this.SPR,
+        };
+
+        this.guardando = true;
+        let medicamento = {};
+
+        if (this.misMedicamentos.prednisona.estado) {
+          medicamento = Object.assign(medicamento, {
+            prednisona: {
+              mg: Number(this.misMedicamentos.prednisona.mg),
+              frecuencia: Number(this.misMedicamentos.prednisona.frecuencia),
+            },
+          });
+        }
+        if (this.misMedicamentos.cyac.estado) {
+          medicamento = Object.assign(medicamento, {
+            cyac: {
+              mg: Number(this.misMedicamentos.cyac.mg),
+              frecuencia: Number(this.misMedicamentos.cyac.frecuencia),
+            },
+          });
+        }
+        if (this.misMedicamentos.tac.estado) {
+          medicamento = Object.assign(medicamento, {
+            tac: {
+              mg: Number(this.misMedicamentos.tac.mg),
+              frecuencia: Number(this.misMedicamentos.tac.frecuencia),
+            },
+          });
+        }
+        if (this.misMedicamentos.mmf.estado) {
+          medicamento = Object.assign(medicamento, {
+            mmf: {
+              mg: Number(this.misMedicamentos.mmf.mg),
+              frecuencia: Number(this.misMedicamentos.mmf.frecuencia),
+            },
+          });
+        }
+        if (this.misMedicamentos.aza.estado) {
+          medicamento = Object.assign(medicamento, {
+            aza: {
+              mg: Number(this.misMedicamentos.aza.mg),
+              frecuencia: Number(this.misMedicamentos.aza.frecuencia),
+            },
+          });
+        }
+        if (this.misMedicamentos.cfm.estado) {
+          medicamento = Object.assign(medicamento, {
+            cfm: {
+              mg: Number(this.misMedicamentos.cfm.mg),
+              frecuencia: Number(this.misMedicamentos.cfm.frecuencia),
+            },
+          });
+        }
+        if (this.misMedicamentos.enalapril.estado) {
+          medicamento = Object.assign(medicamento, {
+            enalapril: {
+              mg: Number(this.misMedicamentos.enalapril.mg),
+              frecuencia: Number(this.misMedicamentos.enalapril.frecuencia),
+            },
+          });
+        }
+        if (this.misMedicamentos.losartan.estado) {
+          medicamento = Object.assign(medicamento, {
+            losartan: {
+              mg: Number(this.misMedicamentos.losartan.mg),
+              frecuencia: Number(this.misMedicamentos.losartan.frecuencia),
+            },
+          });
+        }
+        if (this.misMedicamentos.amlodipina.estado) {
+          medicamento = Object.assign(medicamento, {
+            amlodipina: {
+              mg: Number(this.misMedicamentos.amlodipina.mg),
+              frecuencia: Number(this.misMedicamentos.amlodipina.frecuencia),
+            },
+          });
+        }
+        if (this.misMedicamentos.citratoNa.estado) {
+          medicamento = Object.assign(medicamento, {
+            citratoNa: {
+              mg: Number(this.misMedicamentos.citratoNa.mg),
+              frecuencia: Number(this.misMedicamentos.citratoNa.frecuencia),
+            },
+          });
+        }
+        if (this.misMedicamentos.citratoK.estado) {
+          medicamento = Object.assign(medicamento, {
+            citratoK: {
+              mg: Number(this.misMedicamentos.citratoK.mg),
+              frecuencia: Number(this.misMedicamentos.citratoK.frecuencia),
+            },
+          });
+        }
+        if (this.misMedicamentos.furosemida.estado) {
+          medicamento = Object.assign(medicamento, {
+            furosemida: {
+              mg: Number(this.misMedicamentos.furosemida.mg),
+              frecuencia: Number(this.misMedicamentos.furosemida.frecuencia),
+            },
+          });
+        }
+        if (this.misMedicamentos.alfacalcidol.estado) {
+          medicamento = Object.assign(medicamento, {
+            alfacalcidol: {
+              mg: Number(this.misMedicamentos.alfacalcidol.mg),
+              frecuencia: Number(this.misMedicamentos.alfacalcidol.frecuencia),
+            },
+          });
+        }
+        if (this.misMedicamentos.CaCO3.estado) {
+          medicamento = Object.assign(medicamento, {
+            CaCO3: {
+              mg: Number(this.misMedicamentos.CaCO3.mg),
+              frecuencia: Number(this.misMedicamentos.CaCO3.frecuencia),
+            },
+          });
+        }
+        if (this.misMedicamentos.epo.estado) {
+          medicamento = Object.assign(medicamento, {
+            epo: {
+              mg: Number(this.misMedicamentos.epo.mg),
+              frecuencia: Number(this.misMedicamentos.epo.frecuencia),
+            },
+          });
+        }
+        if (this.misMedicamentos.fe.estado) {
+          medicamento = Object.assign(medicamento, {
+            fe: {
+              mg: Number(this.misMedicamentos.fe.mg),
+              frecuencia: Number(this.misMedicamentos.fe.frecuencia),
+            },
+          });
+        }
+        if (this.misMedicamentos.cefadroxilo.estado) {
+          medicamento = Object.assign(medicamento, {
+            cefadroxilo: {
+              mg: Number(this.misMedicamentos.cefadroxilo.mg),
+              frecuencia: Number(this.misMedicamentos.cefadroxilo.frecuencia),
+            },
+          });
+        }
+
+        let resultado_laboratorio = {};
+
+        resultado_laboratorio = Object.assign(resultado_laboratorio, {
+          Na: Number(this.resultados_de_laboratorio.Na),
+          Cl: Number(this.resultados_de_laboratorio.Cl),
+          BUN: Number(this.resultados_de_laboratorio.BUN),
+          Glu: Number(this.resultados_de_laboratorio.Glu),
+          K: Number(this.resultados_de_laboratorio.K),
+          HCO: Number(this.resultados_de_laboratorio.HCO),
+          Creat: Number(this.resultados_de_laboratorio.Creat),
+          WB: Number(this.resultados_de_laboratorio.WB),
+          Col: Number(this.resultados_de_laboratorio.Col),
+          Alb: Number(this.resultados_de_laboratorio.Alb),
+          HB: Number(this.resultados_de_laboratorio.HB),
+          HT: Number(this.resultados_de_laboratorio.HT),
+          Ca: Number(this.resultados_de_laboratorio.Ca),
+          P: Number(this.resultados_de_laboratorio.P),
+          MG: Number(this.resultados_de_laboratorio.MG),
+          PTL: Number(this.resultados_de_laboratorio.PTL),
+          EGO: Number(this.resultados_de_laboratorio.EGO),
+          pH: Number(this.resultados_de_laboratorio.pH),
+          Glu2: Number(this.resultados_de_laboratorio.Glu2),
+          Prot: Number(this.resultados_de_laboratorio.Prot),
+          Hem: Number(this.resultados_de_laboratorio.Hem),
+          Gr: Number(this.resultados_de_laboratorio.Gr),
+          GB: Number(this.resultados_de_laboratorio.GB),
+          Cil: Number(this.resultados_de_laboratorio.Cil),
+          URO: Number(this.resultados_de_laboratorio.URO),
+          PTH: Number(this.resultados_de_laboratorio.PTH),
+          Ferritina: Number(this.resultados_de_laboratorio.Ferritina),
+        });
+
+        let examenFisico = {};
+
+        examenFisico = Object.assign(examenFisico, {
+          COONG: this.examen_fisico.COONG,
+        });
+        if (this.examen_fisico_check.corazon) {
+          examenFisico = Object.assign(examenFisico, {
+            corazon: this.examen_fisico.corazon,
+          });
+        }
+        if (this.examen_fisico_check.pulmones) {
+          examenFisico = Object.assign(examenFisico, {
+            pulmones: this.examen_fisico.pulmones,
+          });
+        }
+        if (this.examen_fisico_check.abdomen) {
+          examenFisico = Object.assign(examenFisico, {
+            abdomen: this.examen_fisico.abdomen,
+          });
+        }
+        if (this.examen_fisico_check.genitales) {
+          examenFisico = Object.assign(examenFisico, {
+            genitales: this.examen_fisico.genitales,
+          });
+        }
+        if (this.examen_fisico_check.extremidades) {
+          examenFisico = Object.assign(examenFisico, {
+            extremidades: this.examen_fisico.extremidades,
+          });
+        }
+        if (this.examen_fisico_check.piel) {
+          examenFisico = Object.assign(examenFisico, {
+            piel: this.examen_fisico.piel,
+          });
+        }
+        if (this.examen_fisico_check.sn) {
+          examenFisico = Object.assign(examenFisico, {
+            sn: this.examen_fisico.sn,
+          });
+        }
+        if (this.examen_fisico_check.otros) {
+          examenFisico = Object.assign(examenFisico, {
+            otros: this.examen_fisico.otros,
+          });
+        }
+
+        const medicamentoJSON = JSON.stringify(medicamento);
+        const resultados_labJSON = JSON.stringify(resultado_laboratorio);
+        const examen_fisicoJSON = JSON.stringify(examenFisico);
+
+        const info = {
+          cui: this.paciente.CUI,
+          fecha: this.fecha,
+          peso: this.datos_generales.Peso,
+          talla: this.datos_generales.Talla,
+          pa: this.datos_generales.PA,
+          sindrome_clinico: this.Sindrome_Clinico_Presentacion,
+          Dx_Definitivo: this.Dx_Definitivo,
+          Dx_Asociados: this.Dx_Asociado,
+          historia: this.historia,
+          medicamento: medicamentoJSON,
+          resultados_laboratorio: resultados_labJSON,
+          examen_fisico: examen_fisicoJSON,
+          evaluacion_medica: this.Evaluacion_Medica,
+          plan_medico: this.Plan_Medico,
+          evaluacion_psicologica: this.Evaluacion_Psicologica,
+          plan_psicologico: this.Plan_Psicologica,
+          evaluacion_trabajo_social: this.Evaluacion_Trabajo_Social,
+          plan_trabajo_social: this.Plan_Trabajo_Social,
+          evaluacion_nutricional: this.Evaluacion_Nutricional,
+          plan_nutricional: this.Plan_Nutricional,
+          evaluacion_farmacologica: this.Evaluacion_Farmacologica,
+          plan_farmacologico: this.Plan_Farmacologico,
+        };
+
+        if (this.update) {
+          this.$http
+            .put(
+              `http://${process.env.SERVER_IP}:8000/ConsultaController/update`,
+              info
+            )
+            .then((response) => {})
+            .then(() => {
+              if (this.nuevoComentario) {
+                this.$http
+                  .post(
+                    `http://${process.env.SERVER_IP}:8000/ConsultaController/getID`,
+                    info
+                  )
+                  .then((response) => {
+                    var a = response.data.id;
+                    var b = store.id;
+
+                    // console.log('nuevo comentarioooooooo', a, b, this.hasComments)
+                    if (!this.hasComments) {
+                      // console.log("No tiene comentarios")
+
+                      var string =
+                        `{
+                                        "` +
+                        a +
+                        `": ` +
+                        `{
+                                            "` +
+                        b +
+                        `": ` +
+                        `{
+                                                
+                                            }` +
+                        `
+                                        }` +
+                        `
+                                    }`;
+
+                      var json = JSON.parse(string);
+
+                      json[String(a)][String(b)].hora = [];
+                      json[String(a)][String(b)].comentario = [];
+
+                      json[String(a)][String(b)].hora.push(this.horaActual);
+                      json[String(a)][String(b)].comentario.push(
+                        this.comentario
+                      );
+
+                      const info = {
+                        cui: this.paciente.CUI,
+                        comentarios: JSON.stringify(json),
+                      };
+
+                      this.$http
+                        .post(
+                          `http://${process.env.SERVER_IP}:8000/ComentarioController/insert`,
+                          info
+                        )
+                        .then((response) => {})
+                        .catch((error) => {
+                          // console.log("Error en no tiene comentarios")
+                        });
+                    } else {
+                      // console.log("consulta: " + String(a))
+                      // console.log('all comments', this.allComments[0])
+
+                      if (this.allComments[0][String(a)] == undefined) {
+                        // console.log("Si tiene comentarios pero no consulta")
+                        var string =
+                          `{
+                                            "` +
+                          a +
+                          `": ` +
+                          `{
+                                                "` +
+                          b +
+                          `": ` +
+                          `{
+                                                    
+                                                }` +
+                          `
+                                            }` +
+                          `
+                                        }`;
+
+                        var json = JSON.parse(string);
+
+                        json[String(a)][String(b)].hora = [];
+                        json[String(a)][String(b)].comentario = [];
+
+                        json[String(a)][String(b)].hora.push(this.horaActual);
+                        json[String(a)][String(b)].comentario.push(
+                          this.comentario
+                        );
+
+                        Object.assign(this.allComments[0], json);
+                      } else {
+                        if (
+                          this.allComments[0][String(a)][String(b)] == undefined
+                        ) {
+                          // console.log("Si tiene comentarios y consulta pero no doctor")
+                          var string =
+                            `{
+                                                "` +
+                            b +
+                            `": ` +
+                            `{
+                                                    
+                                                }` +
+                            `
+                                            }`;
+
+                          var json = JSON.parse(string);
+
+                          json[String(b)].hora = [];
+                          json[String(b)].comentario = [];
+
+                          json[String(b)].hora.push(this.horaActual);
+                          json[String(b)].comentario.push(this.comentario);
+
+                          Object.assign(this.allComments[0][String(a)], json);
+                          // console.log("Si tiene blah blah: " + JSON.stringify(this.allComments[0]))
+                        } else {
+                          // console.log("tiene todo")
+                          this.allComments[0][String(a)][String(b)].hora.push(
+                            this.horaActual
+                          );
+                          this.allComments[0][String(a)][
+                            String(b)
+                          ].comentario.push(this.comentario);
+                          // console.log(JSON.stringify(this.allComments[0]))
+                        }
+                      }
+                      // console.log(JSON.stringify(this.allComments[0]))
+                      const info = {
+                        cui: this.paciente.CUI,
+                        comentarios: JSON.stringify(this.allComments[0]),
+                      };
+                      this.$http
+                        .put(
+                          `http://${process.env.SERVER_IP}:8000/ComentarioController/update`,
+                          info
+                        )
+                        .then((response) => {})
+                        .catch((error) => {
+                          // console.log("Error en si tiene comentarios")
+                        });
+                    }
+                  });
+              }
+            })
+            .then(() => {
+              this.$http
+                .put(
+                  `http://${process.env.SERVER_IP}:8000/vacunaController/update`,
+                  vacunm
+                )
+                .then((response) => {});
+            })
+            .then(() => {
+              let mapaMed = {};
+              const hoy = new Date();
+              mapaMed = Object.assign(mapaMed, {
+                cui: this.paciente.CUI,
+                fecha: hoy,
+                na: Number(this.resultados_de_laboratorio.Na),
+                k: Number(this.resultados_de_laboratorio.K),
+                cl: Number(this.resultados_de_laboratorio.Cl),
+                hco: Number(this.resultados_de_laboratorio.HCO),
+                bun: Number(this.resultados_de_laboratorio.BUN),
+                creatinina: Number(this.resultados_de_laboratorio.Creat),
+                glucosa: Number(this.resultados_de_laboratorio.Glu),
+                albumina: Number(this.resultados_de_laboratorio.Alb),
+                colesterol: Number(this.resultados_de_laboratorio.Col),
+                calcio: Number(this.resultados_de_laboratorio.Ca),
+                fosforo: Number(this.resultados_de_laboratorio.P),
+                pth: Number(this.resultados_de_laboratorio.PTH),
+                globulosBlancos: Number(this.resultados_de_laboratorio.GB),
+                hb: Number(this.resultados_de_laboratorio.HB),
+                ht: Number(this.resultados_de_laboratorio.HT),
+              });
+
+              this.$http
+                .put(
+                  `http://${process.env.SERVER_IP}:8000/MapaController/updateMapaMedico`,
+                  mapaMed
+                )
+                .then((response) => {});
+            })
+            .then(() => {
+              this.guardando = false;
+            })
+            .then(() => {
+              this.$router.push("/menu-principal");
+            })
+            .catch((error) => {});
+        } else {
+          this.$http
+            .post(
+              `http://${process.env.SERVER_IP}:8000/ConsultaController/insert`,
+              info
+            )
+            .then((response) => {
+              if (this.nuevoComentario) {
+                this.$http
+                  .post(
+                    `http://${process.env.SERVER_IP}:8000/ConsultaController/getID`,
+                    info
+                  )
+                  .then((response) => {
+                    var a = response.data.id;
+                    var b = store.id;
+
+                    // if(!this.hasComments){
+                    var string =
+                      `{
+                                    "` +
+                      a +
+                      `": ` +
+                      `{
+                                        "` +
+                      b +
+                      `": ` +
+                      `{
+                                            
+                                        }` +
+                      `
+                                    }` +
+                      `
+                                }`;
+
+                    var json = JSON.parse(string);
+
+                    json[String(a)][String(b)].hora = [];
+                    json[String(a)][String(b)].comentario = [];
+
+                    json[String(a)][String(b)].hora.push(this.horaActual);
+                    json[String(a)][String(b)].comentario.push(this.comentario);
+
+                    const info = {
+                      cui: this.paciente.CUI,
+                      comentarios: JSON.stringify(json),
+                    };
+
+                    this.$http
+                      .post(
+                        `http://${process.env.SERVER_IP}:8000/ComentarioController/insert`,
+                        info
+                      )
+                      .then((response) => {});
+                  });
+              }
+            })
+            .then(() => {
+              this.$http
+                .post(
+                  `http://${process.env.SERVER_IP}:8000/vacunaController/insert`,
+                  vacunm
+                )
+                .then((response) => {})
+                .catch((error) => {});
+            })
+            .then(() => {
+              let mapaMed = {};
+              const hoy = new Date();
+              mapaMed = Object.assign(mapaMed, {
+                cui: this.paciente.CUI,
+                fecha: hoy,
+                na: Number(this.resultados_de_laboratorio.Na),
+                k: Number(this.resultados_de_laboratorio.K),
+                cl: Number(this.resultados_de_laboratorio.Cl),
+                hco: Number(this.resultados_de_laboratorio.HCO),
+                bun: Number(this.resultados_de_laboratorio.BUN),
+                creatinina: Number(this.resultados_de_laboratorio.Creat),
+                glucosa: Number(this.resultados_de_laboratorio.Glu),
+                albumina: Number(this.resultados_de_laboratorio.Alb),
+                colesterol: Number(this.resultados_de_laboratorio.Col),
+                calcio: Number(this.resultados_de_laboratorio.Ca),
+                fosforo: Number(this.resultados_de_laboratorio.P),
+                pth: Number(this.resultados_de_laboratorio.PTH),
+                globulosBlancos: Number(this.resultados_de_laboratorio.GB),
+                hb: Number(this.resultados_de_laboratorio.HB),
+                ht: Number(this.resultados_de_laboratorio.HT),
+              });
+
+              this.$http
+                .post(
+                  `http://${process.env.SERVER_IP}:8000/MapaController/setMapaMedico`,
+                  mapaMed
+                )
+                .then((response) => {});
+            })
+            .then(() => {
+              this.guardando = false;
+            })
+            .then(() => {
+              this.$router.push("/menu-principal");
+            })
+            .catch((error) => {});
+        }
+      }
+    },
+    fillBCG: function () {
+      if (!this.bcg1) {
+        this.bcg2 = false;
+        this.bcg3 = false;
+        this.bcgRef = false;
+      }
+      if (!this.bcg2) {
+        this.bcg3 = false;
+        this.bcgRef = false;
+      }
+      if (!this.bcg3) {
+        this.bcgRef = false;
+      }
+    },
+    fillPoliovirus: function () {
+      if (!this.poliovirus1) {
+        this.poliovirus2 = false;
+        this.poliovirus3 = false;
+        this.poliovirusRef = false;
+      }
+      if (!this.poliovirus2) {
+        this.poliovirus3 = false;
+        this.poliovirusRef = false;
+      }
+      if (!this.poliovirus3) {
+        this.poliovirusRef = false;
+      }
+    },
+    fillHepatitisA: function () {
+      if (!this.hepatitisA1) {
+        this.hepatitisA2 = false;
+        this.hepatitisA3 = false;
+        this.hepatitisARef = false;
+      }
+      if (!this.hepatitisA2) {
+        this.hepatitisA3 = false;
+        this.hepatitisARef = false;
+      }
+      if (!this.hepatitisA3) {
+        this.hepatitisARef = false;
+      }
+    },
+    fillHepatitisB: function () {
+      if (!this.hepatitisB1) {
+        this.hepatitisB2 = false;
+        this.hepatitisB3 = false;
+        this.hepatitisBRef = false;
+      }
+      if (!this.hepatitisB2) {
+        this.hepatitisB3 = false;
+        this.hepatitisBRef = false;
+      }
+      if (!this.hepatitisB3) {
+        this.hepatitisBRef = false;
+      }
+    },
+    fillNeumococo: function () {
+      if (!this.neumococo1) {
+        this.neumococo2 = false;
+        this.neumococo3 = false;
+        this.neumococoRef = false;
+      }
+      if (!this.neumococo2) {
+        this.neumococo3 = false;
+        this.neumococoRef = false;
+      }
+      if (!this.neumococo3) {
+        this.neumococoRef = false;
+      }
+    },
+    fillInflueza: function () {
+      if (!this.influenza1) {
+        this.influenza2 = false;
+        this.influenza3 = false;
+        this.influenzaRef = false;
+      }
+      if (!this.influenza2) {
+        this.influenza3 = false;
+        this.influenzaRef = false;
+      }
+      if (!this.influenza3) {
+        this.influenzaRef = false;
+      }
+    },
+    fillDPT: function () {
+      if (!this.DPT1) {
+        this.DPT2 = false;
+        this.DPT3 = false;
+        this.DPTRef = false;
+      }
+      if (!this.DPT2) {
+        this.DPT3 = false;
+        this.DPTRef = false;
+      }
+      if (!this.DPT3) {
+        this.DPTRef = false;
+      }
+    },
+    fillSPR: function () {
+      if (!this.SPR1) {
+        this.SPR2 = false;
+        this.SPR3 = false;
+        this.SPRRef = false;
+      }
+      if (!this.SPR2) {
+        this.SPR3 = false;
+        this.SPRRef = false;
+      }
+      if (!this.SPR3) {
+        this.SPRRef = false;
+      }
+    },
+    sindromeValue: function (id, significado) {
+      this.Sindrome_Clinico_Presentacion = parseInt(id);
+    },
+  },
 };
-
-
 </script>
 
 <style scoped>
-    .cuerpo {
-        border: solid #a9a9a9 2px;
-        text-align: center;
-        margin-left: 5%;
-        width: 90%;
-        padding: 5%;
-        padding-top: 2%;
-        padding-bottom: 1%;
-    }
+.cuerpo {
+  border: solid #a9a9a9 2px;
+  text-align: center;
+  margin-left: 5%;
+  width: 90%;
+  padding: 5%;
+  padding-top: 2%;
+  padding-bottom: 1%;
+}
 
-    .encapsulado {
-        background-color: white;
-        margin: 2%;
-        padding: 3%;
-        /* padding-top: 2%; */
-    }
+.encapsulado {
+  background-color: white;
+  margin: 2%;
+  padding: 3%;
+  /* padding-top: 2%; */
+}
 
-    table.table-bordered > tbody > tr > th {
-    border: 3px solid #a9a9a9;
-    }
-    table.table-bordered > tbody > tr > td {
-    border: 3px solid #a9a9a9;
-    }
+table.table-bordered > tbody > tr > th {
+  border: 3px solid #a9a9a9;
+}
+table.table-bordered > tbody > tr > td {
+  border: 3px solid #a9a9a9;
+}
 
-    .posicion {
-    position: relative;
-    }
+.posicion {
+  position: relative;
+}
 
-    .centrado {
-    vertical-align: middle;
-    }
+.centrado {
+  vertical-align: middle;
+}
 
-    div.col-auto > ul > li.nav-item {
-        color:red;
-    }
+div.col-auto > ul > li.nav-item {
+  color: red;
+}
 
-    h1, h2, h3, h4 {
-        font-family: Nunito;
-        font-weight: bolder;
-        text-align: center;
-    }
+h1,
+h2,
+h3,
+h4 {
+  font-family: Nunito;
+  font-weight: bolder;
+  text-align: center;
+}
 
-    .headers{
-        font-family: Nunito;
-        font-weight: bolder;
-    }
+.headers {
+  font-family: Nunito;
+  font-weight: bolder;
+}
 </style>
