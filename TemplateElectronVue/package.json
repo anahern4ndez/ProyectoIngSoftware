@@ -25,7 +25,7 @@
     "@casl/vue": "^0.5.1",
     "axios": "^0.18.1",
     "bootstrap": "^4.3.1",
-    "bootstrap-vue": "^2.0.0-rc.18",
+    "bootstrap-vue": "^2.0.0",
     "chol": "^1.0.0",
     "cucumber-electron": "^2.7.0",
     "dotenv": "^8.2.0",
