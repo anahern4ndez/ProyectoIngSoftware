@@ -29,7 +29,7 @@
     "chol": "^1.0.0",
     "cucumber-electron": "^2.7.0",
     "dotenv": "^8.2.0",
-    "fast-csv": "^4.3.1",
+    "fast-csv": "^4.3.6",
     "html2canvas": "^1.0.0-rc.5",
     "material-design-icons-iconfont": "^4.0.5",
     "pg": "^8.2.1",
